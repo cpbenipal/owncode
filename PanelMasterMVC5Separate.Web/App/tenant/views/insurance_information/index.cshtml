@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+
+    <!-- BEGIN PAGE TITLE-->
+    <h1 class="page-title">
+        Insurance
+        <small>Infomation</small>
+    </h1>
+    <!-- END PAGE TITLE-->
+    <!-- END PAGE HEADER-->
+    <form ng-controller="tenant.views.insurance_information.index as vm" class="form-horizontal" action="#" id="submit_form" method="POST">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tabbable-line boxless tabbable-reversed">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a ng-href="#!/tenant/vehicle_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Vehicle information </a>
+                        </li>
+                        <li>
+                            <a ng-href="#!/tenant/insurance_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Insurance information </a>
+                        </li>
+                        <li>
+                            <a ng-href="#!/tenant/client_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Client information </a>
+                        </li>
+                        <li>
+                            <a ng-href="#!/tenant/financial_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Financial information </a>
+                        </li>
+                        <li>
+                            <a ng-href="#!/tenant/dates_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Dates </a>
+                        </li>
+                        <li>
+                            <a ng-href="#!/tenant/comments_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Comments </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">                       
+
+                        <div class="tab-pane" id="tab_1">
+                            <div class="portlet box green">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-gift"></i>Insurance details
+                                    </div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse"> </a>
+                                        <a href="#portlet-config" data-toggle="modal" class="config"> </a>
+                                        <a href="javascript:;" class="reload"> </a>
+                                        <a href="javascript:;" class="remove"> </a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+
+                                    <div class="form-body">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Insurer</label>
+                                            <div class="col-md-4">                                                                                               
+                                                <select required class="form-control" ng-options="s.id as s.name for s in InsuranceList" ng-model="vm.job.InsuranceId">
+                                                    <option value="">--Select Insurer--</option>
+                                                </select>
+
+
+
+                                            </div>
+                                        </div>                                         
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Broker</label>
+                                            <div class="col-md-4">
+                                                 
+                                                <select required class="form-control" ng-options="s.id as s.name for s in BrokerList" ng-model="vm.job.BrokerId">
+                                                    <option value="">--Select Broker--</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="button" class="btn btn-circle green button-submit">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <script src="~/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+
+    <script src="~/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+
+    <script src="~/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
+
+    <script src="~/assets/global/scripts/app.min.js" type="text/javascript"></script>
+
+    <script src="~/assets/pages/scripts/form-wizard.min.js" type="text/javascript"></script>
+
+    <script src="~/assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
+    <script src="~/assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
+    <script src="~/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+    <script src="~/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#clickmewow').click(function () {
+                $('#radio1003').attr('checked', 'checked');
+            });
+        })
+    </script>
+</body>
+</html>

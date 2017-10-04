@@ -1,0 +1,51 @@
+namespace PanelMasterMVC5Separate.Web.Navigation
+{
+    public static class PageNames
+    {
+        public static class App
+        {
+            public static class Common
+            {
+                public const string Administration = "Administration";
+                public const string Roles = "Administration.Roles";
+                public const string Users = "Administration.Users";
+                public const string AuditLogs = "Administration.AuditLogs";
+                public const string OrganizationUnits = "Administration.OrganizationUnits";
+                public const string Languages = "Administration.Languages";
+            }
+
+            public static class Host
+            {
+                public const string Tenants = "Tenants";
+                public const string Editions = "Editions";
+                public const string Maintenance = "Administration.Maintenance";
+                public const string Settings = "Administration.Settings.Host";
+            }
+
+            public static class Tenant
+            {
+                public const string Dashboard = "Dashboard.Tenant";
+                public const string Quoting = "Dashboard.Quoting";
+                public const string PartsOrdering = "Dashboard.PartsOrdering";
+
+                public const string Claim = "Dashboard.Claim";
+                public const string JobDetails = "Claim.JobDetails";
+                public const string NewJob = "Claim.NewJob";
+                public const string Productivity = "Dashboard.Productivity";
+                public const string Towing = "Dashboard.Towing";
+                public const string Costing = "Dashboard.Costing";
+                public const string Settings = "Administration.Settings.Tenant";
+
+                public const string Vendors = "Dashboard.Vendors";
+                public const string VendorList = "Vendors.VendorList";
+                public const string AddVendor = "Vendors.AddVendor";
+            }
+        }
+
+        public static class Frontend
+        {
+            public const string Home = "Frontend.Home";
+            public const string About = "Frontend.About";
+        }
+    }
+}
