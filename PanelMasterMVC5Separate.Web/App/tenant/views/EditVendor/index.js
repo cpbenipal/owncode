@@ -2,10 +2,9 @@
 
     appModule.controller('tenant.views.EditVendor.index', [
         '$scope', '$uibModal', '$stateParams', 'abp.services.app.vendorClaim',
-        
+
 
         function ($scope, $uibModal, $stateParams, jobService) {
-             
             var vm = this;
             $scope.$on('$viewContentLoaded', function () {
                 App.initAjax();
@@ -41,7 +40,7 @@
             };
 
             vm.getVendorDetails = function () {
-                
+
                 vm.loading = true;
                 jobService.getVendor($.extend({ filter: $stateParams.id }, $stateParams.id))
                     .then(function (result) {
@@ -77,30 +76,24 @@
 
                 for (var i = 1; i <= 100; i++) {
                     $scope.SimpleData.push({
-                        name: i + ' DAYS',
-                        id: i + ' DAYS'
+                        name: i +' '+app.localize('DAYS'),
+                        id: i + ' ' + app.localize('DAYS')
                     });
                 }
             };
 
 
-            $('#submit_form .button-submit').click(function () {
-
+            vm.save = function () {
                 vm.job.TenantId = abp.session.tenantId;
-                vm.job.id = $stateParams.id;
-                
+                vm.job.id = $stateParams.id;                
                 vm.saving = true;
                 jobService.updateVendor(vm.job).then(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
                     window.location.href = "#!/tenant/VendorList";
                 }).finally(function () {
                     vm.saving = false;
-                }, function errorCallback(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
-                    alert("Error : " + response.data.ExceptionMessage);
                 });
-            });
+            };
 
             vm.getpaymenttype();
             vm.getBank();

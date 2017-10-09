@@ -26,7 +26,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors.Exporting
                 "VendorList.xlsx",
                 excelPackage =>
                 {
-                    var sheet = excelPackage.Workbook.Worksheets.Add(L("Claims"));
+                    var sheet = excelPackage.Workbook.Worksheets.Add(L("Vendors"));
                     sheet.OutLineApplyStyle = true;
 
                     AddHeader(

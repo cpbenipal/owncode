@@ -29,7 +29,7 @@
       function BootstrapSwitch(element, options) {
         if (options == null) {
           options = {};
-        }
+          }        
         this.$element = $(element);
         this.options = $.extend({}, $.fn.bootstrapSwitch.defaults, {
           state: this.$element.is(":checked"),

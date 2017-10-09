@@ -159,6 +159,21 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     url: "tenant.VendorList",
                     icon: "glyphicon glyphicon-search"
                     ))
+                    ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.Insurers,
+                    L("Insurers"),
+                    icon: "glyphicon glyphicon-tasks"
+                    ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.AddInsurer,
+                    L("AddInsurer"),
+                    url: "tenant.AddInsurer",
+                    icon: "glyphicon glyphicon-collapse-down"
+                    )).AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.Insurers,
+                    L("Search"),
+                    url: "tenant.Insurers",
+                    icon: "glyphicon glyphicon-search"
+                    ))
                     )
                 );
         }

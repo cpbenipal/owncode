@@ -266,7 +266,27 @@ appModule.config([
             templateUrl: '~/App/tenant/views/costing/index.cshtml'
         });
 
+        $stateProvider.state('tenant.Insurers', {
+            url: '/Insurers',
+            templateUrl: '~/App/tenant/views/Insurers/index.cshtml'
+        });
 
+        $stateProvider.state('tenant.AddInsurer', {
+            url: '/AddInsurer',
+            templateUrl: '~/App/tenant/views/AddInsurer/index.cshtml'
+        });
+        $stateProvider.state('tenant.EditInsurer', {
+            url: '/EditInsurer/:id',
+            templateUrl: '~/App/tenant/views/EditInsurer/index.cshtml'
+        });
+        $stateProvider.state('tenant.AddInsurerSub', {
+            url: '/AddInsurerSub/:id',
+            templateUrl: '~/App/tenant/views/AddInsurerSub/index.cshtml'
+        });
+        $stateProvider.state('tenant.EditInsurerSub', {
+            url: '/EditInsurerSub/:id',
+            templateUrl: '~/App/tenant/views/EditInsurerSub/index.cshtml'
+        });
         //$qProvider settings
         $qProvider.errorOnUnhandledRejections(false);
     }

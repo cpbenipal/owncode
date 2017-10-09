@@ -15,7 +15,6 @@
             vm.job = {};
             vm.client = {};
 
-             
             vm.advancedFiltersAreShown = false;
             vm.filterText = $stateParams.filterText || '';
             vm.currentUserId = abp.session.userId;
@@ -64,15 +63,14 @@
                
                 for (var i = 1; i <= 100; i++) {
                     $scope.SimpleData.push({
-                        name: i+' DAYS',
-                        id: i+' DAYS'
+                        name: i + ' ' + app.localize('DAYS'),
+                        id: i + ' ' + app.localize('DAYS')
                     });
                 }                
             }; 
 
 
-            $('#submit_form .button-submit').click(function () {
-                alert(vm.job.ContactEmail);
+            vm.save = function () {
                 vm.job.TenantId = abp.session.tenantId; 
                 vm.saving = true;               
                 jobService.addVendor(vm.job).then(function () {
@@ -80,12 +78,8 @@
                     window.location.href = "#!/tenant/VendorList";
                 }).finally(function () {
                     vm.saving = false;
-                }, function errorCallback(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
-                    alert("Error : " + response.data.ExceptionMessage);
                 });
-            });
+            };
 
             vm.getpaymenttype();
             vm.getBank();

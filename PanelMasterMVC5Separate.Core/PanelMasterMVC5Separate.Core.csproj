@@ -142,6 +142,8 @@
     <Compile Include="IClaimRepository.cs" />
     <Compile Include="Insurance_Brokers\Broker.cs" />
     <Compile Include="Insurance_Brokers\Insurance.cs" />
+    <Compile Include="Insurer\InsurerMaster.cs" />
+    <Compile Include="Insurer\InsurerSub.cs" />
     <Compile Include="PanelMasterMVC5SeparateConsts.cs" />
     <Compile Include="PanelMasterMVC5SeparateCoreModule.cs" />
     <Compile Include="PanelMasterMVC5SeparateDomainServiceBase.cs" />
