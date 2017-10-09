@@ -147,29 +147,9 @@
     <Compile Include="EntityFramework\PanelMasterMVC5SeparateDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\PanelMasterMVC5SeparateRepositoryBase.cs" />
     <Compile Include="EntityFramework\AbpZeroDbMigrator.cs" />
-    <Compile Include="Migrations\201710061618587_1.cs" />
-    <Compile Include="Migrations\201710061618587_1.Designer.cs">
-      <DependentUpon>201710061618587_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710070430145_InsurerPictureParamAdded.cs" />
-    <Compile Include="Migrations\201710070430145_InsurerPictureParamAdded.Designer.cs">
-      <DependentUpon>201710070430145_InsurerPictureParamAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710080953059_InsurerPictureParamAddedNerw.cs" />
-    <Compile Include="Migrations\201710080953059_InsurerPictureParamAddedNerw.Designer.cs">
-      <DependentUpon>201710080953059_InsurerPictureParamAddedNerw.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710081033513_InsurerPictureParamAddedNerwd.cs" />
-    <Compile Include="Migrations\201710081033513_InsurerPictureParamAddedNerwd.Designer.cs">
-      <DependentUpon>201710081033513_InsurerPictureParamAddedNerwd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710081128593_InsurerNewPicTable.cs" />
-    <Compile Include="Migrations\201710081128593_InsurerNewPicTable.Designer.cs">
-      <DependentUpon>201710081128593_InsurerNewPicTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710081131298_InsurerNewPicTable1.cs" />
-    <Compile Include="Migrations\201710081131298_InsurerNewPicTable1.Designer.cs">
-      <DependentUpon>201710081131298_InsurerNewPicTable1.cs</DependentUpon>
+    <Compile Include="Migrations\201710091227311_1.cs" />
+    <Compile Include="Migrations\201710091227311_1.Designer.cs">
+      <DependentUpon>201710091227311_1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PanelMasterMVC5SeparateDataModule.cs" />
@@ -209,23 +189,8 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710061618587_1.resx">
-      <DependentUpon>201710061618587_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710070430145_InsurerPictureParamAdded.resx">
-      <DependentUpon>201710070430145_InsurerPictureParamAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710080953059_InsurerPictureParamAddedNerw.resx">
-      <DependentUpon>201710080953059_InsurerPictureParamAddedNerw.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710081033513_InsurerPictureParamAddedNerwd.resx">
-      <DependentUpon>201710081033513_InsurerPictureParamAddedNerwd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710081128593_InsurerNewPicTable.resx">
-      <DependentUpon>201710081128593_InsurerNewPicTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710081131298_InsurerNewPicTable1.resx">
-      <DependentUpon>201710081131298_InsurerNewPicTable1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710091227311_1.resx">
+      <DependentUpon>201710091227311_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
