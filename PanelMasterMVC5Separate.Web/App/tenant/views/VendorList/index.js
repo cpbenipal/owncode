@@ -72,22 +72,15 @@
                         minWidth: 140
                     },
                     {
-                        name: app.localize('ContactName'),
-                        field: 'contactName',
+                        name: app.localize('RegistrationNumber'),
+                        field: 'registrationNumber',
                         minWidth: 120
                     },
                     {
-                        name: app.localize('ContactEmail'),
-                        field: 'contactEmail',
+                        name: app.localize('TaxRegistrationNumber'),
+                        field: 'taxRegistrationNumber',
                         minWidth: 200
-                    },
-                    {
-                        name: app.localize('CreationTime'),
-                        field: 'creationTime',
-                        cellFilter: 'momentFormat: \'L\'',
-                        minWidth: 50
-                    }
-                    ,                     
+                    },                     
                     {
                         name: app.localize('Status'),
                         field: 'isActive',
@@ -140,7 +133,9 @@
                         if (isConfirmed) {
                             userService.changeStatus({
                                 id: user.id,
-                                status: !status 
+                                status: !status,
+                                tenantId: abp.session.tenantId
+                                
                             }).then(function () {
                                 vm.getUsers();
                                 if (!status)

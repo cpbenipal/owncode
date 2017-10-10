@@ -147,9 +147,13 @@
     <Compile Include="EntityFramework\PanelMasterMVC5SeparateDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\PanelMasterMVC5SeparateRepositoryBase.cs" />
     <Compile Include="EntityFramework\AbpZeroDbMigrator.cs" />
-    <Compile Include="Migrations\201709290947527_1.cs" />
-    <Compile Include="Migrations\201709290947527_1.Designer.cs">
-      <DependentUpon>201709290947527_1.cs</DependentUpon>
+    <Compile Include="Migrations\201710041418448_1.cs" />
+    <Compile Include="Migrations\201710041418448_1.Designer.cs">
+      <DependentUpon>201710041418448_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710050747287_2.cs" />
+    <Compile Include="Migrations\201710050747287_2.Designer.cs">
+      <DependentUpon>201710050747287_2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PanelMasterMVC5SeparateDataModule.cs" />
@@ -185,8 +189,11 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709290947527_1.resx">
-      <DependentUpon>201709290947527_1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710041418448_1.resx">
+      <DependentUpon>201710041418448_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710050747287_2.resx">
+      <DependentUpon>201710050747287_2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

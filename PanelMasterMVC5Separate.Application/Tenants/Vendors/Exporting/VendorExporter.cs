@@ -20,7 +20,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors.Exporting
             _abpSession = abpSession;
         }
 
-        public FileDto ExportToFile(List<VendorsListDto> claimListDtos)
+        public FileDto ExportToFile(List<GVendorsListDto> claimListDtos)
         {
             return CreateExcelPackage(
                 "VendorList.xlsx",
@@ -73,8 +73,8 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors.Exporting
                           _ => _.Bank,
                         _ => _.Currency,
                         _ => _.Type,
-                        _ => _.Branch,
-                        _ => _.CreationTime
+                        _ => _.Branch
+                        
                     );
 
                     //Formatting cells

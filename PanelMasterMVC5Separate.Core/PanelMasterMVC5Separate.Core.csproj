@@ -226,6 +226,8 @@
     <Compile Include="Vendors\Banks.cs" />
     <Compile Include="Vendors\Currencies.cs" />
     <Compile Include="Vendors\Vendor.cs" />
+    <Compile Include="Vendors\VendorMain.cs" />
+    <Compile Include="Vendors\VendorSub.cs" />
     <Compile Include="Web\IWebUrlService.cs" />
     <Compile Include="Web\WebUrlService.cs" />
   </ItemGroup>

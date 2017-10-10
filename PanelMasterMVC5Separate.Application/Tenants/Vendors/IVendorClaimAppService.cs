@@ -4,6 +4,7 @@ using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.Tenants.Vendors.Dto;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using PanelMasterMVC5Separate.Vendors;
 
 namespace PanelMasterMVC5Separate.Tenants.Vendors
 {
@@ -11,10 +12,12 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
     {
         ListResultDto<BankDto> GetBanks();
         ListResultDto<CurrencyDto> GetCurrencies();
-        void AddVendor(GVendorsListDto input);
-        ListResultDto<VendorsListDto> GetVendors(GetClaimsInput input);
-        Task<FileDto> GetClaimsToExcel();    
-        VendorsListDto GetVendor(GetClaimsInput input);
+        VendorMain AddMainVendor(VendorMainListDto input);
+        void AddSubVendor(VendorSubListDto input);
+        ListResultDto<VendorMainListDto> GetVendors(GetClaimsInput input);
+        Task<FileDto> GetClaimsToExcel();
+        ListResultDto<VendorMainListDto> GetMainVendor(GetClaimsInput input);
+        ListResultDto<VendorSubListDto> GetSubVendor(GetClaimsInput input);
         void UpdateVendor(GVendorsListDto input);
         void ChangeStatus(StatusDto input);
     }

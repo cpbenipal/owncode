@@ -154,8 +154,9 @@
                     vm.job.ClientID = client_results.data.id;
                     
                     jobService.createJob(vm.job).then(function () {
-                        //alert("sucessfully");
+                        
                         abp.notify.info(app.localize('SavedSuccessfully'));
+                        window.location.href = "#!/tenant/jobdetails";
                         
                     }).finally(function () {
                         vm.saving = false;
@@ -170,9 +171,7 @@
 
                 
 
-            }).hide();
-
-            
+            }).hide();            
 
             vm.getManufacture(); 
             vm.getInsurance();

@@ -8,7 +8,6 @@ namespace PanelMasterMVC5Separate.Vendors
     [Table("tblBanks")]
     public class Banks : FullAuditedEntity
     {
-        [Required]
         public virtual string BankName { get; set; }
     }
 }

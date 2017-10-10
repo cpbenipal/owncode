@@ -8,9 +8,8 @@ namespace PanelMasterMVC5Separate.Vendors
     [Table("tblCurrency")]
     public class Currencies : FullAuditedEntity
     {
-        [Required]
-        public virtual string CurrencyCode { get; set; }
-        [Required]
+       
+        public virtual string CurrencyCode { get; set; }        
         public virtual string CurrencyType { get; set; }
     }
 }

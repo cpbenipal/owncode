@@ -7,6 +7,6 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors.Exporting
 {
     public interface IVendorsListExcelExporter
     {
-        FileDto ExportToFile(List<VendorsListDto> claimListDtos);
+        FileDto ExportToFile(List<GVendorsListDto> claimListDtos);
     }
 }

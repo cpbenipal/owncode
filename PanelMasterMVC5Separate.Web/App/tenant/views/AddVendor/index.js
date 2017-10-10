@@ -2,9 +2,8 @@
  
     appModule.controller('tenant.views.AddVendor.index', [
         '$scope', '$uibModal', '$stateParams', 'abp.services.app.vendorClaim',
-
-
-        function ($scope, $uibModal, $stateParams, jobService) {
+        
+        function ($scope, $uibModal, $stateParams, VendorService) {
             var vm = this;
             $scope.$on('$viewContentLoaded', function () {
                 App.initAjax();
@@ -12,19 +11,19 @@
 
             vm.loading = false;
             vm.saving = false;
-            vm.job = {};
-            vm.client = {};
-
-             
+            vm.subVendor = {};
+            vm.mainVendor = {};
+            
             vm.advancedFiltersAreShown = false;
             vm.filterText = $stateParams.filterText || '';
             vm.currentUserId = abp.session.userId;
             vm.TenantId = abp.session.tenantId;
+           
                        
             $scope.bankList = []; //list of Banks
             vm.getBank = function () {
 
-                jobService.getBanks()
+                VendorService.getBanks()
                     .then(function (ins_obj) {                       
 
                         angular.forEach(ins_obj.data.items, function (insvalue, key1) {                             
@@ -43,7 +42,7 @@
             $scope.currencyList = []; //list of Currencies
             vm.getcurrency = function () {
 
-                jobService.getCurrencies()
+                VendorService.getCurrencies()
                     .then(function (ins_obj) {
 
                         angular.forEach(ins_obj.data.items, function (insvalue, key1) {
@@ -72,19 +71,27 @@
 
 
             $('#submit_form .button-submit').click(function () {
-                alert(vm.job.ContactEmail);
-                vm.job.TenantId = abp.session.tenantId; 
-                vm.saving = true;               
-                jobService.addVendor(vm.job).then(function () {
+               
+                vm.saving = true;
+                
+                VendorService.addMainVendor(vm.mainVendor).then(function (vendor_obj) {
+                  
+                    vm.subVendor.VendorID = vendor_obj.data.id;
+                    vm.subVendor.TenantId = abp.session.tenantId;
+                    vm.subVendor.CurrencyID = 1;
+                    vm.subVendor.BankID = 1;
+
+                    VendorService.addSubVendor(vm.subVendor).then(function () { });
+
                     abp.notify.info(app.localize('SavedSuccessfully'));
                     window.location.href = "#!/tenant/VendorList";
+                   
                 }).finally(function () {
                     vm.saving = false;
-                }, function errorCallback(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+                }, function errorCallback(response) {                   
                     alert("Error : " + response.data.ExceptionMessage);
-                });
+                });              
+                                
             });
 
             vm.getpaymenttype();

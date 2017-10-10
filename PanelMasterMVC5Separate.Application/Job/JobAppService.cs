@@ -112,6 +112,9 @@ namespace PanelMasterMVC5Separate.Vehicle
         public async Task CreateJob(CreateJobInput input)
         {
             var job = input.MapTo<Jobs>();
+
+            job.ClaimStatusID = 3;
+
             await _jobsRepository.InsertAsync(job);
         }
 

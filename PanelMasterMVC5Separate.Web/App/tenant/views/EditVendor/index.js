@@ -13,7 +13,8 @@
 
             vm.loading = false;
             vm.saving = false;
-            vm.job = {};
+            vm.mainVendor = {};
+            vm.subVendor = {};
             vm.client = {};
 
             vm.advancedFiltersAreShown = false;
@@ -43,11 +44,20 @@
             vm.getVendorDetails = function () {
                 
                 vm.loading = true;
-                jobService.getVendor($.extend({ filter: $stateParams.id }, $stateParams.id))
+                jobService.getMainVendor($.extend({ filter: $stateParams.id }, $stateParams.id))
                     .then(function (result) {
 
-                        vm.job = result.data;
-                       
+                        vm.mainVendor = result.data.items[0];
+
+                    }).finally(function () {
+                        vm.loading = false;
+                    });
+
+                jobService.getSubVendor($.extend({ filter: $stateParams.id }, $stateParams.id))
+                    .then(function (result) {
+
+                        vm.subVendor = result.data.items[0];
+
                     }).finally(function () {
                         vm.loading = false;
                     });
@@ -86,11 +96,11 @@
 
             $('#submit_form .button-submit').click(function () {
 
-                vm.job.TenantId = abp.session.tenantId;
-                vm.job.id = $stateParams.id;
+                vm.subVendor.TenantId = abp.session.tenantId;
+                vm.subVendor.VendorID = $stateParams.id;
                 
                 vm.saving = true;
-                jobService.updateVendor(vm.job).then(function () {
+                jobService.updateVendor(vm.subVendor).then(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
                     window.location.href = "#!/tenant/VendorList";
                 }).finally(function () {

@@ -63,6 +63,10 @@ namespace PanelMasterMVC5Separate.EntityFramework
 
         public virtual IDbSet<Vendor> Vendors { get; set; }
 
+        public virtual DbSet<VendorSub> VendorSub { get; set; }
+
+        public virtual IDbSet<VendorMain> VendorMain { get; set; }
+
         public virtual IDbSet<Banks> Banks { get; set; }
 
         public virtual IDbSet<Currencies> Currencies { get; set; }

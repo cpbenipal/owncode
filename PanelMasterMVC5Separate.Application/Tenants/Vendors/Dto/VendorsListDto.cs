@@ -6,54 +6,32 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PanelMasterMVC5Separate.Tenants.Vendors.Dto
 {
-    [AutoMapFrom(typeof(Vendor))]
-    public class VendorsListDto : FullAuditedEntityDto
+    public class GVendorsListDto
     {
-        [Required]
-        public virtual int? TenantId { get; set; }
-        [Required]
-        public virtual Guid SupplierCode { get; set; }
-        [Required]
-        public virtual string SupplierName { get; set; }
-        [Required]
-        public virtual string ContactName { get; set; }
-        [Required]
-        [Phone]
-        public virtual string ContactPhone { get; set; }
-        [Required]
-        public virtual string ContactFax { get; set; }
-        [Required]
-        [EmailAddress]
-        public virtual string ContactEmail { get; set; }
-        [Required]
-        public virtual string Address1 { get; set; }
-        public virtual string Address2 { get; set; }
-        public virtual string Address3 { get; set; }
-        [Required]
-        public virtual string Location { get; set; }
-        [Required]
-        public virtual string RegistrationNumber { get; set; }
-        [Required]
-        public virtual string TaxRegistrationNumber { get; set; }
-        [Required]
-        public virtual string SupplierAccount { get; set; }
-        [Required]
-        public virtual string PaymentTerms { get; set; }
-        [Required]
-        public virtual string AccountNumber { get; set; }
-        [Required]
-        public virtual string Type { get; set; }
-        [Required]
-        public virtual string Branch { get; set; }
-        [Required]
-        public virtual int CurrencyID { get; set; }
-        [Required]
-        public virtual string Currency { get; set; }
-        [Required]
-        public virtual int BankID { get; set; }
-        [Required]
-        public virtual string Bank { get; set; }
-        public virtual bool IsActive { get; set; }
+        public int? VendorID { get; set; }
+        public int? TenantId { get; set; }       
+        public Guid SupplierCode { get; set; }        
+        public string SupplierName { get; set; }        
+        public string ContactName { get; set; }      
+        public string ContactPhone { get; set; }       
+        public string ContactFax { get; set; }      
+        public string ContactEmail { get; set; }        
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public string Address3 { get; set; }       
+        public string Location { get; set; }       
+        public string RegistrationNumber { get; set; }        
+        public string TaxRegistrationNumber { get; set; }        
+        public string SupplierAccount { get; set; }        
+        public string PaymentTerms { get; set; }       
+        public string AccountNumber { get; set; }        
+        public string Type { get; set; }       
+        public string Branch { get; set; }        
+        public int CurrencyID { get; set; }        
+        public string Currency { get; set; }       
+        public int BankID { get; set; }       
+        public string Bank { get; set; }
+        public bool IsActive { get; set; }
     }
 
     [AutoMapFrom(typeof(Banks))]
@@ -69,54 +47,35 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors.Dto
         public string CurrencyType { get; set; }
     }
 
-    [AutoMapTo(typeof(Vendor))]
-    public class GVendorsListDto : FullAuditedEntityDto
+    public class VendorMainListDto 
     {
-        [Required]
-        public virtual int? TenantId { get; set; }
-        [Required]
-        public virtual Guid SupplierCode { get; set; }
-        [Required]
-        public virtual string SupplierName { get; set; }
-        [Required]
-        public virtual string ContactName { get; set; }
-        [Required]
-        [Phone]
+        public int? id { get; set; }
+        public Guid SupplierCode { get; set; }        
+        public string SupplierName { get; set; }   
+        public string RegistrationNumber { get; set; }        
+        public string TaxRegistrationNumber { get; set; }  
+        public bool IsActive { get; set; }
+    }
+    public class VendorSubListDto
+    {
+        
+        public virtual int? TenantId { get; set; }        
+        public virtual int? VendorID { get; set; }
+        public virtual string ContactName { get; set; }  
         public virtual string ContactPhone { get; set; }
-        [Required]
-        public virtual string ContactFax { get; set; }
-        [Required]
-        [EmailAddress]
-        public virtual string ContactEmail { get; set; }
-        [Required]
+        public virtual string ContactFax { get; set; }       
+        public virtual string ContactEmail { get; set; }        
         public virtual string Address1 { get; set; }
-
         public virtual string Address2 { get; set; }
-
-        public virtual string Address3 { get; set; }
-        [Required]
-        public virtual string Location { get; set; }
-        [Required]
-        public virtual string RegistrationNumber { get; set; }
-        [Required]
-        public virtual string TaxRegistrationNumber { get; set; }
-        [Required]
-        public virtual string SupplierAccount { get; set; }
-        [Required]
-        public virtual string PaymentTerms { get; set; }
-        [Required]
-        public virtual string AccountNumber { get; set; }
-        [Required]
-        public virtual string Type { get; set; }
-        [Required]
-        public virtual string Branch { get; set; }
-
-        [Required]
-        public virtual int CurrencyID { get; set; } 
-
-        [Required]
-        public virtual int BankID { get; set; } 
-
+        public virtual string Address3 { get; set; }       
+        public virtual string Location { get; set; }        
+        public virtual string SupplierAccount { get; set; }        
+        public virtual string PaymentTerms { get; set; }        
+        public virtual string AccountNumber { get; set; }        
+        public virtual string Type { get; set; }        
+        public virtual string Branch { get; set; }        
+        public virtual int CurrencyID { get; set; }        
+        public virtual int BankID { get; set; }
         public virtual bool IsActive { get; set; }
     }
     public class GetClaimsInput
@@ -127,6 +86,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors.Dto
     public class StatusDto
     {
         public int Id { get; set; }
+        public int TenantId { get; set; }
         public bool Status { get; set; }
     }
 }

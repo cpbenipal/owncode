@@ -23,7 +23,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors.Exporting
             _abpSession = abpSession;
         }
 
-        public FileDto ExportToFile(List<VendorsListDto> claimListDtos)
+        public FileDto ExportToFile(List<GVendorsListDto> claimListDtos)
         {
             return CreateExcelPackage(
                 "ClaimsList.xlsx",
