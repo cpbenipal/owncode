@@ -202,7 +202,7 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
 
             query.InsurerName = querymain.InsurerName;
             query.MaskMain = querymain.Mask;
-            //query.InsurerID = query.Id;
+            query.InsurerID = query.Id;
 
             return query;
         }

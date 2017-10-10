@@ -43,6 +43,10 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string Insurers = "Dashboard.Insurers";
                 public const string InsurerList = "Insurers.Insurers";
                 public const string AddInsurer = "Vendors.AddInsurer";
+
+                public const string Brokers = "Dashboard.Brokers";
+                public const string BrokerList = "Brokers.Brokers";
+                public const string AddBroker = "Brokers.AddInsurer";
             }
         }
 

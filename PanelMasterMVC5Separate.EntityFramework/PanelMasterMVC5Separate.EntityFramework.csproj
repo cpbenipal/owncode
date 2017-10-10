@@ -171,6 +171,18 @@
     <Compile Include="Migrations\201710081131298_InsurerNewPicTable1.Designer.cs">
       <DependentUpon>201710081131298_InsurerNewPicTable1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710100917215_AddBroker.cs" />
+    <Compile Include="Migrations\201710100917215_AddBroker.Designer.cs">
+      <DependentUpon>201710100917215_AddBroker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710100922564_AddToBroker.cs" />
+    <Compile Include="Migrations\201710100922564_AddToBroker.Designer.cs">
+      <DependentUpon>201710100922564_AddToBroker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710101117412_AddToBrokerColChg.cs" />
+    <Compile Include="Migrations\201710101117412_AddToBrokerColChg.Designer.cs">
+      <DependentUpon>201710101117412_AddToBrokerColChg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PanelMasterMVC5SeparateDataModule.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
@@ -226,6 +238,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710081131298_InsurerNewPicTable1.resx">
       <DependentUpon>201710081131298_InsurerNewPicTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710100917215_AddBroker.resx">
+      <DependentUpon>201710100917215_AddBroker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710100922564_AddToBroker.resx">
+      <DependentUpon>201710100922564_AddToBroker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710101117412_AddToBrokerColChg.resx">
+      <DependentUpon>201710101117412_AddToBrokerColChg.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

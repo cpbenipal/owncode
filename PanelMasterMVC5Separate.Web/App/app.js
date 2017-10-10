@@ -287,6 +287,30 @@ appModule.config([
             url: '/EditInsurerSub/:id',
             templateUrl: '~/App/tenant/views/EditInsurerSub/index.cshtml'
         });
+
+
+        $stateProvider.state('tenant.Brokers', {
+            url: '/Brokers',
+            templateUrl: '~/App/tenant/views/Brokers/index.cshtml'
+        });
+
+        $stateProvider.state('tenant.AddBroker', {
+            url: '/AddBroker',
+            templateUrl: '~/App/tenant/views/AddBroker/index.cshtml'
+        });
+        $stateProvider.state('tenant.EditBroker', {
+            url: '/EditBroker/:id',
+            templateUrl: '~/App/tenant/views/EditBroker/index.cshtml'
+        });
+        $stateProvider.state('tenant.AddBrokerSub', {
+            url: '/AddBrokerSub/:id',
+            templateUrl: '~/App/tenant/views/AddBrokerSub/index.cshtml'
+        });
+        $stateProvider.state('tenant.EditBrokerSub', {
+            url: '/EditBrokerSub/:id',
+            templateUrl: '~/App/tenant/views/EditBrokerSub/index.cshtml'
+        });
+
         //$qProvider settings
         $qProvider.errorOnUnhandledRejections(false);
     }

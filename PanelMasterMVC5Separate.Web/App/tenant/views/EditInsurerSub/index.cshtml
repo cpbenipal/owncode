@@ -42,7 +42,7 @@
                                                     <span class="input-group-addon input-circle-left">
                                                         <i class="fa fa-copy"></i>
                                                     </span>
-                                                    <input type="text" readonly ng-class="{'edited':vm.client.insurerName}" class="form-control input-circle-right" placeholder="Insurer Name">
+                                                    <input type="text" readonly ng-model="vm.job.insurerName" ng-class="{'edited':vm.job.insurerName}" class="form-control input-circle-right" placeholder="Insurer Name">
                                                 </div>
                                             </div>
                                         </div>
@@ -50,8 +50,8 @@
                                             <label class="col-md-3 control-label">Logo</label>
                                             <div class="col-md-4">
                                                 <div class="input-group">
-                                                    <img ng-if="vm.client.id" ng-src="@Url.Action("GetProfilePictureById", "Insurer" )?id={{vm.client.id}}" class="img-thumbnail" />
-                                                    <img ng-if="!vm.client.id" src="@Url.Content("~/Common/Images/default-profile-picture.png")" class="img-thumbnail img-rounded user-edit-dialog-profile-image" />
+                                                    <img ng-if="vm.job.insurerID" ng-src="@Url.Action("GetProfilePictureById", "Insurer" )?id={{vm.job.insurerID}}" class="img-thumbnail" />
+                                                    <img ng-if="!vm.job.insurerID" src="@Url.Content("~/Common/Images/default-profile-picture.png")" class="img-thumbnail img-rounded user-edit-dialog-profile-image" />
                                                 </div>
                                             </div>
                                         </div>
@@ -62,7 +62,7 @@
                                                     <span class="input-group-addon input-circle-left">
                                                         <i class="fa fa-copy"></i>
                                                     </span>
-                                                    <input type="text" readonly ng-class="{'edited':vm.client.mask}" class="form-control input-circle-right" placeholder="Insurer Mask">
+                                                    <input type="text" readonly ng-model="vm.job.maskMain" ng-class="{'edited':vm.job.maskMain}" class="form-control input-circle-right" placeholder="Insurer Mask">
                                                 </div>
                                             </div>
                                         </div>
