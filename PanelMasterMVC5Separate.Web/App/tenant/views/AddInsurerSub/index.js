@@ -76,7 +76,7 @@
                 jobService.getInsurerMasterDetail($.extend({ filter: $stateParams.id }, $stateParams.id))
                     .then(function (result) {
 
-                        vm.job = result.data;
+                        vm.client = result.data; 
 
                     }).finally(function () {
                         vm.loading = false;

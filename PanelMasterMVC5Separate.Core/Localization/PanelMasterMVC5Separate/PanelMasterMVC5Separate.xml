@@ -66,6 +66,12 @@
     <text name="AddInsurer" value="Add Insurer" />
     <text name="InsurerAccount" value="Insurer Account" />
     <text name="InsurerName" value="Insurer Name" />
+    
+    <text name="Brokers" value="Brokers" />
+    <text name="AddBroker" value="Add Broker" />
+    <text name="BrokerAccount" value="Broker Account" />
+    <text name="BrokerName" value="Broker Name" />
+    
     <text name="SupplierCode" value="Supplier Code" />
     <text name="SupplierName" value="Supplier Name" />
     <text name="ContactName" value="Contact Name" />
@@ -91,9 +97,13 @@
     <text name="TenantName" value="Tenant name" />
     <text name="ListOfVendor" value="List of Vendor" />
     <text name="ListOfInsurers" value="List of Insurers" />
+    <text name="ListOfBrokers" value="List of Brokers" />
     <text name="EditMasterInsurer" value="Edit master insurer" />
+    <text name="EditMasterBroker" value="Edit master Broker" />
     <text name="AddMasterInsurer" value="Add master insurer" />
+    <text name="AddMasterBroker" value="Add master Broker" />
     <text name="AddSubMasterInsurer" value="Add sub master insurer" />
+    <text name="AddSubMasterBroker" value="Add sub master broker" />
     <text name="TenantDeleteWarningMessage" value="Tenant {0} will be deleted." />
     <text name="AdminEmailAddress" value="admin email" />
     <text name="AdminPassword" value="admin password" />

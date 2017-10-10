@@ -304,6 +304,11 @@
     <Compile Include="Sessions\Dto\UserLoginInfoDto.cs" />
     <Compile Include="Sessions\ISessionAppService.cs" />
     <Compile Include="Sessions\SessionAppService.cs" />
+    <Compile Include="Tenants\Brokers\BrokerAppService.cs" />
+    <Compile Include="Tenants\Brokers\Dto\BrokerDto.cs" />
+    <Compile Include="Tenants\Brokers\Exporting\IBrokerExporter.cs" />
+    <Compile Include="Tenants\Brokers\Exporting\BrokerExporter.cs" />
+    <Compile Include="Tenants\Brokers\IBrokerAppService.cs" />
     <Compile Include="Tenants\Claim\BranchClaimAppService.cs" />
     <Compile Include="Tenants\Claim\Dto\BranchClaimListDto.cs" />
     <Compile Include="Tenants\Claim\Dto\GetClaimsInput.cs" />

@@ -86,8 +86,8 @@
                 vm.loading = true;
                 jobService.getInsurerSubDetail($.extend({ filter: $stateParams.id }, $stateParams.id))
                     .then(function (result) {
-                        vm.job = result.data;                         
-                        vm.getInsurerMaster(vm.job.insurerID);
+                        vm.job = result.data;                       
+                        
                          
                     }).finally(function () {
                         vm.loading = false;
