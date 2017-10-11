@@ -16,6 +16,7 @@ namespace PanelMasterMVC5Separate.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = false;
             ContextKey = "PanelMasterMVC5Separate";
         }
 

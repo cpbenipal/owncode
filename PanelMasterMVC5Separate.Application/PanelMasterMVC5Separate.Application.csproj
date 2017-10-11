@@ -304,6 +304,11 @@
     <Compile Include="Sessions\Dto\UserLoginInfoDto.cs" />
     <Compile Include="Sessions\ISessionAppService.cs" />
     <Compile Include="Sessions\SessionAppService.cs" />
+    <Compile Include="Tenants\Brokers\BrokerAppService.cs" />
+    <Compile Include="Tenants\Brokers\Dto\BrokerDto.cs" />
+    <Compile Include="Tenants\Brokers\Exporting\IBrokerExporter.cs" />
+    <Compile Include="Tenants\Brokers\Exporting\BrokerExporter.cs" />
+    <Compile Include="Tenants\Brokers\IBrokerAppService.cs" />
     <Compile Include="Tenants\Claim\BranchClaimAppService.cs" />
     <Compile Include="Tenants\Claim\Dto\BranchClaimListDto.cs" />
     <Compile Include="Tenants\Claim\Dto\GetClaimsInput.cs" />
@@ -312,6 +317,11 @@
     <Compile Include="Tenants\Claim\IBranchClaimAppService.cs" />
     <Compile Include="Tenants\Dashboard\Dto\GetMemberActivityOutput.cs" />
     <Compile Include="Tenants\Estimators\Dto\getEstimatorInput.cs" />
+    <Compile Include="Tenants\Insurer\Dto\InsurerDto.cs" />
+    <Compile Include="Tenants\Insurer\Exporting\IInsurerExporter.cs" />
+    <Compile Include="Tenants\Insurer\Exporting\InsurerExporter.cs" />
+    <Compile Include="Tenants\Insurer\IInsurerAppService.cs" />
+    <Compile Include="Tenants\Insurer\InsurerAppService.cs" />
     <Compile Include="Tenants\PhoneBook\Dto\GetPeopleInput.cs" />
     <Compile Include="Tenants\Dashboard\ITenantDashboardAppService.cs" />
     <Compile Include="Tenants\Dashboard\TenantDashboardAppService.cs" />
@@ -319,9 +329,7 @@
     <Compile Include="Tenants\PhoneBook\PersonAppService .cs" />
     <Compile Include="Tenants\Vendors\Dto\VendorsListDto.cs" />
     <Compile Include="Tenants\Vendors\Exporting\IVendorExporter.cs" />
-    <Compile Include="Tenants\Vendors\Exporting\IVendorsListExcelExporter.cs" />
     <Compile Include="Tenants\Vendors\Exporting\VendorExporter.cs" />
-    <Compile Include="Tenants\Vendors\Exporting\VendorsListExcelExporter.cs" />
     <Compile Include="Tenants\Vendors\IVendorClaimAppService.cs" />
     <Compile Include="Tenants\Vendors\VendorClaimAppService.cs" />
     <Compile Include="Timing\Dto\GetTimezoneComboboxItemsInput.cs" />

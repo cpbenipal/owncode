@@ -1,0 +1,91 @@
+@using PanelMasterMVC5Separate.Tenants.Insurer
+@using Abp.Web.Mvc.Extensions
+<div class="row margin-bottom-5">
+    <div class="col-xs-6">
+        <div class="page-head">
+            <div class="page-title">
+                <h1>
+                    <span>@L("AddMasterInsurer")</span> <small>more info about insurer</small>
+                </h1>
+            </div>
+        </div>
+    </div> 
+        <form name="addinsurerform" ng-controller="tenant.views.AddInsurer.index as vm" role="form" novalidate class="form-horizontal" action="#" id="submit_form" method="POST">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- BEGIN SAMPLE FORM PORTLET-->
+                    <div class="portlet light bordered">
+
+                        <div class="tabbable-line boxless tabbable-reversed">
+                            <div class="tab-content">
+
+                                <div class="portlet box green">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="fa fa-gift"></i>Fill Insurer Master detail
+                                        </div>
+                                        <div class="tools">
+                                            <a href="javascript:;" class="collapse"> </a>
+                                            <a href="#portlet-config" data-toggle="modal" class="config"> </a>
+                                            <a href="javascript:;" class="reload"> </a>
+                                            <a href="javascript:;" class="remove"> </a>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body form">
+                                        <!-- BEGIN FORM-->
+
+                                        <div class="form-body">
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Insurer Name</label>
+                                                <div class="col-md-4">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon input-circle-left">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </span>
+                                                        <input required type="text" ng-model="vm.job.InsurerName" class="form-control input-circle-right" placeholder="Insurer Name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Logo</label>
+                                                <div class="col-md-4">
+                                                    <div class="input-group">
+                                                        <input type="file" nv-file-select uploader="vm.job.uploader">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Insurer Mask</label>
+                                                <div class="col-md-4">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon input-circle-left">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </span>
+                                                        <input required type="text" ng-model="vm.job.Mask" class="form-control input-circle-right" placeholder="Insurer Mask">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-offset-3 col-md-9">
+                                                    <button ng-disabled="vm.saving" type="reset" class="btn btn-default">@L("Cancel")</button>
+                                                    <button type="button" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="addinsurerform.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- END FORM-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END SAMPLE FORM PORTLET-->
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+</div>

@@ -134,6 +134,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Brokers\Broker.cs" />
     <Compile Include="Claim\JobDetails_StoredProc.cs" />
     <Compile Include="Claim\Jobs.cs" />
     <Compile Include="Claim\BranchClaimStatus.cs" />
@@ -142,6 +143,8 @@
     <Compile Include="IClaimRepository.cs" />
     <Compile Include="Insurance_Brokers\Broker.cs" />
     <Compile Include="Insurance_Brokers\Insurance.cs" />
+    <Compile Include="Insurer\InsurerMaster.cs" />
+    <Compile Include="Insurer\InsurerSub.cs" />
     <Compile Include="PanelMasterMVC5SeparateConsts.cs" />
     <Compile Include="PanelMasterMVC5SeparateCoreModule.cs" />
     <Compile Include="PanelMasterMVC5SeparateDomainServiceBase.cs" />

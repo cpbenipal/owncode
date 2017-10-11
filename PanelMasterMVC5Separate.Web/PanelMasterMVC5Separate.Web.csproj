@@ -530,6 +530,14 @@
       <DependentUpon>index.css</DependentUpon>
     </Content>
     <Content Include="App\host\views\tenants\featuresModal.js" />
+    <Content Include="App\tenant\views\AddBroker\index.js" />
+    <Content Include="App\tenant\views\AddBrokerSub\index.js" />
+    <Content Include="App\tenant\views\EditBroker\index.js" />
+    <Content Include="App\tenant\views\EditBrokerSub\index.js" />
+    <Content Include="App\tenant\views\EditInsurerSub\index.js" />
+    <Content Include="App\tenant\views\EditInsurer\index.js" />
+    <Content Include="App\tenant\views\AddInsurerSub\index.js" />
+    <Content Include="App\tenant\views\AddInsurer\index.js" />
     <Content Include="App\tenant\views\AddVendor\index.js" />
     <Content Include="App\tenant\views\client_information\index.js" />
     <Content Include="App\tenant\views\comments_information\index.js" />
@@ -539,6 +547,8 @@
     <Content Include="App\tenant\views\EditVendor\index.js" />
     <Content Include="App\tenant\views\financial_information\index.js" />
     <Content Include="App\tenant\views\insurance_information\index.js" />
+    <Content Include="App\tenant\views\Brokers\index.js" />
+    <Content Include="App\tenant\views\Insurers\index.js" />
     <Content Include="App\tenant\views\jobdetails\job.js" />
     <Content Include="App\tenant\views\NewJob\index.js" />
     <Content Include="App\tenant\views\towing\index.js" />
@@ -3038,6 +3048,16 @@
     <Content Include="App\tenant\views\AddVendor\index.cshtml" />
     <Content Include="App\tenant\views\EditVendor\index.cshtml" />
     <Content Include="App\tenant\views\VendorList\index.cshtml" />
+    <Content Include="App\tenant\views\Insurers\index.cshtml" />
+    <Content Include="App\tenant\views\AddInsurer\index.cshtml" />
+    <Content Include="App\tenant\views\AddInsurerSub\index.cshtml" />
+    <Content Include="App\tenant\views\EditInsurer\index.cshtml" />
+    <Content Include="App\tenant\views\EditInsurerSub\index.cshtml" />
+    <Content Include="App\tenant\views\Brokers\index.cshtml" />
+    <Content Include="App\tenant\views\AddBroker\index.cshtml" />
+    <Content Include="App\tenant\views\AddBrokerSub\index.cshtml" />
+    <Content Include="App\tenant\views\EditBroker\index.cshtml" />
+    <Content Include="App\tenant\views\EditBrokerSub\index.cshtml" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
@@ -3805,6 +3825,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BrokerController.cs" />
+    <Compile Include="Controllers\InsurerController.cs" />
     <Compile Include="Models\Layout\TenantCustomCssViewModel.cs" />
     <Compile Include="App_Start\Bundling\CssRewriteUrlWithVirtualDirectoryTransform.cs" />
     <Compile Include="App_Start\Bundling\AsIsBundleOrderer.cs" />
@@ -4034,7 +4056,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>6234</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:6240/</IISUrl>
+          <IISUrl>http://localhost:6241/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
