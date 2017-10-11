@@ -147,21 +147,9 @@
     <Compile Include="EntityFramework\PanelMasterMVC5SeparateDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\PanelMasterMVC5SeparateRepositoryBase.cs" />
     <Compile Include="EntityFramework\AbpZeroDbMigrator.cs" />
-    <Compile Include="Migrations\201710091227311_1.cs" />
-    <Compile Include="Migrations\201710091227311_1.Designer.cs">
-      <DependentUpon>201710091227311_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710100917215_AddBroker.cs" />
-    <Compile Include="Migrations\201710100917215_AddBroker.Designer.cs">
-      <DependentUpon>201710100917215_AddBroker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710100922564_AddToBroker.cs" />
-    <Compile Include="Migrations\201710100922564_AddToBroker.Designer.cs">
-      <DependentUpon>201710100922564_AddToBroker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710101117412_AddToBrokerColChg.cs" />
-    <Compile Include="Migrations\201710101117412_AddToBrokerColChg.Designer.cs">
-      <DependentUpon>201710101117412_AddToBrokerColChg.cs</DependentUpon>
+    <Compile Include="Migrations\201710110657446_1.cs" />
+    <Compile Include="Migrations\201710110657446_1.Designer.cs">
+      <DependentUpon>201710110657446_1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PanelMasterMVC5SeparateDataModule.cs" />
@@ -201,17 +189,8 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710091227311_1.resx">
-      <DependentUpon>201710091227311_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710100917215_AddBroker.resx">
-      <DependentUpon>201710100917215_AddBroker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710100922564_AddToBroker.resx">
-      <DependentUpon>201710100922564_AddToBroker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710101117412_AddToBrokerColChg.resx">
-      <DependentUpon>201710101117412_AddToBrokerColChg.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710110657446_1.resx">
+      <DependentUpon>201710110657446_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
