@@ -322,6 +322,11 @@
     <Compile Include="Tenants\Insurer\Exporting\InsurerExporter.cs" />
     <Compile Include="Tenants\Insurer\IInsurerAppService.cs" />
     <Compile Include="Tenants\Insurer\InsurerAppService.cs" />
+    <Compile Include="Tenants\Manufacturing\Dto\ManufacturingDto.cs" />
+    <Compile Include="Tenants\Manufacturing\Exporting\MExporter.cs" />
+    <Compile Include="Tenants\Manufacturing\Exporting\IMExporter.cs" />
+    <Compile Include="Tenants\Manufacturing\IManufactureAppService.cs" />
+    <Compile Include="Tenants\Manufacturing\ManufactureAppService.cs" />
     <Compile Include="Tenants\PhoneBook\Dto\GetPeopleInput.cs" />
     <Compile Include="Tenants\Dashboard\ITenantDashboardAppService.cs" />
     <Compile Include="Tenants\Dashboard\TenantDashboardAppService.cs" />

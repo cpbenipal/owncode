@@ -47,7 +47,6 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
             _bankRepository = BankRepository;
             _currRepository = CurrenciesRepository;
             _BrokerListExcelExporter = BrokerListExcelExporter;
-
         }
 
         public ListResultDto<BankDto> GetBanks()
