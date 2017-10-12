@@ -1,5 +1,3 @@
-
-
 namespace PanelMasterMVC5Separate.Migrations
 {
     using System;
@@ -7,7 +5,7 @@ namespace PanelMasterMVC5Separate.Migrations
     using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.Migrations;
     
-    public partial class AddToBroker : DbMigration
+    public partial class _1 : DbMigration
     {
         public override void Up()
         {
@@ -39,7 +37,7 @@ namespace PanelMasterMVC5Separate.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Description = c.String(nullable: false),
+                        BrokerName = c.String(nullable: false),
                         LogoPicture = c.String(nullable: false),
                         Mask = c.String(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
