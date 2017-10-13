@@ -530,8 +530,12 @@
       <DependentUpon>index.css</DependentUpon>
     </Content>
     <Content Include="App\host\views\tenants\featuresModal.js" />
+    <Content Include="App\tenant\views\EditVehicleMade\index.js" />
+    <Content Include="App\tenant\views\AddVehicleMade\index.js" />
+    <Content Include="App\tenant\views\AddVehicleMake\index.js" />
     <Content Include="App\tenant\views\AddBroker\index.js" />
     <Content Include="App\tenant\views\AddBrokerSub\index.js" />
+    <Content Include="App\tenant\views\EditVehicleMake\index.js" />
     <Content Include="App\tenant\views\EditBroker\index.js" />
     <Content Include="App\tenant\views\EditBrokerSub\index.js" />
     <Content Include="App\tenant\views\EditInsurerSub\index.js" />
@@ -548,6 +552,8 @@
     <Content Include="App\tenant\views\financial_information\index.js" />
     <Content Include="App\tenant\views\insurance_information\index.js" />
     <Content Include="App\tenant\views\Brokers\index.js" />
+    <Content Include="App\tenant\views\VehicleMades\index.js" />
+    <Content Include="App\tenant\views\VehicleMakes\index.js" />
     <Content Include="App\tenant\views\Insurers\index.js" />
     <Content Include="App\tenant\views\jobdetails\job.js" />
     <Content Include="App\tenant\views\NewJob\index.js" />
@@ -3058,6 +3064,12 @@
     <Content Include="App\tenant\views\AddBrokerSub\index.cshtml" />
     <Content Include="App\tenant\views\EditBroker\index.cshtml" />
     <Content Include="App\tenant\views\EditBrokerSub\index.cshtml" />
+    <Content Include="App\tenant\views\VehicleMakes\index.cshtml" />
+    <Content Include="App\tenant\views\AddVehicleMake\index.cshtml" />
+    <Content Include="App\tenant\views\EditVehicleMake\index.cshtml" />
+    <Content Include="App\tenant\views\AddVehicleMade\index.cshtml" />
+    <Content Include="App\tenant\views\EditVehicleMade\index.cshtml" />
+    <Content Include="App\tenant\views\VehicleMades\index.cshtml" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
@@ -3826,6 +3838,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BrokerController.cs" />
+    <Compile Include="Controllers\ManufactureController.cs" />
     <Compile Include="Controllers\InsurerController.cs" />
     <Compile Include="Models\Layout\TenantCustomCssViewModel.cs" />
     <Compile Include="App_Start\Bundling\CssRewriteUrlWithVirtualDirectoryTransform.cs" />

@@ -13,7 +13,7 @@ using PanelMasterMVC5Separate.Vehicle;
 using PanelMasterMVC5Separate.Insurance_Brokers;
 using PanelMasterMVC5Separate.Estimations;
 using PanelMasterMVC5Separate.Clients;
-using PanelMasterMVC5Separate.Vendors; 
+using PanelMasterMVC5Separate.Vendors;
 using PanelMasterMVC5Separate.Insurer;
 using PanelMasterMVC5Separate.Brokers;
 
@@ -35,9 +35,7 @@ namespace PanelMasterMVC5Separate.EntityFramework
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<JobDetails_StoredProc>().MapToStoredProcedures();
-
-           
+            modelBuilder.Entity<JobDetails_StoredProc>().MapToStoredProcedures(); 
 
             base.OnModelCreating(modelBuilder);
         }
@@ -87,6 +85,10 @@ namespace PanelMasterMVC5Separate.EntityFramework
         public virtual IDbSet<BrokerSubMaster> BrokerSubMasters { get; set; }
 
         public virtual IDbSet<BrokerMasterPics> BrokerMasterPics { get; set; }
+
+        public virtual IDbSet<VehicleMake> VehicleMake { get; set; }
+        public virtual IDbSet<VehicleModels> VehicleModel { get; set; }
+        public virtual IDbSet<VehicleModelLogos> VehicleModelLogo { get; set; }
 
         public PanelMasterMVC5SeparateDbContext()
             : base("Default")

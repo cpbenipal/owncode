@@ -47,6 +47,14 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string Brokers = "Dashboard.Brokers";
                 public const string BrokerList = "Brokers.Brokers";
                 public const string AddBroker = "Brokers.AddInsurer";
+
+                public const string VehicleManufacturer = "Dashboard.VehicleManufacturer";
+                public const string VehicleMakes = "Dashboard.VehicleMakes";
+                public const string AddMake = "Dashboard.AddVehicleMake";
+                public const string AddModel = "Dashboard.AddVehicleMade";
+                public const string VehicleMades = "Dashboard.VehicleMades";
+
+                // public const string VehicleManufacturer = "Dashboard.VehicleManufacturer";                 
             }
         }
 

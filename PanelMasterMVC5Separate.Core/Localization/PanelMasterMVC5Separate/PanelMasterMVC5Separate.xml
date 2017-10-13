@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts> 
+  <texts>
     <text name="HomePage" value="Home page" />
     <text name="AboutUs" value="About us" />
     <text name="Administration" value="Administration" />
@@ -66,12 +66,12 @@
     <text name="AddInsurer" value="Add Insurer" />
     <text name="InsurerAccount" value="Insurer Account" />
     <text name="InsurerName" value="Insurer Name" />
-    
+
     <text name="Brokers" value="Brokers" />
     <text name="AddBroker" value="Add Broker" />
     <text name="BrokerAccount" value="Broker Account" />
     <text name="BrokerName" value="Broker Name" />
-    
+
     <text name="SupplierCode" value="Supplier Code" />
     <text name="SupplierName" value="Supplier Name" />
     <text name="ContactName" value="Contact Name" />
@@ -539,5 +539,24 @@
     <text name="MaximumUserCount_Error_Message">Reached to maximum allowed user count!</text>
     <text name="MaximumUserCount_Error_Detail">This tenant is allowed to have a maximum of {0} users.</text>
     <text name="UnlockedTenandAdmin">Unlocked admin user for {0}</text>
+
+    <text name="VehicleManufacturer">Vehicle Manufacturer</text>
+    <text name="AddVehicleMake">Add make</text>
+    <text name="AddVehicleMade">Add model</text>
+    <text name="VehicleMakeAlreadyExists">Vehicle make already exists</text>
+    <text name="VehicleMadeAlreadyExists">Vehicle model already exists</text>
+    <text name="VehicleMakes">Vehicle Makes</text>
+    <text name="VehicleMades">Vehicle Models</text>
+    <text name="VehicleMake">Vehicle Make</text>
+    <text name="VehicleMade">Vehicle Model</text>
+    <text name="AllMades">All Models</text>
+    <text name="AllMakes">All Makes</text>
+    <text name="Model">Model</text>    
+    <text name="MMCode">MMCode</text>
+    <text name="Description">Description</text>
+    <text name="LogoPicture">Logo Picture</text>
+    <text name="EditVehicleMade">Edit Vehicle Made</text>
+    <text name="ChangeLogoPicture">Change Logo Picture</text>
+    
   </texts>
 </localizationDictionary>
