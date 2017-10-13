@@ -546,9 +546,11 @@
     <text name="VehicleMakeAlreadyExists">Vehicle make already exists</text>
     <text name="VehicleMadeAlreadyExists">Vehicle model already exists</text>
     <text name="VehicleMakes">Vehicle Makes</text>
-    <text name="VehicleMades">Vehicle Mades</text>
-    <text name="VechileMake">Vechile Make</text>
-    <text name="VechileMade">Vechile Make</text>
+    <text name="VehicleMades">Vehicle Models</text>
+    <text name="VehicleMake">Vehicle Make</text>
+    <text name="VehicleMade">Vehicle Model</text>
+    <text name="AllMades">All Models</text>
+    <text name="AllMakes">All Makes</text>
     <text name="Model">Model</text>    
     <text name="MMCode">MMCode</text>
     <text name="Description">Description</text>

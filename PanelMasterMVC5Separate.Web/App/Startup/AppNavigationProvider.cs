@@ -195,24 +195,32 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     PageNames.App.Tenant.VehicleManufacturer,
                     L("VehicleManufacturer"),
                     icon: "glyphicon glyphicon-tasks"
-                    ).AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.AddMakes,
+                    )
+                    .AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.VehicleMakes,
+                    L("AllMakes"),
+                    url: "tenant.VehicleMakes",
+                    icon: "glyphicon glyphicon-search"
+                    ))
+                    .AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.AddMake,
                     L("AddVehicleMake"),
                     url: "tenant.AddVehicleMake",
                     icon: "glyphicon glyphicon-collapse-down"
                     ))
                     .AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.AddMades,
+                    PageNames.App.Tenant.VehicleMades,
+                    L("AllMades"),
+                    url: "tenant.VehicleMades",
+                    icon: "glyphicon glyphicon-search"
+                    ))
+                    .AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.AddModel,
                     L("AddVehicleMade"),
                     url: "tenant.AddVehicleMade",
                     icon: "glyphicon glyphicon-collapse-down"
                     ))
-                    .AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.VehicleMakes,
-                    L("Search"),
-                    url: "tenant.VehicleMakes",
-                    icon: "glyphicon glyphicon-search"
-                    ))
+                    
                     )
                 );
         }
