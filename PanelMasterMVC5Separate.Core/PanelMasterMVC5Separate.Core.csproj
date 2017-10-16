@@ -220,6 +220,8 @@
     <Compile Include="Timing\ITimeZoneService.cs" />
     <Compile Include="Timing\TimeZoneService.cs" />
     <Compile Include="Validation\ValidationHelper.cs" />
+    <Compile Include="Vehicle\IndexAttribute.cs" />
+    <Compile Include="Vehicle\Make.cs" />
     <Compile Include="Vehicle\Manufacture.cs" />
     <Compile Include="Vehicle\VehicleModel.cs" />
     <Compile Include="Vendors\Banks.cs" />

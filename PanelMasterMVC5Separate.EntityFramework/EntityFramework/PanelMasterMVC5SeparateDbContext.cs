@@ -7,11 +7,13 @@ using PanelMasterMVC5Separate.Chat;
 using PanelMasterMVC5Separate.Friendships;
 using PanelMasterMVC5Separate.MultiTenancy;
 using PanelMasterMVC5Separate.Storage;
+using PanelMasterMVC5Separate.PhoneBook;
 using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.Vehicle;
+using PanelMasterMVC5Separate.Insurance_Brokers;
 using PanelMasterMVC5Separate.Estimations;
 using PanelMasterMVC5Separate.Clients;
-using PanelMasterMVC5Separate.Vendors; 
+using PanelMasterMVC5Separate.Vendors;
 using PanelMasterMVC5Separate.Insurer;
 using PanelMasterMVC5Separate.Brokers;
 
@@ -29,9 +31,22 @@ namespace PanelMasterMVC5Separate.EntityFramework
     {
         /* Define an IDbSet for each entity of the application */
 
+        public DbSet<JobDetails_StoredProc> JobDetails_StoredProcs { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<JobDetails_StoredProc>().MapToStoredProcedures(); 
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         public virtual IDbSet<Client> Clients { get; set; }
 
         public virtual IDbSet<Estimator> Estimators { get; set; }
+
+        public virtual IDbSet<Broker> Brokers { get; set; }
+
+        public virtual IDbSet<Insurance> Insurances { get; set; }
 
         public virtual IDbSet<Manufacture> Manufactures { get; set; }
 
@@ -41,11 +56,15 @@ namespace PanelMasterMVC5Separate.EntityFramework
 
         public virtual DbSet<Jobs> BranchClaims { get; set; }
 
+        public virtual DbSet<Person> Persons { get; set; }
+
         public virtual IDbSet<BinaryObject> BinaryObjects { get; set; }
 
         public virtual IDbSet<Friendship> Friendships { get; set; }
 
         public virtual IDbSet<ChatMessage> ChatMessages { get; set; }
+
+        public virtual IDbSet<Vendor> Vendors { get; set; }
 
         public virtual DbSet<VendorSub> VendorSub { get; set; }
 
@@ -66,6 +85,10 @@ namespace PanelMasterMVC5Separate.EntityFramework
         public virtual IDbSet<BrokerSubMaster> BrokerSubMasters { get; set; }
 
         public virtual IDbSet<BrokerMasterPics> BrokerMasterPics { get; set; }
+
+        public virtual IDbSet<VehicleMake> VehicleMake { get; set; }
+        public virtual IDbSet<VehicleModels> VehicleModel { get; set; }
+        public virtual IDbSet<VehicleModelLogos> VehicleModelLogo { get; set; }
 
         public PanelMasterMVC5SeparateDbContext()
             : base("Default")

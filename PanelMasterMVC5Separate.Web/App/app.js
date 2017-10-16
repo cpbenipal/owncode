@@ -346,7 +346,30 @@ appModule.config([
             url: '/EditBrokerSub/:id',
             templateUrl: '~/App/tenant/views/EditBrokerSub/index.cshtml'
         });
-
+        $stateProvider.state('tenant.VehicleMakes', {
+            url: '/VehicleMakes',
+            templateUrl: '~/App/tenant/views/VehicleMakes/index.cshtml'
+        });
+        $stateProvider.state('tenant.VehicleMades', {
+            url: '/VehicleMades',
+            templateUrl: '~/App/tenant/views/VehicleMades/index.cshtml'
+        });
+        $stateProvider.state('tenant.AddVehicleMake', {
+            url: '/AddVehicleMake',
+            templateUrl: '~/App/tenant/views/AddVehicleMake/index.cshtml'
+        });
+        $stateProvider.state('tenant.EditVehicleMake', {
+            url: '/EditVehicleMake/:id',
+            templateUrl: '~/App/tenant/views/EditVehicleMake/index.cshtml'
+        });
+        $stateProvider.state('tenant.AddVehicleMade', {
+            url: '/AddVehicleMade',
+            templateUrl: '~/App/tenant/views/AddVehicleMade/index.cshtml'
+        });
+        $stateProvider.state('tenant.EditVehicleMade', {
+            url: '/EditVehicleMade/:id',
+            templateUrl: '~/App/tenant/views/EditVehicleMade/index.cshtml'
+        });
         //$qProvider settings
         $qProvider.errorOnUnhandledRejections(false);
     }
