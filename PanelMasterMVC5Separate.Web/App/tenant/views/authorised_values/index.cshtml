@@ -3,45 +3,18 @@
 
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
 
-    <!-- BEGIN PAGE TITLE-->
-    <h1 class="page-title">
-        Insurance
-        <small>Infomation</small>
-    </h1>
-    <!-- END PAGE TITLE-->
-    <!-- END PAGE HEADER-->
-    <form ng-controller="tenant.views.insurance_information.index as vm" class="form-horizontal" action="#" id="submit_form" method="POST">
+    <form ng-controller="tenant.views.authorised_values.index as vm" class="form-horizontal" action="#" id="submit_form" method="POST">
 
         <div class="row">
             <div class="col-md-12">
                 <div class="tabbable-line boxless tabbable-reversed">
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a ng-href="#!/tenant/vehicle_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Vehicle information </a>
-                        </li>
-                        <li>
-                            <a ng-href="#!/tenant/insurance_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Insurance information </a>
-                        </li>
-                        <li>
-                            <a ng-href="#!/tenant/client_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Client information </a>
-                        </li>
-                        <li>
-                            <a ng-href="#!/tenant/financial_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Financial information </a>
-                        </li>
-                        <li>
-                            <a ng-href="#!/tenant/dates_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Dates </a>
-                        </li>
-                        <li>
-                            <a ng-href="#!/tenant/comments_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Comments </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">                       
-
-                        <div class="tab-pane" id="tab_1">
+                   
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_1">
                             <div class="portlet box green">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="fa fa-gift"></i>Insurance details
+                                        <i class="fa fa-gift"></i>Authorised Values
                                     </div>
                                     <div class="tools">
                                         <a href="javascript:;" class="collapse"> </a>
@@ -54,32 +27,58 @@
                                     <!-- BEGIN FORM-->
 
                                     <div class="form-body">
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Insurer</label>
-                                            <div class="col-md-4">                                                                                               
-                                                <select required class="form-control" ng-options="s.id as s.name for s in InsuranceList" ng-model="vm.job.InsuranceId">
-                                                    <option value="">--Select Insurer--</option>
-                                                </select>
-
-
-
-                                            </div>
-                                        </div>                                         
 
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Broker</label>
+                                            <label class="col-md-3 control-label">Job Value</label>
                                             <div class="col-md-4">
-                                                 
-                                                <select required class="form-control" ng-options="s.id as s.name for s in BrokerList" ng-model="vm.job.BrokerId">
-                                                    <option value="">--Select Broker--</option>
-                                                </select>
+                                                <input required name="JobValue" type="text" class="form-control input-circle" placeholder="Job value.">
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Parts Value</label>
+                                            <div class="col-md-4">
+                                                <input required name="partsValue" type="text" class="form-control input-circle" placeholder="Parts value.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Labour Value</label>
+                                            <div class="col-md-4">
+                                                <input required name="labourValue" type="text" class="form-control input-circle" placeholder="Labour value.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Paint Value</label>
+                                            <div class="col-md-4">
+                                                <input required name="paintValues" type="text" class="form-control input-circle" placeholder="Paint & Consumables">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Other Values</label>
+                                            <div class="col-md-4">
+                                                <input required name="other" type="text" class="form-control input-circle" placeholder="Other values.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <hr style="margin:0px;" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Excess Values</label>
+                                            <div class="col-md-4">
+                                                <input required name="ExcessValue" type="text" class="form-control input-circle" placeholder="Excess value.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Tow Value</label>
+                                            <div class="col-md-4">
+                                                <input required name="ExcessValue" type="text" class="form-control input-circle" placeholder="Excess value.">
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <div class="form-actions">
                                         <div class="row">
                                             <div class="col-md-offset-3 col-md-9">
-                                                <button type="button" class="btn btn-circle green button-submit">Submit</button>
+                                                <button type="button" data-toggle="modal" class="btn btn-circle green">Submit</button>
                                             </div>
                                         </div>
                                     </div>
@@ -89,11 +88,14 @@
                             </div>
 
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
         </div>
+
+        <div ui-view class="fade-in-up"></div>
+
 
     </form>
 

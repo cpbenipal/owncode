@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    appModule.controller('tenant.views.comments_information.index', [
+    appModule.controller('tenant.views.invoiced_values.index', [
         '$scope', '$uibModal', '$stateParams', 'abp.services.app.branchClaim',
 
 

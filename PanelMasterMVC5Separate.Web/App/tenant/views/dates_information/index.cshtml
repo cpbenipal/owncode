@@ -2,45 +2,19 @@
 <html lang="en">
 
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
-    <!-- BEGIN PAGE TITLE-->
-    <h1 class="page-title">
-        Dates
-        <small>Infomation</small>
-    </h1>
-    <!-- END PAGE TITLE-->
-    <!-- END PAGE HEADER-->
+
     <form ng-controller="tenant.views.dates_information.index as vm" class="form-horizontal" action="#" id="submit_form" method="POST">
 
         <div class="row">
             <div class="col-md-12">
                 <div class="tabbable-line boxless tabbable-reversed">
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a ng-href="#!/tenant/vehicle_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Vehicle information </a>
-                        </li>
-                        <li>
-                            <a ng-href="#!/tenant/insurance_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Insurance information </a>
-                        </li>
-                        <li>
-                            <a ng-href="#!/tenant/client_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Client information </a>
-                        </li>
-                        <li>
-                            <a ng-href="#!/tenant/financial_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Financial information </a>
-                        </li>
-                        <li>
-                            <a ng-href="#!/tenant/dates_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Dates </a>
-                        </li>
-                        <li>
-                            <a ng-href="#!/tenant/comments_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Comments </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">                       
-
-                        <div class="tab-pane" id="tab_1">
+                   
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_1">
                             <div class="portlet box green">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="fa fa-gift"></i>Dates info.
+                                        <i class="fa fa-gift"></i>Dates Info
                                     </div>
                                     <div class="tools">
                                         <a href="javascript:;" class="collapse"> </a>
@@ -52,7 +26,19 @@
                                 <div class="portlet-body form">
                                     <!-- BEGIN FORM-->
 
-                                    <div class="form-body">                                        
+                                    <div class="form-body">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Quoted Date</label>
+                                            <div class="col-md-4">
+                                                <input ng-required name="QuotedDate" type="text" class="form-control input-circle" placeholder="Quoted Date.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Auth Date</label>
+                                            <div class="col-md-4">
+                                                <input ng-required name="AuthDate" type="text" class="form-control input-circle" placeholder="Authorized Date.">
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Booking Date</label>
                                             <div class="col-md-4">
@@ -60,29 +46,76 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Promise Days</label>
+                                            <label class="col-md-3 control-label">Check-IN Date</label>
                                             <div class="col-md-4">
-                                                <select required class="form-control">
-                                                    <option value="">--Select Promise Days--</option>
-                                                </select>
+                                                <input ng-required name="CheckinDate" type="text" class="form-control input-circle" placeholder="Checkin Date.">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Promise Dates</label>
+                                            <label class="col-md-3 control-label">Converted Date</label>
                                             <div class="col-md-4">
-                                                <input ng-required name="PromiseDates" type="text" class="form-control input-circle" placeholder="Promise Dates.">
+                                                <input ng-required name="ConvertedDate" type="text" class="form-control input-circle" placeholder="Converted Date.">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Date Converted</label>
+                                            <label class="col-md-3 control-label">Parts Ordered Date</label>
                                             <div class="col-md-4">
-                                                <input ng-required name="DateConverted" type="text" class="form-control input-circle" placeholder="Date Converted.">
+                                                <input ng-required name="PartsOrderedDate" type="text" class="form-control input-circle" placeholder="Parts Ordered Date.">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Last Modified Date</label>
+                                            <label class="col-md-3 control-label">Loaded Date</label>
                                             <div class="col-md-4">
-                                                <input ng-required name="LastModifiedDate" type="text" class="form-control input-circle" placeholder="Last Modified Date.">
+                                                <input ng-required name="LoadedDate" type="text" class="form-control input-circle" placeholder="Loaded Date.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Panelbeating Date</label>
+                                            <div class="col-md-4">
+                                                <input ng-required name="PanelbeatingDate" type="text" class="form-control input-circle" placeholder="Panelbeating Date.">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Painting Date</label>
+                                            <div class="col-md-4">
+                                                <input ng-required name="PaintingDate" type="text" class="form-control input-circle" placeholder="Painting Date.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Assembly Date</label>
+                                            <div class="col-md-4">
+                                                <input ng-required name="AssemblyDate" type="text" class="form-control input-circle" placeholder="Assembly Date.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Quality Check Date</label>
+                                            <div class="col-md-4">
+                                                <input ng-required name="QCDate" type="text" class="form-control input-circle" placeholder="Quality Check Date.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Ready Date</label>
+                                            <div class="col-md-4">
+                                                <input ng-required name="ReadyDate" type="text" class="form-control input-circle" placeholder="Ready Date.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Delivered Date</label>
+                                            <div class="col-md-4">
+                                                <input ng-required name="DeliveredDate" type="text" class="form-control input-circle" placeholder="Delivered Date.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Invoiced Date</label>
+                                            <div class="col-md-4">
+                                                <input ng-required name="InvoicedDate" type="text" class="form-control input-circle" placeholder="Invoiced Date.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Paid Date</label>
+                                            <div class="col-md-4">
+                                                <input ng-required name="PaidDate" type="text" class="form-control input-circle" placeholder="Paid Date.">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -97,12 +130,18 @@
                                                 <input ng-required name="ExpectedCollectionDate" type="text" class="form-control input-circle" placeholder="Expected Collection Date.">
                                             </div>
                                         </div>
-                                        
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Car Hire Expiry Date</label>
+                                            <div class="col-md-4">
+                                                <input ng-required name="CarHireExpiryDate" type="text" class="form-control input-circle" placeholder="Car Hire Expiry Date.">
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <div class="form-actions">
                                         <div class="row">
                                             <div class="col-md-offset-3 col-md-9">
-                                                <button type="button" class="btn btn-circle green button-submit">Submit</button>                                                                                             
+                                                <button type="button" class="btn btn-circle green button-submit">Submit</button>
                                             </div>
                                         </div>
                                     </div>
@@ -112,10 +151,34 @@
                             </div>
 
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
+        <div id="myModal_autocomplete" class="modal fade" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:lightgray;">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">Changes Alert</h4>
+                    </div>
+                    <div class="modal-body form">
+                        <label style="margin:15px 0px 0px 15px;">Do you want to save changes you made in this page?</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Continue without saving</button>
+                        <button type="button" class="btn btn-primary button-submit">
+                            <i class="fa fa-check"></i> Save changes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ui-view class="fade-in-up"></div>
+
 
     </form>
 
@@ -148,12 +211,5 @@
             });
         })
     </script>
-
-
-
-   
-    
-   
-   
 </body>
 </html>

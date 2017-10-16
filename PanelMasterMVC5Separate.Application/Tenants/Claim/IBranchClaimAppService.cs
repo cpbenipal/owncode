@@ -4,7 +4,9 @@ using PanelMasterMVC5Separate.Authorization.Claim.Dto;
 using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.Job;
 using PanelMasterMVC5Separate.Job.Dto;
+using PanelMasterMVC5Separate.Tenants.Brokers.Dto;
 using PanelMasterMVC5Separate.Tenants.Claim.Dto;
+using PanelMasterMVC5Separate.Tenants.Insurer.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +21,6 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
         Task<FileDto> GetClaimsToExcel();
 
-        ListResultDto<JobDetailsList_Proc> GetJobDetailsQuery(GetClaimsInput input);
-
         BranchClaimListDto GetJobDetails(GetClaimsInput input);
 
         void UpdateVehicleInfo(BranchClaimListDto input);
@@ -30,7 +30,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         void UpdateClient(BranchClaimListDto input);
          
 
-        ListResultDto<InsuranceListDto> GetInsurances();
-        ListResultDto<BrokerListDto> GetBrokers();
+        ListResultDto<InsurersDto> GetInsurances();
+        ListResultDto<BrokersDto> GetBrokers();
     }
 }

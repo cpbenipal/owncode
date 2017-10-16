@@ -50,11 +50,7 @@
                         '  <div class="btn-group dropdown" uib-dropdown="" dropdown-append-to-body>' +
                         '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
                         '    <ul uib-dropdown-menu>' +
-                        // '      <li><a ng-if="grid.appScope.permissions.impersonation && row.entity.id != grid.appScope.currentUserId" ng-click="grid.appScope.impersonate(row.entity)">' + app.localize('LoginAsThisUser') + '</a></li>' +
-                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/tenant/vehicle_information/{{row.entity.id}}">' + app.localize('Open') + '</a></li>' +
-                        //'      <li><a ng-if="grid.appScope.permissions.changePermissions" ng-click="grid.appScope.editPermissions(row.entity)">' + app.localize('Permissions') + '</a></li>' +
-                        //'      <li><a ng-click="grid.appScope.unlockUser(row.entity)">' + app.localize('Unlock') + '</a></li>' +
-                        //'      <li><a ng-if="grid.appScope.permissions.delete" ng-click="grid.appScope.deleteUser(row.entity)">' + app.localize('Delete') + '</a></li>' +
+                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/tenant/job_landing/job_information/{{row.entity.id}}">' + app.localize('Open') + '</a></li>' +
                         '    </ul>' +
                         '  </div>' +
                         '</div>'

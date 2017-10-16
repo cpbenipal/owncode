@@ -3,7 +3,7 @@
 
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
 
-    <form ng-controller="tenant.views.comments_information.index as vm" class="form-horizontal" action="#" id="submit_form" method="POST">
+    <form ng-controller="tenant.views.photos.index as vm" class="form-horizontal" action="#" id="submit_form" method="POST">
 
         <div class="row">
             <div class="col-md-12">
@@ -14,7 +14,7 @@
                             <div class="portlet box green">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="fa fa-gift"></i>Comments
+                                        <i class="fa fa-gift"></i>Photos
                                     </div>
                                     <div class="tools">
                                         <a href="javascript:;" class="collapse"> </a>
@@ -26,42 +26,39 @@
                                 <div class="portlet-body form">
                                     <!-- BEGIN FORM-->
 
-                                    <div class="form-body">                                       
+                                    <div class="form-body">
+                                        
+                                        <div class="form-group">                                           
 
-                                    </div>
-                                    <div class="form-actions">
-                                        <div class="row">
-                                            <div class="col-md-offset-3 col-md-9">
-                                                <button type="button" data-toggle="modal" data-target="#myModal_autocomplete" class="btn btn-circle green">New Comment</button>
+                                            <label style="margin: 0px 0px 0px -55px;" class="col-md-2 control-label">Upload Photo</label>
+                                            <div class="col-md-4" style="margin: 6px 0px 0px 0px; width: 31% !important;">
+                                                <div class="input-group">
+                                                    <input type="file" nv-file-select uploader="vm.job.uploader">
+                                                </div>
                                             </div>
+                                            <button style="padding: 2px 14px 3px 12px !important; margin: 5px 0px 0px 0px;" type="button" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="addinsurerform.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+                                        
                                         </div>
-                                    </div>
+                                        <div class="form-group"></div>
 
+                                        <div class="form-group">                                            
+                                            <label>Deepzoom Photos</label> 
+                                            <hr style="margin: 0px;" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Normal Photos</label>
+                                            <hr style="margin: 0px;" />
+                                        </div>
+                                        
+                                    </div>
+                                    
                                     <!-- END FORM-->
                                 </div>
                             </div>
 
                         </div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="myModal_autocomplete" class="modal fade" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header" style="background-color:lightgray;">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                        <h4 class="modal-title">Add Comment</h4>
-                    </div>
-                    <div class="modal-body form">
-                        <textarea style="width: 95%;margin: 10px 0px 0px 15px;" cols="1" rows="3"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary button-submit">
-                            <i class="fa fa-check"></i> Add Comment
-                        </button>
                     </div>
                 </div>
             </div>

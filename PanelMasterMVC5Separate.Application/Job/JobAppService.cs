@@ -3,12 +3,15 @@ using Abp.AutoMapper;
 using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
+using PanelMasterMVC5Separate.Brokers;
 using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.Clients;
 using PanelMasterMVC5Separate.Estimations;
-using PanelMasterMVC5Separate.Insurance_Brokers;
+using PanelMasterMVC5Separate.Insurer;
 using PanelMasterMVC5Separate.Job.Dto;
+using PanelMasterMVC5Separate.Tenants.Brokers.Dto;
 using PanelMasterMVC5Separate.Tenants.Estimators.Dto;
+using PanelMasterMVC5Separate.Tenants.Insurer.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,19 +24,21 @@ namespace PanelMasterMVC5Separate.Vehicle
     {
         private readonly IRepository<Manufacture> _manufactureRepository;
         private readonly IRepository<VehicleModel> _vehiclemodelRepository;
-        private readonly IRepository<Insurance> _insuranceRepository;
-        private readonly IRepository<Broker> _brokerRepository;
+
+        private readonly IRepository<InsurerMaster> _insurersRepository;       
+        private readonly IRepository<BrokerMaster> _brokerRepository;
         private readonly IRepository<Estimator> _estimatorRepository;
         private readonly IRepository<Jobs> _jobsRepository;
         private readonly IRepository<Client> _clientRepository;
 
         public JobAppService(IRepository<Manufacture> manufactureRepository, IRepository<VehicleModel> vehiclemodelRepository
-                             ,IRepository<Insurance> insuranceRepository, IRepository<Broker> brokerRepository
+                             , IRepository<InsurerMaster> insurersRepository,IRepository<BrokerMaster> brokerRepository
                              ,IRepository<Estimator> estimatorRepository, IRepository<Jobs> jobsRepository, IRepository<Client> clientRepository)
         {
             _manufactureRepository = manufactureRepository;
             _vehiclemodelRepository = vehiclemodelRepository;
-            _insuranceRepository = insuranceRepository;
+            _insurersRepository = insurersRepository;
+          
             _brokerRepository = brokerRepository;
             _estimatorRepository = estimatorRepository;
             _jobsRepository = jobsRepository;
@@ -73,24 +78,44 @@ namespace PanelMasterMVC5Separate.Vehicle
             return new ListResultDto<VehicleModelListDto>(ObjectMapper.Map<List<VehicleModelListDto>>(vehicleModel));
         }
 
-        public ListResultDto<InsuranceListDto> GetInsurances()
+        public ListResultDto<GetInsurersDto> GetInsurances()
         {
-            var insurance = _insuranceRepository
-                .GetAll()
-                .OrderBy(p => p.Insurance_Desc)
-                .ToList();
+            var insurerMaster = _insurersRepository.GetAll()            
+             .OrderByDescending(p => p.InsurerName)
+             .ToList();
+            var newList = new List<GetInsurersDto>();
+            foreach (InsurerMaster ins_obj in insurerMaster)
+            {
+                newList.Add(new GetInsurersDto
+                {
+                    Id = ins_obj.Id,
+                    InsurerName = ins_obj.InsurerName,
+                    Mask = ins_obj.Mask
+                });
+            }
 
-            return new ListResultDto<InsuranceListDto>(ObjectMapper.Map<List<InsuranceListDto>>(insurance));
+            return new ListResultDto<GetInsurersDto>(newList);
         }
-
-        public ListResultDto<BrokerListDto> GetBrokers()
+        
+        public ListResultDto<GetBrokersDto> GetBrokers()
         {
             var broker = _brokerRepository
                 .GetAll()
-                .OrderBy(p => p.Broker_Desc)
+                .OrderBy(p => p.BrokerName)
                 .ToList();
 
-            return new ListResultDto<BrokerListDto>(ObjectMapper.Map<List<BrokerListDto>>(broker));
+            var newList = new List<GetBrokersDto>();
+            foreach (BrokerMaster broker_obj in broker)
+            {
+                newList.Add(new GetBrokersDto
+                {
+                    Id = broker_obj.Id,
+                    BrokerName = broker_obj.BrokerName,
+                    Mask = broker_obj.Mask
+                });
+            }
+
+            return new ListResultDto<GetBrokersDto>(newList);
         }
 
         public ListResultDto<EstimatorListDto> GetEstimators()
@@ -113,7 +138,7 @@ namespace PanelMasterMVC5Separate.Vehicle
         {
             var job = input.MapTo<Jobs>();
 
-            job.ClaimStatusID = 3;
+            job.ClaimStatusID = 2;
 
             await _jobsRepository.InsertAsync(job);
         }

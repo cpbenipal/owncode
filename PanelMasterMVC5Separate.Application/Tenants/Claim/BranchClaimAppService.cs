@@ -27,6 +27,10 @@ using PanelMasterMVC5Separate.Clients;
 using PanelMasterMVC5Separate.Job;
 using PanelMasterMVC5Separate.Job.Dto;
 using PanelMasterMVC5Separate.Vehicle;
+using PanelMasterMVC5Separate.Insurer;
+using PanelMasterMVC5Separate.Tenants.Insurer.Dto;
+using PanelMasterMVC5Separate.Brokers;
+using PanelMasterMVC5Separate.Tenants.Brokers.Dto;
 
 namespace PanelMasterMVC5Separate.Tenants.Claim
 {
@@ -37,28 +41,19 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         private readonly IClaimsListExcelExporter _claimListExcelExporter;
         private readonly IRepository<Jobs> _claimRepository;
         private readonly IRepository<Client> _clientRepository;
-        private readonly IRepository<Insurance_Brokers.Insurance> _InsuranceRepository;
-        private readonly IRepository<JobDetails_StoredProc> _JobDetails_StoredProcRepository;
-
+        private readonly IRepository<InsurerMaster> _InsuranceRepository;
+       
         private readonly IRepository<Manufacture> _manufactureRepository;
-        private readonly IRepository<Insurance_Brokers.Broker> _brokerRepository;
-        //private readonly PanelMasterMVC5SeparateDbContext _context;
-        //public BranchClaimAppService()
-        //{
-        //    _context = new PanelMasterMVC5SeparateDbContext();
-        //}
-
-
+        private readonly IRepository<BrokerMaster> _brokerRepository;
+        
         public BranchClaimAppService(IClaimsListExcelExporter claimListExcelExporter,
                                      IRepository<Jobs> claimRepository, IRepository<Client> clientRepository,
-                                     IRepository<JobDetails_StoredProc> JobDetails_StoredProcRepository,
-                                      IRepository<Insurance_Brokers.Insurance> InsuranceRepository, IRepository<Manufacture> manufactureRepository,
-                                      IRepository<Insurance_Brokers.Broker> brokerRepository)
+                                     IRepository<InsurerMaster> InsuranceRepository, IRepository<Manufacture> manufactureRepository,
+                                     IRepository<BrokerMaster> brokerRepository)
         {
             _claimListExcelExporter = claimListExcelExporter;
             _claimRepository = claimRepository;
             _clientRepository = clientRepository;
-            _JobDetails_StoredProcRepository = JobDetails_StoredProcRepository;
             _InsuranceRepository = InsuranceRepository;
             _manufactureRepository = manufactureRepository;
             _brokerRepository = brokerRepository;
@@ -80,7 +75,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                              Id = j.Id,
                              Name = c.Name,
                              Surname = c.Surname,
-                             Insurance = n.Insurance_Desc,
+                             Insurance = n.InsurerName,
                              RegNo = j.RegNo,
                              CreationTime = j.CreationTime
                          }).WhereIf(
@@ -98,25 +93,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
             return new ListResultDto<BranchClaimListDto>(ObjectMapper.Map<List<BranchClaimListDto>>(query));
 
-        }
-
-        public ListResultDto<JobDetailsList_Proc> GetJobDetailsQuery(GetClaimsInput input)
-        {
-            var query = _JobDetails_StoredProcRepository.GetAll()
-            .WhereIf(
-                !input.Filter.IsNullOrWhiteSpace(),
-                u =>
-                    u.Name.Contains(input.Filter) ||
-                    u.Surname.Contains(input.Filter)
-            )
-            .OrderBy(p => p.LastModificationTime)
-            .ThenBy(p => p.Name)
-            .ToList();
-
-            return new ListResultDto<JobDetailsList_Proc>(ObjectMapper.Map<List<JobDetailsList_Proc>>(query));
-        }
-
-
+        }     
         public async Task<FileDto> GetClaimsToExcel()
         {
             var claims = await _claimRepository.GetAll().ToListAsync();
@@ -128,7 +105,8 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
         public BranchClaimListDto GetJobDetails(GetClaimsInput input)
         {
-            int Id = Convert.ToInt32(input.Filter);
+            //string dd = input.Filter;
+            int Id = Convert.ToInt32(1043);
 
             //Get Jobs by Id
             var thisJob = _claimRepository
@@ -164,10 +142,10 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                 VinNumber = thisJob.VinNumber,
 
                 BrokerID = thisBroker.Id,
-                Broker = thisBroker.Broker_Desc,
+                Broker = thisBroker.BrokerName,
 
                 InsuranceID = thisInsurance.Id,
-                Insurance = thisInsurance.Insurance_Desc
+                Insurance = thisInsurance.InsurerName
             }).MapTo<BranchClaimListDto>();
 
             return finalQuery;
@@ -229,24 +207,24 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             }
         }
 
-        public ListResultDto<InsuranceListDto> GetInsurances()
+        public ListResultDto<InsurersDto> GetInsurances()
         {
             var insurance = _InsuranceRepository
                 .GetAll()
-                .OrderBy(p => p.Insurance_Desc)
+                .OrderBy(p => p.InsurerName)
                 .ToList();
 
-            return new ListResultDto<InsuranceListDto>(ObjectMapper.Map<List<InsuranceListDto>>(insurance));
+            return new ListResultDto<InsurersDto>(ObjectMapper.Map<List<InsurersDto>>(insurance));
         }
 
-        public ListResultDto<BrokerListDto> GetBrokers()
+        public ListResultDto<BrokersDto> GetBrokers()
         {
             var broker = _brokerRepository
                 .GetAll()
-                .OrderBy(p => p.Broker_Desc)
+                .OrderBy(p => p.BrokerName)
                 .ToList();
 
-            return new ListResultDto<BrokerListDto>(ObjectMapper.Map<List<BrokerListDto>>(broker));
+            return new ListResultDto<BrokersDto>(ObjectMapper.Map<List<BrokersDto>>(broker));
         }
          
 

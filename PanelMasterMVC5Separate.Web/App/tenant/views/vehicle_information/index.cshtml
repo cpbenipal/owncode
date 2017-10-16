@@ -3,41 +3,12 @@
 
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
 
-    <!-- BEGIN PAGE TITLE-->
-    <h1 class="page-title">
-        Vehicle
-        <small>Infomation</small>
-    </h1>
-    <!-- END PAGE TITLE-->
-    <!-- END PAGE HEADER-->
     <form ng-controller="tenant.views.vehicle_information.index as vm" class="form-horizontal" action="#" id="submit_form" method="POST">
 
         <div class="row">
             <div class="col-md-12">
                 <div class="tabbable-line boxless tabbable-reversed">
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a ng-href="#!/tenant/vehicle_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Vehicle information </a>
-                        </li>
-                        <li>
-                            <a ng-href="#!/tenant/insurance_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Insurance information </a>
-                        </li>
-                        <!--<li>
-                            <a class="check_update_fields" data-toggle="{{tab_or_modal}}" data-target="#myModal_autocomplete"> Insurance information</a>
-                        </li>-->                        
-                        <li>
-                            <a ng-href="#!/tenant/client_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Client information </a>
-                        </li>
-                        <li>
-                            <a ng-href="#!/tenant/financial_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Financial information </a>
-                        </li>
-                        <li>
-                            <a ng-href="#!/tenant/dates_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Dates </a>
-                        </li>
-                        <li>
-                            <a ng-href="#!/tenant/comments_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Comments </a>
-                        </li>
-                    </ul>
+          
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
                             <div class="portlet box green">
@@ -55,17 +26,37 @@
                                 <div class="portlet-body form">
                                     <!-- BEGIN FORM-->
 
-                                    <div class="form-body">                                       
+                                    <div class="form-body">
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Reg No</label>
                                             <div class="col-md-4">
-                                                <input required ng-model="vm.job.RegNo" ng-class="{'edited':vm.job.RegNo}" name="regno" type="text" class="form-control input-circle" placeholder="Enter Reg no.">                                                 
+                                                <input required ng-model="vm.job.RegNo" ng-class="{'edited':vm.job.RegNo}" name="regno" type="text" class="form-control input-circle" placeholder="Enter Reg no.">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Vin Number</label>
                                             <div class="col-md-4">
                                                 <input required ng-model="vm.job.VinNumber" ng-class="{'edited':vm.job.VinNumber}" name="VinNumber" type="text" class="form-control input-circle" placeholder="Enter Vin Number.">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Make</label>
+                                            <div class="col-md-4">
+
+                                                <select required class="form-control" ng-options="" ng-model="">
+                                                    <option value="">--Select Make--</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Model</label>
+                                            <div class="col-md-4">
+
+                                                <select required class="form-control" ng-options="" ng-model="">
+                                                    <option value="">--Select Model--</option>
+                                                </select>
 
                                             </div>
                                         </div>
@@ -80,7 +71,50 @@
                                             <label class="col-md-3 control-label">Year</label>
                                             <div class="col-md-4">
                                                 <input required ng-model="vm.job.Year" ng-class="{'edited':vm.job.Year}" name="Year" type="text" class="form-control input-circle" placeholder="Enter Year.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Is Vehicle Insured?</label>
+                                            <div class="col-md-4">
+                                                <div class="input-group" style="width: 10% !important;">
+                                                    <input type="checkbox" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
 
+                                        <div class="form-group">
+                                            <hr style="margin:0px;" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Insurer</label>
+                                            <div class="col-md-4">
+                                                <select required class="form-control">
+                                                    <option value="">--Select Insurer--</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Broker</label>
+                                            <div class="col-md-4">
+                                                <select required class="form-control">
+                                                    <option value="">--Select Broker--</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Policy No</label>
+                                            <div class="col-md-4">
+                                                <input required name="policyNo" type="text" class="form-control input-circle" placeholder="Policy Number.">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Contact</label>
+                                            <div class="col-md-4">
+                                                <input required name="InsuranceContact" type="text" class="form-control input-circle" placeholder="Contact.">
                                             </div>
                                         </div>
 
@@ -98,12 +132,12 @@
                             </div>
 
                         </div>
-                      
+
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <div id="myModal_autocomplete" class="modal fade" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

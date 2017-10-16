@@ -76,7 +76,7 @@ appModule.config([
             });
         }
 
-        if (abp.auth.hasPermission('Pages.Administration.Users')) {
+        if (abp.auth.hasPermission('Pages.uiAdministration.Users')) {
             $stateProvider.state('users', {
                 url: '/users?filterText',
                 templateUrl: '~/App/common/views/users/index.cshtml'
@@ -220,35 +220,71 @@ appModule.config([
             url: '/EditVendor/:id',
             templateUrl: '~/App/tenant/views/EditVendor/index.cshtml'
         });
+        
+        $stateProvider.state('tenant.job_landing',{
+            url: '/job_landing',
+            templateUrl: '~/App/tenant/views/job_landing/index.cshtml'
+        });
 
-        $stateProvider.state('tenant.vehicle_information', {
+        $stateProvider.state('tenant.job_landing.job_information', {
+            url: '/job_information/:id',
+            templateUrl: '~/App/tenant/views/job_information/index.cshtml'
+        });
+
+        $stateProvider.state('tenant.job_landing.vehicle_information', {
             url: '/vehicle_information/:id',
             templateUrl: '~/App/tenant/views/vehicle_information/index.cshtml'
         });
 
-        $stateProvider.state('tenant.insurance_information', {
-            url: '/insurance_information/:id',
-            templateUrl: '~/App/tenant/views/insurance_information/index.cshtml'
-        });
-
-        $stateProvider.state('tenant.client_information', {
+       
+        $stateProvider.state('tenant.job_landing.client_information', {
             url: '/client_information/:id',
             templateUrl: '~/App/tenant/views/client_information/index.cshtml'
         });        
 
-        $stateProvider.state('tenant.financial_information', {
-            url: '/financial_information/:id',
-            templateUrl: '~/App/tenant/views/financial_information/index.cshtml'
+        $stateProvider.state('tenant.job_landing.quotedvalues', {
+            url: '/quotedvalues/:id',
+            templateUrl: '~/App/tenant/views/quotedvalues/index.cshtml'
         });
 
-        $stateProvider.state('tenant.dates_information', {
+        $stateProvider.state('tenant.job_landing.authorised_values', {
+            url: '/authorised_values/:id',
+            templateUrl: '~/App/tenant/views/authorised_values/index.cshtml'
+        });
+
+        $stateProvider.state('tenant.job_landing.invoiced_values', {
+            url: '/invoiced_values/:id',
+            templateUrl: '~/App/tenant/views/invoiced_values/index.cshtml'
+        });
+
+        $stateProvider.state('tenant.job_landing.dates_information', {
             url: '/dates_information/:id',
             templateUrl: '~/App/tenant/views/dates_information/index.cshtml'
         });
 
-        $stateProvider.state('tenant.comments_information', {
+        $stateProvider.state('tenant.job_landing.comments_information', {
             url: '/comments_information/:id',
             templateUrl: '~/App/tenant/views/comments_information/index.cshtml'
+        });
+
+        $stateProvider.state('tenant.job_landing.audit_trail', {
+            url: '/audit_trail/:id',
+            templateUrl: '~/App/tenant/views/audit_trail/index.cshtml'
+        });
+
+        $stateProvider.state('tenant.job_landing.communications', {
+            url: '/communications/:id',
+            templateUrl: '~/App/tenant/views/communications/index.cshtml'
+        });
+
+        $stateProvider.state('tenant.job_landing.uploads', {
+            url: '/uploads/:id',
+            templateUrl: '~/App/tenant/views/uploads/index.cshtml'
+        });
+
+        $stateProvider.state('tenant.job_landing.photos', {
+            url: '/photos/:id',
+            templateUrl: '~/App/tenant/views/photos/index.cshtml'
         });
 
         $stateProvider.state('tenant.productivity', {
@@ -333,7 +369,7 @@ appModule.run(["$rootScope", "settings", "$state", 'i18nService', '$uibModalStac
 
     $rootScope.safeApply = function (fn) {
         var phase = this.$root.$$phase;
-        if (phase == '$apply' || phase == '$digest') {
+        if (phase === '$apply' || phase === '$digest') {
             if (fn && (typeof (fn) === 'function')) {
                 fn();
             }

@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    appModule.controller('tenant.views.client_information.index', [
+    appModule.controller('tenant.views.landingPage.index', [
         '$scope', '$uibModal', '$stateParams', 'abp.services.app.branchClaim',
 
 
@@ -9,10 +9,6 @@
             $scope.$on('$viewContentLoaded', function () {
                 App.initAjax();
             });
-
-            vm.loading = false;
-            vm.saving = false;           
-             
-
+            
         }]);
 })();

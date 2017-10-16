@@ -3,7 +3,7 @@
 
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
 
-    <form ng-controller="tenant.views.comments_information.index as vm" class="form-horizontal" action="#" id="submit_form" method="POST">
+    <form ng-controller="tenant.views.audit_trail.index as vm" class="form-horizontal" action="#" id="submit_form" method="POST">
 
         <div class="row">
             <div class="col-md-12">
@@ -14,7 +14,7 @@
                             <div class="portlet box green">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="fa fa-gift"></i>Comments
+                                        <i class="fa fa-gift"></i>Audit trail
                                     </div>
                                     <div class="tools">
                                         <a href="javascript:;" class="collapse"> </a>
@@ -32,7 +32,7 @@
                                     <div class="form-actions">
                                         <div class="row">
                                             <div class="col-md-offset-3 col-md-9">
-                                                <button type="button" data-toggle="modal" data-target="#myModal_autocomplete" class="btn btn-circle green">New Comment</button>
+                                                <button type="button" data-toggle="modal" data-target="#myModal_autocomplete" class="btn btn-circle green">Add Audit Trail</button>
                                             </div>
                                         </div>
                                     </div>
@@ -53,14 +53,14 @@
                 <div class="modal-content">
                     <div class="modal-header" style="background-color:lightgray;">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                        <h4 class="modal-title">Add Comment</h4>
+                        <h4 class="modal-title">Add Audit Trail</h4>
                     </div>
                     <div class="modal-body form">
                         <textarea style="width: 95%;margin: 10px 0px 0px 15px;" cols="1" rows="3"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary button-submit">
-                            <i class="fa fa-check"></i> Add Comment
+                            <i class="fa fa-check"></i> Add Audit Trail
                         </button>
                     </div>
                 </div>

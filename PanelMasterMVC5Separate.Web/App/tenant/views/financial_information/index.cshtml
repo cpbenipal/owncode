@@ -1,6 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<head>
+    <style>
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            margin: 5px 0px 0px 4px;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
     <!-- BEGIN PAGE TITLE-->
     <h1 class="page-title">  
@@ -16,16 +63,27 @@
                 <div class="tabbable-line boxless tabbable-reversed">
                     <ul class="nav nav-tabs">
                         <li class="active">
+                            <a ng-href="#!/tenant/job_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Job information </a>
+                        </li>
+                        <li>
                             <a ng-href="#!/tenant/vehicle_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Vehicle information </a>
                         </li>
                         <li>
                             <a ng-href="#!/tenant/insurance_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Insurance information </a>
                         </li>
+                        <!--<li>
+                            <a class="check_update_fields" data-toggle="{{tab_or_modal}}" data-target="#myModal_autocomplete"> Insurance information</a>
+                        </li>-->
                         <li>
                             <a ng-href="#!/tenant/client_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Client information </a>
                         </li>
-                        <li>
-                            <a ng-href="#!/tenant/financial_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Financial information </a>
+                        <li class="dropdown">
+                            <a data-toggle="tab"> Financial information </a>
+                            <div class="dropdown-content">
+                                <a href="#!/tenant/quotedvalues/{{Id=vm.job.id}}#tab_1" data-toggle="tab">Quoted</a>
+                                <a href="#">Authorised</a>
+                                <a href="#">Invoiced</a>
+                            </div>
                         </li>
                         <li>
                             <a ng-href="#!/tenant/dates_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Dates </a>

@@ -19,7 +19,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
 {
     public class VendorClaimAppService : PanelMasterMVC5SeparateAppServiceBase, IVendorClaimAppService
     {
-        private readonly IRepository<Vendor> _vendorsRepository;
+       
         private readonly IRepository<VendorSub> _vendorSubRepository;
         private readonly IRepository<VendorMain> _vendorMainRepository;
         private readonly IRepository<Banks> _bankRepository;
@@ -29,11 +29,10 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
 
         public VendorClaimAppService(
             IVendorExporter vendorListExcelExporter,
-            IRepository<Vendor> VendorsRepository, IRepository<Banks> BankRepository, 
+            IRepository<Banks> BankRepository, 
             IRepository<Currencies> CurrenciesRepository, IRepository<VendorMain> vendorMainRepository,
             IRepository<VendorSub> vendorSubRepository)
         {
-            _vendorsRepository = VendorsRepository;
             _bankRepository = BankRepository;
             _currRepository = CurrenciesRepository;
             _vendorMainRepository = vendorMainRepository;

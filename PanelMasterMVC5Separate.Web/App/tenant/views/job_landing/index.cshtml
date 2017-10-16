@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            margin: 5px 0px 0px 4px;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+        .h1, .h2, .h3, h1, h2, h3 {
+            margin-top: -20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+
+    <!-- BEGIN PAGE TITLE-->
+    <h2 class="page-title">       
+        <small>More Infomation about current job</small>
+    </h2>
+    <!-- END PAGE TITLE-->
+    <!-- END PAGE HEADER-->
+    <form ng-controller="tenant.views.landingPage.index as vm" class="form-horizontal" action="#" id="submit_form" method="POST">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tabbable-line boxless tabbable-reversed">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a ng-href="#!/tenant/job_landing/job_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Job information </a>
+                        </li>
+                        <li>
+                            <a ng-href="#!/tenant/job_landing/vehicle_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Vehicle information </a>
+                        </li>                        
+                        <!--<li>
+                            <a class="check_update_fields" data-toggle="{{tab_or_modal}}" data-target="#myModal_autocomplete"> Insurance information</a>
+                        </li>-->
+                        <li>
+                            <a ng-href="#!/tenant/job_landing/client_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Client information </a>
+                        </li>
+                        <li class="dropdown">
+                            <a data-toggle="tab"> Financial information </a>
+                            <div class="dropdown-content">
+                                <a href="#!/tenant/job_landing/quotedvalues/{{Id=vm.job.id}}#tab_1" data-toggle="tab">Quoted</a>
+                                <a href="#!/tenant/job_landing/authorised_values/{{Id=vm.job.id}}#tab_1">Authorised</a>
+                                <a href="#!/tenant/job_landing/invoiced_values/{{Id=vm.job.id}}#tab_1">Invoiced</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a ng-href="#!/tenant/job_landing/dates_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Dates </a>
+                        </li>  
+                        <li>
+                            <a href="#!/tenant/job_landing/communications/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> CRM </a>
+                        </li>                        
+                        <li class="dropdown">
+                            <a data-toggle="tab"> Uploads & Photos </a>
+                            <div class="dropdown-content">
+                                <a href="#!/tenant/job_landing/photos/{{Id=vm.job.id}}#tab_1" data-toggle="tab">Photos</a>
+                                <a href="#!/tenant/job_landing/uploads/{{Id=vm.job.id}}#tab_1">Uploads</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#!/tenant/job_landing/audit_trail/{{Id=vm.job.id}}#tab_1" data-toggle="tab">Audit trail</a>
+                        </li>
+                    </ul>                    
+                  
+                </div>
+            </div>
+        </div>
+
+        <div ui-view class="fade-in-up"></div>
+        
+    </form>
+
+   <!-- <script src="~/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+
+    <script src="~/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+
+    <script src="~/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
+
+    <script src="~/assets/global/scripts/app.min.js" type="text/javascript"></script>
+
+    <script src="~/assets/pages/scripts/form-wizard.min.js" type="text/javascript"></script>
+
+    <script src="~/assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
+    <script src="~/assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
+    <script src="~/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+    <script src="~/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#clickmewow').click(function () {
+                $('#radio1003').attr('checked', 'checked');
+            });
+        })
+    </script>-->
+</body>
+</html>

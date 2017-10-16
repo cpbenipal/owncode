@@ -28,12 +28,11 @@ namespace PanelMasterMVC5Separate.Claim
 
         [Required]
         public virtual int InsuranceID { get; set; }
-        public virtual Insurance_Brokers.Insurance Insurance { get; set; }
+        public virtual Insurer.InsurerMaster Insurance { get; set; }
 
         [Required]
         public virtual int BrokerID { get; set; }
-        public virtual Insurance_Brokers.Broker Broker { get; set; }
-
+        public virtual Brokers.BrokerMaster Broker { get; set; }
 
         public virtual int BranchID { get; set; }
         public virtual int FinancialID { get; set; }

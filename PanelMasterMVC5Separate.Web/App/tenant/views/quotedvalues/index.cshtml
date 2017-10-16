@@ -3,18 +3,18 @@
 
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
 
-    <form ng-controller="tenant.views.client_information.index as vm" class="form-horizontal" action="#" id="submit_form" method="POST">
+    <form ng-controller="tenant.views.quoted_values.index as vm" class="form-horizontal" action="#" id="submit_form" method="POST">
 
         <div class="row">
             <div class="col-md-12">
                 <div class="tabbable-line boxless tabbable-reversed">
-          
+                   
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
                             <div class="portlet box green">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="fa fa-gift"></i>Client information
+                                        <i class="fa fa-gift"></i>Quoted Values
                                     </div>
                                     <div class="tools">
                                         <a href="javascript:;" class="collapse"> </a>
@@ -26,70 +26,59 @@
                                 <div class="portlet-body form">
                                     <!-- BEGIN FORM-->
 
-                                    <div class="form-body">
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label">Title</label>
-                                            <div class="col-md-4">
-                                                <select required class="form-control" ng-options="" ng-model="">
-                                                    <option value="">--Select Title--</option>
-                                                </select>
-                                            </div>
-
-                                            <label class="col-md-2 control-label">Name</label>
-                                            <div class="col-md-4">
-                                                <input ng-required ng-model="vm.job.Name" ng-class="{'edited':vm.job.Name}" name="Name" type="text" class="form-control input-circle" placeholder="Enter Name.">
-                                            </div>
-
-                                        </div>
-                                        <div class="form-group">                                            
-
-                                            <label class="col-md-2 control-label">Contact No</label>
-                                            <div class="col-md-4">
-                                                <input ng-required ng-model="" name="ContactNo" type="text" class="form-control input-circle" placeholder="Enter Contact Number.">
-                                            </div>
-
-                                            <label class="col-md-2 control-label">Surname </label>
-                                            <div class="col-md-4">
-                                                <input ng-model="vm.job.Surname" name="Surname" type="text" class="form-control input-circle" placeholder="Enter Surname.">
-                                            </div>
-
-                                        </div>                                      
-                                       
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label">Alternative No</label>
-                                            <div class="col-md-4">
-                                                <input ng-required ng-model="" name="AlternativeNo" type="text" class="form-control input-circle" placeholder="Enter Alternate Number.">
-                                            </div>
-
-                                            <label class="col-md-2 control-label">Email</label>
-                                            <div class="col-md-4">
-                                                <input ng-required ng-model="" name="ClientEmail" type="text" class="form-control input-circle" placeholder="Enter Client Email.">
-                                            </div>
-
-                                        </div>
+                                    <div class="form-body"> 
                                         
                                         <div class="form-group">
-                                            <label class="col-md-2 control-label">Preffered Comms</label>
+                                            <label class="col-md-3 control-label">Job Value</label>
                                             <div class="col-md-4">
-                                                <select required class="form-control" ng-options="" ng-model="">
-                                                    <option value="">--Select--</option>
-                                                </select>
+                                                <input required name="JobValue" type="text" class="form-control input-circle" placeholder="Job value.">
                                             </div>
-
-                                            <label class="col-md-2 control-label">Opt For Marketing</label>
-                                            <div class="col-md-4">
-                                                <select required class="form-control" ng-options="" ng-model="">
-                                                    <option value="">--Select--</option>
-                                                </select>
-                                            </div>
-
                                         </div>
-                                        
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Parts Value</label>
+                                            <div class="col-md-4">
+                                                <input required name="partsValue" type="text" class="form-control input-circle" placeholder="Parts value.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Labour Value</label>
+                                            <div class="col-md-4">
+                                                <input required name="labourValue" type="text" class="form-control input-circle" placeholder="Labour value.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Paint &Aacute; Consumables Value</label>
+                                            <div class="col-md-4">
+                                                <input required name="paintValues" type="text" class="form-control input-circle" placeholder="Paint value">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Other Values</label>
+                                            <div class="col-md-4">
+                                                <input required name="other" type="text" class="form-control input-circle" placeholder="Other values.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                           <hr style="margin:0px;" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Excess Values</label>
+                                            <div class="col-md-4">
+                                                <input required name="ExcessValue" type="text" class="form-control input-circle" placeholder="Excess value.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Tow Value</label>
+                                            <div class="col-md-4">
+                                                <input required name="ExcessValue" type="text" class="form-control input-circle" placeholder="Excess value.">
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <div class="form-actions">
                                         <div class="row">
-                                            <div class="col-md-offset-10 col-md-7">
-                                                <button style="margin: 0px 0px 0px 52px;" type="button" class="btn btn-circle green button-submit">Submit</button>
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="button" data-toggle="modal" class="btn btn-circle green">Submit</button>
                                             </div>
                                         </div>
                                     </div>
@@ -105,25 +94,8 @@
             </div>
         </div>
 
-        <div id="myModal_autocomplete" class="modal fade" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header" style="background-color:lightgray;">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                        <h4 class="modal-title">Changes Alert</h4>
-                    </div>
-                    <div class="modal-body form">
-                        <label style="margin:15px 0px 0px 15px;">Do you want to save changes you made in this page?</label>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Continue without saving</button>
-                        <button type="button" class="btn btn-primary button-submit">
-                            <i class="fa fa-check"></i> Save changes
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div ui-view class="fade-in-up"></div>
+
 
     </form>
 

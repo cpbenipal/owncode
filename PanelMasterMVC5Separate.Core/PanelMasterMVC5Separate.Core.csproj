@@ -135,14 +135,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Brokers\Broker.cs" />
-    <Compile Include="Claim\JobDetails_StoredProc.cs" />
     <Compile Include="Claim\Jobs.cs" />
     <Compile Include="Claim\BranchClaimStatus.cs" />
     <Compile Include="Clients\Client.cs" />
     <Compile Include="Estimations\Estimator.cs" />
     <Compile Include="IClaimRepository.cs" />
-    <Compile Include="Insurance_Brokers\Broker.cs" />
-    <Compile Include="Insurance_Brokers\Insurance.cs" />
     <Compile Include="Insurer\InsurerMaster.cs" />
     <Compile Include="Insurer\InsurerSub.cs" />
     <Compile Include="PanelMasterMVC5SeparateConsts.cs" />
@@ -214,7 +211,6 @@
     <Compile Include="Notifications\AppNotificationProvider.cs" />
     <Compile Include="Notifications\AppNotifier.cs" />
     <Compile Include="Notifications\IAppNotifier.cs" />
-    <Compile Include="PhoneBook\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\PasswordComplexityChecker.cs" />
     <Compile Include="Security\PasswordComplexitySetting.cs" />
@@ -228,7 +224,6 @@
     <Compile Include="Vehicle\VehicleModel.cs" />
     <Compile Include="Vendors\Banks.cs" />
     <Compile Include="Vendors\Currencies.cs" />
-    <Compile Include="Vendors\Vendor.cs" />
     <Compile Include="Vendors\VendorMain.cs" />
     <Compile Include="Vendors\VendorSub.cs" />
     <Compile Include="Web\IWebUrlService.cs" />

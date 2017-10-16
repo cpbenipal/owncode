@@ -148,9 +148,7 @@
     <Compile Include="Job\Dto\CreateClientInput.cs" />
     <Compile Include="Job\Dto\CreateJobInput.cs" />
     <Compile Include="Job\Dto\GetClaimStatusesInput.cs" />
-    <Compile Include="Job\Dto\GetInsurance_Broker_Input.cs" />
     <Compile Include="Job\Dto\GetVehicleModelInput.cs" />
-    <Compile Include="Job\Dto\JobDetailsList_Proc.cs" />
     <Compile Include="PanelMasterMVC5SeparateApplicationModule.cs" />
     <Compile Include="PanelMasterMVC5SeparateAppServiceBase.cs" />
     <Compile Include="AppConsts.cs" />
@@ -322,11 +320,8 @@
     <Compile Include="Tenants\Insurer\Exporting\InsurerExporter.cs" />
     <Compile Include="Tenants\Insurer\IInsurerAppService.cs" />
     <Compile Include="Tenants\Insurer\InsurerAppService.cs" />
-    <Compile Include="Tenants\PhoneBook\Dto\GetPeopleInput.cs" />
     <Compile Include="Tenants\Dashboard\ITenantDashboardAppService.cs" />
     <Compile Include="Tenants\Dashboard\TenantDashboardAppService.cs" />
-    <Compile Include="Tenants\PhoneBook\IPersonAppService.cs" />
-    <Compile Include="Tenants\PhoneBook\PersonAppService .cs" />
     <Compile Include="Tenants\Vendors\Dto\VendorsListDto.cs" />
     <Compile Include="Tenants\Vendors\Exporting\IVendorExporter.cs" />
     <Compile Include="Tenants\Vendors\Exporting\VendorExporter.cs" />

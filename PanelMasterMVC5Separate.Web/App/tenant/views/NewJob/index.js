@@ -64,9 +64,9 @@
                     .then(function (ins_obj) {
                         $scope.InsuranceList = []; //list of Insurances
 
-                        angular.forEach(ins_obj.data.items, function (insvalue, key1) {
+                        angular.forEach(ins_obj.data.items, function (insvalue, key1) {                           
                             $scope.InsuranceList.push({
-                                name: insvalue.insurance_Desc,
+                                name: insvalue.insurerName,
                                 id: insvalue.id
                             });                            
                         });
@@ -84,7 +84,7 @@
 
                         angular.forEach(ins_obj.data.items, function (insvalue, key1) {
                             $scope.BrokerList.push({
-                                name: insvalue.broker_Desc,
+                                name: insvalue.brokerName,
                                 id: insvalue.id
                             });
                         });
