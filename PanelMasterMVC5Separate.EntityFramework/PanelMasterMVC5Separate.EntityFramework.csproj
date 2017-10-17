@@ -151,6 +151,10 @@
     <Compile Include="Migrations\201710130802059_2.Designer.cs">
       <DependentUpon>201710130802059_2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710170729194_Initial.cs" />
+    <Compile Include="Migrations\201710170729194_Initial.Designer.cs">
+      <DependentUpon>201710170729194_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PanelMasterMVC5SeparateDataModule.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
@@ -187,6 +191,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710130802059_2.resx">
       <DependentUpon>201710130802059_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710170729194_Initial.resx">
+      <DependentUpon>201710170729194_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

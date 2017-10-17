@@ -550,7 +550,6 @@
     <Content Include="App\tenant\views\EditJob\index.js" />
     <Content Include="App\tenant\views\EditVendor\index.js" />
     <Content Include="App\tenant\views\financial_information\index.js" />
-    <Content Include="App\tenant\views\insurance_information\index.js" />
     <Content Include="App\tenant\views\Brokers\index.js" />
     <Content Include="App\tenant\views\VehicleMades\index.js" />
     <Content Include="App\tenant\views\VehicleMakes\index.js" />
@@ -3046,7 +3045,6 @@
     <Content Include="App\tenant\views\jobdetails\job.cshtml" />
     <Content Include="App\tenant\views\EditJob\index.cshtml" />
     <Content Include="App\tenant\views\vehicle_information\index.cshtml" />
-    <Content Include="App\tenant\views\insurance_information\index.cshtml" />
     <Content Include="App\tenant\views\client_information\index.cshtml" />
     <Content Include="App\tenant\views\financial_information\index.cshtml" />
     <Content Include="App\tenant\views\dates_information\index.cshtml" />
