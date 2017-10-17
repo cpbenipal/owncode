@@ -13,7 +13,7 @@ namespace PanelMasterMVC5Separate.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201710171118036_1"; }
+            get { return "201710171243142_1"; }
         }
         
         string IMigrationMetadata.Source

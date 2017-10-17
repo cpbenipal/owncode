@@ -37,7 +37,6 @@ namespace PanelMasterMVC5Separate.Vehicle
     { 
         [Required]
         public virtual int VehicleMakeID { get; set; }
-        [ForeignKey("VehicleMakeID")]
         public virtual VehicleMake VehicleMake { get; set; }
 
         [Required]      
@@ -55,7 +54,6 @@ namespace PanelMasterMVC5Separate.Vehicle
 
         [Required]
         public virtual int VehicleMakeID { get; set; }
-        [ForeignKey("VehicleMakeID")]
         public virtual VehicleMake Make { get; set; }
 
         public VehicleModelLogos() { }

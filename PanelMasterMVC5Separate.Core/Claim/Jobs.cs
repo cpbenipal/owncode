@@ -20,13 +20,11 @@ namespace PanelMasterMVC5Separate.Claim
         public virtual Clients.Client Client { get; set; }
 
         [Required]
-        public virtual int ManufactureID { get; set; }
-        public virtual VehicleMake Manufacture { get; set; }
-        
-        [Required]
-        public virtual int ModelID { get; set; }
-        public virtual VehicleModels Model { get; set; }
-
+        public virtual int ManufactureID { get; set; }        
+        public virtual VehicleMake Manufacture { get; set; }        
+       
+        public virtual int ModelID { get; set; }      
+       
         [Required]
         public virtual int InsuranceID { get; set; }
         public virtual Insurer.InsurerMaster Insurance { get; set; }
