@@ -106,7 +106,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         public BranchClaimListDto GetJobDetails(GetClaimsInput input)
         {
             //string dd = input.Filter;
-            int Id = Convert.ToInt32(1043);
+            int Id = Convert.ToInt32(input.Filter);
 
             //Get Jobs by Id
             var thisJob = _claimRepository

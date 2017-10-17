@@ -47,46 +47,7 @@
                 $scope.tab_or_modal = 'tab';
             };           
 
-            $('#submit_form .button-submit').click(function () {    
-                //$('#myModal_autocomplete').modal('hide');
-                UpdateVehicleINformation();                
-            });    
-
-            function UpdateVehicleINformation() {
-
-                vm.saving = true;
-                vm.job.id = $stateParams.id; 
-
-                jobService.updateVehicleInfo(
-                    $.extend({ filter: vm.job }, vm.job)
-                ).then(function () {
-                    abp.notify.info(app.localize('SavedSuccessfully'));
-                    
-                    //window.location.href = "#!/tenant/insurance_information/" + vm.job.id + "#tab_1";
-                    
-                }).finally(function () {
-                    vm.saving = false;
-                }, function errorCallback(response) {                    
-                    alert("Error : " + response.data.ExceptionMessage);
-                });
-
-            }
-          
-            vm.getJobs();
-
-            $('#submit_form .check_update_fields').click(function () {                
-                /*if (vm.existing_job.RegNo == vm.job.RegNo) {               
-                    $scope.tab_or_modal = 'tab';
-                    alert("regno didnt changed");                                   
-                    window.location.href = "#!/tenant/insurance_information/" + vm.job.id + "#tab_1";
-                } else {
-                    $scope.tab_or_modal = 'modal';                 
-                    alert("regno changed");                 
-                    window.location.href = "#!/tenant/vehicle_information/" + vm.job.id + "#tab_1";
-                }*/
-               
-            });
-             
+           
 
         }]);
 })();

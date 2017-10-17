@@ -138,7 +138,7 @@ namespace PanelMasterMVC5Separate.Vehicle
         {
             var job = input.MapTo<Jobs>();
 
-            job.ClaimStatusID = 2;
+            job.ClaimStatusID = 1;
 
             await _jobsRepository.InsertAsync(job);
         }
