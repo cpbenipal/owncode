@@ -1,4 +1,5 @@
 ﻿using Abp.Domain.Entities.Auditing;
+using PanelMasterMVC5Separate.Vehicle;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,11 +21,11 @@ namespace PanelMasterMVC5Separate.Claim
 
         [Required]
         public virtual int ManufactureID { get; set; }
-        public virtual Vehicle.Manufacture Manufacture { get; set; }
-
+        public virtual VehicleMake Manufacture { get; set; }
+        
         [Required]
         public virtual int ModelID { get; set; }
-        public virtual Vehicle.VehicleModel Model { get; set; }
+        public virtual VehicleModels Model { get; set; }
 
         [Required]
         public virtual int InsuranceID { get; set; }

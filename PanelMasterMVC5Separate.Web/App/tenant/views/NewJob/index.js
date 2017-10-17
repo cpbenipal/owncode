@@ -28,7 +28,7 @@
                         angular.forEach(result.data.items, function (value, key) {
 
                             $scope.manufactureList.push({
-                                name: value.manufacture_Desc,
+                                name: value.description,
                                 id: value.id
                             });
 
@@ -48,8 +48,8 @@
 
                         angular.forEach(result1.data.items, function (value1, key1) {
                             $scope.modelList.push({
-                                name: value1.model_Desc,
-                                id: value1.id
+                                name: value1.model,
+                                id: value1.madeID
                             });
                         });
 
@@ -147,7 +147,7 @@
                 
                 
 
-                vm.job.ClaimStatusID = 2;
+                vm.job.ClaimStatusID = 1;
                 
                 jobService.addClient(vm.client).then(function (client_results) {
 

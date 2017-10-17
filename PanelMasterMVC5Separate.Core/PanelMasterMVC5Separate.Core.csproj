@@ -222,8 +222,6 @@
     <Compile Include="Validation\ValidationHelper.cs" />
     <Compile Include="Vehicle\IndexAttribute.cs" />
     <Compile Include="Vehicle\Make.cs" />
-    <Compile Include="Vehicle\Manufacture.cs" />
-    <Compile Include="Vehicle\VehicleModel.cs" />
     <Compile Include="Vendors\Banks.cs" />
     <Compile Include="Vendors\Currencies.cs" />
     <Compile Include="Vendors\VendorMain.cs" />

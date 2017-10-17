@@ -43,12 +43,12 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         private readonly IRepository<Client> _clientRepository;
         private readonly IRepository<InsurerMaster> _InsuranceRepository;
        
-        private readonly IRepository<Manufacture> _manufactureRepository;
+        private readonly IRepository<VehicleMake> _manufactureRepository;
         private readonly IRepository<BrokerMaster> _brokerRepository;
         
         public BranchClaimAppService(IClaimsListExcelExporter claimListExcelExporter,
                                      IRepository<Jobs> claimRepository, IRepository<Client> clientRepository,
-                                     IRepository<InsurerMaster> InsuranceRepository, IRepository<Manufacture> manufactureRepository,
+                                     IRepository<InsurerMaster> InsuranceRepository, IRepository<VehicleMake> manufactureRepository,
                                      IRepository<BrokerMaster> brokerRepository)
         {
             _claimListExcelExporter = claimListExcelExporter;

@@ -5,14 +5,15 @@ using PanelMasterMVC5Separate.Job.Dto;
 using PanelMasterMVC5Separate.Tenants.Brokers.Dto;
 using PanelMasterMVC5Separate.Tenants.Estimators.Dto;
 using PanelMasterMVC5Separate.Tenants.Insurer.Dto;
+using PanelMasterMVC5Separate.Tenants.Manufacturing.Dto;
 using System.Threading.Tasks;
 
 namespace PanelMasterMVC5Separate.Vehicle
 {
     public interface IJobAppService : IApplicationService
     {
-        ListResultDto<ManufactureListDto> GetManufacture();
-        ListResultDto<VehicleModelListDto> GetVehicleModel(GetVehicleModelInput input);
+        ListResultDto<VehicleMakeDto> GetManufacture();
+        ListResultDto<ModelMadeListDto> GetVehicleModel(GetVehicleModelInput input);
         //ListResultDto<InsuranceListDto> GetInsurances();
         ListResultDto<GetInsurersDto> GetInsurances();
         ListResultDto<GetBrokersDto> GetBrokers();

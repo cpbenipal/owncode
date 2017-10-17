@@ -14,9 +14,5 @@ namespace PanelMasterMVC5Separate.Job.Dto
         public string Filter { get; set; }
     }
 
-    [AutoMapFrom(typeof(Manufacture))]
-    public class ManufactureListDto : FullAuditedEntityDto
-    {
-        public string Manufacture_Desc { get; set; }
-    }
+    
 }

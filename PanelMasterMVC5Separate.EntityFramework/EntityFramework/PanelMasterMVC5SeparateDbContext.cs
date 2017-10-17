@@ -33,11 +33,7 @@ namespace PanelMasterMVC5Separate.EntityFramework
         public virtual IDbSet<Client> Clients { get; set; }
 
         public virtual IDbSet<Estimator> Estimators { get; set; }
-
-        public virtual IDbSet<Manufacture> Manufactures { get; set; }
-
-        public virtual IDbSet<VehicleModel> VehicleModels { get; set; }
-
+       
         public virtual IDbSet<BranchClaimStatus> ClaimStatus { get; set; }
 
         public virtual DbSet<Jobs> BranchClaims { get; set; }

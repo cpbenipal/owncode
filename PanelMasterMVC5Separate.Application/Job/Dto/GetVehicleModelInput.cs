@@ -15,9 +15,5 @@ namespace PanelMasterMVC5Separate.Job.Dto
         public string Filter { get; set; }
     }
 
-    [AutoMapFrom(typeof(VehicleModel))]
-    public class VehicleModelListDto : FullAuditedEntityDto
-    {
-        public string Model_Desc { get; set; }
-    }
+   
 }

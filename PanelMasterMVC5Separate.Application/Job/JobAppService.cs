@@ -12,6 +12,7 @@ using PanelMasterMVC5Separate.Job.Dto;
 using PanelMasterMVC5Separate.Tenants.Brokers.Dto;
 using PanelMasterMVC5Separate.Tenants.Estimators.Dto;
 using PanelMasterMVC5Separate.Tenants.Insurer.Dto;
+using PanelMasterMVC5Separate.Tenants.Manufacturing.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,8 @@ namespace PanelMasterMVC5Separate.Vehicle
 {
     public class JobAppService : PanelMasterMVC5SeparateAppServiceBase, IJobAppService
     {
-        private readonly IRepository<Manufacture> _manufactureRepository;
-        private readonly IRepository<VehicleModel> _vehiclemodelRepository;
+        private readonly IRepository<VehicleMake> _manufactureRepository;
+        private readonly IRepository<VehicleModels> _vehiclemodelRepository;
 
         private readonly IRepository<InsurerMaster> _insurersRepository;       
         private readonly IRepository<BrokerMaster> _brokerRepository;
@@ -31,7 +32,7 @@ namespace PanelMasterMVC5Separate.Vehicle
         private readonly IRepository<Jobs> _jobsRepository;
         private readonly IRepository<Client> _clientRepository;
 
-        public JobAppService(IRepository<Manufacture> manufactureRepository, IRepository<VehicleModel> vehiclemodelRepository
+        public JobAppService(IRepository<VehicleMake> manufactureRepository, IRepository<VehicleModels> vehiclemodelRepository
                              , IRepository<InsurerMaster> insurersRepository,IRepository<BrokerMaster> brokerRepository
                              ,IRepository<Estimator> estimatorRepository, IRepository<Jobs> jobsRepository, IRepository<Client> clientRepository)
         {
@@ -44,38 +45,52 @@ namespace PanelMasterMVC5Separate.Vehicle
             _jobsRepository = jobsRepository;
             _clientRepository = clientRepository;
         }
-        public ListResultDto<ManufactureListDto> GetManufacture()
+        public ListResultDto<VehicleMakeDto> GetManufacture()
         {
             var manufacture = _manufactureRepository
                 .GetAll()                
-                .OrderBy(p => p.Manufacture_Desc)                
+                .OrderBy(p => p.Description)                
                 .ToList();
 
-            return new ListResultDto<ManufactureListDto>(ObjectMapper.Map<List<ManufactureListDto>>(manufacture));
+            return new ListResultDto<VehicleMakeDto>(ObjectMapper.Map<List<VehicleMakeDto>>(manufacture));
         }
 
         public ListResultDto<ClaimStatusListDto> GetClaimStatuses()
         {
             var claim_status = _manufactureRepository
                 .GetAll()
-                .OrderBy(p => p.Manufacture_Desc)
+                .OrderBy(p => p.Description)
                 .ToList();
 
             return new ListResultDto<ClaimStatusListDto>(ObjectMapper.Map<List<ClaimStatusListDto>>(claim_status));
         }
 
-        public ListResultDto<VehicleModelListDto> GetVehicleModel(GetVehicleModelInput input)
+        public ListResultDto<ModelMadeListDto> GetVehicleModel(GetVehicleModelInput input)
         {
             var vehicleModel = _vehiclemodelRepository
                 .GetAll()
                 .WhereIf(
                     !input.Filter.IsNullOrEmpty(),
-                    p => p.ManufactureID.Equals( Convert.ToInt32(input.Filter))                       
+                    p => p.Id.Equals( Convert.ToInt32(input.Filter))                       
                 )
-                .OrderBy(p => p.Model_Desc)               
+                .OrderBy(p => p.Model)               
                 .ToList();
 
-            return new ListResultDto<VehicleModelListDto>(ObjectMapper.Map<List<VehicleModelListDto>>(vehicleModel));
+           
+            var newList = new List<ModelMadeListDto>();
+            foreach (VehicleModels model_obj in vehicleModel)
+            {
+                newList.Add(new ModelMadeListDto
+                {
+                    MadeID = model_obj.Id,
+                    Make = model_obj.VehicleMake.Description,
+                    Model = model_obj.Model,
+                    MMCode = model_obj.MMCode                 
+                });
+            }
+
+            return new ListResultDto<ModelMadeListDto>(newList);
+
         }
 
         public ListResultDto<GetInsurersDto> GetInsurances()
