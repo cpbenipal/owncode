@@ -15,12 +15,13 @@ using PanelMasterMVC5Separate.Authorization;
 using PanelMasterMVC5Separate.Authorization.Claim;
 using PanelMasterMVC5Separate.Editions.Dto;
 using PanelMasterMVC5Separate.MultiTenancy.Dto;
+using Abp.Domain.Repositories;
 
 namespace PanelMasterMVC5Separate.MultiTenancy
 {
     [AbpAuthorize(AppPermissions.Pages_Tenants)]
     public class TenantAppService : PanelMasterMVC5SeparateAppServiceBase, ITenantAppService
-    {
+    { 
         public async Task<PagedResultDto<TenantListDto>> GetTenants(GetTenantsInput input)
         {
             var query = TenantManager.Tenants
@@ -116,5 +117,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                 }
             }
         }
+        
+                
     }
 }

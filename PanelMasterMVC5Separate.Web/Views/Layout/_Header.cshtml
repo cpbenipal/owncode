@@ -66,7 +66,7 @@
                     @if (Model.LoginInformations == null && Model.IsMultiTenancyEnabled && Model.TenantRegistrationEnabled)
                     {
                         <li>
-                            <a href="@Url.Action("Index", "TenantRegistration")">@L("NewTenant")</a>
+                            <a href="@Url.Action("Chooseyourplan", "TenantRegistration")">@L("SignUp")</a>
                         </li>
                     }
                     <li>

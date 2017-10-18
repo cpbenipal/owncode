@@ -8,5 +8,10 @@ namespace PanelMasterMVC5Separate.Web.Controllers
         {
             return View();
         }
-	}
+        [Abp.Authorization.AbpAuthorize]
+        public ActionResult Me()
+        {
+            return View();
+        }
+    }
 }

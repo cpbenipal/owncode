@@ -2,6 +2,7 @@
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using PanelMasterMVC5Separate.MultiTenancy.Dto;
+using System.Collections.Generic;
 
 namespace PanelMasterMVC5Separate.MultiTenancy
 {
@@ -24,5 +25,6 @@ namespace PanelMasterMVC5Separate.MultiTenancy
         Task ResetTenantSpecificFeatures(EntityDto input);
 
         Task UnlockTenantAdmin(EntityDto input);
+         
     }
 }
