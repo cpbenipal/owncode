@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PanelMasterMVC5Separate.Security;
 
 namespace PanelMasterMVC5Separate.Web.Models.TenantRegistration
 {
@@ -18,5 +19,6 @@ namespace PanelMasterMVC5Separate.Web.Models.TenantRegistration
         public bool IsActive { get; set; }
 
         public bool IsEmailConfirmationRequired { get; set; }
+        public PasswordComplexitySetting PasswordComplexitySetting { get; internal set; }
     }
 }

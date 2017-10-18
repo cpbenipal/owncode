@@ -120,14 +120,15 @@ namespace PanelMasterMVC5Separate.Web.Controllers
 
             ViewBag.ReturnUrl = returnUrl;
             ViewBag.IsMultiTenancyEnabled = _multiTenancyConfig.IsEnabled;
-
+            
             return View(
                 new LoginFormViewModel
                 {
                     TenancyName = _tenancyNameFinder.GetCurrentTenancyNameOrNull(),
                     IsSelfRegistrationEnabled = IsSelfRegistrationEnabled(),
                     SuccessMessage = successMessage,
-                    UserNameOrEmailAddress = userNameOrEmailAddress
+                    UserNameOrEmailAddress = userNameOrEmailAddress,
+                    listTenancyNames = _tenantManager.GetTenants(),
                 });
         }
 
@@ -192,7 +193,7 @@ namespace PanelMasterMVC5Separate.Web.Controllers
             _authenticationManager.SignOutAll();
             return RedirectToAction("Login");
         }
-
+     
         private async Task SignInAsync(User user, ClaimsIdentity identity = null, bool rememberMe = false)
         {
             if (identity == null)

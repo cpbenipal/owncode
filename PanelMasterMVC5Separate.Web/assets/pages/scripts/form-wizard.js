@@ -13,7 +13,7 @@ var FormWizard = function () {
                 return "<img class='flag' src='../../assets/global/img/flags/" + state.id.toLowerCase() + ".png'/>&nbsp;&nbsp;" + state.text;
             }
 
-            $("#country_list").select2({
+            $("#Country_list").select2({
                 placeholder: "Select",
                 allowClear: true,
                 formatResult: format,
@@ -267,7 +267,7 @@ var FormWizard = function () {
             }).hide();*/
 
             //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
-            $('#country_list', form).change(function () {
+            $('#Country_list', form).change(function () {
                 form.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
             });
         }

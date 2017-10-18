@@ -1,0 +1,88 @@
+﻿@using Abp.Web.Mvc.Extensions
+@using PanelMasterMVC5Separate.MultiTenancy
+ 
+<link href="~/metronic/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+<link href="~/metronic/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> 
+<link href="~/metronic/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+<link href="~/metronic/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+<link href="~/metronic/assets/pages/css/pricing.min.css" rel="stylesheet" />
+
+<div class="portlet light portlet-fit bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-share font-green"></i>
+            <span class="caption-subject font-green bold uppercase">Choose your plan</span>
+        </div>
+        <div class="actions">
+            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                <i class="icon-cloud-upload"></i>
+            </a>
+            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                <i class="icon-wrench"></i>
+            </a>
+            <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"> </a>
+            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                <i class="icon-trash"></i>
+            </a>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="pricing-content-1">
+            <div class="row">
+
+                @foreach (var modelItem in Model)
+                {
+                <div class="col-md-3">
+                    <div class="price-column-container border-active">
+                        <div class="price-table-head bg-@modelItem.HeaderColor">
+                            <h2 class="no-margin">@modelItem.PlanName</h2>
+                        </div>
+                        <div class="arrow-down border-top-@modelItem.HeaderColor"></div>
+                        <div class="price-table-pricing">
+                            <h3>
+                                <sup class="price-sign">$</sup>@modelItem.Price
+                            </h3>
+                            <p>per month</p>
+                            @if(@modelItem.Price==59)
+                            {
+                            <div class="price-ribbon">Popular</div>
+                            }
+                        </div>
+                        <div class="price-table-content">
+                            <div class="row mobile-padding">
+                                <div class="col-xs-3 text-right mobile-padding">
+                                    <i class="icon-user"></i>
+                                </div>
+                                <div class="col-xs-9 text-left mobile-padding">@modelItem.Members Members</div>
+                            </div>
+                            <div class="row mobile-padding">
+                                <div class="col-xs-3 text-right mobile-padding">
+                                    <i class="icon-drawer"></i>
+                                </div>
+                                <div class="col-xs-9 text-left mobile-padding">50GB Storage</div>
+                            </div>
+                            <div class="row mobile-padding">
+                                <div class="col-xs-3 text-right mobile-padding">
+                                    <i class="icon-screen-smartphone"></i>
+                                </div>
+                                <div class="col-xs-9 text-left mobile-padding">Single Device</div>
+                            </div>
+                            <div class="row mobile-padding">
+                                <div class="col-xs-3 text-right mobile-padding">
+                                    <i class="icon-refresh"></i>
+                                </div>
+                                <div class="col-xs-9 text-left mobile-padding">Weekly Backups</div>
+                            </div>
+                        </div>
+                        <div class="arrow-down arrow-grey"></div>
+                        <div class="price-table-footer">
+                            <button type="button" class="btn green price-button sbold uppercase" onclick="location.href='@Url.Action("NewTenantSignUp", "TenantRegistration" , new { id=@modelItem.Id })'">Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

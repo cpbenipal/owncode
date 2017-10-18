@@ -20,6 +20,8 @@ namespace PanelMasterMVC5Separate
 
         public UserManager UserManager { get; set; }
 
+        public SignonPlans SignonPlans { get; set; }
+
         protected PanelMasterMVC5SeparateAppServiceBase()
         {
             LocalizationSourceName = PanelMasterMVC5SeparateConsts.LocalizationSourceName;

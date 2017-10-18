@@ -16,6 +16,8 @@ using Abp.Extensions;
 using Abp.Notifications;
 using Abp.Runtime.Security;
 using PanelMasterMVC5Separate.Notifications;
+using System.Collections.Generic;
+using System;
 
 namespace PanelMasterMVC5Separate.MultiTenancy
 {
@@ -32,8 +34,15 @@ namespace PanelMasterMVC5Separate.MultiTenancy
         private readonly INotificationSubscriptionManager _notificationSubscriptionManager;
         private readonly IAppNotifier _appNotifier;
         private readonly IAbpZeroDbMigrator _abpZeroDbMigrator;
+        private readonly IRepository<SignonPlans> _SignonPlansRepository;
+        private readonly IRepository<TenantProfile> _TenantProfile;
+        private readonly IRepository<TenantPlanBillingDetails> _TenantPlanBillingDetails;
+
 
         public TenantManager(
+            IRepository<SignonPlans> signonplansrepository,
+             IRepository<TenantProfile> tenantprofile,
+              IRepository<TenantPlanBillingDetails> tenantplanbillingdetails,
             IRepository<Tenant> tenantRepository,
             IRepository<TenantFeatureSetting, long> tenantFeatureRepository,
             EditionManager editionManager,
@@ -52,6 +61,9 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                   editionManager, 
                   featureValueStore)
         {
+            _SignonPlansRepository = signonplansrepository;
+            _TenantPlanBillingDetails = tenantplanbillingdetails;
+            _TenantProfile = tenantprofile;
             _unitOfWorkManager = unitOfWorkManager;
             _roleManager = roleManager;
             _userEmailer = userEmailer;
@@ -61,7 +73,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             _appNotifier = appNotifier;
             _abpZeroDbMigrator = abpZeroDbMigrator;
         }
-
+         
         public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress, string connectionString, bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin, bool sendActivationEmail)
         {
             int newTenantId;
@@ -150,7 +162,136 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             return newTenantId;
         }
 
+        public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress, 
+            string fullName, string phoneNumber , string companyRegistrationNo, string companyVatNo, string address, string city, string country_list, string remarks,
+            string cardHoldersName, string cardNumber, string cardExpiration, string cVV, string payment, int planId, string connectionString,
+            bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin, bool sendActivationEmail)
+        {
+            int newTenantId;
+            long newAdminId;
 
+            using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                //Create tenant
+                var tenant = new Tenant(tenancyName, name)
+                {
+                    IsActive = isActive,
+                    EditionId = editionId,
+                    ConnectionString = connectionString.IsNullOrWhiteSpace() ? null : SimpleStringCipher.Instance.Encrypt(connectionString)
+                };
+
+                await CreateAsync(tenant);
+                await _unitOfWorkManager.Current.SaveChangesAsync(); //To get new tenant's id.
+
+                //Save Newly tenant Profile
+                var tenantprofile = new TenantProfile() {
+                    FullName = fullName,
+                    PhoneNumber = phoneNumber,
+                    CompanyName = tenancyName,
+                    CompanyRegistrationNo = companyRegistrationNo,
+                    CompanyVatNo = companyVatNo,
+                    Address = address,
+                    City = city,
+                    Country_list = country_list,
+                    Remarks = remarks,
+                    TenantId = tenant.Id
+                };
+
+                await _TenantProfile.InsertAsync(tenantprofile);
+                // Save Newly Tenant Proflie billing Details
+                var tenantbilling = new TenantPlanBillingDetails()
+                {
+                    CardHoldersName = cardHoldersName,
+                    CardNumber = cardNumber,
+                    CardExpiration = cardExpiration,
+                    CVV= cVV,
+                    planId = planId ,
+                    TenantId = tenant.Id
+                };
+                await _TenantPlanBillingDetails.InsertAsync(tenantbilling);
+
+                //Create tenant database
+                _abpZeroDbMigrator.CreateOrMigrateForTenant(tenant);
+
+                //We are working entities of new tenant, so changing tenant filter
+                using (_unitOfWorkManager.Current.SetTenantId(tenant.Id))
+                {
+                    //Create static roles for new tenant
+                    CheckErrors(await _roleManager.CreateStaticRoles(tenant.Id));
+                    await _unitOfWorkManager.Current.SaveChangesAsync(); //To get static role ids
+
+                    //grant all permissions to admin role
+                    var adminRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.Admin);
+                    await _roleManager.GrantAllPermissionsAsync(adminRole);
+
+                    //User role should be default
+                    var userRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.User);
+                    userRole.IsDefault = true;
+                    CheckErrors(await _roleManager.UpdateAsync(userRole));
+
+                    //Create admin user for the tenant
+                    if (adminPassword.IsNullOrEmpty())
+                    {
+                        adminPassword = User.CreateRandomPassword();
+                    }
+
+                    var adminUser = User.CreateTenantAdminUser(tenant.Id, adminEmailAddress, adminPassword);
+                    adminUser.ShouldChangePasswordOnNextLogin = shouldChangePasswordOnNextLogin;
+                    adminUser.IsActive = true;
+
+                    CheckErrors(await _userManager.CreateAsync(adminUser));
+                    await _unitOfWorkManager.Current.SaveChangesAsync(); //To get admin user's id
+
+                    //Assign admin user to admin role!
+                    CheckErrors(await _userManager.AddToRoleAsync(adminUser.Id, adminRole.Name));
+
+                    //Notifications
+                    await _appNotifier.WelcomeToTheApplicationAsync(adminUser);
+
+                    //Send activation email
+                    if (sendActivationEmail)
+                    {
+                        adminUser.SetNewEmailConfirmationCode();
+                        await _userEmailer.SendEmailActivationLinkAsync(adminUser, adminPassword);
+                    }
+
+                    await _unitOfWorkManager.Current.SaveChangesAsync();
+
+                    await _demoDataBuilder.BuildForAsync(tenant);
+
+                    newTenantId = tenant.Id;
+                    newAdminId = adminUser.Id;
+                }
+
+                await uow.CompleteAsync();
+            }
+
+            //Used a second UOW since UOW above sets some permissions and _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync needs these permissions to be saved.
+            using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
+                {
+                    await _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(new UserIdentifier(newTenantId, newAdminId));
+                    await _unitOfWorkManager.Current.SaveChangesAsync();
+                    await uow.CompleteAsync();
+                }
+            }
+
+            return newTenantId;
+        }
+
+        public virtual List<SignonPlans> GetTenantPlans()
+        {
+            List<SignonPlans> data = _SignonPlansRepository.GetAll().ToList();
+            
+            return data;
+        }
+        public virtual List<Tenant> GetTenants()
+        {
+            var tenants = Tenants.ToList();
+
+            return tenants;
+        }
         protected virtual void CheckErrors(IdentityResult identityResult)
         {
             identityResult.CheckErrors(LocalizationManager);
