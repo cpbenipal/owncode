@@ -138,7 +138,7 @@
                         
                         if (isConfirmed) {                           
                             if (i.isActive == false) {
-                                window.location.href = "#!/tenant/EditVendor/" + i.id;
+                                window.location.href = "#!/tenant/AddSubVendor/" + i.id;
                             }
                             else {
                                 userService.changeStatus({

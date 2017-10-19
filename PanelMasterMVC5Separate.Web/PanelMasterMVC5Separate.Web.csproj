@@ -530,6 +530,7 @@
       <DependentUpon>index.css</DependentUpon>
     </Content>
     <Content Include="App\host\views\tenants\featuresModal.js" />
+    <Content Include="App\tenant\views\AddSubVendor\index.js" />
     <Content Include="App\tenant\views\audit_trail\index.js" />
     <Content Include="App\tenant\views\authorised_values\index.js" />
     <Content Include="App\tenant\views\communications\index.js" />
@@ -3314,6 +3315,7 @@
     <Content Include="App\tenant\views\job_landing\index.cshtml" />
     <Content Include="App\tenant\views\quotedvalues\index.cshtml" />
     <Content Include="App\tenant\views\uploads\index.cshtml" />
+    <Content Include="App\tenant\views\AddSubVendor\index.cshtml" />
     <None Include="bin\PanelMasterMVC5Separate.Web.dll.config" />
     <Content Include="bin\PanelMasterMVC5Separate.WebApi.dll.config" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />

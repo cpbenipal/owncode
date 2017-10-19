@@ -211,6 +211,11 @@ appModule.config([
             templateUrl: '~/App/tenant/views/AddVendor/index.cshtml'
         });
 
+        $stateProvider.state('tenant.AddSubVendor', {
+            url: '/AddSubVendor',
+            templateUrl: '~/App/tenant/views/AddSubVendor/index.cshtml'
+        });        
+
         $stateProvider.state('tenant.VendorList', {
             url: '/VendorList',
             templateUrl: '~/App/tenant/views/VendorList/index.cshtml'
