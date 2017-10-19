@@ -80,16 +80,20 @@
                         name: app.localize('TaxRegistrationNumber'),
                         field: 'taxRegistrationNumber',
                         minWidth: 200
-                    },                     
-                    {
+                    },{
                         name: app.localize('Status'),
                         field: 'isActive',
                         cellTemplate:
                         '<div class=\"ui-grid-cell-contents\">' +
-                        '<span ng-show="row.entity.isActive" class="label label-sm label-success">' + app.localize('Enabled') + '</span>' +
-                        '<span ng-show="!row.entity.isActive" class="label label-sm label-warning">' + app.localize('Disabled') + '</span>' +
+                        '<div ng-show="row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.id}} bootstrap-switch-animate bootstrap-switch-on" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: 0px;">' +
+                        '<span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;"> ON</span>' +
+                        '<span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span>' +
+                        '<span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
+                        '<input ng-checked="row.entity.isActive" ng-model="row.entity.isActive"  class="make-switch" data-size="mini" type="checkbox"></div></div>' +
+                        '<div ng-show="!row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.id}} bootstrap-switch-animate bootstrap-switch-off" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: -32px;"><span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;">ON</span><span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
+                        '</div></div>' +
                         '</div>',
-                        minWidth: 80
+                        minWidth: 50
                     }
                 ],
                 onRegisterApi: function (gridApi) {
@@ -126,7 +130,35 @@
                     });
             };
 
-            vm.Status = function (user, status) {
+
+            vm.Status = function (i) {
+                abp.message.confirm(
+                    app.localize('AreYouSure', i.supplierName),
+                    function (isConfirmed) {
+                        
+                        if (isConfirmed) {                           
+                            if (i.isActive == false) {
+                                window.location.href = "#!/tenant/EditVendor/" + i.id;
+                            }
+                            else {
+                                userService.changeStatus({
+                                    id: i.subpkId,
+                                    status: !i.isActive
+                                }).then(function () {
+                                    vm.getInsurerdata();
+                                    if (!i.isActive)
+                                        abp.notify.success(app.localize('SuccessfullyEnabled'));
+                                    else
+                                        abp.notify.warn(app.localize('SuccessfullyDisabled'));
+                                });
+                            }
+                        }
+                    }
+                );
+            };
+
+
+            /*vm.Status = function (user, status) {
                 abp.message.confirm(
                     app.localize('AreYouSure', user.supplierName),
                     function (isConfirmed) {
@@ -147,7 +179,7 @@
                     }
                 );
                 
-            };
+            };*/
 
             function addRoleNamesField(users) {
                 for (var i = 0; i < users.length; i++) {

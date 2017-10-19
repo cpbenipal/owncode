@@ -100,8 +100,9 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
 
         public ListResultDto<VendorMainListDto> GetVendors(GetClaimsInput input)
         {
+
             var query = _vendorMainRepository.GetAll()
-              .WhereIf (
+              .WhereIf(
                     !input.Filter.IsNullOrEmpty(),
                     p => p.SupplierName.Equals(input.Filter) ||
                          p.RegistrationNumber.Equals(input.Filter) ||
@@ -110,24 +111,25 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
              .OrderByDescending(p => p.LastModificationTime)
              .ToList();
 
-            var newList = new List<VendorMainListDto>();
-            foreach (VendorMain vendor_obj in query)
-            {
-                var sub_query = _vendorSubRepository
-               .GetAll().Where(s => s.VendorID == vendor_obj.Id)
-               .ToList();
+            var sub_query = _vendorSubRepository.GetAll().ToList();
 
-                newList.Add(new VendorMainListDto
-                {
-                    id = vendor_obj.Id,
-                    SupplierCode = vendor_obj.SupplierCode,
-                    SupplierName = vendor_obj.SupplierName,
-                    RegistrationNumber = vendor_obj.RegistrationNumber,
-                    TaxRegistrationNumber = vendor_obj.TaxRegistrationNumber,
-                    IsActive = sub_query.FirstOrDefault().IsActive
-                });
-            }
-            return new ListResultDto<VendorMainListDto>(newList);
+
+            var finalQuery = (from master in query
+                              join v in sub_query on master.Id equals v.VendorID into ps
+                              from y1 in ps.DefaultIfEmpty()
+
+                              select new VendorMainListDto
+                              {
+                                  id = master.Id,
+                                  SupplierCode = master.SupplierCode,
+                                  SupplierName = master.SupplierName,
+                                  RegistrationNumber = master.RegistrationNumber,
+                                  TaxRegistrationNumber = master.TaxRegistrationNumber,
+                                  IsActive = y1 == null ? false : y1.IsActive
+                              }).ToList();
+
+
+            return new ListResultDto<VendorMainListDto>(finalQuery);
 
         }
 
@@ -251,7 +253,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
 
         public void ChangeStatus(StatusDto input)
         {
-            int VendorID = Convert.ToInt32(input.Id);
+            /*int VendorID = Convert.ToInt32(input.Id);
             int TenantId = Convert.ToInt32(input.TenantId);
 
             var query = _vendorSubRepository
@@ -260,7 +262,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
 
             query.IsActive = input.Status;
            
-            _vendorSubRepository.Update(query);
+            _vendorSubRepository.Update(query);*/
         }
     }
 }
