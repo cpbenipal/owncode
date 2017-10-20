@@ -148,6 +148,10 @@
     <Compile Include="EntityFramework\IndexInitializer.cs" />
     <Compile Include="EntityFramework\PanelMasterMVC5SeparateDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\PanelMasterMVC5SeparateRepositoryBase.cs" />
+    <Compile Include="Migrations\201710201058162_1.cs" />
+    <Compile Include="Migrations\201710201058162_1.Designer.cs">
+      <DependentUpon>201710201058162_1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -253,6 +257,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Release\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201710201058162_1.resx">
+      <DependentUpon>201710201058162_1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
