@@ -136,14 +136,35 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
 
         public void AddSubVendor(VendorSubListDto input)
         {
-            VendorSub newSubVendor = new VendorSub();
-            newSubVendor.IsActive = false;
-            newSubVendor.TenantId = input.TenantId;
-            newSubVendor.VendorID = Convert.ToInt32(input.VendorID);
-            newSubVendor.CurrencyID = input.CurrencyID;
-            newSubVendor.BankID = input.BankID;
+            if (string.IsNullOrEmpty(input.subVendorID.ToString()))
+            {
+                VendorSub newSubVendor = new VendorSub();
+                newSubVendor.IsActive = true;
+                newSubVendor.TenantId = input.TenantId;
+                newSubVendor.VendorID = Convert.ToInt32(input.VendorID);
+                newSubVendor.ContactName = input.ContactName;
+                newSubVendor.ContactPhone = input.ContactPhone;
+                newSubVendor.ContactFax = input.ContactFax;
+                newSubVendor.ContactEmail = input.ContactEmail;
+                newSubVendor.Address1 = input.Address1;
+                newSubVendor.Address2 = input.Address2;
+                newSubVendor.Address3 = input.Address3;
+                newSubVendor.Location = input.Location;
+                newSubVendor.SupplierAccount = input.SupplierAccount;
+                newSubVendor.PaymentTerms = input.PaymentTerms;
+                newSubVendor.AccountNumber = input.AccountNumber;
+                newSubVendor.Type = input.Type;
+                newSubVendor.Branch = input.Branch;
+                newSubVendor.CurrencyID = input.CurrencyID;
+                newSubVendor.BankID = input.BankID;
 
-            _vendorSubRepository.Insert(newSubVendor);
+                _vendorSubRepository.Insert(newSubVendor);
+            }
+            else
+            {
+                input.IsActive = true;
+                UpdateVendor(input);
+            }
         }
 
         public VendorMain AddMainVendor(VendorMainListDto input)
@@ -196,6 +217,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             {
                 newList.Add(new VendorSubListDto
                 {
+                    subVendorID = vendor_obj.Id,
                     TenantId = vendor_obj.TenantId,
                     VendorID = vendor_obj.VendorID,
                     ContactName = vendor_obj.ContactName,
@@ -220,7 +242,12 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             return new ListResultDto<VendorSubListDto>(newList);
         }
 
-        public void UpdateVendor(GVendorsListDto input)
+        public void AddVendor(GVendorsListDto input)
+        {
+
+        }
+
+        public void UpdateVendor(VendorSubListDto input)
         {
             try
             {              
@@ -251,18 +278,18 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             }
         }
 
-        public void ChangeStatus(StatusDto input)
+        public void ChangeStatus(VendorSubListDto input)
         {
-            /*int VendorID = Convert.ToInt32(input.Id);
+            int VendorID = Convert.ToInt32(input.VendorID);
             int TenantId = Convert.ToInt32(input.TenantId);
 
             var query = _vendorSubRepository
              .GetAll().Where(c => c.VendorID == VendorID && c.TenantId == TenantId)
              .FirstOrDefault();
 
-            query.IsActive = input.Status;
+            query.IsActive = input.IsActive;
            
-            _vendorSubRepository.Update(query);*/
+            _vendorSubRepository.Update(query);
         }
     }
 }

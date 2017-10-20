@@ -530,6 +530,11 @@
       <DependentUpon>index.css</DependentUpon>
     </Content>
     <Content Include="App\host\views\tenants\featuresModal.js" />
+    <Content Include="App\tenant\views\AddSubVendor\index.js" />
+    <Content Include="App\tenant\views\audit_trail\index.js" />
+    <Content Include="App\tenant\views\authorised_values\index.js" />
+    <Content Include="App\tenant\views\communications\index.js" />
+    <Content Include="App\tenant\views\EditMainVendor\index.js" />
     <Content Include="App\tenant\views\EditVehicleMade\index.js" />
     <Content Include="App\tenant\views\AddVehicleMade\index.js" />
     <Content Include="App\tenant\views\AddVehicleMake\index.js" />
@@ -552,6 +557,12 @@
     <Content Include="App\tenant\views\financial_information\index.js" />
     <Content Include="App\tenant\views\insurance_information\index.js" />
     <Content Include="App\tenant\views\Brokers\index.js" />
+    <Content Include="App\tenant\views\invoiced_values\index.js" />
+    <Content Include="App\tenant\views\job_information\index.js" />
+    <Content Include="App\tenant\views\job_landing\index.js" />
+    <Content Include="App\tenant\views\photos\index.js" />
+    <Content Include="App\tenant\views\quotedvalues\index.js" />
+    <Content Include="App\tenant\views\uploads\index.js" />
     <Content Include="App\tenant\views\VehicleMades\index.js" />
     <Content Include="App\tenant\views\VehicleMakes\index.js" />
     <Content Include="App\tenant\views\Insurers\index.js" />
@@ -565,6 +576,7 @@
     <Content Include="App\tenant\views\quoting\index.js" />
     <Content Include="App\tenant\views\vehicle_information\index.js" />
     <Content Include="App\tenant\views\VendorList\index.js" />
+    <Content Include="App_Data\Logs\Logs.txt" />
     <Content Include="assets\apps\css\inbox.css" />
     <Content Include="assets\apps\css\inbox.min.css" />
     <Content Include="assets\apps\css\ticket.css" />
@@ -7188,6 +7200,18 @@
     <Content Include="Scripts\form-wizard.min.js" />
     <Content Include="Scripts\jquery.bootstrap.wizard.js" />
     <Content Include="Scripts\jquery.bootstrap.wizard.min.js" />
+    <Content Include="Temp\Downloads\273d0d30-901e-4a3a-ac1a-ccb4e03c240b2.png" />
+    <Content Include="Temp\Downloads\38757a3c-8fa8-42f2-a41d-ab56b7fe91202.JPG" />
+    <Content Include="Temp\Downloads\39a31911-bba7-4aa4-a96a-4d6aa6f61b1e2.png" />
+    <Content Include="Temp\Downloads\546ea0ff-446e-405f-a79c-5e22806802602.JPG" />
+    <Content Include="Temp\Downloads\5a689794-4aea-4613-9c9a-5937674e11112.jpg" />
+    <Content Include="Temp\Downloads\5f7e7598-0c74-44c2-9197-4a5660796ca42.jpg" />
+    <Content Include="Temp\Downloads\683cf4af-84c6-4e8d-aeb0-f35c15b5adc62.JPG" />
+    <Content Include="Temp\Downloads\97897e4a-6df7-40e9-bdce-3caf6a81edce2.gif" />
+    <Content Include="Temp\Downloads\9cfc7023-f185-4a90-b4fe-945729ef00232.JPG" />
+    <Content Include="Temp\Downloads\c7fe6d1f-f0f1-4c69-ac01-aece6ace7cf82.jpg" />
+    <Content Include="Temp\Downloads\e583fd74-2440-463a-bb6c-27cd3175ada62.jpg" />
+    <Content Include="Temp\Downloads\userProfileImage_2.jpg" />
     <Content Include="Views\Layout\_TenantCustomCss.cshtml" />
     <Content Include="libs\jquery-jtable\.npmignore" />
     <Content Include="libs\jquery-jtable\bower.json" />
@@ -7608,6 +7632,20 @@
     <Content Include="metronic\assets\global\plugins\wysihtml\minified\wysihtml.table_editing.min.map" />
     <Content Include="metronic\assets\global\plugins\wysihtml\minified\wysihtml.toolbar.min.map" />
     <Content Include="libs\bootstrap-wizard\README.md" />
+    <Content Include="App\tenant\views\audit_trail\index.cshtml" />
+    <Content Include="App\tenant\views\AddSubVendor\index.cshtml" />
+    <Content Include="App\tenant\views\authorised_values\index.cshtml" />
+    <Content Include="App\tenant\views\communications\index.cshtml" />
+    <Content Include="App\tenant\views\invoiced_values\index.cshtml" />
+    <Content Include="App\tenant\views\job_information\index.cshtml" />
+    <Content Include="App\tenant\views\job_landing\index.cshtml" />
+    <Content Include="App\tenant\views\quotedvalues\index.cshtml" />
+    <Content Include="App\tenant\views\photos\index.cshtml" />
+    <Content Include="App\tenant\views\uploads\index.cshtml" />
+    <Content Include="App_Data\Logs\Logs.txt.1" />
+    <Content Include="App_Data\Logs\Logs.txt.2" />
+    <Content Include="App\tenant\views\EditMainVendor\index.cshtml" />
+    <Content Include="App\tenant\views\profile_account\index.cshtml" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
@@ -8585,6 +8623,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\App_LocalResources\" />
     <Folder Include="assets\pages\img\" />
     <Folder Include="libs\jquery-jtable\dev\" />
     <Folder Include="libs\jquery-jtable\lib\" />

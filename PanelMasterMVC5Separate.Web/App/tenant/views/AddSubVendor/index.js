@@ -1,11 +1,10 @@
 ﻿(function () {
 
     appModule.controller('tenant.views.AddSubVendor.index', [
-        '$scope', '$uibModal', '$stateParams', 'abp.services.app.vendorClaim',
-        
+        '$scope', '$uibModal', '$stateParams', 'abp.services.app.vendorClaim',        
 
         function ($scope, $uibModal, $stateParams, jobService) {
-           
+            
             var vm = this;
             $scope.$on('$viewContentLoaded', function () {
                 App.initAjax();
@@ -100,7 +99,8 @@
                 vm.subVendor.VendorID = $stateParams.id;
                 
                 vm.saving = true;
-                jobService.updateVendor(vm.subVendor).then(function () {
+
+                jobService.addSubVendor(vm.subVendor).then(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
                     window.location.href = "#!/tenant/VendorList";
                 }).finally(function () {

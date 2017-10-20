@@ -148,9 +148,9 @@
     <Compile Include="EntityFramework\IndexInitializer.cs" />
     <Compile Include="EntityFramework\PanelMasterMVC5SeparateDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\PanelMasterMVC5SeparateRepositoryBase.cs" />
-    <Compile Include="Migrations\201710171243142_1.cs" />
-    <Compile Include="Migrations\201710171243142_1.Designer.cs">
-      <DependentUpon>201710171243142_1.cs</DependentUpon>
+    <Compile Include="Migrations\201710190954086_initial.cs" />
+    <Compile Include="Migrations\201710190954086_initial.Designer.cs">
+      <DependentUpon>201710190954086_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
@@ -259,8 +259,8 @@
     <Folder Include="bin\Release\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710171243142_1.resx">
-      <DependentUpon>201710171243142_1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710190954086_initial.resx">
+      <DependentUpon>201710190954086_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

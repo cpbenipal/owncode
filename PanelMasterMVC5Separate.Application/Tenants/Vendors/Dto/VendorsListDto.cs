@@ -58,7 +58,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors.Dto
     }
     public class VendorSubListDto
     {
-        
+        public virtual int? subVendorID { get; set; }
         public virtual int? TenantId { get; set; }        
         public virtual int? VendorID { get; set; }
         public virtual string ContactName { get; set; }  

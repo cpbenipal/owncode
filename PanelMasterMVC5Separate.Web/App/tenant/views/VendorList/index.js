@@ -51,14 +51,19 @@
                         '  <div class="btn-group dropdown" uib-dropdown="" dropdown-append-to-body>' +
                         '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
                         '    <ul uib-dropdown-menu>' +
-                        // '      <li><a ng-if="grid.appScope.permissions.impersonation && row.entity.id != grid.appScope.currentUserId" ng-click="grid.appScope.impersonate(row.entity)">' + app.localize('LoginAsThisUser') + '</a></li>' +
-                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/tenant/EditVendor/{{row.entity.id}}">' + app.localize('Open') + '</a></li>' +
-                        '      <li><a ng-click="grid.appScope.Status(row.entity,row.entity.isActive)">' + app.localize('ChangeStatus') + '</a></li>' +
-                        //'      <li><a ng-click="grid.appScope.unlockUser(row.entity)">' + app.localize('Unlock') + '</a></li>' +
-                        //'      <li><a ng-if="grid.appScope.permissions.delete" ng-click="grid.appScope.deleteUser(row.entity)">' + app.localize('Delete') + '</a></li>' +
+                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/tenant/EditMainVendor/{{row.entity.id}}">' + app.localize('Open') + '</a></li>' +                                       
                         '    </ul>' +
                         '  </div>' +
                         '</div>'
+                    },
+                    {
+                        name: '',
+                        field: 'isActive',
+                        cellTemplate:
+                        '<div class=\"ui-grid-cell-contents\">' +
+                        '<a ng-show="row.entity.isActive" ng-href="#!/tenant/EditVendor/{{row.entity.id}}" class="btn btn-xs btn-primary blue">' + app.localize('EDIT') + '</a>' +
+                        '</div>',
+                        minWidth: 50
                     },
                     {
                         name: app.localize('SupplierName'),
@@ -137,19 +142,20 @@
                     function (isConfirmed) {
                         
                         if (isConfirmed) {                           
-                            if (i.isActive == false) {
+                            if (i.isActive === false) {
                                 window.location.href = "#!/tenant/AddSubVendor/" + i.id;
                             }
                             else {
                                 userService.changeStatus({
-                                    id: i.subpkId,
+                                    vendorID: i.id,
+                                    tenantID: abp.session.tenantId,
                                     status: !i.isActive
-                                }).then(function () {
-                                    vm.getInsurerdata();
+                                }).then(function () {                                    
+                                    vm.getUsers();
                                     if (!i.isActive)
                                         abp.notify.success(app.localize('SuccessfullyEnabled'));
                                     else
-                                        abp.notify.warn(app.localize('SuccessfullyDisabled'));
+                                        abp.notify.warn(app.localize('SuccessfullyDisabled'));                                   
                                 });
                             }
                         }

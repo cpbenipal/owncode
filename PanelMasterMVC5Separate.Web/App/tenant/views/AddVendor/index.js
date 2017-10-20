@@ -74,15 +74,8 @@
                
                 vm.saving = true;
                 
-                VendorService.addMainVendor(vm.mainVendor).then(function (vendor_obj) {
-                  
-                    vm.subVendor.VendorID = vendor_obj.data.id;
-                    vm.subVendor.TenantId = abp.session.tenantId;
-                    vm.subVendor.CurrencyID = 1;
-                    vm.subVendor.BankID = 1;
-
-                    VendorService.addSubVendor(vm.subVendor).then(function () { });
-
+                VendorService.addMainVendor(vm.mainVendor).then(function (vendor_obj) {                  
+                    
                     abp.notify.info(app.localize('SavedSuccessfully'));
                     window.location.href = "#!/tenant/VendorList";
                    

@@ -178,11 +178,11 @@ namespace PanelMasterMVC5Separate.Web.Controllers
                     if (tenant.IsActive && user.IsActive && (user.IsEmailConfirmed || !isEmailConfirmationRequiredForLogin))
                     {
                         var loginResult = await GetLoginResultAsync(user.UserName, model.AdminPassword, tenant.TenancyName);
-
+                        var redirect = "Application%23!/tenant/profile_account";
                         if (loginResult.Result == AbpLoginResultType.Success)
                         {
                             await SignInAsync(loginResult.User, loginResult.Identity);
-                            return Redirect(Url.Action("Me", "Home"));
+                            return Redirect(Url.Action("index", redirect));
                         }
 
                         Logger.Warn("New registered user could not be login. This should not be normally. login result: " + loginResult.Result);

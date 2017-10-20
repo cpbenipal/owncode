@@ -212,8 +212,13 @@ appModule.config([
         });
 
         $stateProvider.state('tenant.AddSubVendor', {
-            url: '/AddSubVendor',
+            url: '/AddSubVendor/:id',
             templateUrl: '~/App/tenant/views/AddSubVendor/index.cshtml'
+        }); 
+
+        $stateProvider.state('tenant.EditMainVendor', {
+            url: '/EditMainVendor/:id',
+            templateUrl: '~/App/tenant/views/EditMainVendor/index.cshtml'
         });        
 
         $stateProvider.state('tenant.VendorList', {
@@ -225,6 +230,11 @@ appModule.config([
             url: '/EditVendor/:id',
             templateUrl: '~/App/tenant/views/EditVendor/index.cshtml'
         });
+
+        $stateProvider.state('tenant.profile_account', {
+            url: '/profile_account',
+            templateUrl: '~/App/tenant/views/profile_account/index.cshtml'
+        });     
         
         $stateProvider.state('tenant.job_landing',{
             url: '/job_landing',
