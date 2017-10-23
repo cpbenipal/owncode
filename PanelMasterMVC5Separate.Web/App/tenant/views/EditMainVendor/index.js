@@ -50,6 +50,10 @@
                                 
             });
 
+            $('#submit_form .btn-cancel').click(function () {
+                window.location.href = "#!/tenant/VendorList";
+            });
+
             vm.getVendorDetails();
             
         }]);

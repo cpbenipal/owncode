@@ -530,6 +530,11 @@
       <DependentUpon>index.css</DependentUpon>
     </Content>
     <Content Include="App\host\views\tenants\featuresModal.js" />
+    <Content Include="App\tenant\views\AddSubVendor\index.js" />
+    <Content Include="App\tenant\views\audit_trail\index.js" />
+    <Content Include="App\tenant\views\authorised_values\index.js" />
+    <Content Include="App\tenant\views\communications\index.js" />
+    <Content Include="App\tenant\views\EditMainVendor\index.js" />
     <Content Include="App\tenant\views\EditVehicleMade\index.js" />
     <Content Include="App\tenant\views\AddVehicleMade\index.js" />
     <Content Include="App\tenant\views\AddVehicleMake\index.js" />
@@ -552,6 +557,12 @@
     <Content Include="App\tenant\views\financial_information\index.js" />
     <Content Include="App\tenant\views\insurance_information\index.js" />
     <Content Include="App\tenant\views\Brokers\index.js" />
+    <Content Include="App\tenant\views\invoiced_values\index.js" />
+    <Content Include="App\tenant\views\job_information\index.js" />
+    <Content Include="App\tenant\views\job_landing\index.js" />
+    <Content Include="App\tenant\views\photos\index.js" />
+    <Content Include="App\tenant\views\quotedvalues\index.js" />
+    <Content Include="App\tenant\views\uploads\index.js" />
     <Content Include="App\tenant\views\VehicleMades\index.js" />
     <Content Include="App\tenant\views\VehicleMakes\index.js" />
     <Content Include="App\tenant\views\Insurers\index.js" />
@@ -7608,6 +7619,18 @@
     <Content Include="metronic\assets\global\plugins\wysihtml\minified\wysihtml.table_editing.min.map" />
     <Content Include="metronic\assets\global\plugins\wysihtml\minified\wysihtml.toolbar.min.map" />
     <Content Include="libs\bootstrap-wizard\README.md" />
+    <Content Include="App\tenant\views\AddSubVendor\index.cshtml" />
+    <Content Include="App\tenant\views\audit_trail\index.cshtml" />
+    <Content Include="App\tenant\views\authorised_values\index.cshtml" />
+    <Content Include="App\tenant\views\communications\index.cshtml" />
+    <Content Include="App\tenant\views\EditMainVendor\index.cshtml" />
+    <Content Include="App\tenant\views\invoiced_values\index.cshtml" />
+    <Content Include="App\tenant\views\job_information\index.cshtml" />
+    <Content Include="App\tenant\views\job_landing\index.cshtml" />
+    <Content Include="App\tenant\views\photos\index.cshtml" />
+    <Content Include="App\tenant\views\profile_account\index.cshtml" />
+    <Content Include="App\tenant\views\quotedvalues\index.cshtml" />
+    <Content Include="App\tenant\views\uploads\index.cshtml" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
@@ -8589,7 +8612,6 @@
     <Folder Include="libs\jquery-jtable\dev\" />
     <Folder Include="libs\jquery-jtable\lib\" />
     <Folder Include="metronic\assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
-    <Folder Include="Views\Job\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Abp\Framework\scripts\abp.d.ts" />

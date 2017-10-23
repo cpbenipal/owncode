@@ -182,7 +182,7 @@ namespace PanelMasterMVC5Separate.Web.Controllers
                         if (loginResult.Result == AbpLoginResultType.Success)
                         {
                             await SignInAsync(loginResult.User, loginResult.Identity);
-                            return Redirect(Url.Action("Me", "Home"));
+                            return Redirect("~/Application#!/tenant/profile_account");
                         }
 
                         Logger.Warn("New registered user could not be login. This should not be normally. login result: " + loginResult.Result);

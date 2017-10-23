@@ -39,10 +39,14 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
 
         public string Name { get; set; }
         public string Surname { get; set; }
+        public string Email { get; set; }
+        public string Tel { get; set; }
+
         public string Insurance { get; set; }
         public string Broker { get; set; }
         public string Manufacture { get; set; }
         public string Model { get; set; }
+        public string ClaimStatusDescription { get; set; }
 
     }
 

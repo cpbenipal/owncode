@@ -179,6 +179,24 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
 
         }
 
+        public void UpdateMainVendor(VendorMainListDto input)
+        {
+            try
+            {
+                VendorMain updateMainVendor = _vendorMainRepository.GetAll().Where(s => s.Id == input.id).First();
+
+                updateMainVendor.SupplierName = input.SupplierName;
+                updateMainVendor.RegistrationNumber = input.RegistrationNumber;
+                updateMainVendor.SupplierCode = input.SupplierCode;
+                updateMainVendor.TaxRegistrationNumber = input.TaxRegistrationNumber;
+
+                _vendorMainRepository.Update(updateMainVendor);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public ListResultDto<VendorMainListDto> GetMainVendor(GetClaimsInput input)
         {
@@ -240,11 +258,6 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             }
 
             return new ListResultDto<VendorSubListDto>(newList);
-        }
-
-        public void AddVendor(GVendorsListDto input)
-        {
-
         }
 
         public void UpdateVendor(VendorSubListDto input)

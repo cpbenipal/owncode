@@ -112,6 +112,11 @@
                 });
             });
 
+            $('#submit_form .btn-cancel').click(function () {
+                window.location.href = "#!/tenant/VendorList";
+            });
+                       
+
             vm.getpaymenttype();
             vm.getBank();
             vm.getcurrency();
