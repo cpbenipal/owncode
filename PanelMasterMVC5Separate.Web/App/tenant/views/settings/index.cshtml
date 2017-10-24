@@ -272,7 +272,7 @@
 
                 <uib-tab heading="@L("EmailSmtp")" ng-if="!vm.isMultiTenancyEnabled">
                     <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <input type="email" name="DefaultFromAddress" class="form-control" ng-class="{'edited':vm.settings.email.defaultFromAddress}" ng-model="vm.settings.email.defaultFromAddress" maxlength="@PanelMasterMVC5Separate.Authorization.Users.User.MaxEmailAddressLength">
+                        <input type="email" name="DefaultFromAddress" class="form-control" ng-class="{'edited':vm.settings.email.defaultFromAddress}" ng-model="vm.settings.email.defaultFromAddress" maxlength="30">
                         <label>@L("DefaultFromAddress")</label>
                     </div>
 
