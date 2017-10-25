@@ -21,30 +21,8 @@ namespace PanelMasterMVC5Separate.Migrations.Seed.Host
 
         public void Create()
         {
-            CreateHostRoleAndUsers();        
-
-            //CreateDefaultStoredproc();
+            CreateHostRoleAndUsers();           
         }
-
-        /*private void CreateDefaultStoredproc()
-        {
-            var sp_JobDetails = "CREATE PROCEDURE [dbo].sp_JobDetails " +    
-                "AS " +
-                "BEGIN " +    
-                    "SET NOCOUNT ON; " +
-
-                    "SELECT dbo.brClient.Id, dbo.brClient.Name, dbo.brClient.Surname, dbo.brClient.Title, dbo.brClient.Email, " +
-                    "dbo.brClient.Tel, dbo.brClient.CommunicationType, dbo.brClient.ContactAfterService, dbo.brJobs.ClientID, " + 
-                    "dbo.brJobs.ManufactureID, dbo.brJobs.ModelID, dbo.brJobs.InsuranceID, dbo.brJobs.BrokerID, dbo.brJobs.BranchID, " +
-                    "dbo.brJobs.FinancialID, dbo.brJobs.CSAID, dbo.brJobs.EstimatorID, dbo.brJobs.ProductiveStaffID, " + 
-                    "dbo.brJobs.ClaimStatusID, dbo.brJobs.ClaimEventID, dbo.brJobs.RegNo, dbo.brJobs.VinNumber, dbo.brJobs.Colour, " +
-                    "dbo.brJobs.Year, dbo.brJobs.UnderWaranty, dbo.brJobs.New_Comeback " + 
-                    "FROM dbo.brClient INNER JOIN dbo.brJobs ON dbo.brClient.Id = dbo.brJobs.ClientID " +
-
-                "END ";
-
-            _context.Database.ExecuteSqlCommand(sp_JobDetails);
-        }*/
 
         private void CreateHostRoleAndUsers()
         {
