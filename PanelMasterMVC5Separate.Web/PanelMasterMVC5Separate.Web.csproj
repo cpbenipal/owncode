@@ -579,6 +579,8 @@
     <Content Include="App\tenant\views\quoting\index.js" />
     <Content Include="App\tenant\views\vehicle_information\index.js" />
     <Content Include="App\tenant\views\VendorList\index.js" />
+    <Content Include="App\tenant\views\ViewQuotations\createModal.js" />
+    <Content Include="App\tenant\views\ViewQuotations\index.js" />
     <Content Include="assets\apps\css\inbox.css" />
     <Content Include="assets\apps\css\inbox.min.css" />
     <Content Include="assets\apps\css\ticket.css" />
@@ -7636,6 +7638,8 @@
     <Content Include="App\tenant\views\profile_account\index.cshtml" />
     <Content Include="App\tenant\views\quotedvalues\index.cshtml" />
     <Content Include="App\tenant\views\uploads\index.cshtml" />
+    <Content Include="App\tenant\views\ViewQuotations\index.cshtml" />
+    <Content Include="App\tenant\views\ViewQuotations\createOrEditModal.cshtml" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />

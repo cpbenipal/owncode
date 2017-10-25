@@ -50,7 +50,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     )).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Quotations,
                     L("NewQuotation"),
-                    url: "tenant.quoting",
+                    url: "tenant.viewQuotations",
                     icon: "glyphicon glyphicon-search"
                     ))
                 )                

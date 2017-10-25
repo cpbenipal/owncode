@@ -191,6 +191,11 @@ appModule.config([
             templateUrl: '~/App/tenant/views/quoting/index.cshtml'
         });
 
+        $stateProvider.state('tenant.viewQuotations', {
+            url: '/viewQuotations',
+            templateUrl: '~/App/tenant/views/viewQuotations/index.cshtml'
+        });
+
         $stateProvider.state('tenant.quoteheaders', {
             url: '/quoteheaders/:id',
             templateUrl: '~/App/tenant/views/quoteheaders/index.cshtml'

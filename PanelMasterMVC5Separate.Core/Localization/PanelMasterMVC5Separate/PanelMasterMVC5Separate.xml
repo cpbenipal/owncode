@@ -282,7 +282,9 @@
     <text name="RepairType" value="Repair Type" />
     <text name="SelectOne" value="--Select One--" />
      <text name="QuoteProperties" value="Quote Properties" />
-    <text name="EditQuotationFor" value="Edit Quotation" />
+    <text name="EditQuotationFor" value="Edit Quotation For" />
+    <text name="EditQuotation" value="Edit Quotation" />
+    <text name="EditQuoteType" value="Edit Quote Type" />
     <text name="DashboardNoteForMpaVersion">
       <![CDATA[
       See Demo for Multi-Page Application version with <strong>ASP.NET MVC</strong> and <strong>jQuery</strong>.
