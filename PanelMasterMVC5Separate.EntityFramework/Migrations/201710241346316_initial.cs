@@ -5,7 +5,7 @@ namespace PanelMasterMVC5Separate.Migrations
     using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.Migrations;
     
-    public partial class _1 : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {

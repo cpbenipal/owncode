@@ -67,11 +67,13 @@ namespace PanelMasterMVC5Separate.Vehicle
 
         public ListResultDto<ModelMadeListDto> GetVehicleModel(GetVehicleModelInput input)
         {
+            int make_id = Convert.ToInt32(input.Filter);
+
             var vehicleModel = _vehiclemodelRepository
                 .GetAll()
                 .WhereIf(
                     !input.Filter.IsNullOrEmpty(),
-                    p => p.Id.Equals( Convert.ToInt32(input.Filter))                       
+                    p => p.VehicleMakeID.Equals(make_id)                       
                 )
                 .OrderBy(p => p.Model)               
                 .ToList();

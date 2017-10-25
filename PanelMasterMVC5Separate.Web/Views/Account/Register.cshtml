@@ -54,15 +54,15 @@
     </p>
     <div class="form-group">
         <label class="control-label visible-ie8 visible-ie9">@L("Name")</label>
-        <input class="form-control placeholder-no-fix" type="text" placeholder="@L("Name")" name="Name" required value="@Model.Name" maxlength="@PanelMasterMVC5Separate.Authorization.Users.User.MaxNameLength" />
+        <input class="form-control placeholder-no-fix" type="text" placeholder="@L("Name")" name="Name" required value="@Model.Name" maxlength="20" />
     </div>
     <div class="form-group">
         <label class="control-label visible-ie8 visible-ie9">@L("Surname")</label>
-        <input class="form-control placeholder-no-fix" type="text" placeholder="@L("Surname")" name="Surname" required value="@Model.Surname" maxlength="@PanelMasterMVC5Separate.Authorization.Users.User.MaxSurnameLength" />
+        <input class="form-control placeholder-no-fix" type="text" placeholder="@L("Surname")" name="Surname" required value="@Model.Surname" maxlength="20" />
     </div>
     <div class="form-group">
         <label class="control-label visible-ie8 visible-ie9">@L("EmailAddress")</label>
-        <input class="form-control placeholder-no-fix" type="email" placeholder="@L("EmailAddress")" name="EmailAddress" required value="@Model.EmailAddress" maxlength="@PanelMasterMVC5Separate.Authorization.Users.User.MaxEmailAddressLength" />
+        <input class="form-control placeholder-no-fix" type="email" placeholder="@L("EmailAddress")" name="EmailAddress" required value="@Model.EmailAddress" maxlength="30" />
     </div>
 
     @if (!Model.IsExternalLogin)
@@ -72,7 +72,7 @@
         </p>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">@L("UserName")</label>
-            <input class="form-control placeholder-no-fix input-ltr" type="text" autocomplete="off" placeholder="@L("UserName")" name="UserName" value="@Model.UserName" required maxlength="@PanelMasterMVC5Separate.Authorization.Users.User.MaxUserNameLength" />
+            <input class="form-control placeholder-no-fix input-ltr" type="text" autocomplete="off" placeholder="@L("UserName")" name="UserName" value="@Model.UserName" required maxlength="20" />
         </div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">@L("Password")</label>

@@ -88,7 +88,7 @@ namespace PanelMasterMVC5Separate.Tenants.Manufacturing
                               {
                                   MadeID = mk.Id,
                                   CreationTime = mk.CreationTime,
-                                  Make = _VehicleMakeRepository.FirstOrDefault(mk.Id).Description,
+                                  Make = _VehicleMakeRepository.FirstOrDefault(mk.VehicleMakeID).Description,
                                   MMCode = mk.MMCode,
                                   Model = mk.Model
                               })
