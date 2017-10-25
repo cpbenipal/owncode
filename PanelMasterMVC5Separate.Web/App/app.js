@@ -76,7 +76,7 @@ appModule.config([
             });
         }
 
-        if (abp.auth.hasPermission('Pages.uiAdministration.Users')) {
+        if (abp.auth.hasPermission('Pages.Administration.Users')) {
             $stateProvider.state('users', {
                 url: '/users?filterText',
                 templateUrl: '~/App/common/views/users/index.cshtml'

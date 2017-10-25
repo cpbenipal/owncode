@@ -4,7 +4,7 @@
         '$scope', 'abp.services.app.tenantSettings', 'appSession', 'FileUploader',
         function ($scope, tenantSettingsService, appSession, fileUploader) {
             var vm = this;
-
+            
             var usingDefaultTimeZone = false;
             var initialTimeZone = null;
 

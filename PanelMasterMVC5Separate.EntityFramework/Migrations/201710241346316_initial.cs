@@ -4,7 +4,7 @@ namespace PanelMasterMVC5Separate.Migrations
     using System.Collections.Generic;
     using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.Migrations;
-
+    
     public partial class _1 : DbMigration
     {
         public override void Up()
@@ -224,7 +224,7 @@ namespace PanelMasterMVC5Separate.Migrations
                     { "DynamicFilter_Estimator_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
                 })
                 .PrimaryKey(t => t.Id);
-
+            
             CreateTable(
                 "dbo.tblInsurerMaster",
                 c => new

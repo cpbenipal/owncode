@@ -18,12 +18,12 @@
                         </div>
                         <div class="col-sm-8">
                             <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                                <input class="form-control" type="text" name="Name" ng-class="{'edited':vm.user.name}" ng-model="vm.user.name" required maxlength="@PanelMasterMVC5Separate.Authorization.Users.User.MaxNameLength">
+                                <input class="form-control" type="text" name="Name" ng-class="{'edited':vm.user.name}" ng-model="vm.user.name" required maxlength="20">
                                 <label>@L("Name")</label>
                             </div>
 
                             <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                                <input type="text" name="Surname" class="form-control" ng-class="{'edited':vm.user.surname}" ng-model="vm.user.surname" required maxlength="@PanelMasterMVC5Separate.Authorization.Users.User.MaxSurnameLength">
+                                <input type="text" name="Surname" class="form-control" ng-class="{'edited':vm.user.surname}" ng-model="vm.user.surname" required maxlength="20">
                                 <label>@L("Surname")</label>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <input type="text" name="PhoneNumber" class="form-control" ng-class="{'edited':vm.user.phoneNumber}" ng-model="vm.user.phoneNumber" maxlength="@PanelMasterMVC5Separate.Authorization.Users.User.MaxPhoneNumberLength">
+                        <input type="text" name="PhoneNumber" class="form-control" ng-class="{'edited':vm.user.phoneNumber}" ng-model="vm.user.phoneNumber" maxlength="10">
                         <label>@L("PhoneNumber")</label>
                     </div>
 
@@ -58,12 +58,12 @@
                     </div>
 
                     <div class="form-group form-md-line-input form-md-floating-label no-hint" ng-if="!vm.setRandomPassword">
-                        <input type="password" name="Password" class="form-control" ng-model="vm.user.password" ng-required="!vm.user.id && !vm.setRandomPassword" maxlength="@PanelMasterMVC5Separate.Authorization.Users.User.MaxPlainPasswordLength" ng-minlength="@PanelMasterMVC5Separate.Authorization.Users.User.MinPlainPasswordLength">
+                        <input type="password" name="Password" class="form-control" ng-model="vm.user.password" ng-required="!vm.user.id && !vm.setRandomPassword" maxlength="20" ng-minlength="5">
                         <label>@L("Password")</label>
                     </div>
 
                     <div class="form-group form-md-line-input form-md-floating-label no-hint" ng-if="!vm.setRandomPassword">
-                        <input type="password" name="PasswordRepeat" class="form-control" ng-model="vm.user.passwordRepeat" ng-required="!vm.user.id && !vm.setRandomPassword" maxlength="@PanelMasterMVC5Separate.Authorization.Users.User.MaxPlainPasswordLength" ui-validate=" '$value==vm.user.password' " ui-validate-watch=" 'vm.user.password' " ng-minlength="@PanelMasterMVC5Separate.Authorization.Users.User.MinPlainPasswordLength">
+                        <input type="password" name="PasswordRepeat" class="form-control" ng-model="vm.user.passwordRepeat" ng-required="!vm.user.id && !vm.setRandomPassword" maxlength="20" ui-validate=" '$value==vm.user.password' " ui-validate-watch=" 'vm.user.password' " ng-minlength="5">
                         <label>@L("PasswordRepeat")</label>
                     </div>
 

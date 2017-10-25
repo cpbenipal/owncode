@@ -175,11 +175,12 @@
                 return users;
             }
 
-            vm.editUser = function (user) {
+            vm.editUser = function (user) {               
                 openCreateOrEditUserModal(user.id);
             };
 
             vm.createUser = function () {
+
                 openCreateOrEditUserModal(null);
             };
 
@@ -251,6 +252,7 @@
                     backdrop: 'static',
                     resolve: {
                         userId: function () {
+                           
                             return userId;
                         }
                     }

@@ -148,14 +148,17 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                         icon: "icon-settings",
                         requiredPermissionName: AppPermissions.Pages_Administration_Host_Settings
                         )
-                    ).AddItem(new MenuItemDefinition(
+                    )
+                    .AddItem(new MenuItemDefinition(
                         PageNames.App.Tenant.Settings,
                         L("Settings"),
                         url: "tenant.settings",
                         icon: "icon-settings",
                         requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                         )
-                    ).AddItem(new MenuItemDefinition(
+                    )
+                    
+                    .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Vendors,
                     L("Vendors"),
                     icon: "glyphicon glyphicon-tasks"
@@ -170,7 +173,9 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     url: "tenant.VendorList",
                     icon: "glyphicon glyphicon-search"
                     ))
-                    ).AddItem(new MenuItemDefinition(
+                    )
+                    
+                    .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Insurers,
                     L("Insurers"),
                     icon: "glyphicon glyphicon-tasks"
@@ -202,7 +207,9 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     url: "tenant.Brokers",
                     icon: "glyphicon glyphicon-search"
                     ))
-                    ).AddItem(new MenuItemDefinition(
+                    )
+                    
+                    .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.VehicleManufacturer,
                     L("VehicleManufacturer"),
                     icon: "glyphicon glyphicon-tasks"

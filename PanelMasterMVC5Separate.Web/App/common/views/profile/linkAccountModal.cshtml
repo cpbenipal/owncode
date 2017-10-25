@@ -13,12 +13,12 @@
             </div>
 
             <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                <input class="form-control" type="text" name="UserName" ng-class="{'edited':vm.linkUser.usernameOrEmailAddress}" ng-model="vm.linkUser.usernameOrEmailAddress" required maxlength="@PanelMasterMVC5Separate.Authorization.Users.User.MaxEmailAddressLength">
+                <input class="form-control" type="text" name="UserName" ng-class="{'edited':vm.linkUser.usernameOrEmailAddress}" ng-model="vm.linkUser.usernameOrEmailAddress" required maxlength="30">
                 <label>@L("UserName")</label>
             </div>
 
             <div class="form-group form-md-line-input form-md-floating-label">
-                <input type="password" ng-class="{'edited':vm.linkUser.password}" name="Password" class="form-control" ng-model="vm.linkUser.password" required maxlength="@PanelMasterMVC5Separate.Authorization.Users.User.MaxPasswordLength">
+                <input type="password" ng-class="{'edited':vm.linkUser.password}" name="Password" class="form-control" ng-model="vm.linkUser.password" required maxlength="20">
                 <label>@L("Password")</label>
             </div>
 

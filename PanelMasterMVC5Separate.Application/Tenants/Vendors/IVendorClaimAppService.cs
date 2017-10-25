@@ -20,5 +20,6 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
         ListResultDto<VendorSubListDto> GetSubVendor(GetClaimsInput input);
         void UpdateVendor(VendorSubListDto input);
         void ChangeStatus(VendorSubListDto input);
+        void UpdateMainVendor(VendorMainListDto input);
     }
 }

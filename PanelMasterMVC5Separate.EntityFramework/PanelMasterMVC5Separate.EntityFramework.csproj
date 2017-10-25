@@ -148,9 +148,9 @@
     <Compile Include="EntityFramework\IndexInitializer.cs" />
     <Compile Include="EntityFramework\PanelMasterMVC5SeparateDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\PanelMasterMVC5SeparateRepositoryBase.cs" />
-    <Compile Include="Migrations\201710201058162_1.cs" />
-    <Compile Include="Migrations\201710201058162_1.Designer.cs">
-      <DependentUpon>201710201058162_1.cs</DependentUpon>
+    <Compile Include="Migrations\201710241346316_initial.cs" />
+    <Compile Include="Migrations\201710241346316_initial.Designer.cs">
+      <DependentUpon>201710241346316_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201710201723443_2.cs" />
     <Compile Include="Migrations\201710201723443_2.Designer.cs">
@@ -275,8 +275,8 @@
     <Folder Include="bin\Release\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710201058162_1.resx">
-      <DependentUpon>201710201058162_1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710241346316_initial.resx">
+      <DependentUpon>201710241346316_initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710201723443_2.resx">
       <DependentUpon>201710201723443_2.cs</DependentUpon>
