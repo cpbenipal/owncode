@@ -23,14 +23,14 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 .AddItem(new MenuItemDefinition(
                     PageNames.Frontend.Home,
                     L("HomePage"),
-                    url: ""
+                    url: "http://www.panelmaster.co.za"
                     )
 
                 //ABOUT
                 ).AddItem(new MenuItemDefinition(
                     PageNames.Frontend.About,
                     L("AboutUs"),
-                    url: "About"
+                    url: "http://www.panelmaster.co.za"
                     )
 
                 //MULTI-LEVEL MENU (JUST FOR EXAMPLE)
