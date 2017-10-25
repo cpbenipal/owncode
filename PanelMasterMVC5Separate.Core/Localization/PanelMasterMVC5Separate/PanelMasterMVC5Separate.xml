@@ -283,7 +283,7 @@
     <text name="SelectOne" value="--Select One--" />
      <text name="QuoteProperties" value="Quote Properties" />
     <text name="EditQuotationFor" value="Edit Quotation For" />
-    <text name="EditQuotation" value="Edit Quotation" />
+    <text name="EditQuotation" value="Edit Quote Details" />
     <text name="EditQuoteType" value="Edit Quote Type" />
     <text name="DashboardNoteForMpaVersion">
       <![CDATA[

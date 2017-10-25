@@ -145,6 +145,8 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
 
         public virtual string QuoteCreated { get; set; }
 
+        public virtual string CreatedBy { get; set; }
+
         public virtual int Id { get; set; }
     }
 }

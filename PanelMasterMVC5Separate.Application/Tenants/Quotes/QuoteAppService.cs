@@ -176,10 +176,13 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
 
             var model = _modelepository.GetAll().Where(c => c.Id == JobMaster.ModelID).FirstOrDefault();
 
-            var make = _makerepository.GetAll().Where(c => c.Id == model.VehicleMakeID).FirstOrDefault().Description;            
+            var make = _makerepository.GetAll().Where(c => c.Id == model.VehicleMakeID).FirstOrDefault().Description;
+
+            var createdBy = UserManager.Users.FirstOrDefault(c => c.Id == qmaster.CreatorUserId).UserName;
 
             var sdtos = new QuoteSummaryDto();
             sdtos.JobId = JobMaster.Id;
+            sdtos.QuoteCat = quotecategories;
             sdtos.QuoteStatus = quotestatus;
             sdtos.QuoteCreated = qmaster.CreationTime.ToShortDateString();
             sdtos.Value = qmaster.Value;
@@ -195,7 +198,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
             sdtos.Broker = BrokerName;
             sdtos.Insurer = InsurerName;
             sdtos.Id = Id;
-
+            sdtos.CreatedBy = createdBy;
             return sdtos.MapTo<QuoteSummaryDto>();
         }
     }

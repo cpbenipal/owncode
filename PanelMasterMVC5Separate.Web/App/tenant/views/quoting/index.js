@@ -52,8 +52,8 @@
                         '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
                         '    <ul uib-dropdown-menu>' +                        
                        // '      <li><a ng-click="grid.appScope.newQuotation(row.entity)">' + app.localize('NewQuotation') + '</a></li>' +
-                        '      <li><a ng-show="row.entity.id!=0" ng-href="#!/tenant/quoteheaders/{{row.entity.id}}">' + app.localize('EditQuoteType') + '</a></li>' + 
-                        '      <li><a ng-show="row.entity.id!=0" ng-click="grid.appScope.editQuotation(row.entity)">' + app.localize('EditQuotation') + '</a></li>' + 
+                        '      <li><a ng-show="row.entity.id!=0" ng-href="#!/tenant/quoteheaders/{{row.entity.id}}">' + app.localize('EditQuotation') + '</a></li>' + 
+                        '      <li><a ng-show="row.entity.id!=0" ng-click="grid.appScope.editQuotation(row.entity)">' + app.localize('EditQuoteType') + '</a></li>' + 
                         '    </ul>' +
                         '  </div>' +
                         '</div>'
