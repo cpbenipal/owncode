@@ -152,6 +152,22 @@
     <Compile Include="Migrations\201710201058162_1.Designer.cs">
       <DependentUpon>201710201058162_1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710201723443_2.cs" />
+    <Compile Include="Migrations\201710201723443_2.Designer.cs">
+      <DependentUpon>201710201723443_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710210539388_ADDQUOTETABLESTODB.cs" />
+    <Compile Include="Migrations\201710210539388_ADDQUOTETABLESTODB.Designer.cs">
+      <DependentUpon>201710210539388_ADDQUOTETABLESTODB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710221544115_ChangeToPreAuthCol.cs" />
+    <Compile Include="Migrations\201710221544115_ChangeToPreAuthCol.Designer.cs">
+      <DependentUpon>201710221544115_ChangeToPreAuthCol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710232146449_3.cs" />
+    <Compile Include="Migrations\201710232146449_3.Designer.cs">
+      <DependentUpon>201710232146449_3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -261,6 +277,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710201058162_1.resx">
       <DependentUpon>201710201058162_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710201723443_2.resx">
+      <DependentUpon>201710201723443_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710210539388_ADDQUOTETABLESTODB.resx">
+      <DependentUpon>201710210539388_ADDQUOTETABLESTODB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710221544115_ChangeToPreAuthCol.resx">
+      <DependentUpon>201710221544115_ChangeToPreAuthCol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710232146449_3.resx">
+      <DependentUpon>201710232146449_3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

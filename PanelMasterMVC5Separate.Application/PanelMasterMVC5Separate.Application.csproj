@@ -327,6 +327,9 @@
     <Compile Include="Tenants\Manufacturing\ManufactureAppService.cs" />
     <Compile Include="Tenants\Dashboard\ITenantDashboardAppService.cs" />
     <Compile Include="Tenants\Dashboard\TenantDashboardAppService.cs" />
+    <Compile Include="Tenants\Quotes\Dto\QuoteDto.cs" />
+    <Compile Include="Tenants\Quotes\IQuoteAppService.cs" />
+    <Compile Include="Tenants\Quotes\QuoteAppService.cs" />
     <Compile Include="Tenants\Vendors\Dto\VendorsListDto.cs" />
     <Compile Include="Tenants\Vendors\Exporting\IVendorExporter.cs" />
     <Compile Include="Tenants\Vendors\Exporting\VendorExporter.cs" />

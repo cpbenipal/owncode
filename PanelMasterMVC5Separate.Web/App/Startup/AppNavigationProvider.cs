@@ -37,13 +37,24 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     icon: "icon-home",
                     requiredPermissionName: AppPermissions.Pages_Tenant_Dashboard
                     )
-                ).AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.Quoting,
+                )                
+                .AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.Quote,
                     L("Quoting"),
+                    icon: "glyphicon glyphicon-tasks"
+                    ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.Quotations,
+                    L("ViewQuotations"),
                     url: "tenant.quoting",
-                    icon: "glyphicon glyphicon-book"
-                    )
-                ).AddItem(new MenuItemDefinition(
+                    icon: "glyphicon glyphicon-collapse-down"
+                    )).AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.Quotations,
+                    L("NewQuotation"),
+                    url: "tenant.quoting",
+                    icon: "glyphicon glyphicon-search"
+                    ))
+                )                
+                .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.PartsOrdering,
                     L("PartsOrdering"),
                     url: "tenant.partsordering",
@@ -51,7 +62,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     )
                 ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Claim,
-                    L("JobDetails"),                   
+                    L("JobDetails"),
                     icon: "glyphicon glyphicon-tasks"
                     ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.NewJob,
@@ -66,19 +77,19 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     ))
 
                 ).AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.Productivity ,
+                    PageNames.App.Tenant.Productivity,
                     L("Productivity"),
                     url: "tenant.productivity",
                     icon: "glyphicon glyphicon-calendar"
                     )
                 ).AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.Towing ,
+                    PageNames.App.Tenant.Towing,
                     L("Towing"),
                     url: "tenant.towing",
                     icon: "glyphicon glyphicon-book"
                     )
                 ).AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.Costing ,
+                    PageNames.App.Tenant.Costing,
                     L("Costing"),
                     url: "tenant.costing",
                     icon: "glyphicon glyphicon-usd"
@@ -175,7 +186,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     icon: "glyphicon glyphicon-search"
                     ))
                     )
-                    
+
                     .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Brokers,
                     L("Brokers"),
@@ -220,7 +231,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     url: "tenant.AddVehicleMade",
                     icon: "glyphicon glyphicon-collapse-down"
                     ))
-                    
+
                     )
                 );
         }

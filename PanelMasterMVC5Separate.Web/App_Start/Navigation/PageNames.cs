@@ -25,7 +25,9 @@ namespace PanelMasterMVC5Separate.Web.Navigation
             public static class Tenant
             {
                 public const string Dashboard = "Dashboard.Tenant";
-                public const string Quoting = "Dashboard.Quoting";
+                public const string Quote = "Dashboard.Quote";
+                public const string Quotations = "Quote.Quoting"; 
+
                 public const string PartsOrdering = "Dashboard.PartsOrdering";
 
                 public const string Claim = "Dashboard.Claim";

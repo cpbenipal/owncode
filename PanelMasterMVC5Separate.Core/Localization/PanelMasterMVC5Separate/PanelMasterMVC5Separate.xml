@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
   <texts>
+    <text name="TaxPageFourDigitHeader" value="Please enter the 4 digit activation code that was send to phone number" />
     <text name="HomePage" value="Home page" />
     <text name="AboutUs" value="About us" />
     <text name="Administration" value="Administration" />
@@ -272,6 +273,16 @@
     <text name="ClickHere" value="click here" />
     <text name="Apply" value="Apply" />
     <text name="CustomRange" value="Custom range" />
+    <text name="ViewQuotations" value="View Quotations" />
+    <text name="NewQuotation" value="New Quotation" />
+    <text name="NewQuotationFor" value="New quotation for : " />
+    <text name="Category" value="Category" />
+    <text name="PreAuthorised" value="Already Authorised (Pre Authorised)" />
+    <text name="Comments" value="Comments" />
+    <text name="RepairType" value="Repair Type" />
+    <text name="SelectOne" value="--Select One--" />
+     <text name="QuoteProperties" value="Quote Properties" />
+    <text name="EditQuotationFor" value="Edit Quotation" />
     <text name="DashboardNoteForMpaVersion">
       <![CDATA[
       See Demo for Multi-Page Application version with <strong>ASP.NET MVC</strong> and <strong>jQuery</strong>.

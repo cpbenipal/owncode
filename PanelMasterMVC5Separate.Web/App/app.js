@@ -191,6 +191,11 @@ appModule.config([
             templateUrl: '~/App/tenant/views/quoting/index.cshtml'
         });
 
+        $stateProvider.state('tenant.quoteheaders', {
+            url: '/quoteheaders/:id',
+            templateUrl: '~/App/tenant/views/quoteheaders/index.cshtml'
+        });
+
         $stateProvider.state('tenant.partsordering', {
             url: '/partsordering',
             templateUrl: '~/App/tenant/views/partsordering/index.cshtml'
@@ -385,6 +390,7 @@ appModule.config([
             url: '/EditVehicleMade/:id',
             templateUrl: '~/App/tenant/views/EditVehicleMade/index.cshtml'
         });
+
         //$qProvider settings
         $qProvider.errorOnUnhandledRejections(false);
     }

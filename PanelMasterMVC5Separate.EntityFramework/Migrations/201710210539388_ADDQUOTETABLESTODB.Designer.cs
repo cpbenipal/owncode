@@ -5,22 +5,22 @@ namespace PanelMasterMVC5Separate.Migrations
     using System.Data.Entity.Migrations;
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
-
+    
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class _1 : IMigrationMetadata
+    public sealed partial class ADDQUOTETABLESTODB : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_1));
-
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ADDQUOTETABLESTODB));
+        
         string IMigrationMetadata.Id
         {
-            get { return "201710201058162_1"; }
+            get { return "201710210539388_ADDQUOTETABLESTODB"; }
         }
-
+        
         string IMigrationMetadata.Source
         {
             get { return null; }
         }
-
+        
         string IMigrationMetadata.Target
         {
             get { return Resources.GetString("Target"); }

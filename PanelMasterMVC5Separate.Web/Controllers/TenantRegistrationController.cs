@@ -28,6 +28,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using PanelMasterMVC5Separate.Security;
 using Abp.Web.Security.AntiForgery;
+using System.Globalization;
+using System.Linq;
 
 namespace PanelMasterMVC5Separate.Web.Controllers
 {
@@ -83,7 +85,7 @@ namespace PanelMasterMVC5Separate.Web.Controllers
             ViewBag.PlanId = Id;
             ViewBag.UseCaptcha = UseCaptchaOnRegistration();
             ViewBag.PasswordComplexitySetting = SettingManager.GetSettingValue(AppSettings.Security.PasswordComplexity).Replace("\"", "");
-
+            ViewBag.Countries = GetAllCountries();
             return View();
         }
 
@@ -96,6 +98,25 @@ namespace PanelMasterMVC5Separate.Web.Controllers
         //    var tenant = await _tenantManager.GetByIdAsync(1);
         //    return View("NewTenantSignUp");
         //}
+        private List<SelectListItem> GetAllCountries()
+        {
+            var objDict = new Dictionary<string, string>();
+            foreach (var cultureInfo in CultureInfo.GetCultures(CultureTypes.SpecificCultures))
+            {
+                var regionInfo = new RegionInfo(cultureInfo.Name);
+                if (!objDict.ContainsKey(regionInfo.EnglishName))
+                {
+                    objDict.Add(cultureInfo.EnglishName, regionInfo.TwoLetterISORegionName.ToLower());
+                }
+            }
+            var obj = objDict.OrderBy(p => p.Key).ToArray();
+
+            return obj.Select(t => new SelectListItem
+            {
+                Text = t.Key,
+                Value = t.Value
+            }).ToList();
+        }
 
         [Abp.Runtime.Validation.DisableValidation]
         [HttpPost]

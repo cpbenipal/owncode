@@ -44,32 +44,8 @@ namespace PanelMasterMVC5Separate.Migrations
             {
                 //You can add seed for tenant databases using Tenant property...
             }
-            AddTenantSignonPlans(context);
+            
             context.SaveChanges();
-        }
-
-        private void AddTenantSignonPlans(PanelMasterMVC5SeparateDbContext context)
-        {
-            var data = new List<SignonPlans>();
-            data.AddRange(GetPlans());
-            context.SignonPlan.AddOrUpdate(data.ToArray());
-        }
-        private static IEnumerable<SignonPlans> GetPlans()
-        {
-            yield return SignonPlans("Bugdet", 24.00, "blue" , 3);
-            yield return SignonPlans("Solo", 39.00 , "red" , 5 );
-            yield return SignonPlans("Start Up", 59.00, "green" , 20);
-            yield return SignonPlans("Enterprise", 128.00, "purple", 100);
-        }
-        public static SignonPlans SignonPlans(string planname, double price, string color, int member)
-        {
-            return new SignonPlans()
-            {
-                PlanName = planname,
-                Price = price,
-                HeaderColor = color,
-                Members = member
-            };
-        }
+        }         
     }
 }

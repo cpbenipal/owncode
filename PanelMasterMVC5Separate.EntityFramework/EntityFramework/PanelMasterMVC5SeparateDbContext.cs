@@ -14,6 +14,7 @@ using PanelMasterMVC5Separate.Clients;
 using PanelMasterMVC5Separate.Vendors;
 using PanelMasterMVC5Separate.Insurer;
 using PanelMasterMVC5Separate.Brokers;
+using PanelMasterMVC5Separate.Quotings;
 
 namespace PanelMasterMVC5Separate.EntityFramework
 {
@@ -31,48 +32,33 @@ namespace PanelMasterMVC5Separate.EntityFramework
 
      
         public virtual IDbSet<Client> Clients { get; set; }
-
-        public virtual IDbSet<Estimator> Estimators { get; set; }
-       
+        public virtual IDbSet<Estimator> Estimators { get; set; }       
         public virtual IDbSet<BranchClaimStatus> ClaimStatus { get; set; }
-
         public virtual DbSet<Jobs> BranchClaims { get; set; }
-
         public virtual IDbSet<BinaryObject> BinaryObjects { get; set; }
-
         public virtual IDbSet<Friendship> Friendships { get; set; }
-
         public virtual IDbSet<ChatMessage> ChatMessages { get; set; }
-
         public virtual DbSet<VendorSub> VendorSub { get; set; }
-
         public virtual IDbSet<VendorMain> VendorMain { get; set; }
-
         public virtual IDbSet<Banks> Banks { get; set; }
-
         public virtual IDbSet<Currencies> Currencies { get; set; }
-
         public virtual IDbSet<InsurerMaster> InsurerMasters { get; set; }
-
         public virtual IDbSet<InsurerSub> InsurerSubs { get; set; }
-
         public virtual IDbSet<InsurerPics> InsurerPics { get; set; }
-
         public virtual IDbSet<BrokerMaster> BrokerMasters { get; set; }
-
         public virtual IDbSet<BrokerSubMaster> BrokerSubMasters { get; set; }
-
         public virtual IDbSet<BrokerMasterPics> BrokerMasterPics { get; set; }
-
         public virtual IDbSet<VehicleMake> VehicleMake { get; set; }
         public virtual IDbSet<VehicleModels> VehicleModel { get; set; }
         public virtual IDbSet<VehicleModelLogos> VehicleModelLogo { get; set; }
-
         public virtual IDbSet<SignonPlans> SignonPlan { get; set; }
-
         public virtual IDbSet<TenantProfile> TenantProfiles { get; set; }
-
         public virtual IDbSet<TenantPlanBillingDetails> TenantPlanBillingDetail { get; set; }
+
+        public virtual IDbSet<QuoteMaster> QuoteMasters { get; set; }
+        public virtual IDbSet<RepairTypes> RepairTypes { get; set; }
+        public virtual IDbSet<QuoteCategories> QuoteCategories { get; set; }
+        public virtual IDbSet<QuoteStatus> QuoteStatus { get; set; }
 
         public PanelMasterMVC5SeparateDbContext()
             : base("Default")
