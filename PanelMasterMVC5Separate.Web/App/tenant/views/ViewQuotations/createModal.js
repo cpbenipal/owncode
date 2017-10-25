@@ -1,5 +1,5 @@
 ﻿(function () {
-    appModule.controller('tenant.views.quoting.createModal', [
+    appModule.controller('tenant.views.viewQuotations.createModal', [
         '$scope', '$uibModalInstance', 'abp.services.app.quote', 'jobId',
         function ($scope, $uibModalInstance, jobService, jobId) {
             var vm = this;
@@ -14,7 +14,7 @@
                 vm.vehicle.quoteStatusID = 1;                        
                 vm.vehicle.TenantId = vm.TenantId; 
                 jobService.createOrUpdateQuotation(vm.vehicle).then(function (result) {
-                       
+                         
                     abp.notify.info(app.localize('SavedSuccessfully'));
                     window.location.href = "#!/tenant/quoteheaders/"+result.data;
                     $uibModalInstance.close();

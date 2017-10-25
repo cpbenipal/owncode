@@ -1,0 +1,50 @@
+@using PanelMasterMVC5Separate.Tenants.Quotes
+<div>
+    <form name="quoteCreateOrEditForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span>@L("NewQuotationFor"): # {{vm.vehicle.regNo}}</span>                
+            </h4>
+        </div>
+        <div class="modal-body">
+            <uib-tabset class="tab-container tabbable-line">
+                <uib-tab heading="@L("QuoteProperties")">
+                    <div class="form-group form-md-line-input no-hint">
+                        <label>@L("Category")</label>
+                        <select required class="form-control" ng-model="vm.vehicle.quoteCatID" name="QuoteCatID"
+                                ng-options="opt.id as opt.name for opt in categoryList">
+                            <option value="">@L("SelectOne")</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group form-md-line-input no-hint">
+                        <label>@L("RepairType")</label>
+                        <select required class="form-control" ng-model="vm.vehicle.repairTypeId" name="RepairTypeId"
+                                ng-options="opt.id as opt.name for opt in rtypeList">
+                            <option value="">@L("SelectOne")</option>
+                        </select>                       
+                    </div>
+
+                    <div class="form-group form-md-line-input no-hint"><label>@L("PreAuthorised")</label>
+                        <select required class="form-control" name="Pre_Auth" ng-model="vm.vehicle.pre_Auth"
+                               ng-options="opt.id as opt.name for opt in preAuthList">    
+                            <option value="">@L("SelectOne")</option>
+                        </select>
+                      
+                    </div>
+
+                    <div class="form-group form-md-line-input no-hint">
+                        <label>@L("Comments")</label> <textarea ng-model="vm.vehicle.comments" name="Comments" class="form-control" rows="3"></textarea>
+                        
+                    </div>
+
+                </uib-tab>
+
+            </uib-tabset>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            <button type="submit" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="quoteCreateOrEditForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+        </div>
+    </form>
+</div>
