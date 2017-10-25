@@ -1504,6 +1504,7 @@
     <Content Include="Common\Styles\core.min.css">
       <DependentUpon>core.css</DependentUpon>
     </Content>
+    <Content Include="Common\Videos\1.mp4" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts-open-sans.css" />
