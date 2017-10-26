@@ -15,6 +15,7 @@ using PanelMasterMVC5Separate.Vendors;
 using PanelMasterMVC5Separate.Insurer;
 using PanelMasterMVC5Separate.Brokers;
 using PanelMasterMVC5Separate.Quotings;
+using PanelMasterMVC5Separate.RolesCategories;
 
 namespace PanelMasterMVC5Separate.EntityFramework
 {
@@ -59,6 +60,8 @@ namespace PanelMasterMVC5Separate.EntityFramework
         public virtual IDbSet<RepairTypes> RepairTypes { get; set; }
         public virtual IDbSet<QuoteCategories> QuoteCategories { get; set; }
         public virtual IDbSet<QuoteStatus> QuoteStatus { get; set; }
+
+        public virtual IDbSet<RolesCategory> RolesCategory { get; set; }
 
         public PanelMasterMVC5SeparateDbContext()
             : base("Default")
