@@ -221,12 +221,9 @@
     <text name="Error" value="Error!" />
     <text name="OopsYouAreLost" value="Oops! You're lost." />
     <text name="WeCanNotFindThePage" value="We can not find the page you're looking for." />
-    <text name="DashboardDemo_Note_Title" value="Welcome to ASP.NET Zero startup project!" />
+    <text name="DashboardDemo_Note_Title" value="Welcome to Panel Master startup project!" />
     <text name="DashboardDemo_Note_Info">
-      In this demo, you can use the left menu to test the application.
-      This dashboard page is just for demonstration, but all other pages and functionalities are fully implemented, working and ready for production.
-      You can add/apply your business requirements on this startup project (or remove any functionality you don't need).
-      Thus, you can have a signification time gain to immediately start your own project requirements.
+     Panelmaster is a software tool for managing Autobody Repair Workshops Worldwide. It is suitable for all business sizes.
     </text>
     <text name="WelcomePage_Title" value="Welcome!" />
     <text name="WelcomePage_Info" value="Welcome to the application. You can use the menu to start using the application. If you don't see any menu item, probably you don't have permission to see any page. Consider to ask system administration for permissions." />
@@ -287,7 +284,7 @@
     <text name="EditQuoteType" value="Edit Quote Type" />
     <text name="DashboardNoteForMpaVersion">
       <![CDATA[
-      See Demo for Multi-Page Application version with <strong>ASP.NET MVC</strong> and <strong>jQuery</strong>.
+       For support on this system contact 083 343 2045 or email online@panelmaster.co.za.
       ]]>
     </text>
     <text name="DashboardNoteForSpaVersion">
@@ -343,7 +340,7 @@
     <text name="Previous" value="Previous" />
     <text name="LanguageDeleteWarningMessage" value="Are you sure to delete the language {0}?" />
     <text name="CanNotEditOrDeleteDefaultLanguages" value="Can not edit or delete default languages. You can only edit or delete the languages you added. But you can change texts of all languages." />
-    <text name="LookingForMpaVersion" value="Looking for Multi-Page Application Version?" />
+    <text name="LookingForMpaVersion" value="Need Assistance?" />
     <text name="LookingForSpaVersion" value="Looking for Single-Page Application Version?" />
     <text name="ThisLanguageAlreadyExists" value="This language already exists!" />
     <text name="OrganizationUnits" value="Organization units" />
