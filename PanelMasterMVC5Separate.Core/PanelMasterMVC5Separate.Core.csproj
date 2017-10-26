@@ -213,6 +213,7 @@
     <Compile Include="Notifications\IAppNotifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quotings\Quote.cs" />
+    <Compile Include="RolesCategories\RolesCategory.cs" />
     <Compile Include="Security\PasswordComplexityChecker.cs" />
     <Compile Include="Security\PasswordComplexitySetting.cs" />
     <Compile Include="Storage\DbBinaryObjectManager.cs" />
