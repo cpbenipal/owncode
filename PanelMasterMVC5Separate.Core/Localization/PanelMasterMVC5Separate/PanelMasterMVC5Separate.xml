@@ -67,7 +67,7 @@
     <text name="AddInsurer" value="Add Insurer" />
     <text name="InsurerAccount" value="Insurer Account" />
     <text name="InsurerName" value="Insurer Name" />
-
+    <text name="Report" value="Reporting" />
     <text name="Brokers" value="Brokers" />
     <text name="AddBroker" value="Add Broker" />
     <text name="BrokerAccount" value="Broker Account" />

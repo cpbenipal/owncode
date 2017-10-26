@@ -191,6 +191,11 @@ appModule.config([
             templateUrl: '~/App/tenant/views/quoting/index.cshtml'
         });
 
+        $stateProvider.state('tenant.reporting', {
+            url: '/reporting',
+            templateUrl: '~/App/tenant/views/reporting/index.cshtml'
+        });
+
         $stateProvider.state('tenant.viewQuotations', {
             url: '/viewQuotations',
             templateUrl: '~/App/tenant/views/viewQuotations/index.cshtml'
