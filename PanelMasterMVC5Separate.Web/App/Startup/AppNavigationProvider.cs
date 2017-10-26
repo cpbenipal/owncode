@@ -50,7 +50,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     )).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Quotations,
                     L("NewQuotation"),
-                    url: "tenant.quoting",
+                    url: "tenant.viewQuotations",
                     icon: "glyphicon glyphicon-search"
                     ))
                 )                
@@ -80,7 +80,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     PageNames.App.Tenant.Productivity,
                     L("Productivity"),
                     url: "tenant.productivity",
-                    icon: "glyphicon glyphicon-calendar"
+                    icon: "glyphicon glyphicon-wrench"
                     )
                 ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Towing,
@@ -94,6 +94,16 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     url: "tenant.costing",
                     icon: "glyphicon glyphicon-usd"
                     )
+
+                  
+                    ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.Productivity,
+                    L("Reporting"),
+                    url: "tenant.productivity",
+                    icon: "glyphicon glyphicon-info-sign"
+                    )
+
+
                 ).AddItem(new MenuItemDefinition(
                     PageNames.App.Common.Administration,
                     L("Administration"),

@@ -23,11 +23,12 @@
                         <strong>Quote Created:</strong> {{vm.job.quoteCreated}}
                     </li>
                     <li>
-                        <strong>Value:</strong> {{vm.job.value}}
+                        <strong>Quote Category:</strong> {{vm.job.quoteCat}}
                     </li>
+                  
                 </ul>
             </div>
-            <div class="col-xs-3 invoice-payment">
+             <div class="col-xs-3 invoice-payment">
 
                 <ul class="list-unstyled">
                     <li>
@@ -40,9 +41,8 @@
                         <strong>Model:</strong> {{vm.job.vehicleModal}}
                     </li>
                     <li>
-                        <strong>Created By:</strong> {{vm.job.vehicleCreatedBy}}
+                        <strong>Value:</strong> {{vm.job.value}}
                     </li>
-
                 </ul>
             </div>
             <div class="col-xs-3 invoice-payment">
@@ -71,10 +71,13 @@
                         <strong>Broker:</strong>   {{vm.job.broker}}
                     </li>
                     <li>
+                        <strong>Pre Authorised:</strong>   {{vm.job.pre_Auth}}
+                    </li>
+                    <li>
                         <strong>Repair Type:</strong>   {{vm.job.repairType}}
                     </li>
                     <li>
-                        <strong>Pre Authorised:</strong>   {{vm.job.pre_Auth}}
+                        <strong>Created By:</strong> {{vm.job.createdBy}}
                     </li>
                 </ul>
             </div>
@@ -448,8 +451,8 @@
                             </div>
                         </div>
                          <div class="tabbable-line">
-                             <a> Import </a>
-                             <a> Authorize </a>
+                             <button type="button" class="btn btn-primary blue">Import</button>
+                             <button type="button" class="btn btn-primary blue">Authorize</button>
                          </div>
                     </div>
                 </div>
