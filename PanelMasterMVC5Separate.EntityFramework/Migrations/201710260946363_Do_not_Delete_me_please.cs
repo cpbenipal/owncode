@@ -7,10 +7,12 @@ namespace PanelMasterMVC5Separate.Migrations
     {
         public override void Up()
         {
+            AddColumn("dbo.AbpRoles", "RolesCategoryID", c => c.Int());
         }
-        
+
         public override void Down()
         {
+            AddColumn("dbo.AbpRoles", "RolesCategoryID", c => c.Int(nullable: false));
         }
     }
 }

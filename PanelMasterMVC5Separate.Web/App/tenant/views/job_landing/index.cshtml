@@ -55,57 +55,105 @@
 <body  class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
 
     <form ng-controller="tenant.views.landingPage.index as vm" class="form-horizontal" action="#" id="submit_form" method="POST">
-        <!-- BEGIN PAGE TITLE-->
-        <h2>
-            <small style="background-color:#32c5d2; color:#FFFFFF; font-size:small; padding: 4px 9px 6px 9px;">Job Number: {{vm.job.id}}, Reg: {{vm.job.RegNo}}, Make: {{vm.job.Make}}, Model: {{vm.job.Model}}, Cell: {{vm.job.Cell}}, Email: {{vm.job.Email}}, Status: {{vm.job.ClaimStatusDesc}}, Customer: {{vm.job.Surname}} {{vm.job.Name}}</small>
-        </h2>
-        <!-- END PAGE TITLE-->
-
+        
         <div class="row">
-            <div class="col-md-12">
-                <div class="tabbable-line boxless tabbable-reversed">
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a ng-href="#!/tenant/job_landing/job_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Job information </a>
-                        </li>
-                        <li>
-                            <a ng-href="#!/tenant/job_landing/vehicle_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Vehicle information </a>
-                        </li>
-                        <!--<li>
-                            <a class="check_update_fields" data-toggle="{{tab_or_modal}}" data-target="#myModal_autocomplete"> Insurance information</a>
-                        </li>-->
-                        <li>
-                            <a ng-href="#!/tenant/job_landing/client_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Client information </a>
-                        </li>
-                        <li class="dropdown">
-                            <a data-toggle="tab"> Financial information </a>
-                            <div class="dropdown-content">
-                                <a href="#!/tenant/job_landing/quotedvalues/{{Id=vm.job.id}}#tab_1" data-toggle="tab">Quoted</a>
-                                <a href="#!/tenant/job_landing/authorised_values/{{Id=vm.job.id}}#tab_1">Authorised</a>
-                                <a href="#!/tenant/job_landing/invoiced_values/{{Id=vm.job.id}}#tab_1">Invoiced</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a ng-href="#!/tenant/job_landing/dates_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Dates </a>
-                        </li>
-                        <li>
-                            <a href="#!/tenant/job_landing/communications/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> CRM </a>
-                        </li>
-                        <li class="dropdown">
-                            <a data-toggle="tab"> Uploads & Photos </a>
-                            <div class="dropdown-content">
-                                <a href="#!/tenant/job_landing/photos/{{Id=vm.job.id}}#tab_1" data-toggle="tab">Photos</a>
-                                <a href="#!/tenant/job_landing/uploads/{{Id=vm.job.id}}#tab_1">Uploads</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#!/tenant/job_landing/audit_trail/{{Id=vm.job.id}}#tab_1" data-toggle="tab">Audit trail</a>
-                        </li>
-                    </ul>
 
+           
+                <div class="col-xs-3 invoice-payment">
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <strong>Job Number #:</strong> {{vm.job.id}}
+                        </li>
+                        <li>
+                            <strong>Reg Number:</strong> {{vm.job.RegNo}}
+                        </li>                       
+                    </ul>
+                </div>
+                <div class="col-xs-3 invoice-payment">
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <strong>Make:</strong> {{vm.job.Make}}
+                        </li>
+                        <li>
+                            <strong>Model:</strong> {{vm.job.Model}}
+                        </li>
+                       
+                    </ul>
+                </div>
+                <div class="col-xs-3 invoice-payment">
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <strong>Cell:</strong> {{vm.job.Cell}}
+                        </li>
+                        <li>
+                            <strong>Email:</strong> {{vm.job.Email}}
+                        </li>
+
+                    </ul>
+                </div>
+                
+                <div class="col-xs-3 invoice-payment">
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <strong>Status:</strong> {{vm.job.ClaimStatusDesc}}
+                        </li>
+                        <li>
+                            <strong>Customer:</strong> {{vm.job.Surname}} {{vm.job.Name}}
+                        </li>
+                        
+                    </ul>
+                </div>
+               
+
+
+                <div class="col-md-12">
+                    <div class="tabbable-line boxless tabbable-reversed">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a ng-href="#!/tenant/job_landing/job_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Job information </a>
+                            </li>
+                            <li>
+                                <a ng-href="#!/tenant/job_landing/vehicle_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Vehicle information </a>
+                            </li>
+                            <!--<li>
+                        <a class="check_update_fields" data-toggle="{{tab_or_modal}}" data-target="#myModal_autocomplete"> Insurance information</a>
+                    </li>-->
+                            <li>
+                                <a ng-href="#!/tenant/job_landing/client_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Client information </a>
+                            </li>
+                            <li class="dropdown">
+                                <a data-toggle="tab"> Financial information </a>
+                                <div class="dropdown-content">
+                                    <a href="#!/tenant/job_landing/quotedvalues/{{Id=vm.job.id}}#tab_1" data-toggle="tab">Quoted</a>
+                                    <a href="#!/tenant/job_landing/authorised_values/{{Id=vm.job.id}}#tab_1">Authorised</a>
+                                    <a href="#!/tenant/job_landing/invoiced_values/{{Id=vm.job.id}}#tab_1">Invoiced</a>
+                                </div>
+                            </li>
+                            <li>
+                                <a ng-href="#!/tenant/job_landing/dates_information/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> Dates </a>
+                            </li>
+                            <li>
+                                <a href="#!/tenant/job_landing/communications/{{Id=vm.job.id}}#tab_1" data-toggle="tab"> CRM </a>
+                            </li>
+                            <li class="dropdown">
+                                <a data-toggle="tab"> Uploads & Photos </a>
+                                <div class="dropdown-content">
+                                    <a href="#!/tenant/job_landing/photos/{{Id=vm.job.id}}#tab_1" data-toggle="tab">Photos</a>
+                                    <a href="#!/tenant/job_landing/uploads/{{Id=vm.job.id}}#tab_1">Uploads</a>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#!/tenant/job_landing/audit_trail/{{Id=vm.job.id}}#tab_1" data-toggle="tab">Audit trail</a>
+                            </li>
+                        </ul>
+
+                    </div>
                 </div>
             </div>
-        </div>
 
         <div ui-view class="fade-in-up"></div>
 

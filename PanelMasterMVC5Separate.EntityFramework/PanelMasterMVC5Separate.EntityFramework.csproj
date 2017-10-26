@@ -172,8 +172,11 @@
     <Compile Include="Migrations\201710260943016_4.Designer.cs">
       <DependentUpon>201710260943016_4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710260946363_Do_not_Delete_me_please.cs" />
+    <Compile Include="Migrations\201710260946363_Do_not_Delete_me_please.Designer.cs">
+      <DependentUpon>201710260946363_Do_not_Delete_me_please.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Migrations\Do_not_Delete_me_please.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultSettingsCreator.cs" />
@@ -297,6 +300,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710260943016_4.resx">
       <DependentUpon>201710260943016_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710260946363_Do_not_Delete_me_please.resx">
+      <DependentUpon>201710260946363_Do_not_Delete_me_please.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
