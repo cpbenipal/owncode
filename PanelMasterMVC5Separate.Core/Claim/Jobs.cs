@@ -48,6 +48,8 @@ namespace PanelMasterMVC5Separate.Claim
         public virtual Claim.BranchClaimStatus ClaimStatus { get; set; }
 
         public virtual int ClaimEventID { get; set; }
+         
+        public virtual NotProceedReason NotProceedReason { get; set; }
 
         public virtual string RegNo { get; set; }
         public virtual string VinNumber { get; set; }

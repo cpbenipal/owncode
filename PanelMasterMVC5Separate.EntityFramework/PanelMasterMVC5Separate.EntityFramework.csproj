@@ -176,6 +176,14 @@
     <Compile Include="Migrations\201710270658344_Added_rolesCategoryID_to_Roles.Designer.cs">
       <DependentUpon>201710270658344_Added_rolesCategoryID_to_Roles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710271417434_tblNotProceedReason.cs" />
+    <Compile Include="Migrations\201710271417434_tblNotProceedReason.Designer.cs">
+      <DependentUpon>201710271417434_tblNotProceedReason.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710271445314_tblNotProceedReason1.cs" />
+    <Compile Include="Migrations\201710271445314_tblNotProceedReason1.Designer.cs">
+      <DependentUpon>201710271445314_tblNotProceedReason1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -303,6 +311,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710270658344_Added_rolesCategoryID_to_Roles.resx">
       <DependentUpon>201710270658344_Added_rolesCategoryID_to_Roles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710271417434_tblNotProceedReason.resx">
+      <DependentUpon>201710271417434_tblNotProceedReason.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710271445314_tblNotProceedReason1.resx">
+      <DependentUpon>201710271445314_tblNotProceedReason1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
