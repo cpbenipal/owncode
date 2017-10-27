@@ -7,13 +7,13 @@ namespace PanelMasterMVC5Separate.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Do_not_Delete_me_please : IMigrationMetadata
+    public sealed partial class Added_rolesCategoryID_to_Roles : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Do_not_Delete_me_please));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Added_rolesCategoryID_to_Roles));
         
         string IMigrationMetadata.Id
         {
-            get { return "201710260946363_Do_not_Delete_me_please"; }
+            get { return "201710270658344_Added_rolesCategoryID_to_Roles"; }
         }
         
         string IMigrationMetadata.Source

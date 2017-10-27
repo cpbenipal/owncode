@@ -9,6 +9,7 @@ namespace PanelMasterMVC5Separate.Authorization.Roles
     public class Role : AbpRole<User>
     {
         //Can add application specific role properties here
+        public virtual int? RoleCategoryID { get; set; }
 
         public Role()
         {

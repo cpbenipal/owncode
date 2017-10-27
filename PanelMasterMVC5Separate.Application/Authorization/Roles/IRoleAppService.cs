@@ -17,5 +17,7 @@ namespace PanelMasterMVC5Separate.Authorization.Roles
         Task CreateOrUpdateRole(CreateOrUpdateRoleInput input);
 
         Task DeleteRole(EntityDto input);
+
+        ListResultDto<RoleCategoriesDto> GetRolesCategories(NullableIdDto input);
     }
 }

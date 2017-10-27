@@ -21,7 +21,179 @@ namespace PanelMasterMVC5Separate.Migrations.Seed.Host
 
         public void Create()
         {
-            CreateHostRoleAndUsers();           
+            CreateHostRoleAndUsers();
+            CreateRolesCategory();
+        }
+
+        private void CreateRolesCategory()
+        {
+            var AdminRoleDesc = _context.RolesCategory.FirstOrDefault(r => r.Description.ToLower() == "admin");
+            if(AdminRoleDesc == null)
+            {
+                AdminRoleDesc = _context.RolesCategory.Add(
+                      new RolesCategories.RolesCategory{
+                          Description = "Admin",
+                          Enabled = true
+                      });
+                          
+                _context.SaveChanges();
+            }
+
+            var UserRoleDesc = _context.RolesCategory.FirstOrDefault(r => r.Description.ToLower() == "user");
+            if (UserRoleDesc == null)
+            {
+                UserRoleDesc = _context.RolesCategory.Add(
+                      new RolesCategories.RolesCategory
+                      {
+                          Description = "User",
+                          Enabled = true
+                      });
+
+                _context.SaveChanges();
+            }
+
+            var ClaimHandlerRoleDesc = _context.RolesCategory.FirstOrDefault(r => r.Description.ToLower() == "claims handler");
+            if (ClaimHandlerRoleDesc == null)
+            {
+                ClaimHandlerRoleDesc = _context.RolesCategory.Add(
+                      new RolesCategories.RolesCategory
+                      {
+                          Description = "Claims Handler",
+                          Enabled = true
+                      });
+
+                _context.SaveChanges();
+            }
+
+            var CSARoleDesc = _context.RolesCategory.FirstOrDefault(r => r.Description.ToLower() == "customer service advisor");
+            if (CSARoleDesc == null)
+            {
+                CSARoleDesc = _context.RolesCategory.Add(
+                      new RolesCategories.RolesCategory
+                      {
+                          Description = "Customer Service Advisor",
+                          Enabled = true
+                      });
+
+                _context.SaveChanges();
+            }
+
+            var PartsBuyerRoleDesc = _context.RolesCategory.FirstOrDefault(r => r.Description.ToLower() == "parts buyer");
+            if (PartsBuyerRoleDesc == null)
+            {
+                PartsBuyerRoleDesc = _context.RolesCategory.Add(
+                      new RolesCategories.RolesCategory
+                      {
+                          Description = "Parts Buyer",
+                          Enabled = true
+                      });
+
+                _context.SaveChanges();
+            }
+
+            var EstimatorRoleDesc = _context.RolesCategory.FirstOrDefault(r => r.Description.ToLower() == "estimator");
+            if (EstimatorRoleDesc == null)
+            {
+                EstimatorRoleDesc = _context.RolesCategory.Add(
+                      new RolesCategories.RolesCategory
+                      {
+                          Description = "Estimator",
+                          Enabled = true
+                      });
+
+                _context.SaveChanges();
+            }
+
+            var KeyAccountsManagerRoleDesc = _context.RolesCategory.FirstOrDefault(r => r.Description.ToLower() == "key accounts manager");
+            if (KeyAccountsManagerRoleDesc == null)
+            {
+                KeyAccountsManagerRoleDesc = _context.RolesCategory.Add(
+                      new RolesCategories.RolesCategory
+                      {
+                          Description = "Key Accounts Manager",
+                          Enabled = true
+                      });
+
+                _context.SaveChanges();
+            }
+
+            var SwithchboardRoleDesc = _context.RolesCategory.FirstOrDefault(r => r.Description.ToLower() == "swithchboard");
+            if (SwithchboardRoleDesc == null)
+            {
+                SwithchboardRoleDesc = _context.RolesCategory.Add(
+                      new RolesCategories.RolesCategory
+                      {
+                          Description = "Swithchboard",
+                          Enabled = true
+                      });
+
+                _context.SaveChanges();
+            }
+
+            var PartsReceiverRoleDesc = _context.RolesCategory.FirstOrDefault(r => r.Description.ToLower() == "parts receiver");
+            if (PartsReceiverRoleDesc == null)
+            {
+                PartsReceiverRoleDesc = _context.RolesCategory.Add(
+                      new RolesCategories.RolesCategory
+                      {
+                          Description = "Parts Receiver",
+                          Enabled = true
+                      });
+
+                _context.SaveChanges();
+            }
+
+            var CostingClerkRoleDesc = _context.RolesCategory.FirstOrDefault(r => r.Description.ToLower() == "costing clerk");
+            if (CostingClerkRoleDesc == null)
+            {
+                CostingClerkRoleDesc = _context.RolesCategory.Add(
+                      new RolesCategories.RolesCategory
+                      {
+                          Description = "Costing Clerk",
+                          Enabled = true
+                      });
+
+                _context.SaveChanges();
+            }
+
+            var FinancialManagerRoleDesc = _context.RolesCategory.FirstOrDefault(r => r.Description.ToLower() == "financial manager");
+            if (FinancialManagerRoleDesc == null)
+            {
+                FinancialManagerRoleDesc = _context.RolesCategory.Add(
+                      new RolesCategories.RolesCategory
+                      {
+                          Description = "Financial Manager",
+                          Enabled = true
+                      });
+
+                _context.SaveChanges();
+            }
+
+            var InsurerRoleDesc = _context.RolesCategory.FirstOrDefault(r => r.Description.ToLower() == "insurer");
+            if (InsurerRoleDesc == null)
+            {
+                InsurerRoleDesc = _context.RolesCategory.Add(
+                      new RolesCategories.RolesCategory
+                      {
+                          Description = "Insurer",
+                          Enabled = true
+                      });
+
+                _context.SaveChanges();
+            }
+
+            var BrokerRoleDesc = _context.RolesCategory.FirstOrDefault(r => r.Description.ToLower() == "broker");
+            if (BrokerRoleDesc == null)
+            {
+                BrokerRoleDesc = _context.RolesCategory.Add(
+                      new RolesCategories.RolesCategory
+                      {
+                          Description = "Broker",
+                          Enabled = true
+                      });
+
+                _context.SaveChanges();
+            }
         }
 
         private void CreateHostRoleAndUsers()

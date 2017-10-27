@@ -23,6 +23,7 @@
     <text name="CreateAnAccount" value="Create account" />
     <text name="Pages" value="Pages" />
     <text name="RoleName" value="Role name" />
+    <text name="RoleCategory" value="Role category" />    
     <text name="EditRole" value="Edit role" />
     <text name="CreateNewRole" value="Create new role" />
     <text name="RoleProperties" value="Role properties" />
