@@ -930,6 +930,9 @@
     <Content Include="assets\global\plugins\bootstrap\css\bootstrap.min.css" />
     <Content Include="assets\global\plugins\bootstrap\js\bootstrap.js" />
     <Content Include="assets\global\plugins\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\global\plugins\counterup\jquery.counterup.js" />
+    <Content Include="assets\global\plugins\counterup\jquery.counterup.min.js" />
+    <Content Include="assets\global\plugins\counterup\jquery.waypoints.min.js" />
     <Content Include="assets\global\plugins\excanvas.min.js" />
     <Content Include="assets\global\plugins\font-awesome\css\font-awesome.css" />
     <Content Include="assets\global\plugins\font-awesome\css\font-awesome.min.css" />
@@ -7643,6 +7646,8 @@
     <Content Include="App\tenant\views\ViewQuotations\index.cshtml" />
     <Content Include="App\tenant\views\ViewQuotations\createOrEditModal.cshtml" />
     <Content Include="App\tenant\views\reporting\index.cshtml" />
+    <Content Include="assets\global\plugins\counterup\LICENSE" />
+    <Content Include="assets\global\plugins\counterup\README.md" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
