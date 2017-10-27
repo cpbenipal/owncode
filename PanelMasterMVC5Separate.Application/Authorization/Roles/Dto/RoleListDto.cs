@@ -17,5 +17,13 @@ namespace PanelMasterMVC5Separate.Authorization.Roles.Dto
         public bool IsDefault { get; set; }
 
         public DateTime CreationTime { get; set; }
+
+        public int? RoleCategoryID { get; set; }
+    }
+
+    public class RoleCategoriesDto
+    {
+        public int? ID { get; set; }
+        public string Description { get; set; }
     }
 }

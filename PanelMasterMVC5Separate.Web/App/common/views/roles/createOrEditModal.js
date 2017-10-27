@@ -10,6 +10,7 @@
 
             vm.save = function () {
                 vm.saving = true;
+                //alert(vm.role.RolesCategoryID);
                 roleService.createOrUpdateRole({
                     role: vm.role,
                     grantedPermissionNames: vm.permissionEditData.grantedPermissionNames
@@ -19,6 +20,25 @@
                 }).finally(function() {
                     vm.saving = false;
                 });
+            }; 
+            
+            $scope.rolesCategoryList = []; //list of categories
+            vm.getRolesCategories = function () {
+               
+                roleService.getRolesCategories({ id: roleId })
+                    .then(function (roles_obj) {
+                      
+                        angular.forEach(roles_obj.data.items, function (rolesCategoriesvalue, key1) {                           
+                            $scope.rolesCategoryList.push({
+                                name: rolesCategoriesvalue.description,
+                                id: rolesCategoriesvalue.id
+                            });
+                        });
+
+                    }).finally(function () {
+                        vm.loading = false;
+                    });
+
             };
 
             vm.cancel = function () {
@@ -36,8 +56,9 @@
                     };
                 });
             }
-
+          
             init();
+            vm.getRolesCategories();
         }
     ]);
 })();

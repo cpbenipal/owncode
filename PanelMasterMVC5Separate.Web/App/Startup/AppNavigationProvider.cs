@@ -96,10 +96,10 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     )
 
                   
-                    ).AddItem(new MenuItemDefinition(
+                ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Productivity,
-                    L("Reporting"),
-                    url: "tenant.productivity",
+                    @L("Report"),
+                    url: "tenant.reporting",
                     icon: "glyphicon glyphicon-info-sign"
                     )
 

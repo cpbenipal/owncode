@@ -50,9 +50,7 @@ namespace PanelMasterMVC5Separate.Migrations
             //    {
             //        { "DynamicFilter_Vendor_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
             //    });
-            DropStoredProcedure("dbo.JobDetails_StoredProc_Insert");
-            DropStoredProcedure("dbo.JobDetails_StoredProc_Update");
-            DropStoredProcedure("dbo.JobDetails_StoredProc_Delete");
+          
         }
         
         public override void Down()
