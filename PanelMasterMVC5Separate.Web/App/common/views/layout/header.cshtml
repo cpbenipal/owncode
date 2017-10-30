@@ -7,7 +7,7 @@
     <div class="page-logo">
         <a href="@Url.Action("Index", "Home")" target="_blank">
             <img ng-if="vm.tenant && vm.tenant.logoId" ng-src="~/TenantCustomization/GetLogo?id={{vm.tenant.logoId}}" alt="logo" class="logo-default" width="168" height="33" />
-            <img ng-if="!vm.tenant || !vm.tenant.logoId" src="~/Common/Images/GetLogo.png" alt="logo" class="logo-default" width="168" height="33" />
+            <img ng-if="!vm.tenant || !vm.tenant.logoId" src="~/Common/Images/app-logo-on-light.png" alt="logo" class="logo-default" width="168" height="33" />
         </a>
         <div class="menu-toggler sidebar-toggler">
             <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->

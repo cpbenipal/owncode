@@ -1,43 +1,33 @@
 ﻿using Abp.Application.Services.Dto;
-using Abp.Authorization;
-using Abp.Authorization.Roles;
-using Abp.Authorization.Users;
 using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Abp.Linq.Extensions;
-using PanelMasterMVC5Separate.Authorization;
-using PanelMasterMVC5Separate.Authorization.Claim.Dto;
 using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.Tenants.Claim.Dto;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data.Entity;
-using System.Diagnostics;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Threading.Tasks;
 using System;
 using Abp.AutoMapper;
-using PanelMasterMVC5Separate.Authorization.Roles;
-using PanelMasterMVC5Separate.Authorization.Claim.Exporting;
 using PanelMasterMVC5Separate.Tenants.Claim.Exporting;
 using PanelMasterMVC5Separate.Clients;
-using PanelMasterMVC5Separate.Job;
-using PanelMasterMVC5Separate.Job.Dto;
 using PanelMasterMVC5Separate.Vehicle;
 using PanelMasterMVC5Separate.Insurer;
 using PanelMasterMVC5Separate.Tenants.Insurer.Dto;
 using PanelMasterMVC5Separate.Brokers;
 using PanelMasterMVC5Separate.Tenants.Brokers.Dto;
+using Abp.Runtime.Session;
 
 namespace PanelMasterMVC5Separate.Tenants.Claim
 {
 
     public class BranchClaimAppService : PanelMasterMVC5SeparateAppServiceBase, IBranchClaimAppService
     {
-
+        private readonly IAbpSession _abpSession;
         private readonly IClaimsListExcelExporter _claimListExcelExporter;
         private readonly IRepository<Jobs> _claimRepository;
         private readonly IRepository<Client> _clientRepository;
@@ -52,13 +42,14 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         private readonly IRepository<JobstatusMask> _jobstatusmaskRepository;
         private readonly IRepository<JobstatusTenant> _jobstatustenantRepository;
 
-        public BranchClaimAppService(IClaimsListExcelExporter claimListExcelExporter,
+        public BranchClaimAppService(IAbpSession abpSession, IClaimsListExcelExporter claimListExcelExporter,
                                      IRepository<Jobs> claimRepository, IRepository<Client> clientRepository,
                                      IRepository<InsurerMaster> InsuranceRepository, IRepository<VehicleMake> manufactureRepository,
                                      IRepository<BrokerMaster> brokerRepository, IRepository<VehicleModels> vehicleModelRepository,
                                      IRepository<BranchClaimStatus> claimStatusRepository
             , IRepository<Jobstatus> jobstatusRepository, IRepository<JobstatusMask> jobstatusmaskRepository, IRepository<JobstatusTenant> jobstatustenantRepository)
         {
+            _abpSession = abpSession;
             _claimListExcelExporter = claimListExcelExporter;
             _claimRepository = claimRepository;
             _clientRepository = clientRepository;
@@ -79,10 +70,11 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             var queryClient = _clientRepository.GetAll().ToList();
 
             var queryInsurance = _InsuranceRepository.GetAll().ToList();
-
+              
             var query = (from j in queryjobs
                          join c in queryClient on j.ClientID equals c.Id
                          join n in queryInsurance on j.InsuranceID equals n.Id
+
                          select new BranchClaimListDto
                          {
                              Id = j.Id,
@@ -268,7 +260,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
         public ListResultDto<JobStatusDto> GetJobStatuses(GetClaimsInput input)
         {
-            var querystatustenant = _jobstatustenantRepository.GetAll().ToList();
+            var querystatustenant = _jobstatustenantRepository.GetAll().Where(p=>p.Tenant == _abpSession.TenantId).ToList();
 
             var queryjobstatus = _jobstatusRepository.GetAll().ToList();
 
@@ -277,7 +269,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             var query = (from j in queryjobstatus
                          join c in querystatustenant on j.Id equals c.JobStatusID into ps
                          from py1s in ps.DefaultIfEmpty()
-
+                          
                          select new JobStatusDto
                          {
                              Id = j.Id,
@@ -296,7 +288,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                     u.JobstatusMask.Contains(input.Filter) ||
                     u.ShowAwaiting.Contains(input.Filter) ||
                     u.ShowSpeedbump.Contains(input.Filter)
-            )
+            )             
             .OrderByDescending(p => p.CreationTime)
             .ThenBy(p => p.Jobstatus)
             .ToList();
@@ -343,7 +335,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         public async Task<JobstatusTenantDto> GetJobStatusForEdit(GetJobInput input)
         {
             var output = new JobstatusTenantDto();
-            var ifexist = _jobstatustenantRepository.FirstOrDefault(p => p.JobStatusID == input.id);
+            var ifexist = _jobstatustenantRepository.FirstOrDefault(p => p.JobStatusID == input.id && p.Tenant == _abpSession.TenantId);
             if (ifexist != null)//Job Static doesn't exist in tblJobstatusTenant
             {
                 try
@@ -365,7 +357,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             int Id = Convert.ToInt32(input.Id);
 
             var query = _jobstatustenantRepository
-             .GetAll().Where(c => c.Id == Id)
+             .GetAll().Where(c => c.Id == Id && c.Tenant == _abpSession.TenantId)
              .FirstOrDefault();
 
             query.isActive = input.IsActive;
