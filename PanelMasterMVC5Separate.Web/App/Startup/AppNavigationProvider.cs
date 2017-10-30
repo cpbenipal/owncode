@@ -37,7 +37,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     icon: "icon-home",
                     requiredPermissionName: AppPermissions.Pages_Tenant_Dashboard
                     )
-                )                
+                )
                 .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Quote,
                     L("Quoting"),
@@ -53,7 +53,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     url: "tenant.viewQuotations",
                     icon: "glyphicon glyphicon-search"
                     ))
-                )                
+                )
                 .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.PartsOrdering,
                     L("PartsOrdering"),
@@ -95,7 +95,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     icon: "glyphicon glyphicon-usd"
                     )
 
-                  
+
                 ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Productivity,
                     @L("Report"),
@@ -167,7 +167,14 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                         requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                         )
                     )
-                    
+                    .AddItem(new MenuItemDefinition(
+                        PageNames.App.Tenant.JobStatuses,
+                        L("JobStatuses"),
+                        url: "tenant.jobstatuses",
+                        icon: "icon-settings"
+                        )
+                    ) 
+
                     .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Vendors,
                     L("Vendors"),
@@ -184,7 +191,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     icon: "glyphicon glyphicon-search"
                     ))
                     )
-                    
+
                     .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Insurers,
                     L("Insurers"),
@@ -218,7 +225,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     icon: "glyphicon glyphicon-search"
                     ))
                     )
-                    
+
                     .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.VehicleManufacturer,
                     L("VehicleManufacturer"),

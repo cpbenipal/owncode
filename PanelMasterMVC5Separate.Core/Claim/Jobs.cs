@@ -20,11 +20,11 @@ namespace PanelMasterMVC5Separate.Claim
         public virtual Clients.Client Client { get; set; }
 
         [Required]
-        public virtual int ManufactureID { get; set; }        
-        public virtual VehicleMake Manufacture { get; set; }        
-       
-        public virtual int ModelID { get; set; }      
-       
+        public virtual int ManufactureID { get; set; }
+        public virtual VehicleMake Manufacture { get; set; }
+
+        public virtual int ModelID { get; set; }
+
         [Required]
         public virtual int InsuranceID { get; set; }
         public virtual Insurer.InsurerMaster Insurance { get; set; }
@@ -48,7 +48,7 @@ namespace PanelMasterMVC5Separate.Claim
         public virtual Claim.BranchClaimStatus ClaimStatus { get; set; }
 
         public virtual int ClaimEventID { get; set; }
-         
+
         public virtual NotProceedReason NotProceedReason { get; set; }
 
         public virtual string RegNo { get; set; }
@@ -59,4 +59,37 @@ namespace PanelMasterMVC5Separate.Claim
         public virtual bool New_Comeback { get; set; }
 
     }
+
+    [Table("tblJobstatus")]
+    public class Jobstatus : FullAuditedEntity
+    {
+        public virtual string Description { get; set; }
+    }
+
+    [Table("tblJobstatusMask")]
+    public class JobstatusMask : FullAuditedEntity
+    {       
+        public virtual string Description1 { get; set; }
+        public virtual string Description2 { get; set; }
+        public virtual string Description3 { get; set; }
+        public virtual bool Enabled { get; set; }
+    }
+
+    [Table("tblJobstatusTenant")]
+    public class JobstatusTenant : FullAuditedEntity
+    {
+        public int JobStatusID { get; set; }  
+        [ForeignKey("JobStatusID")]
+        public virtual Jobstatus Jobstatus { get; set; }
+        public virtual int Tenant { get; set; }
+        public virtual bool isActive { get; set; }
+        public virtual bool ShowSpeedbump { get; set; }
+        public virtual bool ShowAwaiting { get; set; }
+        public virtual int Sortorder { get; set; }
+        public int Mask { get; set; }
+        [ForeignKey("Mask")]
+        public virtual JobstatusMask JobstatusMask { get; set; }
+    }
+
+
 }

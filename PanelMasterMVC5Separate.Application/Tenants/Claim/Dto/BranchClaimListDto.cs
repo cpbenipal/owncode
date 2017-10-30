@@ -8,6 +8,7 @@ using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.Clients;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,4 +51,70 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
 
     }
 
+    public class JobStatusDto
+    {
+        public virtual int Id { get; set; }
+        public virtual int JobStatusId { get; set; }
+        public virtual string Jobstatus { get; set; }
+        public virtual Boolean IsActive { get; set; }
+        public virtual string ShowSpeedbump { get; set; }
+        public virtual string ShowAwaiting { get; set; }
+        public virtual string JobstatusMask { get; set; }
+        public virtual int Sortorder { get; set; }
+        public virtual string CreationTime { get; set; }
+        public int pkId { get; set; }
+    }
+
+    [AutoMapFrom(typeof(JobstatusTenant))]
+    public class JobstatusTenantDto : FullAuditedEntityDto
+    {
+        [Required]
+        public virtual int JobStatusID { get; set; }
+        [Required]
+        public virtual int Tenant { get; set; }
+        [Required]
+        public virtual bool isActive { get; set; }
+        [Required]
+        public virtual bool ShowSpeedbump { get; set; }
+        [Required]
+        public virtual bool ShowAwaiting { get; set; }
+        [Required]
+        public virtual int Sortorder { get; set; }
+        [Required]
+        public virtual int Mask { get; set; }
+        public virtual string JobStatus { get; set; }
+    }
+
+    [AutoMapFrom(typeof(JobstatusMask))]
+    public class JobStatusMasksDto
+    {
+        public virtual int Id { get; set; }
+        public virtual string Description1 { get; set; }
+        public virtual string Description2 { get; set; }
+        public virtual string Description3 { get; set; }       
+    }
+
+    public class GetJobInput
+    {
+        public int id { get; set; } 
+    }
+
+    [AutoMapTo(typeof(JobstatusTenant))]
+    public class JobstatusTenantToDto : FullAuditedEntityDto
+    {
+        [Required]
+        public virtual int JobStatusID { get; set; }
+        [Required]
+        public virtual int Tenant { get; set; }
+        [Required]
+        public virtual bool isActive { get; set; }
+        [Required]
+        public virtual bool ShowSpeedbump { get; set; }
+        [Required]
+        public virtual bool ShowAwaiting { get; set; }
+        [Required]
+        public virtual int Sortorder { get; set; }
+        [Required]
+        public virtual int Mask { get; set; } 
+    }
 }

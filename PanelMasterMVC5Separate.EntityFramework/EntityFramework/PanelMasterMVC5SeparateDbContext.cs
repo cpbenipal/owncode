@@ -61,6 +61,9 @@ namespace PanelMasterMVC5Separate.EntityFramework
         public virtual IDbSet<QuoteStatus> QuoteStatus { get; set; }
         public virtual IDbSet<RolesCategory> RolesCategory { get; set; }
         public virtual IDbSet<NotProceedReason> NotProceedReason { get; set; }
+        public virtual IDbSet<Jobstatus> Jobstatus { get; set; }
+        public virtual IDbSet<JobstatusMask> JobstatusMask { get; set; }
+        public virtual IDbSet<JobstatusTenant> JobstatusTenant { get; set; }
 
         public PanelMasterMVC5SeparateDbContext()
             : base("Default")

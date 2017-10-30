@@ -42,17 +42,22 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         private readonly IRepository<Jobs> _claimRepository;
         private readonly IRepository<Client> _clientRepository;
         private readonly IRepository<InsurerMaster> _InsuranceRepository;
-       
+
         private readonly IRepository<VehicleMake> _manufactureRepository;
         private readonly IRepository<VehicleModels> _vehicleModelRepository;
         private readonly IRepository<BrokerMaster> _brokerRepository;
         private readonly IRepository<BranchClaimStatus> _claimStatusRepository;
-        
+
+        private readonly IRepository<Jobstatus> _jobstatusRepository;
+        private readonly IRepository<JobstatusMask> _jobstatusmaskRepository;
+        private readonly IRepository<JobstatusTenant> _jobstatustenantRepository;
+
         public BranchClaimAppService(IClaimsListExcelExporter claimListExcelExporter,
                                      IRepository<Jobs> claimRepository, IRepository<Client> clientRepository,
                                      IRepository<InsurerMaster> InsuranceRepository, IRepository<VehicleMake> manufactureRepository,
                                      IRepository<BrokerMaster> brokerRepository, IRepository<VehicleModels> vehicleModelRepository,
-                                     IRepository<BranchClaimStatus> claimStatusRepository)
+                                     IRepository<BranchClaimStatus> claimStatusRepository
+            , IRepository<Jobstatus> jobstatusRepository, IRepository<JobstatusMask> jobstatusmaskRepository, IRepository<JobstatusTenant> jobstatustenantRepository)
         {
             _claimListExcelExporter = claimListExcelExporter;
             _claimRepository = claimRepository;
@@ -62,6 +67,9 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             _brokerRepository = brokerRepository;
             _vehicleModelRepository = vehicleModelRepository;
             _claimStatusRepository = claimStatusRepository;
+            _jobstatusRepository = jobstatusRepository;
+            _jobstatusmaskRepository = jobstatusmaskRepository;
+            _jobstatustenantRepository = jobstatustenantRepository;
         }
 
         public ListResultDto<BranchClaimListDto> GetClaims(GetClaimsInput input)
@@ -98,7 +106,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
             return new ListResultDto<BranchClaimListDto>(ObjectMapper.Map<List<BranchClaimListDto>>(query));
 
-        }     
+        }
         public async Task<FileDto> GetClaimsToExcel()
         {
             var claims = await _claimRepository.GetAll().ToListAsync();
@@ -195,9 +203,9 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                 jobs.RegNo = input.RegNo;
                 jobs.VinNumber = input.VinNumber;
                 jobs.Year = input.Year;
-                
+
                 _claimRepository.Update(jobs);
-              
+
             }
             catch (Exception x)
             {
@@ -210,10 +218,10 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             try
             {
                 var jobs = _claimRepository.Get(input.Id);
-                
+
                 jobs.BrokerID = input.BrokerID;
                 jobs.InsuranceID = input.InsuranceID;
-                _claimRepository.Update(jobs);              
+                _claimRepository.Update(jobs);
 
             }
             catch (Exception x)
@@ -226,7 +234,6 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         {
             try
             {
-
                 var clients = _clientRepository.Get(input.ClientID);
                 clients.Name = input.Name;
                 clients.Surname = input.Surname;
@@ -258,7 +265,118 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
             return new ListResultDto<BrokersDto>(ObjectMapper.Map<List<BrokersDto>>(broker));
         }
-         
 
+        public ListResultDto<JobStatusDto> GetJobStatuses(GetClaimsInput input)
+        {
+            var querystatustenant = _jobstatustenantRepository.GetAll().ToList();
+
+            var queryjobstatus = _jobstatusRepository.GetAll().ToList();
+
+            var queryjobstatusmask = _jobstatusmaskRepository.GetAll().ToList();
+
+            var query = (from j in queryjobstatus
+                         join c in querystatustenant on j.Id equals c.JobStatusID into ps
+                         from py1s in ps.DefaultIfEmpty()
+
+                         select new JobStatusDto
+                         {
+                             Id = j.Id,
+                             pkId = py1s == null ? 0 : py1s.Id,
+                             Jobstatus = j.Description,
+                             JobstatusMask = py1s == null ? "--" : (_jobstatusmaskRepository.FirstOrDefault(p => p.Id == py1s.Mask).Description1),
+                             CreationTime = py1s == null ? "--" : py1s.CreationTime.ToShortDateString(),
+                             Sortorder = py1s == null ? 0 : py1s.Sortorder,
+                             IsActive = py1s == null ? false : py1s.isActive,
+                             ShowAwaiting = py1s == null ? "--" : ((py1s.ShowAwaiting == true) ? "Yes" : "No"),
+                             ShowSpeedbump = py1s == null ? "--" : ((py1s.ShowSpeedbump == true) ? "Yes" : "No")
+                         }).WhereIf(
+                !input.Filter.IsNullOrWhiteSpace(),
+                u =>
+                    u.Jobstatus.Contains(input.Filter) ||
+                    u.JobstatusMask.Contains(input.Filter) ||
+                    u.ShowAwaiting.Contains(input.Filter) ||
+                    u.ShowSpeedbump.Contains(input.Filter)
+            )
+            .OrderByDescending(p => p.CreationTime)
+            .ThenBy(p => p.Jobstatus)
+            .ToList();
+
+            return new ListResultDto<JobStatusDto>(ObjectMapper.Map<List<JobStatusDto>>(query));
+
+        }
+        public async Task<FileDto> GetJobStatusToExcel()
+        {
+            var querystatustenant = await _jobstatustenantRepository.GetAll().ToListAsync();
+            var queryjobstatus = await _jobstatusRepository.GetAll().ToListAsync();
+            var queryjobstatusmask = await _jobstatusmaskRepository.GetAll().ToListAsync();
+            var query = (from j in queryjobstatus
+                         join c in querystatustenant on j.Id equals c.JobStatusID into ps
+                         from py1s in ps.DefaultIfEmpty()
+
+                         select new JobStatusDto
+                         {
+                             Id = j.Id,
+                             Jobstatus = j.Description,
+                             JobstatusMask = py1s == null ? "--" : (_jobstatusmaskRepository.FirstOrDefault(p => p.Id == py1s.Mask).Description1),
+                             CreationTime = py1s == null ? "--" : py1s.CreationTime.ToShortDateString(),
+                             Sortorder = py1s == null ? 0 : py1s.Sortorder,
+                             IsActive = py1s == null ? false : py1s.isActive,
+                             ShowAwaiting = py1s == null ? "--" : ((py1s.ShowAwaiting == true) ? "Yes" : "No"),
+                             ShowSpeedbump = py1s == null ? "--" : ((py1s.ShowSpeedbump == true) ? "Yes" : "No")
+                         })
+            .OrderByDescending(p => p.CreationTime)
+            .ThenBy(p => p.Jobstatus)
+            .ToList();
+            var claimListDtos = query.MapTo<List<JobStatusDto>>();
+            return _claimListExcelExporter.ExportToFile(claimListDtos);
+        }
+        public ListResultDto<JobStatusMasksDto> GetJobStatusMasks()
+        {
+            var status = _jobstatusmaskRepository
+                .GetAll()
+                .Where(p => p.IsDeleted == false)
+                .ToList();
+
+            return new ListResultDto<JobStatusMasksDto>(ObjectMapper.Map<List<JobStatusMasksDto>>(status));
+        }
+        // By jobstaticId
+        public async Task<JobstatusTenantDto> GetJobStatusForEdit(GetJobInput input)
+        {
+            var output = new JobstatusTenantDto();
+            var ifexist = _jobstatustenantRepository.FirstOrDefault(p => p.JobStatusID == input.id);
+            if (ifexist != null)//Job Static doesn't exist in tblJobstatusTenant
+            {
+                try
+                {
+                    output = ifexist.MapTo<JobstatusTenantDto>();
+                }
+                catch (Exception c)
+                {
+                    throw c;
+                }
+            }
+            var job = await _jobstatusRepository.GetAsync(input.id);
+            output.JobStatus = job.Description;
+            output.JobStatusID = job.Id;
+            return output;
+        }
+        public void ChangeStatus(JobStatusDto input)
+        {
+            int Id = Convert.ToInt32(input.Id);
+
+            var query = _jobstatustenantRepository
+             .GetAll().Where(c => c.Id == Id)
+             .FirstOrDefault();
+
+            query.isActive = input.IsActive;
+
+            _jobstatustenantRepository.Update(query);
+        }
+        public void CreateOrUpdateJobStatus(JobstatusTenantToDto input)
+        {
+            input.isActive = input.isActive; // Default Status : Quote Preparation             
+            var query = input.MapTo<JobstatusTenant>();
+            _jobstatustenantRepository.InsertOrUpdate(query);
+        }
     }
 }

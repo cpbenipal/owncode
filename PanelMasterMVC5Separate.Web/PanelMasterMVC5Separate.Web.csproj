@@ -558,6 +558,8 @@
     <Content Include="App\tenant\views\insurance_information\index.js" />
     <Content Include="App\tenant\views\Brokers\index.js" />
     <Content Include="App\tenant\views\invoiced_values\index.js" />
+    <Content Include="App\tenant\views\jobstatuses\createOrEditModal.js" />
+    <Content Include="App\tenant\views\jobstatuses\index.js" />
     <Content Include="App\tenant\views\job_information\index.js" />
     <Content Include="App\tenant\views\job_landing\index.js" />
     <Content Include="App\tenant\views\photos\index.js" />
@@ -7648,6 +7650,8 @@
     <Content Include="App\tenant\views\reporting\index.cshtml" />
     <Content Include="assets\global\plugins\counterup\LICENSE" />
     <Content Include="assets\global\plugins\counterup\README.md" />
+    <Content Include="App\tenant\views\jobstatuses\index.cshtml" />
+    <Content Include="App\tenant\views\jobstatuses\createOrEditModal.cshtml" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />

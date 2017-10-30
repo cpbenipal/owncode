@@ -23,7 +23,7 @@
     <text name="CreateAnAccount" value="Create account" />
     <text name="Pages" value="Pages" />
     <text name="RoleName" value="Role name" />
-    <text name="RoleCategory" value="Role category" />    
+    <text name="RoleCategory" value="Role category" />
     <text name="EditRole" value="Edit role" />
     <text name="CreateNewRole" value="Create new role" />
     <text name="RoleProperties" value="Role properties" />
@@ -224,7 +224,7 @@
     <text name="WeCanNotFindThePage" value="We can not find the page you're looking for." />
     <text name="DashboardDemo_Note_Title" value="Welcome to Panel Master startup project!" />
     <text name="DashboardDemo_Note_Info">
-     Panelmaster is a software tool for managing Autobody Repair Workshops Worldwide. It is suitable for all business sizes.
+      Panelmaster is a software tool for managing Autobody Repair Workshops Worldwide. It is suitable for all business sizes.
     </text>
     <text name="WelcomePage_Title" value="Welcome!" />
     <text name="WelcomePage_Info" value="Welcome to the application. You can use the menu to start using the application. If you don't see any menu item, probably you don't have permission to see any page. Consider to ask system administration for permissions." />
@@ -279,10 +279,21 @@
     <text name="Comments" value="Comments" />
     <text name="RepairType" value="Repair Type" />
     <text name="SelectOne" value="--Select One--" />
-     <text name="QuoteProperties" value="Quote Properties" />
+    <text name="QuoteProperties" value="Quote Properties" />
     <text name="EditQuotationFor" value="Edit Quotation For" />
     <text name="EditQuotation" value="Edit Quote Details" />
     <text name="EditQuoteType" value="Edit Quote Type" />
+    <text name="JobStatuses" value="Job Statuses" />
+    <text name="JobStatusProperties" value="JobStatus Properties" />
+    <text name="EditStatus" value="Edit Job Status" />
+    <text name="CreateStatus" value="Create Job Status" />
+    <text name="ShowSpeedbump" value="Show Speedbump" />
+    <text name="ShowAwaiting" value="Show Awaiting" />
+    <text name="ShortOrder" value="Short Order" />
+    <text name="JobstatusMask" value="Job status Mask" />
+
+
+
     <text name="DashboardNoteForMpaVersion">
       <![CDATA[
        For support on this system contact 083 343 2045 or email online@panelmaster.co.za.
@@ -562,12 +573,12 @@
     <text name="VehicleMade">Vehicle Model</text>
     <text name="AllMades">All Models</text>
     <text name="AllMakes">All Makes</text>
-    <text name="Model">Model</text>    
+    <text name="Model">Model</text>
     <text name="MMCode">MMCode</text>
     <text name="Description">Description</text>
     <text name="LogoPicture">Logo Picture</text>
     <text name="EditVehicleMade">Edit Vehicle Made</text>
     <text name="ChangeLogoPicture">Change Logo Picture</text>
-    
+
   </texts>
 </localizationDictionary>

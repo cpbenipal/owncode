@@ -184,6 +184,18 @@
     <Compile Include="Migrations\201710271445314_tblNotProceedReason1.Designer.cs">
       <DependentUpon>201710271445314_tblNotProceedReason1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710280428072_JobStatusesTables.cs" />
+    <Compile Include="Migrations\201710280428072_JobStatusesTables.Designer.cs">
+      <DependentUpon>201710280428072_JobStatusesTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710280642436_JobStatusesTables1.cs" />
+    <Compile Include="Migrations\201710280642436_JobStatusesTables1.Designer.cs">
+      <DependentUpon>201710280642436_JobStatusesTables1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710281045293_JobStatusesTables11.cs" />
+    <Compile Include="Migrations\201710281045293_JobStatusesTables11.Designer.cs">
+      <DependentUpon>201710281045293_JobStatusesTables11.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -317,6 +329,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710271445314_tblNotProceedReason1.resx">
       <DependentUpon>201710271445314_tblNotProceedReason1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710280428072_JobStatusesTables.resx">
+      <DependentUpon>201710280428072_JobStatusesTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710280642436_JobStatusesTables1.resx">
+      <DependentUpon>201710280642436_JobStatusesTables1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710281045293_JobStatusesTables11.resx">
+      <DependentUpon>201710281045293_JobStatusesTables11.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

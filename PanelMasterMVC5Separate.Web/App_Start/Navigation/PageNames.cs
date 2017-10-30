@@ -56,6 +56,7 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string AddModel = "Dashboard.AddVehicleMade";
                 public const string VehicleMades = "Dashboard.VehicleMades";
 
+                public const string JobStatuses = "Administration.JobStatuses.Tenant";
                 // public const string VehicleManufacturer = "Dashboard.VehicleManufacturer";                 
             }
         }
