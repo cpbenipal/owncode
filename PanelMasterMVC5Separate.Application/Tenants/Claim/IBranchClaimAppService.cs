@@ -42,5 +42,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         Task<JobstatusTenantDto> GetJobStatusForEdit(GetJobInput input);
         void ChangeStatus(JobStatusDto input);
         void CreateOrUpdateJobStatus(JobstatusTenantToDto input);
+
+        ListResultDto<int> GetSortOrders(int jobStatusId);
     }
 }

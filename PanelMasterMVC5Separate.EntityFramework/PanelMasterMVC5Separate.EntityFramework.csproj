@@ -196,6 +196,10 @@
     <Compile Include="Migrations\201710281045293_JobStatusesTables11.Designer.cs">
       <DependentUpon>201710281045293_JobStatusesTables11.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710310758126_TowOperator.cs" />
+    <Compile Include="Migrations\201710310758126_TowOperator.Designer.cs">
+      <DependentUpon>201710310758126_TowOperator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -338,6 +342,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710281045293_JobStatusesTables11.resx">
       <DependentUpon>201710281045293_JobStatusesTables11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710310758126_TowOperator.resx">
+      <DependentUpon>201710310758126_TowOperator.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

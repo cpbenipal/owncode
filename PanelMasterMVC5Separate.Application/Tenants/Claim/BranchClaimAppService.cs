@@ -70,7 +70,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             var queryClient = _clientRepository.GetAll().ToList();
 
             var queryInsurance = _InsuranceRepository.GetAll().ToList();
-              
+
             var query = (from j in queryjobs
                          join c in queryClient on j.ClientID equals c.Id
                          join n in queryInsurance on j.InsuranceID equals n.Id
@@ -260,7 +260,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
         public ListResultDto<JobStatusDto> GetJobStatuses(GetClaimsInput input)
         {
-            var querystatustenant = _jobstatustenantRepository.GetAll().Where(p=>p.Tenant == _abpSession.TenantId).ToList();
+            var querystatustenant = _jobstatustenantRepository.GetAll().Where(p => p.Tenant == _abpSession.TenantId).ToList();
 
             var queryjobstatus = _jobstatusRepository.GetAll().ToList();
 
@@ -269,7 +269,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             var query = (from j in queryjobstatus
                          join c in querystatustenant on j.Id equals c.JobStatusID into ps
                          from py1s in ps.DefaultIfEmpty()
-                          
+
                          select new JobStatusDto
                          {
                              Id = j.Id,
@@ -288,13 +288,12 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                     u.JobstatusMask.Contains(input.Filter) ||
                     u.ShowAwaiting.Contains(input.Filter) ||
                     u.ShowSpeedbump.Contains(input.Filter)
-            )             
+            )
             .OrderByDescending(p => p.Id)
             .ThenBy(p => p.Jobstatus)
             .ToList();
 
             return new ListResultDto<JobStatusDto>(ObjectMapper.Map<List<JobStatusDto>>(query));
-
         }
         public async Task<FileDto> GetJobStatusToExcel()
         {
@@ -369,6 +368,63 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             input.isActive = input.isActive; // Default Status : Quote Preparation             
             var query = input.MapTo<JobstatusTenant>();
             _jobstatustenantRepository.InsertOrUpdate(query);
+        }
+
+        public ListResultDto<int> GetSortOrders(int jobStatusId)
+        {
+            int currentSortOrder = 0;
+            if (jobStatusId != 0)
+            {
+                var sortOrder = _jobstatustenantRepository.FirstOrDefault(p => p.JobStatusID == jobStatusId && p.Tenant == _abpSession.TenantId);
+                if (sortOrder != null)//Job Static doesn't exist in tblJobstatusTenant
+                {
+                    currentSortOrder = sortOrder.Sortorder;
+                }
+            }
+            var status = _jobstatustenantRepository.GetAll()
+                .Where(p => p.IsDeleted == false && p.Tenant == _abpSession.TenantId && p.Sortorder != currentSortOrder).Select(x => x.Sortorder).ToList();
+
+            var numberList = Enumerable.Range(1, 100).Except(status).ToList();
+
+            return new ListResultDto<int>(ObjectMapper.Map<List<int>>(numberList));
+        }
+
+        public ListResultDto<JobStatusDto> GetTowOperators(GetClaimsInput input)
+        {
+            var querystatustenant = _jobstatustenantRepository.GetAll().Where(p => p.Tenant == _abpSession.TenantId).ToList();
+
+            var queryjobstatus = _jobstatusRepository.GetAll().ToList();
+
+            var queryjobstatusmask = _jobstatusmaskRepository.GetAll().ToList();
+
+            var query = (from j in queryjobstatus
+                         join c in querystatustenant on j.Id equals c.JobStatusID into ps
+                         from py1s in ps.DefaultIfEmpty()
+
+                         select new JobStatusDto
+                         {
+                             Id = j.Id,
+                             pkId = py1s == null ? 0 : py1s.Id,
+                             Jobstatus = j.Description,
+                             JobstatusMask = py1s == null ? "--" : (_jobstatusmaskRepository.FirstOrDefault(p => p.Id == py1s.Mask).Description1),
+                             CreationTime = py1s == null ? "--" : py1s.CreationTime.ToShortDateString(),
+                             Sortorder = py1s == null ? 0 : py1s.Sortorder,
+                             IsActive = py1s == null ? false : py1s.isActive,
+                             ShowAwaiting = py1s == null ? "--" : ((py1s.ShowAwaiting == true) ? "Yes" : "No"),
+                             ShowSpeedbump = py1s == null ? "--" : ((py1s.ShowSpeedbump == true) ? "Yes" : "No")
+                         }).WhereIf(
+                !input.Filter.IsNullOrWhiteSpace(),
+                u =>
+                    u.Jobstatus.Contains(input.Filter) ||
+                    u.JobstatusMask.Contains(input.Filter) ||
+                    u.ShowAwaiting.Contains(input.Filter) ||
+                    u.ShowSpeedbump.Contains(input.Filter)
+            )
+            .OrderByDescending(p => p.Id)
+            .ThenBy(p => p.Jobstatus)
+            .ToList();
+
+            return new ListResultDto<JobStatusDto>(ObjectMapper.Map<List<JobStatusDto>>(query));
         }
     }
 }

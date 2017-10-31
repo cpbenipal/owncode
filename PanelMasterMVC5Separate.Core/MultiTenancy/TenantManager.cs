@@ -18,6 +18,7 @@ using Abp.Runtime.Security;
 using PanelMasterMVC5Separate.Notifications;
 using System.Collections.Generic;
 using System;
+using PanelMasterMVC5Separate.Claim;
 
 namespace PanelMasterMVC5Separate.MultiTenancy
 {
@@ -37,9 +38,9 @@ namespace PanelMasterMVC5Separate.MultiTenancy
         private readonly IRepository<SignonPlans> _SignonPlansRepository;
         private readonly IRepository<TenantProfile> _TenantProfile;
         private readonly IRepository<TenantPlanBillingDetails> _TenantPlanBillingDetails;
-
-
+        private readonly IRepository<TowOperator> _TowOperator;
         public TenantManager(
+            IRepository<TowOperator> towoperator,
             IRepository<SignonPlans> signonplansrepository,
              IRepository<TenantProfile> tenantprofile,
               IRepository<TenantPlanBillingDetails> tenantplanbillingdetails,
@@ -56,11 +57,12 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             IAbpZeroFeatureValueStore featureValueStore,
             IAbpZeroDbMigrator abpZeroDbMigrator)
             : base(
-                  tenantRepository, 
-                  tenantFeatureRepository, 
-                  editionManager, 
+                  tenantRepository,
+                  tenantFeatureRepository,
+                  editionManager,
                   featureValueStore)
         {
+            _TowOperator = towoperator;
             _SignonPlansRepository = signonplansrepository;
             _TenantPlanBillingDetails = tenantplanbillingdetails;
             _TenantProfile = tenantprofile;
@@ -73,7 +75,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             _appNotifier = appNotifier;
             _abpZeroDbMigrator = abpZeroDbMigrator;
         }
-         
+
         public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress, string connectionString, bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin, bool sendActivationEmail)
         {
             int newTenantId;
@@ -162,8 +164,8 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             return newTenantId;
         }
 
-        public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress, 
-            string fullName, string phoneNumber , string companyRegistrationNo, string companyVatNo, string address, string city, string country_list, string remarks,
+        public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress,
+            string fullName, string phoneNumber, string companyRegistrationNo, string companyVatNo, string address, string city, string country_list, string remarks,
             string cardHoldersName, string cardNumber, string cardExpiration, string cVV, string payment, int planId, string connectionString,
             bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin, bool sendActivationEmail)
         {
@@ -184,7 +186,8 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                 await _unitOfWorkManager.Current.SaveChangesAsync(); //To get new tenant's id.
 
                 //Save Newly tenant Profile
-                var tenantprofile = new TenantProfile() {
+                var tenantprofile = new TenantProfile()
+                {
                     FullName = fullName,
                     PhoneNumber = phoneNumber,
                     CompanyName = tenancyName,
@@ -204,11 +207,14 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                     CardHoldersName = cardHoldersName,
                     CardNumber = cardNumber,
                     CardExpiration = cardExpiration,
-                    CVV= cVV,
-                    planId = planId ,
+                    CVV = cVV,
+                    planId = planId,
                     TenantId = tenant.Id
                 };
                 await _TenantPlanBillingDetails.InsertAsync(tenantbilling);
+
+                // Add TowOperators
+                CreateTowOperators(tenant.Id);
 
                 //Create tenant database
                 _abpZeroDbMigrator.CreateOrMigrateForTenant(tenant);
@@ -280,10 +286,31 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             return newTenantId;
         }
 
+        private void CreateTowOperators(int tenantId)
+        {
+            string allstatus = "1 TIME TOWING,112 AUTOROADSIDE,A1 ASSIST,AA TOWING,ABOVE TOWING,ABS TOWING,ABSOLUTE TOWING,ACJ TOWING," +
+               "ADNANCED RECOVERIES,AFRICA TOWING,AGT TOWING,ALBERTON TOWING,ALL WAYS TOWING,ALLTOW SERVICES,AM TOWING,ATS TOWING,AUTO ACCIDENT ASSIST," +
+               "AUTO TECH TOWING,AUTOHAUS TOWING,BAPELA TOWING,BEUKES TOWING,BIG D ROADSIDE ASSIST,CAS TOWING,CENTOW TOWING,CLASSIQUE TOWING,DA TOWING," +
+               "DAANTJIES TOWING,DC TOWING,DIVERSE TOWING &LOGISTICS,DOT TOWING,EAGLE TOWING,EASYWAY TOWING,EXCLUSIVE TOWING,EXECUTIVE CARRIERS,EXTREME TOWING," +
+               "FIRST ROAD EMERGENCY,FLEETSIDE TOWING,FREDS AUTOBODY,GLOBAL TOW ASSIST,GLYNMART TOWING,J.J TOWING,JIDZ RECOVERIES,JML TOWING,MAGALIES AUTO CENTRE," +
+               "MAGIC TOWING,METRO ACCIDENT ASSISTANCE,MILLENIUM TOWING,MIRACLE TOWING,MOMOS TOWING,NEWLANDS TOWING,NONE,ON CALL TOWING,OTHER,PJ'S TOWING,SEDS 24 HOUR TOWING," +
+               "SNAP 123 TOWING,SOUTHSIDE TOWING,UNIQUE TOWING";
+            string[] str = allstatus.Split(',');
+            TowOperator tow = null;
+            for (int i = 0; i < str.Length; i++)
+            {
+                tow = new TowOperator();
+                tow.Description = str[i];
+                tow.TenantId = tenantId;
+                tow.Enabled = false;
+                _TowOperator.Insert(tow);
+            }
+        }
+         
         public virtual List<SignonPlans> GetTenantPlans()
         {
             List<SignonPlans> data = _SignonPlansRepository.GetAll().ToList();
-            
+
             return data;
         }
         public virtual List<Tenant> GetTenants()

@@ -14,11 +14,15 @@ namespace MasterData
         {
             var context = new PanelMasterMVC5SeparateDbContext("Data Source=localhost;Initial Catalog=PanelMasterMVC5Separate;Integrated Security=True");
 
-
             System.Console.WriteLine("Would you like to add master data to tblJobstatus? Y/N");
             var anwser = System.Console.ReadLine();
             if (anwser?.ToLower() == "Y".ToLower())
                 AddJobstatus(context);
+
+            System.Console.WriteLine("Would you like to add master data to tblTowOperator? Y /N");
+            anwser = System.Console.ReadLine();
+            if (anwser?.ToLower() == "Y".ToLower())
+                AddTowOperator(context);
 
             System.Console.WriteLine("Would you like to add master data to tblJobstatusMask? Y /N");
             anwser = System.Console.ReadLine();
@@ -68,6 +72,36 @@ namespace MasterData
             System.Console.ReadLine();
         }
 
+        private static void AddTowOperator(PanelMasterMVC5SeparateDbContext context)
+        {             
+            var data = new List<TowOperator>();
+            data.AddRange(GetTowOperators(1));
+            context.TowOperators.AddOrUpdate(data.ToArray());
+        }
+        private static IEnumerable<TowOperator> GetTowOperators(int tenantId)
+        {
+            string allstatus = "1 TIME TOWING,112 AUTOROADSIDE,A1 ASSIST,AA TOWING,ABOVE TOWING,ABS TOWING,ABSOLUTE TOWING,ACJ TOWING," +
+               "ADNANCED RECOVERIES,AFRICA TOWING,AGT TOWING,ALBERTON TOWING,ALL WAYS TOWING,ALLTOW SERVICES,AM TOWING,ATS TOWING,AUTO ACCIDENT ASSIST," +
+               "AUTO TECH TOWING,AUTOHAUS TOWING,BAPELA TOWING,BEUKES TOWING,BIG D ROADSIDE ASSIST,CAS TOWING,CENTOW TOWING,CLASSIQUE TOWING,DA TOWING," +
+               "DAANTJIES TOWING,DC TOWING,DIVERSE TOWING &LOGISTICS,DOT TOWING,EAGLE TOWING,EASYWAY TOWING,EXCLUSIVE TOWING,EXECUTIVE CARRIERS,EXTREME TOWING," +
+               "FIRST ROAD EMERGENCY,FLEETSIDE TOWING,FREDS AUTOBODY,GLOBAL TOW ASSIST,GLYNMART TOWING,J.J TOWING,JIDZ RECOVERIES,JML TOWING,MAGALIES AUTO CENTRE," +
+               "MAGIC TOWING,METRO ACCIDENT ASSISTANCE,MILLENIUM TOWING,MIRACLE TOWING,MOMOS TOWING,NEWLANDS TOWING,NONE,ON CALL TOWING,OTHER,PJ'S TOWING,SEDS 24 HOUR TOWING," +
+               "SNAP 123 TOWING,SOUTHSIDE TOWING,UNIQUE TOWING";
+
+            string[] str = allstatus.Split(',');
+            for (int i = 0; i < str.Length; i++)
+            {
+                yield return GetTowOperator(str[i], tenantId);
+            }
+        }
+        private static TowOperator GetTowOperator(string desc, int tenantId)
+        {
+            return new TowOperator()
+            {
+                Description = desc,
+                TenantId = tenantId
+            };
+        }
         private static void AddJobstatusMask(PanelMasterMVC5SeparateDbContext context)
         {
             var data = new List<JobstatusMask>();
