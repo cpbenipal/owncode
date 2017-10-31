@@ -107,6 +107,29 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             return _claimListExcelExporter.ExportToFile(claimListDtos);
         }
 
+        /*public ListResultDto<ClaimStatusListDto> GetJobStatuses(GetClaimsInput input)
+        {
+            int Id = Convert.ToInt32(input.Filter);
+
+            //Get Jobs by Id
+            var thisJob = _claimRepository.GetAll().Where(c => c.Id == Id).FirstOrDefault();
+
+            //Get Current Job Status
+            var thisCurrentClaimStatus = _claimStatusRepository.GetAll().Where(m => m.Id == thisJob.ClaimStatusID).FirstOrDefault();
+
+            //Get All statuses except currrent status
+            var thisAllClaimStatus = _claimStatusRepository.GetAll().Where(m => m.Id != thisJob.ClaimStatusID && m.ShowStatus == true).ToList();
+
+            var statuses = new List<ClaimStatusListDto>();
+
+            statuses.Add(new ClaimStatusListDto {
+
+                Id = thisCurrentClaimStatus.Id,
+                Description = thisCurrentClaimStatus.Description
+            });
+
+            return new ListResultDto<ClaimStatusListDto>(statuses);
+        }*/
 
         public BranchClaimListDto GetJobDetails(GetClaimsInput input)
         {

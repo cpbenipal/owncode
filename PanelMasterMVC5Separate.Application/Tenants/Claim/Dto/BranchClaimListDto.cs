@@ -49,5 +49,5 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
         public string ClaimStatusDescription { get; set; }
 
     }
-
+   
 }
