@@ -289,7 +289,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                     u.ShowAwaiting.Contains(input.Filter) ||
                     u.ShowSpeedbump.Contains(input.Filter)
             )             
-            .OrderByDescending(p => p.CreationTime)
+            .OrderByDescending(p => p.Id)
             .ThenBy(p => p.Jobstatus)
             .ToList();
 
@@ -298,7 +298,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         }
         public async Task<FileDto> GetJobStatusToExcel()
         {
-            var querystatustenant = await _jobstatustenantRepository.GetAll().ToListAsync();
+            var querystatustenant = await _jobstatustenantRepository.GetAll().Where(p => p.Tenant == _abpSession.TenantId).ToListAsync();
             var queryjobstatus = await _jobstatusRepository.GetAll().ToListAsync();
             var queryjobstatusmask = await _jobstatusmaskRepository.GetAll().ToListAsync();
             var query = (from j in queryjobstatus
@@ -316,7 +316,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                              ShowAwaiting = py1s == null ? "--" : ((py1s.ShowAwaiting == true) ? "Yes" : "No"),
                              ShowSpeedbump = py1s == null ? "--" : ((py1s.ShowSpeedbump == true) ? "Yes" : "No")
                          })
-            .OrderByDescending(p => p.CreationTime)
+            .OrderByDescending(p => p.Id)
             .ThenBy(p => p.Jobstatus)
             .ToList();
             var claimListDtos = query.MapTo<List<JobStatusDto>>();
