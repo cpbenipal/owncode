@@ -137,6 +137,7 @@
     <Compile Include="Brokers\Broker.cs" />
     <Compile Include="Claim\Jobs.cs" />
     <Compile Include="Claim\BranchClaimStatus.cs" />
+    <Compile Include="Claim\NotProceedReason.cs" />
     <Compile Include="Clients\Client.cs" />
     <Compile Include="Estimations\Estimator.cs" />
     <Compile Include="IClaimRepository.cs" />

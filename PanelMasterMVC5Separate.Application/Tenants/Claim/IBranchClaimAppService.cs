@@ -32,5 +32,15 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
         ListResultDto<InsurersDto> GetInsurances();
         ListResultDto<BrokersDto> GetBrokers();
+
+
+        ListResultDto<JobStatusDto> GetJobStatuses(GetClaimsInput input);
+        Task<FileDto> GetJobStatusToExcel();
+
+        ListResultDto<JobStatusMasksDto> GetJobStatusMasks();
+
+        Task<JobstatusTenantDto> GetJobStatusForEdit(GetJobInput input);
+        void ChangeStatus(JobStatusDto input);
+        void CreateOrUpdateJobStatus(JobstatusTenantToDto input);
     }
 }

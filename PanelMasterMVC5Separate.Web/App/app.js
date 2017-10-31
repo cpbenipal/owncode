@@ -401,6 +401,11 @@ appModule.config([
             templateUrl: '~/App/tenant/views/EditVehicleMade/index.cshtml'
         });
 
+        $stateProvider.state('tenant.jobstatuses', {
+            url: '/jobstatuses',
+            templateUrl: '~/App/tenant/views/jobstatuses/index.cshtml'
+        });
+
         //$qProvider settings
         $qProvider.errorOnUnhandledRejections(false);
     }

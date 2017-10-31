@@ -8,5 +8,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Exporting
     public interface IClaimsListExcelExporter
     {
         FileDto ExportToFile(List<BranchClaimListDto> claimListDtos);
+
+        FileDto ExportToFile(List<JobStatusDto> claimListDtos);
     }
 }

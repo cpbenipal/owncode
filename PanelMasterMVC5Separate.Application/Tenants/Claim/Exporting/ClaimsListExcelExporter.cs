@@ -16,7 +16,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Exporting
         private readonly IAbpSession _abpSession;
 
         public ClaimsListExcelExporter(
-            ITimeZoneConverter timeZoneConverter, 
+            ITimeZoneConverter timeZoneConverter,
             IAbpSession abpSession)
         {
             _timeZoneConverter = timeZoneConverter;
@@ -35,15 +35,59 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Exporting
                     AddHeader(
                         sheet,
                         L("Name"),
-                        L("Surname"),                       
-                        L("EmailAddress")                        
+                        L("Surname"),
+                        L("EmailAddress")
                     );
 
                     AddObjects(
                         sheet, 2, claimListDtos,
                         _ => _.BranchID,
-                        _ => _.CSAID,                       
-                        _ => _.Colour                     
+                        _ => _.CSAID,
+                        _ => _.Colour
+                    );
+
+                    //Formatting cells
+
+                    var lastLoginTimeColumn = sheet.Column(8);
+                    lastLoginTimeColumn.Style.Numberformat.Format = "yyyy-mm-dd";
+
+                    var creationTimeColumn = sheet.Column(10);
+                    creationTimeColumn.Style.Numberformat.Format = "yyyy-mm-dd";
+
+                    for (var i = 1; i <= 10; i++)
+                    {
+                        sheet.Column(i).AutoFit();
+                    }
+                });
+        }
+
+        public FileDto ExportToFile(List<JobStatusDto> claimListDtos)
+        {
+            return CreateExcelPackage(
+                "JobStatusList.xlsx",
+                excelPackage =>
+                {
+                    var sheet = excelPackage.Workbook.Worksheets.Add(L("JobStatus"));
+                    sheet.OutLineApplyStyle = true;
+
+                    AddHeader(
+                        sheet,
+                        L("Jobstatus"),
+                        L("JobstatusMask"),
+                        L("Sortorder"),
+                        L("ShowAwaiting"),
+                        L("ShowSpeedbump"),
+                        L("IsActive")
+                    );
+
+                    AddObjects(
+                        sheet, 2, claimListDtos,
+                        _ => _.Jobstatus,
+                        _ => _.JobstatusMask,
+                        _ => _.Sortorder,
+                        _ => _.ShowAwaiting,
+                        _ => _.ShowSpeedbump,
+                        _ => _.IsActive
                     );
 
                     //Formatting cells

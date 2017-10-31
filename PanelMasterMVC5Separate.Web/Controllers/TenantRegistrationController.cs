@@ -162,7 +162,7 @@ namespace PanelMasterMVC5Separate.Web.Controllers
                     CurrentUnitOfWork.SetTenantId(null);
 
                     var tenantId = await _tenantManager.CreateWithAdminUserAsync(
-                         model.TenancyName,
+                         model.TenancyName.Replace(" ","-"),
                          model.Name,
                          model.AdminPassword,
                          model.AdminEmailAddress,
@@ -223,8 +223,8 @@ namespace PanelMasterMVC5Separate.Web.Controllers
             {
                 ViewBag.UseCaptcha = UseCaptchaOnRegistration();
                 ViewBag.ErrorMessage = ex.Message;
-
-                return View("Index", model);
+                ViewBag.PlanId = model.PlanId = model.PlanId;
+                return View("NewTenantSignUp", model);
             }
         }
 

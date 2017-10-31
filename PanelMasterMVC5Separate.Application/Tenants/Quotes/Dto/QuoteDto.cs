@@ -63,6 +63,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
 
         public string RegNo { get; set; }
     }
+
     [AutoMapTo(typeof(QuoteMaster))]
     public class QuoteMasterToDto : FullAuditedEntityDto
     {
