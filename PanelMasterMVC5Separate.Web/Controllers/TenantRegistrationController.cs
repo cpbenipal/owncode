@@ -186,6 +186,8 @@ namespace PanelMasterMVC5Separate.Web.Controllers
                          false,
                          true);
 
+                     
+
                     ViewBag.UseCaptcha = UseCaptchaOnRegistration();
 
                     var tenant = await _tenantManager.GetByIdAsync(tenantId);

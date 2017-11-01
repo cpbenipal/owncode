@@ -35,14 +35,30 @@
                 });
             };
 
-            $scope.sortOrderList = []; //list of dropdowns
-            vm.sortOrder = function () {
+            $scope.sortOrderList1 = []; //list of dropdowns
+            vm.sortOrder1 = function () {
                 for (var i = 1; i <= 100; i++) {
-                    $scope.sortOrderList.push({
+                    $scope.sortOrderList1.push({
                         name: i,
                         id: i
                     });
                 }
+            };
+
+            $scope.sortOrderList = []; //list of masks
+            vm.sortOrder = function () {
+                userService.getSortOrders(jobStatusId)
+                    .then(function (ins_obj) {
+                        angular.forEach(ins_obj.data.items, function (insvalue, key1) {
+                            $scope.sortOrderList.push({
+                                name: insvalue,
+                                id: insvalue
+                            });
+                        });
+
+                    }).finally(function () {
+                        vm.loading = false;
+                    });
             };
 
             $scope.masksList = []; //list of masks

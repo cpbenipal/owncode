@@ -117,4 +117,9 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
         [Required]
         public virtual int Mask { get; set; } 
     }
+     
+    public class SortOrder
+    { 
+        public virtual int Order { get; set; } 
+    }
 }

@@ -152,6 +152,10 @@
     <Compile Include="Migrations\201710310737215_initial.Designer.cs">
       <DependentUpon>201710310737215_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710310758126_TowOperator.cs" />
+    <Compile Include="Migrations\201710310758126_TowOperator.Designer.cs">
+      <DependentUpon>201710310758126_TowOperator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -261,6 +265,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710310737215_initial.resx">
       <DependentUpon>201710310737215_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710310758126_TowOperator.resx">
+      <DependentUpon>201710310758126_TowOperator.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
