@@ -148,53 +148,9 @@
     <Compile Include="EntityFramework\IndexInitializer.cs" />
     <Compile Include="EntityFramework\PanelMasterMVC5SeparateDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\PanelMasterMVC5SeparateRepositoryBase.cs" />
-    <Compile Include="Migrations\201710241346316_initial.cs" />
-    <Compile Include="Migrations\201710241346316_initial.Designer.cs">
-      <DependentUpon>201710241346316_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710201723443_2.cs" />
-    <Compile Include="Migrations\201710201723443_2.Designer.cs">
-      <DependentUpon>201710201723443_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710210539388_ADDQUOTETABLESTODB.cs" />
-    <Compile Include="Migrations\201710210539388_ADDQUOTETABLESTODB.Designer.cs">
-      <DependentUpon>201710210539388_ADDQUOTETABLESTODB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710221544115_ChangeToPreAuthCol.cs" />
-    <Compile Include="Migrations\201710221544115_ChangeToPreAuthCol.Designer.cs">
-      <DependentUpon>201710221544115_ChangeToPreAuthCol.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710232146449_3.cs" />
-    <Compile Include="Migrations\201710232146449_3.Designer.cs">
-      <DependentUpon>201710232146449_3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710260943016_4.cs" />
-    <Compile Include="Migrations\201710260943016_4.Designer.cs">
-      <DependentUpon>201710260943016_4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710270658344_Added_rolesCategoryID_to_Roles.cs" />
-    <Compile Include="Migrations\201710270658344_Added_rolesCategoryID_to_Roles.Designer.cs">
-      <DependentUpon>201710270658344_Added_rolesCategoryID_to_Roles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710271417434_tblNotProceedReason.cs" />
-    <Compile Include="Migrations\201710271417434_tblNotProceedReason.Designer.cs">
-      <DependentUpon>201710271417434_tblNotProceedReason.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710271445314_tblNotProceedReason1.cs" />
-    <Compile Include="Migrations\201710271445314_tblNotProceedReason1.Designer.cs">
-      <DependentUpon>201710271445314_tblNotProceedReason1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710280428072_JobStatusesTables.cs" />
-    <Compile Include="Migrations\201710280428072_JobStatusesTables.Designer.cs">
-      <DependentUpon>201710280428072_JobStatusesTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710280642436_JobStatusesTables1.cs" />
-    <Compile Include="Migrations\201710280642436_JobStatusesTables1.Designer.cs">
-      <DependentUpon>201710280642436_JobStatusesTables1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710281045293_JobStatusesTables11.cs" />
-    <Compile Include="Migrations\201710281045293_JobStatusesTables11.Designer.cs">
-      <DependentUpon>201710281045293_JobStatusesTables11.cs</DependentUpon>
+    <Compile Include="Migrations\201710310737215_initial.cs" />
+    <Compile Include="Migrations\201710310737215_initial.Designer.cs">
+      <DependentUpon>201710310737215_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
@@ -303,41 +259,8 @@
     <Folder Include="bin\Release\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710241346316_initial.resx">
-      <DependentUpon>201710241346316_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710201723443_2.resx">
-      <DependentUpon>201710201723443_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710210539388_ADDQUOTETABLESTODB.resx">
-      <DependentUpon>201710210539388_ADDQUOTETABLESTODB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710221544115_ChangeToPreAuthCol.resx">
-      <DependentUpon>201710221544115_ChangeToPreAuthCol.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710232146449_3.resx">
-      <DependentUpon>201710232146449_3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710260943016_4.resx">
-      <DependentUpon>201710260943016_4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710270658344_Added_rolesCategoryID_to_Roles.resx">
-      <DependentUpon>201710270658344_Added_rolesCategoryID_to_Roles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710271417434_tblNotProceedReason.resx">
-      <DependentUpon>201710271417434_tblNotProceedReason.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710271445314_tblNotProceedReason1.resx">
-      <DependentUpon>201710271445314_tblNotProceedReason1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710280428072_JobStatusesTables.resx">
-      <DependentUpon>201710280428072_JobStatusesTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710280642436_JobStatusesTables1.resx">
-      <DependentUpon>201710280642436_JobStatusesTables1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710281045293_JobStatusesTables11.resx">
-      <DependentUpon>201710281045293_JobStatusesTables11.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710310737215_initial.resx">
+      <DependentUpon>201710310737215_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

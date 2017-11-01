@@ -28,6 +28,72 @@ namespace PanelMasterMVC5Separate.Authorization.Roles
                     StaticRoleNames.Tenants.User,
                     MultiTenancySides.Tenant)
                 );
+
+            roleManagementConfig.StaticRoles.Add(
+                new StaticRoleDefinition(
+                    StaticRoleNames.Tenants.Claims_Handler,
+                    MultiTenancySides.Tenant)
+                );
+
+            roleManagementConfig.StaticRoles.Add(
+                new StaticRoleDefinition(
+                    StaticRoleNames.Tenants.CSA,
+                    MultiTenancySides.Tenant)
+                );
+
+            roleManagementConfig.StaticRoles.Add(
+                new StaticRoleDefinition(
+                    StaticRoleNames.Tenants.Parts_Buyer,
+                    MultiTenancySides.Tenant)
+                );
+
+            roleManagementConfig.StaticRoles.Add(
+                new StaticRoleDefinition(
+                    StaticRoleNames.Tenants.Estimator,
+                    MultiTenancySides.Tenant)
+                );
+
+            roleManagementConfig.StaticRoles.Add(
+                new StaticRoleDefinition(
+                    StaticRoleNames.Tenants.Key_Accounts_Manager,
+                    MultiTenancySides.Tenant)
+                );
+
+            roleManagementConfig.StaticRoles.Add(
+                new StaticRoleDefinition(
+                    StaticRoleNames.Tenants.Swithchboard,
+                    MultiTenancySides.Tenant)
+                );
+
+            roleManagementConfig.StaticRoles.Add(
+                new StaticRoleDefinition(
+                    StaticRoleNames.Tenants.Parts_Receiver,
+                    MultiTenancySides.Tenant)
+                );
+
+            roleManagementConfig.StaticRoles.Add(
+                new StaticRoleDefinition(
+                    StaticRoleNames.Tenants.Costing_Clerk,
+                    MultiTenancySides.Tenant)
+                );
+
+            roleManagementConfig.StaticRoles.Add(
+                new StaticRoleDefinition(
+                    StaticRoleNames.Tenants.Financial_Manager,
+                    MultiTenancySides.Tenant)
+                );
+
+            roleManagementConfig.StaticRoles.Add(
+                new StaticRoleDefinition(
+                    StaticRoleNames.Tenants.Insurer,
+                    MultiTenancySides.Tenant)
+                );
+
+            roleManagementConfig.StaticRoles.Add(
+                new StaticRoleDefinition(
+                    StaticRoleNames.Tenants.Broker,
+                    MultiTenancySides.Tenant)
+                );
         }
     }
 }

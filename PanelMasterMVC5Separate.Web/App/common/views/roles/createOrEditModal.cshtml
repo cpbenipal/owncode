@@ -13,9 +13,9 @@
                     <div class="form-group form-md-line-input no-hint">
                         <label>@L("RoleCategory")</label>
                         
-                        <select class="form-control" ng-model="vm.role.RolesCategoryID" 
+                        <select required class="form-control" ng-model="vm.role.RolesCategoryID" 
                                 ng-options="opt.id as opt.name for opt in rolesCategoryList">
-                            <option ng-if="!vm.role.id" value="">@L("SelectOne")</option>
+                            <option value="">@L("SelectOne")</option>
                         </select>                         
                        
                     </div>
