@@ -14,7 +14,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
         ListResultDto<CurrencyDto> GetCurrencies();
         VendorMain AddMainVendor(VendorMainListDto input);
         void AddSubVendor(VendorSubListDto input);
-        ListResultDto<VendorMainListDto> GetVendors(GetClaimsInput input);
+        ListResultDto<VendorMainListDto> GetVendors(GetClaimsInput input, string tenantID);
         Task<FileDto> GetClaimsToExcel();
         ListResultDto<VendorMainListDto> GetMainVendor(GetClaimsInput input);
         ListResultDto<VendorSubListDto> GetSubVendor(GetClaimsInput input);

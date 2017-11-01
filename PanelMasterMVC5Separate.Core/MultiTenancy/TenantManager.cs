@@ -111,7 +111,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
 
                     //User role should be default
                     var userRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.User);
-                    userRole.IsDefault = false;
+                    userRole.IsDefault = true;
                     userRole.RoleCategoryID = 2;
                     
                     CheckErrors(await _roleManager.UpdateAsync(userRole));
