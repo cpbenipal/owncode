@@ -17,7 +17,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
         ListResultDto<VendorMainListDto> GetVendors(GetClaimsInput input, string tenantID);
         Task<FileDto> GetClaimsToExcel();
         ListResultDto<VendorMainListDto> GetMainVendor(GetClaimsInput input);
-        ListResultDto<VendorSubListDto> GetSubVendor(GetClaimsInput input);
+        ListResultDto<VendorSubListDto> GetSubVendor(GetClaimsInput input, string tenantID);
         void UpdateVendor(VendorSubListDto input);
         void ChangeStatus(VendorSubListDto input);
         void UpdateMainVendor(VendorMainListDto input);

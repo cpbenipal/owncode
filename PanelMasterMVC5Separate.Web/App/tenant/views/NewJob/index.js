@@ -139,15 +139,7 @@
                 vm.job.InsuranceID = $scope.InsuranceModel.id;
                 vm.job.BrokerID = $scope.BrokerModel.id;
                 vm.job.BranchID = vm.BranchID;
-
-                vm.job.EstimatorID = $scope.estimators_list.id;
-
-                vm.job.New_Comeback = $scope.NewComebackModel;
-                
-                
-                
-
-                vm.job.ClaimStatusID = 1;
+                vm.job.New_Comeback = $scope.NewComebackModel;       
                 
                 jobService.addClient(vm.client).then(function (client_results) {
 

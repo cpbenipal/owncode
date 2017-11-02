@@ -225,12 +225,12 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             return new ListResultDto<VendorMainListDto>(newList);
         }
 
-        public ListResultDto<VendorSubListDto> GetSubVendor(GetClaimsInput input)
+        public ListResultDto<VendorSubListDto> GetSubVendor(GetClaimsInput input, string tenantID)
         {
             int Id = Convert.ToInt32(input.Filter);
-
+            int tenant_id = Convert.ToInt16(tenantID);
             var sub_query = _vendorSubRepository
-                .GetAll().Where(s => s.VendorID == Id)
+                .GetAll().Where(s => s.VendorID == Id && s.TenantId == tenant_id)
                 .ToList();
 
             var newList = new List<VendorSubListDto>();

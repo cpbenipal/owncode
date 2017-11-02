@@ -26,9 +26,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
         public virtual int BranchID { get; set; }
         public virtual int FinancialID { get; set; }
         public virtual int CSAID { get; set; }
-        public virtual int EstimatorID { get; set; }
-        public virtual int ProductiveStaffID { get; set; }
-        public virtual int ClaimStatusID { get; set; }
+        public virtual int ProductiveStaffID { get; set; }       
         public virtual int ClaimEventID { get; set; }
 
         public virtual string RegNo { get; set; }
@@ -47,8 +45,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
         public string Broker { get; set; }
         public string Manufacture { get; set; }
         public string Model { get; set; }
-        public string ClaimStatusDescription { get; set; }
-
+       
     }
 
     public class JobStatusDto
