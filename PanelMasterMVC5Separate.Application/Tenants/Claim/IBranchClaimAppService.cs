@@ -44,5 +44,13 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         void CreateOrUpdateJobStatus(JobstatusTenantToDto input);
 
         ListResultDto<int> GetSortOrders(int jobStatusId);
+
+        ListResultDto<TowOperatorDto> GetTowOperators(GetClaimsInput input);
+
+        Task<TowTenantDto> GetTow(NullableIdDto<int> input);
+
+        void CreateOrUpdateTowOperator(TowTenantDto input);
+        Task<FileDto> GetTowOperatorsToExcel();
+        void ChangeTowStatus(JobStatusDto input);
     }
 }

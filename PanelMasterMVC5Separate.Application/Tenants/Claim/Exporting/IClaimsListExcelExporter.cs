@@ -10,5 +10,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Exporting
         FileDto ExportToFile(List<BranchClaimListDto> claimListDtos);
 
         FileDto ExportToFile(List<JobStatusDto> claimListDtos);
+
+        FileDto ExportToFile(List<TowOperatorDto> claimListDtos);
     }
 }

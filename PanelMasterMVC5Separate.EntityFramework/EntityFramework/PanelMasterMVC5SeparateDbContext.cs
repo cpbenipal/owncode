@@ -31,9 +31,9 @@ namespace PanelMasterMVC5Separate.EntityFramework
     {
         /* Define an IDbSet for each entity of the application */
 
-     
+
         public virtual IDbSet<Client> Clients { get; set; }
-        public virtual IDbSet<Estimator> Estimators { get; set; }       
+        public virtual IDbSet<Estimator> Estimators { get; set; }
         public virtual IDbSet<BranchClaimStatus> ClaimStatus { get; set; }
         public virtual DbSet<Jobs> BranchClaims { get; set; }
         public virtual IDbSet<BinaryObject> BinaryObjects { get; set; }
@@ -65,12 +65,11 @@ namespace PanelMasterMVC5Separate.EntityFramework
         public virtual IDbSet<JobstatusMask> JobstatusMask { get; set; }
         public virtual IDbSet<JobstatusTenant> JobstatusTenant { get; set; }
         public virtual IDbSet<TowOperator> TowOperators { get; set; }
-
-
+         
         public PanelMasterMVC5SeparateDbContext()
-            : base("Default")
+        : base("Default")
         {
-
+            
         }
 
         public PanelMasterMVC5SeparateDbContext(string nameOrConnectionString)

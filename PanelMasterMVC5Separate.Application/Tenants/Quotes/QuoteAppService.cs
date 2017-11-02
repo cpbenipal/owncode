@@ -3,6 +3,7 @@ using Abp.AutoMapper;
 using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
+using Abp.Runtime.Session;
 using PanelMasterMVC5Separate.Brokers;
 using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.Insurer;
@@ -23,21 +24,19 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
         private readonly IRepository<RepairTypes> _repairtyperepository;
         private readonly IRepository<QuoteMaster> _quotemasterrepository;
         private readonly IRepository<Jobs> _jobsrrepository;
-
         private readonly IRepository<BrokerMaster> _brokerrrepository;
         private readonly IRepository<InsurerMaster> _insurerrrepository;
-
         private readonly IRepository<VehicleMake> _makerepository;
         private readonly IRepository<VehicleModels> _modelepository;
-
+        private readonly IAbpSession _abpSession;
         private readonly IAppFolders _appFolders;
 
-        public QuoteAppService(IAppFolders appFolders, IRepository<QuoteStatus> qstatusrepository, IRepository<QuoteCategories> quotecatrepository,
+        public QuoteAppService(IAbpSession abpSession, IAppFolders appFolders, IRepository<QuoteStatus> qstatusrepository, IRepository<QuoteCategories> quotecatrepository,
           IRepository<RepairTypes> repairtyperepository, IRepository<QuoteMaster> quotemasterrepository, IRepository<Jobs> jobsrrepository
             , IRepository<InsurerMaster> insurerrrepository, IRepository<BrokerMaster> brokerrrepository, IRepository<VehicleMake> makerepository,
             IRepository<VehicleModels> modelepository)
         {
-            _appFolders = appFolders; _qstatusrepository = qstatusrepository; _quotecatrepository = quotecatrepository;
+            _abpSession = abpSession; _appFolders = appFolders; _qstatusrepository = qstatusrepository; _quotecatrepository = quotecatrepository;
             _repairtyperepository = repairtyperepository; _quotemasterrepository = quotemasterrepository; _jobsrrepository = jobsrrepository;
             _insurerrrepository = insurerrrepository; _brokerrrepository = brokerrrepository; _makerepository = makerepository;
             _modelepository = modelepository;
@@ -54,7 +53,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
 
             var repairtypes = _repairtyperepository.GetAll().ToList();
 
-            var qmaster = _quotemasterrepository.GetAll().ToList();
+            var qmaster = _quotemasterrepository.GetAll().Where(c => c.TenantId == _abpSession.TenantId).ToList();
 
             var quoteMaster = (from y1 in qmaster
                                join s in quotestatus on y1.QuoteStatusID equals s.Id
@@ -151,8 +150,9 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
 
         public int CreateOrUpdateQuotation(QuoteMasterToDto input)
         {
-            input.QuoteStatusID = 1; // Default Status : Quote Preparation             
+            input.QuoteStatusID = 1; // Default Status : Quote Preparation                          
             var query = input.MapTo<QuoteMaster>();
+            
             return _quotemasterrepository.InsertOrUpdateAndGetId(query);
         }
 

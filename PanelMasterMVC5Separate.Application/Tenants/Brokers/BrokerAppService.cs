@@ -4,6 +4,7 @@ using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Abp.IO;
+using Abp.Runtime.Session;
 using Abp.UI;
 using PanelMasterMVC5Separate.Brokers;
 using PanelMasterMVC5Separate.Dto;
@@ -29,9 +30,9 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
         private readonly IAppFolders _appFolders;
         private readonly IRepository<BrokerMasterPics, int> _binaryObjectRepository;
         private readonly IBrokerExporter _BrokerListExcelExporter;
+        private readonly IAbpSession _abpSession;
 
-
-        public BrokerAppService(IAppFolders appFolders,
+        public BrokerAppService(IAbpSession abpSession, IAppFolders appFolders,
             IBrokerExporter BrokerListExcelExporter,
             IRepository<BrokerMasterPics, int> binaryObjectRepository,
             IRepository<BrokerSubMaster> BrokerSubMasterrepositry,
@@ -40,6 +41,7 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
             IRepository<Currencies> CurrenciesRepository,
             IRepository<BrokerMasterPics> BrokerMasterPicsRepository)
         {
+            _abpSession = abpSession;
             _binaryObjectRepository = binaryObjectRepository;
             _appFolders = appFolders;
             _BrokersRepository = BrokersRepository;
@@ -80,7 +82,7 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
              .OrderByDescending(p => p.LastModificationTime)
              .ToList();
 
-            var Brokers = _BrokerSubMasterRepository.GetAll()
+            var Brokers = _BrokerSubMasterRepository.GetAll().Where(p => p.TenantID == _abpSession.TenantId)
              .WhereIf(
                  !input.Filter.IsNullOrWhiteSpace(),
                  u =>
@@ -191,7 +193,7 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
 
 
             var query = _BrokerSubMasterRepository
-              .GetAll().Where(c => c.BrokerID == Id)
+              .GetAll().Where(c => c.BrokerID == Id && c.TenantID == _abpSession.TenantId)
               .FirstOrDefault().MapTo<BrokersForListDto>();
 
             var querymain = _BrokersRepository
@@ -212,7 +214,7 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
         public async Task<FileDto> GetClaimsToExcel()
         {
             var BrokerMaster = await _BrokersRepository.GetAll().ToListAsync();
-            var Brokers = await _BrokerSubMasterRepository.GetAll().ToListAsync();
+            var Brokers = await _BrokerSubMasterRepository.GetAll().Where(p => p.TenantID == _abpSession.TenantId).ToListAsync();
 
             var finalQuery = (from master in BrokerMaster
                               join sub in Brokers on master.Id equals sub.BrokerID into ps
@@ -248,7 +250,8 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
         }
         public void ChangeStatus(StatusDto input)
         {
-            var query = _BrokerSubMasterRepository.Get(input.Id);
+            var query = _BrokerSubMasterRepository.GetAll().Where(c => c.Id == input.Id && c.TenantID == _abpSession.TenantId)
+             .FirstOrDefault();
             query.IsActive = input.Status;
             _BrokerSubMasterRepository.Update(query);
         }

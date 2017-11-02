@@ -291,9 +291,14 @@
     <text name="ShowAwaiting" value="Show Awaiting" />
     <text name="ShortOrder" value="Short Order" />
     <text name="JobstatusMask" value="Job status Mask" />
-
-
-
+    <text name="EditOperator" value="Edit Operator" />
+    <text name="AddnewOperator" value="Add new Operator" />
+    <text name="ContactNumber" value="Contact Number" />
+    <text name="ContactPerson" value="Contact Person" />
+    <text name="TowoperatorInformation" value="Tow Operator Information" />
+    <text name="TowOperators" value="Tow Operators" />
+    <text name="AddNewOperator" value="Add New Operator" />
+    
     <text name="DashboardNoteForMpaVersion">
       <![CDATA[
        For support on this system contact 083 343 2045 or email online@panelmaster.co.za.
@@ -579,6 +584,6 @@
     <text name="LogoPicture">Logo Picture</text>
     <text name="EditVehicleMade">Edit Vehicle Made</text>
     <text name="ChangeLogoPicture">Change Logo Picture</text>
-
+    <text name="IsActive">Enabled</text> 
   </texts>
 </localizationDictionary>

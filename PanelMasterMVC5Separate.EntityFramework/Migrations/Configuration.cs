@@ -20,7 +20,6 @@ namespace PanelMasterMVC5Separate.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            AutomaticMigrationDataLossAllowed = false;
             ContextKey = "PanelMasterMVC5Separate";
         }
 
@@ -43,6 +42,7 @@ namespace PanelMasterMVC5Separate.Migrations
             else
             {
                 //You can add seed for tenant databases using Tenant property...
+                new DefaultTowOperators(context).Create(); // Add default tow operators
             }
             
             context.SaveChanges();

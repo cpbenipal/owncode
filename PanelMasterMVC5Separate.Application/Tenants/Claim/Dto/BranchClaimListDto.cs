@@ -122,4 +122,31 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
     { 
         public virtual int Order { get; set; } 
     }
+
+    public class TowOperatorDto
+    {
+        public virtual int Id { get; set; } 
+        public virtual string Description { get; set; }
+        public virtual string ContactNumber { get; set; }
+        public virtual string ContactPerson { get; set; }
+        public virtual string EmailAddress { get; set; } 
+        public virtual Boolean isActive { get; set; }       
+        public virtual string CreationTime { get; set; } 
+    }
+
+    [AutoMapTo(typeof(TowOperator))]
+    public class TowTenantDto : FullAuditedEntityDto
+    {
+        [Required]
+        public virtual int TenantId { get; set; }
+        [Required]
+        public virtual string Description { get; set; }
+        [Phone]
+        public virtual string ContactNumber { get; set; }        
+        public virtual string ContactPerson { get; set; }
+        [EmailAddress]
+        public virtual string EmailAddress { get; set; }
+        [Required]
+        public virtual bool isActive { get; set; }
+    }
 }

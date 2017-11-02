@@ -5,6 +5,7 @@ using PanelMasterMVC5Separate.Quotings;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Linq;
 
 namespace MasterData
 {
@@ -73,12 +74,17 @@ namespace MasterData
         }
 
         private static void AddTowOperator(PanelMasterMVC5SeparateDbContext context)
-        {             
+        {
+            var defaultTenant = context.Tenants.Select(x => x.Id).ToList();
             var data = new List<TowOperator>();
-            data.AddRange(GetTowOperators(1));
+            // data.AddRange(GetTowOperators(1));
+            foreach (var s in defaultTenant)
+            {
+                data.AddRange(GetTowOperators(s, context));
+            }
             context.TowOperators.AddOrUpdate(data.ToArray());
         }
-        private static IEnumerable<TowOperator> GetTowOperators(int tenantId)
+        private static IEnumerable<TowOperator> GetTowOperators(int tenantId, PanelMasterMVC5SeparateDbContext context)
         {
             string allstatus = "1 TIME TOWING,112 AUTOROADSIDE,A1 ASSIST,AA TOWING,ABOVE TOWING,ABS TOWING,ABSOLUTE TOWING,ACJ TOWING," +
                "ADNANCED RECOVERIES,AFRICA TOWING,AGT TOWING,ALBERTON TOWING,ALL WAYS TOWING,ALLTOW SERVICES,AM TOWING,ATS TOWING,AUTO ACCIDENT ASSIST," +
@@ -99,7 +105,8 @@ namespace MasterData
             return new TowOperator()
             {
                 Description = desc,
-                TenantId = tenantId
+                TenantId = tenantId,
+                isActive = false
             };
         }
         private static void AddJobstatusMask(PanelMasterMVC5SeparateDbContext context)

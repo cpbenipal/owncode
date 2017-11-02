@@ -302,7 +302,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                 tow = new TowOperator();
                 tow.Description = str[i];
                 tow.TenantId = tenantId;
-                tow.Enabled = false;
+                tow.isActive = false;
                 _TowOperator.Insert(tow);
             }
         }

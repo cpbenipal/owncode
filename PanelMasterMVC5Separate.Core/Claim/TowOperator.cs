@@ -14,12 +14,11 @@ namespace PanelMasterMVC5Separate.Claim
         public virtual Tenant Tenant { get; set; }         
         public virtual string Description { get; set; }        
         [Phone]
-        public virtual string ContactNumber { get; set; }         
-        [Phone]
+        public virtual string ContactNumber { get; set; }                 
         public virtual string ContactPerson { get; set; }         
         [EmailAddress]
-        public virtual string EmailAdress { get; set; }
+        public virtual string EmailAddress { get; set; }
         [Required]
-        public virtual bool Enabled { get; set; }
+        public virtual bool isActive { get; set; }
     }
 }

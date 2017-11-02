@@ -406,6 +406,11 @@ appModule.config([
             templateUrl: '~/App/tenant/views/jobstatuses/index.cshtml'
         });
 
+        $stateProvider.state('tenant.towoperators', {
+            url: '/towoperators',
+            templateUrl: '~/App/tenant/views/towoperators/index.cshtml'
+        });
+
         //$qProvider settings
         $qProvider.errorOnUnhandledRejections(false);
     }

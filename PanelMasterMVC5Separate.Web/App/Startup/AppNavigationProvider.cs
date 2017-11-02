@@ -168,13 +168,19 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                         )
                     )
                     .AddItem(new MenuItemDefinition(
+                        PageNames.App.Tenant.TowOperators,
+                        L("TowOperators"),
+                        url: "tenant.towoperators",
+                        icon: "icon-settings"
+                        )
+                    )
+                     .AddItem(new MenuItemDefinition(
                         PageNames.App.Tenant.JobStatuses,
                         L("JobStatuses"),
                         url: "tenant.jobstatuses",
                         icon: "icon-settings"
                         )
-                    ) 
-
+                    )
                     .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Vendors,
                     L("Vendors"),
@@ -227,13 +233,13 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     )
 
                     .AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.VehicleManufacturer,
-                    L("VehicleManufacturer"),
+                    PageNames.App.Tenant.VehicleMakes,
+                    L("VehicleMakes"),
                     icon: "glyphicon glyphicon-tasks"
                     )
                     .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.VehicleMakes,
-                    L("AllMakes"),
+                    L("Search"),
                     url: "tenant.VehicleMakes",
                     icon: "glyphicon glyphicon-search"
                     ))
@@ -243,9 +249,17 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     url: "tenant.AddVehicleMake",
                     icon: "glyphicon glyphicon-collapse-down"
                     ))
+
+                    )
+
                     .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.VehicleMades,
-                    L("AllMades"),
+                    L("VehicleMades"),
+                    icon: "glyphicon glyphicon-tasks"
+                    )
+                    .AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.VehicleMades,
+                    L("Search"),
                     url: "tenant.VehicleMades",
                     icon: "glyphicon glyphicon-search"
                     ))
@@ -255,7 +269,6 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     url: "tenant.AddVehicleMade",
                     icon: "glyphicon glyphicon-collapse-down"
                     ))
-
                     )
                 );
         }

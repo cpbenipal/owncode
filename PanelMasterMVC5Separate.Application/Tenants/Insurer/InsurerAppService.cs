@@ -4,6 +4,7 @@ using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Abp.IO;
+using Abp.Runtime.Session;
 using Abp.UI;
 using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.Insurer;
@@ -30,9 +31,9 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
         private readonly IAppFolders _appFolders;
         private readonly IRepository<InsurerPics, int> _binaryObjectRepository;
         private readonly IInsurerExporter _insurerListExcelExporter;
-         
+        private readonly IAbpSession _abpSession;
 
-        public InsurerAppService(IAppFolders appFolders,
+        public InsurerAppService(IAbpSession abpSession, IAppFolders appFolders,
             IInsurerExporter insurerListExcelExporter,
             IRepository<InsurerPics, int> binaryObjectRepository,
             IRepository<InsurerSub> insurersubmasterrepositry,
@@ -41,6 +42,7 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
             IRepository<Currencies> CurrenciesRepository,
             IRepository<InsurerPics> InsurerPicsRepository)
         {
+            _abpSession = abpSession;
             _binaryObjectRepository = binaryObjectRepository;
             _appFolders = appFolders;
             _insurersRepository = insurersRepository;
@@ -48,7 +50,7 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
             _bankRepository = BankRepository;
             _currRepository = CurrenciesRepository;
             _insurerListExcelExporter = insurerListExcelExporter;
-            
+
         }
 
         public ListResultDto<BankDto> GetBanks()
@@ -82,7 +84,7 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
              .OrderByDescending(p => p.LastModificationTime)
              .ToList();
 
-            var insurers = _insurersubRepository.GetAll()
+            var insurers = _insurersubRepository.GetAll().Where(p => p.TenantID == _abpSession.TenantId)
              .WhereIf(
                  !input.Filter.IsNullOrWhiteSpace(),
                  u =>
@@ -165,7 +167,7 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
         public void CreateOrUpdateSubInsurer(InsurersToListDto input)
         {
             var client = input.MapTo<InsurerSub>();
-             
+
             client.InsurerID = input.InsurerID;
             if (input.Id == 0)
             {
@@ -193,7 +195,7 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
 
 
             var query = _insurersubRepository
-              .GetAll().Where(c => c.InsurerID == Id)
+              .GetAll().Where(c => c.InsurerID == Id && c.TenantID == _abpSession.TenantId)
               .FirstOrDefault().MapTo<InsurersForListDto>();
 
             var querymain = _insurersRepository
@@ -214,7 +216,7 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
         public async Task<FileDto> GetClaimsToExcel()
         {
             var insurerMaster = await _insurersRepository.GetAll().ToListAsync();
-            var insurers = await _insurersubRepository.GetAll().ToListAsync();
+            var insurers = await _insurersubRepository.GetAll().Where(c => c.TenantID == _abpSession.TenantId).ToListAsync();
 
             var finalQuery = (from master in insurerMaster
                               join sub in insurers on master.Id equals sub.InsurerID into ps
@@ -249,9 +251,10 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
             return _insurerListExcelExporter.ExportToFile(ListDtos);
         }
         public void ChangeStatus(StatusDto input)
-        { 
-            var query = _insurersubRepository.Get(input.Id);
-            query.IsActive = input.Status;            
+        {
+            var query = _insurersubRepository.GetAll().Where(c => c.Id == input.Id && c.TenantID == _abpSession.TenantId)
+             .FirstOrDefault();
+            query.IsActive = input.Status;
             _insurersubRepository.Update(query);
         }
     }

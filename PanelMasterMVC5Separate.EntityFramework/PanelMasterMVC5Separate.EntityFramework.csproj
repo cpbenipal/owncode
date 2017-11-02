@@ -196,9 +196,21 @@
     <Compile Include="Migrations\201710281045293_JobStatusesTables11.Designer.cs">
       <DependentUpon>201710281045293_JobStatusesTables11.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201710310758126_TowOperator.cs" />
-    <Compile Include="Migrations\201710310758126_TowOperator.Designer.cs">
-      <DependentUpon>201710310758126_TowOperator.cs</DependentUpon>
+    <Compile Include="Migrations\201711011750143_towoperator.cs" />
+    <Compile Include="Migrations\201711011750143_towoperator.Designer.cs">
+      <DependentUpon>201711011750143_towoperator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711011846079_towoperator1.cs" />
+    <Compile Include="Migrations\201711011846079_towoperator1.Designer.cs">
+      <DependentUpon>201711011846079_towoperator1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711011851477_SeedOnly.cs" />
+    <Compile Include="Migrations\201711011851477_SeedOnly.Designer.cs">
+      <DependentUpon>201711011851477_SeedOnly.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711011926479_SeedOnly1.cs" />
+    <Compile Include="Migrations\201711011926479_SeedOnly1.Designer.cs">
+      <DependentUpon>201711011926479_SeedOnly1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
@@ -207,6 +219,7 @@
     <Compile Include="Migrations\Seed\Host\HostRoleAndUserCreator.cs" />
     <Compile Include="Migrations\Seed\Host\InitialHostDbBuilder.cs" />
     <Compile Include="Migrations\Seed\Tenants\DefaultTenantBuilder.cs" />
+    <Compile Include="Migrations\Seed\Tenants\DefaultTowOperators.cs" />
     <Compile Include="Migrations\Seed\Tenants\TenantRoleAndUserBuilder.cs" />
     <Compile Include="PanelMasterMVC5SeparateDataModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -343,8 +356,17 @@
     <EmbeddedResource Include="Migrations\201710281045293_JobStatusesTables11.resx">
       <DependentUpon>201710281045293_JobStatusesTables11.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710310758126_TowOperator.resx">
-      <DependentUpon>201710310758126_TowOperator.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711011750143_towoperator.resx">
+      <DependentUpon>201711011750143_towoperator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711011846079_towoperator1.resx">
+      <DependentUpon>201711011846079_towoperator1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711011851477_SeedOnly.resx">
+      <DependentUpon>201711011851477_SeedOnly.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711011926479_SeedOnly1.resx">
+      <DependentUpon>201711011926479_SeedOnly1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

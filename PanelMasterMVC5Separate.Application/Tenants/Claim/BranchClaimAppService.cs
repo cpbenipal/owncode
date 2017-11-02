@@ -41,13 +41,14 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         private readonly IRepository<Jobstatus> _jobstatusRepository;
         private readonly IRepository<JobstatusMask> _jobstatusmaskRepository;
         private readonly IRepository<JobstatusTenant> _jobstatustenantRepository;
+        private readonly IRepository<TowOperator> _towoperatorrepository;
 
-        public BranchClaimAppService(IAbpSession abpSession, IClaimsListExcelExporter claimListExcelExporter,
-                                     IRepository<Jobs> claimRepository, IRepository<Client> clientRepository,
-                                     IRepository<InsurerMaster> InsuranceRepository, IRepository<VehicleMake> manufactureRepository,
-                                     IRepository<BrokerMaster> brokerRepository, IRepository<VehicleModels> vehicleModelRepository,
-                                     IRepository<BranchClaimStatus> claimStatusRepository
-            , IRepository<Jobstatus> jobstatusRepository, IRepository<JobstatusMask> jobstatusmaskRepository, IRepository<JobstatusTenant> jobstatustenantRepository)
+        public BranchClaimAppService(IAbpSession abpSession, IClaimsListExcelExporter claimListExcelExporter, IRepository<Jobs> claimRepository,
+                                     IRepository<Client> clientRepository, IRepository<InsurerMaster> InsuranceRepository,
+                                     IRepository<VehicleMake> manufactureRepository, IRepository<BrokerMaster> brokerRepository,
+                                     IRepository<VehicleModels> vehicleModelRepository, IRepository<BranchClaimStatus> claimStatusRepository,
+                                     IRepository<Jobstatus> jobstatusRepository, IRepository<JobstatusMask> jobstatusmaskRepository,
+                                     IRepository<JobstatusTenant> jobstatustenantRepository, IRepository<TowOperator> towoperatorrepository)
         {
             _abpSession = abpSession;
             _claimListExcelExporter = claimListExcelExporter;
@@ -61,6 +62,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             _jobstatusRepository = jobstatusRepository;
             _jobstatusmaskRepository = jobstatusmaskRepository;
             _jobstatustenantRepository = jobstatustenantRepository;
+            _towoperatorrepository = towoperatorrepository;
         }
 
         public ListResultDto<BranchClaimListDto> GetClaims(GetClaimsInput input)
@@ -312,8 +314,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                     u.ShowAwaiting.Contains(input.Filter) ||
                     u.ShowSpeedbump.Contains(input.Filter)
             )
-            .OrderByDescending(p => p.Id)
-            .ThenBy(p => p.Jobstatus)
+            .OrderBy(p => p.Id)
             .ToList();
 
             return new ListResultDto<JobStatusDto>(ObjectMapper.Map<List<JobStatusDto>>(query));
@@ -338,8 +339,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                              ShowAwaiting = py1s == null ? "--" : ((py1s.ShowAwaiting == true) ? "Yes" : "No"),
                              ShowSpeedbump = py1s == null ? "--" : ((py1s.ShowSpeedbump == true) ? "Yes" : "No")
                          })
-            .OrderByDescending(p => p.Id)
-            .ThenBy(p => p.Jobstatus)
+            .OrderBy(p => p.Id)
             .ToList();
             var claimListDtos = query.MapTo<List<JobStatusDto>>();
             return _claimListExcelExporter.ExportToFile(claimListDtos);
@@ -412,42 +412,98 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             return new ListResultDto<int>(ObjectMapper.Map<List<int>>(numberList));
         }
 
-        public ListResultDto<JobStatusDto> GetTowOperators(GetClaimsInput input)
+        public ListResultDto<TowOperatorDto> GetTowOperators(GetClaimsInput input)
         {
-            var querystatustenant = _jobstatustenantRepository.GetAll().Where(p => p.Tenant == _abpSession.TenantId).ToList();
-
-            var queryjobstatus = _jobstatusRepository.GetAll().ToList();
-
-            var queryjobstatusmask = _jobstatusmaskRepository.GetAll().ToList();
-
-            var query = (from j in queryjobstatus
-                         join c in querystatustenant on j.Id equals c.JobStatusID into ps
-                         from py1s in ps.DefaultIfEmpty()
-
-                         select new JobStatusDto
-                         {
-                             Id = j.Id,
-                             pkId = py1s == null ? 0 : py1s.Id,
-                             Jobstatus = j.Description,
-                             JobstatusMask = py1s == null ? "--" : (_jobstatusmaskRepository.FirstOrDefault(p => p.Id == py1s.Mask).Description1),
-                             CreationTime = py1s == null ? "--" : py1s.CreationTime.ToShortDateString(),
-                             Sortorder = py1s == null ? 0 : py1s.Sortorder,
-                             IsActive = py1s == null ? false : py1s.isActive,
-                             ShowAwaiting = py1s == null ? "--" : ((py1s.ShowAwaiting == true) ? "Yes" : "No"),
-                             ShowSpeedbump = py1s == null ? "--" : ((py1s.ShowSpeedbump == true) ? "Yes" : "No")
-                         }).WhereIf(
+            var towops = _towoperatorrepository.GetAll().Where(p => p.TenantId == _abpSession.TenantId)
+               .WhereIf(
                 !input.Filter.IsNullOrWhiteSpace(),
                 u =>
-                    u.Jobstatus.Contains(input.Filter) ||
-                    u.JobstatusMask.Contains(input.Filter) ||
-                    u.ShowAwaiting.Contains(input.Filter) ||
-                    u.ShowSpeedbump.Contains(input.Filter)
+                    u.Description.Contains(input.Filter) ||
+                    u.ContactNumber.Contains(input.Filter) ||
+                    u.ContactPerson.Contains(input.Filter) ||
+                    u.EmailAddress.Contains(input.Filter)
             )
-            .OrderByDescending(p => p.Id)
-            .ThenBy(p => p.Jobstatus)
+            .OrderBy(p => p.Id)
             .ToList();
 
-            return new ListResultDto<JobStatusDto>(ObjectMapper.Map<List<JobStatusDto>>(query));
+            var final = (
+                from x in towops
+                select new TowOperatorDto
+                {
+                    Id = x.Id,
+                    Description = x.Description,
+                    ContactNumber = x == null ? "--" : x.ContactNumber,
+                    ContactPerson = x == null ? "--" : x.ContactPerson,
+                    CreationTime = x == null ? "--" : x.CreationTime.ToShortDateString(),
+                    EmailAddress = x == null ? "--" : x.EmailAddress,
+                    isActive = x == null ? false : x.isActive
+                });
+
+
+            return new ListResultDto<TowOperatorDto>(ObjectMapper.Map<List<TowOperatorDto>>(final));
+        }
+
+
+        public async Task<TowTenantDto> GetTow(NullableIdDto<int> input)
+        {
+            var output = new TowTenantDto();
+
+            if (input.Id.HasValue)
+            {
+                var towinfo = await _towoperatorrepository.FirstOrDefaultAsync(p => p.Id == input.Id.Value && p.TenantId == _abpSession.TenantId); 
+                output.Id = towinfo.Id;
+                output.Description = towinfo.Description == null ? "" : towinfo.Description;
+                output.ContactNumber = towinfo.ContactNumber == null ? "" : towinfo.ContactNumber;
+                output.ContactPerson = towinfo.ContactPerson == null ? "" : towinfo.ContactPerson;
+                output.EmailAddress = towinfo.EmailAddress == null ? "" : towinfo.EmailAddress;
+            }
+            else
+            {
+                output.Id = 0; 
+            }
+            return output;
+        }
+
+        public void CreateOrUpdateTowOperator(TowTenantDto input)
+        {
+            input.isActive = input.isActive; // Default Status : Quote Preparation             
+            var query = input.MapTo<TowOperator>();
+            _towoperatorrepository.InsertOrUpdate(query);
+        }
+
+        public void ChangeTowStatus(JobStatusDto input)
+        {
+            int Id = Convert.ToInt32(input.Id);
+
+            var query = _towoperatorrepository
+             .GetAll().Where(c => c.Id == Id && c.TenantId == _abpSession.TenantId)
+             .FirstOrDefault();
+            query.isActive = !input.IsActive;
+            _towoperatorrepository.Update(query);
+        }
+
+        public async Task<FileDto> GetTowOperatorsToExcel()
+        {
+            var towops = await _towoperatorrepository.GetAll().Where(p => p.TenantId == _abpSession.TenantId)                
+            .OrderBy(p => p.Id)
+            .ToListAsync();
+
+            var final = (
+                from x in towops
+                select new TowOperatorDto
+                {
+                    Id = x.Id,
+                    Description = x.Description,
+                    ContactNumber = x == null ? "--" : x.ContactNumber,
+                    ContactPerson = x == null ? "--" : x.ContactPerson,
+                    CreationTime = x == null ? "--" : x.CreationTime.ToShortDateString(),
+                    EmailAddress = x == null ? "--" : x.EmailAddress,
+                    isActive = x == null ? false : x.isActive
+                });
+
+            var claimListDtos = final.MapTo<List<TowOperatorDto>>();
+            return _claimListExcelExporter.ExportToFile(claimListDtos);
+             
         }
     }
 }

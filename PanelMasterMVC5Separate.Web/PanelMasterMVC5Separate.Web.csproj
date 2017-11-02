@@ -558,6 +558,8 @@
     <Content Include="App\tenant\views\insurance_information\index.js" />
     <Content Include="App\tenant\views\Brokers\index.js" />
     <Content Include="App\tenant\views\invoiced_values\index.js" />
+    <Content Include="App\tenant\views\towoperators\createOrEditModal.js" />
+    <Content Include="App\tenant\views\towoperators\index.js" />
     <Content Include="App\tenant\views\jobstatuses\createOrEditModal.js" />
     <Content Include="App\tenant\views\jobstatuses\index.js" />
     <Content Include="App\tenant\views\job_information\index.js" />
@@ -565,6 +567,7 @@
     <Content Include="App\tenant\views\photos\index.js" />
     <Content Include="App\tenant\views\quotedvalues\index.js" />
     <Content Include="App\tenant\views\reporting\index.js" />
+    <Content Include="App\tenant\views\towing\index.js" />
     <Content Include="App\tenant\views\uploads\index.js" />
     <Content Include="App\tenant\views\quoting\createModal.js" />
     <Content Include="App\tenant\views\quoting\editModal.js" />
@@ -574,7 +577,6 @@
     <Content Include="App\tenant\views\Insurers\index.js" />
     <Content Include="App\tenant\views\jobdetails\job.js" />
     <Content Include="App\tenant\views\NewJob\index.js" />
-    <Content Include="App\tenant\views\towing\index.js" />
     <Content Include="App\tenant\views\productivity\index.js" />
     <Content Include="App\tenant\views\jobdetails\index.js" />
     <Content Include="App\tenant\views\phonebook\index.js" />
@@ -7226,7 +7228,6 @@
     <Content Include="App\tenant\views\partsordering\index.cshtml" />
     <Content Include="App\tenant\views\jobdetails\index.cshtml" />
     <Content Include="App\tenant\views\productivity\index.cshtml" />
-    <Content Include="App\tenant\views\towing\index.cshtml" />
     <Content Include="App\tenant\views\costing\index.cshtml" />
     <Content Include="App\tenant\views\NewJob\index.cshtml" />
     <Content Include="assets\global\img\social\Thumbs.db" />
@@ -7652,6 +7653,9 @@
     <Content Include="assets\global\plugins\counterup\README.md" />
     <Content Include="App\tenant\views\jobstatuses\index.cshtml" />
     <Content Include="App\tenant\views\jobstatuses\createOrEditModal.cshtml" />
+    <Content Include="App\tenant\views\towing\index.cshtml" />
+    <Content Include="App\tenant\views\towoperators\createOrEditModal.cshtml" />
+    <Content Include="App\tenant\views\towoperators\index.cshtml" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />

@@ -50,6 +50,8 @@ namespace PanelMasterMVC5Separate.Claim
         public virtual int ClaimEventID { get; set; }
 
         public virtual NotProceedReason NotProceedReason { get; set; }
+         
+        public virtual TowOperator TowOperator { get; set; }
 
         public virtual string RegNo { get; set; }
         public virtual string VinNumber { get; set; }
