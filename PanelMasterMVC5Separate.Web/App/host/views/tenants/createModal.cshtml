@@ -9,7 +9,7 @@
         <div class="modal-body">
             
             <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                <input auto-focus class="form-control input-ltr" type="text" name="TenancyName" ng-model="vm.tenant.tenancyName" required maxlength="@Tenant.MaxTenancyNameLength" ng-pattern="/@Tenant.TenancyNameRegex/">
+                <input auto-focus class="form-control input-ltr" type="text" name="TenancyName" ng-model="vm.tenant.tenancyName" required maxlength="@Tenant.MaxTenancyNameLength" >
                 <label>@L("TenancyName")</label>
             </div>
             <div>
@@ -39,7 +39,7 @@
             </div>
 
             <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                <input type="email" name="AdminEmailAddress" class="form-control" ng-model="vm.tenant.adminEmailAddress" required maxlength="@PanelMasterMVC5Separate.Authorization.Users.User.MaxEmailAddressLength">
+                <input type="email" name="AdminEmailAddress" class="form-control" ng-model="vm.tenant.adminEmailAddress" required maxlength="30">
                 <label>@L("AdminEmailAddress")</label>
             </div>
 
@@ -56,12 +56,12 @@
             </div>
 
             <div class="form-group form-md-line-input form-md-floating-label no-hint" ng-if="!vm.setRandomPassword">
-                <input type="password" name="Password" class="form-control" ng-model="vm.tenant.adminPassword" ng-required="!vm.setRandomPassword" maxlength="@PanelMasterMVC5Separate.Authorization.Users.User.MaxPlainPasswordLength">
+                <input type="password" name="Password" class="form-control" ng-model="vm.tenant.adminPassword" ng-required="!vm.setRandomPassword" maxlength="20">
                 <label>@L("AdminPassword")</label>
             </div>
 
             <div class="form-group form-md-line-input form-md-floating-label no-hint" ng-if="!vm.setRandomPassword">
-                <input type="password" name="AdminPasswordRepeat" class="form-control" ng-model="vm.tenant.adminPasswordRepeat" ng-required="!vm.setRandomPassword" maxlength="@PanelMasterMVC5Separate.Authorization.Users.User.MaxPlainPasswordLength" ui-validate=" '$value==vm.tenant.adminPassword' " ui-validate-watch=" 'vm.tenant.adminPassword' ">
+                <input type="password" name="AdminPasswordRepeat" class="form-control" ng-model="vm.tenant.adminPasswordRepeat" ng-required="!vm.setRandomPassword" maxlength="20" ui-validate=" '$value==vm.tenant.adminPassword' " ui-validate-watch=" 'vm.tenant.adminPassword' ">
                 <label>@L("AdminPasswordRepeat")</label>
             </div>
 

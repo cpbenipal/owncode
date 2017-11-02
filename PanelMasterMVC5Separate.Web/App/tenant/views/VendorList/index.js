@@ -14,6 +14,7 @@
             vm.advancedFiltersAreShown = false;
             vm.filterText = $stateParams.filterText || '';
             vm.currentUserId = abp.session.userId;
+            vm.tenantID = abp.session.tenantId;
 
             vm.permissions = {
                 create: abp.auth.hasPermission('Pages.Administration.Users.Create'),
@@ -126,7 +127,7 @@
 
                 vm.loading = true;
 
-                userService.getVendors($.extend({ filter: vm.filterText }, vm.requestParams))
+                userService.getVendors($.extend({ filter: vm.filterText }, vm.requestParams), vm.tenantID)
                     .then(function (result) {
                         vm.userGridOptions.totalItems = result.data.totalCount;
                         vm.userGridOptions.data = addRoleNamesField(result.data.items);

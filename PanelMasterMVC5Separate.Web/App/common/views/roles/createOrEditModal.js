@@ -3,44 +3,30 @@
         '$scope', '$uibModalInstance', 'abp.services.app.role', 'roleId',
         function ($scope, $uibModalInstance, roleService, roleId) {
             var vm = this;
-
+           
             vm.saving = false;
             vm.role = null;
-            vm.permissionEditData = null;
-
-            vm.save = function () {
-                vm.saving = true;
-                //alert(vm.role.RolesCategoryID);
-                roleService.createOrUpdateRole({
-                    role: vm.role,
-                    grantedPermissionNames: vm.permissionEditData.grantedPermissionNames
-                }).then(function () {
-                    abp.notify.info(app.localize('SavedSuccessfully'));
-                    $uibModalInstance.close();
-                }).finally(function() {
-                    vm.saving = false;
-                });
-            }; 
+            vm.permissionEditData = null;            
             
             $scope.rolesCategoryList = []; //list of categories
             vm.getRolesCategories = function () {
                
                 roleService.getRolesCategories({ id: roleId })
                     .then(function (roles_obj) {
-                      
+                                             
                         angular.forEach(roles_obj.data.items, function (rolesCategoriesvalue, key1) {                           
                             $scope.rolesCategoryList.push({
                                 name: rolesCategoriesvalue.description,
                                 id: rolesCategoriesvalue.id
                             });
                         });
-
+                                               
                     }).finally(function () {
-                        vm.loading = false;
+                        vm.loading = false;                        
                     });
 
             };
-
+           
             vm.cancel = function () {
                 $uibModalInstance.dismiss();
             };
@@ -56,9 +42,25 @@
                     };
                 });
             }
-          
+
+            vm.save = function () {
+               
+                vm.saving = true;
+               
+                roleService.createOrUpdateRole({
+                    role: vm.role,
+                    grantedPermissionNames: vm.permissionEditData.grantedPermissionNames
+                }).then(function () {
+                    abp.notify.info(app.localize('SavedSuccessfully'));
+                    $uibModalInstance.close();
+                }).finally(function() {
+                    vm.saving = false;
+                });
+            }; 
             init();
-            vm.getRolesCategories();
+            vm.getRolesCategories();          
+           
+            
         }
     ]);
 })();

@@ -33,7 +33,7 @@ namespace PanelMasterMVC5Separate.Migrations.Seed.Tenants
             var adminRole = _context.Roles.FirstOrDefault(r => r.TenantId == _tenantId && r.Name == StaticRoleNames.Tenants.Admin);
             if (adminRole == null)
             {
-                adminRole = _context.Roles.Add(new Role(_tenantId, StaticRoleNames.Tenants.Admin, StaticRoleNames.Tenants.Admin) { IsStatic = true });
+                adminRole = _context.Roles.Add(new Role(_tenantId, StaticRoleNames.Tenants.Admin, StaticRoleNames.Tenants.Admin) { IsStatic = true, RoleCategoryID = 1 });
                 _context.SaveChanges();
 
                 //Grant all permissions to admin role
@@ -62,7 +62,84 @@ namespace PanelMasterMVC5Separate.Migrations.Seed.Tenants
             var userRole = _context.Roles.FirstOrDefault(r => r.TenantId == _tenantId && r.Name == StaticRoleNames.Tenants.User);
             if (userRole == null)
             {
-                _context.Roles.Add(new Role(_tenantId, StaticRoleNames.Tenants.User, StaticRoleNames.Tenants.User) { IsStatic = true, IsDefault = true });
+                _context.Roles.Add(new Role(_tenantId, StaticRoleNames.Tenants.User, StaticRoleNames.Tenants.User) { IsStatic = true, IsDefault = true, RoleCategoryID = 2 });
+                _context.SaveChanges();
+            }
+
+            var Claims_HandlerRole = _context.Roles.FirstOrDefault(r => r.TenantId == _tenantId && r.Name == StaticRoleNames.Tenants.Claims_Handler);
+            if (Claims_HandlerRole == null)
+            {
+                _context.Roles.Add(new Role(_tenantId, StaticRoleNames.Tenants.Claims_Handler, StaticRoleNames.Tenants.Claims_Handler) { IsStatic = true, IsDefault = false, RoleCategoryID = 3 });
+                _context.SaveChanges();
+            }
+
+            var CSARole = _context.Roles.FirstOrDefault(r => r.TenantId == _tenantId && r.Name == StaticRoleNames.Tenants.CSA);
+            if (CSARole == null)
+            {
+                _context.Roles.Add(new Role(_tenantId, StaticRoleNames.Tenants.CSA, StaticRoleNames.Tenants.CSA) { IsStatic = true, IsDefault = false, RoleCategoryID = 4 });
+                _context.SaveChanges();
+            }
+
+            var PartsBuyerRole = _context.Roles.FirstOrDefault(r => r.TenantId == _tenantId && r.Name == StaticRoleNames.Tenants.Parts_Buyer);
+            if (PartsBuyerRole == null)
+            {
+                _context.Roles.Add(new Role(_tenantId, StaticRoleNames.Tenants.Parts_Buyer, StaticRoleNames.Tenants.Parts_Buyer) { IsStatic = true, IsDefault = false, RoleCategoryID = 5 });
+                _context.SaveChanges();
+            }
+
+            var EstimatorRole = _context.Roles.FirstOrDefault(r => r.TenantId == _tenantId && r.Name == StaticRoleNames.Tenants.Estimator);
+            if (EstimatorRole == null)
+            {
+                _context.Roles.Add(new Role(_tenantId, StaticRoleNames.Tenants.Estimator, StaticRoleNames.Tenants.Estimator) { IsStatic = true, IsDefault = false, RoleCategoryID = 6 });
+                _context.SaveChanges();
+            }
+
+            var KeyAccountManagerRole = _context.Roles.FirstOrDefault(r => r.TenantId == _tenantId && r.Name == StaticRoleNames.Tenants.Key_Accounts_Manager);
+            if (KeyAccountManagerRole == null)
+            {
+                _context.Roles.Add(new Role(_tenantId, StaticRoleNames.Tenants.Key_Accounts_Manager, StaticRoleNames.Tenants.Key_Accounts_Manager) { IsStatic = true, IsDefault = false, RoleCategoryID = 7 });
+                _context.SaveChanges();
+            }
+
+            var SwithchboardRole = _context.Roles.FirstOrDefault(r => r.TenantId == _tenantId && r.Name == StaticRoleNames.Tenants.Swithchboard);
+            if (SwithchboardRole == null)
+            {
+                _context.Roles.Add(new Role(_tenantId, StaticRoleNames.Tenants.Swithchboard, StaticRoleNames.Tenants.Swithchboard) { IsStatic = true, IsDefault = false, RoleCategoryID = 8 });
+                _context.SaveChanges();
+            }
+           
+            var PartsReceiverRole = _context.Roles.FirstOrDefault(r => r.TenantId == _tenantId && r.Name == StaticRoleNames.Tenants.Parts_Receiver);
+            if (PartsReceiverRole == null)
+            {
+                _context.Roles.Add(new Role(_tenantId, StaticRoleNames.Tenants.Parts_Receiver, StaticRoleNames.Tenants.Parts_Receiver) { IsStatic = true, IsDefault = false, RoleCategoryID = 9 });
+                _context.SaveChanges();
+            }
+
+            var CostingClerkRole = _context.Roles.FirstOrDefault(r => r.TenantId == _tenantId && r.Name == StaticRoleNames.Tenants.Costing_Clerk);
+            if (CostingClerkRole == null)
+            {
+                _context.Roles.Add(new Role(_tenantId, StaticRoleNames.Tenants.Costing_Clerk, StaticRoleNames.Tenants.Costing_Clerk) { IsStatic = true, IsDefault = false, RoleCategoryID = 10 });
+                _context.SaveChanges();
+            }
+
+            var FinancialManagerRole = _context.Roles.FirstOrDefault(r => r.TenantId == _tenantId && r.Name == StaticRoleNames.Tenants.Financial_Manager);
+            if (FinancialManagerRole == null)
+            {
+                _context.Roles.Add(new Role(_tenantId, StaticRoleNames.Tenants.Financial_Manager, StaticRoleNames.Tenants.Financial_Manager) { IsStatic = true, IsDefault = false, RoleCategoryID = 11 });
+                _context.SaveChanges();
+            }
+
+            var InsurerRole = _context.Roles.FirstOrDefault(r => r.TenantId == _tenantId && r.Name == StaticRoleNames.Tenants.Insurer);
+            if (InsurerRole == null)
+            {
+                _context.Roles.Add(new Role(_tenantId, StaticRoleNames.Tenants.Insurer, StaticRoleNames.Tenants.Insurer) { IsStatic = true, IsDefault = false, RoleCategoryID = 12 });
+                _context.SaveChanges();
+            }
+
+            var BrokerRole = _context.Roles.FirstOrDefault(r => r.TenantId == _tenantId && r.Name == StaticRoleNames.Tenants.Broker);
+            if (BrokerRole == null)
+            {
+                _context.Roles.Add(new Role(_tenantId, StaticRoleNames.Tenants.Broker, StaticRoleNames.Tenants.Broker) { IsStatic = true, IsDefault = false, RoleCategoryID = 13 });
                 _context.SaveChanges();
             }
 

@@ -98,10 +98,11 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             return new ListResultDto<CurrencyDto>(ObjectMapper.Map<List<CurrencyDto>>(banks));
         }
 
-        public ListResultDto<VendorMainListDto> GetVendors(GetClaimsInput input)
+        public ListResultDto<VendorMainListDto> GetVendors(GetClaimsInput input, string tenantID)
         {
+            int tenant_id = Convert.ToInt16(tenantID);
 
-            var query = _vendorMainRepository.GetAll()
+            var query = _vendorMainRepository.GetAll()             
               .WhereIf(
                     !input.Filter.IsNullOrEmpty(),
                     p => p.SupplierName.Equals(input.Filter) ||
@@ -111,13 +112,15 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
              .OrderByDescending(p => p.LastModificationTime)
              .ToList();
 
-            var sub_query = _vendorSubRepository.GetAll().ToList();
+            var sub_query = _vendorSubRepository.GetAll()
+                            .Where(sv => sv.TenantId == tenant_id)
+                            .ToList();
 
 
             var finalQuery = (from master in query
                               join v in sub_query on master.Id equals v.VendorID into ps
                               from y1 in ps.DefaultIfEmpty()
-
+                             
                               select new VendorMainListDto
                               {
                                   id = master.Id,

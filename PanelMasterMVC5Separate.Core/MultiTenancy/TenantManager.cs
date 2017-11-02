@@ -106,12 +106,73 @@ namespace PanelMasterMVC5Separate.MultiTenancy
 
                     //grant all permissions to admin role
                     var adminRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.Admin);
+                    adminRole.RoleCategoryID = 1;
                     await _roleManager.GrantAllPermissionsAsync(adminRole);
 
                     //User role should be default
                     var userRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.User);
                     userRole.IsDefault = true;
+                    userRole.RoleCategoryID = 2;
+                    
                     CheckErrors(await _roleManager.UpdateAsync(userRole));
+
+                    //Estimator should be default
+
+                    var claimHandlerRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.Claims_Handler);
+                    claimHandlerRole.IsDefault = false;
+                    claimHandlerRole.RoleCategoryID = 3;
+                    CheckErrors(await _roleManager.UpdateAsync(claimHandlerRole));
+
+                    var csaRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.CSA);
+                    csaRole.IsDefault = false;
+                    csaRole.RoleCategoryID = 4;
+                    CheckErrors(await _roleManager.UpdateAsync(csaRole));
+
+                    var partsBuyerRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.Parts_Buyer);
+                    partsBuyerRole.IsDefault = false;
+                    partsBuyerRole.RoleCategoryID = 5;
+                    CheckErrors(await _roleManager.UpdateAsync(partsBuyerRole));
+
+                    var estimatorRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.Estimator);
+                    estimatorRole.IsDefault = false;
+                    estimatorRole.RoleCategoryID = 6;
+                    CheckErrors(await _roleManager.UpdateAsync(estimatorRole));
+
+                    var keyAccManagerRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.Key_Accounts_Manager);
+                    keyAccManagerRole.IsDefault = false;
+                    keyAccManagerRole.RoleCategoryID = 7;
+                    CheckErrors(await _roleManager.UpdateAsync(keyAccManagerRole));
+
+                    var SwitchboardRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.Swithchboard);
+                    SwitchboardRole.IsDefault = false;
+                    SwitchboardRole.RoleCategoryID = 8;
+                    CheckErrors(await _roleManager.UpdateAsync(SwitchboardRole));
+
+                    var partsReceiverRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.Parts_Receiver);
+                    partsReceiverRole.IsDefault = false;
+                    partsReceiverRole.RoleCategoryID = 9;
+                    CheckErrors(await _roleManager.UpdateAsync(partsReceiverRole));
+
+                    var costingClerkRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.Costing_Clerk);
+                    costingClerkRole.IsDefault = false;
+                    costingClerkRole.RoleCategoryID = 10;
+                    CheckErrors(await _roleManager.UpdateAsync(costingClerkRole));
+
+                    var FinancialmanagerRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.Financial_Manager);
+                    FinancialmanagerRole.IsDefault = false;
+                    FinancialmanagerRole.RoleCategoryID = 11;
+                    CheckErrors(await _roleManager.UpdateAsync(FinancialmanagerRole));
+
+                    var InsurerRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.Insurer);
+                    InsurerRole.IsDefault = false;
+                    InsurerRole.RoleCategoryID = 12;
+                    CheckErrors(await _roleManager.UpdateAsync(InsurerRole));
+
+                    var brokerRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.Broker);
+                    brokerRole.IsDefault = false;
+                    brokerRole.RoleCategoryID = 13;
+                    CheckErrors(await _roleManager.UpdateAsync(brokerRole));
+
 
                     //Create admin user for the tenant
                     if (adminPassword.IsNullOrEmpty())
