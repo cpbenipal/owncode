@@ -53,7 +53,7 @@
                         vm.loading = false;
                     });
 
-                jobService.getSubVendor($.extend({ filter: $stateParams.id }, $stateParams.id))
+                jobService.getSubVendor($.extend({ filter: $stateParams.id }, $stateParams.id), vm.TenantId)
                     .then(function (result) {
 
                         vm.subVendor = result.data.items[0];

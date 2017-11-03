@@ -37,15 +37,7 @@ namespace PanelMasterMVC5Separate.Claim
         public virtual int FinancialID { get; set; }
         public virtual int CSAID { get; set; }
 
-        [Required]
-        public virtual int EstimatorID { get; set; }
-        public virtual Estimations.Estimator Estimator { get; set; }
-
         public virtual int ProductiveStaffID { get; set; }
-
-        [Required]
-        public virtual int ClaimStatusID { get; set; }
-        public virtual Claim.BranchClaimStatus ClaimStatus { get; set; }
 
         public virtual int ClaimEventID { get; set; }
 

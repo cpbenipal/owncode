@@ -9,7 +9,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy.Dto
     {
         [Required]
         [StringLength(AbpTenantBase.MaxTenancyNameLength)]
-        [RegularExpression(Tenant.TenancyNameRegex)]
+        //[RegularExpression(Tenant.TenancyNameRegex)]
         public string TenancyName { get; set; }
 
         [Required]

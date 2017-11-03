@@ -29,6 +29,7 @@
                 }
 
                 vm.saving = true;
+                
                 tenantService.createTenant(vm.tenant)
                     .then(function () {
                         abp.notify.info(app.localize('SavedSuccessfully'));

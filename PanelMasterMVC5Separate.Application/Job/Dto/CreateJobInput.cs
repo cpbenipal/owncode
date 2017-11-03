@@ -19,9 +19,7 @@ namespace PanelMasterMVC5Separate.Job.Dto
         public int BranchID { get; set; }
         public int FinancialID { get; set; }
         public int CSAID { get; set; }
-        public int EstimatorID { get; set; }
-        public int ProductiveStaffID { get; set; }
-        public int ClaimStatusID { get; set; }
+        public int ProductiveStaffID { get; set; }       
         public int ClaimEventID { get; set; }
 
         public string RegNo { get; set; }

@@ -9,7 +9,6 @@ using PanelMasterMVC5Separate.MultiTenancy;
 using PanelMasterMVC5Separate.Storage;
 using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.Vehicle;
-using PanelMasterMVC5Separate.Estimations;
 using PanelMasterMVC5Separate.Clients;
 using PanelMasterMVC5Separate.Vendors;
 using PanelMasterMVC5Separate.Insurer;
@@ -32,9 +31,7 @@ namespace PanelMasterMVC5Separate.EntityFramework
         /* Define an IDbSet for each entity of the application */
 
 
-        public virtual IDbSet<Client> Clients { get; set; }
-        public virtual IDbSet<Estimator> Estimators { get; set; }
-        public virtual IDbSet<BranchClaimStatus> ClaimStatus { get; set; }
+        public virtual IDbSet<Client> Clients { get; set; }       
         public virtual DbSet<Jobs> BranchClaims { get; set; }
         public virtual IDbSet<BinaryObject> BinaryObjects { get; set; }
         public virtual IDbSet<Friendship> Friendships { get; set; }

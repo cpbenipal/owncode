@@ -147,7 +147,6 @@
   <ItemGroup>
     <Compile Include="Job\Dto\CreateClientInput.cs" />
     <Compile Include="Job\Dto\CreateJobInput.cs" />
-    <Compile Include="Job\Dto\GetClaimStatusesInput.cs" />
     <Compile Include="Job\Dto\GetVehicleModelInput.cs" />
     <Compile Include="PanelMasterMVC5SeparateApplicationModule.cs" />
     <Compile Include="PanelMasterMVC5SeparateAppServiceBase.cs" />
@@ -314,7 +313,6 @@
     <Compile Include="Tenants\Claim\Exporting\ClaimsListExcelExporter.cs" />
     <Compile Include="Tenants\Claim\IBranchClaimAppService.cs" />
     <Compile Include="Tenants\Dashboard\Dto\GetMemberActivityOutput.cs" />
-    <Compile Include="Tenants\Estimators\Dto\getEstimatorInput.cs" />
     <Compile Include="Tenants\Insurer\Dto\InsurerDto.cs" />
     <Compile Include="Tenants\Insurer\Exporting\IInsurerExporter.cs" />
     <Compile Include="Tenants\Insurer\Exporting\InsurerExporter.cs" />
