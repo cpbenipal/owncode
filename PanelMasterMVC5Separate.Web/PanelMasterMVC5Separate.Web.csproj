@@ -530,6 +530,7 @@
       <DependentUpon>index.css</DependentUpon>
     </Content>
     <Content Include="App\host\views\tenants\featuresModal.js" />
+    <Content Include="App\tenant\views\adminforms\index.js" />
     <Content Include="App\tenant\views\AddSubVendor\index.js" />
     <Content Include="App\tenant\views\audit_trail\index.js" />
     <Content Include="App\tenant\views\authorised_values\index.js" />
@@ -6864,7 +6865,9 @@
     <Content Include="metronic\assets\pages\scripts\form-validation-md.min.js" />
     <Content Include="metronic\assets\pages\scripts\form-validation.js" />
     <Content Include="metronic\assets\pages\scripts\form-validation.min.js" />
+    <Content Include="Views\TenantRegistration\form-wizard.js" />
     <Content Include="metronic\assets\pages\scripts\form-wizard.js" />
+    <Content Include="Views\TenantRegistration\form-wizard.min.js" />
     <Content Include="metronic\assets\pages\scripts\form-wizard.min.js" />
     <Content Include="metronic\assets\pages\scripts\inbox.js" />
     <Content Include="metronic\assets\pages\scripts\inbox.min.js" />
@@ -7656,6 +7659,7 @@
     <Content Include="App\tenant\views\towing\index.cshtml" />
     <Content Include="App\tenant\views\towoperators\createOrEditModal.cshtml" />
     <Content Include="App\tenant\views\towoperators\index.cshtml" />
+    <Content Include="App\tenant\views\adminforms\index.cshtml" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
@@ -8416,7 +8420,11 @@
     <Content Include="Views\Account\Login.js" />
     <Content Include="Views\Account\_Layout-rtl.css" />
     <Content Include="Views\Error\_Layout.css" />
+    <Content Include="Views\TenantRegistration\otpconfirm.js" />
+    <Content Include="Views\TenantRegistration\CountryAndBilling.js" />
+    <Content Include="Views\TenantRegistration\Setting.js" />
     <Content Include="Views\TenantRegistration\NewTenantSignUp.js" />
+    <Content Include="Views\TenantRegistration\newtenant.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -8598,10 +8606,15 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Account\_AppLogo.cshtml" />
     <Content Include="Views\Account\_TenantCustomCss.cshtml" />
-    <Content Include="Views\TenantRegistration\NewTenantSignUp.cshtml" />
+    <Content Include="Views\TenantRegistration\Setting.cshtml" />
     <Content Include="Scripts\jquery.bootstrap.wizard.min.js.map" />
     <Content Include="Scripts\jquery.bootstrap.wizard.js.map" />
     <Content Include="Views\Home\Me.cshtml" />
+    <Content Include="Views\TenantRegistration\NewTenantSignUp - Copy.cshtml" />
+    <Content Include="Views\TenantRegistration\newtenant.cshtml" />
+    <Content Include="Views\TenantRegistration\otpconfirm.cshtml" />
+    <Content Include="Views\TenantRegistration\CountryAndBilling.cshtml" />
+    <Content Include="Views\TenantRegistration\confirm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
@@ -8633,6 +8646,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\common\views\functions\" />
     <Folder Include="assets\pages\img\" />
     <Folder Include="libs\jquery-jtable\dev\" />
     <Folder Include="libs\jquery-jtable\lib\" />

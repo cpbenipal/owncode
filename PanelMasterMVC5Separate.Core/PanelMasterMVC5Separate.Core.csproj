@@ -225,6 +225,7 @@
     <Compile Include="Vehicle\IndexAttribute.cs" />
     <Compile Include="Vehicle\Make.cs" />
     <Compile Include="Vendors\Banks.cs" />
+    <Compile Include="Vendors\Countries.cs" />
     <Compile Include="Vendors\Currencies.cs" />
     <Compile Include="Vendors\VendorMain.cs" />
     <Compile Include="Vendors\VendorSub.cs" />

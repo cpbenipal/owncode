@@ -22,6 +22,7 @@ namespace PanelMasterMVC5Separate.Vehicle
     public class JobAppService : PanelMasterMVC5SeparateAppServiceBase, IJobAppService
     {
         private readonly IRepository<VehicleMake> _manufactureRepository;
+
         private readonly IRepository<VehicleModels> _vehiclemodelRepository;
 
         private readonly IRepository<InsurerMaster> _insurersRepository;       

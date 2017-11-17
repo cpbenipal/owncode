@@ -47,7 +47,7 @@
 
                         angular.forEach(ins_obj.data.items, function (insvalue, key1) {
                             $scope.currencyList.push({
-                                name: insvalue.currencyCode,
+                                name: insvalue.countryAndCurrency,
                                 id: insvalue.id
                             });
                         });
@@ -87,9 +87,9 @@
                                 
             });
 
-            vm.getpaymenttype();
-            vm.getBank();
-            vm.getcurrency();
+            //vm.getpaymenttype();
+            //vm.getBank();
+            //vm.getcurrency();
             
         }]);
 })();

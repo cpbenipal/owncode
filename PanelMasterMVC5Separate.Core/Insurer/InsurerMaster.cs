@@ -1,5 +1,6 @@
 ﻿ 
 using Abp.Domain.Entities.Auditing;
+using PanelMasterMVC5Separate.Vendors;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,16 +10,18 @@ namespace PanelMasterMVC5Separate.Insurer
     public class InsurerMaster : FullAuditedEntity
     {
         public InsurerMaster() { }
+         
 
         public InsurerMaster(
             //byte[] byteArray, 
-            string insurerName, string mask, string logo, int id)
+            string insurerName, string mask, string logo, int id , int countryId)
         {
            // Bytes = byteArray;
             InsurerName = insurerName;
             Mask = mask;
             LogoPicture = logo;
             Id = id;
+            CountryID = countryId;
         }
 
         [Required]
@@ -27,9 +30,9 @@ namespace PanelMasterMVC5Separate.Insurer
         public virtual string LogoPicture { get; set; }
         [Required]
         public virtual string Mask { get; set; }
-        //[Required]
-        //public virtual byte[] Bytes { get; set; }
-         
+        public virtual int CountryID { get; set; }
+        [ForeignKey("CountryID")]
+        public virtual Countries Country { get; set; }
     }
     [Table("tblInsurerMasterPics")]
     public class InsurerPics : FullAuditedEntity

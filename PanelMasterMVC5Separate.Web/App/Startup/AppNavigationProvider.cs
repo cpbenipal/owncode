@@ -175,6 +175,13 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                         )
                     )
                      .AddItem(new MenuItemDefinition(
+                        PageNames.App.Tenant.AdminFunctions,
+                        L("AdminFunctions"),
+                        url: "tenant.adminforms",
+                        icon: "icon-settings"
+                        )
+                    )
+                     .AddItem(new MenuItemDefinition(
                         PageNames.App.Tenant.JobStatuses,
                         L("JobStatuses"),
                         url: "tenant.jobstatuses",

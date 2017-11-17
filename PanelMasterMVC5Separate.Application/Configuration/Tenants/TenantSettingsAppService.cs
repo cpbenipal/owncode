@@ -17,6 +17,13 @@ using PanelMasterMVC5Separate.Security;
 using PanelMasterMVC5Separate.Storage;
 using PanelMasterMVC5Separate.Timing;
 using Newtonsoft.Json;
+using Abp.Application.Services.Dto;
+using System.Collections.Generic;
+using Abp.Domain.Repositories;
+using PanelMasterMVC5Separate.Vendors;
+using System.Linq;
+using System;
+using PanelMasterMVC5Separate.MultiTenancy;
 
 namespace PanelMasterMVC5Separate.Configuration.Tenants
 {
@@ -27,17 +34,31 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
         private readonly IAbpZeroLdapModuleConfig _ldapModuleConfig;
         private readonly ITimeZoneService _timeZoneService;
         private readonly IBinaryObjectManager _binaryObjectManager;
+        private readonly IRepository<CountryandCurrency> _currRepository;
+        private readonly IRepository<Countries> _couRepository;
+        private readonly IRepository<SignonPlans> _planRepository;
+        private readonly IRepository<TenantProfile> _TenantProfile;
+        private readonly IRepository<TenantPlanBillingDetails> _TenantPlanBillingDetails;
 
         public TenantSettingsAppService(
+            IRepository<TenantProfile> tenantprofile,
+              IRepository<TenantPlanBillingDetails> tenantplanbillingdetails,
             IMultiTenancyConfig multiTenancyConfig,
             IAbpZeroLdapModuleConfig ldapModuleConfig,
-            ITimeZoneService timeZoneService, 
-            IBinaryObjectManager binaryObjectManager)
+            ITimeZoneService timeZoneService,
+            IBinaryObjectManager binaryObjectManager,
+            IRepository<CountryandCurrency> currRepository,
+            IRepository<Countries> couRepository, IRepository<SignonPlans> planRepository)
         {
+            _TenantPlanBillingDetails = tenantplanbillingdetails;
+            _TenantProfile = tenantprofile;
             _multiTenancyConfig = multiTenancyConfig;
             _ldapModuleConfig = ldapModuleConfig;
             _timeZoneService = timeZoneService;
             _binaryObjectManager = binaryObjectManager;
+            _currRepository = currRepository;
+            _couRepository = couRepository;
+            _planRepository = planRepository;
         }
 
         #region Get Settings
@@ -145,7 +166,7 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
                 DefaultPasswordComplexity = JsonConvert.DeserializeObject<PasswordComplexitySetting>(defaultPasswordComplexitySetting),
                 UserLockOut = await GetUserLockOutSettingsAsync()
             };
-            
+
             settings.TwoFactorLogin = await GetTwoFactorLoginSettingsAsync();
 
             return settings;
@@ -304,7 +325,7 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
 
         private async Task UpdateTwoFactorLoginSettingsAsync(TwoFactorLoginSettingsEditDto settings)
         {
-            if (_multiTenancyConfig.IsEnabled && 
+            if (_multiTenancyConfig.IsEnabled &&
                 !await IsTwoFactorLoginEnabledForApplicationAsync()) //Two factor login can not be used by tenants if disabled by the host
             {
                 return;
@@ -361,6 +382,194 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
             tenant.CustomCssId = null;
         }
 
+        #endregion
+
+        #region
+
+        public List<CurrencyDto> GetCurrencies()
+        {
+            var banks = _currRepository
+                .GetAll()
+                .OrderBy(p => p.CurrencyCode)
+                .ToList();
+
+            var cur = (from f in banks
+                       select new CurrencyDto()
+                       {
+                           CurrencyCode = f.CurrencyCode,
+                           CurrencyType = f.CountryAndCurrency
+                       }
+                ).ToList();
+
+            return cur;
+        }
+
+        public List<CountriesDto> GetCountries()
+        {
+            var banks = _couRepository
+                .GetAll()
+                .OrderBy(p => p.Code)
+                .ToList();
+
+            var cur = (from f in banks
+                       select new CountriesDto()
+                       {
+                           Code = f.Code,
+                           Country = f.Country
+                       }
+                ).ToList();
+
+            return cur;
+        }
+        public List<PlanDto> GetSignOnPlans()
+        {
+            var banks = _planRepository
+                .GetAll()
+                .OrderBy(p => p.PlanName)
+                .ToList();
+
+            var cur = (from f in banks
+                       select new PlanDto()
+                       {
+                           Id = f.Id,
+                           PlanName = f.PlanName
+                       }
+                ).ToList();
+
+            return cur;
+        }
+
+        public List<TimeZoneDto> GetTimeZones()
+        {
+            var cur = (from f in TimeZoneInfo.GetSystemTimeZones()
+                       select new TimeZoneDto()
+                       {
+                           DisplayName = f.DisplayName,
+                           Id = f.Id
+                       }).ToList();
+
+            return cur;
+        }
+
+        public TenantRegisterDto GetRegisteredInfo()
+        {
+            try
+            {
+                var reginfo = _TenantPlanBillingDetails.FirstOrDefault(x => x.TenantId == AbpSession.TenantId);
+                TenantRegisterDto retinfo = null;
+                if (reginfo != null)
+                {
+                    retinfo = new TenantRegisterDto()
+                    {
+                        TenantId = reginfo.TenantId,
+                        planId = reginfo.planId,
+                        CardHoldersName = reginfo.CardHoldersName,
+                        CardNumber = reginfo.CardNumber,
+                        CardExpiration = reginfo.CardExpiration,
+                        CVV = reginfo.CVV,
+                        payment = reginfo.PaymentOptions
+                    };
+                    string[] paymentoption = retinfo.payment.Split(',');
+
+                    if (paymentoption.Length == 2)
+                    {
+                        retinfo.paymentoption1 = true;
+                        retinfo.paymentoption2 = true;
+                    }
+                    else
+                    {
+                        if (paymentoption[0] == "1")
+                            retinfo.paymentoption1 = true;
+                        else if (paymentoption[0] == "2")
+                            retinfo.paymentoption2 = true;
+                    }
+                }
+                return retinfo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public TenantCompanyDto GetCompanyInfo()
+        {
+            try
+            {
+                var reginfo = _TenantProfile.FirstOrDefault(x => x.TenantId == AbpSession.TenantId);
+                TenantCompanyDto retinfo = null;
+                if (reginfo != null)
+                {
+                    retinfo = new TenantCompanyDto()
+                    {
+                        TenantId = reginfo.TenantId,
+                        address = reginfo.Address,
+                        phoneNumber = reginfo.PhoneNumber,
+                        city = reginfo.City,
+                        companyName = reginfo.CompanyName,
+                        companyRegistrationNo = reginfo.CompanyRegistrationNo,
+                        companyVatNo = reginfo.CompanyVatNo,
+                        country = reginfo.CountryCode,
+                        currency = reginfo.CurrencyCode,
+                        faximileeNumber = reginfo.FaximileeNumber,
+                        invoicingInstruction = reginfo.InvoicingInstruction,
+                        timezone = reginfo.Timezone
+                    };
+                }
+                return retinfo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task UpdateTenantProfile(TenantRegisterDto reginfo)
+        {
+            var current = await _TenantPlanBillingDetails.FirstOrDefaultAsync(x => x.TenantId == AbpSession.TenantId);
+            if (current != null)
+            {
+                string payment = "";
+                if (reginfo.paymentoption1 == true)
+                {
+                    payment = "1";
+                }
+                if (reginfo.paymentoption2 == true)
+                {
+                    payment += (payment != "") ? "," : "";
+                    payment += "2";
+                }
+
+                current.TenantId = reginfo.TenantId;
+                current.planId = reginfo.planId;
+                current.CardHoldersName = reginfo.CardHoldersName;
+                current.CardNumber = reginfo.CardNumber;
+                current.CardExpiration = reginfo.CardExpiration;
+                current.CVV = reginfo.CVV;
+                current.PaymentOptions = payment;
+                await _TenantPlanBillingDetails.UpdateAsync(current);
+            }
+        }
+
+        public async Task UpdateTenantCompany(TenantCompanyDto reginfo)
+        {
+            var current = await _TenantProfile.FirstOrDefaultAsync(x => x.TenantId == AbpSession.TenantId);
+            if (current != null)
+            {
+                current.TenantId = reginfo.TenantId;
+                current.Address = reginfo.address;
+                current.PhoneNumber = reginfo.phoneNumber;
+                current.City = reginfo.city;
+                current.CompanyName = reginfo.companyName;
+                current.CompanyRegistrationNo = reginfo.companyRegistrationNo;
+                current.CompanyVatNo = reginfo.companyVatNo;
+                current.CountryCode = reginfo.country;
+                current.FaximileeNumber = reginfo.faximileeNumber;
+                current.InvoicingInstruction = reginfo.invoicingInstruction;
+                current.Timezone = reginfo.timezone;
+                current.CurrencyCode = reginfo.currency;
+
+                await _TenantProfile.UpdateAsync(current);
+            }
+        }
         #endregion
     }
 }

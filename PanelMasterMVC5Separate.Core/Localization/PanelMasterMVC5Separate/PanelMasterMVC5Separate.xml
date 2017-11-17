@@ -73,7 +73,7 @@
     <text name="AddBroker" value="Add Broker" />
     <text name="BrokerAccount" value="Broker Account" />
     <text name="BrokerName" value="Broker Name" />
-
+    <text name="AdminFunction" value="Admin Functions" />
     <text name="SupplierCode" value="Supplier Code" />
     <text name="SupplierName" value="Supplier Name" />
     <text name="ContactName" value="Contact Name" />
@@ -298,6 +298,19 @@
     <text name="TowoperatorInformation" value="Tow Operator Information" />
     <text name="TowOperators" value="Tow Operators" />
     <text name="AddNewOperator" value="Add New Operator" />
+    <text name="ProvideRegistrationDetails" value="Provide Registration Details" />
+    <text name="CompanyName" value="Company Name" />
+    <text name="AdminLoginName" value="Admin Login Name" />
+    <text name="ChooseAdminLoginName" value="Choose Admin Login Name" />
+    <text name="FullName" value="Full Name" />
+    <text name="CellNumber" value="Cell Number" />    
+    <text name="OTP" value="OTP"/>
+    <text name="EnterOTP" value="Please enter OTP send to ( cell number and email)."/>   
+    <text name="CountryBillingDetails" value="Country and Billing Details" />
+    <text name="FaximileeNumber" value="Faximilee Number" />
+    <text name="YourFullName" value="Your FullName" />
+    <text name="OTPMismatched" value="You have entered wront OTP"/>
+    <text name="Chooseone" value="Choose one"/>
     
     <text name="DashboardNoteForMpaVersion">
       <![CDATA[
@@ -584,6 +597,26 @@
     <text name="LogoPicture">Logo Picture</text>
     <text name="EditVehicleMade">Edit Vehicle Made</text>
     <text name="ChangeLogoPicture">Change Logo Picture</text>
-    <text name="IsActive">Enabled</text> 
+    <text name="IsActive">Enabled</text>
+
+    <text name="AutoPaywiththisCreditCard">AutoPay with this Credit Card</text>
+    <text name="Emailmemonthlybilling">Email me monthly billing</text>
+    <text name="PaymentOptions">Payment Options</text>
+    <text name="Expiration">Expiration</text>
+    <text name="CVV">CVV</text>
+    <text name="CardNumber">Card Number</text>
+    <text name="CardHoldersName">Card Holder's Name</text>
+    <text name="CurrentPlan">Current Plan</text>
+    <text name="Plans">Plans</text>
+    <text name="InvoicingInstruction">Invoicing Instruction</text>
+    <text name="CompanyVatNo">Company Vat No</text>
+    <text name="CompanyRegistrationNo">Company Registration No</text>
+    <text name="Country">Country</text>
+    <text name="CityTown">City/Town</text>
+    <text name="Address">Address</text> 
+    <text name="Company">Company</text>
+    <text name="Registration">Registration</text>
+    <text name="CountryandBillingDetails">Country and Billing Details</text>
+    <text name="AdminFunctions" value="Admin Functions" />
   </texts>
 </localizationDictionary>

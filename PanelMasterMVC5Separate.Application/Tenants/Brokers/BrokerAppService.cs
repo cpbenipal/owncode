@@ -8,6 +8,7 @@ using Abp.Runtime.Session;
 using Abp.UI;
 using PanelMasterMVC5Separate.Brokers;
 using PanelMasterMVC5Separate.Dto;
+using PanelMasterMVC5Separate.MultiTenancy;
 using PanelMasterMVC5Separate.Tenants.Brokers.Dto;
 using PanelMasterMVC5Separate.Tenants.Brokers.Exporting;
 using PanelMasterMVC5Separate.Tenants.Vendors.Dto;
@@ -26,20 +27,23 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
         private readonly IRepository<BrokerMaster> _BrokersRepository;
         private readonly IRepository<BrokerSubMaster> _BrokerSubMasterRepository;
         private readonly IRepository<Banks> _bankRepository;
-        private readonly IRepository<Currencies> _currRepository;
+        private readonly IRepository<CountryandCurrency> _currRepository;        
         private readonly IAppFolders _appFolders;
         private readonly IRepository<BrokerMasterPics, int> _binaryObjectRepository;
         private readonly IBrokerExporter _BrokerListExcelExporter;
         private readonly IAbpSession _abpSession;
-
+        private readonly IRepository<TenantPlanBillingDetails> _TenantPlanBillingDetails;
+        private readonly IRepository<Countries> _countryRepository;
         public BrokerAppService(IAbpSession abpSession, IAppFolders appFolders,
             IBrokerExporter BrokerListExcelExporter,
             IRepository<BrokerMasterPics, int> binaryObjectRepository,
             IRepository<BrokerSubMaster> BrokerSubMasterrepositry,
             IRepository<BrokerMaster> BrokersRepository,
             IRepository<Banks> BankRepository,
-            IRepository<Currencies> CurrenciesRepository,
-            IRepository<BrokerMasterPics> BrokerMasterPicsRepository)
+            IRepository<CountryandCurrency> CurrenciesRepository,
+            IRepository<BrokerMasterPics> BrokerMasterPicsRepository,
+            IRepository<TenantPlanBillingDetails> tenantplanbillingdetails,
+            IRepository<Countries> countryRepository)
         {
             _abpSession = abpSession;
             _binaryObjectRepository = binaryObjectRepository;
@@ -49,6 +53,8 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
             _bankRepository = BankRepository;
             _currRepository = CurrenciesRepository;
             _BrokerListExcelExporter = BrokerListExcelExporter;
+            _TenantPlanBillingDetails = tenantplanbillingdetails;
+            _countryRepository = countryRepository;
         }
 
         public ListResultDto<BankDto> GetBanks()
@@ -135,7 +141,15 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
 
         public async Task CreateBrokerMaster(BrokersDto input)
         {
-            var NewBroker = new BrokerMaster(input.BrokerName, input.Mask, input.LogoPicture, input.Id);
+            var country = _TenantPlanBillingDetails.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
+            int countryId = 250;
+            if (country != null)
+            {
+                countryId = _countryRepository.FirstOrDefault(x => x.Code == country.BillingCountryCode).Id;
+
+            }
+            var NewBroker = new BrokerMaster(input.BrokerName, input.Mask, input.LogoPicture, input.Id, countryId);             
+          
             int BrokerNewId = await _BrokersRepository.InsertAndGetIdAsync(NewBroker);
 
             byte[] byteArray = FetchByteArray(input.LogoPicture);

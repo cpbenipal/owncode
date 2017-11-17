@@ -168,7 +168,7 @@
             vm.getManufacture(); 
             vm.getInsurance();
             vm.getBroker();
-            vm.getEstimators(); 
+          //  vm.getEstimators(); 
             
         }]);
 })();

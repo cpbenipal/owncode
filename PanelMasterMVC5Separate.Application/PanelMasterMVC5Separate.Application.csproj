@@ -145,6 +145,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminFunctions\Dto\functionDto.cs" />
+    <Compile Include="AdminFunctions\Functions.cs" />
+    <Compile Include="AdminFunctions\IFunctions.cs" />
+    <Compile Include="Configuration\Tenants\Dto\TenantRegistrationDto.cs" />
     <Compile Include="Job\Dto\CreateClientInput.cs" />
     <Compile Include="Job\Dto\CreateJobInput.cs" />
     <Compile Include="Job\Dto\GetVehicleModelInput.cs" />

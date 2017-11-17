@@ -1,0 +1,191 @@
+﻿@model PanelMasterMVC5Separate.Web.Models.TenantRegistration.TenantRegistrationViewModel
+@using System.Web.Script.Serialization
+@using Abp.Extensions
+@using Abp.Web.Mvc.Extensions
+@using PanelMasterMVC5Separate.MultiTenancy
+@using Recaptcha.Web
+@using Recaptcha.Web.Mvc
+
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-gift"></i>Review
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        @if(Model!=null)
+        {
+        <form class="form-horizontal" action="@Url.Action("confirm")" id="submit_form" method="post">
+            @if (@ViewBag.ErrorMessage != null)
+            {
+            <div class="alert alert-danger">
+                <i class="fa fa-warning"></i> @ViewBag.ErrorMessage
+                @if (@ViewBag.ErrorDetails != null)
+                {
+                <br />@ViewBag.ErrorDetails
+                }
+            </div>
+            }
+
+            @Html.AntiForgeryToken()
+            <div class="form-body">
+
+                <h3 class="form-section">@L("ProvideRegistrationDetails")</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">@L("CompanyName"):</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> @Model.TenancyName </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">@L("AdminLoginName"):</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">  @Model.LoginName </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">@L("FullName"):</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">  @Model.FullName </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">@L("EmailAddress"):</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> @Model.AdminEmailAddress </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">@L("ContactNumber"):</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> @Model.CellNumber </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">@L("CurrentPlan"):</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> @Model.CurrentPlan </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+                <h3 class="form-section">@L("CountryandBillingDetails")</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">@L("Country"):</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> @Model.BillingCountryCode </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">@L("CurrencyCode"):</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> @Model.CurrencyCode </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">@L("CardHoldersName"):</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> @Model.CardHoldersName </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">@L("CardNumber"):</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> @Model.CardNumber </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">@L("CVV"):</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> @Model.CVV </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <!--/row-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">@L("Expiration"):</label>
+                                <div class="col-md-9">
+                                    <p class="form-control-static"> @Model.CardExpiration </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">@L("PaymentOptions"):</label>
+                                <div class="col-md-9">
+                                    <p class="form-control-static">
+                                        @Model.paymentoption1<br />@Model.paymentoption2
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9"> 
+                                    <button type="submit" class="btn green">
+                                        <i class="fa fa-pencil"></i> @L("Submit")
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6"> </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+        }
+    </div>
+</div>

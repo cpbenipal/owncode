@@ -20,16 +20,14 @@ var FormInputMask = function () {
             placeholder: "" // remove underscores from the input mask
         });         
         
-        $("#mask_expiry").inputmask("99-9999", {
-            placeholder: " ",
+        $("#mask_expiry").inputmask("m/y", {
+            placeholder: "mm/yyyy",
             clearMaskOnLostFocus: true
         }); //default
-
-        $("#mask_tax").inputmask("99-99", {
-            placeholder: " ",
-            clearMaskOnLostFocus: true
-        }); //default
-
+ 
+        $("#mark_otp").inputmask("mask", {
+            "mask": "99-99"
+        });
         $("#mask_number").inputmask({
             "mask": "9",
             "repeat": 10,

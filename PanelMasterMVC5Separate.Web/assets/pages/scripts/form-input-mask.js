@@ -40,6 +40,9 @@ var FormInputMask = function () {
             placeholder: " ",
             clearMaskOnLostFocus: true
         }); //default
+        $("#mark_otp").inputmask("mask", {
+            "mask": "99-99"
+        }); //specifying fn & options
     }
 
     var handleIPAddressInput = function () {

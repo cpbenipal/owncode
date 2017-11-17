@@ -10,12 +10,21 @@ namespace PanelMasterMVC5Separate.Brokers
     {
         public BrokerMaster() { }
 
-        public BrokerMaster(string brokername, string mask, string logoPicture, int id)
+        public BrokerMaster(string brokerName, string mask, string logoPicture, int id)
+        {
+            BrokerName = brokerName;
+            Mask = mask;
+            LogoPicture = logoPicture;
+            Id = id;
+        }
+
+        public BrokerMaster(string brokername, string mask, string logoPicture, int id ,int countryId)
         {
             BrokerName = brokername;
             Mask = mask;
             LogoPicture = logoPicture;
             Id = id;
+            CountryID = countryId;
         }
 
         [Required]
@@ -24,6 +33,9 @@ namespace PanelMasterMVC5Separate.Brokers
         public virtual string LogoPicture { get; set; }
         [Required]
         public virtual string Mask { get; set; }
+        public virtual int CountryID { get; set; }
+        [ForeignKey("CountryID")]
+        public virtual Countries Country { get; set; }
     }
     [Table("tblBrokerSubMaster")]
     public class BrokerSubMaster : FullAuditedEntity
@@ -79,7 +91,7 @@ namespace PanelMasterMVC5Separate.Brokers
 
         [Required]
         public virtual int CurrencyID { get; set; }
-        public virtual Currencies Currency { get; set; }
+        public virtual CountryandCurrency Currency { get; set; }
 
         [Required]
         public virtual int BankID { get; set; }

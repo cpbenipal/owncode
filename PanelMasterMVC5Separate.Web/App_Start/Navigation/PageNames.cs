@@ -59,6 +59,8 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string JobStatuses = "Administration.JobStatuses.Tenant";
 
                 public const string TowOperators = "Administration.TowOperators.Tenant";
+
+                public const string AdminFunctions = "Administration.AdminFunctions.Tenant";
                 // public const string VehicleManufacturer = "Dashboard.VehicleManufacturer";                 
             }
         }

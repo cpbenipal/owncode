@@ -4,6 +4,8 @@ using Abp.MultiTenancy;
 using PanelMasterMVC5Separate.Authorization.Claim;
 using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities.Auditing;
+using Abp;
+using Abp.Domain.Entities;
 
 namespace PanelMasterMVC5Separate.MultiTenancy
 {
@@ -51,7 +53,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
 
     [Table("tblSignonPlans")]
     public class SignonPlans : FullAuditedEntity
-    { 
+    {
         public virtual string PlanName { get; set; }
         [DataType(DataType.Currency)]
         public virtual double Price { get; set; }
@@ -67,38 +69,47 @@ namespace PanelMasterMVC5Separate.MultiTenancy
         [ForeignKey("TenantId")]
         public virtual Tenant Tenant { get; set; }
 
-        [Required]
-        [StringLength(User.MaxNameLength)]
-        public string FullName { get; set; }
-
-        [Required]
-        [StringLength(User.MaxPhoneNumberLength)]
-        public string PhoneNumber { get; set; }
-
-        [Required]
         [StringLength(User.MaxNameLength)]
         public string CompanyName { get; set; }
 
         [Required]
-        [StringLength(User.MaxSurnameLength)]
-        public string CompanyRegistrationNo { get; set; }
+        [StringLength(User.MaxNameLength)]
+        public string FullName { get; set; }
 
-        [Required]
-        [StringLength(User.MaxSurnameLength)]
-        public string CompanyVatNo { get; set; }
+        [Phone, Required]
+        [StringLength(User.MaxPhoneNumberLength)]
+        public string CellNumber { get; set; }
 
-        [Required]
+        [Phone]
+        [StringLength(User.MaxPhoneNumberLength)]
+        public string PhoneNumber { get; set; }
+
+        [Phone]
+        [StringLength(User.MaxPhoneNumberLength)]
+        public string FaximileeNumber { get; set; }
+
         public string Address { get; set; }
 
-        [Required]
         [StringLength(User.MaxSurnameLength)]
         public string City { get; set; }
 
-        [Required]
-        public string Country_list { get; set; }
+        [StringLength(2)]
+        public string CountryCode { get; set; }
 
-        public string Remarks { get; set; }
+        [StringLength(3)]
+        public string CurrencyCode { get; set; }
+
+        public string Timezone { get; set; }
+
+        [StringLength(User.MaxSurnameLength)]
+        public string CompanyRegistrationNo { get; set; }
+
+        [StringLength(User.MaxSurnameLength)]
+        public string CompanyVatNo { get; set; }
+
+        public string InvoicingInstruction { get; set; }
     }
+
 
     [Table("tblTenantPlanBillingDetails")]
     public class TenantPlanBillingDetails : FullAuditedEntity
@@ -112,6 +123,12 @@ namespace PanelMasterMVC5Separate.MultiTenancy
         public int planId { get; set; }
         [ForeignKey("planId")]
         public virtual SignonPlans SignonPlans { get; set; }
+
+        [Required, StringLength(2)]
+        public string BillingCountryCode { get; set; }
+
+        [Required, StringLength(3)]
+        public string CurrencyCode { get; set; }
 
         [Required]
         [StringLength(160)]
@@ -130,5 +147,26 @@ namespace PanelMasterMVC5Separate.MultiTenancy
         public string CVV { get; set; }
 
         public string PaymentOptions { get; set; }
+    }
+
+    [Table("tblTenantCompanyLogo")]
+    public class TenantCompanyLogo : Entity<Guid>
+    {
+        public virtual int? CompanyId { get; set; }
+
+        [Required]
+        public virtual byte[] Bytes { get; set; }
+
+        public TenantCompanyLogo()
+        {
+            Id = SequentialGuidGenerator.Instance.Create();
+        }
+
+        public TenantCompanyLogo(int? companyid, byte[] bytes)
+            : this()
+        {
+            CompanyId = companyid;
+            Bytes = bytes;
+        }
     }
 }

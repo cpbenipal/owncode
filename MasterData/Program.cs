@@ -1,11 +1,21 @@
-﻿using PanelMasterMVC5Separate.Claim;
+﻿using PanelMasterMVC5Separate.Brokers;
+using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.EntityFramework;
+using PanelMasterMVC5Separate.Insurer;
 using PanelMasterMVC5Separate.MultiTenancy;
 using PanelMasterMVC5Separate.Quotings;
+using PanelMasterMVC5Separate.Vehicle;
+using PanelMasterMVC5Separate.Vendors;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 using System.Data.Entity.Migrations;
+using System.Data.OleDb;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace MasterData
 {
@@ -20,10 +30,45 @@ namespace MasterData
             if (anwser?.ToLower() == "Y".ToLower())
                 AddJobstatus(context);
 
+            System.Console.WriteLine("Would you like to add master data to CreateDefaultVehicleMakes? Y /N");
+            anwser = System.Console.ReadLine();
+            if (anwser?.ToLower() == "Y".ToLower())
+                CreateDefaultVehicleMakes(context);
+
+            System.Console.WriteLine("Would you like to add master data to CreateDefaultVehicleModels? Y /N");
+            anwser = System.Console.ReadLine();
+            if (anwser?.ToLower() == "Y".ToLower())
+                CreateDefaultVehicleModels(context);
+
+            System.Console.WriteLine("Would you like to add master data to CreateDefaultVendorMain? Y /N");
+            anwser = System.Console.ReadLine();
+            if (anwser?.ToLower() == "Y".ToLower())
+                CreateDefaultVendorMain(context);
+
+            System.Console.WriteLine("Would you like to add master data to tblInsurerMaster? Y /N");
+            anwser = System.Console.ReadLine();
+            if (anwser?.ToLower() == "Y".ToLower())
+                AddInsurerMaster(context);
+
+            System.Console.WriteLine("Would you like to add master data to CreateBrokerMaster? Y /N");
+            anwser = System.Console.ReadLine();
+            if (anwser?.ToLower() == "Y".ToLower())
+                CreateBrokerMaster(context);
+
+            //System.Console.WriteLine("Would you like to add master data to tblCountries? Y /N");
+            //anwser = System.Console.ReadLine();
+            //if (anwser?.ToLower() == "Y".ToLower())
+            //    AddCountries();
+
+            System.Console.WriteLine("Would you like to add master data to CreateDefaultBanks ? Y /N");
+            anwser = System.Console.ReadLine();
+            if (anwser?.ToLower() == "Y".ToLower())
+                CreateDefaultBanks(context);
+
             System.Console.WriteLine("Would you like to add master data to tblTowOperator? Y /N");
             anwser = System.Console.ReadLine();
             if (anwser?.ToLower() == "Y".ToLower())
-                AddTowOperator(context);
+                CreateDefaultTowOperator(context);
 
             System.Console.WriteLine("Would you like to add master data to tblJobstatusMask? Y /N");
             anwser = System.Console.ReadLine();
@@ -73,6 +118,332 @@ namespace MasterData
             System.Console.ReadLine();
         }
 
+        private static void CreateDefaultVendorMain(PanelMasterMVC5SeparateDbContext _context)
+        {
+            var data = new List<VendorMain>();
+            data.AddRange(GetDefaultVendorMains());
+            _context.VendorMain.AddOrUpdate(data.ToArray());
+            _context.SaveChanges();
+        }
+        private static IEnumerable<VendorMain> GetDefaultVendorMains()
+        {
+            yield return VendorMain("OTHER");
+            yield return VendorMain("NONE");
+        }
+
+        private static VendorMain VendorMain(string name)
+        {
+            return new VendorMain()
+            {
+                SupplierName = name,
+                SupplierCode = Guid.NewGuid(),
+                CountryID = 250,
+                IsDeleted = false,
+                CreationTime = DateTime.Now
+            };
+        }
+
+        private static void CreateDefaultVehicleMakes(PanelMasterMVC5SeparateDbContext _context)
+        {
+            var data = new List<VehicleMake>();
+            data.AddRange(GetDefaultVehicleMakess());
+            _context.VehicleMake.AddOrUpdate(data.ToArray());
+            _context.SaveChanges();
+
+
+            var pics = new List<VehicleModelLogos>();
+            var Ids = (from f in data
+                       select new VehicleMake()
+                       { Id = f.Id, LogoPicture = f.LogoPicture }).ToList();
+
+            pics.AddRange(GetDefaultVehicleMakeLogos(Ids));
+            _context.VehicleModelLogo.AddOrUpdate(pics.ToArray());
+            _context.SaveChanges();
+        }
+
+        private static IEnumerable<VehicleModelLogos> GetDefaultVehicleMakeLogos(List<VehicleMake> ids)
+        {
+            foreach (var a in ids)
+            {
+                yield return VehicleModelLogos(a.Id, a.LogoPicture);
+            }
+        }
+        private static VehicleModelLogos VehicleModelLogos(int id, string LogoPicture)
+        {
+            return new VehicleModelLogos()
+            {
+                VehicleMakeID = id,
+                Bytes = GetBytes(LogoPicture),
+                IsDeleted = false,
+                CreationTime = DateTime.Now
+            };
+        }
+        private static IEnumerable<VehicleMake> GetDefaultVehicleMakess()
+        {
+            yield return VehicleMakes("OTHER");
+            yield return VehicleMakes("NONE");
+        }
+
+        private static VehicleMake VehicleMakes(string name)
+        {
+            return new VehicleMake()
+            {
+                Description = name,
+                LogoPicture = "default-profile-picture.png",
+                IsDeleted = false,
+                CreationTime = DateTime.Now
+            };
+        }
+
+        private static void CreateDefaultVehicleModels(PanelMasterMVC5SeparateDbContext _context)
+        {
+            var data = new List<VehicleModels>();
+            data.AddRange(GetDefaultVehicleModelss());
+            _context.VehicleModel.AddOrUpdate(data.ToArray());
+            _context.SaveChanges();
+
+        }
+        private static IEnumerable<VehicleModels> GetDefaultVehicleModelss()
+        {
+            yield return VehicleModels("OTHER", 1, "123");
+            yield return VehicleModels("NONE", 1, "NONE");
+
+            yield return VehicleModels("OTHER", 2, "123");
+            yield return VehicleModels("NONE", 2, "NONE");
+        }
+
+        private static VehicleModels VehicleModels(string name, int vehicleId, string mmcode)
+        {
+            return new VehicleModels()
+            {
+                Model = name,
+                MMCode = mmcode,
+                VehicleMakeID = vehicleId,
+                IsDeleted = false,
+                CreationTime = DateTime.Now
+            };
+        }
+        private static void CreateDefaultTowOperator(PanelMasterMVC5SeparateDbContext _context)
+        {
+            var data = new List<TowOperator>();
+            data.AddRange(GetDefaultTowOperators());
+            _context.TowOperators.AddOrUpdate(data.ToArray());
+            _context.SaveChanges();
+        }
+        private static IEnumerable<TowOperator> GetDefaultTowOperators()
+        {
+            yield return TowOperator("OTHER");
+            yield return TowOperator("NONE");
+        }
+
+        private static TowOperator TowOperator(string name)
+        {
+            return new TowOperator()
+            {
+                Description = name,
+                TenantId = 1,
+                isActive = false,
+                CountryID = 250,
+                CreationTime = DateTime.Now
+            };
+        }
+        private static void CreateBrokerMaster(PanelMasterMVC5SeparateDbContext _context)
+        {
+            var data = new List<BrokerMaster>();
+            data.AddRange(GetDefaultBrokerMasters());
+            _context.BrokerMasters.AddOrUpdate(data.ToArray());
+            _context.SaveChanges();
+
+            var pics = new List<BrokerMasterPics>();
+            var Ids = (from f in data
+                       select new BrokerMaster()
+                       { Id = f.Id, LogoPicture = f.LogoPicture }).ToList();
+
+            pics.AddRange(GetDefaultBrokerMastersPics(Ids));
+            _context.BrokerMasterPics.AddOrUpdate(pics.ToArray());
+            _context.SaveChanges();
+        }
+
+        private static IEnumerable<BrokerMasterPics> GetDefaultBrokerMastersPics(List<BrokerMaster> ids)
+        {
+            foreach (var a in ids)
+            {
+                yield return BrokerMasterPics(a.Id, a.LogoPicture);
+            }
+        }
+        private static BrokerMasterPics BrokerMasterPics(int id, string LogoPicture)
+        {
+            return new BrokerMasterPics()
+            {
+                BrokerID = id,
+                Bytes = GetBytes(LogoPicture),
+                IsDeleted = false,
+                CreationTime = DateTime.Now
+            };
+        }
+        private static IEnumerable<BrokerMaster> GetDefaultBrokerMasters()
+        {
+            yield return BrokerMaster("OTHER", "2132");
+            yield return BrokerMaster("NONE", "NONE");
+        }
+
+        private static BrokerMaster BrokerMaster(string name, string mask)
+        {
+            return new BrokerMaster()
+            {
+                BrokerName = name,
+                LogoPicture = "default-profile-picture.png",
+                Mask = mask,                
+                IsDeleted = false,
+                CreationTime = DateTime.Now,
+                CountryID = 250
+            };
+        }
+        private static void CreateDefaultBanks(PanelMasterMVC5SeparateDbContext _context)
+        {
+            var data = new List<Banks>();
+            data.AddRange(GetDefaultBanks());
+            _context.Banks.AddOrUpdate(data.ToArray());
+            _context.SaveChanges();
+        }
+        private static IEnumerable<Banks> GetDefaultBanks()
+        {
+            yield return Banks("OTHER");
+            yield return Banks("NONE");
+        }
+
+        private static Banks Banks(string name)
+        {
+            return new Banks()
+            {
+                BankName = name,
+                IsDeleted = false,
+                CreationTime = DateTime.Now,
+                CountryID = 250
+            };
+        }
+        private static void AddInsurerMaster(PanelMasterMVC5SeparateDbContext _context)
+        {
+            var data = new List<InsurerMaster>();
+            data.AddRange(GetDefaultInsurerMasters());
+            _context.InsurerMasters.AddOrUpdate(data.ToArray());
+            _context.SaveChanges();
+
+            var pics = new List<InsurerPics>();
+            var Ids = (from f in data
+                      select new InsurerMaster()
+                      { Id = f.Id, LogoPicture = f.LogoPicture }).ToList();
+
+            pics.AddRange(GetDefaultInsurerMastersPics(Ids));
+            _context.InsurerPics.AddOrUpdate(pics.ToArray());
+            _context.SaveChanges();
+        }
+
+        private static IEnumerable<InsurerPics> GetDefaultInsurerMastersPics(List<InsurerMaster> ids)
+        {
+            foreach (var a in ids)
+            {
+                yield return InsurerPics(a.Id, a.LogoPicture);
+            }
+        }
+        private static InsurerPics InsurerPics(int id ,string LogoPicture)
+        {
+            return new InsurerPics()
+            {
+                InsurerID = id,
+                Bytes  = GetBytes(LogoPicture),
+                IsDeleted = false,
+                CreationTime = DateTime.Now
+            };
+        }
+        static byte[] GetBytes(string str)
+        {
+            byte[] bytes = new byte[str.Length * sizeof(char)];
+            System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
+            return bytes;
+        }
+        private static IEnumerable<InsurerMaster> GetDefaultInsurerMasters()
+        {
+            yield return InsurerMaster("OTHER");
+            yield return InsurerMaster("NONE");
+        }
+
+        private static InsurerMaster InsurerMaster(string name)
+        {
+            return new InsurerMaster()
+            {
+                InsurerName = name,
+                LogoPicture = "default-profile-picture.png",
+                Mask = name,
+                IsDeleted = false,
+                CountryID = 250,
+                CreationTime = DateTime.Now
+            };
+        }
+
+        private static void AddCountries()
+        {
+            string File = @"F:\Projects\Hennie\Code\MasterData\MilestoneEstimationlocalization.xlsx";
+            // Connection String to Excel Workbook
+
+            string excelConnectionString = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=Excel 8.0", File);
+
+            OleDbConnection connection = new OleDbConnection();
+
+            connection.ConnectionString = excelConnectionString;
+
+            connection.Open();
+            string sheet1 = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null).Rows[0]["TABLE_NAME"].ToString();
+
+            DataTable dtExcelData = new DataTable();
+
+            using (OleDbDataAdapter oda = new OleDbDataAdapter("SELECT * FROM [" + sheet1 + "]", connection))
+            {
+                oda.Fill(dtExcelData);
+            }
+            connection.Close();
+
+            DataTable dtExcelData1 = new DataTable();
+            dtExcelData1.Columns.AddRange(new DataColumn[4] {
+
+                new DataColumn("Code", typeof(string)),
+                new DataColumn("Country",typeof(string)),
+                new DataColumn("IsDeleted",typeof(bool)),
+                new DataColumn("CreationTime",typeof(DateTime))
+            });
+
+            string[] str = null;
+            DataRow dc = null;
+            for (int i = 0; i < dtExcelData.Rows.Count; i++)
+            {
+                str = dtExcelData.Rows[i][0].ToString().Split(':');
+                dc = dtExcelData1.NewRow();
+                dc["Code"] = str[0];
+                dc["Country"] = str[1];
+                dc["IsDeleted"] = false;
+                dc["CreationTime"] = DateTime.Now;
+                dtExcelData1.Rows.Add(dc);
+            }
+
+            string sqlConnectionString = @"Data Source=localhost;Initial Catalog=PanelMasterMVC5Separate;Integrated Security=True";
+            SqlConnection con = new SqlConnection(sqlConnectionString);
+
+            SqlBulkCopy objbulk = new SqlBulkCopy(con);
+
+            objbulk.DestinationTableName = "tblCoutries";
+            SqlBulkCopyColumnMapping a = new SqlBulkCopyColumnMapping();
+
+            objbulk.ColumnMappings.Add("Code", "Code");
+            objbulk.ColumnMappings.Add("Country", "Country");
+            objbulk.ColumnMappings.Add("IsDeleted", "IsDeleted");
+            objbulk.ColumnMappings.Add("CreationTime", "CreationTime");
+
+            con.Open();
+            objbulk.WriteToServer(dtExcelData1);
+            con.Close();
+
+        }
+
         private static void AddTowOperator(PanelMasterMVC5SeparateDbContext context)
         {
             var defaultTenant = context.Tenants.Select(x => x.Id).ToList();
@@ -106,7 +477,10 @@ namespace MasterData
             {
                 Description = desc,
                 TenantId = tenantId,
-                isActive = false
+                isActive = false,
+                IsDeleted = false,                
+                CreationTime = DateTime.Now,
+                CountryID = 250
             };
         }
         private static void AddJobstatusMask(PanelMasterMVC5SeparateDbContext context)
@@ -131,7 +505,9 @@ namespace MasterData
         {
             return new JobstatusMask()
             {
-                Description1 = desc
+                Description1 = desc,
+                IsDeleted = false,
+                CreationTime = DateTime.Now
             };
         }
         private static void AddJobstatus(PanelMasterMVC5SeparateDbContext context)
@@ -160,7 +536,9 @@ namespace MasterData
         {
             return new Jobstatus()
             {
-                Description = desc
+                Description = desc,
+                IsDeleted = false,
+                CreationTime = DateTime.Now
             };
         }
         private static void NotProceedReason(PanelMasterMVC5SeparateDbContext context)
@@ -193,7 +571,9 @@ namespace MasterData
         {
             return new NotProceedReason()
             {
-                Description = desc
+                Description = desc,
+                IsDeleted = false,
+                CreationTime = DateTime.Now
             };
         }
 
@@ -217,7 +597,9 @@ namespace MasterData
                 PlanName = planname,
                 Price = price,
                 HeaderColor = color,
-                Members = member
+                Members = member,
+                IsDeleted = false,
+                CreationTime = DateTime.Now
             };
         }
 
@@ -242,7 +624,9 @@ namespace MasterData
             return new QuoteStatus()
             {
                 Enabled = true,
-                Description = description
+                Description = description,
+                IsDeleted = false,
+                CreationTime = DateTime.Now
             };
         }
 
@@ -264,7 +648,9 @@ namespace MasterData
             return new QuoteCategories()
             {
                 Enabled = true,
-                Description = description
+                Description = description,
+                IsDeleted = false,
+                CreationTime = DateTime.Now
             };
         }
 
@@ -287,7 +673,9 @@ namespace MasterData
             return new RepairTypes()
             {
                 Enabled = true,
-                Description = description
+                Description = description,
+                IsDeleted = false,
+                CreationTime = DateTime.Now
             };
         }
 

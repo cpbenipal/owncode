@@ -3,9 +3,11 @@ using Abp.AutoMapper;
 using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
+using Abp.Runtime.Session;
 using AutoMapper;
 using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.Job.Dto;
+using PanelMasterMVC5Separate.MultiTenancy;
 using PanelMasterMVC5Separate.Tenants.Vendors.Dto;
 using PanelMasterMVC5Separate.Tenants.Vendors.Exporting;
 using PanelMasterMVC5Separate.Vendors;
@@ -19,26 +21,31 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
 {
     public class VendorClaimAppService : PanelMasterMVC5SeparateAppServiceBase, IVendorClaimAppService
     {
-       
+
         private readonly IRepository<VendorSub> _vendorSubRepository;
         private readonly IRepository<VendorMain> _vendorMainRepository;
         private readonly IRepository<Banks> _bankRepository;
-        private readonly IRepository<Currencies> _currRepository;
-
+        private readonly IRepository<CountryandCurrency> _currRepository;
+        private readonly IAbpSession _abpSession;
         private readonly IVendorExporter _vendorListExcelExporter;
-
-        public VendorClaimAppService(
+        private readonly IRepository<TenantPlanBillingDetails> _TenantPlanBillingDetails;
+        private readonly IRepository<Countries> _countryRepository;
+        public VendorClaimAppService(IAbpSession abpSession,
             IVendorExporter vendorListExcelExporter,
-            IRepository<Banks> BankRepository, 
-            IRepository<Currencies> CurrenciesRepository, IRepository<VendorMain> vendorMainRepository,
-            IRepository<VendorSub> vendorSubRepository)
+            IRepository<Banks> BankRepository,
+            IRepository<CountryandCurrency> CurrenciesRepository, IRepository<VendorMain> vendorMainRepository,
+            IRepository<VendorSub> vendorSubRepository,
+            IRepository<TenantPlanBillingDetails> tenantplanbillingdetails,
+            IRepository<Countries> countryRepository)
         {
+            _abpSession = abpSession;
             _bankRepository = BankRepository;
             _currRepository = CurrenciesRepository;
             _vendorMainRepository = vendorMainRepository;
             _vendorSubRepository = vendorSubRepository;
-
+            _TenantPlanBillingDetails = tenantplanbillingdetails;
             _vendorListExcelExporter = vendorListExcelExporter;
+            _countryRepository = countryRepository;
         }
 
         public ListResultDto<BankDto> GetBanks()
@@ -57,8 +64,8 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             var Subvendors = _vendorSubRepository.GetAll().ToList();
             var bank = await _bankRepository.GetAll().ToListAsync();
             var currency = await _currRepository.GetAll().ToListAsync();
-           
-            var finalQuery = (from sv in Subvendors                              
+
+            var finalQuery = (from sv in Subvendors
                               select new GVendorsListDto
                               {
                                   SupplierCode = sv.VendorMains.SupplierCode
@@ -80,7 +87,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
                                   Branch = sv.Branch,
                                   Bank = b.BankName,
                                   Currency = c.CurrencyCode*/
-                                  
+
                               }).ToList();
 
             var ListDtos = finalQuery.MapTo<List<GVendorsListDto>>();
@@ -102,7 +109,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
         {
             int tenant_id = Convert.ToInt16(tenantID);
 
-            var query = _vendorMainRepository.GetAll()             
+            var query = _vendorMainRepository.GetAll()
               .WhereIf(
                     !input.Filter.IsNullOrEmpty(),
                     p => p.SupplierName.Equals(input.Filter) ||
@@ -120,7 +127,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             var finalQuery = (from master in query
                               join v in sub_query on master.Id equals v.VendorID into ps
                               from y1 in ps.DefaultIfEmpty()
-                             
+
                               select new VendorMainListDto
                               {
                                   id = master.Id,
@@ -173,11 +180,18 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
         public VendorMain AddMainVendor(VendorMainListDto input)
         {
             VendorMain newVendor = new VendorMain();
-            newVendor.SupplierCode = System.Guid.NewGuid(); 
+            newVendor.SupplierCode = System.Guid.NewGuid();
             newVendor.SupplierName = input.SupplierName;
             newVendor.RegistrationNumber = input.RegistrationNumber;
             newVendor.TaxRegistrationNumber = input.TaxRegistrationNumber;
 
+            var country = _TenantPlanBillingDetails.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
+            if (country != null)
+            {
+                newVendor.CountryID = _countryRepository.FirstOrDefault(x => x.Code == country.BillingCountryCode).Id;
+            }
+            else
+                newVendor.CountryID = 250;
             return _vendorMainRepository.Insert(newVendor);
 
         }
@@ -208,7 +222,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             var main_query = _vendorMainRepository
               .GetAll().Where(c => c.Id == Id)
               .ToList();
-           
+
             var newList = new List<VendorMainListDto>();
             foreach (VendorMain vendor_obj in main_query)
             {
@@ -218,7 +232,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
                     SupplierCode = vendor_obj.SupplierCode,
                     SupplierName = vendor_obj.SupplierName,
                     RegistrationNumber = vendor_obj.RegistrationNumber,
-                    TaxRegistrationNumber = vendor_obj.TaxRegistrationNumber                                    
+                    TaxRegistrationNumber = vendor_obj.TaxRegistrationNumber
                 });
             }
 
@@ -266,7 +280,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
         public void UpdateVendor(VendorSubListDto input)
         {
             try
-            {              
+            {
                 VendorSub updateSubVendor = _vendorSubRepository.GetAll().Where(s => s.TenantId == input.TenantId && s.VendorID == input.VendorID).First();
 
                 updateSubVendor.ContactName = input.ContactName;
@@ -304,7 +318,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
              .FirstOrDefault();
 
             query.IsActive = input.IsActive;
-           
+
             _vendorSubRepository.Update(query);
         }
     }

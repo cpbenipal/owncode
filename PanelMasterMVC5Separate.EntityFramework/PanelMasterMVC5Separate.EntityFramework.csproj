@@ -148,9 +148,57 @@
     <Compile Include="EntityFramework\IndexInitializer.cs" />
     <Compile Include="EntityFramework\PanelMasterMVC5SeparateDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\PanelMasterMVC5SeparateRepositoryBase.cs" />
-    <Compile Include="Migrations\201711021445172_1.cs" />
-    <Compile Include="Migrations\201711021445172_1.Designer.cs">
-      <DependentUpon>201711021445172_1.cs</DependentUpon>
+    <Compile Include="Migrations\201711040632585_1.cs" />
+    <Compile Include="Migrations\201711040632585_1.Designer.cs">
+      <DependentUpon>201711040632585_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711070611038_21.cs" />
+    <Compile Include="Migrations\201711070611038_21.Designer.cs">
+      <DependentUpon>201711070611038_21.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711070619462_22.cs" />
+    <Compile Include="Migrations\201711070619462_22.Designer.cs">
+      <DependentUpon>201711070619462_22.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711070908328_15.cs" />
+    <Compile Include="Migrations\201711070908328_15.Designer.cs">
+      <DependentUpon>201711070908328_15.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711111632515_newtenant.cs" />
+    <Compile Include="Migrations\201711111632515_newtenant.Designer.cs">
+      <DependentUpon>201711111632515_newtenant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711141039301_banktbl.cs" />
+    <Compile Include="Migrations\201711141039301_banktbl.Designer.cs">
+      <DependentUpon>201711141039301_banktbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711141731495_banktbl2.cs" />
+    <Compile Include="Migrations\201711141731495_banktbl2.Designer.cs">
+      <DependentUpon>201711141731495_banktbl2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711151424481_ChangeTenantStruct.cs" />
+    <Compile Include="Migrations\201711151424481_ChangeTenantStruct.Designer.cs">
+      <DependentUpon>201711151424481_ChangeTenantStruct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711162026561_ChangeTenantStructnew.cs" />
+    <Compile Include="Migrations\201711162026561_ChangeTenantStructnew.Designer.cs">
+      <DependentUpon>201711162026561_ChangeTenantStructnew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711170627316_new-Change.cs" />
+    <Compile Include="Migrations\201711170627316_new-Change.Designer.cs">
+      <DependentUpon>201711170627316_new-Change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711170634119_new-Change1.cs" />
+    <Compile Include="Migrations\201711170634119_new-Change1.Designer.cs">
+      <DependentUpon>201711170634119_new-Change1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711170850099_new-Change1y.cs" />
+    <Compile Include="Migrations\201711170850099_new-Change1y.Designer.cs">
+      <DependentUpon>201711170850099_new-Change1y.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711171342392_companylogo.cs" />
+    <Compile Include="Migrations\201711171342392_companylogo.Designer.cs">
+      <DependentUpon>201711171342392_companylogo.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
@@ -159,7 +207,7 @@
     <Compile Include="Migrations\Seed\Host\HostRoleAndUserCreator.cs" />
     <Compile Include="Migrations\Seed\Host\InitialHostDbBuilder.cs" />
     <Compile Include="Migrations\Seed\Tenants\DefaultTenantBuilder.cs" />
-    <Compile Include="Migrations\Seed\Tenants\DefaultTowOperators.cs" />
+    <Compile Include="Migrations\Seed\Tenants\DefaultDataFirstTimeMigration.cs" />
     <Compile Include="Migrations\Seed\Tenants\TenantRoleAndUserBuilder.cs" />
     <Compile Include="PanelMasterMVC5SeparateDataModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -260,8 +308,44 @@
     <Folder Include="bin\Release\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711021445172_1.resx">
-      <DependentUpon>201711021445172_1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711040632585_1.resx">
+      <DependentUpon>201711040632585_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711070611038_21.resx">
+      <DependentUpon>201711070611038_21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711070619462_22.resx">
+      <DependentUpon>201711070619462_22.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711070908328_15.resx">
+      <DependentUpon>201711070908328_15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711111632515_newtenant.resx">
+      <DependentUpon>201711111632515_newtenant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711141039301_banktbl.resx">
+      <DependentUpon>201711141039301_banktbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711141731495_banktbl2.resx">
+      <DependentUpon>201711141731495_banktbl2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711151424481_ChangeTenantStruct.resx">
+      <DependentUpon>201711151424481_ChangeTenantStruct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711162026561_ChangeTenantStructnew.resx">
+      <DependentUpon>201711162026561_ChangeTenantStructnew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711170627316_new-Change.resx">
+      <DependentUpon>201711170627316_new-Change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711170634119_new-Change1.resx">
+      <DependentUpon>201711170634119_new-Change1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711170850099_new-Change1y.resx">
+      <DependentUpon>201711170850099_new-Change1y.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711171342392_companylogo.resx">
+      <DependentUpon>201711171342392_companylogo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

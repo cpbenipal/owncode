@@ -15,6 +15,8 @@ namespace PanelMasterMVC5Separate.Vendors
         public virtual string SupplierName { get; set; }        
         public virtual string RegistrationNumber { get; set; }
         public virtual string TaxRegistrationNumber { get; set; }
-      
+        public virtual int CountryID { get; set; }
+        [ForeignKey("CountryID")]
+        public virtual Countries Country { get; set; }
     }
 }

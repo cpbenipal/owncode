@@ -8,6 +8,7 @@ using Abp.Runtime.Session;
 using Abp.UI;
 using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.Insurer;
+using PanelMasterMVC5Separate.MultiTenancy;
 using PanelMasterMVC5Separate.Tenants.Insurer.Dto;
 using PanelMasterMVC5Separate.Tenants.Insurer.Exporting;
 using PanelMasterMVC5Separate.Tenants.Vendors.Dto;
@@ -27,11 +28,13 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
         private readonly IRepository<InsurerMaster> _insurersRepository;
         private readonly IRepository<InsurerSub> _insurersubRepository;
         private readonly IRepository<Banks> _bankRepository;
-        private readonly IRepository<Currencies> _currRepository;
+        private readonly IRepository<CountryandCurrency> _currRepository;
         private readonly IAppFolders _appFolders;
         private readonly IRepository<InsurerPics, int> _binaryObjectRepository;
         private readonly IInsurerExporter _insurerListExcelExporter;
         private readonly IAbpSession _abpSession;
+        private readonly IRepository<TenantPlanBillingDetails> _TenantPlanBillingDetails;
+        private readonly IRepository<Countries> _countryRepository;
 
         public InsurerAppService(IAbpSession abpSession, IAppFolders appFolders,
             IInsurerExporter insurerListExcelExporter,
@@ -39,8 +42,10 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
             IRepository<InsurerSub> insurersubmasterrepositry,
             IRepository<InsurerMaster> insurersRepository,
             IRepository<Banks> BankRepository,
-            IRepository<Currencies> CurrenciesRepository,
-            IRepository<InsurerPics> InsurerPicsRepository)
+            IRepository<CountryandCurrency> CurrenciesRepository,
+            IRepository<InsurerPics> InsurerPicsRepository,
+            IRepository<TenantPlanBillingDetails> tenantplanbillingdetails,
+            IRepository<Countries> countryRepository)
         {
             _abpSession = abpSession;
             _binaryObjectRepository = binaryObjectRepository;
@@ -50,7 +55,8 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
             _bankRepository = BankRepository;
             _currRepository = CurrenciesRepository;
             _insurerListExcelExporter = insurerListExcelExporter;
-
+            _TenantPlanBillingDetails = tenantplanbillingdetails;
+            _countryRepository = countryRepository;
         }
 
         public ListResultDto<BankDto> GetBanks()
@@ -137,7 +143,15 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
 
         public async Task CreateInsurerMaster(InsurersDto input)
         {
-            var Newinsurer = new InsurerMaster(input.InsurerName, input.Mask, input.LogoPicture, input.Id);
+            
+            var country = _TenantPlanBillingDetails.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
+            int countryId = 250;
+            if (country != null)
+            {
+                countryId = _countryRepository.FirstOrDefault(x => x.Code == country.BillingCountryCode).Id;
+               
+            } 
+            var Newinsurer = new InsurerMaster(input.InsurerName, input.Mask, input.LogoPicture, input.Id, countryId);
             int InsurerNewId = await _insurersRepository.InsertAndGetIdAsync(Newinsurer);
 
             byte[] byteArray = GetByteArray(input.LogoPicture);

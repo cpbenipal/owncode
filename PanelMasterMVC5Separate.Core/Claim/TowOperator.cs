@@ -1,5 +1,6 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using PanelMasterMVC5Separate.MultiTenancy;
+using PanelMasterMVC5Separate.Vendors;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,5 +21,8 @@ namespace PanelMasterMVC5Separate.Claim
         public virtual string EmailAddress { get; set; }
         [Required]
         public virtual bool isActive { get; set; }
+        public virtual int CountryID { get; set; }
+        [ForeignKey("CountryID")]
+        public virtual Countries Country { get; set; }
     }
 }

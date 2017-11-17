@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="MilestoneEstimationlocalization.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PanelMasterMVC5Separate.Core\PanelMasterMVC5Separate.Core.csproj">

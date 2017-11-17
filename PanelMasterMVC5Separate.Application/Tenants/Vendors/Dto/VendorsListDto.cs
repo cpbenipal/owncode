@@ -40,11 +40,11 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors.Dto
         public string BankName { get; set; }
     }
 
-    [AutoMapFrom(typeof(Currencies))]
+    [AutoMapFrom(typeof(CountryandCurrency))]
     public class CurrencyDto : FullAuditedEntityDto
     {
         public string CurrencyCode { get; set; }
-        public string CurrencyType { get; set; }
+        public string CountryAndCurrency { get; set; }
     }
 
     public class VendorMainListDto 

@@ -9,5 +9,8 @@ namespace PanelMasterMVC5Separate.Vendors
     public class Banks : FullAuditedEntity
     {
         public virtual string BankName { get; set; }
+        public virtual int CountryID { get; set; }
+        [ForeignKey("CountryID")]
+        public virtual Countries Country { get; set; }
     }
 }

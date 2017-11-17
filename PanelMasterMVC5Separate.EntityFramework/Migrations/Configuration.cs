@@ -10,6 +10,7 @@ using PanelMasterMVC5Separate.Migrations.Seed.Host;
 using PanelMasterMVC5Separate.Migrations.Seed.Tenants;
 using System.Collections.Generic;
 using PanelMasterMVC5Separate.MultiTenancy;
+using System.Data.Entity;
 
 namespace PanelMasterMVC5Separate.Migrations
 {
@@ -20,6 +21,7 @@ namespace PanelMasterMVC5Separate.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = true; 
             ContextKey = "PanelMasterMVC5Separate";
         }
 
@@ -41,11 +43,35 @@ namespace PanelMasterMVC5Separate.Migrations
             }
             else
             {
-                //You can add seed for tenant databases using Tenant property...
-                new DefaultTowOperators(context).Create(); // Add default tow operators
+                
             }
             
             context.SaveChanges();
         }         
+    }
+
+    public class PanelMasterDBInitializer : CreateDatabaseIfNotExists<EntityFramework.PanelMasterMVC5SeparateDbContext>
+    {
+        protected override void Seed(PanelMasterMVC5SeparateDbContext context)
+        {
+            //You can add seed for tenant databases using Tenant property...
+            //new DefaultDataFirstTimeMigration(context).CreateTowOperators(); // Add default tow operators
+
+            new DefaultDataFirstTimeMigration(context).CreateBanks(); // Add default CreateBanks
+
+            new DefaultDataFirstTimeMigration(context).CreateBrokerMaster(); // Add default CreateBrokerMaster
+
+            new DefaultDataFirstTimeMigration(context).CreateInsurerMaster(); // Add default CreateInsurerMaster
+
+            new DefaultDataFirstTimeMigration(context).CreateTowOperator(); // Add default CreateTowOperator
+
+            new DefaultDataFirstTimeMigration(context).CreateVehicleMakes(); // Add default CreateVehicleMakes
+
+            new DefaultDataFirstTimeMigration(context).CreateVehicleModels(); // Add default CreateVehicleModels
+
+            new DefaultDataFirstTimeMigration(context).CreateVendorMain(); // Add default CreateVendorMain
+
+            base.Seed(context);
+        }
     }
 }

@@ -1,0 +1,142 @@
+@using PanelMasterMVC5Separate.Localization
+<div ng-controller="tenant.views.adminforms.index as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-12">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>@L("AdminFunction")</span> <small>Add/Edit/Disable/Enable</small>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form">
+                <form class="horizontal-form">
+                    <div class="form-body" enter-key="vm.getData()">
+                        <div class="row margin-bottom-10">
+                            <div ng-class="col-md-6">
+                                <div class="portlet-input">
+                                    <div class="form-group">
+                                        <small>Choose one: RolesCategory, RepairType, QuoteStatus, Jobstatus, JobstatusMask </small>
+                                        <select ng-change="vm.getData()" ng-model="vm.tables"
+                                                ng-options="opt.id as opt.name for opt in tableList">
+                                            <option value="">@L("SelectOne")</option>
+                                        </select>
+                                    </div>
+
+                                    <div ng-show="IsVisible">
+                                        <input type="text" ng-model="vm.newdescription" placeholder="new description" />
+                                        <button id="addnew" ng-click="vm.addnew()" class="btn blue">
+                                            Add New
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div busy-if="vm.loading">
+                <div ui-grid="vm.userGridOptions" ui-grid-pagination ui-grid-resize-columns dir=@(CultureHelper.IsRtl ? "rtl" : "" )></div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form">
+                <form class="horizontal-form">
+                    <div class="form-body">
+                        <div class="row margin-bottom-10">
+                            <div ng-class="col-md-6">
+                                <div class="portlet-input">
+                                    <div class="form-group">
+                                        <small>Choose one : Currency and Countries </small>
+                                        <select ng-change="vm.getCurrencies()" ng-model="vm.countrycurrrency"
+                                                ng-options="opt.id as opt.name for opt in tblDataList">
+                                            <option value="">@L("SelectOne")</option>
+                                        </select>
+                                    </div>
+                                    <div ng-show="IsthisVisible">
+                                        <input type="text" ng-model="vm.code" placeholder="Code" />
+                                        <input type="text" ng-model="vm.description" placeholder="Name" />
+                                        <button type="button" ng-click="vm.addnewcode()" class="btn blue">
+                                            Add New
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div busy-if="vm.loadingcc">
+                <div ui-grid="vm.currencyGridOptions" ui-grid-pagination ui-grid-resize-columns dir=@(CultureHelper.IsRtl ? "rtl" : "" )></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="form">
+                <form class="horizontal-form">
+                    <div class="form-body" enter-key="vm.getSPlans()">
+                        <div class="row margin-bottom-4">
+                            <div ng-class="col-md-10">
+                                <div class="portlet-input">
+                                    <div>
+                                        <input type="text" ng-model="vm.planname" placeholder="new PlanName" />
+                                        <input type="text" ng-model="vm.price" placeholder="new Price" />
+                                        <input type="text" ng-model="vm.headercolor" placeholder="new HeaderColor" />
+                                        <input type="text" ng-model="vm.members" placeholder="new Members" />
+                                        <button id="addnew" ng-click="vm.addnewplan()" class="btn blue">
+                                            Add<i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div busy-if="vm.loadingsp">
+                <div ui-grid="vm.plansGridOptions" ui-grid-pagination ui-grid-resize-columns dir=@(CultureHelper.IsRtl ? "rtl" : "" )></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form">
+                <form class="horizontal-form">
+                    <div class="form-body" enter-key="vm.getBanks()">
+                        <div class="row margin-bottom-10">
+                            <div ng-class="col-md-6">
+                                <div class="portlet-input">
+                                    <div>
+                                        <select ng-model="vm.country"
+                                                ng-options="opt.id as opt.name for opt in countryList">
+                                            <option value="">@L("SelectOne")</option>
+                                        </select>
+                                        <input type="text" ng-model="vm.newbank" placeholder="new bank" />
+                                        <button id="addnew" ng-click="vm.addnewbank()" class="btn blue">
+                                            Add New Bank
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div busy-if="vm.loadingccb">
+                <div ui-grid="vm.bankGridOptions" ui-grid-pagination ui-grid-resize-columns dir=@(CultureHelper.IsRtl ? "rtl" : "" )></div>
+            </div>
+        </div>
+
+        
+    </div>
+
+</div>

@@ -360,6 +360,11 @@ appModule.config([
             templateUrl: '~/App/tenant/views/Brokers/index.cshtml'
         });
 
+        $stateProvider.state('tenant.adminforms', {
+            url: '/adminforms',
+            templateUrl: '~/App/tenant/views/adminforms/index.cshtml'
+        });
+
         $stateProvider.state('tenant.AddBroker', {
             url: '/AddBroker',
             templateUrl: '~/App/tenant/views/AddBroker/index.cshtml'

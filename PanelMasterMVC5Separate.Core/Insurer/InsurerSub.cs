@@ -60,7 +60,7 @@ namespace PanelMasterMVC5Separate.Insurer
 
         [Required]
         public virtual int CurrencyID { get; set; }
-        public virtual Currencies Currency { get; set; }
+        public virtual CountryandCurrency Currency { get; set; }
 
         [Required]
         public virtual int BankID { get; set; }

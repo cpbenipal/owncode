@@ -15,6 +15,7 @@ using PanelMasterMVC5Separate.Insurer;
 using PanelMasterMVC5Separate.Brokers;
 using PanelMasterMVC5Separate.Quotings;
 using PanelMasterMVC5Separate.RolesCategories;
+using PanelMasterMVC5Separate.Migrations;
 
 namespace PanelMasterMVC5Separate.EntityFramework
 {
@@ -38,8 +39,9 @@ namespace PanelMasterMVC5Separate.EntityFramework
         public virtual IDbSet<ChatMessage> ChatMessages { get; set; }
         public virtual DbSet<VendorSub> VendorSub { get; set; }
         public virtual IDbSet<VendorMain> VendorMain { get; set; }
+        public virtual IDbSet<Countries> Countries { get; set; }       
+        public virtual IDbSet<CountryandCurrency> Currencies { get; set; }
         public virtual IDbSet<Banks> Banks { get; set; }
-        public virtual IDbSet<Currencies> Currencies { get; set; }
         public virtual IDbSet<InsurerMaster> InsurerMasters { get; set; }
         public virtual IDbSet<InsurerSub> InsurerSubs { get; set; }
         public virtual IDbSet<InsurerPics> InsurerPics { get; set; }
@@ -49,9 +51,7 @@ namespace PanelMasterMVC5Separate.EntityFramework
         public virtual IDbSet<VehicleMake> VehicleMake { get; set; }
         public virtual IDbSet<VehicleModels> VehicleModel { get; set; }
         public virtual IDbSet<VehicleModelLogos> VehicleModelLogo { get; set; }
-        public virtual IDbSet<SignonPlans> SignonPlan { get; set; }
-        public virtual IDbSet<TenantProfile> TenantProfiles { get; set; }
-        public virtual IDbSet<TenantPlanBillingDetails> TenantPlanBillingDetail { get; set; }
+        public virtual IDbSet<SignonPlans> SignonPlan { get; set; }       
         public virtual IDbSet<QuoteMaster> QuoteMasters { get; set; }
         public virtual IDbSet<RepairTypes> RepairTypes { get; set; }
         public virtual IDbSet<QuoteCategories> QuoteCategories { get; set; }
@@ -62,11 +62,14 @@ namespace PanelMasterMVC5Separate.EntityFramework
         public virtual IDbSet<JobstatusMask> JobstatusMask { get; set; }
         public virtual IDbSet<JobstatusTenant> JobstatusTenant { get; set; }
         public virtual IDbSet<TowOperator> TowOperators { get; set; }
-         
+        public virtual IDbSet<TenantProfile> TenantProfiles { get; set; }
+        public virtual IDbSet<TenantPlanBillingDetails> TenantPlanBillingDetail { get; set; }
+        public virtual IDbSet<TenantCompanyLogo> TenantCompanyLogo { get; set; }
+
         public PanelMasterMVC5SeparateDbContext()
         : base("Default")
         {
-            
+           
         }
 
         public PanelMasterMVC5SeparateDbContext(string nameOrConnectionString)
