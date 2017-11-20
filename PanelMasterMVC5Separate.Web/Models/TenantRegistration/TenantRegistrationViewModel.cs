@@ -126,6 +126,83 @@ namespace PanelMasterMVC5Separate.Web.Models.TenantRegistration
         public List<CountryandCurrency> listCurrencies { get; set; }         
 
     }
+    public class TenantRegistrationView : IValidatableObject
+    {
+        [Required]
+        public int PlanId { get; set; }
+        [Required]
+        [StringLength(Tenant.MaxTenancyNameLength)]
+        public string TenancyName { get; set; }
+
+        [Required]
+        [StringLength(User.MaxNameLength)]
+        public string LoginName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [StringLength(User.MaxEmailAddressLength)]
+        public string AdminEmailAddress { get; set; }
+
+        [Required]
+        [StringLength(User.MaxPlainPasswordLength)]
+        public string AdminPassword { get; set; }
+
+        public PasswordComplexitySetting PasswordComplexitySetting { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (!LoginName.IsNullOrEmpty())
+            {
+                if (!LoginName.Equals(AdminEmailAddress) && new ValidationHelper().IsEmail(LoginName))
+                {
+                    yield return new ValidationResult("Username cannot be an email address unless it's same with your email address !");
+                }
+            }
+        }
+        [Required]
+        [StringLength(User.MaxNameLength)]
+        public string FullName { get; set; }
+
+        [Required]
+        [Phone, StringLength(User.MaxPhoneNumberLength)]
+        public string CellNumber { get; set; }
+
+        [Required]
+        public string BillingCountryCode { get; set; }
+
+        [Required]
+        public string CurrencyCode { get; set; }
+
+        [Required(ErrorMessage = "Card Holders Name is required")]
+        [DisplayName("Card Holders Name")]
+        [StringLength(160)]
+        public string CardHoldersName { get; set; }
+
+        [Required]
+        [DisplayName("Card Number")]
+        public string CardNumber { get; set; }
+
+        [Required]
+        [DisplayName("Expiration(MM/YYYY)")]
+        public string CardExpiration { get; set; }
+
+        [Required]
+        [StringLength(4)]
+        public string CVV { get; set; }
+
+        public string payment { get; set; }
+
+        public string CurrentPlan { get; set; }
+
+        public List<Countries> listCountries { get; set; }
+
+        public List<CountryandCurrency> listCurrencies { get; set; }
+
+        [Required]
+        [StringLength(5)]
+        public string OTP { get; set; }
+    }
+
     public class RegisterDetail : IValidatableObject
     {
         [Required]

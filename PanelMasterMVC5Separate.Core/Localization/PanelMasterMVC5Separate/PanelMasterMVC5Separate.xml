@@ -306,12 +306,17 @@
     <text name="CellNumber" value="Cell Number" />    
     <text name="OTP" value="OTP"/>
     <text name="EnterOTP" value="Please enter OTP send to ( cell number and email)."/>   
-    <text name="CountryBillingDetails" value="Country and Billing Details" />
+    <text name="CountryBillingDetails" value="Country and Billing" />
     <text name="FaximileeNumber" value="Faximilee Number" />
     <text name="YourFullName" value="Your FullName" />
     <text name="OTPMismatched" value="You have entered wront OTP"/>
     <text name="Chooseone" value="Choose one"/>
-    
+    <text name="Review" value="Review"/>
+    <text name="AlertDanger" value="You have some form errors. Please check below."/>
+    <text name="Alertsuccess" value="Your form validation is successful!."/>
+    <text name="Continue" value="Continue->"/>
+    <text name="Confirm" value="Confirm"/>
+    <text name="Confirmation" value="Confirmation"/>
     <text name="DashboardNoteForMpaVersion">
       <![CDATA[
        For support on this system contact 083 343 2045 or email online@panelmaster.co.za.
@@ -598,7 +603,7 @@
     <text name="EditVehicleMade">Edit Vehicle Made</text>
     <text name="ChangeLogoPicture">Change Logo Picture</text>
     <text name="IsActive">Enabled</text>
-
+    <text name="Next">Next</text>
     <text name="AutoPaywiththisCreditCard">AutoPay with this Credit Card</text>
     <text name="Emailmemonthlybilling">Email me monthly billing</text>
     <text name="PaymentOptions">Payment Options</text>

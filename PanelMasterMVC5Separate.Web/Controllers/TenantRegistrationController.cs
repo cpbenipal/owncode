@@ -84,14 +84,17 @@ namespace PanelMasterMVC5Separate.Web.Controllers
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public ActionResult newtenant(int Id)
+        public ActionResult NewTenantSignUp(int Id)
         {
             CheckTenantRegistrationIsEnabled();
             ViewBag.UseCaptcha = UseCaptchaOnRegistration();
             ViewBag.PasswordComplexitySetting = SettingManager.GetSettingValue(AppSettings.Security.PasswordComplexity).Replace("\"", "");
-            return View(new RegisterDetail()
+            return View(new TenantRegistrationView()
             {
-                PlanId = Id
+                PlanId = Id,
+                CurrentPlan = _tenantManager.GetCurrentTenantPlan(Id),
+                listCountries = _tenantManager.GetCountries(),
+                listCurrencies = _tenantManager.GetCurrencies()
             });
         }
 
@@ -188,7 +191,7 @@ namespace PanelMasterMVC5Separate.Web.Controllers
                     else if (countryandBillingDetail.payment[0] == "2")
                         model.paymentoption2 = L("Emailmemonthlybilling");
                 }
-                
+
                 TempData["model"] = model;
                 TempData.Keep("model");
             }
@@ -198,118 +201,159 @@ namespace PanelMasterMVC5Separate.Web.Controllers
             }
             return View("confirm", model);
         }
-         
+
 
         [Abp.Runtime.Validation.DisableValidation]
         [HttpPost]
         [UnitOfWork]
-        public virtual async Task<ActionResult> confirm(TenantRegistrationViewModel model)
+        public virtual async Task<ActionResult> NewTenantSignUp(TenantRegistrationView model)
         {
             try
             {
-               // if (model == null)
+                if (!CheckActivationCode(model.OTP))
                 {
-                    model = (TenantRegistrationViewModel)TempData.Peek("model");
-                }
-                CheckTenantRegistrationIsEnabled();
-                if (UseCaptchaOnRegistration())
-                {
-                    var recaptchaHelper = this.GetRecaptchaVerificationHelper();
-                    if (recaptchaHelper.Response.IsNullOrEmpty())
+                    ViewBag.ErrorMessage = L("OTPMismatched");
+                    CheckTenantRegistrationIsEnabled();
+                    ViewBag.UseCaptcha = UseCaptchaOnRegistration();
+                    ViewBag.PasswordComplexitySetting = SettingManager.GetSettingValue(AppSettings.Security.PasswordComplexity).Replace("\"", "");
+                    return View(new TenantRegistrationView()
                     {
-                        throw new UserFriendlyException(L("CaptchaCanNotBeEmpty"));
+                        PlanId = model.PlanId,
+                        CurrentPlan = _tenantManager.GetCurrentTenantPlan(model.PlanId),
+                        listCountries = _tenantManager.GetCountries(),
+                        listCurrencies = _tenantManager.GetCurrencies()
+                    });
+                }
+                if(EmailExists(model.AdminEmailAddress))
+                {
+                    ViewBag.ErrorMessage = "Email already exists";
+                    CheckTenantRegistrationIsEnabled();
+                    ViewBag.UseCaptcha = UseCaptchaOnRegistration();
+                    ViewBag.PasswordComplexitySetting = SettingManager.GetSettingValue(AppSettings.Security.PasswordComplexity).Replace("\"", "");
+                    return View(new TenantRegistrationView()
+                    {
+                        PlanId = model.PlanId,
+                        CurrentPlan = _tenantManager.GetCurrentTenantPlan(model.PlanId),
+                        listCountries = _tenantManager.GetCountries(),
+                        listCurrencies = _tenantManager.GetCurrencies()
+                    });
+                }
+                else
+                {
+                    CheckTenantRegistrationIsEnabled();
+                    if (UseCaptchaOnRegistration())
+                    {
+                        var recaptchaHelper = this.GetRecaptchaVerificationHelper();
+                        if (recaptchaHelper.Response.IsNullOrEmpty())
+                        {
+                            throw new UserFriendlyException(L("CaptchaCanNotBeEmpty"));
+                        }
+
+                        if (recaptchaHelper.VerifyRecaptchaResponse() != RecaptchaVerificationResult.Success)
+                        {
+                            throw new UserFriendlyException(L("IncorrectCaptchaAnswer"));
+                        }
                     }
 
-                    if (recaptchaHelper.VerifyRecaptchaResponse() != RecaptchaVerificationResult.Success)
+                    //Getting host-specific settings
+                    var isNewRegisteredTenantActiveByDefault = await SettingManager.GetSettingValueForApplicationAsync<bool>(AppSettings.TenantManagement.IsNewRegisteredTenantActiveByDefault);
+                    var isEmailConfirmationRequiredForLogin = await SettingManager.GetSettingValueForApplicationAsync<bool>(AbpZeroSettingNames.UserManagement.IsEmailConfirmationRequiredForLogin);
+                    var defaultEditionIdValue = await SettingManager.GetSettingValueForApplicationAsync(AppSettings.TenantManagement.DefaultEdition);
+                    int? defaultEditionId = null;
+
+                    if (!string.IsNullOrEmpty(defaultEditionIdValue) && (await _editionManager.FindByIdAsync(Convert.ToInt32(defaultEditionIdValue)) != null))
                     {
-                        throw new UserFriendlyException(L("IncorrectCaptchaAnswer"));
+                        defaultEditionId = Convert.ToInt32(defaultEditionIdValue);
                     }
-                }
+                    //  model.PlanId = Convert.ToInt32(ViewBag.PlanId);
+                    CurrentUnitOfWork.SetTenantId(null);
 
-                //Getting host-specific settings
-                var isNewRegisteredTenantActiveByDefault = await SettingManager.GetSettingValueForApplicationAsync<bool>(AppSettings.TenantManagement.IsNewRegisteredTenantActiveByDefault);
-                var isEmailConfirmationRequiredForLogin = await SettingManager.GetSettingValueForApplicationAsync<bool>(AbpZeroSettingNames.UserManagement.IsEmailConfirmationRequiredForLogin);
-                var defaultEditionIdValue = await SettingManager.GetSettingValueForApplicationAsync(AppSettings.TenantManagement.DefaultEdition);
-                int? defaultEditionId = null;
-
-                if (!string.IsNullOrEmpty(defaultEditionIdValue) && (await _editionManager.FindByIdAsync(Convert.ToInt32(defaultEditionIdValue)) != null))
-                {
-                    defaultEditionId = Convert.ToInt32(defaultEditionIdValue);
-                }
-                //  model.PlanId = Convert.ToInt32(ViewBag.PlanId);
-                CurrentUnitOfWork.SetTenantId(null);
-
-                var tenantId = await _tenantManager.CreateWithAdminUserAsync(
-                 model.TenancyName,
-                 model.LoginName,
-                 model.AdminPassword,
-                 model.AdminEmailAddress,
-                 model.FullName,
-                 model.CellNumber,
-                 //model.PhoneNumber,
-                 //model.CompanyRegistrationNo,
-                 //model.CompanyVatNo,
-                 //model.Address,
-                 //model.City,
-                 //model.CountryCode,
-                 //model.InvoicingInstruction,
-                 model.BillingCountryCode,
-                 model.CurrencyCode,
-                 //model.Timezone,
-                 model.CardHoldersName,
-                 model.CardNumber,
-                 model.CardExpiration,
-                 model.CVV,
-                 model.payment,
-                 model.PlanId,
-                 null,
-                 true,
-                 defaultEditionId,
-                 false,
-                 true);
+                    var tenantId = await _tenantManager.CreateWithAdminUserAsync(
+                     model.TenancyName,
+                     model.LoginName,
+                     model.AdminPassword,
+                     model.AdminEmailAddress,
+                     model.FullName,
+                     model.CellNumber,
+                     //model.PhoneNumber,
+                     //model.CompanyRegistrationNo,
+                     //model.CompanyVatNo,
+                     //model.Address,
+                     //model.City,
+                     //model.CountryCode,
+                     //model.InvoicingInstruction,
+                     model.BillingCountryCode,
+                     model.CurrencyCode,
+                     //model.Timezone,
+                     model.CardHoldersName,
+                     model.CardNumber,
+                     model.CardExpiration,
+                     model.CVV,
+                     model.payment,
+                     model.PlanId,
+                     null,
+                     true,
+                     defaultEditionId,
+                     false,
+                     true);
 
 
 
-                ViewBag.UseCaptcha = UseCaptchaOnRegistration();
+                    ViewBag.UseCaptcha = UseCaptchaOnRegistration();
 
-                var tenant = await _tenantManager.GetByIdAsync(tenantId);
-                await _appNotifier.NewTenantRegisteredAsync(tenant);
+                    var tenant = await _tenantManager.GetByIdAsync(tenantId);
+                    await _appNotifier.NewTenantRegisteredAsync(tenant);
 
-                CurrentUnitOfWork.SetTenantId(tenant.Id);
+                    CurrentUnitOfWork.SetTenantId(tenant.Id);
 
-                var user = await _userManager.FindByNameAsync(AbpUserBase.AdminUserName);
+                    var user = await _userManager.FindByNameAsync(AbpUserBase.AdminUserName);
 
-                //Directly login if possible
-                if (tenant.IsActive && user.IsActive && (user.IsEmailConfirmed || !isEmailConfirmationRequiredForLogin))
-                {
-                    var loginResult = await GetLoginResultAsync(user.UserName, model.AdminPassword , tenant.TenancyName);
-
-                    if (loginResult.Result == AbpLoginResultType.Success)
+                    //Directly login if possible
+                    if (tenant.IsActive && user.IsActive && (user.IsEmailConfirmed || !isEmailConfirmationRequiredForLogin))
                     {
-                        await SignInAsync(loginResult.User, loginResult.Identity);
-                        return Redirect("~/Application#!/tenant/settings");
+                        var loginResult = await GetLoginResultAsync(user.UserName, model.AdminPassword, tenant.TenancyName);
+
+                        if (loginResult.Result == AbpLoginResultType.Success)
+                        {
+                            await SignInAsync(loginResult.User, loginResult.Identity);
+                            return Redirect("~/Application#!/tenant/settings");
+                        }
+
+                        Logger.Warn("New registered user could not be login. This should not be normally. login result: " + loginResult.Result);
                     }
-
-                    Logger.Warn("New registered user could not be login. This should not be normally. login result: " + loginResult.Result);
+                    return View("RegisterResult", new TenantRegisterResultViewModel
+                    {
+                        TenancyName = model.TenancyName,
+                        Name = model.LoginName,
+                        UserName = AbpUserBase.AdminUserName,
+                        EmailAddress = model.AdminEmailAddress,
+                        IsActive = isNewRegisteredTenantActiveByDefault,
+                        IsEmailConfirmationRequired = isEmailConfirmationRequiredForLogin
+                    });
                 }
-                return View("RegisterResult", new TenantRegisterResultViewModel
-                {
-                    TenancyName = model.TenancyName,
-                    Name = model.LoginName,
-                    UserName = AbpUserBase.AdminUserName,
-                    EmailAddress = model.AdminEmailAddress,
-                    IsActive = isNewRegisteredTenantActiveByDefault,
-                    IsEmailConfirmationRequired = isEmailConfirmationRequiredForLogin
-                });
-
             }
             catch (UserFriendlyException ex)
             {
                 ViewBag.UseCaptcha = UseCaptchaOnRegistration();
                 ViewBag.ErrorMessage = ex.Message;
-                ViewBag.PlanId = model.PlanId;
-                return View(model);
+               
+                return View(new TenantRegistrationView()
+                {
+                    PlanId = model.PlanId,
+                    CurrentPlan = _tenantManager.GetCurrentTenantPlan(model.PlanId),
+                    listCountries = _tenantManager.GetCountries(),
+                    listCurrencies = _tenantManager.GetCurrencies()
+                });
             }
+        }
+
+        private bool EmailExists(string adminEmailAddress)
+        {
+            var user = _userManager.FindByEmail(adminEmailAddress);
+            if (user != null)
+                return false;
+            else
+                return true;
         }
 
         private bool CheckActivationCode(string TaxID)

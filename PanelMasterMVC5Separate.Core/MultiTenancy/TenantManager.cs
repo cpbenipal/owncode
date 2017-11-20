@@ -242,8 +242,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             string cardHoldersName, string cardNumber, string cardExpiration, string cVV, string payment, int planId, string connectionString,
             bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin, bool sendActivationEmail)
         {
-            try
-            {
+            
 
                 int newTenantId;
                 long newAdminId;
@@ -365,11 +364,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                 }
 
                 return newTenantId;
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
+             
         }
 
         private void CreateTowOperators(int tenantId, string CountryCode)
@@ -395,6 +390,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                 _TowOperator.Insert(tow);
             }
         }
+        
         public virtual string GetCurrentTenantPlan(int PlanId)
         {
              return  _SignonPlansRepository.FirstOrDefault(x=>x.Id == PlanId).PlanName;             

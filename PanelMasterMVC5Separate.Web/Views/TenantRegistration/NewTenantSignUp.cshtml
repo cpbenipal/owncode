@@ -1,0 +1,432 @@
+﻿@using PanelMasterMVC5Separate.MultiTenancy
+@model PanelMasterMVC5Separate.Web.Models.TenantRegistration.TenantRegistrationView
+@using Abp.Extensions
+@using Abp.Web.Mvc.Extensions
+@using PanelMasterMVC5Separate.Localization
+@using Recaptcha.Web
+@using Recaptcha.Web.Mvc
+
+@section Styles
+{
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+<link href="~/metronic/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="~/metronic/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+<link href="~/metronic/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="~/metronic/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+<!-- END GLOBAL MANDATORY STYLES -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<link href="~/metronic/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="~/metronic/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+  
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN THEME GLOBAL STYLES -->
+<link href="~/metronic/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+<link href="~/metronic/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+<!-- END THEME GLOBAL STYLES -->
+
+<link rel="shortcut icon" href="favicon.ico" />
+<!-- END HEAD -->
+}
+
+@section Scripts
+{
+<script src="~/metronic/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="~/metronic/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script> 
+<script src="~/metronic/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="~/metronic/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+<script src="~/metronic/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="~/metronic/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+<script src="~/metronic/assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js" type="text/javascript"></script> 
+<script src="~/metronic/assets/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js" type="text/javascript"></script>
+<script src="~/metronic/assets/global/plugins/jquery.input-ip-address-control-1.0.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN THEME GLOBAL SCRIPTS -->
+<script src="~/metronic/assets/global/scripts/app.min.js" type="text/javascript"></script>
+<!-- END THEME GLOBAL SCRIPTS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="~/metronic/assets/pages/scripts/form-wizard.js" type="text/javascript"></script> 
+<script src="~/metronic/assets/pages/scripts/form-input-mask.min.js" type="text/javascript"></script>
+<script src="~/metronic/assets/pages/scripts/ui-modals.min.js" type="text/javascript"></script>
+
+<!-- END PAGE LEVEL SCRIPTS -->
+<script>
+    window.passwordComplexitySetting = @ViewBag.PasswordComplexitySetting;
+</script>
+@Html.IncludeScript("~/Views/TenantRegistration/NewTenantSignUp.js")
+}
+<form class="form-horizontal" id="submit_form" method="post" action="@Url.Action("NewTenantSignUp")">
+    <div class="row">
+        <div class="col-md-12">
+            @if (@ViewBag.ErrorMessage != null)
+            {
+            <div class="m-heading-1 border-green m-bordered">
+                <div class="alert alert-danger">
+                    <i class="fa fa-warning"></i> @ViewBag.ErrorMessage
+                </div>
+            </div>
+            }
+            @Html.AntiForgeryToken()
+            <div class="portlet light bordered" id="form_wizard_1">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-red"></i>
+                        <span class="caption-subject font-red bold uppercase">
+                            Tenant Registration -
+                            <span class="step-title"> Step 1 of 3 </span>
+                        </span>
+                    </div>
+                    <div class="actions">
+                        <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                            <i class="icon-cloud-upload"></i>
+                        </a>
+                        <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                            <i class="icon-wrench"></i>
+                        </a>
+                        <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                            <i class="icon-trash"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+
+                    <div class="form-wizard">
+                        <div class="form-body">
+                            <ul class="nav nav-pills nav-justified steps">
+                                <li>
+                                    <a href="#tab1" data-toggle="tab" class="step">
+                                        <span class="number"> 1 </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> @L("Registration")
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#tab2" data-toggle="tab" class="step">
+                                        <span class="number"> 2 </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> @L("CountryBillingDetails")
+                                        </span>
+                                    </a>
+                                </li>                               
+                                <li>
+                                    <a href="#tab3" data-toggle="tab" class="step">
+                                        <span class="number"> 3 </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> @L("Review")
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div id="bar" class="progress progress-striped" role="progressbar">
+                                <div class="progress-bar progress-bar-success"> </div>
+                            </div>
+                            <div class="tab-content">
+                                <div class="alert alert-danger display-none">
+                                    <button class="close" data-dismiss="alert"></button>  @L("AlertDanger")
+                                </div>
+                                <div class="alert alert-success display-none">
+                                    <button class="close" data-dismiss="alert"></button>  @L("Alertsuccess")
+                                </div>
+                                <div class="tab-pane active" id="tab1">
+                                    <h3 class="block">@L("ProvideRegistrationDetails")</h3>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            @L("CompanyName")
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control placeholder-no-fix" name="TenancyName" placeholder="@L("CompanyName")" />
+                                             
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            @L("AdminLoginName")
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control placeholder-no-fix" name="LoginName" placeholder="@L("AdminLoginName")" />
+                                             
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            @L("Password")
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="password" class="form-control" autocomplete="off" id="admin_password" placeholder="@L("Password")" name="AdminPassword" />
+                                             
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            @L("PasswordRepeat")
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="password" class="form-control" autocomplete="off" placeholder="@L("PasswordRepeat")" name="AdminPasswordRepeat" />
+                                             
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            @L("FullName")
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control placeholder-no-fix" name="FullName" placeholder="@L("FullName")" /> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            @L("EmailAddress")
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" placeholder="@L("EmailAddress")" name="AdminEmailAddress"/> 
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            @L("CellNumber")
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" id="mask_phone" placeholder="@L("CellNumber")" name="CellNumber" /> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab2">
+                                    <h3 class="block"> @L("CountryandBillingDetails")</h3>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            @L("Country")
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <select class="form-control" name="BillingCountryCode" id="BillingCountryCode">
+                                                <option value="">Select One</option>
+                                                @foreach (var item in Model.listCountries)
+                                                {
+                                                <option value="@item.Code">
+                                                    @item.Country
+                                                </option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            @L("CurrencyCode")
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <select class="form-control" name="CurrencyCode" id="CurrencyCode">
+                                                <option value="">Select One</option>
+                                                @foreach (var item in Model.listCurrencies)
+                                                {
+                                                <option value="@item.CurrencyCode">
+                                                    @item.CountryAndCurrency (@item.CurrencyCode)
+                                                </option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>                                     
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            @L("CardHoldersName")
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" placeholder="@L("CardHoldersName")" name="CardHoldersName" /> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            @L("CardNumber")
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" placeholder="@L("CardNumber")" maxlength="16" name="CardNumber" /> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            @L("CVV")
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text"  placeholder="@L("CVV")" class="form-control"  name="CVV" maxlength="4" /> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            @L("Expiration")
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="text" id="mask_expiry"  class="form-control" placeholder="@L("Expiration")" maxlength="7" name="CardExpiration" /> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            @L("CVV")
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <div class="checkbox-list">
+                                                <label>
+                                                    <input type="checkbox" name="payment[]" value="1" data-title="Auto-Pay with this Credit Card." /> @L("AutoPaywiththisCreditCard")
+                                                </label>
+                                                <label>
+                                                    <input type="checkbox" name="payment[]" value="2" data-title="Email me monthly billing." /> @L("Emailmemonthlybilling")
+                                                </label>
+                                            </div>
+                                            <div id="form_payment_error"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab3">
+                                    <h3 class="block">@L("Review")</h3>
+                                    <h4 class="form-section">@L("ProvideRegistrationDetails")</h4>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("CompanyName"):</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="TenancyName"> </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("AdminLoginName"):</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="LoginName"> </p>
+                                        </div>
+                                    </div>
+                                     
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("FullName"):</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="FullName"> </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("EmailAddress"):</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="AdminEmailAddress"> </p>
+                                        </div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("CellNumber"):</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="CellNumber"> </p>
+                                        </div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("CurrentPlan"):</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="@Model.CurrentPlan">@Model.CurrentPlan</p>
+                                        </div>
+                                    </div>
+                                   
+                                    <h4 class="form-section">@L("CountryandBillingDetails")</h4>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("Country"):</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="BillingCountryCode"> </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("CurrencyCode"):</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="CurrencyCode"> </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("CardHoldersName"):</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="CardHoldersName"> </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("CardNumber"):</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="CardNumber"> </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("CVV"):</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="CVV"> </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("Expiration"):</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="CardExpiration"> </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("PaymentOptions"):</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="payment[]"> </p>
+                                        </div>
+                                    </div>
+                                    @if (ViewBag.UseCaptcha)
+                                    {
+                                    <p class="hint">
+                                        @L("Captha_Hint")
+                                    </p>
+                                    <div class="form-group margin-bottom-20">
+                                        @Html.Recaptcha(theme: RecaptchaTheme.Red)
+                                    </div>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <a href="javascript:;" class="btn default button-previous">
+                                        <i class="fa fa-angle-left"></i> @L("Back")
+                                    </a>                                   
+                                    <a href="javascript:;" class="btn btn-outline green button-next">
+                                        @L("Continue")
+                                        <i class="fa fa-angle-right"></i>
+                                    </a> 
+                                    <a class="btn green button-submit" data-toggle="modal" href="#static">@L("Confirm")</a>
+                                </div>
+                            </div>                         
+                        </div>                       
+                    </div>                   
+                </div>                
+            </div>             
+        </div>
+    </div>
+    <div id="static" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">@L("Confirmation")</h4>
+                </div>
+                <div class="modal-body">
+                    <p> @L("EnterOTP")</p> 
+                    <input type="text" id="mark_otp" class="form-control placeholder-no-fix" name="OTP" placeholder="@L("OTP")" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn dark btn-outline">@L("Cancel")</button>
+                    <button type="submit" data-dismiss="modal" onclick="form.submit();" class="btn green">@L("Submit")</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" value="@Model.PlanId" name="PlanId" id="PlanId" />  
+</form>
+
+ 

@@ -1,28 +1,13 @@
 var FormWizard = function () {
 
-$("#form_wizard_1").find(".button-submit").hide();
+   $('#form_wizard_1').find('.button-submit').hide();
+
     return {
         //main function to initiate the module
         init: function () {
             if (!jQuery().bootstrapWizard) {
                 return;
-            }
-
-            function format(state) {
-                if (!state.id) return state.text; // optgroup
-                return "<img class='flag' src='../../assets/global/img/flags/" + state.id.toLowerCase() + ".png'/>&nbsp;&nbsp;" + state.text;
-            }
-
-            $("#Country_list").select2({
-                placeholder: "Select",
-                allowClear: true,
-                formatResult: format,
-                width: 'auto',
-                formatSelection: format,
-                escapeMarkup: function (m) {
-                    return m;
-                }
-            });
+            } 
 
             var form = $('#submit_form');
             var error = $('.alert-danger', form);
@@ -34,65 +19,62 @@ $("#form_wizard_1").find(".button-submit").hide();
                 errorClass: 'help-block help-block-error', // default input error message class
                 focusInvalid: false, // do not focus the last invalid input
                 rules: {
-                    //account
-                    name: {
-                        minlength: 5,
-                        required: true
-                    },
-                    password: {
-                        minlength: 5,
-                        required: true
-                    },
-                    rpassword: {
-                        minlength: 5,
-                        required: true,
-                        equalTo: "#submit_form_password"
-                    },
-                    //profile
-                    fullname: {
-                        required: true
-                    },
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    phone: {
-                        required: true
-                    },
-                    gender: {
-                        required: true
-                    },
-                    address: {
-                        required: true
-                    },
-                    city: {
-                        required: true
-                    },
-                    country: {
-                        required: true
-                    },
-                    //payment
-                    card_name: {
-                        required: true
-                    },
-                    card_number: {
-                        minlength: 16,
-                        maxlength: 16,
-                        required: true
-                    },
-                    card_cvc: {
-                        digits: true,
-                        required: true,
-                        minlength: 3,
-                        maxlength: 4
-                    },
-                    card_expiry_date: {
-                        required: true
-                    },
-                    'payment[]': {
-                        required: true,
-                        minlength: 1
-                    }
+                    
+                TenancyName: {
+                    minlength: 4,
+                    required: true
+                },
+                LoginName: {
+                    minlength: 4,
+                    required: true
+                },
+                FullName: {
+                    required: true
+                },
+                CellNumber: {
+                    required: true
+                }, 
+                AdminEmailAddress: {
+                    required: true,
+                    email: true
+                },
+                AdminPassword: {
+                    required: true
+                },
+                AdminPasswordRepeat: {
+                    required: true
+                },
+                AdminPasswordRepeat: {
+                    equalTo: "#admin_password"
+                },
+                 CurrencyCode: {
+                    required: true
+                },  
+                //payment
+                CardHoldersName: {
+                    required: true
+                },
+                CardNumber: {
+                    minlength: 16,
+                    maxlength: 16,
+                    required: true
+                },
+                CVV: {
+                    digits: true,
+                    required: true,
+                    minlength: 3,
+                    maxlength: 4
+                },
+                CardExpiration: {
+                    required: true
+                },
+                'payment[]': {
+                    required: true,
+                    minlength: 1
+                },
+                BillingCountryCode: {
+                    required: true
+                }  
                 },
 
                 messages: { // custom messages for radio buttons and checkboxes
@@ -136,7 +118,7 @@ $("#form_wizard_1").find(".button-submit").hide();
                     } else { // display success icon for other inputs
                         label
                             .addClass('valid') // mark the current input as valid and display OK icon
-                            .closest('.form-group').removeClass('has-error').addClass('has-success'); // set success class to the control group
+                        .closest('.form-group').removeClass('has-error').addClass('has-success'); // set success class to the control group
                     }
                 },
 
@@ -144,16 +126,17 @@ $("#form_wizard_1").find(".button-submit").hide();
                     success.show();
                     error.hide();
                     form[0].submit();
+            alert('0');
                     //add here some ajax code to submit your form or just call form.submit() if you want to submit the form without ajax
                 }
 
             });
 
-            var displayConfirm = function () {
-                $('#tab4 .form-control-static', form).each(function () {
-                    var input = $('[name="' + $(this).attr("data-display") + '"]', form);
+            var displayConfirm = function() {
+                $('#tab3 .form-control-static', form).each(function(){
+                    var input = $('[name="'+$(this).attr("data-display")+'"]', form);
                     if (input.is(":radio")) {
-                        input = $('[name="' + $(this).attr("data-display") + '"]:checked', form);
+                        input = $('[name="'+$(this).attr("data-display")+'"]:checked', form);
                     }
                     if (input.is(":text") || input.is("textarea")) {
                         $(this).html(input.val());
@@ -163,7 +146,7 @@ $("#form_wizard_1").find(".button-submit").hide();
                         $(this).html(input.attr("data-title"));
                     } else if ($(this).attr("data-display") == 'payment[]') {
                         var payment = [];
-                        $('[name="payment[]"]:checked', form).each(function () {
+                        $('[name="payment[]"]:checked', form).each(function(){ 
                             payment.push($(this).attr('data-title'));
                         });
                         $(this).html(payment.join("<br>"));
@@ -171,7 +154,7 @@ $("#form_wizard_1").find(".button-submit").hide();
                 });
             }
 
-            var handleTitle = function (tab, navigation, index) {
+            var handleTitle = function(tab, navigation, index) {
                 var total = navigation.find('li').length;
                 var current = index + 1;
                 // set wizard title
@@ -205,14 +188,14 @@ $("#form_wizard_1").find(".button-submit").hide();
                 'nextSelector': '.button-next',
                 'previousSelector': '.button-previous',
                 onTabClick: function (tab, navigation, index, clickedIndex) {
-                    return false;
-
+                    //return false;
+                    
                     success.hide();
                     error.hide();
                     if (form.valid() == false) {
                         return false;
                     }
-
+                    
                     handleTitle(tab, navigation, clickedIndex);
                 },
                 onNext: function (tab, navigation, index) {
@@ -241,18 +224,17 @@ $("#form_wizard_1").find(".button-submit").hide();
                 }
             });
 
-            $('#form_wizard_1').find('.button-previous').hide();            
+            $('#form_wizard_1').find('.button-previous').hide();
 
-            //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
-            $('#Country_list', form).change(function () {
-                form.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
-            });
+               
+
+
         }
 
     };
 
 }();
 
-jQuery(document).ready(function () {
+jQuery(document).ready(function() {
     FormWizard.init();
 });
