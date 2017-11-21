@@ -40,6 +40,7 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
         private readonly IRepository<SignonPlans> _planRepository;
         private readonly IRepository<TenantProfile> _TenantProfile;
         private readonly IRepository<TenantPlanBillingDetails> _TenantPlanBillingDetails;
+        private readonly IRepository<TenantCompanyLogo, Guid> _binaryObjectTenant;
 
         public TenantSettingsAppService(
             IRepository<TenantProfile> tenantprofile,
@@ -581,6 +582,19 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
 
                 await _TenantProfile.UpdateAsync(current);
             }
+        }
+
+        public Task SaveAsync(TenantCompanyLogo file)
+        {
+            return _binaryObjectTenant.InsertAsync(file);
+        }
+        public Task<TenantCompanyLogo> GetOrNullAsync(Guid id)
+        {
+            return _binaryObjectTenant.FirstOrDefaultAsync(id);
+        }
+        public Task DeleteAsync(Guid id)
+        {
+            return _binaryObjectTenant.DeleteAsync(id);
         }
         #endregion
     }

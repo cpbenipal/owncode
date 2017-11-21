@@ -13,6 +13,7 @@ using PanelMasterMVC5Separate.Net.MimeTypes;
 using PanelMasterMVC5Separate.Storage;
 using PanelMasterMVC5Separate.Web.Helpers;
 using PanelMasterMVC5Separate.Web.MultiTenancy;
+using PanelMasterMVC5Separate.Configuration.Tenants;
 
 namespace PanelMasterMVC5Separate.Web.Controllers
 {
@@ -20,19 +21,61 @@ namespace PanelMasterMVC5Separate.Web.Controllers
     public class TenantCustomizationController : PanelMasterMVC5SeparateControllerBase
     {
         private readonly TenantManager _tenantManager;
-        private readonly IBinaryObjectManager _binaryObjectManager;
+        private readonly ITenantSettingsAppService _binaryObjectTenant;
         private readonly ITenancyNameFinder _tenancyNameFinder;
-
+        private readonly IBinaryObjectManager _binaryObjectManager;
         public TenantCustomizationController(
             IAppFolders appFolders,
             TenantManager tenantManager,
             IBinaryObjectManager binaryObjectManager,
+             ITenantSettingsAppService binaryObjectTenant,
             ITenancyNameFinder tenancyNameFinder)
         {
             _tenantManager = tenantManager;
             _binaryObjectManager = binaryObjectManager;
+            _binaryObjectTenant = binaryObjectTenant;
             _tenancyNameFinder = tenancyNameFinder;
         }
+
+        [HttpPost]
+        public async Task<JsonResult> UploadCompanyLogo()
+        {
+            try
+            {
+                if (Request.Files.Count <= 0 || Request.Files[0] == null)
+                {
+                    throw new UserFriendlyException(L("File_Empty_Error"));
+                }
+
+                var file = Request.Files[0];
+
+                if (file.ContentLength > 30720) //30KB
+                {
+                    throw new UserFriendlyException(L("File_SizeLimit_Error"));
+                }
+
+                var fileBytes = file.InputStream.GetAllBytes();
+
+                if (!ImageFormatHelper.GetRawImageFormat(fileBytes).IsIn(ImageFormat.Jpeg, ImageFormat.Png, ImageFormat.Gif))
+                {
+                    throw new UserFriendlyException("File_Invalid_Type_Error");
+                }
+
+                var logoObject = new TenantCompanyLogo(AbpSession.GetTenantId(), fileBytes);
+                await _binaryObjectTenant.SaveAsync(logoObject);
+
+                var tenant = await _tenantManager.GetByIdAsync(AbpSession.GetTenantId());
+                tenant.LogoId = logoObject.Id;
+                tenant.LogoFileType = file.ContentType;
+
+                return Json(new AjaxResponse(new { id = logoObject.Id, fileType = tenant.LogoFileType }));
+            }
+            catch (UserFriendlyException ex)
+            {
+                return Json(new AjaxResponse(new ErrorInfo(ex.Message)));
+            }
+        }
+
 
         [HttpPost]
         public async Task<JsonResult> UploadLogo()

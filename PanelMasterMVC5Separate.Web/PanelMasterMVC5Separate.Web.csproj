@@ -559,6 +559,8 @@
     <Content Include="App\tenant\views\insurance_information\index.js" />
     <Content Include="App\tenant\views\Brokers\index.js" />
     <Content Include="App\tenant\views\invoiced_values\index.js" />
+    <Content Include="App\tenant\views\settings\changeLogo.cshtml" />
+    <Content Include="App\tenant\views\settings\changeLogo.js" />
     <Content Include="App\tenant\views\settings\editRegister.js" />
     <Content Include="App\tenant\views\settings\editCompany.js" />
     <Content Include="App\tenant\views\towoperators\createOrEditModal.js" />

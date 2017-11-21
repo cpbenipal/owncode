@@ -252,6 +252,29 @@
                         vm.getRegister();
                     });
                 }
+                
+                vm.changeLogo = function () { 
+                    openUploaded(null); 
+                };
+                
+                function openUploaded(tenantId) { 
+                alert('tenantId');
+                var modalInstance = $uibModal.open({
+                    templateUrl: '~/App/tenant/views/settings/changeLogo.cshtml',
+                    controller: 'tenant.views.settings.changeLogo as vm',
+                    backdrop: 'static',
+                    resolve: {
+                        tenantId: function () {
+                            return tenantId;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (result) {
+                    vm.getCompany();
+                });
+                }      
+
 
                 vm.getCompany = function () {
                     vm.loading = true;
@@ -271,6 +294,8 @@
                             vm.loading = false;
                         });
                 };          
+
+               
 
                 vm.getSettings();                                            
                 vm.getCompany();                 

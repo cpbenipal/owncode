@@ -148,8 +148,7 @@ namespace PanelMasterMVC5Separate.Web.Controllers
                 }
                 //  model.PlanId = Convert.ToInt32(ViewBag.PlanId);
                 CurrentUnitOfWork.SetTenantId(null);
-                int tenantId = 1;
-                /*
+                 
                 var tenantId = await _tenantManager.CreateWithAdminUserAsync(
                  model.TenancyName,
                  model.LoginName,
@@ -178,8 +177,7 @@ namespace PanelMasterMVC5Separate.Web.Controllers
                  defaultEditionId,
                  false,
                  true);
-
-                */
+ 
 
                 ViewBag.UseCaptcha = UseCaptchaOnRegistration();
 
@@ -191,18 +189,18 @@ namespace PanelMasterMVC5Separate.Web.Controllers
                 var user = await _userManager.FindByNameAsync(AbpUserBase.AdminUserName);
 
                 //Directly login if possible
-                //if (tenant.IsActive && user.IsActive && (user.IsEmailConfirmed || !isEmailConfirmationRequiredForLogin))
-                //{
-                //    var loginResult = await GetLoginResultAsync(user.UserName, model.AdminPassword, tenant.TenancyName);
+                if (tenant.IsActive && user.IsActive && (user.IsEmailConfirmed || !isEmailConfirmationRequiredForLogin))
+                {
+                    var loginResult = await GetLoginResultAsync(user.UserName, model.AdminPassword, tenant.TenancyName);
 
-                //    if (loginResult.Result == AbpLoginResultType.Success)
-                //    {
-                //        await SignInAsync(loginResult.User, loginResult.Identity);
-                //        return Redirect("~/Application#!/tenant/settings");
-                //    }
+                    if (loginResult.Result == AbpLoginResultType.Success)
+                    {
+                        await SignInAsync(loginResult.User, loginResult.Identity);
+                        return Redirect("~/Application#!/tenant/settings");
+                    }
 
-                //    Logger.Warn("New registered user could not be login. This should not be normally. login result: " + loginResult.Result);
-                //}
+                    Logger.Warn("New registered user could not be login. This should not be normally. login result: " + loginResult.Result);
+                }
                 return View("RegisterResult", new TenantRegisterResultViewModel
                 {
                     TenancyName = model.TenancyName,

@@ -2,6 +2,8 @@
 using Abp.Application.Services;
 using PanelMasterMVC5Separate.Configuration.Tenants.Dto;
 using System.Collections.Generic;
+using PanelMasterMVC5Separate.MultiTenancy;
+using System;
 
 namespace PanelMasterMVC5Separate.Configuration.Tenants
 {
@@ -25,5 +27,9 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
 
         Task UpdateTenantProfile(TenantRegisterDto input);
         Task UpdateTenantCompany(TenantCompanyDto input);
+
+        Task SaveAsync(TenantCompanyLogo file);
+        Task<TenantCompanyLogo> GetOrNullAsync(Guid id);
+        Task DeleteAsync(Guid id);
     }
 }
