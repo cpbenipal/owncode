@@ -1,0 +1,68 @@
+@using Abp.Configuration
+<div>
+    <form name="EditForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span>@L("Edit"): {{vm.register.fullName}}</span>
+            </h4>
+        </div>
+        <div class="modal-body">
+            <uib-tabset class="tab-container tabbable-line">
+                <uib-tab heading="@L("Registration")"> 
+
+                    <div class="form-group form-md-line-input form-md-label no-hint">
+
+                        <select name="Plans" required class="form-control" ng-model="vm.register.planId" ng-options="opt.id as opt.name for opt in plansList">
+                            <option value="">--Select One--</option>
+                        </select>
+                        <label>@L("CurrentPlan")</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" required name="CardHoldersName" class="form-control" ng-model="vm.register.cardHoldersName" ng-class="{'edited':vm.register.cardHoldersName}" maxlength="128">
+                        <label>@L("CardHoldersName")</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" required name="CardNumber" class="form-control" ng-model="vm.register.cardNumber" ng-class="{'edited':vm.register.cardNumber}" maxlength="16">
+                        <label>@L("CardNumber")</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" required name="CVV" class="form-control" ng-model="vm.register.cvv" ng-class="{'edited':vm.register.cvv}" maxlength="4">
+                        <label>@L("CVV")</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" required id="mask_expiry" name="Expiration" class="form-control" ng-model="vm.register.cardExpiration" ng-class="{'edited':vm.register.cardExpiration}" maxlength="7">
+                        <label>@L("Expiration")</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+
+                        <div class="md-checkbox">
+                            <input id="paymentoption1" class="md-check" type="checkbox" value="1" name="payment[]" ng-model="vm.register.paymentoption1">
+                            <label for="paymentoption1">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                @L("AutoPaywiththisCreditCard")
+                            </label>
+                        </div>
+
+                        <div class="md-checkbox">
+                            <input id="paymentoption2" class="md-check" type="checkbox" value="2" name="payment[]" ng-model="vm.register.paymentoption2">
+                            <label for="paymentoption2">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                @L("Emailmemonthlybilling")
+                            </label>
+                        </div>
+                        <span class="help-block">@L("PaymentOptions")</span>
+                    </div>                   
+                    <div></div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            <button type="submit" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="EditForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+        </div>
+    </form>
+</div>

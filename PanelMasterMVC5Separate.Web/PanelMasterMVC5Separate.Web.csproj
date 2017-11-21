@@ -559,6 +559,8 @@
     <Content Include="App\tenant\views\insurance_information\index.js" />
     <Content Include="App\tenant\views\Brokers\index.js" />
     <Content Include="App\tenant\views\invoiced_values\index.js" />
+    <Content Include="App\tenant\views\settings\editRegister.js" />
+    <Content Include="App\tenant\views\settings\editCompany.js" />
     <Content Include="App\tenant\views\towoperators\createOrEditModal.js" />
     <Content Include="App\tenant\views\towoperators\index.js" />
     <Content Include="App\tenant\views\jobstatuses\createOrEditModal.js" />
@@ -7660,6 +7662,8 @@
     <Content Include="App\tenant\views\towoperators\createOrEditModal.cshtml" />
     <Content Include="App\tenant\views\towoperators\index.cshtml" />
     <Content Include="App\tenant\views\adminforms\index.cshtml" />
+    <Content Include="App\tenant\views\settings\editCompany.cshtml" />
+    <Content Include="App\tenant\views\settings\editRegister.cshtml" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />

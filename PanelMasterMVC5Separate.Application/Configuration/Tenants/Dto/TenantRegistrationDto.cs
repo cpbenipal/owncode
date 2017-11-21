@@ -30,6 +30,11 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants.Dto
         [Required]
         public string companyVatNo { get; set; }
         public string invoicingInstruction { get; set; }
+
+        public string countryName { get; set; } 
+        public string currencyName { get; set; }
+
+        
     }
     public class TenantRegisterDto
     {
@@ -56,6 +61,8 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants.Dto
         public string payment { get; set; }
         public bool paymentoption1 { get; set; }
         public bool paymentoption2 { get; set; }
+        public string CurrentPlan { get; set; }
+        public string FullName { get; set; }
     }
     public class CurrencyDto
     {

@@ -1,0 +1,82 @@
+@using Abp.Configuration
+<div>
+    <form name="EditForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span>@L("Edit"): {{vm.company.companyName}}</span>                
+            </h4>
+        </div>
+        <div class="modal-body">
+            <uib-tabset class="tab-container tabbable-line">
+                <uib-tab heading="@L("Company")">
+
+                    <div class="row">
+                        <div class="col-sm-4 text-center">                            
+                            <img src="@Url.Content("~/Common/Images/default-profile-picture.png")" width="128" height="128" class="img-thumbnail img-rounded user-edit-dialog-profile-image" />
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                                <input class="form-control" type="text" name="Company" ng-class="{'edited':vm.company.companyName}" ng-model="vm.company.companyName" required maxlength="128">
+                                <label>@L("Company")</label>
+                            </div>
+
+                            <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                                <input type="text" name="ContactNumber" class="form-control" ng-class="{'edited':vm.company.phoneNumber}" ng-model="vm.company.phoneNumber" required maxlength="10">
+                                <label>@L("ContactNumber")</label>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" name="FaximileeNumber" class="form-control" ng-class="{'edited':vm.company.faximileeNumber}" ng-model="vm.company.faximileeNumber" maxlength="10">
+                        <label>@L("FaximileeNumber")</label>
+                    </div>
+                     
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" name="Address" class="form-control" ng-model="vm.company.address" ng-class="{'edited':vm.company.address}" maxlength="128">
+                        <label>@L("Address")</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" name="City" class="form-control" ng-model="vm.company.city" ng-class="{'edited':vm.company.city}" maxlength="128">
+                        <label>@L("CityTown")</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-label no-hint">
+                        <select name="Country" class="form-control" ng-model="vm.company.country" ng-options="opt.id as opt.name for opt in countriesList">
+                            <option value="">--Select One--</option>
+                        </select>
+                        <label>@L("Country")</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-label no-hint">
+                        <select name="timezone" class="form-control" ng-model="vm.company.timezone" ng-options="opt.id as opt.name for opt in timezoneList">
+                            <option value="">--Select One--</option>
+                        </select>
+                        <label>@L("Timezone")</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-label no-hint">
+                        <select name="currency" class="form-control" ng-model="vm.company.currency" ng-options="opt.id as opt.name for opt in currencyList">
+                            <option value="">--Select One--</option>
+                        </select>
+                        <label>@L("CurrencyCode")</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" name="CompanyRegistrationNo" class="form-control" ng-model="vm.company.companyRegistrationNo" ng-class="{'edited':vm.company.companyRegistrationNo}" maxlength="128">
+                        <label>@L("CompanyRegistrationNo")</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" name="CompanyVatNo" class="form-control" ng-model="vm.company.companyVatNo" ng-class="{'edited':vm.company.companyVatNo}" maxlength="128">
+                        <label>@L("CompanyVatNo")</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <textarea class="form-control" rows="3" name="InvoicingInstruction" ng-model="vm.company.invoicingInstruction" ng-class="{'edited':vm.company.invoicingInstruction}"></textarea>
+                        <label>@L("InvoicingInstruction")</label>
+                    </div>
+                     
+                </uib-tab>                 
+            </uib-tabset>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            <button type="submit" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="EditForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+        </div>
+    </form>
+</div>

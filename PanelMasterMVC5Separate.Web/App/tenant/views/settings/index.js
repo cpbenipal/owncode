@@ -1,8 +1,7 @@
 ﻿(function () {
-    appModule.controller('tenant.views.settings.index',
-        [
-            '$scope', 'abp.services.app.tenantSettings', 'appSession', 'FileUploader',
-            function ($scope, tenantSettingsService, appSession, fileUploader) {
+    appModule.controller('tenant.views.settings.index',[
+        '$scope', '$uibModal', 'abp.services.app.tenantSettings', 'appSession', 'FileUploader',
+        function ($scope, $uibModal , tenantSettingsService, appSession, fileUploader) {
                 var vm = this;
 
                 var usingDefaultTimeZone = false;
@@ -212,6 +211,48 @@
                     });
                 };
 
+                vm.confirmcompany = function () { 
+                    openEditCompany(null); 
+                };
+
+                function openEditCompany(tenantId) { 
+                    var modalInstance = $uibModal.open({
+                        templateUrl: '~/App/tenant/views/settings/editCompany.cshtml',
+                        controller: 'tenant.views.settings.editCompany as vm',
+                        backdrop: 'static',
+                        resolve: {
+                            tenantId: function () {
+                                return tenantId;
+                            }
+                        }
+                    });
+
+                    modalInstance.result.then(function (result) {
+                        vm.getCompany();
+                    });
+                }
+
+                vm.confirmregister = function () { 
+                    openEditRegister(null); 
+                };
+
+                function openEditRegister(tenantId) { 
+                    var modalInstance = $uibModal.open({
+                        templateUrl: '~/App/tenant/views/settings/editRegister.cshtml',
+                        controller: 'tenant.views.settings.editRegister as vm',
+                        backdrop: 'static',
+                        resolve: {
+                            tenantId: function () {
+                                return tenantId;
+                            }
+                        }
+                    });
+
+                    modalInstance.result.then(function (result) {
+                        vm.getRegister();
+                    });
+                }
+
                 vm.getCompany = function () {
                     vm.loading = true;
                     tenantSettingsService.getCompanyInfo()
@@ -229,48 +270,10 @@
                         }).finally(function () {
                             vm.loading = false;
                         });
-                };
+                };          
 
-            vm.confirmregister = function () {
- 
-                bootbox.prompt(app.localize('EnterOTP'), function(result) {            
-                if (result === "00-00") {
-                   tenantSettingsService.updateTenantProfile(
-                        vm.settings.register
-                    ).then(function () {
-                        abp.notify.info(app.localize('SavedSuccessfully'));
-                        vm.getRegister();
-                    });
-                } 
-                else {
-                  abp.notify.info(app.localize('OTPMismatched'));
-                }
-                });
-            };   
-
-            vm.confirmcompany = function () {
- 
-                bootbox.prompt(app.localize('EnterOTP'), function(result) {            
-                if (result === "00-00") {
-                   tenantSettingsService.updateTenantCompany(
-                        vm.settings.company
-                    ).then(function () {
-                        abp.notify.info(app.localize('SavedSuccessfully'));
-                        vm.getCompany();
-                    });
-                } 
-                else {
-                 abp.notify.info(app.localize('OTPMismatched'));
-                }
-                });
-            };            
-
-                vm.getSettings();
-                vm.getCountry();
-                vm.getTimezone();
-                vm.getCurrency();                              
-                vm.getCompany();
-                vm.getPlans();  
+                vm.getSettings();                                            
+                vm.getCompany();                 
                 vm.getRegister();
                 initUploaders();
             }

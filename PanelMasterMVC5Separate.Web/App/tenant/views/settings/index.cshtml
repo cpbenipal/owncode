@@ -1,5 +1,8 @@
 @using Abp.Configuration
+
 <script src="~/metronic/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="~/metronic/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="~/metronic/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
 <script src="~/metronic/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="~/metronic/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
 <script src="~/metronic/assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
@@ -7,6 +10,9 @@
 <script src="~/metronic/assets/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js" type="text/javascript"></script>
 <script src="~/metronic/assets/pages/scripts/form-input-mask.min.js" type="text/javascript"></script>
 <script src="~/metronic/assets/global/plugins/jquery.input-ip-address-control-1.0.min.js" type="text/javascript"></script>
+<script src="~/metronic/assets/pages/scripts/ui-modals.min.js" type="text/javascript"></script>
+<link href="~/metronic/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
+<link href="~/metronic/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
 <div ng-controller="tenant.views.settings.index as vm">
     <div class="row margin-bottom-5">
         <div class="col-xs-6">
@@ -25,7 +31,7 @@
     <div class="portlet light margin-bottom-0">
         <div class="portlet-body">
             <uib-tabset class="tab-container tabbable-line" active="vm.activeTabIndex">
-                <uib-tab heading="@L("General")" ng-show="!vm.isMultiTenancyEnabled || vm.showTimezoneSelection">
+                @*<uib-tab heading="@L("General")" ng-show="!vm.isMultiTenancyEnabled || vm.showTimezoneSelection">
                     <div ng-if="!vm.isMultiTenancyEnabled || vm.showTimezoneSelection">
                         <div class="form-group form-md-line-input form-md-floating-label no-hint" ng-if="vm.showTimezoneSelection">
                             <timezone-combo selected-timezone="vm.settings.general.timezone" default-timezone-scope="@((int) SettingScopes.Tenant)" class="edited"></timezone-combo>
@@ -33,7 +39,7 @@
                         </div>
                         <div></div>
                     </div>
-                </uib-tab>
+                </uib-tab>*@
 
                 <uib-tab heading="@L("Appearance")">
                     <div class="row">
@@ -334,129 +340,219 @@
                         <input type="password" name="SmtpPassword" class="form-control" ng-class="{'edited':vm.settings.email.smtpPassword}" ng-model="vm.settings.email.smtpPassword" maxlength="128">
                         <label>@L("Password")</label>
                     </div>
-                    
+
                 </uib-tab>
 
 
                 <uib-tab heading="@L("Company")">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("Company"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.company.companyName}} </p>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <input type="text" name="companyName" class="form-control" ng-model="vm.settings.company.companyName" ng-class="{'edited':vm.settings.company.companyName}" maxlength="128">
-                        <label>@L("Company")</label>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <input type="text" name="phoneNumber" class="form-control" ng-model="vm.settings.company.phoneNumber" ng-class="{'edited':vm.settings.company.phoneNumber}" maxlength="10">
-                        <label>@L("ContactNumber")</label>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <input type="text" name="faximileeNumber" class="form-control" ng-model="vm.settings.company.faximileeNumber" ng-class="{'edited':vm.settings.company.faximileeNumber}" maxlength="128">
-                        <label>@L("FaximileeNumber")</label>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <input type="text" name="Address" class="form-control" ng-model="vm.settings.company.address" ng-class="{'edited':vm.settings.company.address}" maxlength="128">
-                        <label>@L("Address")</label>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <input type="text" name="City" class="form-control" ng-model="vm.settings.company.city" ng-class="{'edited':vm.settings.company.city}" maxlength="128">
-                        <label>@L("CityTown")</label>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-label no-hint">
-                        <select name="Country" class="form-control" ng-model="vm.settings.company.country" ng-options="opt.id as opt.name for opt in countriesList">
-                            <option value="">--Select One--</option>
-                        </select>
-                        <label>@L("Country")</label>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-label no-hint">
-                        <select name="timezone" class="form-control" ng-model="vm.settings.company.timezone" ng-options="opt.id as opt.name for opt in timezoneList">
-                            <option value="">--Select One--</option>
-                        </select>
-                        <label>@L("Timezone")</label>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-label no-hint">
-                        <select name="Country" class="form-control" ng-model="vm.settings.company.currency" ng-options="opt.id as opt.name for opt in currencyList">
-                            <option value="">--Select One--</option>
-                        </select>
-                        <label>@L("CurrencyCode")</label>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <input type="text" name="CompanyRegistrationNo" class="form-control" ng-model="vm.settings.company.companyRegistrationNo" ng-class="{'edited':vm.settings.company.companyRegistrationNo}" maxlength="128">
-                        <label>@L("CompanyRegistrationNo")</label>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <input type="text" name="CompanyVatNo" class="form-control" ng-model="vm.settings.company.companyVatNo" ng-class="{'edited':vm.settings.company.companyVatNo}" maxlength="128">
-                        <label>@L("CompanyVatNo")</label>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <textarea class="form-control" rows="3" name="InvoicingInstruction" ng-model="vm.settings.company.invoicingInstruction" ng-class="{'edited':vm.settings.company.invoicingInstruction}"></textarea>
-                        <label>@L("InvoicingInstruction")</label>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-floating-button no-hint">
-                        <button class="btn btn-primary" type="button" ng-click="vm.confirmcompany()">@L("Edit")</button>
-                    </div>
-                    <div></div>
-                    @*<div class="form-group form-md-line-input form-md-floating-button no-hint">
-                        <form>
-                            <div class="form-group">
-                                <input id="CompanyFileInput" type="file" nv-file-select uploader="vm.companyLogoUploader" required />
-                                <span class="help-block m-b-none">@L("CompanyLogo")</span>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("ContactNumber"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.company.phoneNumber}} </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <button class="btn btn-primary" type="button" ng-click="vm.uploadCompanyLogo()">@L("Upload")</button>                             
-                        </form>
-                    </div>*@
-                    <div></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("FaximileeNumber"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.company.faximileeNumber}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("Address"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.company.address}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("CityTown"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.company.city}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("Country"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.company.country}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("Timezone"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.company.timezone}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("CurrencyCode"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.company.currency}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("CompanyRegistrationNo"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.company.companyRegistrationNo}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("CompanyVatNo"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.company.companyVatNo}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("InvoicingInstruction"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.company.invoicingInstruction}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">@L("Logo"):</label>
+                                            <div class="col-md-9">
+                                                <img src="@Url.Content("~/Common/Images/default-profile-picture.png")" width="128" height="128" class="img-thumbnail img-rounded user-edit-dialog-profile-image" />                                                 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">                                             
+                                            <div class="col-md-9">                                                
+                                                <button class="btn btn-primary" type="button">@L("ChangeLogo")</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-9">
+                                                <button class="btn btn-primary" type="button" ng-click="vm.confirmcompany()">@L("Edit")</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
                 </uib-tab>
 
                 <uib-tab heading="@L("Registration")">
-                    <div class="form-group form-md-line-input form-md-label no-hint">
-                         
-                        <select name="Plans" required class="form-control" ng-model="vm.settings.register.planId" ng-options="opt.id as opt.name for opt in plansList">
-                            <option value="">--Select One--</option>
-                        </select>
-                        <label>@L("CurrentPlan")</label>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <input type="text" required name="CardHoldersName" class="form-control" ng-model="vm.settings.register.cardHoldersName" ng-class="{'edited':vm.settings.register.cardHoldersName}" maxlength="128">
-                        <label>@L("CardHoldersName")</label>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <input type="text" required name="CardNumber" class="form-control" ng-model="vm.settings.register.cardNumber" ng-class="{'edited':vm.settings.register.cardNumber}" maxlength="16">
-                        <label>@L("CardNumber")</label>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <input type="text" required name="CVV" class="form-control" ng-model="vm.settings.register.cvv" ng-class="{'edited':vm.settings.register.cvv}" maxlength="4">
-                        <label>@L("CVV")</label>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <input type="text" required id="mask_expiry" name="Expiration" class="form-control" ng-model="vm.settings.register.cardExpiration" ng-class="{'edited':vm.settings.register.cardExpiration}" maxlength="7">
-                        <label>@L("Expiration")</label>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("CurrentPlan"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.register.currentPlan}} </p>
+                                        </div>
+                                    </div>
+                                </div>
 
-                        <div class="md-checkbox">
-                            <input id="paymentoption1" class="md-check" type="checkbox" name="payment[]" ng-model="vm.settings.register.paymentoption1" >
-                            <label for="paymentoption1">
-                                <span class="inc"></span>
-                                <span class="check"></span>
-                                <span class="box"></span>
-                                @L("AutoPaywiththisCreditCard")
-                            </label>
-                        </div>
+                            </div>
 
-                        <div class="md-checkbox">
-                            <input id="paymentoption2" class="md-check" type="checkbox" name="payment[]" ng-model="vm.settings.register.paymentoption2" >
-                            <label for="paymentoption2">
-                                <span class="inc"></span>
-                                <span class="check"></span>
-                                <span class="box"></span>
-                                @L("Emailmemonthlybilling")
-                            </label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("CardNumber"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.register.cardNumber}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("CVV"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.register.cvv}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("Expiration"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.register.cardExpiration}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("PaymentOptions"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static" ng-show="vm.settings.register.paymentoption1"> @L("AutoPaywiththisCreditCard") </p>
+                                            <p class="form-control-static" ng-show="vm.settings.register.paymentoption2"> @L("Emailmemonthlybilling") </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-9">
+                                            <button class="btn btn-primary" type="button" ng-click="vm.confirmregister()">@L("Edit")</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <span class="help-block">@L("PaymentOptions")</span>
-                    </div>
-                    <div class="form-group form-md-line-input form-md-floating-button no-hint">
-                        <button class="btn btn-primary" type="button" ng-click="vm.confirmregister()">@L("Edit")</button>
-                    </div>
-                    <div></div>
+                    </form>
                 </uib-tab>
 
             </uib-tabset>

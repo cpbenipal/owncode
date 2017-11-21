@@ -24,6 +24,7 @@ using PanelMasterMVC5Separate.Vendors;
 using System.Linq;
 using System;
 using PanelMasterMVC5Separate.MultiTenancy;
+using Abp.UI;
 
 namespace PanelMasterMVC5Separate.Configuration.Tenants
 {
@@ -461,8 +462,9 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
                 {
                     retinfo = new TenantRegisterDto()
                     {
-                        TenantId = reginfo.TenantId,
+                        TenantId = reginfo.TenantId,                        
                         planId = reginfo.planId,
+                        CurrentPlan = _planRepository.FirstOrDefault(x => x.Id == reginfo.planId).PlanName,
                         CardHoldersName = reginfo.CardHoldersName,
                         CardNumber = reginfo.CardNumber,
                         CardExpiration = reginfo.CardExpiration,
@@ -483,6 +485,7 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
                         else if (paymentoption[0] == "2")
                             retinfo.paymentoption2 = true;
                     }
+                    retinfo.FullName = _TenantProfile.FirstOrDefault(x => x.TenantId == AbpSession.TenantId).FullName;
                 }
                 return retinfo;
             }
@@ -509,10 +512,12 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
                         companyRegistrationNo = reginfo.CompanyRegistrationNo,
                         companyVatNo = reginfo.CompanyVatNo,
                         country = reginfo.CountryCode,
+                        countryName = _couRepository.FirstOrDefault(x=>x.Code == reginfo.CountryCode).Country,
                         currency = reginfo.CurrencyCode,
+                        currencyName = _currRepository.FirstOrDefault(x => x.CurrencyCode == reginfo.CurrencyCode).CountryAndCurrency,
                         faximileeNumber = reginfo.FaximileeNumber,
                         invoicingInstruction = reginfo.InvoicingInstruction,
-                        timezone = reginfo.Timezone
+                        timezone = reginfo.Timezone 
                     };
                 }
                 return retinfo;
@@ -524,28 +529,35 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
         }
         public async Task UpdateTenantProfile(TenantRegisterDto reginfo)
         {
-            var current = await _TenantPlanBillingDetails.FirstOrDefaultAsync(x => x.TenantId == AbpSession.TenantId);
-            if (current != null)
+            if (reginfo.paymentoption1 == false && reginfo.paymentoption2 == false)
             {
-                string payment = "";
-                if (reginfo.paymentoption1 == true)
+                throw new UserFriendlyException("Payment options is required");
+            }
+            else
+            {
+                var current = await _TenantPlanBillingDetails.FirstOrDefaultAsync(x => x.TenantId == AbpSession.TenantId);
+                if (current != null)
                 {
-                    payment = "1";
-                }
-                if (reginfo.paymentoption2 == true)
-                {
-                    payment += (payment != "") ? "," : "";
-                    payment += "2";
-                }
+                    string payment = "";
+                    if (reginfo.paymentoption1 == true)
+                    {
+                        payment = "1";
+                    }
+                    if (reginfo.paymentoption2 == true)
+                    {
+                        payment += (payment != "") ? "," : "";
+                        payment += "2";
+                    }
 
-                current.TenantId = reginfo.TenantId;
-                current.planId = reginfo.planId;
-                current.CardHoldersName = reginfo.CardHoldersName;
-                current.CardNumber = reginfo.CardNumber;
-                current.CardExpiration = reginfo.CardExpiration;
-                current.CVV = reginfo.CVV;
-                current.PaymentOptions = payment;
-                await _TenantPlanBillingDetails.UpdateAsync(current);
+                    current.TenantId = reginfo.TenantId;
+                    current.planId = reginfo.planId;
+                    current.CardHoldersName = reginfo.CardHoldersName;
+                    current.CardNumber = reginfo.CardNumber;
+                    current.CardExpiration = reginfo.CardExpiration;
+                    current.CVV = reginfo.CVV;
+                    current.PaymentOptions = payment;
+                    await _TenantPlanBillingDetails.UpdateAsync(current);
+                }
             }
         }
 

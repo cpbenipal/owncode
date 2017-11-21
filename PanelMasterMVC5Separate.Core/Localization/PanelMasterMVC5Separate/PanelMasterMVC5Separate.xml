@@ -623,5 +623,6 @@
     <text name="Registration">Registration</text>
     <text name="CountryandBillingDetails">Country and Billing Details</text>
     <text name="AdminFunctions" value="Admin Functions" />
+    <text name="ChangeLogo" value="Change Logo" />
   </texts>
 </localizationDictionary>

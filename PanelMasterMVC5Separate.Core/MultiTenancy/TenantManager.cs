@@ -365,7 +365,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
 
                 return newTenantId;
              
-        }
+        }         
 
         private void CreateTowOperators(int tenantId, string CountryCode)
         {

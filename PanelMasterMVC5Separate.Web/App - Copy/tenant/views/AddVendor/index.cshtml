@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+
+    <!-- BEGIN PAGE TITLE-->
+    <h1 class="page-title">
+        New Vendor
+        <small>Infomation</small>
+    </h1>
+    <!-- END PAGE TITLE-->
+    <!-- END PAGE HEADER-->
+    <form ng-controller="tenant.views.AddVendor.index as vm" class="form-horizontal" action="#" id="submit_form" method="POST">
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN SAMPLE FORM PORTLET-->
+                <div class="portlet light bordered">
+
+                    <div class="tabbable-line boxless tabbable-reversed">
+                        <div class="tab-content">
+
+                            <div class="portlet box green">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-gift"></i>Fill vendor detail
+                                    </div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse"> </a>
+                                        <a href="#portlet-config" data-toggle="modal" class="config"> </a>
+                                        <a href="javascript:;" class="reload"> </a>
+                                        <a href="javascript:;" class="remove"> </a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+
+                                    <div class="form-body">
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Supplier Name</label>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon input-circle-left">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </span>
+                                                    <input type="text" ng-model="vm.mainVendor.SupplierName" class="form-control input-circle-right" placeholder="Supplier Name">
+                                                </div>
+                                            </div>
+                                        </div>                                        
+                                        
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Registration Number</label>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon input-circle-left">
+                                                        <i class="fa fa-registered"></i>
+                                                    </span>
+                                                    <input type="text" ng-model="vm.mainVendor.RegistrationNumber"class="form-control input-circle-right" placeholder="Registration">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Tax Registration Number</label>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon input-circle-left">
+                                                        <i class="fa fa-registered"></i>
+                                                    </span>
+                                                    <input type="text" ng-model="vm.mainVendor.TaxRegistrationNumber" class="form-control input-circle-right" placeholder="Tax Registration">
+                                                </div>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                    <div class="form-actions">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="button" class="btn btn-circle green button-submit">Submit</button>
+                                                <button type="button" class="btn btn-circle grey-salsa btn-outline">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END SAMPLE FORM PORTLET-->
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </form>
+  
+    <script>
+        $(document).ready(function () {
+            $('#clickmewow').click(function () {
+                $('#radio1003').attr('checked', 'checked');
+            });
+        })
+    </script>
+</body>
+</html>
