@@ -75,7 +75,7 @@
             };
             function init() { 
                 tenantSettingsService.getCompanyInfo().then(function (result) {
-                    vm.company = result.data;                     
+                    vm.company = result.data;                   
                 });
             }
 

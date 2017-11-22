@@ -47,9 +47,7 @@ var FormWizard = function () {
                 AdminPasswordRepeat: {
                     equalTo: "#admin_password"
                 },
-                 CurrencyCode: {
-                    required: true
-                },  
+                 
                 //payment
                 CardHoldersName: {
                     required: true
@@ -72,9 +70,18 @@ var FormWizard = function () {
                     required: true,
                     minlength: 1
                 },
+                CurrencyCode: {
+                    required: true
+                }, 
                 BillingCountryCode: {
                     required: true
-                }  
+                },
+                CountryCode: {
+                    required: true
+                },
+                BillingCurrencyCode: {
+                    required: true
+                }, 
                 },
 
                 messages: { // custom messages for radio buttons and checkboxes

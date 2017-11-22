@@ -21,7 +21,7 @@
                 vm.loading = false;
                 vm.settings = null;
                 vm.tenant = appSession.tenant;
-
+               
                 vm.logoUploader = undefined;
                 vm.customCssUploader = undefined;
 
@@ -33,6 +33,7 @@
                             initialTimeZone = vm.settings.general.timezone;
                             usingDefaultTimeZone = vm.settings.general.timezoneForComparison ===
                                 abp.setting.values["Abp.Timing.TimeZone"];
+                               
                         }).finally(function () {
                             vm.loading = false;
                         });
@@ -71,7 +72,7 @@
                 };
 
                 $scope.timezoneList = []; //list of timezones
-                vm.getTimezone = function () {
+                vm.getTimezone = function () {                    
                     tenantSettingsService.getTimeZones()
                         .then(function (ins_obj) {
                             angular.forEach(ins_obj.data, function (insvalue, key1) {
@@ -211,11 +212,11 @@
                     });
                 };
 
-                vm.confirmcompany = function () { 
-                    openEditCompany(null); 
+                vm.confirmcompany = function () {                      
+                    openEditCompany(abp.session.tenantId); 
                 };
 
-                function openEditCompany(tenantId) { 
+                function openEditCompany(tenantId) {  
                     var modalInstance = $uibModal.open({
                         templateUrl: '~/App/tenant/views/settings/editCompany.cshtml',
                         controller: 'tenant.views.settings.editCompany as vm',
@@ -258,7 +259,7 @@
                 };
                 
                 function openUploaded(tenantId) { 
-                alert('tenantId');
+                
                 var modalInstance = $uibModal.open({
                     templateUrl: '~/App/tenant/views/settings/changeLogo.cshtml',
                     controller: 'tenant.views.settings.changeLogo as vm',
@@ -281,6 +282,11 @@
                     tenantSettingsService.getCompanyInfo()
                         .then(function (result) {
                             vm.settings.company = result.data;
+ 
+                            if(vm.settings.company.timezone==null)
+                                {
+                                vm.settings.company.timezone = abp.setting.values["Abp.Timing.TimeZone"];                                
+                             }
                         }).finally(function () {
                             vm.loading = false;
                         });

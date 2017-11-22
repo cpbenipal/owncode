@@ -33,8 +33,7 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants.Dto
 
         public string countryName { get; set; } 
         public string currencyName { get; set; }
-
-        
+        public string cellNumber { get; set; }
     }
     public class TenantRegisterDto
     {

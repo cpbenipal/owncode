@@ -171,7 +171,13 @@ namespace PanelMasterMVC5Separate.Web.Models.TenantRegistration
         public string BillingCountryCode { get; set; }
 
         [Required]
+        public string CountryCode { get; set; }
+
+        [Required]
         public string CurrencyCode { get; set; }
+
+        [Required]
+        public string BillingCurrencyCode { get; set; }
 
         [Required(ErrorMessage = "Card Holders Name is required")]
         [DisplayName("Card Holders Name")]

@@ -83,7 +83,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             _countries = countries;
             _countryandcurrency = countryandcurrency;
         }
-
+   
         public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress, string connectionString, bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin, bool sendActivationEmail)
         {
             int newTenantId;
@@ -232,140 +232,142 @@ namespace PanelMasterMVC5Separate.MultiTenancy
 
             return newTenantId;
         }
-
+   
         public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress,
-            string fullName, string cellnumber, 
-            //string phoneNumber, string companyRegistrationNo, string companyVatNo, string address, string city, string countrycode, 
+            string fullName, string cellnumber,
+            //string phoneNumber, string companyRegistrationNo, string companyVatNo, string address, string city, 
+            string countrycode, string currencycode,
             //string invoicinginstruction,
-            string billingcountrycode, string currencycode, 
+            string billingcountrycode, string billingcurrencycode,
             //string timezone, 
             string cardHoldersName, string cardNumber, string cardExpiration, string cVV, string payment, int planId, string connectionString,
             bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin, bool sendActivationEmail)
         {
-            
 
-                int newTenantId;
-                long newAdminId;
 
-                using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            int newTenantId;
+            long newAdminId;
+
+            using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                //Create tenant
+                var tenant = new Tenant(tenancyName.Replace(" ", "-"), name)
                 {
-                    //Create tenant
-                    var tenant = new Tenant(tenancyName.Replace(" ", "-"), name)
+                    IsActive = isActive,
+                    EditionId = editionId,
+                    ConnectionString = connectionString.IsNullOrWhiteSpace() ? null : SimpleStringCipher.Instance.Encrypt(connectionString)
+                };
+                string invoicinginstruction = "Payment instructions if necessary. Tell recipients how to make out their check (cheque) payment. If you expect payments by wire transfer, you should provide your bank ";
+                await CreateAsync(tenant);
+                await _unitOfWorkManager.Current.SaveChangesAsync(); //To get new tenant's id.
+
+                //Save Newly tenant Profile
+                var tenantprofile = new TenantProfile()
+                {
+                    FullName = fullName,
+                    //PhoneNumber = phoneNumber,
+                    CompanyName = tenancyName,
+                    CellNumber = cellnumber,
+                    // CompanyRegistrationNo = companyRegistrationNo,
+                    // CompanyVatNo = companyVatNo,
+                    // Address = address,
+                    // City = city,
+                    CountryCode = countrycode,
+                    CurrencyCode = currencycode,
+                    // Timezone = timezone,
+                    InvoicingInstruction = invoicinginstruction,
+                    TenantId = tenant.Id
+                };
+
+                await _TenantProfile.InsertAsync(tenantprofile);
+                // Save Newly Tenant Proflie billing Details
+                var tenantbilling = new TenantPlanBillingDetails()
+                {
+                    CardHoldersName = cardHoldersName,
+                    CardNumber = cardNumber,
+                    CardExpiration = cardExpiration,
+                    CVV = cVV,
+                    planId = planId,
+                    TenantId = tenant.Id,
+                    BillingCountryCode = billingcountrycode,
+                    CurrencyCode = billingcountrycode,
+                    PaymentOptions = payment
+                };
+                await _TenantPlanBillingDetails.InsertAsync(tenantbilling);
+
+                // Add TowOperators
+                CreateTowOperators(tenant.Id, billingcountrycode);
+
+                //Create tenant database
+                _abpZeroDbMigrator.CreateOrMigrateForTenant(tenant);
+
+                //We are working entities of new tenant, so changing tenant filter
+                using (_unitOfWorkManager.Current.SetTenantId(tenant.Id))
+                {
+                    //Create static roles for new tenant
+                    CheckErrors(await _roleManager.CreateStaticRoles(tenant.Id));
+                    await _unitOfWorkManager.Current.SaveChangesAsync(); //To get static role ids
+
+                    //grant all permissions to admin role
+                    var adminRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.Admin);
+                    await _roleManager.GrantAllPermissionsAsync(adminRole);
+
+                    //User role should be default
+                    var userRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.User);
+                    userRole.IsDefault = true;
+                    CheckErrors(await _roleManager.UpdateAsync(userRole));
+
+                    //Create admin user for the tenant
+                    if (adminPassword.IsNullOrEmpty())
                     {
-                        IsActive = isActive,
-                        EditionId = editionId,
-                        ConnectionString = connectionString.IsNullOrWhiteSpace() ? null : SimpleStringCipher.Instance.Encrypt(connectionString)
-                    };
-
-                    await CreateAsync(tenant);
-                    await _unitOfWorkManager.Current.SaveChangesAsync(); //To get new tenant's id.
-
-                    //Save Newly tenant Profile
-                    var tenantprofile = new TenantProfile()
-                    {
-                        FullName = fullName,
-                        //PhoneNumber = phoneNumber,
-                        CompanyName = tenancyName,
-                        CellNumber = cellnumber,
-                        // CompanyRegistrationNo = companyRegistrationNo,
-                        // CompanyVatNo = companyVatNo,
-                        // Address = address,
-                        // City = city,
-                        // CountryCode = countrycode,
-                        // Timezone = timezone,
-                        // InvoicingInstruction = invoicinginstruction,
-                        TenantId = tenant.Id
-                    };
-
-                    await _TenantProfile.InsertAsync(tenantprofile);
-                    // Save Newly Tenant Proflie billing Details
-                    var tenantbilling = new TenantPlanBillingDetails()
-                    {
-                        CardHoldersName = cardHoldersName,
-                        CardNumber = cardNumber,
-                        CardExpiration = cardExpiration,
-                        CVV = cVV,
-                        planId = planId,
-                        TenantId = tenant.Id,
-                        BillingCountryCode = billingcountrycode,
-                        CurrencyCode = currencycode,
-                        PaymentOptions = payment
-                    };
-                    await _TenantPlanBillingDetails.InsertAsync(tenantbilling);
-
-                    // Add TowOperators
-                    CreateTowOperators(tenant.Id, billingcountrycode);
-
-                    //Create tenant database
-                    _abpZeroDbMigrator.CreateOrMigrateForTenant(tenant);
-
-                    //We are working entities of new tenant, so changing tenant filter
-                    using (_unitOfWorkManager.Current.SetTenantId(tenant.Id))
-                    {
-                        //Create static roles for new tenant
-                        CheckErrors(await _roleManager.CreateStaticRoles(tenant.Id));
-                        await _unitOfWorkManager.Current.SaveChangesAsync(); //To get static role ids
-
-                        //grant all permissions to admin role
-                        var adminRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.Admin);
-                        await _roleManager.GrantAllPermissionsAsync(adminRole);
-
-                        //User role should be default
-                        var userRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.User);
-                        userRole.IsDefault = true;
-                        CheckErrors(await _roleManager.UpdateAsync(userRole));
-
-                        //Create admin user for the tenant
-                        if (adminPassword.IsNullOrEmpty())
-                        {
-                            adminPassword = User.CreateRandomPassword();
-                        }
-
-                        var adminUser = User.CreateTenantAdminUser(tenant.Id, adminEmailAddress, adminPassword);
-                        adminUser.ShouldChangePasswordOnNextLogin = shouldChangePasswordOnNextLogin;
-                        adminUser.IsActive = true;
-
-                        CheckErrors(await _userManager.CreateAsync(adminUser));
-                        await _unitOfWorkManager.Current.SaveChangesAsync(); //To get admin user's id
-
-                        //Assign admin user to admin role!
-                        CheckErrors(await _userManager.AddToRoleAsync(adminUser.Id, adminRole.Name));
-
-                        //Notifications
-                        await _appNotifier.WelcomeToTheApplicationAsync(adminUser);
-
-                        //Send activation email
-                        if (sendActivationEmail)
-                        {
-                            adminUser.SetNewEmailConfirmationCode();
-                            await _userEmailer.SendEmailActivationLinkAsync(adminUser, adminPassword);
-                        }
-
-                        await _unitOfWorkManager.Current.SaveChangesAsync();
-
-                        await _demoDataBuilder.BuildForAsync(tenant);
-
-                        newTenantId = tenant.Id;
-                        newAdminId = adminUser.Id;
+                        adminPassword = User.CreateRandomPassword();
                     }
 
+                    var adminUser = User.CreateTenantAdminUser(tenant.Id, adminEmailAddress, adminPassword);
+                    adminUser.ShouldChangePasswordOnNextLogin = shouldChangePasswordOnNextLogin;
+                    adminUser.IsActive = true;
+
+                    CheckErrors(await _userManager.CreateAsync(adminUser));
+                    await _unitOfWorkManager.Current.SaveChangesAsync(); //To get admin user's id
+
+                    //Assign admin user to admin role!
+                    CheckErrors(await _userManager.AddToRoleAsync(adminUser.Id, adminRole.Name));
+
+                    //Notifications
+                    await _appNotifier.WelcomeToTheApplicationAsync(adminUser);
+
+                    //Send activation email
+                    if (sendActivationEmail)
+                    {
+                        adminUser.SetNewEmailConfirmationCode();
+                        await _userEmailer.SendEmailActivationLinkAsync(adminUser, adminPassword);
+                    }
+
+                    await _unitOfWorkManager.Current.SaveChangesAsync();
+
+                    await _demoDataBuilder.BuildForAsync(tenant);
+
+                    newTenantId = tenant.Id;
+                    newAdminId = adminUser.Id;
+                }
+
+                await uow.CompleteAsync();
+            }
+
+            //Used a second UOW since UOW above sets some permissions and _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync needs these permissions to be saved.
+            using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
+                {
+                    await _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(new UserIdentifier(newTenantId, newAdminId));
+                    await _unitOfWorkManager.Current.SaveChangesAsync();
                     await uow.CompleteAsync();
                 }
+            }
 
-                //Used a second UOW since UOW above sets some permissions and _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync needs these permissions to be saved.
-                using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
-                {
-                    using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
-                    {
-                        await _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(new UserIdentifier(newTenantId, newAdminId));
-                        await _unitOfWorkManager.Current.SaveChangesAsync();
-                        await uow.CompleteAsync();
-                    }
-                }
+            return newTenantId;
 
-                return newTenantId;
-             
-        }         
+        }
 
         private void CreateTowOperators(int tenantId, string CountryCode)
         {
@@ -390,10 +392,10 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                 _TowOperator.Insert(tow);
             }
         }
-        
+
         public virtual string GetCurrentTenantPlan(int PlanId)
         {
-             return  _SignonPlansRepository.FirstOrDefault(x=>x.Id == PlanId).PlanName;             
+            return _SignonPlansRepository.FirstOrDefault(x => x.Id == PlanId).PlanName;
         }
         public virtual List<SignonPlans> GetTenantPlans()
         {

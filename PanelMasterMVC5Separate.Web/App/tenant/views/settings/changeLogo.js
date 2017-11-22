@@ -4,14 +4,17 @@
         function ($scope, appSession, $uibModalInstance, fileUploader, profileService) {
             var vm = this;
             vm.logoUploader = null;
+           
             vm.logoUploader = undefined;
-
             vm.uploadLogo = function () {
                 vm.logoUploader.uploadAll();
             };
+
+            
+
             function initUploaders() {
                 vm.logoUploader = createUploader(
-                    "TenantCustomization/UploadCompanyLogo",
+                    "Company/UploadLogo",
                     [{
                         name: 'imageFilter',
                         fn: function (item, options) {
@@ -34,8 +37,40 @@
                         appSession.tenant.logoFileType = result.fileType;
                         appSession.tenant.logoId = result.id;
                         $('#LogoFileInput').val(null);
+                        $uibModalInstance.close();
                     }
                 );
+            }
+             
+            vm.cancel = function () {
+                $uibModalInstance.dismiss();
+            };
+
+            function createUploader(url, filters, success) {
+                var uploader = new fileUploader({
+                    url: abp.appPath + url,
+                    headers: {
+                        "X-XSRF-TOKEN": abp.security.antiForgery.getToken()
+                    },
+                    queueLimit: 1,
+                    removeAfterUpload: true
+                });
+
+                if (filters) {
+                    uploader.filters = filters;
+                }
+
+                uploader.onSuccessItem = function (item, ajaxResponse, status) {
+                    if (ajaxResponse.success) {
+                        abp.notify.info(app.localize('SavedSuccessfully'));
+                        success && success(ajaxResponse.result);
+                    } else {
+                        abp.message.error(ajaxResponse.error.message);
+                    }
+                };
+
+                return uploader;
+            }
             initUploaders();
         }
     ]);

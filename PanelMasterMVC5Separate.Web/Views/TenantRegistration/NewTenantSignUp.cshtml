@@ -107,7 +107,7 @@
                                     <a href="#tab2" data-toggle="tab" class="step">
                                         <span class="number"> 2 </span>
                                         <span class="desc">
-                                            <i class="fa fa-check"></i> @L("CountryBillingDetails")
+                                            <i class="fa fa-check"></i> @L("Billing")
                                         </span>
                                     </a>
                                 </li>                               
@@ -201,9 +201,43 @@
                                             <input type="text" class="form-control" id="mask_phone" placeholder="@L("CellNumber")" name="CellNumber" /> 
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            @L("Country")
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <select class="form-control" name="CountryCode" id="CountryCode">
+                                                <option value="">Select One</option>
+                                                @foreach (var item in Model.listCountries)
+                                                {
+                                                <option value="@item.Code">
+                                                    @item.Country
+                                                </option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            @L("CurrencyCode")
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <select class="form-control" name="CurrencyCode" id="CurrencyCode">
+                                                <option value="">Select One</option>
+                                                @foreach (var item in Model.listCurrencies)
+                                                {
+                                                <option value="@item.CurrencyCode">
+                                                    @item.CountryAndCurrency (@item.CurrencyCode)
+                                                </option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>  
                                 </div>
                                 <div class="tab-pane" id="tab2">
-                                    <h3 class="block"> @L("CountryandBillingDetails")</h3>
+                                    <h3 class="block"> @L("Billing")</h3>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">
                                             @L("Country")
@@ -227,7 +261,7 @@
                                             <span class="required"> * </span>
                                         </label>
                                         <div class="col-md-4">
-                                            <select class="form-control" name="CurrencyCode" id="CurrencyCode">
+                                            <select class="form-control" name="BillingCurrencyCode" id="BillingCurrencyCode">
                                                 <option value="">Select One</option>
                                                 @foreach (var item in Model.listCurrencies)
                                                 {
@@ -327,13 +361,25 @@
                                         </div>
                                     </div> 
                                     <div class="form-group">
+                                        <label class="control-label col-md-3">@L("Country"):</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="CountryCode"> </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("CurrencyCode"):</label>
+                                        <div class="col-md-4">
+                                            <p class="form-control-static" data-display="CurrencyCode"> </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="control-label col-md-3">@L("CurrentPlan"):</label>
                                         <div class="col-md-4">
                                             <p class="form-control-static" data-display="@Model.CurrentPlan">@Model.CurrentPlan</p>
                                         </div>
                                     </div>
                                    
-                                    <h4 class="form-section">@L("CountryandBillingDetails")</h4>
+                                    <h4 class="form-section">@L("Billing")</h4>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">@L("Country"):</label>
                                         <div class="col-md-4">
@@ -343,7 +389,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3">@L("CurrencyCode"):</label>
                                         <div class="col-md-4">
-                                            <p class="form-control-static" data-display="CurrencyCode"> </p>
+                                            <p class="form-control-static" data-display="BillingCurrencyCode"> </p>
                                         </div>
                                     </div>
                                     <div class="form-group">

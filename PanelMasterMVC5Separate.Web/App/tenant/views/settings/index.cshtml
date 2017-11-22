@@ -31,7 +31,7 @@
     <div class="portlet light margin-bottom-0">
         <div class="portlet-body">
             <uib-tabset class="tab-container tabbable-line" active="vm.activeTabIndex">
-                @*<uib-tab heading="@L("General")" ng-show="!vm.isMultiTenancyEnabled || vm.showTimezoneSelection">
+                <uib-tab heading="@L("General")" ng-show="!vm.isMultiTenancyEnabled || vm.showTimezoneSelection">
                     <div ng-if="!vm.isMultiTenancyEnabled || vm.showTimezoneSelection">
                         <div class="form-group form-md-line-input form-md-floating-label no-hint" ng-if="vm.showTimezoneSelection">
                             <timezone-combo selected-timezone="vm.settings.general.timezone" default-timezone-scope="@((int) SettingScopes.Tenant)" class="edited"></timezone-combo>
@@ -39,7 +39,7 @@
                         </div>
                         <div></div>
                     </div>
-                </uib-tab>*@
+                </uib-tab> 
 
                 <uib-tab heading="@L("Appearance")">
                     <div class="row">
@@ -361,7 +361,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3">@L("ContactNumber"):</label>
                                         <div class="col-md-9">
-                                            <p class="form-control-static"> {{vm.settings.company.phoneNumber}} </p>
+                                            <p class="form-control-static"> {{vm.settings.company.cellNumber}} </p>
                                         </div>
                                     </div>
                                 </div>
@@ -400,7 +400,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3">@L("Country"):</label>
                                         <div class="col-md-9">
-                                            <p class="form-control-static"> {{vm.settings.company.country}} </p>
+                                            <p class="form-control-static"> {{vm.settings.company.countryName}} </p>
                                         </div>
                                     </div>
                                 </div>
@@ -420,7 +420,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3">@L("CurrencyCode"):</label>
                                         <div class="col-md-9">
-                                            <p class="form-control-static"> {{vm.settings.company.currency}} </p>
+                                            <p class="form-control-static"> {{vm.settings.company.currencyName}} </p>
                                         </div>
                                     </div>
                                 </div>
@@ -462,7 +462,8 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-3">@L("Logo"):</label>
                                             <div class="col-md-9">
-                                                <img src="@Url.Content("~/Common/Images/default-profile-picture.png")" width="128" height="128" class="img-thumbnail img-rounded user-edit-dialog-profile-image" />                                                 
+                                                <img ng-if="vm.settings.company.tenantId" ng-src="@Url.Action("GetTenantLogo", "Company" )?tenantId={{vm.settings.company.tenantId}}" width="128" height="128" class="img-thumbnail img-rounded user-edit-dialog-profile-image" />
+                                                <img ng-if="!vm.settings.company.tenantId" src="@Url.Content("~/Common/Images/default-profile-picture.png")" width="128" height="128" class="img-thumbnail img-rounded user-edit-dialog-profile-image" />                                                 
                                             </div>
                                         </div>
                                     </div>

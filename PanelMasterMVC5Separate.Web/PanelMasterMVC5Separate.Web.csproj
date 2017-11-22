@@ -8440,6 +8440,7 @@
     <Compile Include="Controllers\BrokerController.cs" />
     <Compile Include="Controllers\ManufactureController.cs" />
     <Compile Include="Controllers\InsurerController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Models\Layout\TenantCustomCssViewModel.cs" />
     <Compile Include="App_Start\Bundling\CssRewriteUrlWithVirtualDirectoryTransform.cs" />
     <Compile Include="App_Start\Bundling\AsIsBundleOrderer.cs" />

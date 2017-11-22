@@ -40,7 +40,7 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
         private readonly IRepository<SignonPlans> _planRepository;
         private readonly IRepository<TenantProfile> _TenantProfile;
         private readonly IRepository<TenantPlanBillingDetails> _TenantPlanBillingDetails;
-        private readonly IRepository<TenantCompanyLogo, Guid> _binaryObjectTenant;
+
 
         public TenantSettingsAppService(
             IRepository<TenantProfile> tenantprofile,
@@ -50,7 +50,9 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
             ITimeZoneService timeZoneService,
             IBinaryObjectManager binaryObjectManager,
             IRepository<CountryandCurrency> currRepository,
-            IRepository<Countries> couRepository, IRepository<SignonPlans> planRepository)
+            IRepository<Countries> couRepository,
+            IRepository<SignonPlans> planRepository
+             )
         {
             _TenantPlanBillingDetails = tenantplanbillingdetails;
             _TenantProfile = tenantprofile;
@@ -463,7 +465,7 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
                 {
                     retinfo = new TenantRegisterDto()
                     {
-                        TenantId = reginfo.TenantId,                        
+                        TenantId = reginfo.TenantId,
                         planId = reginfo.planId,
                         CurrentPlan = _planRepository.FirstOrDefault(x => x.Id == reginfo.planId).PlanName,
                         CardHoldersName = reginfo.CardHoldersName,
@@ -507,18 +509,18 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
                     {
                         TenantId = reginfo.TenantId,
                         address = reginfo.Address,
-                        phoneNumber = reginfo.PhoneNumber,
+                        cellNumber = reginfo.CellNumber,
                         city = reginfo.City,
                         companyName = reginfo.CompanyName,
                         companyRegistrationNo = reginfo.CompanyRegistrationNo,
                         companyVatNo = reginfo.CompanyVatNo,
                         country = reginfo.CountryCode,
-                        countryName = _couRepository.FirstOrDefault(x=>x.Code == reginfo.CountryCode).Country,
+                        countryName = reginfo.CountryCode != null ? _couRepository.FirstOrDefault(x => x.Code == reginfo.CountryCode).Country : "",
                         currency = reginfo.CurrencyCode,
-                        currencyName = _currRepository.FirstOrDefault(x => x.CurrencyCode == reginfo.CurrencyCode).CountryAndCurrency,
+                        currencyName = reginfo.CurrencyCode != null ? _currRepository.FirstOrDefault(x => x.CurrencyCode == reginfo.CurrencyCode).CountryAndCurrency : "",
                         faximileeNumber = reginfo.FaximileeNumber,
                         invoicingInstruction = reginfo.InvoicingInstruction,
-                        timezone = reginfo.Timezone 
+                        timezone = reginfo.Timezone
                     };
                 }
                 return retinfo;
@@ -584,18 +586,6 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
             }
         }
 
-        public Task SaveAsync(TenantCompanyLogo file)
-        {
-            return _binaryObjectTenant.InsertAsync(file);
-        }
-        public Task<TenantCompanyLogo> GetOrNullAsync(Guid id)
-        {
-            return _binaryObjectTenant.FirstOrDefaultAsync(id);
-        }
-        public Task DeleteAsync(Guid id)
-        {
-            return _binaryObjectTenant.DeleteAsync(id);
-        }
         #endregion
     }
 }

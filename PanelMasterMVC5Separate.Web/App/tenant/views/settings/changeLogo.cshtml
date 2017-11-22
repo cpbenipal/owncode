@@ -3,7 +3,7 @@
     <form name="mySettingsForm" role="form" novalidate class="form-validation">
         <div class="modal-header">
             <h3 class="modal-title">
-                <span>Upload company logo</span>
+                <span>@L("ChangeProfilePicture")</span>
             </h3>
         </div>
         <div class="modal-body">
@@ -11,11 +11,10 @@
                 <input id="LogoFileInput" type="file" nv-file-select uploader="vm.logoUploader" required />
                 <span class="help-block m-b-none">@L("UploadLogo_Info")</span>
             </div>
-            <img id="ProfilePictureResize" src="" ng-show="vm.uploadedFileName"/>
         </div>
         <div class="modal-footer">
-            <button type="button" ng-disabled="vm.saving" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
-            <button type="submit" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="mySettingsForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+            <button class="btn btn-primary" type="button" ng-click="vm.uploadLogo()">@L("Upload")</button>
+            <button class="btn btn-default" type="button" ng-click="vm.cancel()">@L("Cancel")</button>
         </div>
     </form>
 </div>

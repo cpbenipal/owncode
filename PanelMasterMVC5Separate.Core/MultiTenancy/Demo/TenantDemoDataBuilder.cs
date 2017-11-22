@@ -35,7 +35,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy.Demo
         private readonly OrganizationUnitManager _organizationUnitManager;
         private readonly UserManager _userManager;
         private readonly RandomUserGenerator _randomUserGenerator;
-        private readonly IBinaryObjectManager _binaryObjectManager;
+        private readonly IBinaryTenantManager _binaryObjectManager;
         private readonly IAppFolders _appFolders;
         private readonly IFriendshipManager _friendshipManager;
         private readonly IRepository<ChatMessage, long> _chatMessageRepository;
@@ -44,7 +44,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy.Demo
             OrganizationUnitManager organizationUnitManager,
             UserManager userManager,
             RandomUserGenerator randomUserGenerator,
-            IBinaryObjectManager binaryObjectManager,
+            IBinaryTenantManager binaryObjectManager,
             IAppFolders appFolders,
             IFriendshipManager friendshipManager,
             IChatMessageManager chatMessageManager, 
@@ -197,7 +197,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy.Demo
             try
             {
                 //Save a random profile picture
-                var storedFile = new BinaryObject(user.TenantId, GetRandomProfilePictureBytes());
+                var storedFile = new TenantCompanyLogo(user.TenantId, GetRandomProfilePictureBytes());
                 await _binaryObjectManager.SaveAsync(storedFile);
 
                 //Update new picture on the user
