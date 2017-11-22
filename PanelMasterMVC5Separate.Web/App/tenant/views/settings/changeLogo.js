@@ -38,6 +38,7 @@
                         appSession.tenant.logoId = result.id;
                         $('#LogoFileInput').val(null);
                         $uibModalInstance.close();
+                         
                     }
                 );
             }

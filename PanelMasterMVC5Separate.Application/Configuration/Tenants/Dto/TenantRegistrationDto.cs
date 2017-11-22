@@ -12,8 +12,7 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants.Dto
     {
         public int TenantId { get; set; }
         [Required]
-        public string companyName { get; set; }
-        [Required]
+        public string companyName { get; set; }       
         public string phoneNumber { get; set; } 
         public string faximileeNumber { get; set; }        
         public string address { get; set; }
@@ -30,9 +29,9 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants.Dto
         [Required]
         public string companyVatNo { get; set; }
         public string invoicingInstruction { get; set; }
-
         public string countryName { get; set; } 
         public string currencyName { get; set; }
+        [Required]
         public string cellNumber { get; set; }
     }
     public class TenantRegisterDto

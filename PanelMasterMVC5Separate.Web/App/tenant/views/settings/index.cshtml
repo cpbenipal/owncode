@@ -31,7 +31,7 @@
     <div class="portlet light margin-bottom-0">
         <div class="portlet-body">
             <uib-tabset class="tab-container tabbable-line" active="vm.activeTabIndex">
-                <uib-tab heading="@L("General")" ng-show="!vm.isMultiTenancyEnabled || vm.showTimezoneSelection">
+                @*<uib-tab heading="@L("General")" ng-show="!vm.isMultiTenancyEnabled || vm.showTimezoneSelection">
                     <div ng-if="!vm.isMultiTenancyEnabled || vm.showTimezoneSelection">
                         <div class="form-group form-md-line-input form-md-floating-label no-hint" ng-if="vm.showTimezoneSelection">
                             <timezone-combo selected-timezone="vm.settings.general.timezone" default-timezone-scope="@((int) SettingScopes.Tenant)" class="edited"></timezone-combo>
@@ -39,7 +39,7 @@
                         </div>
                         <div></div>
                     </div>
-                </uib-tab> 
+                </uib-tab>*@ 
 
                 <uib-tab heading="@L("Appearance")">
                     <div class="row">
@@ -359,7 +359,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label col-md-3">@L("ContactNumber"):</label>
+                                        <label class="control-label col-md-3">@L("CompanyContactNumber"):</label>
                                         <div class="col-md-9">
                                             <p class="form-control-static"> {{vm.settings.company.cellNumber}} </p>
                                         </div>
@@ -452,6 +452,14 @@
                                         <label class="control-label col-md-3">@L("InvoicingInstruction"):</label>
                                         <div class="col-md-9">
                                             <p class="form-control-static"> {{vm.settings.company.invoicingInstruction}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("AdminContactNumber"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.company.phoneNumber}} </p>
                                         </div>
                                     </div>
                                 </div>

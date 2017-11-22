@@ -93,10 +93,10 @@ namespace PanelMasterMVC5Separate.MultiTenancy
         [StringLength(User.MaxSurnameLength)]
         public string City { get; set; }
 
-        [StringLength(2)]
+        [Required, StringLength(2)]
         public string CountryCode { get; set; }
 
-        [StringLength(3)]
+        [Required, StringLength(3)]
         public string CurrencyCode { get; set; }
 
         public string Timezone { get; set; }
@@ -124,11 +124,11 @@ namespace PanelMasterMVC5Separate.MultiTenancy
         [ForeignKey("planId")]
         public virtual SignonPlans SignonPlans { get; set; }
 
-        [Required, StringLength(2)]
-        public string BillingCountryCode { get; set; }
+        //[Required, StringLength(2)]
+        //public string BillingCountryCode { get; set; }
 
-        [Required, StringLength(3)]
-        public string CurrencyCode { get; set; }
+        //[Required, StringLength(3)]
+        //public string CurrencyCode { get; set; }
 
         [Required]
         [StringLength(160)]

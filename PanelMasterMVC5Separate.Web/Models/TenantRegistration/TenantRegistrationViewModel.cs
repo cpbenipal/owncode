@@ -84,8 +84,8 @@ namespace PanelMasterMVC5Separate.Web.Models.TenantRegistration
         public string AdminEmailAddress { get; set; }
         public string FullName { get; set; }
         public string PhoneNumber { get; set; }
-        public string CountryCode { get; set; }
-        public string BillingCountryCode { get; set; }
+        //public string CountryCode { get; set; }
+        //public string BillingCountryCode { get; set; }
         public string CurrentPlan { get; set; }
     }
     public class OtpConfirmation
@@ -96,11 +96,11 @@ namespace PanelMasterMVC5Separate.Web.Models.TenantRegistration
     }
     public class CountryandBillingDetail
     {
-        [Required]
-        public string BillingCountryCode { get; set; }
+        //[Required]
+        //public string BillingCountryCode { get; set; }
 
-        [Required]
-        public string CurrencyCode { get; set; }
+        //[Required]
+        //public string CurrencyCode { get; set; }
 
         [Required(ErrorMessage = "Card Holders Name is required")]
         [DisplayName("Card Holders Name")]
@@ -167,8 +167,8 @@ namespace PanelMasterMVC5Separate.Web.Models.TenantRegistration
         [Phone, StringLength(User.MaxPhoneNumberLength)]
         public string CellNumber { get; set; }
 
-        [Required]
-        public string BillingCountryCode { get; set; }
+        //[Required]
+        //public string BillingCountryCode { get; set; }
 
         [Required]
         public string CountryCode { get; set; }
@@ -176,8 +176,8 @@ namespace PanelMasterMVC5Separate.Web.Models.TenantRegistration
         [Required]
         public string CurrencyCode { get; set; }
 
-        [Required]
-        public string BillingCurrencyCode { get; set; }
+        //[Required]
+        //public string BillingCurrencyCode { get; set; }
 
         [Required(ErrorMessage = "Card Holders Name is required")]
         [DisplayName("Card Holders Name")]

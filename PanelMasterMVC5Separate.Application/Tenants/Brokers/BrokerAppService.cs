@@ -32,7 +32,7 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
         private readonly IRepository<BrokerMasterPics, int> _binaryObjectRepository;
         private readonly IBrokerExporter _BrokerListExcelExporter;
         private readonly IAbpSession _abpSession;
-        private readonly IRepository<TenantPlanBillingDetails> _TenantPlanBillingDetails;
+        private readonly IRepository<TenantProfile> _TenantProfile;
         private readonly IRepository<Countries> _countryRepository;
         public BrokerAppService(IAbpSession abpSession, IAppFolders appFolders,
             IBrokerExporter BrokerListExcelExporter,
@@ -42,7 +42,7 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
             IRepository<Banks> BankRepository,
             IRepository<CountryandCurrency> CurrenciesRepository,
             IRepository<BrokerMasterPics> BrokerMasterPicsRepository,
-            IRepository<TenantPlanBillingDetails> tenantplanbillingdetails,
+           IRepository<TenantProfile> tenantprofile,
             IRepository<Countries> countryRepository)
         {
             _abpSession = abpSession;
@@ -53,7 +53,7 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
             _bankRepository = BankRepository;
             _currRepository = CurrenciesRepository;
             _BrokerListExcelExporter = BrokerListExcelExporter;
-            _TenantPlanBillingDetails = tenantplanbillingdetails;
+            _TenantProfile = tenantprofile;
             _countryRepository = countryRepository;
         }
 
@@ -141,11 +141,11 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
 
         public async Task CreateBrokerMaster(BrokersDto input)
         {
-            var country = _TenantPlanBillingDetails.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
+            var country = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
             int countryId = 250;
             if (country != null)
             {
-                countryId = _countryRepository.FirstOrDefault(x => x.Code == country.BillingCountryCode).Id;
+                countryId = _countryRepository.FirstOrDefault(x => x.Code == country.CountryCode).Id;
 
             }
             var NewBroker = new BrokerMaster(input.BrokerName, input.Mask, input.LogoPicture, input.Id, countryId);             

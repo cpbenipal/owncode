@@ -131,7 +131,7 @@
                                     <button class="close" data-dismiss="alert"></button>  @L("Alertsuccess")
                                 </div>
                                 <div class="tab-pane active" id="tab1">
-                                    <h3 class="block">@L("ProvideRegistrationDetails")</h3>
+                                    <h3 class="block">@L("Registration")</h3>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">
                                             @L("CompanyName")
@@ -194,7 +194,7 @@
 
                                     <div class="form-group">
                                         <label class="control-label col-md-3">
-                                            @L("CellNumber")
+                                            @L("CompanyContactNumber")
                                             <span class="required"> * </span>
                                         </label>
                                         <div class="col-md-4">
@@ -238,40 +238,7 @@
                                 </div>
                                 <div class="tab-pane" id="tab2">
                                     <h3 class="block"> @L("Billing")</h3>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">
-                                            @L("Country")
-                                            <span class="required"> * </span>
-                                        </label>
-                                        <div class="col-md-4">
-                                            <select class="form-control" name="BillingCountryCode" id="BillingCountryCode">
-                                                <option value="">Select One</option>
-                                                @foreach (var item in Model.listCountries)
-                                                {
-                                                <option value="@item.Code">
-                                                    @item.Country
-                                                </option>
-                                                }
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">
-                                            @L("CurrencyCode")
-                                            <span class="required"> * </span>
-                                        </label>
-                                        <div class="col-md-4">
-                                            <select class="form-control" name="BillingCurrencyCode" id="BillingCurrencyCode">
-                                                <option value="">Select One</option>
-                                                @foreach (var item in Model.listCurrencies)
-                                                {
-                                                <option value="@item.CurrencyCode">
-                                                    @item.CountryAndCurrency (@item.CurrencyCode)
-                                                </option>
-                                                }
-                                            </select>
-                                        </div>
-                                    </div>                                     
+                                                                          
                                     <div class="form-group">
                                         <label class="control-label col-md-3">
                                             @L("CardHoldersName")
@@ -328,7 +295,7 @@
                                 </div>
                                 <div class="tab-pane" id="tab3">
                                     <h3 class="block">@L("Review")</h3>
-                                    <h4 class="form-section">@L("ProvideRegistrationDetails")</h4>
+                                    <h4 class="form-section">@L("Registration")</h4>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">@L("CompanyName"):</label>
                                         <div class="col-md-4">
@@ -355,7 +322,7 @@
                                         </div>
                                     </div> 
                                     <div class="form-group">
-                                        <label class="control-label col-md-3">@L("CellNumber"):</label>
+                                        <label class="control-label col-md-3">@L("CompanyContactNumber"):</label>
                                         <div class="col-md-4">
                                             <p class="form-control-static" data-display="CellNumber"> </p>
                                         </div>
@@ -379,19 +346,7 @@
                                         </div>
                                     </div>
                                    
-                                    <h4 class="form-section">@L("Billing")</h4>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">@L("Country"):</label>
-                                        <div class="col-md-4">
-                                            <p class="form-control-static" data-display="BillingCountryCode"> </p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">@L("CurrencyCode"):</label>
-                                        <div class="col-md-4">
-                                            <p class="form-control-static" data-display="BillingCurrencyCode"> </p>
-                                        </div>
-                                    </div>
+                                    <h4 class="form-section">@L("Billing")</h4>                                    
                                     <div class="form-group">
                                         <label class="control-label col-md-3">@L("CardHoldersName"):</label>
                                         <div class="col-md-4">

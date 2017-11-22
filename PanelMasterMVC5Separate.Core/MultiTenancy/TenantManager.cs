@@ -238,7 +238,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             //string phoneNumber, string companyRegistrationNo, string companyVatNo, string address, string city, 
             string countrycode, string currencycode,
             //string invoicinginstruction,
-            string billingcountrycode, string billingcurrencycode,
+            //string billingcountrycode, string billingcurrencycode,
             //string timezone, 
             string cardHoldersName, string cardNumber, string cardExpiration, string cVV, string payment, int planId, string connectionString,
             bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin, bool sendActivationEmail)
@@ -289,14 +289,14 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                     CVV = cVV,
                     planId = planId,
                     TenantId = tenant.Id,
-                    BillingCountryCode = billingcountrycode,
-                    CurrencyCode = billingcountrycode,
+                    //BillingCountryCode = billingcountrycode,
+                    //CurrencyCode = billingcountrycode,
                     PaymentOptions = payment
                 };
                 await _TenantPlanBillingDetails.InsertAsync(tenantbilling);
 
                 // Add TowOperators
-                CreateTowOperators(tenant.Id, billingcountrycode);
+                CreateTowOperators(tenant.Id, countrycode);
 
                 //Create tenant database
                 _abpZeroDbMigrator.CreateOrMigrateForTenant(tenant);

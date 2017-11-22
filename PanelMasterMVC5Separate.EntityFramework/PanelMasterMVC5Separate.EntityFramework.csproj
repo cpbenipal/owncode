@@ -200,6 +200,10 @@
     <Compile Include="Migrations\201711171342392_companylogo.Designer.cs">
       <DependentUpon>201711171342392_companylogo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711221310275_Milestone3change.cs" />
+    <Compile Include="Migrations\201711221310275_Milestone3change.Designer.cs">
+      <DependentUpon>201711221310275_Milestone3change.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -346,6 +350,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711171342392_companylogo.resx">
       <DependentUpon>201711171342392_companylogo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711221310275_Milestone3change.resx">
+      <DependentUpon>201711221310275_Milestone3change.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

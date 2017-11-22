@@ -28,14 +28,14 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
         private readonly IRepository<CountryandCurrency> _currRepository;
         private readonly IAbpSession _abpSession;
         private readonly IVendorExporter _vendorListExcelExporter;
-        private readonly IRepository<TenantPlanBillingDetails> _TenantPlanBillingDetails;
+        private readonly IRepository<TenantProfile> _TenantProfile;
         private readonly IRepository<Countries> _countryRepository;
         public VendorClaimAppService(IAbpSession abpSession,
             IVendorExporter vendorListExcelExporter,
             IRepository<Banks> BankRepository,
             IRepository<CountryandCurrency> CurrenciesRepository, IRepository<VendorMain> vendorMainRepository,
             IRepository<VendorSub> vendorSubRepository,
-            IRepository<TenantPlanBillingDetails> tenantplanbillingdetails,
+            IRepository<TenantProfile> tenantprofile,
             IRepository<Countries> countryRepository)
         {
             _abpSession = abpSession;
@@ -43,7 +43,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             _currRepository = CurrenciesRepository;
             _vendorMainRepository = vendorMainRepository;
             _vendorSubRepository = vendorSubRepository;
-            _TenantPlanBillingDetails = tenantplanbillingdetails;
+            _TenantProfile = tenantprofile;
             _vendorListExcelExporter = vendorListExcelExporter;
             _countryRepository = countryRepository;
         }
@@ -185,10 +185,10 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             newVendor.RegistrationNumber = input.RegistrationNumber;
             newVendor.TaxRegistrationNumber = input.TaxRegistrationNumber;
 
-            var country = _TenantPlanBillingDetails.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
+            var country = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
             if (country != null)
             {
-                newVendor.CountryID = _countryRepository.FirstOrDefault(x => x.Code == country.BillingCountryCode).Id;
+                newVendor.CountryID = _countryRepository.FirstOrDefault(x => x.Code == country.CountryCode).Id;
             }
             else
                 newVendor.CountryID = 250;

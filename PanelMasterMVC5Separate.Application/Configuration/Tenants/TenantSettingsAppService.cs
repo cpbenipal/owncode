@@ -451,7 +451,7 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
                            DisplayName = f.DisplayName,
                            Id = f.Id
                        }).ToList();
-
+            
             return cur;
         }
 
@@ -510,6 +510,7 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
                         TenantId = reginfo.TenantId,
                         address = reginfo.Address,
                         cellNumber = reginfo.CellNumber,
+                        phoneNumber = reginfo.PhoneNumber,                        
                         city = reginfo.City,
                         companyName = reginfo.CompanyName,
                         companyRegistrationNo = reginfo.CompanyRegistrationNo,
@@ -572,6 +573,7 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
                 current.TenantId = reginfo.TenantId;
                 current.Address = reginfo.address;
                 current.PhoneNumber = reginfo.phoneNumber;
+                current.CellNumber = reginfo.cellNumber;
                 current.City = reginfo.city;
                 current.CompanyName = reginfo.companyName;
                 current.CompanyRegistrationNo = reginfo.companyRegistrationNo;

@@ -300,13 +300,10 @@
                             vm.loading = false;
                         });
                 };          
-
-               
-
+                initUploaders();
                 vm.getSettings();                                            
                 vm.getCompany();                 
-                vm.getRegister();
-                initUploaders();
+                vm.getRegister();               
             }
         ]);
 })();
