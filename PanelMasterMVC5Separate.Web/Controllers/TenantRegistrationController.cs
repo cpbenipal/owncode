@@ -155,7 +155,7 @@ namespace PanelMasterMVC5Separate.Web.Controllers
                  model.AdminPassword,
                  model.AdminEmailAddress,
                  model.FullName,
-                 model.CellNumber,
+                 model.CellNumber.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", ""),
                  //model.PhoneNumber,
                  //model.CompanyRegistrationNo,
                  //model.CompanyVatNo,

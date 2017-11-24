@@ -251,8 +251,7 @@
                     controller: 'common.views.users.createOrEditModal as vm',
                     backdrop: 'static',
                     resolve: {
-                        userId: function () {
-                           
+                        userId: function () {                           
                             return userId;
                         }
                     }

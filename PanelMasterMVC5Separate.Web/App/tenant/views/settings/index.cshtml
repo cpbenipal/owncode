@@ -1,18 +1,5 @@
-@using Abp.Configuration
-
-<script src="~/metronic/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-<script src="~/metronic/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="~/metronic/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-<script src="~/metronic/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
-<script src="~/metronic/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
-<script src="~/metronic/assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
-<script src="~/metronic/assets/pages/scripts/ui-bootbox.min.js" type="text/javascript"></script>
-<script src="~/metronic/assets/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js" type="text/javascript"></script>
-<script src="~/metronic/assets/pages/scripts/form-input-mask.min.js" type="text/javascript"></script>
-<script src="~/metronic/assets/global/plugins/jquery.input-ip-address-control-1.0.min.js" type="text/javascript"></script>
-<script src="~/metronic/assets/pages/scripts/ui-modals.min.js" type="text/javascript"></script>
-<link href="~/metronic/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
-<link href="~/metronic/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
+@using Abp.Configuration 
+ 
 <div ng-controller="tenant.views.settings.index as vm">
     <div class="row margin-bottom-5">
         <div class="col-xs-6">
@@ -31,7 +18,7 @@
     <div class="portlet light margin-bottom-0">
         <div class="portlet-body">
             <uib-tabset class="tab-container tabbable-line" active="vm.activeTabIndex">
-                @*<uib-tab heading="@L("General")" ng-show="!vm.isMultiTenancyEnabled || vm.showTimezoneSelection">
+                <uib-tab heading="@L("General")" ng-show="!vm.isMultiTenancyEnabled || vm.showTimezoneSelection">
                     <div ng-if="!vm.isMultiTenancyEnabled || vm.showTimezoneSelection">
                         <div class="form-group form-md-line-input form-md-floating-label no-hint" ng-if="vm.showTimezoneSelection">
                             <timezone-combo selected-timezone="vm.settings.general.timezone" default-timezone-scope="@((int) SettingScopes.Tenant)" class="edited"></timezone-combo>
@@ -39,7 +26,7 @@
                         </div>
                         <div></div>
                     </div>
-                </uib-tab>*@ 
+                </uib-tab>
 
                 <uib-tab heading="@L("Appearance")">
                     <div class="row">

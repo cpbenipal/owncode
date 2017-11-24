@@ -1,10 +1,12 @@
 ﻿using Abp.Application.Services.Dto;
+using Abp.Authorization;
 using Abp.AutoMapper;
 using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Abp.IO;
 using Abp.UI;
+using PanelMasterMVC5Separate.Authorization;
 using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.Tenants.Manufacturing.Dto;
 using PanelMasterMVC5Separate.Tenants.Manufacturing.Exporting;
@@ -18,6 +20,7 @@ using System.Threading.Tasks;
 
 namespace PanelMasterMVC5Separate.Tenants.Manufacturing
 {
+    [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
     public class ManufactureAppService : PanelMasterMVC5SeparateAppServiceBase, IManufactureAppService
     {
         private readonly IRepository<VehicleMake> _VehicleMakeRepository;

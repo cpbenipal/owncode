@@ -20,6 +20,18 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string Editions = "Editions";
                 public const string Maintenance = "Administration.Maintenance";
                 public const string Settings = "Administration.Settings.Host";
+                public const string SystemDefaults = "Administration.SystemDefaults";
+
+                public static string Banks = "Administration.SystemDefaults.Banks";
+                public static string AddBank = "Banks.AddBank";
+
+                public const string VehicleMakes = "Administration.SystemDefaults.VehicleMakes";
+                public const string AddMake = "VehicleMakes.AddVehicleMake";
+
+                public const string VehicleMades = "Administration.SystemDefaults.VehicleMades";
+                public const string AddModel = "VehicleMades.AddVehicleMade";
+
+                
             }
 
             public static class Tenant
@@ -50,11 +62,7 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string BrokerList = "Brokers.Brokers";
                 public const string AddBroker = "Brokers.AddInsurer";
 
-                public const string VehicleManufacturer = "Dashboard.VehicleManufacturer";
-                public const string VehicleMakes = "Dashboard.VehicleMakes";
-                public const string AddMake = "Dashboard.AddVehicleMake";
-                public const string AddModel = "Dashboard.AddVehicleMade";
-                public const string VehicleMades = "Dashboard.VehicleMades";
+              
 
                 public const string JobStatuses = "Administration.JobStatuses.Tenant";
 

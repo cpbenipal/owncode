@@ -90,6 +90,11 @@
     <text name="PaymentTerms" value="Payment Terms" />
     <text name="AccountNumber" value="Account Number" />
     <text name="Bank" value="Bank" />
+    <text name="BankName" value="Bank Name" />
+    <text name="BankInformation" value="Bank Information" />
+    <text name="Banks" value="Banks" />
+    <text name="AddBank" value="Add Bank" />
+    <text name="EditBank" value="Edit Bank" />
     <text name="CurrencyCode" value="Currency Code" />
     <text name="Type" value="Type" />
     <text name="Branch" value="Branch" />
@@ -625,5 +630,6 @@
     <text name="CompanyContactNumber" value="Company Contact Number" />
     <text name="AdminContactNumber" value="Admin Contact Number" />
     <text name="Logo" value="Logo" />
+    <text name="SystemDefaults" value="System Defaults" />
   </texts>
 </localizationDictionary>

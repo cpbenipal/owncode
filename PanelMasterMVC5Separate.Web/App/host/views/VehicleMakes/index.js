@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    appModule.controller('tenant.views.VehicleMades.index', [
+    appModule.controller('host.views.VehicleMakes.index', [
         '$scope', '$uibModal', '$stateParams', 'uiGridConstants', 'abp.services.app.manufacture',
         function ($scope, $uibModal, $stateParams, uiGridConstants, userService) {
 
@@ -51,33 +51,44 @@
                         '  <div class="btn-group dropdown" uib-dropdown="" dropdown-append-to-body>' +
                         '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
                         '    <ul uib-dropdown-menu>' +                         
-                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/tenant/EditVehicleMade/{{row.entity.madeID}}">' + app.localize('Open') + '</a></li>' +                         
+                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/host/EditVehicleMake/{{row.entity.makeID}}">' + app.localize('Open') + '</a></li>' +                         
                         '    </ul>' +
                         '  </div>' +
                         '</div>'
                     },
                     {
-                        name: app.localize('Make'),
-                        field: 'make',
-                        minWidth: 120
-                    },
-                    {
-                        name: app.localize('Model'),
-                        field: 'model',
-                        minWidth: 120
-                    },
-                    {
-                        name: app.localize('MMCode'),
-                        field: 'mmCode',
-                        minWidth: 120
-                    },
+                        name: app.localize('Description'),
+                        field: 'description',
+                        cellTemplate:
+                        '<div class=\"ui-grid-cell-contents\">' +
+                        '  <img ng-if="row.entity.makeID" ng-src="' + abp.appPath + 'Manufacture/GetProfilePictureById?id={{row.entity.makeID}}" width="22" height="22" class="img-rounded img-profile-picture-in-grid" />' +
+                        '  <img ng-if="!row.entity.makeID" src="' + abp.appPath + 'Common/Images/default-profile-picture.png" width="22" height="22" class="img-rounded" />' +
+                        '  {{COL_FIELD CUSTOM_FILTERS}} ' +
+                        '</div>',
+                        minWidth: 140
+                    },                    
                     {
                         name: app.localize('CreationTime'),
                         field: 'creationTime',
                         cellFilter: 'momentFormat: \'L\'',
                         minWidth: 50
-                    }                     
-                    
+                    }
+                    ,
+                    {
+                        name: app.localize('Status'),
+                        field: 'isActive',
+                        cellTemplate:
+                        '<div class=\"ui-grid-cell-contents\">' +
+                        '<div ng-show="row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.makeID}} bootstrap-switch-animate bootstrap-switch-on" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: 0px;">' +
+                        '<span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;"> ON</span>' +
+                        '<span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span>' +
+                        '<span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
+                        '<input ng-checked="row.entity.isActive" ng-model="row.entity.isActive"  class="make-switch" data-size="mini" type="checkbox"></div></div>' +
+                        '<div ng-show="!row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.makeID}} bootstrap-switch-animate bootstrap-switch-off" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: -32px;"><span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;">ON</span><span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
+                        '</div></div>' +
+                        '</div>',
+                        minWidth: 50
+                    }
                 ],
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
@@ -88,23 +99,23 @@
                             vm.requestParams.sorting = sortColumns[0].field + ' ' + sortColumns[0].sort.direction;
                         }
 
-                        vm.getVehicleMadeModel();
+                        vm.getVehicleMakeModel();
                     });
                     gridApi.pagination.on.paginationChanged($scope, function (pageNumber, pageSize) {
                         vm.requestParams.skipCount = (pageNumber - 1) * pageSize;
                         vm.requestParams.maxResultCount = pageSize;
 
-                        vm.getVehicleMadeModel();
+                        vm.getVehicleMakeModel();
                     });
                 },
                 data: []
             };
 
-            vm.getVehicleMadeModel = function () {
+            vm.getVehicleMakeModel = function () {
 
                 vm.loading = true;
 
-                userService.getVehicleMades($.extend({ filter: vm.filterText }, vm.requestParams))
+                userService.getVehicleInformation($.extend({ filter: vm.filterText }, vm.requestParams))
                     .then(function (result) {
                         vm.userGridOptions.totalItems = result.data.totalCount;
                         vm.userGridOptions.data = addRoleNamesField(result.data.items);
@@ -113,7 +124,26 @@
                     });
 
             };
-             
+
+            vm.Status = function (i) {
+                abp.message.confirm(
+                    app.localize('AreYouSure', i.description),
+                    function (isConfirmed) {
+                        if (isConfirmed) {
+                            userService.changeStatus({
+                                id: i.makeID,
+                                status: !i.isActive
+                            }).then(function () {
+                                vm.getVehicleMakeModel();
+                                if (!i.isActive)
+                                    abp.notify.success(app.localize('SuccessfullyEnabled'));
+                                else
+                                    abp.notify.warn(app.localize('SuccessfullyDisabled'));
+                            });
+                        }
+                    }
+                );
+            };
 
             function addRoleNamesField(users) {
                 for (var i = 0; i < users.length; i++) {
@@ -135,13 +165,13 @@
             };
 
             vm.exportToExcel = function () {
-                userService.getMadesToExcel({})
+                userService.getMakesToExcel({})
                     .then(function (result) {
                         app.downloadTempFile(result.data);
                     });
             };
 
-            vm.getVehicleMadeModel();
+            vm.getVehicleMakeModel();
 
         }]);
 })();

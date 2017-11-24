@@ -153,6 +153,38 @@ appModule.config([
             });
         }
 
+        if (abp.auth.hasPermission('Pages.Administration.Host.SystemDefaults')) {
+
+            $stateProvider.state('host.Banks', {
+            url: '/Banks',
+            templateUrl: '~/App/host/views/Banks/index.cshtml'
+        }); 
+            $stateProvider.state('host.VehicleMakes', {
+            url: '/VehicleMakes',
+            templateUrl: '~/App/host/views/VehicleMakes/index.cshtml'
+        });
+            $stateProvider.state('host.VehicleMades', {
+            url: '/VehicleMades',
+            templateUrl: '~/App/host/views/VehicleMades/index.cshtml'
+        });
+            $stateProvider.state('host.AddVehicleMake', {
+            url: '/AddVehicleMake',
+            templateUrl: '~/App/host/views/AddVehicleMake/index.cshtml'
+        });
+        $stateProvider.state('host.EditVehicleMake', {
+            url: '/EditVehicleMake/:id',
+            templateUrl: '~/App/host/views/EditVehicleMake/index.cshtml'
+        });
+        $stateProvider.state('host.AddVehicleMade', {
+            url: '/AddVehicleMade',
+            templateUrl: '~/App/host/views/AddVehicleMade/index.cshtml'
+        });
+        $stateProvider.state('host.EditVehicleMade', {
+            url: '/EditVehicleMade/:id',
+            templateUrl: '~/App/host/views/EditVehicleMade/index.cshtml'
+        });
+        }
+
         //TENANT routes
 
         $stateProvider.state('tenant', {
@@ -380,31 +412,7 @@ appModule.config([
         $stateProvider.state('tenant.EditBrokerSub', {
             url: '/EditBrokerSub/:id',
             templateUrl: '~/App/tenant/views/EditBrokerSub/index.cshtml'
-        });
-        $stateProvider.state('tenant.VehicleMakes', {
-            url: '/VehicleMakes',
-            templateUrl: '~/App/tenant/views/VehicleMakes/index.cshtml'
-        });
-        $stateProvider.state('tenant.VehicleMades', {
-            url: '/VehicleMades',
-            templateUrl: '~/App/tenant/views/VehicleMades/index.cshtml'
-        });
-        $stateProvider.state('tenant.AddVehicleMake', {
-            url: '/AddVehicleMake',
-            templateUrl: '~/App/tenant/views/AddVehicleMake/index.cshtml'
-        });
-        $stateProvider.state('tenant.EditVehicleMake', {
-            url: '/EditVehicleMake/:id',
-            templateUrl: '~/App/tenant/views/EditVehicleMake/index.cshtml'
-        });
-        $stateProvider.state('tenant.AddVehicleMade', {
-            url: '/AddVehicleMade',
-            templateUrl: '~/App/tenant/views/AddVehicleMade/index.cshtml'
-        });
-        $stateProvider.state('tenant.EditVehicleMade', {
-            url: '/EditVehicleMade/:id',
-            templateUrl: '~/App/tenant/views/EditVehicleMade/index.cshtml'
-        });
+        });       
 
         $stateProvider.state('tenant.jobstatuses', {
             url: '/jobstatuses',

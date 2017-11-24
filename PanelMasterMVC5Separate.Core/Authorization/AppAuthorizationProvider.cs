@@ -81,6 +81,8 @@ namespace PanelMasterMVC5Separate.Authorization
 
             administration.CreateChildPermission(AppPermissions.Pages_Administration_Host_Maintenance, L("Maintenance"), multiTenancySides: _isMultiTenancyEnabled ? MultiTenancySides.Host : MultiTenancySides.Tenant);
 
+            administration.CreateChildPermission(AppPermissions.Pages_Administration_Host_SystemDefaults, L("SystemDefaults"), multiTenancySides: MultiTenancySides.Host);
+
             administration.CreateChildPermission(AppPermissions.Pages_Administration_HangfireDashboard, L("HangfireDashboard"), multiTenancySides: _isMultiTenancyEnabled ? MultiTenancySides.Host : MultiTenancySides.Tenant);
         }
 

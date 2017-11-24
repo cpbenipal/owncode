@@ -572,8 +572,8 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
             {
                 current.TenantId = reginfo.TenantId;
                 current.Address = reginfo.address;
-                current.PhoneNumber = reginfo.phoneNumber;
-                current.CellNumber = reginfo.cellNumber;
+                current.PhoneNumber = reginfo.phoneNumber.Replace("(","").Replace(")", "").Replace("-", "").Replace(" ", "");
+                current.CellNumber = reginfo.cellNumber.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
                 current.City = reginfo.city;
                 current.CompanyName = reginfo.companyName;
                 current.CompanyRegistrationNo = reginfo.companyRegistrationNo;

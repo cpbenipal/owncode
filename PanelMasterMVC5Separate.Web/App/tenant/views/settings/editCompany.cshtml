@@ -22,19 +22,19 @@
                             </div>
 
                             <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                                <input type="text" name="ContactNumber" class="form-control" ng-class="{'edited':vm.company.cellNumber}" ng-model="vm.company.cellNumber" required maxlength="10">
+                                <input type="text" name="ContactNumber" id="mask_phone" class="form-control" ng-class="{'edited':vm.company.cellNumber}" ng-model="vm.company.cellNumber" required maxlength="10">
                                 <label>@L("CompanyContactNumber")</label>
                             </div>
                         </div>
                     </div>
                   
                     <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <input type="text" name="FaximileeNumber" class="form-control" ng-class="{'edited':vm.company.phoneNumber}" ng-model="vm.company.phoneNumber" maxlength="10">
+                        <input type="text" name="phoneNumber" id="mask_phone" class="form-control" ng-class="{'edited':vm.company.phoneNumber}" ng-model="vm.company.phoneNumber" maxlength="10">
                         <label>@L("AdminContactNumber")</label>
                     </div>
 
                     <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <input type="text" name="FaximileeNumber" class="form-control" ng-class="{'edited':vm.company.faximileeNumber}" ng-model="vm.company.faximileeNumber" maxlength="10">
+                        <input type="text" name="FaximileeNumber" id="mask_phone" class="form-control" ng-class="{'edited':vm.company.faximileeNumber}" ng-model="vm.company.faximileeNumber" maxlength="10">
                         <label>@L("FaximileeNumber")</label>
                     </div>
                      

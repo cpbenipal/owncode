@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    appModule.controller('tenant.views.AddVehicleMade.index', [
+    appModule.controller('host.views.AddVehicleMade.index', [
         '$scope', 'appSession', '$uibModal', '$stateParams', 'FileUploader', 'abp.services.app.manufacture',
 
 
@@ -23,7 +23,7 @@
                 vm.saving = true;
                 jobService.createOrUpdateMade(vm.job).then(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
-                    window.location.href = "#!/tenant/VehicleMades";
+                    window.location.href = "#!/host/VehicleMades";
                 }).finally(function () {
                     vm.saving = false;
                 });

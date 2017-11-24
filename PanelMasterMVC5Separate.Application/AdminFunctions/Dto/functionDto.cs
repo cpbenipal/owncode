@@ -1,5 +1,7 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using Abp.Runtime.Validation;
+using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.Vendors;
 using System;
 
@@ -22,6 +24,12 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
         public virtual int Members { get; set; }
         public DateTime CreationTime { get; set; }
     }
+    public class GetClaimsInput
+    {
+        public int Id { get; set; }
+    }
+   
+    
     public class BankDto
     {
         public int Id { get; set; }
@@ -36,10 +44,18 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
         public string Description { get; set; }
         public DateTime CreationTime { get; set; }        
     }
-    public class GetInputs
+    public class GetInputs : PagedAndSortedInputDto, IShouldNormalize
     {
         public int tableIndex { get; set; }
         public string Filter { get; set; }
+
+        public void Normalize()
+        {
+            if (string.IsNullOrEmpty(Sorting))
+            {
+                Sorting = "BankName,CountryCode";
+            }
+        }
     }
     [AutoMapFrom(typeof(Countries))]
     public class CountriesDto : FullAuditedEntityDto
@@ -48,6 +64,21 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
           
         public virtual string Country { get; set; }
     }
+
+    [AutoMapFrom(typeof(Banks))]
+    public class BankDetailDto : FullAuditedEntityDto
+    {
+        public string BankName { get; set; }
+        public int CountryId { get; set; }
+    }
+
+    [AutoMapTo(typeof(Banks))]
+    public class BankToDto : FullAuditedEntityDto
+    {
+        public string BankName { get; set; }
+        public int CountryId { get; set; }
+    }
+
     public class TableDescriptionDto
     {
         public int Id { get; set; }

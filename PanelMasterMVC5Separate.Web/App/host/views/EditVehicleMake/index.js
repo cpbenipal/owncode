@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    appModule.controller('tenant.views.EditVehicleMake.index', [
+    appModule.controller('host.views.EditVehicleMake.index', [
         '$scope', 'appSession', '$uibModal', '$stateParams', 'FileUploader', 'abp.services.app.manufacture',
 
 
@@ -71,7 +71,7 @@
                     newFileName: vm.uploadedFileName 
                 }).then(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
-                    window.location.href = "#!/tenant/VehicleMakesModels";
+                    window.location.href = "#!/host/VehicleMakesModels";
                 }).finally(function () {
                     vm.saving = false;
                 });

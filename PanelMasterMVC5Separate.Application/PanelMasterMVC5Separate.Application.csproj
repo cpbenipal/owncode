@@ -145,8 +145,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminFunctions\Exporting\BankExport.cs" />
+    <Compile Include="AdminFunctions\Exporting\IBankExport.cs" />
+    <Compile Include="AdminFunctions\SystemDefaults.cs" />
     <Compile Include="AdminFunctions\Dto\functionDto.cs" />
     <Compile Include="AdminFunctions\Functions.cs" />
+    <Compile Include="AdminFunctions\ISystemDefaults.cs" />
     <Compile Include="AdminFunctions\IFunctions.cs" />
     <Compile Include="Configuration\Tenants\Dto\TenantRegistrationDto.cs" />
     <Compile Include="Job\Dto\CreateClientInput.cs" />

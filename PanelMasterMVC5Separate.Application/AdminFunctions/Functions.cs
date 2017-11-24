@@ -12,6 +12,8 @@ using PanelMasterMVC5Separate.Claim;
 using Abp.AutoMapper;
 using PanelMasterMVC5Separate.Vendors;
 using PanelMasterMVC5Separate.MultiTenancy;
+using Abp.Authorization;
+using PanelMasterMVC5Separate.Authorization;
 
 namespace PanelMasterMVC5Separate.AdminFunctions
 {
@@ -354,7 +356,6 @@ namespace PanelMasterMVC5Separate.AdminFunctions
                 _countries.InsertOrUpdate(client);
             }
         }
-
         public ListResultDto<BankDto> GetBanks(GetInputs input)
         {
             var data = _bank.GetAll()
