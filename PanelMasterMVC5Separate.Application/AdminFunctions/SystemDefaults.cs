@@ -83,6 +83,7 @@ namespace PanelMasterMVC5Separate.AdminFunctions
             if (input.Id == 0)
             {
                 id = _bank.FirstOrDefault(c => c.BankName == input.BankName && c.CountryID == input.CountryId);
+                bank.isActive = true;
             }
             else
             {
@@ -113,7 +114,8 @@ namespace PanelMasterMVC5Separate.AdminFunctions
                          CountryCode = _countries.FirstOrDefault(x => x.Id == f.CountryID).Code,
                          Id = f.Id,
                          BankName = f.BankName,
-                         CreationTime = f.CreationTime
+                         CreationTime = f.CreationTime,
+                         isActive = f.isActive
                      }).ToList();
 
 
@@ -146,6 +148,17 @@ namespace PanelMasterMVC5Separate.AdminFunctions
 
             var ListDtos = finalQuery.MapTo<List<BankDto>>();
             return _IMListExcelExporter.ExportToFile(ListDtos);
+        }
+
+        public void ChangeStatus(ActiveDto input)
+        {
+            var client = new Banks()
+            {
+                Id = input.Id,
+                isActive = input.Status
+            };
+            _bank.Update(client);
+
         }
     }
 }

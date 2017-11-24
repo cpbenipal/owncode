@@ -74,22 +74,22 @@
                         cellFilter: 'momentFormat: \'L\'',
                         minWidth: 50
                     }
-                    //,
-                    //{
-                    //    name: app.localize('Status'),
-                    //    field: 'isActive',
-                    //    cellTemplate:
-                    //    '<div class=\"ui-grid-cell-contents\">' +
-                    //    '<div ng-show="row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.makeID}} bootstrap-switch-animate bootstrap-switch-on" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: 0px;">' +
-                    //    '<span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;"> ON</span>' +
-                    //    '<span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span>' +
-                    //    '<span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
-                    //    '<input ng-checked="row.entity.isActive" ng-model="row.entity.isActive"  class="make-switch" data-size="mini" type="checkbox"></div></div>' +
-                    //    '<div ng-show="!row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.makeID}} bootstrap-switch-animate bootstrap-switch-off" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: -32px;"><span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;">ON</span><span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
-                    //    '</div></div>' +
-                    //    '</div>',
-                    //    minWidth: 50
-                    //}
+                    ,
+                    {
+                        name: app.localize('Status'),
+                        field: 'isActive',
+                        cellTemplate:
+                        '<div class=\"ui-grid-cell-contents\">' +
+                        '<div ng-show="row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.makeID}} bootstrap-switch-animate bootstrap-switch-on" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: 0px;">' +
+                        '<span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;"> ON</span>' +
+                        '<span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span>' +
+                        '<span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
+                        '<input ng-checked="row.entity.isActive" ng-model="row.entity.isActive"  class="make-switch" data-size="mini" type="checkbox"></div></div>' +
+                        '<div ng-show="!row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.makeID}} bootstrap-switch-animate bootstrap-switch-off" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: -32px;"><span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;">ON</span><span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
+                        '</div></div>' +
+                        '</div>',
+                        minWidth: 50
+                    }
                 ],
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
@@ -176,6 +176,30 @@
                         app.downloadTempFile(result.data);
                     });
             };
+
+
+            vm.Status = function (bank) {
+                abp.message.confirm(
+                    app.localize('AreYouSure', bank.bankName),
+                    function (isConfirmed) {
+                        if (isConfirmed) {
+                            if (bank.id != 0) {
+                                userService.changeStatus({
+                                    id: bank.id,
+                                    status: bank.isActive
+                                }).then(function () {
+                                    vm.getAllBanks();
+                                    if (!bank.isActive)
+                                        abp.notify.success(app.localize('SuccessfullyEnabled'));
+                                    else
+                                        abp.notify.warn(app.localize('SuccessfullyDisabled'));
+                                });
+                            }                            
+                        }
+                    }
+                );
+            };
+
             vm.getAllBanks();
 
         }]);

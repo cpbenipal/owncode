@@ -43,6 +43,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
         private readonly IRepository<TenantProfile> _TenantProfile;
         private readonly IRepository<TenantPlanBillingDetails> _TenantPlanBillingDetails;
         private readonly IRepository<TowOperator> _TowOperator;
+        private readonly IRepository<Banks> _Banks;
         public TenantManager(
             IRepository<TowOperator> towoperator,
             IRepository<SignonPlans> signonplansrepository,
@@ -61,7 +62,8 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             INotificationSubscriptionManager notificationSubscriptionManager,
             IAppNotifier appNotifier,
             IAbpZeroFeatureValueStore featureValueStore,
-            IAbpZeroDbMigrator abpZeroDbMigrator)
+            IAbpZeroDbMigrator abpZeroDbMigrator,
+            IRepository<Banks> bank)
             : base(
                   tenantRepository,
                   tenantFeatureRepository,
@@ -82,6 +84,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             _abpZeroDbMigrator = abpZeroDbMigrator;
             _countries = countries;
             _countryandcurrency = countryandcurrency;
+            _Banks = bank;
         }
    
         public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress, string connectionString, bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin, bool sendActivationEmail)
@@ -261,6 +264,10 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                 await CreateAsync(tenant);
                 await _unitOfWorkManager.Current.SaveChangesAsync(); //To get new tenant's id.
 
+                //Verify if tblBanks contain banknames "OTHER" and "NONE" for the specific country,
+                //if already created, then don’t add. If not exist for current country, then add  banknames "OTHER" and "NONE" to tblbanks with countryid and enable
+                VerifyBank(countrycode);
+
                 //Save Newly tenant Profile
                 var tenantprofile = new TenantProfile()
                 {
@@ -367,6 +374,34 @@ namespace PanelMasterMVC5Separate.MultiTenancy
 
             return newTenantId;
 
+        }
+
+        public void VerifyBank(string countrycode)
+        {
+            int CountryID = _countries.FirstOrDefault(x => x.Code == countrycode).Id;
+
+            string[] DefaultBanks = new string[] { "OTHER", "NONE"};
+            
+            foreach(var bank in DefaultBanks)
+            {
+                var query = _Banks.FirstOrDefault(c => c.BankName == bank && c.CountryID == CountryID);
+                // If not exist for current country, then add  banknames "OTHER" and "NONE" to tblbanks with countryid and enable
+                if (query==null)
+                {
+                    var client = new Banks()
+                    { 
+                        BankName = bank,
+                        CountryID = CountryID ,
+                        isActive = true
+                    };
+                    _Banks.Insert(client);
+                }
+                else // Enable Bank if not
+                {
+                    query.isActive = true;
+                    _Banks.Update(query);
+                }
+            }
         }
 
         private void CreateTowOperators(int tenantId, string CountryCode)

@@ -36,6 +36,7 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
         public string BankName { get; set; }
         public string CountryCode { get; set; }
         public DateTime CreationTime { get; set; }
+        public bool isActive { get; set; }
     }
     public class functionCCDto
     {
@@ -97,6 +98,11 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
     {
         public int Id { get; set; }
         public int tableIndex { get; set; }
+        public bool Status { get; set; }
+    }
+    public class ActiveDto
+    {
+        public int Id { get; set; } 
         public bool Status { get; set; }
     }
 }

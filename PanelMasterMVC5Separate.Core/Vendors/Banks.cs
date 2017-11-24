@@ -12,5 +12,6 @@ namespace PanelMasterMVC5Separate.Vendors
         public virtual int CountryID { get; set; }
         [ForeignKey("CountryID")]
         public virtual Countries Country { get; set; }
+        public virtual bool isActive { get; set; }
     }
 }

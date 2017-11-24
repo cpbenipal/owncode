@@ -76,7 +76,7 @@ namespace PanelMasterMVC5Separate.Web.Controllers
         public ActionResult Chooseyourplan()
         {
             List<SignonPlans> data = _tenantManager.GetTenantPlans();
-
+           // _tenantManager.VerifyBank("AD");
             return View(data);
         }
         /// <summary>

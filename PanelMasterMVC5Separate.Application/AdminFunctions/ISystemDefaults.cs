@@ -17,5 +17,6 @@ namespace PanelMasterMVC5Separate.AdminFunctions
         ListResultDto<CountriesDto> GetCountry();
         BankDetailDto GetBank(GetClaimsInput input);
         Task<FileDto> GetBanksExcel();
+        void ChangeStatus(ActiveDto input);
     }
 }
