@@ -152,13 +152,9 @@ namespace PanelMasterMVC5Separate.AdminFunctions
 
         public void ChangeStatus(ActiveDto input)
         {
-            var client = new Banks()
-            {
-                Id = input.Id,
-                isActive = input.Status
-            };
+            var client = _bank.FirstOrDefault(input.Id);
+            client.isActive = input.Status;
             _bank.Update(client);
-
         }
     }
 }

@@ -186,7 +186,7 @@
                             if (bank.id != 0) {
                                 userService.changeStatus({
                                     id: bank.id,
-                                    status: bank.isActive
+                                    status: !bank.isActive
                                 }).then(function () {
                                     vm.getAllBanks();
                                     if (!bank.isActive)
