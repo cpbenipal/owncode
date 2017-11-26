@@ -521,8 +521,10 @@
       <DependentUpon>featureTree.css</DependentUpon>
     </Content>
     <Content Include="App\host\views\Banks\createOrEditModal.js" />
+    <Content Include="App\host\views\Brokers\index.js" />
     <Content Include="App\host\views\editions\createOrEditModal.js" />
     <Content Include="App\host\views\editions\index.js" />
+    <Content Include="App\host\views\Insurers\index.js" />
     <Content Include="App\host\views\maintenance\index.css">
       <DependentUpon>index.less</DependentUpon>
     </Content>
@@ -541,15 +543,14 @@
     <Content Include="App\host\views\EditVehicleMade\index.js" />
     <Content Include="App\host\views\AddVehicleMade\index.js" />
     <Content Include="App\host\views\AddVehicleMake\index.js" />
-    <Content Include="App\tenant\views\AddBroker\index.js" />
+    <Content Include="App\host\views\AddBroker\index.js" />
     <Content Include="App\tenant\views\AddBrokerSub\index.js" />
     <Content Include="App\host\views\EditVehicleMake\index.js" />
-    <Content Include="App\tenant\views\EditBroker\index.js" />
+    <Content Include="App\host\views\EditBroker\index.js" />
     <Content Include="App\tenant\views\EditBrokerSub\index.js" />
     <Content Include="App\tenant\views\EditInsurerSub\index.js" />
-    <Content Include="App\tenant\views\EditInsurer\index.js" />
     <Content Include="App\tenant\views\AddInsurerSub\index.js" />
-    <Content Include="App\tenant\views\AddInsurer\index.js" />
+    <Content Include="App\host\views\AddEditInsurer\index.js" />
     <Content Include="App\tenant\views\AddVendor\index.js" />
     <Content Include="App\tenant\views\client_information\index.js" />
     <Content Include="App\tenant\views\comments_information\index.js" />
@@ -7270,14 +7271,13 @@
     <Content Include="App\tenant\views\EditVendor\index.cshtml" />
     <Content Include="App\tenant\views\VendorList\index.cshtml" />
     <Content Include="App\tenant\views\Insurers\index.cshtml" />
-    <Content Include="App\tenant\views\AddInsurer\index.cshtml" />
+    <Content Include="App\host\views\AddEditInsurer\index.cshtml" />
     <Content Include="App\tenant\views\AddInsurerSub\index.cshtml" />
-    <Content Include="App\tenant\views\EditInsurer\index.cshtml" />
     <Content Include="App\tenant\views\EditInsurerSub\index.cshtml" />
     <Content Include="App\tenant\views\Brokers\index.cshtml" />
-    <Content Include="App\tenant\views\AddBroker\index.cshtml" />
+    <Content Include="App\host\views\AddBroker\index.cshtml" />
     <Content Include="App\tenant\views\AddBrokerSub\index.cshtml" />
-    <Content Include="App\tenant\views\EditBroker\index.cshtml" />
+    <Content Include="App\host\views\EditBroker\index.cshtml" />
     <Content Include="App\tenant\views\EditBrokerSub\index.cshtml" />
     <Content Include="App\host\views\VehicleMakes\index.cshtml" />
     <Content Include="App\host\views\AddVehicleMake\index.cshtml" />
@@ -7670,6 +7670,8 @@
     <Content Include="App\tenant\views\settings\editRegister.cshtml" />
     <Content Include="App\host\views\Banks\index.cshtml" />
     <Content Include="App\host\views\Banks\createOrEditModal.cshtml" />
+    <Content Include="App\host\views\Insurers\index.cshtml" />
+    <Content Include="App\host\views\Brokers\index.cshtml" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />

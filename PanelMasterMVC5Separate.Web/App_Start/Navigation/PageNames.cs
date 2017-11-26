@@ -31,7 +31,13 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string VehicleMades = "Administration.SystemDefaults.VehicleMades";
                 public const string AddModel = "VehicleMades.AddVehicleMade";
 
-                
+                public const string Insurers = "Administration.SystemDefaults.Insurers";
+                public const string InsurerList = "Insurers.Insurers";
+                public const string AddInsurer = "Insurers.AddInsurer";
+
+                public const string Brokers = "Administration.SystemDefaults.Brokers";
+                public const string BrokerList = "Brokers.Brokers";
+                public const string AddBroker = "Brokers.AddBroker";
             }
 
             public static class Tenant
@@ -55,20 +61,14 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string AddVendor = "Vendors.AddVendor";
 
                 public const string Insurers = "Dashboard.Insurers";
-                public const string InsurerList = "Insurers.Insurers";
-                public const string AddInsurer = "Vendors.AddInsurer";
+                public const string InsurerList = "Insurers.Insurers";               
 
                 public const string Brokers = "Dashboard.Brokers";
                 public const string BrokerList = "Brokers.Brokers";
-                public const string AddBroker = "Brokers.AddInsurer";
-
-              
 
                 public const string JobStatuses = "Administration.JobStatuses.Tenant";
 
-                public const string TowOperators = "Administration.TowOperators.Tenant";
-
-                public const string AdminFunctions = "Administration.AdminFunctions.Tenant";
+                public const string TowOperators = "Administration.TowOperators.Tenant"; 
                 // public const string VehicleManufacturer = "Dashboard.VehicleManufacturer";                 
             }
         }

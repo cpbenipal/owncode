@@ -1,7 +1,7 @@
 ﻿(function () {
 
-    appModule.controller('tenant.views.Insurers.index', [
-        '$scope', '$uibModal', '$stateParams', 'uiGridConstants', 'abp.services.app.insurer',
+    appModule.controller('host.views.Brokers.index', [
+        '$scope', '$uibModal', '$stateParams', 'uiGridConstants', 'abp.services.app.broker',
         function ($scope, $uibModal, $stateParams, uiGridConstants, userService) {
 
             var vm = this;
@@ -17,7 +17,7 @@
 
             vm.permissions = {
                 create: abp.auth.hasPermission('Pages.Administration.Users.Create'),
-                edit: abp.auth.hasPermission('Pages.Administration.Users.Edit'),
+                edit: abp.auth.hasPermission('Pages.Administration.Host.SystemDefaults'),
                 changePermissions: abp.auth.hasPermission('Pages.Administration.Users.ChangePermissions'),
                 impersonation: abp.auth.hasPermission('Pages.Administration.Users.Impersonation'),
                 'delete': abp.auth.hasPermission('Pages.Administration.Users.Delete'),
@@ -48,38 +48,33 @@
                         width: 120,
                         cellTemplate:
                         '<div class=\"ui-grid-cell-contents\">' +
-                            '  <div class="btn-group dropdown" uib-dropdown="" dropdown-append-to-body>' +
-                            '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
-                            '    <ul uib-dropdown-menu>' +
-                        // '      <li><a ng-if="grid.appScope.permissions.impersonation && row.entity.id != grid.appScope.currentUserId" ng-click="grid.appScope.impersonate(row.entity)">' + app.localize('LoginAsThisUser') + '</a></li>' +                         
-                                '<a ng-if="grid.appScope.permissions.edit" ng-show="row.entity.isActive" ng-href="#!/tenant/EditInsurerSub/{{row.entity.id}}">' + app.localize('EDIT') + '</a>' +
+                        '  <div class="btn-group dropdown" uib-dropdown="" dropdown-append-to-body>' +
+                        '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
+                        '    <ul uib-dropdown-menu>' +
+                        // '      <li><a ng-if="grid.appScope.permissions.impersonation && row.entity.id != grid.appScope.currentUserId" ng-click="grid.appScope.impersonate(row.entity)">' + app.localize('LoginAsThisUser') + '</a></li>' +
+                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/tenant/EditBroker/{{row.entity.id}}">' + app.localize('Open') + '</a></li>' +                         
                         //'      <li><a ng-click="grid.appScope.unlockUser(row.entity)">' + app.localize('Unlock') + '</a></li>' +
                         //'      <li><a ng-if="grid.appScope.permissions.delete" ng-click="grid.appScope.deleteUser(row.entity)">' + app.localize('Delete') + '</a></li>' +
                         '    </ul>' +
                         '  </div>' +
                         '</div>'
-                    },                     
+                    }, 
                     {
-                        name: app.localize('InsurerName'),
-                        field: 'insurerName',
+                        name: app.localize('BrokerName'),
+                        field: 'brokerName',
                         cellTemplate:
                         '<div class=\"ui-grid-cell-contents\">' +
-                        '  <img ng-if="row.entity.id" ng-src="' + abp.appPath + 'Insurer/GetProfilePictureById?id={{row.entity.id}}" width="22" height="22" class="img-rounded img-profile-picture-in-grid" />' +
+                        '  <img ng-if="row.entity.id" ng-src="' + abp.appPath + 'Broker/GetProfilePictureById?id={{row.entity.id}}" width="22" height="22" class="img-rounded img-profile-picture-in-grid" />' +
                         '  <img ng-if="!row.entity.id" src="' + abp.appPath + 'Common/Images/default-profile-picture.png" width="22" height="22" class="img-rounded" />' +
                         '  {{COL_FIELD CUSTOM_FILTERS}} ' +
                         '</div>',
                         minWidth: 140
                     },
                     {
-                        name: app.localize('ContactName'),
-                        field: 'contactName',
+                        name: app.localize('Country'),
+                        field: 'country',
                         minWidth: 120
-                    },
-                    {
-                        name: app.localize('ContactEmail'),
-                        field: 'contactEmail',
-                        minWidth: 200
-                    },
+                    }, 
                     {
                         name: app.localize('CreationTime'),
                         field: 'creationTime',
@@ -112,23 +107,23 @@
                             vm.requestParams.sorting = sortColumns[0].field + ' ' + sortColumns[0].sort.direction;
                         }
 
-                        vm.getInsurerdata();
+                        vm.getBrokerdata();
                     });
                     gridApi.pagination.on.paginationChanged($scope, function (pageNumber, pageSize) {
                         vm.requestParams.skipCount = (pageNumber - 1) * pageSize;
                         vm.requestParams.maxResultCount = pageSize;
 
-                        vm.getInsurerdata();
+                        vm.getBrokerdata();
                     });
                 },
                 data: []
             };
 
-            vm.getInsurerdata = function () {
+            vm.getBrokerdata = function () {
 
                 vm.loading = true;
 
-                userService.getInsurers($.extend({ filter: vm.filterText }, vm.requestParams))
+                userService.getBrokers($.extend({ filter: vm.filterText }, vm.requestParams))
                     .then(function (result) {
                         vm.userGridOptions.totalItems = result.data.totalCount;
                         vm.userGridOptions.data = addRoleNamesField(result.data.items);
@@ -140,19 +135,19 @@
 
             vm.Status = function (i) {
                 abp.message.confirm(
-                    app.localize('AreYouSure', i.insurerName),
+                    app.localize('AreYouSure', i.brokerName),
                     function (isConfirmed) {
                         if (isConfirmed) {
 
-                            if (i.subpkId == 0) {
-                                window.location.href = "#!/tenant/AddInsurerSub/" + i.id;
+                            if (i.subpkId === 0) {
+                                window.location.href = "#!/tenant/AddBrokerSub/" + i.id;
                             }
                             else {
                                 userService.changeStatus({
                                     id: i.subpkId,
                                     status: !i.isActive
                                 }).then(function () {
-                                    vm.getInsurerdata();
+                                    vm.getBrokerdata();
                                     if (!i.isActive)
                                         abp.notify.success(app.localize('SuccessfullyEnabled'));
                                     else
@@ -190,7 +185,7 @@
                     });
             };
 
-            vm.getInsurerdata();
+            vm.getBrokerdata();
 
         }]);
 })();

@@ -17,7 +17,7 @@
 
             vm.permissions = {
                 create: abp.auth.hasPermission('Pages.Administration.Users.Create'),
-                edit: abp.auth.hasPermission('Pages.Administration.Users.Edit'),
+                edit: abp.auth.hasPermission('Pages.Administration.Host.SystemDefaults'),
                 changePermissions: abp.auth.hasPermission('Pages.Administration.Users.ChangePermissions'),
                 impersonation: abp.auth.hasPermission('Pages.Administration.Users.Impersonation'),
                 'delete': abp.auth.hasPermission('Pages.Administration.Users.Delete'),

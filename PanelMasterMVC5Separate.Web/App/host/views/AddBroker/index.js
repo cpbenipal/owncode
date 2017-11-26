@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    appModule.controller('tenant.views.AddBroker.index', [
+    appModule.controller('host.views.AddBroker.index', [
         '$scope', 'appSession', '$uibModal', '$stateParams', 'FileUploader', 'abp.services.app.broker',
 
 
@@ -72,7 +72,7 @@
                 }).then(function () {
 
                     abp.notify.info(app.localize('SavedSuccessfully'));
-                    window.location.href = "#!/tenant/Brokers";
+                    window.location.href = "#!/host/Brokers";
                 }).finally(function () {
                     vm.saving = false;
                 });

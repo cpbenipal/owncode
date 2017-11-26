@@ -37,7 +37,6 @@
                     }).finally(function () {
                         vm.loading = false;
                     });
-
             };
 
             $scope.currencyList = []; //list of Currencies

@@ -1,6 +1,7 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using PanelMasterMVC5Separate.Insurer;
+using PanelMasterMVC5Separate.Vendors;
 using System.ComponentModel.DataAnnotations;
 
 namespace PanelMasterMVC5Separate.Tenants.Insurer.Dto
@@ -15,6 +16,8 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer.Dto
         [Required]
         [MaxLength(400)]
         public string LogoPicture { get; set; }
+        [Required]
+        public int CountryID { get; set; }
     }
 
 
@@ -27,6 +30,8 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer.Dto
         public virtual string NewFileName { get; set; }
         public virtual int Id { get; set; }
         public string LogoPicture { get; set; }
+        [Required]
+        public int CountryID { get; set; }
     }
 
     public class GetInsurersDto
@@ -227,6 +232,22 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer.Dto
         [Required]
         public virtual int InsurerID { get; set; }
         public virtual bool IsActive { get; set; }
+    }
+
+    [AutoMapFrom(typeof(InsurerMaster))]
+    public class InsurersMasterDto : FullAuditedEntityDto
+    { 
+        public virtual string InsurerName { get; set; } 
+        public virtual string Mask { get; set; } 
+        public string Country { get; set; }
+        public bool IsActive { get; set; }
+    }
+    [AutoMapFrom(typeof(Countries))]
+    public class CountriesDto : FullAuditedEntityDto
+    {
+        public virtual string Code { get; set; }
+
+        public virtual string Country { get; set; }
     }
 }
 

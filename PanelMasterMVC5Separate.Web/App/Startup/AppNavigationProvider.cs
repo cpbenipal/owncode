@@ -207,6 +207,42 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     ))
                     )
 
+
+                    .AddItem(new MenuItemDefinition(
+                    PageNames.App.Host.Insurers,
+                    L("Insurers"),
+                    icon: "glyphicon glyphicon-tasks"
+                    ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Host.AddInsurer,
+                    L("AddInsurer"),
+                    url: "host.AddInsurer",
+                    icon: "glyphicon glyphicon-collapse-down"
+                    )).AddItem(new MenuItemDefinition(
+                    PageNames.App.Host.Insurers,
+                    L("Search"),
+                    url: "host.Insurers",
+                    icon: "glyphicon glyphicon-search"
+                    ))
+                    )
+
+                    .AddItem(new MenuItemDefinition(
+                    PageNames.App.Host.Brokers,
+                    L("Brokers"),
+                    icon: "glyphicon glyphicon-tasks"
+                    ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Host.AddBroker,
+                    L("AddBroker"),
+                    url: "host.AddBroker",
+                    icon: "glyphicon glyphicon-collapse-down"
+                    )).AddItem(new MenuItemDefinition(
+                    PageNames.App.Host.Brokers,
+                    L("Search"),
+                    url: "host.Brokers",
+                    icon: "glyphicon glyphicon-search"
+                    ))
+                    )
+
+
                     )
 
                     .AddItem(new MenuItemDefinition(
@@ -231,14 +267,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                         url: "tenant.towoperators",
                         icon: "icon-settings"
                         )
-                    )
-                     .AddItem(new MenuItemDefinition(
-                        PageNames.App.Tenant.AdminFunctions,
-                        L("AdminFunctions"),
-                        url: "tenant.adminforms",
-                        icon: "icon-settings"
-                        )
-                    )
+                    )                    
                      .AddItem(new MenuItemDefinition(
                         PageNames.App.Tenant.JobStatuses,
                         L("JobStatuses"),
@@ -268,11 +297,6 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     L("Insurers"),
                     icon: "glyphicon glyphicon-tasks"
                     ).AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.AddInsurer,
-                    L("AddInsurer"),
-                    url: "tenant.AddInsurer",
-                    icon: "glyphicon glyphicon-collapse-down"
-                    )).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Insurers,
                     L("Search"),
                     url: "tenant.Insurers",
@@ -285,11 +309,6 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     L("Brokers"),
                     icon: "glyphicon glyphicon-tasks"
                     ).AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.AddBroker,
-                    L("AddBroker"),
-                    url: "tenant.AddBroker",
-                    icon: "glyphicon glyphicon-collapse-down"
-                    )).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Brokers,
                     L("Search"),
                     url: "tenant.Brokers",

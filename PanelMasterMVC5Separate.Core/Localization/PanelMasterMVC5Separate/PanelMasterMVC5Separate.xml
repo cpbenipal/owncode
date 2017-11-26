@@ -5,6 +5,7 @@
     <text name="HomePage" value="Home page" />
     <text name="AboutUs" value="About us" />
     <text name="Administration" value="Administration" />
+    <text name="EditSubMasterInsurer" value="Edit Sub Master Insurer" />
     <text name="Roles" value="Roles" />
     <text name="Users" value="Users" />
     <text name="InvalidFormMessage" value="Your form is invalid. Please check and correct it." />

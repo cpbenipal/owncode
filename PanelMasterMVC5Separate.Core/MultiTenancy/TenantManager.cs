@@ -21,6 +21,8 @@ using System;
 using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.Vendors;
 using System.Collections.ObjectModel;
+using PanelMasterMVC5Separate.Insurer;
+using PanelMasterMVC5Separate.Brokers;
 
 namespace PanelMasterMVC5Separate.MultiTenancy
 {
@@ -44,6 +46,8 @@ namespace PanelMasterMVC5Separate.MultiTenancy
         private readonly IRepository<TenantPlanBillingDetails> _TenantPlanBillingDetails;
         private readonly IRepository<TowOperator> _TowOperator;
         private readonly IRepository<Banks> _Banks;
+        private readonly IRepository<InsurerMaster> _insurer;
+        private readonly IRepository<BrokerMaster> _broker;
         public TenantManager(
             IRepository<TowOperator> towoperator,
             IRepository<SignonPlans> signonplansrepository,
@@ -63,7 +67,10 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             IAppNotifier appNotifier,
             IAbpZeroFeatureValueStore featureValueStore,
             IAbpZeroDbMigrator abpZeroDbMigrator,
-            IRepository<Banks> bank)
+            IRepository<Banks> bank,
+            IRepository<InsurerMaster> insurer,
+            IRepository<BrokerMaster> broker
+            )
             : base(
                   tenantRepository,
                   tenantFeatureRepository,
@@ -85,6 +92,8 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             _countries = countries;
             _countryandcurrency = countryandcurrency;
             _Banks = bank;
+            _insurer = insurer;
+            _broker = broker;
         }
    
         public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress, string connectionString, bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin, bool sendActivationEmail)
@@ -264,9 +273,9 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                 await CreateAsync(tenant);
                 await _unitOfWorkManager.Current.SaveChangesAsync(); //To get new tenant's id.
 
-                //Verify if tblBanks contain banknames "OTHER" and "NONE" for the specific country,
-                //if already created, then don’t add. If not exist for current country, then add  banknames "OTHER" and "NONE" to tblbanks with countryid and enable
-                VerifyBank(countrycode);
+                //Verify if tblBanks/tblInsurerMaster contain banknames "OTHER" and "NONE" for the specific country,
+                //if already created, then don’t add. If not exist for current country, then add  banknames/insurerNames "OTHER" and "NONE" to tblbanks/tblInsurerMaster with countryid and enable
+                VerifyDefaultData(countrycode);
 
                 //Save Newly tenant Profile
                 var tenantprofile = new TenantProfile()
@@ -376,13 +385,14 @@ namespace PanelMasterMVC5Separate.MultiTenancy
 
         }
 
-        public void VerifyBank(string countrycode)
+        public void VerifyDefaultData(string countrycode)
         {
             int CountryID = _countries.FirstOrDefault(x => x.Code == countrycode).Id;
 
-            string[] DefaultBanks = new string[] { "OTHER", "NONE"};
+            string[] defaults = new string[] { "OTHER", "NONE"};
             
-            foreach(var bank in DefaultBanks)
+            // Verify Bank
+            foreach(var bank in defaults)
             {
                 var query = _Banks.FirstOrDefault(c => c.BankName == bank && c.CountryID == CountryID);
                 // If not exist for current country, then add  banknames "OTHER" and "NONE" to tblbanks with countryid and enable
@@ -402,7 +412,50 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                     _Banks.Update(query);
                 }
             }
+            // Verify Insurer
+            foreach (var insurer in defaults)
+            {
+                var query = _insurer.FirstOrDefault(c => c.InsurerName == insurer && c.CountryID == CountryID);
+                // If not exist for current country, then add  InsurerName "OTHER" and "NONE" to tblinsurerMaster with countryid and enable
+                if (query == null)
+                {
+                    var client = new InsurerMaster()
+                    {
+                        InsurerName = insurer,
+                        CountryID = CountryID,
+                        IsActive = true
+                    };
+                    _insurer.Insert(client);
+                }
+                else // Enable Bank if not
+                {
+                    query.IsActive = true;
+                    _insurer.Update(query);
+                }
+            }
+            // Verify Broker
+            foreach (var broker in defaults)
+            {
+                var query = _broker.FirstOrDefault(c => c.BrokerName == broker && c.CountryID == CountryID);
+                // If not exist for current country, then add  brokerName "OTHER" and "NONE" to tblBrokerMaster with countryid and enable
+                if (query == null)
+                {
+                    var client = new BrokerMaster()
+                    {
+                        BrokerName = broker,
+                        CountryID = CountryID,
+                        IsActive = true
+                    };
+                    _broker.Insert(client);
+                }
+                else // Enable Bank if not
+                {
+                    query.IsActive = true;
+                    _broker.Update(query);
+                }
+            }
         }
+         
 
         private void CreateTowOperators(int tenantId, string CountryCode)
         {

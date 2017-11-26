@@ -72,7 +72,6 @@
             };
 
             vm.getInsurerMaster = function (InsurerId) {
-                 
                 vm.loading = true;
                 jobService.getInsurerMasterDetail($.extend({ filter: InsurerId }, InsurerId))
                     .then(function (result) {
@@ -86,9 +85,10 @@
                 vm.loading = true;
                 jobService.getInsurerSubDetail($.extend({ filter: $stateParams.id }, $stateParams.id))
                     .then(function (result) {
-                        vm.job = result.data;                       
-                        
-                         
+                        if (result.data == null)
+                            window.location.href = "#!/tenant/Insurers";
+                        else
+                            vm.job = result.data;
                     }).finally(function () {
                         vm.loading = false;
                     });
@@ -96,7 +96,7 @@
 
             vm.save = function () {
                 vm.job.TenantId = abp.session.tenantId;
-               // vm.job.Id = $stateParams.id;
+                // vm.job.Id = $stateParams.id;
                 vm.job.InsurerId = $stateParams.id;
                 vm.saving = true;
                 jobService.createOrUpdateSubInsurer(vm.job).then(function () {
@@ -109,7 +109,7 @@
 
             vm.getpaymenttype();
             vm.getBank();
-            vm.getcurrency();            
+            vm.getcurrency();
             vm.getInsurersub();
         }]);
 })();

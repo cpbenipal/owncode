@@ -22,6 +22,7 @@ namespace PanelMasterMVC5Separate.Insurer
             LogoPicture = logo;
             Id = id;
             CountryID = countryId;
+            IsActive = true;
         }
 
         [Required]
@@ -33,6 +34,8 @@ namespace PanelMasterMVC5Separate.Insurer
         public virtual int CountryID { get; set; }
         [ForeignKey("CountryID")]
         public virtual Countries Country { get; set; }
+
+        public virtual bool IsActive { get; set; }
     }
     [Table("tblInsurerMasterPics")]
     public class InsurerPics : FullAuditedEntity

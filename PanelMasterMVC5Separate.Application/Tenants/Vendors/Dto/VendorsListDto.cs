@@ -89,4 +89,9 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors.Dto
         public int TenantId { get; set; }
         public bool Status { get; set; }
     }
+    public class MasterStatusDto
+    {
+        public int Id { get; set; } 
+        public bool Status { get; set; }
+    }
 }

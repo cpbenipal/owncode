@@ -36,6 +36,8 @@ namespace PanelMasterMVC5Separate.Brokers
         public virtual int CountryID { get; set; }
         [ForeignKey("CountryID")]
         public virtual Countries Country { get; set; }
+
+        public virtual bool IsActive { get; set; }
     }
     [Table("tblBrokerSubMaster")]
     public class BrokerSubMaster : FullAuditedEntity

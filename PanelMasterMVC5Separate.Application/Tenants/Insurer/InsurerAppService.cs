@@ -1,4 +1,5 @@
 ﻿using Abp.Application.Services.Dto;
+using Abp.Authorization;
 using Abp.AutoMapper;
 using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
@@ -6,6 +7,7 @@ using Abp.Extensions;
 using Abp.IO;
 using Abp.Runtime.Session;
 using Abp.UI;
+using PanelMasterMVC5Separate.Authorization;
 using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.Insurer;
 using PanelMasterMVC5Separate.MultiTenancy;
@@ -61,8 +63,12 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
 
         public ListResultDto<BankDto> GetBanks()
         {
+            var CountryCode = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId).CountryCode;
+            var countryId = _abpSession.TenantId != 0 ? _countryRepository.FirstOrDefault(x => x.Code == CountryCode).Id : 0;
+
             var banks = _bankRepository
                 .GetAll()
+                .Where(p => p.CountryID == countryId)
                 .OrderBy(p => p.BankName)
                 .ToList();
 
@@ -71,22 +77,87 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
 
         public ListResultDto<CurrencyDto> GetCurrencies()
         {
-            var banks = _currRepository
+            var currency = _currRepository
                 .GetAll()
                 .OrderBy(p => p.CurrencyCode)
                 .ToList();
 
-            return new ListResultDto<CurrencyDto>(ObjectMapper.Map<List<CurrencyDto>>(banks));
+            return new ListResultDto<CurrencyDto>(ObjectMapper.Map<List<CurrencyDto>>(currency));
+        }
+        public ListResultDto<CountriesDto> GetCountry()
+        {
+            var banks = _countryRepository
+                .GetAll()
+                .OrderBy(p => p.Country)
+                .ToList();
+
+            return new ListResultDto<CountriesDto>(ObjectMapper.Map<List<CountriesDto>>(banks));
+        }
+        [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
+        public async Task<FileDto> GetInsurersToExcel()
+        {
+            var query = await _insurersRepository.GetAll().ToListAsync();
+
+            var countries = await _countryRepository.GetAll().ToListAsync();
+
+            var insurerMaster = (
+                 from f in query
+                 join v in countries on f.CountryID equals v.Id
+                 select new InsurersMasterDto
+                 {
+                     Id = f.Id,
+                     InsurerName = f.InsurerName,
+                     Country = v.Country,
+                     Mask = f.Mask
+                 }).ToList();
+
+
+            var ListDtos = insurerMaster.MapTo<List<InsurersMasterDto>>();
+
+            return _insurerListExcelExporter.ExportToFile(ListDtos);
         }
 
+        [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
+        public ListResultDto<InsurersMasterDto> GetInsurerMasters(GetInsurerInput input)
+        {
+            var query = _insurersRepository.GetAll()
+             .WhereIf(
+                 !input.Filter.IsNullOrWhiteSpace(),
+                 u =>
+                     u.InsurerName.Contains(input.Filter)
+             )
+             .OrderByDescending(p => p.LastModificationTime)
+             .ToList();
+
+            var countries = _countryRepository.GetAll().AsNoTracking().ToList();
+
+            var insurerMaster = (
+                 from f in query
+                 join v in countries on f.CountryID equals v.Id
+                 select new InsurersMasterDto
+                 {
+                     Id = f.Id,
+                     InsurerName = f.InsurerName,
+                     Country = v.Country,
+                     Mask = f.Mask,
+                     IsActive = f.IsActive
+                 }).ToList();
+
+            return new ListResultDto<InsurersMasterDto>(ObjectMapper.Map<List<InsurersMasterDto>>(insurerMaster));
+        }
         public ListResultDto<InsurersListDto> GetInsurers(GetInsurerInput input)
         {
+            var CountryCode = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId).CountryCode;
+
+            var countryId = _countryRepository.FirstOrDefault(x => x.Code == CountryCode).Id;
+
             var insurerMaster = _insurersRepository.GetAll()
              .WhereIf(
                  !input.Filter.IsNullOrWhiteSpace(),
                  u =>
                      u.InsurerName.Contains(input.Filter)
              )
+             .Where(p => p.CountryID.Equals(countryId) && p.IsActive.Equals(true))
              .OrderByDescending(p => p.LastModificationTime)
              .ToList();
 
@@ -140,18 +211,10 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
             FileHelper.DeleteIfExists(tempProfilePicturePath);
             return byteArray;
         }
-
+        [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
         public async Task CreateInsurerMaster(InsurersDto input)
         {
-            
-            var country = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
-            int countryId = 250;
-            if (country != null)
-            {
-                countryId = _countryRepository.FirstOrDefault(x => x.Code == country.CountryCode).Id;
-               
-            } 
-            var Newinsurer = new InsurerMaster(input.InsurerName, input.Mask, input.LogoPicture, input.Id, countryId);
+            var Newinsurer = new InsurerMaster(input.InsurerName, input.Mask, input.LogoPicture, input.Id, input.CountryID);
             int InsurerNewId = await _insurersRepository.InsertAndGetIdAsync(Newinsurer);
 
             byte[] byteArray = GetByteArray(input.LogoPicture);
@@ -160,6 +223,7 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
 
             await _binaryObjectRepository.InsertAsync(NewPicForInsurer);
         }
+        [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
         public async Task UpdateInsurerMaster(InsurersUDto input)
         {
             if (input.NewFileName != null)
@@ -176,7 +240,33 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
             master.InsurerName = input.InsurerName;
             master.Mask = input.Mask;
             master.LogoPicture = input.LogoPicture;
+            master.CountryID = input.CountryID;
             await _insurersRepository.UpdateAsync(master);
+        }
+
+
+        public InsurersDto GetInsurerMasterDetail(GetClaimsInput input)
+        {
+            var CountryCode = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
+            var countryId = 0;
+            // for Host countryId = 0 :: tenant is null
+            countryId = CountryCode == null ? 0 : _countryRepository.FirstOrDefault(x => x.Code == CountryCode.CountryCode).Id;
+
+            int Id = Convert.ToInt32(input.Filter);
+
+            var query = _insurersRepository
+              .GetAll().Where(c => c.Id == Id && (countryId == 0 || c.CountryID == countryId))
+              .FirstOrDefault();
+
+            return query.MapTo<InsurersDto>();
+        }
+        [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
+        public void ChangeMasterStatus(MasterStatusDto input)
+        {
+            var query = _insurersRepository.GetAll().Where(c => c.Id == input.Id)
+             .FirstOrDefault();
+            query.IsActive = input.Status;
+            _insurersRepository.Update(query);
         }
         public void CreateOrUpdateSubInsurer(InsurersToListDto input)
         {
@@ -192,34 +282,23 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
                 _insurersubRepository.Update(client);
             }
         }
-
-        public InsurersDto GetInsurerMasterDetail(GetClaimsInput input)
-        {
-            int Id = Convert.ToInt32(input.Filter);
-
-            var query = _insurersRepository
-              .GetAll().Where(c => c.Id == Id)
-              .FirstOrDefault();
-
-            return query.MapTo<InsurersDto>();
-        }
         public InsurersForListDto GetInsurerSubDetail(GetClaimsInput input)
         {
             int Id = Convert.ToInt32(input.Filter);
 
-
             var query = _insurersubRepository
-              .GetAll().Where(c => c.InsurerID == Id && c.TenantID == _abpSession.TenantId)
-              .FirstOrDefault().MapTo<InsurersForListDto>();
+              .GetAll().FirstOrDefault(c => c.InsurerID == Id && c.TenantID == _abpSession.TenantId)
+              .MapTo<InsurersForListDto>();
 
-            var querymain = _insurersRepository
-              .GetAll().Where(c => c.Id == query.InsurerID)
-              .FirstOrDefault();
+            if (query != null)
+            {
+                var querymain = _insurersRepository
+                  .GetAll().FirstOrDefault(c => c.Id == query.InsurerID);
 
-            query.InsurerName = querymain.InsurerName;
-            query.MaskMain = querymain.Mask;
-            query.InsurerID = query.Id;
-
+                query.InsurerName = querymain.InsurerName;
+                query.MaskMain = querymain.Mask;
+                query.InsurerID = query.Id;
+            }
             return query;
         }
         public Task<InsurerPics> GetOrNullAsync(int id)
@@ -271,5 +350,7 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
             query.IsActive = input.Status;
             _insurersubRepository.Update(query);
         }
+
+
     }
 }

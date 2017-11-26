@@ -12,18 +12,18 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
     {
         ListResultDto<BankDto> GetBanks();
         ListResultDto<CurrencyDto> GetCurrencies();
-        ListResultDto<InsurersListDto> GetInsurers(GetInsurerInput input);
-
-        Task CreateInsurerMaster(InsurersDto input);
-        Task UpdateInsurerMaster(InsurersUDto input);
-
-        void CreateOrUpdateSubInsurer(InsurersToListDto input);
-
-        InsurersDto GetInsurerMasterDetail(GetClaimsInput input);
+        ListResultDto<CountriesDto> GetCountry();
+        void CreateOrUpdateSubInsurer(InsurersToListDto input);       
         InsurersForListDto GetInsurerSubDetail(GetClaimsInput input);
-
         Task<InsurerPics> GetOrNullAsync(int id);
         Task<FileDto> GetClaimsToExcel();
         void ChangeStatus(StatusDto input);
+        //Host
+        ListResultDto<InsurersMasterDto> GetInsurerMasters(GetInsurerInput input);
+        void ChangeMasterStatus(MasterStatusDto input);
+        Task CreateInsurerMaster(InsurersDto input);
+        Task UpdateInsurerMaster(InsurersUDto input);
+        InsurersDto GetInsurerMasterDetail(GetClaimsInput input);
+        ListResultDto<InsurersListDto> GetInsurers(GetInsurerInput input);
     }
 }

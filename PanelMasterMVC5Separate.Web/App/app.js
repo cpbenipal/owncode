@@ -183,7 +183,19 @@ appModule.config([
             url: '/EditVehicleMade/:id',
             templateUrl: '~/App/host/views/EditVehicleMade/index.cshtml'
         });
-        }
+        $stateProvider.state('host.Insurers', {
+            url: '/Insurers',
+            templateUrl: '~/App/host/views/Insurers/index.cshtml'
+        }); 
+        $stateProvider.state('host.AddInsurer', {
+            url: '/AddEditInsurer',
+            templateUrl: '~/App/host/views/AddEditInsurer/index.cshtml'
+        });
+        $stateProvider.state('host.EditInsurer', {
+            url: '/AddEditInsurer/:id',
+            templateUrl: '~/App/host/views/AddEditInsurer/index.cshtml'
+        });
+       }
 
         //TENANT routes
 

@@ -59,6 +59,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
         public virtual double Price { get; set; }
         public virtual string HeaderColor { get; set; }
         public virtual int Members { get; set; }
+        public virtual bool isActive { get; set; }
     }
 
     [Table("tblTenantProfile")]

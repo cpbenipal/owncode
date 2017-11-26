@@ -208,6 +208,10 @@
     <Compile Include="Migrations\201711240809061_ToBank.Designer.cs">
       <DependentUpon>201711240809061_ToBank.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711250654111_addactivefield.cs" />
+    <Compile Include="Migrations\201711250654111_addactivefield.Designer.cs">
+      <DependentUpon>201711250654111_addactivefield.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -360,6 +364,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711240809061_ToBank.resx">
       <DependentUpon>201711240809061_ToBank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711250654111_addactivefield.resx">
+      <DependentUpon>201711250654111_addactivefield.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,5 +7,6 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer.Exporting
     public interface IInsurerExporter
     {
         FileDto ExportToFile(List<InsurersListDto> claimListDtos);
+        FileDto ExportToFile(List<InsurersMasterDto> claimListDtos);
     }
 }

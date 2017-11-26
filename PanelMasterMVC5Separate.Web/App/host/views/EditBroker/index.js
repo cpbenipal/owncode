@@ -1,7 +1,7 @@
 ﻿(function () {
 
-    appModule.controller('tenant.views.AddInsurer.index', [
-        '$scope', 'appSession', '$uibModal', '$stateParams', 'FileUploader', 'abp.services.app.insurer',
+    appModule.controller('host.views.EditBroker.index', [
+        '$scope', 'appSession', '$uibModal', '$stateParams', 'FileUploader', 'abp.services.app.broker',
 
 
         function ($scope, appSession, $uibModal, $stateParams, fileUploader, jobService) {
@@ -18,11 +18,11 @@
             vm.filterText = $stateParams.filterText || '';
             vm.currentUserId = abp.session.userId;
             vm.TenantId = abp.session.tenantId;
-            var $jcropImage = null;
+
             vm.uploadedFileName = null;
 
             vm.job.uploader = new fileUploader({
-                url: abp.appPath + 'Insurer/UploadProfilePicture',
+                url: abp.appPath + 'Broker/UploadProfilePicture',
                 headers: {
                     "X-XSRF-TOKEN": abp.security.antiForgery.getToken()
                 },
@@ -62,21 +62,33 @@
                     abp.message.error(response.error.message);
                 }
             };
-            vm.save = function () {
-                vm.saving = true;
-                 
-                jobService.createInsurerMaster({
-                    logoPicture: vm.uploadedFileName,
-                    insurerName: vm.job.InsurerName,
-                    mask: vm.job.Mask
+            vm.save = function () {                
+                vm.saving = true;                 
+                jobService.updateBrokerMaster({
+                    Id: $stateParams.id,
+                    logoPicture: vm.job.logoPicture,                  
+                    BrokerName: vm.job.brokerName,
+                    newFileName: vm.uploadedFileName, 
+                    mask: vm.job.mask
                 }).then(function () {
-
                     abp.notify.info(app.localize('SavedSuccessfully'));
-                    window.location.href = "#!/tenant/Insurers";
+                    window.location.href = "#!/host/Brokers";
                 }).finally(function () {
                     vm.saving = false;
                 });
             };
 
+            vm.getBrokerMaster = function () {
+
+                vm.loading = true;
+                jobService.getBrokerMasterDetail($.extend({ filter: $stateParams.id }, $stateParams.id))
+                    .then(function (result) {
+                        vm.job = result.data;
+                    }).finally(function () {
+                        vm.loading = false;
+                    });
+            };
+
+            vm.getBrokerMaster();
         }]);
 })();

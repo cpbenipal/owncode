@@ -1,9 +1,8 @@
 ﻿(function () {
 
-    appModule.controller('tenant.views.EditBroker.index', [
-        '$scope', 'appSession', '$uibModal', '$stateParams', 'FileUploader', 'abp.services.app.broker',
-
-
+    appModule.controller('host.views.AddUpdateInsurer.index', [
+        '$scope', 'appSession', '$uibModal', '$stateParams', 'FileUploader', 'abp.services.app.insurer',
+        
         function ($scope, appSession, $uibModal, $stateParams, fileUploader, jobService) {
             var vm = this;
             $scope.$on('$viewContentLoaded', function () {
@@ -17,12 +16,11 @@
             vm.advancedFiltersAreShown = false;
             vm.filterText = $stateParams.filterText || '';
             vm.currentUserId = abp.session.userId;
-            vm.TenantId = abp.session.tenantId;
 
             vm.uploadedFileName = null;
 
             vm.job.uploader = new fileUploader({
-                url: abp.appPath + 'Broker/UploadProfilePicture',
+                url: abp.appPath + 'Insurer/UploadProfilePicture',
                 headers: {
                     "X-XSRF-TOKEN": abp.security.antiForgery.getToken()
                 },
@@ -62,33 +60,81 @@
                     abp.message.error(response.error.message);
                 }
             };
-            vm.save = function () {                
-                vm.saving = true;                 
-                jobService.updateBrokerMaster({
-                    Id: $stateParams.id,
-                    logoPicture: vm.job.logoPicture,                  
-                    BrokerName: vm.job.brokerName,
-                    newFileName: vm.uploadedFileName, 
-                    mask: vm.job.mask
+         
+            $scope.countryList = []; //list of Countries
+            vm.getCountries = function () {
+
+                jobService.getCountry()
+                    .then(function (ins_obj) {
+
+                        angular.forEach(ins_obj.data.items, function (insvalue, key1) {
+                            $scope.countryList.push({
+                                name: insvalue.country + " (" + insvalue.code + ")",
+                                id: insvalue.id
+                            });
+                        });
+
+                    }).finally(function () {
+                        vm.loading = false;
+                    });
+            };
+
+            vm.save = function() {
+                if ($stateParams.id==null) {
+                    vm.create();
+                }
+                else {
+                    vm.update();
+                }
+            };
+
+            vm.create = function () {
+                vm.saving = true;
+
+                jobService.createInsurerMaster({
+                    logoPicture: vm.uploadedFileName,
+                    insurerName: vm.job.insurerName,
+                    mask: vm.job.mask,
+                    countryid : vm.job.countryID
                 }).then(function () {
+
                     abp.notify.info(app.localize('SavedSuccessfully'));
-                    window.location.href = "#!/tenant/Brokers";
+                    window.location.href = "#!/host/Insurers";
                 }).finally(function () {
                     vm.saving = false;
                 });
             };
 
-            vm.getBrokerMaster = function () {
+            vm.update = function () {
+                vm.saving = true; 
+                jobService.updateInsurerMaster({
+                    Id: $stateParams.id,
+                    logoPicture: vm.job.logoPicture,
+                    insurerName: vm.job.insurerName,
+                    newFileName: vm.uploadedFileName,
+                    mask: vm.job.mask,
+                    countryid: vm.job.countryID
+                }).then(function () {
+                    abp.notify.info(app.localize('SavedSuccessfully'));
+                    window.location.href = "#!/host/Insurers";
+                }).finally(function () {
+                    vm.saving = false;
+                });
+            };
+
+            vm.getInsurerMaster = function () {
 
                 vm.loading = true;
-                jobService.getBrokerMasterDetail($.extend({ filter: $stateParams.id }, $stateParams.id))
+                jobService.getInsurerMasterDetail($.extend({ filter: $stateParams.id }, $stateParams.id))
                     .then(function (result) {
                         vm.job = result.data;
                     }).finally(function () {
                         vm.loading = false;
                     });
             };
-
-            vm.getBrokerMaster();
+            if ($stateParams.id != null) {
+                vm.getInsurerMaster();
+            }
+            vm.getCountries();
         }]);
 })();
