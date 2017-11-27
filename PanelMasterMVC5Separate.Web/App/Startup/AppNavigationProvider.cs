@@ -160,7 +160,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     PageNames.App.Host.Banks,
                     L("Banks"),
                     icon: "glyphicon glyphicon-tasks"
-                    ) 
+                    )
                     .AddItem(new MenuItemDefinition(
                     PageNames.App.Host.Banks,
                     L("Search"),
@@ -206,8 +206,6 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     icon: "glyphicon glyphicon-collapse-down"
                     ))
                     )
-
-
                     .AddItem(new MenuItemDefinition(
                     PageNames.App.Host.Insurers,
                     L("Insurers"),
@@ -267,7 +265,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                         url: "tenant.towoperators",
                         icon: "icon-settings"
                         )
-                    )                    
+                    )
                      .AddItem(new MenuItemDefinition(
                         PageNames.App.Tenant.JobStatuses,
                         L("JobStatuses"),
@@ -301,6 +299,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     L("Search"),
                     url: "tenant.Insurers",
                     icon: "glyphicon glyphicon-search"
+
                     ))
                     )
 

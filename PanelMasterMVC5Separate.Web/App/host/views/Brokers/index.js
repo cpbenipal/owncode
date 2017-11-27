@@ -52,7 +52,7 @@
                         '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
                         '    <ul uib-dropdown-menu>' +
                         // '      <li><a ng-if="grid.appScope.permissions.impersonation && row.entity.id != grid.appScope.currentUserId" ng-click="grid.appScope.impersonate(row.entity)">' + app.localize('LoginAsThisUser') + '</a></li>' +
-                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/tenant/EditBroker/{{row.entity.id}}">' + app.localize('Open') + '</a></li>' +                         
+                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/host/AddEditBroker/{{row.entity.id}}">' + app.localize('Open') + '</a></li>' +                         
                         //'      <li><a ng-click="grid.appScope.unlockUser(row.entity)">' + app.localize('Unlock') + '</a></li>' +
                         //'      <li><a ng-if="grid.appScope.permissions.delete" ng-click="grid.appScope.deleteUser(row.entity)">' + app.localize('Delete') + '</a></li>' +
                         '    </ul>' +
@@ -73,8 +73,13 @@
                     {
                         name: app.localize('Country'),
                         field: 'country',
-                        minWidth: 120
-                    }, 
+                        minWidth: 200
+                    },
+                    {
+                        name: app.localize('Mask'),
+                        field: 'mask',
+                        minWidth: 200
+                    },
                     {
                         name: app.localize('CreationTime'),
                         field: 'creationTime',
@@ -123,7 +128,7 @@
 
                 vm.loading = true;
 
-                userService.getBrokers($.extend({ filter: vm.filterText }, vm.requestParams))
+                userService.getBrokerMasters($.extend({ filter: vm.filterText }, vm.requestParams))
                     .then(function (result) {
                         vm.userGridOptions.totalItems = result.data.totalCount;
                         vm.userGridOptions.data = addRoleNamesField(result.data.items);
@@ -133,27 +138,21 @@
 
             };
 
-            vm.Status = function (i) {
+             vm.Status = function (i) {
                 abp.message.confirm(
                     app.localize('AreYouSure', i.brokerName),
                     function (isConfirmed) {
                         if (isConfirmed) {
-
-                            if (i.subpkId === 0) {
-                                window.location.href = "#!/tenant/AddBrokerSub/" + i.id;
-                            }
-                            else {
-                                userService.changeStatus({
-                                    id: i.subpkId,
-                                    status: !i.isActive
-                                }).then(function () {
-                                    vm.getBrokerdata();
-                                    if (!i.isActive)
-                                        abp.notify.success(app.localize('SuccessfullyEnabled'));
-                                    else
-                                        abp.notify.warn(app.localize('SuccessfullyDisabled'));
-                                });
-                            }
+                            userService.changeMasterStatus({
+                                id: i.id,
+                                status: !i.isActive
+                            }).then(function () {
+                                vm.getBrokerdata();
+                                if (!i.isActive)
+                                    abp.notify.success(app.localize('SuccessfullyEnabled'));
+                                else
+                                    abp.notify.warn(app.localize('SuccessfullyDisabled'));
+                            });
                         }
                     }
                 );

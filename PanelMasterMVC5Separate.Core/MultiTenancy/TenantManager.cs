@@ -273,8 +273,8 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                 await CreateAsync(tenant);
                 await _unitOfWorkManager.Current.SaveChangesAsync(); //To get new tenant's id.
 
-                //Verify if tblBanks/tblInsurerMaster contain banknames "OTHER" and "NONE" for the specific country,
-                //if already created, then don’t add. If not exist for current country, then add  banknames/insurerNames "OTHER" and "NONE" to tblbanks/tblInsurerMaster with countryid and enable
+                //Verify if tblBanks/tblInsurerMaster/tblBrokerMaster contain "OTHER" and "NONE" for the specific country,
+                //if already created, then don’t add. If not exist for current country, then add "OTHER" and "NONE" to tblbanks/tblBrokerMaster/tblInsurerMaster with countryid and enable
                 VerifyDefaultData(countrycode);
 
                 //Save Newly tenant Profile
@@ -392,15 +392,15 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             string[] defaults = new string[] { "OTHER", "NONE"};
             
             // Verify Bank
-            foreach(var bank in defaults)
+            foreach(var data in defaults)
             {
-                var query = _Banks.FirstOrDefault(c => c.BankName == bank && c.CountryID == CountryID);
+                var bank = _Banks.FirstOrDefault(c => c.BankName == data && c.CountryID == CountryID);
                 // If not exist for current country, then add  banknames "OTHER" and "NONE" to tblbanks with countryid and enable
-                if (query==null)
+                if (bank == null)
                 {
                     var client = new Banks()
                     { 
-                        BankName = bank,
+                        BankName = data,
                         CountryID = CountryID ,
                         isActive = true
                     };
@@ -408,20 +408,19 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                 }
                 else // Enable Bank if not
                 {
-                    query.isActive = true;
-                    _Banks.Update(query);
+                    bank.isActive = true;
+                    _Banks.Update(bank);
                 }
-            }
+            
             // Verify Insurer
-            foreach (var insurer in defaults)
-            {
-                var query = _insurer.FirstOrDefault(c => c.InsurerName == insurer && c.CountryID == CountryID);
+             
+                var insurer = _insurer.FirstOrDefault(c => c.InsurerName == data && c.CountryID == CountryID);
                 // If not exist for current country, then add  InsurerName "OTHER" and "NONE" to tblinsurerMaster with countryid and enable
-                if (query == null)
+                if (insurer == null)
                 {
                     var client = new InsurerMaster()
                     {
-                        InsurerName = insurer,
+                        InsurerName = data,
                         CountryID = CountryID,
                         IsActive = true
                     };
@@ -429,20 +428,19 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                 }
                 else // Enable Bank if not
                 {
-                    query.IsActive = true;
-                    _insurer.Update(query);
+                    insurer.IsActive = true;
+                    _insurer.Update(insurer);
                 }
-            }
+         
             // Verify Broker
-            foreach (var broker in defaults)
-            {
-                var query = _broker.FirstOrDefault(c => c.BrokerName == broker && c.CountryID == CountryID);
+             
+                var broker = _broker.FirstOrDefault(c => c.BrokerName == data && c.CountryID == CountryID);
                 // If not exist for current country, then add  brokerName "OTHER" and "NONE" to tblBrokerMaster with countryid and enable
-                if (query == null)
+                if (broker == null)
                 {
                     var client = new BrokerMaster()
                     {
-                        BrokerName = broker,
+                        BrokerName = data,
                         CountryID = CountryID,
                         IsActive = true
                     };
@@ -450,8 +448,8 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                 }
                 else // Enable Bank if not
                 {
-                    query.IsActive = true;
-                    _broker.Update(query);
+                    broker.IsActive = true;
+                    _broker.Update(broker);
                 }
             }
         }

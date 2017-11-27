@@ -1,6 +1,7 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using PanelMasterMVC5Separate.Brokers;
+using PanelMasterMVC5Separate.Vendors;
 using System.ComponentModel.DataAnnotations;
 
 namespace PanelMasterMVC5Separate.Tenants.Brokers.Dto
@@ -15,6 +16,8 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers.Dto
         [Required]
         [MaxLength(400)]
         public string LogoPicture { get; set; }
+        [Required]
+        public int CountryID { get; set; }
     }
 
 
@@ -27,6 +30,8 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers.Dto
         public virtual string NewFileName { get; set; }
         public virtual int Id { get; set; }
         public string LogoPicture { get; set; }
+        [Required]
+        public int CountryID { get; set; }
     }
 
     public class GetBrokersDto
@@ -35,7 +40,21 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers.Dto
         public virtual string Mask { get; set; }
         public int Id { get; set; }
     }
+    [AutoMapFrom(typeof(BrokerMaster))]
+    public class BrokerMasterDto : FullAuditedEntityDto
+    {
+        public virtual string BrokerName { get; set; }
+        public virtual string Mask { get; set; }
+        public string Country { get; set; }
+        public bool IsActive { get; set; }
+    }
+    [AutoMapFrom(typeof(Countries))]
+    public class CountriesDto : FullAuditedEntityDto
+    {
+        public virtual string Code { get; set; }
 
+        public virtual string Country { get; set; }
+    }
 
     [AutoMapFrom(typeof(BrokerSubMaster))]
     public class BrokersListDto : FullAuditedEntityDto

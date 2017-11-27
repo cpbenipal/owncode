@@ -546,7 +546,7 @@
     <Content Include="App\host\views\AddBroker\index.js" />
     <Content Include="App\tenant\views\AddBrokerSub\index.js" />
     <Content Include="App\host\views\EditVehicleMake\index.js" />
-    <Content Include="App\host\views\EditBroker\index.js" />
+    <Content Include="App\host\views\AddEditBroker\index.js" />
     <Content Include="App\tenant\views\EditBrokerSub\index.js" />
     <Content Include="App\tenant\views\EditInsurerSub\index.js" />
     <Content Include="App\tenant\views\AddInsurerSub\index.js" />
@@ -7277,7 +7277,7 @@
     <Content Include="App\tenant\views\Brokers\index.cshtml" />
     <Content Include="App\host\views\AddBroker\index.cshtml" />
     <Content Include="App\tenant\views\AddBrokerSub\index.cshtml" />
-    <Content Include="App\host\views\EditBroker\index.cshtml" />
+    <Content Include="App\host\views\AddEditBroker\index.cshtml" />
     <Content Include="App\tenant\views\EditBrokerSub\index.cshtml" />
     <Content Include="App\host\views\VehicleMakes\index.cshtml" />
     <Content Include="App\host\views\AddVehicleMake\index.cshtml" />

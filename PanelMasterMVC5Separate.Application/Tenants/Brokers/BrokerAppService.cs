@@ -1,4 +1,5 @@
 ﻿using Abp.Application.Services.Dto;
+using Abp.Authorization;
 using Abp.AutoMapper;
 using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
@@ -6,6 +7,7 @@ using Abp.Extensions;
 using Abp.IO;
 using Abp.Runtime.Session;
 using Abp.UI;
+using PanelMasterMVC5Separate.Authorization;
 using PanelMasterMVC5Separate.Brokers;
 using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.MultiTenancy;
@@ -27,7 +29,7 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
         private readonly IRepository<BrokerMaster> _BrokersRepository;
         private readonly IRepository<BrokerSubMaster> _BrokerSubMasterRepository;
         private readonly IRepository<Banks> _bankRepository;
-        private readonly IRepository<CountryandCurrency> _currRepository;        
+        private readonly IRepository<CountryandCurrency> _currRepository;
         private readonly IAppFolders _appFolders;
         private readonly IRepository<BrokerMasterPics, int> _binaryObjectRepository;
         private readonly IBrokerExporter _BrokerListExcelExporter;
@@ -59,14 +61,25 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
 
         public ListResultDto<BankDto> GetBanks()
         {
+            int countryId = GetCountryIdByCode();
+
             var banks = _bankRepository
                 .GetAll()
+                .Where(p => p.CountryID == countryId)
                 .OrderBy(p => p.BankName)
                 .ToList();
 
             return new ListResultDto<BankDto>(ObjectMapper.Map<List<BankDto>>(banks));
         }
+        public ListResultDto<CountriesDto> GetCountry()
+        {
+            var banks = _countryRepository
+                .GetAll()
+                .OrderBy(p => p.Country)
+                .ToList();
 
+            return new ListResultDto<CountriesDto>(ObjectMapper.Map<List<CountriesDto>>(banks));
+        }
         public ListResultDto<CurrencyDto> GetCurrencies()
         {
             var banks = _currRepository
@@ -76,15 +89,43 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
 
             return new ListResultDto<CurrencyDto>(ObjectMapper.Map<List<CurrencyDto>>(banks));
         }
-
-        public ListResultDto<BrokersListDto> GetBrokers(GetBrokerInput input)
+        [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
+        public ListResultDto<BrokerMasterDto> GetBrokerMasters(GetBrokerInput input)
         {
-            var BrokerMaster = _BrokersRepository.GetAll()
+            var query = _BrokersRepository.GetAll()
              .WhereIf(
                  !input.Filter.IsNullOrWhiteSpace(),
                  u =>
                      u.BrokerName.Contains(input.Filter)
              )
+             .OrderByDescending(p => p.LastModificationTime)
+             .ToList();
+            var countries = _countryRepository.GetAll().AsNoTracking().ToList();
+
+            var brokermaster = (
+              from f in query
+              join v in countries on f.CountryID equals v.Id
+              select new BrokerMasterDto
+              {
+                  Id = f.Id,
+                  BrokerName = f.BrokerName,
+                  Country = v.Country,
+                  Mask = f.Mask,
+                  IsActive = f.IsActive
+              }).ToList();
+
+            return new ListResultDto<BrokerMasterDto>(ObjectMapper.Map<List<BrokerMasterDto>>(brokermaster));
+        }
+        public ListResultDto<BrokersListDto> GetBrokers(GetBrokerInput input)
+        {
+            int countryId = GetCountryIdByCode();
+
+            var BrokerMaster = _BrokersRepository.GetAll()
+             .WhereIf(
+                 !input.Filter.IsNullOrWhiteSpace(),
+                 u =>
+                     u.BrokerName.Contains(input.Filter)
+             ).Where(p => p.CountryID.Equals(countryId) && p.IsActive.Equals(true))
              .OrderByDescending(p => p.LastModificationTime)
              .ToList();
 
@@ -138,18 +179,11 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
             FileHelper.DeleteIfExists(tempProfilePicturePath);
             return byteArray;
         }
-
+        [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
         public async Task CreateBrokerMaster(BrokersDto input)
-        {
-            var country = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
-            int countryId = 250;
-            if (country != null)
-            {
-                countryId = _countryRepository.FirstOrDefault(x => x.Code == country.CountryCode).Id;
+        { 
+            var NewBroker = new BrokerMaster(input.BrokerName, input.Mask, input.LogoPicture, input.Id, input.CountryID);
 
-            }
-            var NewBroker = new BrokerMaster(input.BrokerName, input.Mask, input.LogoPicture, input.Id, countryId);             
-          
             int BrokerNewId = await _BrokersRepository.InsertAndGetIdAsync(NewBroker);
 
             byte[] byteArray = FetchByteArray(input.LogoPicture);
@@ -158,6 +192,7 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
 
             await _binaryObjectRepository.InsertAsync(NewPicForBroker);
         }
+        [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
         public async Task UpdateBrokerMaster(BrokersUDto input)
         {
             if (input.NewFileName != null)
@@ -174,15 +209,17 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
             master.BrokerName = input.BrokerName;
             master.Mask = input.Mask;
             master.LogoPicture = input.LogoPicture;
+            master.CountryID = input.CountryID;
             await _BrokersRepository.UpdateAsync(master);
         }
         public void CreateOrUpdateSubBroker(BrokersToListDto input)
         {
             var client = input.MapTo<BrokerSubMaster>();
-
+            
             client.BrokerID = input.BrokerID;
             if (input.Id == 0)
             {
+                client.IsActive = true;
                 _BrokerSubMasterRepository.Insert(client);
             }
             else
@@ -193,14 +230,24 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
 
         public BrokersDto GetBrokerMasterDetail(GetClaimsInput input)
         {
+            int countryId = GetCountryIdByCode();
             int Id = Convert.ToInt32(input.Filter);
 
             var query = _BrokersRepository
-              .GetAll().Where(c => c.Id == Id)
+              .GetAll().Where(c => c.Id == Id && (countryId == 0 || c.CountryID == countryId))
               .FirstOrDefault();
 
             return query.MapTo<BrokersDto>();
         }
+        [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
+        public void ChangeMasterStatus(MasterStatusDto input)
+        {
+            var query = _BrokersRepository.GetAll().Where(c => c.Id == input.Id)
+             .FirstOrDefault();
+            query.IsActive = input.Status;
+            _BrokersRepository.Update(query);
+        }
+
         public BrokersForListDto GetBrokerSubMasterDetail(GetClaimsInput input)
         {
             int Id = Convert.ToInt32(input.Filter);
@@ -210,14 +257,16 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
               .GetAll().Where(c => c.BrokerID == Id && c.TenantID == _abpSession.TenantId)
               .FirstOrDefault().MapTo<BrokersForListDto>();
 
-            var querymain = _BrokersRepository
+            if (query != null)
+            {
+                var querymain = _BrokersRepository
               .GetAll().Where(c => c.Id == query.BrokerID)
               .FirstOrDefault();
 
-            query.BrokerName = querymain.BrokerName;
-            query.MaskMain = querymain.Mask;
-            query.BrokerID = query.Id;
-
+                query.BrokerName = querymain.BrokerName;
+                query.MaskMain = querymain.Mask;
+                query.BrokerID = query.Id;
+            }
             return query;
         }
         public Task<BrokerMasterPics> GetOrNullAsync(int id)
@@ -227,7 +276,8 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
         }
         public async Task<FileDto> GetClaimsToExcel()
         {
-            var BrokerMaster = await _BrokersRepository.GetAll().ToListAsync();
+            int CountryId = GetCountryIdByCode();
+            var BrokerMaster = await _BrokersRepository.GetAll().Where(x => x.CountryID == CountryId).ToListAsync();
             var Brokers = await _BrokerSubMasterRepository.GetAll().Where(p => p.TenantID == _abpSession.TenantId).ToListAsync();
 
             var finalQuery = (from master in BrokerMaster
@@ -262,12 +312,39 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
 
             return _BrokerListExcelExporter.ExportToFile(ListDtos);
         }
+        public async Task<FileDto> GetBrokersToExcel()
+        {
+            var query = await _BrokersRepository.GetAll().ToListAsync();
+
+            var countries = await _countryRepository.GetAll().ToListAsync();
+
+            var insurerMaster = (
+                 from f in query
+                 join v in countries on f.CountryID equals v.Id
+                 select new BrokerMasterDto
+                 {
+                     Id = f.Id,
+                     BrokerName = f.BrokerName,
+                     Country = v.Country,
+                     Mask = f.Mask
+                 }).ToList();
+
+
+            var ListDtos = insurerMaster.MapTo<List<BrokerMasterDto>>();
+
+            return _BrokerListExcelExporter.ExportToFile(ListDtos);
+        }
         public void ChangeStatus(StatusDto input)
         {
             var query = _BrokerSubMasterRepository.GetAll().Where(c => c.Id == input.Id && c.TenantID == _abpSession.TenantId)
              .FirstOrDefault();
             query.IsActive = input.Status;
             _BrokerSubMasterRepository.Update(query);
+        }
+        private int GetCountryIdByCode()
+        {
+            var CountryCode = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
+            return (CountryCode == null ? 0 : _countryRepository.FirstOrDefault(x => x.Code == CountryCode.CountryCode).Id);
         }
     }
 }

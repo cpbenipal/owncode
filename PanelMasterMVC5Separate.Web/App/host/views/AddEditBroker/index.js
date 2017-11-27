@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    appModule.controller('host.views.EditBroker.index', [
+    appModule.controller('host.views.AddEditBroker.index', [
         '$scope', 'appSession', '$uibModal', '$stateParams', 'FileUploader', 'abp.services.app.broker',
 
 
@@ -16,9 +16,7 @@
 
             vm.advancedFiltersAreShown = false;
             vm.filterText = $stateParams.filterText || '';
-            vm.currentUserId = abp.session.userId;
-            vm.TenantId = abp.session.tenantId;
-
+            vm.currentUserId = abp.session.userId;           
             vm.uploadedFileName = null;
 
             vm.job.uploader = new fileUploader({
@@ -62,14 +60,38 @@
                     abp.message.error(response.error.message);
                 }
             };
-            vm.save = function () {                
+            vm.save = function () {
+                if ($stateParams.id == null) {
+                    vm.create();
+                }
+                else {
+                    vm.update();
+                }
+            };
+            vm.update = function () {                
                 vm.saving = true;                 
                 jobService.updateBrokerMaster({
                     Id: $stateParams.id,
                     logoPicture: vm.job.logoPicture,                  
                     BrokerName: vm.job.brokerName,
                     newFileName: vm.uploadedFileName, 
-                    mask: vm.job.mask
+                    Mask: vm.job.mask,
+                    countryid : vm.job.countryID
+                }).then(function () {
+                    abp.notify.info(app.localize('SavedSuccessfully'));
+                    window.location.href = "#!/host/Brokers";
+                }).finally(function () {
+                    vm.saving = false;
+                });
+            };
+            vm.create = function () {
+                vm.saving = true;
+
+                jobService.createBrokerMaster({
+                    LogoPicture: vm.uploadedFileName,
+                    BrokerName: vm.job.brokerName,
+                    Mask: vm.job.mask,
+                    countryid : vm.job.countryID
                 }).then(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
                     window.location.href = "#!/host/Brokers";
@@ -78,6 +100,23 @@
                 });
             };
 
+            $scope.countryList = []; //list of Countries
+            vm.getCountries = function () {
+
+                jobService.getCountry()
+                    .then(function (ins_obj) {
+
+                        angular.forEach(ins_obj.data.items, function (insvalue, key1) {
+                            $scope.countryList.push({
+                                name: insvalue.country + " (" + insvalue.code + ")",
+                                id: insvalue.id
+                            });
+                        });
+
+                    }).finally(function () {
+                        vm.loading = false;
+                    });
+            };
             vm.getBrokerMaster = function () {
 
                 vm.loading = true;
@@ -88,7 +127,9 @@
                         vm.loading = false;
                     });
             };
-
-            vm.getBrokerMaster();
+            if ($stateParams.id != null) {
+                vm.getBrokerMaster();
+            }
+            vm.getCountries();
         }]);
 })();

@@ -25,6 +25,7 @@ namespace PanelMasterMVC5Separate.Brokers
             LogoPicture = logoPicture;
             Id = id;
             CountryID = countryId;
+            IsActive = true;
         }
 
         [Required]

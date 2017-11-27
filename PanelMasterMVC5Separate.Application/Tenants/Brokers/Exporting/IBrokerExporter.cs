@@ -7,5 +7,6 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers.Exporting
     public interface IBrokerExporter
     {
         FileDto ExportToFile(List<BrokersListDto> claimListDtos);
+        FileDto ExportToFile(List<BrokerMasterDto> claimListDtos);
     }
 }

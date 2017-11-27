@@ -4,13 +4,14 @@
     <div class="col-xs-6">
         <div class="page-head">
             <div class="page-title">
-                <h1>
-                    <span>@L("EditMasterBroker")</span> <small>more info about Broker</small>
+                <h1> 
+                    <span ng-if="!vm.job.id">@L("AddMasterBroker")</span>
+                    <span ng-if="vm.job.id">@L("EditMasterBroker")</span><small>more info about Broker</small>
                 </h1>
             </div>
         </div>
     </div>
-    <form name="editBrokerform" ng-controller="host.views.EditBroker.index as vm" role="form" novalidate class="form-horizontal" action="#" id="submit_form" method="POST">
+    <form name="editBrokerform" ng-controller="host.views.AddEditBroker.index as vm" role="form" novalidate class="form-horizontal" action="#" id="submit_form" method="POST">
         <div class="row">
             <div class="col-md-12">
                 <!-- BEGIN SAMPLE FORM PORTLET-->
@@ -36,6 +37,19 @@
 
                                     <div class="form-body">
                                         <div class="form-group">
+                                            <label class="col-md-3 control-label">Country</label>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon input-circle-left">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </span>
+                                                    <select ng-model="vm.job.countryID"  class="form-control input-circle-right" ng-options="opt.id as opt.name for opt in countryList" required>
+                                                        <option value="">@L("SelectOne")</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label class="col-md-3 control-label">Broker Name</label>
                                             <div class="col-md-4">
                                                 <div class="input-group">
@@ -46,7 +60,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" ng-if="vm.job.id">
                                             <label class="col-md-3 control-label">Logo</label>
                                             <div class="col-md-4">
                                                 <div class="input-group">
@@ -57,7 +71,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Change Logo</label>
+                                            <label class="col-md-3 control-label">Logo</label>
                                             <div class="col-md-4">
                                                 <div class="input-group">
                                                     <input type="file" nv-file-select uploader="vm.job.uploader">

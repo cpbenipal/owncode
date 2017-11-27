@@ -195,6 +195,18 @@ appModule.config([
             url: '/AddEditInsurer/:id',
             templateUrl: '~/App/host/views/AddEditInsurer/index.cshtml'
         });
+        $stateProvider.state('host.Brokers', {
+            url: '/Brokers',
+            templateUrl: '~/App/host/views/Brokers/index.cshtml'
+        }); 
+        $stateProvider.state('host.AddBroker', {
+            url: '/AddEditBroker',
+            templateUrl: '~/App/host/views/AddEditBroker/index.cshtml'
+        });
+        $stateProvider.state('host.EditBroker', {
+            url: '/AddEditBroker/:id',
+            templateUrl: '~/App/host/views/AddEditBroker/index.cshtml'
+        });
        }
 
         //TENANT routes
@@ -380,15 +392,7 @@ appModule.config([
             url: '/Insurers',
             templateUrl: '~/App/tenant/views/Insurers/index.cshtml'
         });
-
-        $stateProvider.state('tenant.AddInsurer', {
-            url: '/AddInsurer',
-            templateUrl: '~/App/tenant/views/AddInsurer/index.cshtml'
-        });
-        $stateProvider.state('tenant.EditInsurer', {
-            url: '/EditInsurer/:id',
-            templateUrl: '~/App/tenant/views/EditInsurer/index.cshtml'
-        });
+  
         $stateProvider.state('tenant.AddInsurerSub', {
             url: '/AddInsurerSub/:id',
             templateUrl: '~/App/tenant/views/AddInsurerSub/index.cshtml'
@@ -402,21 +406,7 @@ appModule.config([
         $stateProvider.state('tenant.Brokers', {
             url: '/Brokers',
             templateUrl: '~/App/tenant/views/Brokers/index.cshtml'
-        });
-
-        $stateProvider.state('tenant.adminforms', {
-            url: '/adminforms',
-            templateUrl: '~/App/tenant/views/adminforms/index.cshtml'
-        });
-
-        $stateProvider.state('tenant.AddBroker', {
-            url: '/AddBroker',
-            templateUrl: '~/App/tenant/views/AddBroker/index.cshtml'
-        });
-        $stateProvider.state('tenant.EditBroker', {
-            url: '/EditBroker/:id',
-            templateUrl: '~/App/tenant/views/EditBroker/index.cshtml'
-        });
+        });  
         $stateProvider.state('tenant.AddBrokerSub', {
             url: '/AddBrokerSub/:id',
             templateUrl: '~/App/tenant/views/AddBrokerSub/index.cshtml'

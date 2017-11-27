@@ -25,5 +25,6 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
         Task UpdateInsurerMaster(InsurersUDto input);
         InsurersDto GetInsurerMasterDetail(GetClaimsInput input);
         ListResultDto<InsurersListDto> GetInsurers(GetInsurerInput input);
+        Task<FileDto> GetInsurersToExcel();
     }
 }

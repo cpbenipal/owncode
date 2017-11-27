@@ -63,8 +63,7 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
 
         public ListResultDto<BankDto> GetBanks()
         {
-            var CountryCode = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId).CountryCode;
-            var countryId = _abpSession.TenantId != 0 ? _countryRepository.FirstOrDefault(x => x.Code == CountryCode).Id : 0;
+            int countryId = GetCountryIdByCode();
 
             var banks = _bankRepository
                 .GetAll()
@@ -147,9 +146,7 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
         }
         public ListResultDto<InsurersListDto> GetInsurers(GetInsurerInput input)
         {
-            var CountryCode = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId).CountryCode;
-
-            var countryId = _countryRepository.FirstOrDefault(x => x.Code == CountryCode).Id;
+            int countryId = GetCountryIdByCode();
 
             var insurerMaster = _insurersRepository.GetAll()
              .WhereIf(
@@ -247,10 +244,7 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
 
         public InsurersDto GetInsurerMasterDetail(GetClaimsInput input)
         {
-            var CountryCode = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
-            var countryId = 0;
-            // for Host countryId = 0 :: tenant is null
-            countryId = CountryCode == null ? 0 : _countryRepository.FirstOrDefault(x => x.Code == CountryCode.CountryCode).Id;
+            int countryId = GetCountryIdByCode();
 
             int Id = Convert.ToInt32(input.Filter);
 
@@ -308,7 +302,9 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
         }
         public async Task<FileDto> GetClaimsToExcel()
         {
-            var insurerMaster = await _insurersRepository.GetAll().ToListAsync();
+            int countryId = GetCountryIdByCode();
+
+            var insurerMaster = await _insurersRepository.GetAll().Where(x=>x.CountryID == countryId).ToListAsync();
             var insurers = await _insurersubRepository.GetAll().Where(c => c.TenantID == _abpSession.TenantId).ToListAsync();
 
             var finalQuery = (from master in insurerMaster
@@ -350,7 +346,11 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
             query.IsActive = input.Status;
             _insurersubRepository.Update(query);
         }
-
+        private int GetCountryIdByCode()
+        {
+            var CountryCode = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
+            return (CountryCode == null ? 0 : _countryRepository.FirstOrDefault(x => x.Code == CountryCode.CountryCode).Id);
+        }
 
     }
 }
