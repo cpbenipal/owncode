@@ -48,6 +48,8 @@ namespace PanelMasterMVC5Separate.MultiTenancy
         private readonly IRepository<Banks> _Banks;
         private readonly IRepository<InsurerMaster> _insurer;
         private readonly IRepository<BrokerMaster> _broker;
+        private readonly IRepository<InsurerPics> _insurerpic;
+        private readonly IRepository<BrokerMasterPics> _brokerpic;
         public TenantManager(
             IRepository<TowOperator> towoperator,
             IRepository<SignonPlans> signonplansrepository,
@@ -69,7 +71,9 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             IAbpZeroDbMigrator abpZeroDbMigrator,
             IRepository<Banks> bank,
             IRepository<InsurerMaster> insurer,
-            IRepository<BrokerMaster> broker
+            IRepository<BrokerMaster> broker,
+               IRepository<InsurerPics> insurerpic,
+            IRepository<BrokerMasterPics> brokerpic
             )
             : base(
                   tenantRepository,
@@ -94,8 +98,10 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             _Banks = bank;
             _insurer = insurer;
             _broker = broker;
+            _insurerpic = insurerpic;
+            _brokerpic = brokerpic;
         }
-   
+
         public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress, string connectionString, bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin, bool sendActivationEmail)
         {
             int newTenantId;
@@ -244,7 +250,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
 
             return newTenantId;
         }
-   
+
         public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress,
             string fullName, string cellnumber,
             //string phoneNumber, string companyRegistrationNo, string companyVatNo, string address, string city, 
@@ -389,19 +395,19 @@ namespace PanelMasterMVC5Separate.MultiTenancy
         {
             int CountryID = _countries.FirstOrDefault(x => x.Code == countrycode).Id;
 
-            string[] defaults = new string[] { "OTHER", "NONE"};
-            
+            string[] defaults = new string[] { "OTHER", "NONE" };
+            string defaultlogo = "default-profile-picture.png";
             // Verify Bank
-            foreach(var data in defaults)
+            foreach (var data in defaults)
             {
                 var bank = _Banks.FirstOrDefault(c => c.BankName == data && c.CountryID == CountryID);
                 // If not exist for current country, then add  banknames "OTHER" and "NONE" to tblbanks with countryid and enable
                 if (bank == null)
                 {
                     var client = new Banks()
-                    { 
+                    {
                         BankName = data,
-                        CountryID = CountryID ,
+                        CountryID = CountryID,
                         isActive = true
                     };
                     _Banks.Insert(client);
@@ -411,29 +417,39 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                     bank.isActive = true;
                     _Banks.Update(bank);
                 }
-            
-            // Verify Insurer
-             
+
+                // Verify Insurer
+
                 var insurer = _insurer.FirstOrDefault(c => c.InsurerName == data && c.CountryID == CountryID);
                 // If not exist for current country, then add  InsurerName "OTHER" and "NONE" to tblinsurerMaster with countryid and enable
                 if (insurer == null)
                 {
+
                     var client = new InsurerMaster()
                     {
                         InsurerName = data,
                         CountryID = CountryID,
+                        LogoPicture = defaultlogo,
+                        Mask = data,
                         IsActive = true
                     };
-                    _insurer.Insert(client);
+                    int Id = _insurer.InsertAndGetId(client);
+
+                    var logo = new InsurerPics()
+                    {
+                        Bytes = GetBytes(defaultlogo),
+                        InsurerID = Id,
+                    };
+                    _insurerpic.Insert(logo);
                 }
                 else // Enable Bank if not
                 {
                     insurer.IsActive = true;
                     _insurer.Update(insurer);
                 }
-         
-            // Verify Broker
-             
+
+                // Verify Broker
+
                 var broker = _broker.FirstOrDefault(c => c.BrokerName == data && c.CountryID == CountryID);
                 // If not exist for current country, then add  brokerName "OTHER" and "NONE" to tblBrokerMaster with countryid and enable
                 if (broker == null)
@@ -442,9 +458,19 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                     {
                         BrokerName = data,
                         CountryID = CountryID,
+                        LogoPicture = defaultlogo,
+                        Mask = data,
                         IsActive = true
                     };
-                    _broker.Insert(client);
+                    int id = _broker.InsertAndGetId(client);
+
+
+                    var logobroker = new BrokerMasterPics()
+                    {
+                        Bytes = GetBytes(defaultlogo),
+                        BrokerID = id
+                    };
+                    _brokerpic.Insert(logobroker);
                 }
                 else // Enable Bank if not
                 {
@@ -453,7 +479,13 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                 }
             }
         }
-         
+
+        private byte[] GetBytes(string str)
+        {
+            byte[] bytes = new byte[str.Length * sizeof(char)];
+            System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
+            return bytes;
+        }
 
         private void CreateTowOperators(int tenantId, string CountryCode)
         {
