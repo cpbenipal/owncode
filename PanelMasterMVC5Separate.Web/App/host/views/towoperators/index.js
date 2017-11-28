@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    appModule.controller('tenant.views.towoperators.index', [
+    appModule.controller('host.views.towoperators.index', [
         '$scope', '$uibModal', '$stateParams', 'uiGridConstants', 'abp.services.app.branchClaim',
         function ($scope, $uibModal, $stateParams, uiGridConstants, userService) {
             var vm = this;
@@ -66,40 +66,25 @@
                         minWidth: 120
                     },
                     {
-                        name: app.localize('ContactNumber'),
-                        field: 'contactNumber',
-                        minWidth: 120
-                    },
-                    {
-                        name: app.localize('ContactPerson'),
-                        field: 'contactPerson',
-                        minWidth: 120
-                    },
-                    {
-                        name: app.localize('EmailAddress'),
-                        field: 'emailAddress',
-                        minWidth: 120
-                    },
-                    {
                         name: app.localize('CreationTime'),
                         field: 'creationTime',
                         minWidth: 100
                     }
-                    , {
-                        name: app.localize('Status'),
-                        field: 'isActive',
-                        cellTemplate:
-                        '<div class=\"ui-grid-cell-contents\">' +
-                        '<div ng-show="row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.id}} bootstrap-switch-animate bootstrap-switch-on" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: 0px;">' +
-                        '<span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;"> ON</span>' +
-                        '<span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span>' +
-                        '<span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
-                        '<input ng-checked="row.entity.isActive" ng-model="row.entity.isActive"  class="make-switch" data-size="mini" type="checkbox"></div></div>' +
-                        '<div ng-show="!row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.id}} bootstrap-switch-animate bootstrap-switch-off" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: -32px;"><span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;">ON</span><span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
-                        '</div></div>' +
-                        '</div>',
-                        minWidth: 50
-                    }
+                    //, {
+                    //    name: app.localize('Status'),
+                    //    field: 'isActive',
+                    //    cellTemplate:
+                    //    '<div class=\"ui-grid-cell-contents\">' +
+                    //    '<div ng-show="row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.id}} bootstrap-switch-animate bootstrap-switch-on" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: 0px;">' +
+                    //    '<span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;"> ON</span>' +
+                    //    '<span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span>' +
+                    //    '<span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
+                    //    '<input ng-checked="row.entity.isActive" ng-model="row.entity.isActive"  class="make-switch" data-size="mini" type="checkbox"></div></div>' +
+                    //    '<div ng-show="!row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.id}} bootstrap-switch-animate bootstrap-switch-off" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: -32px;"><span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;">ON</span><span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
+                    //    '</div></div>' +
+                    //    '</div>',
+                    //    minWidth: 50
+                    //}
                 ],
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
@@ -124,7 +109,7 @@
 
             vm.getTowOperator = function () {
                 vm.loading = true;
-                userService.getTowOperators($.extend({ filter: vm.filterText }, vm.requestParams))
+                userService.getHostTowOperators($.extend({ filter: vm.filterText }, vm.requestParams))
                     .then(function (result) {
                         vm.userGridOptions.totalItems = result.data.totalCount;
                         vm.userGridOptions.data = addRoleNamesField(result.data.items);
@@ -172,8 +157,8 @@
             function openCreateOrEditUserModal(towId) {
                 
                 var modalInstance = $uibModal.open({
-                    templateUrl: '~/App/tenant/views/towoperators/createOrEditModal.cshtml',
-                    controller: 'tenant.views.towoperators.createOrEditModal as vm',
+                    templateUrl: '~/App/host/views/towoperators/createOrEditModal.cshtml',
+                    controller: 'host.views.towoperators.createOrEditModal as vm',
                     backdrop: 'static',
                     resolve: {
                         towId: function () {
@@ -186,31 +171,7 @@
                     vm.getTowOperator();
                 });
             }
-
-            vm.Status = function (tow) {
-                abp.message.confirm(
-                    app.localize('AreYouSure', tow.description),
-                    function (isConfirmed) {
-                        if (isConfirmed) {
-                            if (tow.id != 0) {
-                                userService.changeTowStatus({
-                                    id: tow.id,
-                                    isActive: tow.isActive
-                                }).then(function () {
-                                    vm.getTowOperator();
-                                    if (!tow.isActive)
-                                        abp.notify.success(app.localize('SuccessfullyEnabled'));
-                                    else
-                                        abp.notify.warn(app.localize('SuccessfullyDisabled'));
-                                });                                
-                            }
-                            else {
-                                openCreateOrEditUserModal(tow.id);
-                            }
-                        }
-                    }
-                );
-            };
+             
             vm.getTowOperator();
         }]);
 })();

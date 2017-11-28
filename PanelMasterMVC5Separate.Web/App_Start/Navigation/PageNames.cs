@@ -38,6 +38,13 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string Brokers = "Administration.SystemDefaults.Brokers";
                 public const string BrokerList = "Brokers.Brokers";
                 public const string AddBroker = "Brokers.AddBroker";
+
+                public const string MainVendors = "Administration.SystemDefaults.Vendors";
+                public const string Vendors = "MainVendors.Vendors";
+                public const string AddVendor = "MainVendors.AddVendor";
+
+                public const string TowOperators = "Administration.TowOperators.Host";
+                 
             }
 
             public static class Tenant

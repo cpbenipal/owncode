@@ -1,16 +1,9 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
-using PanelMasterMVC5Separate.Authorization.Claim.Dto;
 using PanelMasterMVC5Separate.Dto;
-using PanelMasterMVC5Separate.Job;
-using PanelMasterMVC5Separate.Job.Dto;
 using PanelMasterMVC5Separate.Tenants.Brokers.Dto;
 using PanelMasterMVC5Separate.Tenants.Claim.Dto;
 using PanelMasterMVC5Separate.Tenants.Insurer.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PanelMasterMVC5Separate.Tenants.Claim
@@ -28,8 +21,8 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         void UpdateInsuranceInfo(BranchClaimListDto input);
 
         void UpdateClient(BranchClaimListDto input);
-         
 
+        ListResultDto<Brokers.Dto.CountriesDto> GetCountry();
         ListResultDto<InsurersDto> GetInsurances();
         ListResultDto<BrokersDto> GetBrokers();
 
@@ -52,5 +45,8 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         void CreateOrUpdateTowOperator(TowTenantDto input);
         Task<FileDto> GetTowOperatorsToExcel();
         void ChangeTowStatus(JobStatusDto input);
+
+        ListResultDto<TowOperatorDto> GetHostTowOperators(GetClaimsInput input);
+        Task<TowTenantDto> GetHostTow(NullableIdDto<int> input);
     }
 }

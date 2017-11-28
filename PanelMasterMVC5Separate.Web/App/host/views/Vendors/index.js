@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    appModule.controller('tenant.views.VendorList.index', [
+    appModule.controller('host.views.Vendors.index', [
         '$scope', '$uibModal', '$stateParams', 'uiGridConstants', 'abp.services.app.vendorClaim',
         function ($scope, $uibModal, $stateParams, uiGridConstants, userService) {
 
@@ -14,7 +14,7 @@
             vm.advancedFiltersAreShown = false;
             vm.filterText = $stateParams.filterText || '';
             vm.currentUserId = abp.session.userId;
-            vm.tenantID = abp.session.tenantId;
+
 
             vm.permissions = {
                 create: abp.auth.hasPermission('Pages.Administration.Users.Create'),
@@ -52,20 +52,11 @@
                         '  <div class="btn-group dropdown" uib-dropdown="" dropdown-append-to-body>' +
                         '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
                         '    <ul uib-dropdown-menu>' +
-                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/tenant/AddEditVendor/{{row.entity.id}}">' + app.localize('Open') + '</a></li>' +                                       
+                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/host/AddEditVendor/{{row.entity.id}}">' + app.localize('Open') + '</a></li>' +
                         '    </ul>' +
                         '  </div>' +
                         '</div>'
-                    },
-                    {
-                        name: '',
-                        field: 'isActive',
-                        cellTemplate:
-                        '<div class=\"ui-grid-cell-contents\">' +
-                        '<a ng-show="row.entity.isActive" ng-href="#!/tenant/EditVendor/{{row.entity.id}}" class="btn btn-xs btn-primary blue">' + app.localize('EDIT') + '</a>' +
-                        '</div>',
-                        minWidth: 50
-                    },
+                    },                     
                     {
                         name: app.localize('SupplierName'),
                         field: 'supplierName',
@@ -78,6 +69,12 @@
                         minWidth: 140
                     },
                     {
+                        name: app.localize('CountryCode'),
+                        enableSorting: true,
+                        field: 'country',
+                        minWidth: 100
+                    },
+                    {
                         name: app.localize('RegistrationNumber'),
                         field: 'registrationNumber',
                         minWidth: 120
@@ -87,21 +84,21 @@
                         field: 'taxRegistrationNumber',
                         minWidth: 200
                     }
-                    ,{
-                        name: app.localize('Status'),
-                        field: 'isActive',
-                        cellTemplate:
-                        '<div class=\"ui-grid-cell-contents\">' +
-                        '<div ng-show="row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.id}} bootstrap-switch-animate bootstrap-switch-on" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: 0px;">' +
-                        '<span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;"> ON</span>' +
-                        '<span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span>' +
-                        '<span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
-                        '<input ng-checked="row.entity.isActive" ng-model="row.entity.isActive"  class="make-switch" data-size="mini" type="checkbox"></div></div>' +
-                        '<div ng-show="!row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.id}} bootstrap-switch-animate bootstrap-switch-off" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: -32px;"><span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;">ON</span><span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
-                        '</div></div>' +
-                        '</div>',
-                        minWidth: 50
-                    }
+                    //,{
+                    //    name: app.localize('Status'),
+                    //    field: 'isActive',
+                    //    cellTemplate:
+                    //    '<div class=\"ui-grid-cell-contents\" ng-show="row.entity.hasSub">' +
+                    //    '<div ng-show="row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.id}} bootstrap-switch-animate bootstrap-switch-on" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: 0px;">' +
+                    //    '<span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;"> ON</span>' +
+                    //    '<span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span>' +
+                    //    '<span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
+                    //    '<input ng-checked="row.entity.isActive" ng-model="row.entity.isActive"  class="make-switch" data-size="mini" type="checkbox"></div></div>' +
+                    //    '<div ng-show="!row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.id}} bootstrap-switch-animate bootstrap-switch-off" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: -32px;"><span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;">ON</span><span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
+                    //    '</div></div>' +
+                    //    '</div>',
+                    //    minWidth: 50
+                    //}
                 ],
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
@@ -125,8 +122,9 @@
             };
 
             vm.getUsers = function () {
-                vm.loading = true; 
-                userService.getVendors($.extend({ filter: vm.filterText }, vm.requestParams), vm.tenantID)
+
+                vm.loading = true;
+                userService.getMasterVendors($.extend({ filter: vm.filterText }, vm.requestParams))
                     .then(function (result) {
                         vm.userGridOptions.totalItems = result.data.totalCount;
                         vm.userGridOptions.data = addRoleNamesField(result.data.items);
@@ -140,30 +138,23 @@
                 abp.message.confirm(
                     app.localize('AreYouSure', i.supplierName),
                     function (isConfirmed) {
-                        
-                        if (isConfirmed) {                           
-                            if (i.isActive === false) {
-                                window.location.href = "#!/tenant/AddSubVendor/" + i.id;
-                            }
-                            else {
-                                userService.changeStatus({
-                                    vendorID: i.id,
-                                    tenantID: abp.session.tenantId,
-                                    status: !i.isActive
-                                }).then(function () {                                    
-                                    vm.getUsers();
-                                    if (!i.isActive)
-                                        abp.notify.success(app.localize('SuccessfullyEnabled'));
-                                    else
-                                        abp.notify.warn(app.localize('SuccessfullyDisabled'));                                   
-                                });
-                            }
+
+                        if (isConfirmed) {
+                            userService.changeVendorStatus({
+                                id: i.id, 
+                                status: !i.isActive
+                            }).then(function () {
+                                vm.getUsers();
+                                if (!i.isActive)
+                                    abp.notify.success(app.localize('SuccessfullyEnabled'));
+                                else
+                                    abp.notify.warn(app.localize('SuccessfullyDisabled'));
+                            });
                         }
                     }
                 );
             };
 
- 
 
             function addRoleNamesField(users) {
                 for (var i = 0; i < users.length; i++) {

@@ -607,6 +607,7 @@
     <text name="Description">Description</text>
     <text name="LogoPicture">Logo Picture</text>
     <text name="EditVehicleMade">Edit Vehicle Made</text>
+    <text name="EditVendor">Edit Vendor</text>
     <text name="ChangeLogoPicture">Change Logo Picture</text>
     <text name="IsActive">Enabled</text>
     <text name="Next">Next</text>

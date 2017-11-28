@@ -1,10 +1,12 @@
 ﻿using Abp.Application.Services.Dto;
+using Abp.Authorization;
 using Abp.AutoMapper;
 using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Abp.Runtime.Session;
 using AutoMapper;
+using PanelMasterMVC5Separate.Authorization;
 using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.Job.Dto;
 using PanelMasterMVC5Separate.MultiTenancy;
@@ -104,10 +106,10 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
 
             return new ListResultDto<CurrencyDto>(ObjectMapper.Map<List<CurrencyDto>>(banks));
         }
-
-        public ListResultDto<VendorMainListDto> GetVendors(GetClaimsInput input, string tenantID)
+        [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
+        public ListResultDto<VendorMainListDto> GetMasterVendors(GetClaimsInput input)
         {
-            int tenant_id = Convert.ToInt16(tenantID);
+            var countries = _countryRepository.GetAll().AsNoTracking().ToList();
 
             var query = _vendorMainRepository.GetAll()
               .WhereIf(
@@ -116,6 +118,46 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
                          p.RegistrationNumber.Equals(input.Filter) ||
                          p.TaxRegistrationNumber.Equals(input.Filter)
               )
+             .OrderByDescending(p => p.LastModificationTime)
+             .ToList();
+
+            var sub_query = _vendorSubRepository.GetAll().ToList();
+
+
+            var finalQuery = (from master in query
+                              join c in countries on master.CountryID equals c.Id
+                              join v in sub_query on master.Id equals v.VendorID into ps
+                              from y1 in ps.DefaultIfEmpty()
+
+                              select new VendorMainListDto
+                              {
+                                  id = master.Id,
+                                  SupplierCode = master.SupplierCode,
+                                  SupplierName = master.SupplierName,
+                                  RegistrationNumber = master.RegistrationNumber,
+                                  TaxRegistrationNumber = master.TaxRegistrationNumber,
+                                  Country = c.Country,
+                                  IsActive = y1 == null ? false : y1.IsActive,
+                                  HasSub = y1 == null ? false : true
+                              }).ToList();
+
+
+            return new ListResultDto<VendorMainListDto>(finalQuery);
+
+        }
+
+        public ListResultDto<VendorMainListDto> GetVendors(GetClaimsInput input, string tenantID)
+        {
+            int tenant_id = Convert.ToInt16(tenantID);
+            int countryId = GetCountryIdByCode();
+            var query = _vendorMainRepository.GetAll()
+              .WhereIf(
+                    !input.Filter.IsNullOrEmpty(),
+                    p => p.SupplierName.Equals(input.Filter) ||
+                         p.RegistrationNumber.Equals(input.Filter) ||
+                         p.TaxRegistrationNumber.Equals(input.Filter)
+              )
+              .Where(p => p.CountryID.Equals(countryId))
              .OrderByDescending(p => p.LastModificationTime)
              .ToList();
 
@@ -184,14 +226,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             newVendor.SupplierName = input.SupplierName;
             newVendor.RegistrationNumber = input.RegistrationNumber;
             newVendor.TaxRegistrationNumber = input.TaxRegistrationNumber;
-
-            var country = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
-            if (country != null)
-            {
-                newVendor.CountryID = _countryRepository.FirstOrDefault(x => x.Code == country.CountryCode).Id;
-            }
-            else
-                newVendor.CountryID = 250;
+            newVendor.CountryID = GetCountryIdByCode();
             return _vendorMainRepository.Insert(newVendor);
 
         }
@@ -215,28 +250,15 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             }
         }
 
-        public ListResultDto<VendorMainListDto> GetMainVendor(GetClaimsInput input)
+        public VendorDto GetMainVendor(GetClaimsInput input)
         {
             int Id = Convert.ToInt32(input.Filter);
+            int CountryID = GetCountryIdByCode();
 
             var main_query = _vendorMainRepository
-              .GetAll().Where(c => c.Id == Id)
-              .ToList();
+              .GetAll().FirstOrDefault(c => c.Id == Id && (CountryID == 0 || c.CountryID == CountryID));
 
-            var newList = new List<VendorMainListDto>();
-            foreach (VendorMain vendor_obj in main_query)
-            {
-                newList.Add(new VendorMainListDto
-                {
-                    id = vendor_obj.Id,
-                    SupplierCode = vendor_obj.SupplierCode,
-                    SupplierName = vendor_obj.SupplierName,
-                    RegistrationNumber = vendor_obj.RegistrationNumber,
-                    TaxRegistrationNumber = vendor_obj.TaxRegistrationNumber
-                });
-            }
-
-            return new ListResultDto<VendorMainListDto>(newList);
+            return main_query.MapTo<VendorDto>();
         }
 
         public ListResultDto<VendorSubListDto> GetSubVendor(GetClaimsInput input, string tenantID)
@@ -320,6 +342,48 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             query.IsActive = input.IsActive;
 
             _vendorSubRepository.Update(query);
+        }
+        [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
+        public void ChangeVendorStatus(MasterStatusDto input)
+        {
+            var query = _vendorSubRepository
+             .GetAll().Where(c => c.VendorID == input.Id)
+             .FirstOrDefault();
+
+            query.IsActive = input.Status;
+
+            _vendorSubRepository.Update(query);
+        }
+        public ListResultDto<CountryDto> GetCountry()
+        {
+            var banks = _countryRepository
+                .GetAll()
+                .OrderBy(p => p.Country)
+                .ToList();
+
+            return new ListResultDto<CountryDto>(ObjectMapper.Map<List<CountryDto>>(banks));
+        }
+        private int GetCountryIdByCode()
+        {
+            var CountryCode = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
+            return (CountryCode == null ? 0 : _countryRepository.FirstOrDefault(x => x.Code == CountryCode.CountryCode).Id);
+        }
+        [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
+        public void AddUpdateVendor(VendorSaveDto input)
+        {
+            var vendor = input.MapTo<VendorMain>();
+            if (input.Id == 0)
+                vendor.SupplierCode = Guid.NewGuid();
+            _vendorMainRepository.InsertOrUpdate(vendor);
+        }
+        // Tenant Specific
+        public void AddEditVendor(VendorSaveDto input)
+        {
+            var vendor = input.MapTo<VendorMain>();
+            vendor.CountryID = GetCountryIdByCode();
+            if (input.Id == 0)
+                vendor.SupplierCode = Guid.NewGuid();
+            _vendorMainRepository.InsertOrUpdate(vendor);
         }
     }
 }

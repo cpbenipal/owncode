@@ -207,6 +207,23 @@ appModule.config([
             url: '/AddEditBroker/:id',
             templateUrl: '~/App/host/views/AddEditBroker/index.cshtml'
         });
+
+        $stateProvider.state('host.Vendors', {
+            url: '/Vendors',
+            templateUrl: '~/App/host/views/Vendors/index.cshtml'
+        });
+        $stateProvider.state('host.AddVendor', {
+            url: '/AddEditVendor',
+            templateUrl: '~/App/host/views/AddEditVendor/index.cshtml'
+        });
+        $stateProvider.state('host.EditVendor', {
+            url: '/AddEditVendor/:id',
+            templateUrl: '~/App/host/views/AddEditVendor/index.cshtml'
+        });
+        $stateProvider.state('host.towoperators', {
+            url: '/towoperators',
+            templateUrl: '~/App/host/views/towoperators/index.cshtml'
+        });
        }
 
         //TENANT routes
@@ -278,8 +295,8 @@ appModule.config([
         });
 
         $stateProvider.state('tenant.AddVendor', {
-            url: '/AddVendor',
-            templateUrl: '~/App/tenant/views/AddVendor/index.cshtml'
+            url: '/AddEditVendor',
+            templateUrl: '~/App/tenant/views/AddEditVendor/index.cshtml'
         });
 
         $stateProvider.state('tenant.AddSubVendor', {
@@ -287,9 +304,9 @@ appModule.config([
             templateUrl: '~/App/tenant/views/AddSubVendor/index.cshtml'
         }); 
 
-        $stateProvider.state('tenant.EditMainVendor', {
-            url: '/EditMainVendor/:id',
-            templateUrl: '~/App/tenant/views/EditMainVendor/index.cshtml'
+        $stateProvider.state('tenant.AddEditVendor', {
+            url: '/AddEditVendor/:id',
+            templateUrl: '~/App/tenant/views/AddEditVendor/index.cshtml'
         });        
 
         $stateProvider.state('tenant.VendorList', {

@@ -16,10 +16,19 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
         void AddSubVendor(VendorSubListDto input);
         ListResultDto<VendorMainListDto> GetVendors(GetClaimsInput input, string tenantID);
         Task<FileDto> GetClaimsToExcel();
-        ListResultDto<VendorMainListDto> GetMainVendor(GetClaimsInput input);
+        void AddEditVendor(VendorSaveDto input);
+        VendorDto GetMainVendor(GetClaimsInput input);
+
         ListResultDto<VendorSubListDto> GetSubVendor(GetClaimsInput input, string tenantID);
         void UpdateVendor(VendorSubListDto input);
         void ChangeStatus(VendorSubListDto input);
         void UpdateMainVendor(VendorMainListDto input);
+
+        // Host
+        ListResultDto<VendorMainListDto> GetMasterVendors(GetClaimsInput input);
+        void ChangeVendorStatus(MasterStatusDto input);
+        void AddUpdateVendor(VendorSaveDto input);
+        ListResultDto<CountryDto> GetCountry();
+       
     }
 }

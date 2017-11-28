@@ -50,6 +50,8 @@ namespace PanelMasterMVC5Separate.MultiTenancy
         private readonly IRepository<BrokerMaster> _broker;
         private readonly IRepository<InsurerPics> _insurerpic;
         private readonly IRepository<BrokerMasterPics> _brokerpic;
+        private readonly IRepository<VendorMain> _vendors;
+        private readonly IRepository<TowOperator> _tow;
         public TenantManager(
             IRepository<TowOperator> towoperator,
             IRepository<SignonPlans> signonplansrepository,
@@ -73,7 +75,9 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             IRepository<InsurerMaster> insurer,
             IRepository<BrokerMaster> broker,
                IRepository<InsurerPics> insurerpic,
-            IRepository<BrokerMasterPics> brokerpic
+            IRepository<BrokerMasterPics> brokerpic,
+            IRepository<VendorMain> vendors,
+            IRepository<TowOperator> town
             )
             : base(
                   tenantRepository,
@@ -100,6 +104,8 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             _broker = broker;
             _insurerpic = insurerpic;
             _brokerpic = brokerpic;
+            _vendors = vendors;
+            _tow = town;
         }
 
         public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress, string connectionString, bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin, bool sendActivationEmail)
@@ -318,7 +324,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                 await _TenantPlanBillingDetails.InsertAsync(tenantbilling);
 
                 // Add TowOperators
-                CreateTowOperators(tenant.Id, countrycode);
+                //CreateTowOperators(tenant.Id, countrycode);
 
                 //Create tenant database
                 _abpZeroDbMigrator.CreateOrMigrateForTenant(tenant);
@@ -476,6 +482,33 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                 {
                     broker.IsActive = true;
                     _broker.Update(broker);
+                }
+                //Default Vendors
+                var vendor = _vendors.FirstOrDefault(c => c.SupplierName == data && c.CountryID == CountryID);
+                // If not exist for current country, then add  SupplierName "OTHER" and "NONE" to tblVendorMain with countryid and enable
+                if (vendor == null)
+                {
+                    var client = new VendorMain()
+                    {
+                        SupplierCode = Guid.NewGuid(),
+                        SupplierName = data,
+                        CountryID = CountryID
+                    };
+                    _vendors.Insert(client);
+                }
+
+                //Default Towoperator
+                var tow = _tow.FirstOrDefault(c => c.Description == data && c.CountryID == CountryID);
+                // If not exist for current country, then add  Description "OTHER" and "NONE" to tblTowOperator with countryid and enable
+                if (tow == null)
+                {
+                    var client = new TowOperator()
+                    {
+                        Description = data,
+                        CountryID = CountryID,
+                        isActive = true
+                    };
+                    _tow.Insert(client);
                 }
             }
         }

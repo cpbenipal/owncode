@@ -128,7 +128,8 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
         public virtual string ContactPerson { get; set; }
         public virtual string EmailAddress { get; set; } 
         public virtual Boolean isActive { get; set; }       
-        public virtual string CreationTime { get; set; } 
+        public virtual string CreationTime { get; set; }
+        public virtual string Country { get; set; }
     }
 
     [AutoMapTo(typeof(TowOperator))]
@@ -145,5 +146,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
         public virtual string EmailAddress { get; set; }
         [Required]
         public virtual bool isActive { get; set; }
+        [Required]
+        public virtual int CountryID { get; set; }
     }
 }
