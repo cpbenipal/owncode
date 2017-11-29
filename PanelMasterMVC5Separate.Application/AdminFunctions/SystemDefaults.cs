@@ -8,6 +8,7 @@ using Abp.UI;
 using PanelMasterMVC5Separate.AdminFunctions.Dto;
 using PanelMasterMVC5Separate.AdminFunctions.Exporting;
 using PanelMasterMVC5Separate.Authorization;
+using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.MultiTenancy;
 using PanelMasterMVC5Separate.RolesCategories;
@@ -29,9 +30,10 @@ namespace PanelMasterMVC5Separate.AdminFunctions
         private readonly IRepository<Banks> _bank;
         private readonly IRepository<SignonPlans> _signonplans;
         private readonly IBankExport _IMListExcelExporter;
+        private readonly IRepository<Jobstatus> _jobstatusRepository;
         public SystemDefaults(IRepository<RolesCategory> rolescategory, IRepository<CountryandCurrency> countryandcurrency
                     , IRepository<Countries> countries, IRepository<Banks> banks, IRepository<SignonPlans> signonplans,
-             IBankExport imlistexcelexporter)
+            IRepository<Jobstatus> jobstatusRepository, IBankExport imlistexcelexporter)
         {
             _rolescategory = rolescategory;
             _countryandcurrency = countryandcurrency;
@@ -39,6 +41,7 @@ namespace PanelMasterMVC5Separate.AdminFunctions
             _signonplans = signonplans;
             _bank = banks;
             _IMListExcelExporter = imlistexcelexporter;
+            _jobstatusRepository = jobstatusRepository;
         }
         public ListResultDto<CountriesDto> GetCountry()
         {
@@ -155,6 +158,39 @@ namespace PanelMasterMVC5Separate.AdminFunctions
             var client = _bank.FirstOrDefault(input.Id);
             client.isActive = input.Status;
             _bank.Update(client);
+        }
+        // Job Status 
+        public ListResultDto<JobStatusDto> GetJobStatuses(GetInput input)
+        {
+            var queryjobstatus = _jobstatusRepository.GetAll()
+                .WhereIf(
+                !input.Filter.IsNullOrWhiteSpace(),
+                u =>
+                    u.Description.Contains(input.Filter))
+                    .OrderBy(p => p.Id)
+            .ToList();
+
+            return new ListResultDto<JobStatusDto>(ObjectMapper.Map<List<JobStatusDto>>(queryjobstatus));
+        }
+
+        public void CreateOrUpdateJobStatus(JobStatusToDto input)
+        {
+            var jobstatus = input.MapTo<Jobstatus>();
+            _jobstatusRepository.InsertOrUpdate(jobstatus);
+        }
+
+        public JobStatusDto GetJobStatus(GetClaimsInput input)
+        {
+            var query = _jobstatusRepository
+              .GetAll().FirstOrDefault(c => c.Id == input.Id).MapTo<JobStatusDto>();                            
+            return query;
+        }
+
+        public async Task<FileDto> GetJobStatusToExcel()
+        { 
+            var queryjobstatus = await _jobstatusRepository.GetAll().ToListAsync();
+            var claimListDtos = queryjobstatus.MapTo<List<JobStatusDto>>();
+            return _IMListExcelExporter.ExportToFile(claimListDtos);
         }
     }
 }

@@ -43,15 +43,16 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string Vendors = "MainVendors.Vendors";
                 public const string AddVendor = "MainVendors.AddVendor";
 
-                public const string TowOperators = "Administration.TowOperators.Host";
-                 
+                public const string TowOperators = "SystemDefaults.TowOperators.Host";
+                public const string JobStatuses = "SystemDefaults.JobStatuses.Host";
+
             }
 
             public static class Tenant
             {
                 public const string Dashboard = "Dashboard.Tenant";
                 public const string Quote = "Dashboard.Quote";
-                public const string Quotations = "Quote.Quoting"; 
+                public const string Quotations = "Quote.Quoting";
 
                 public const string PartsOrdering = "Dashboard.PartsOrdering";
 
@@ -68,14 +69,14 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string AddVendor = "Vendors.AddVendor";
 
                 public const string Insurers = "Dashboard.Insurers";
-                public const string InsurerList = "Insurers.Insurers";               
+                public const string InsurerList = "Insurers.Insurers";
 
                 public const string Brokers = "Dashboard.Brokers";
                 public const string BrokerList = "Brokers.Brokers";
 
                 public const string JobStatuses = "Administration.JobStatuses.Tenant";
 
-                public const string TowOperators = "Administration.TowOperators.Tenant"; 
+                public const string TowOperators = "Administration.TowOperators.Tenant";
                 // public const string VehicleManufacturer = "Dashboard.VehicleManufacturer";                 
             }
         }

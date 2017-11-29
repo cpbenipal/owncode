@@ -19,7 +19,6 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Exporting
             _timeZoneConverter = timeZoneConverter;
             _abpSession = abpSession;
         }
-
         public FileDto ExportToFile(List<BankDto> claimListDtos)
         {
             return CreateExcelPackage(
@@ -40,6 +39,41 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Exporting
                         sheet, 2, claimListDtos,
                         _ => _.BankName,
                          _ => _.CountryCode,
+                        _ => _.CreationTime
+                    );
+
+                    //Formatting cells
+
+                    var lastLoginTimeColumn = sheet.Column(8);
+                    lastLoginTimeColumn.Style.Numberformat.Format = "yyyy-mm-dd";
+
+                    var creationTimeColumn = sheet.Column(10);
+                    creationTimeColumn.Style.Numberformat.Format = "yyyy-mm-dd";
+
+                    for (var i = 1; i <= 10; i++)
+                    {
+                        sheet.Column(i).AutoFit();
+                    }
+                });
+        }
+        public FileDto ExportToFile(List<JobStatusDto> claimListDtos)
+        {
+            return CreateExcelPackage(
+                "JobStatus.xlsx",
+                excelPackage =>
+                {
+                    var sheet = excelPackage.Workbook.Worksheets.Add(L("JobStatus"));
+                    sheet.OutLineApplyStyle = true;
+
+                    AddHeader(
+                     sheet,
+                    L("JobStatus"), 
+                    L("CreationTime")
+                 );
+
+                    AddObjects(
+                        sheet, 2, claimListDtos,
+                        _ => _.Description, 
                         _ => _.CreationTime
                     );
 

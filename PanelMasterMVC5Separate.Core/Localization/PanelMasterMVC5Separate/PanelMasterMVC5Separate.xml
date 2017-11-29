@@ -297,8 +297,10 @@
     <text name="ShowAwaiting" value="Show Awaiting" />
     <text name="ShortOrder" value="Short Order" />
     <text name="JobstatusMask" value="Job status Mask" />
+    <text name="EditJobStatus" value="Edit JobStatus" />
     <text name="EditOperator" value="Edit Operator" />
     <text name="AddnewOperator" value="Add new Operator" />
+    <text name="AddNewJobStatus" value="Add job status" />
     <text name="ContactNumber" value="Contact Number" />
     <text name="ContactPerson" value="Contact Person" />
     <text name="TowoperatorInformation" value="Tow Operator Information" />

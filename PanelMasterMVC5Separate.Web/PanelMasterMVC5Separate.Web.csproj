@@ -526,6 +526,8 @@
     <Content Include="App\host\views\editions\index.js" />
     <Content Include="App\host\views\AddEditVendor\index.js" />
     <Content Include="App\host\views\Insurers\index.js" />
+    <Content Include="App\host\views\JobStatuses\createOrEditModal.js" />
+    <Content Include="App\host\views\JobStatuses\index.js" />
     <Content Include="App\host\views\maintenance\index.css">
       <DependentUpon>index.less</DependentUpon>
     </Content>
@@ -7676,6 +7678,8 @@
     <Content Include="App\tenant\views\AddEditVendor\index.cshtml" />
     <Content Include="App\host\views\towoperators\index.cshtml" />
     <Content Include="App\host\views\towoperators\createOrEditModal.cshtml" />
+    <Content Include="App\host\views\JobStatuses\createOrEditModal.cshtml" />
+    <Content Include="App\host\views\JobStatuses\index.cshtml" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />

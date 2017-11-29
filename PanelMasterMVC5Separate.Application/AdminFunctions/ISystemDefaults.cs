@@ -13,10 +13,16 @@ namespace PanelMasterMVC5Separate.AdminFunctions
     public interface ISystemDefaults : IApplicationService
     {
         ListResultDto<BankDto> GetBanks(GetInputs input);
-        void CreateOrUpdateBank(BankToDto input); 
+        void CreateOrUpdateBank(BankToDto input);
         ListResultDto<CountriesDto> GetCountry();
         BankDetailDto GetBank(GetClaimsInput input);
         Task<FileDto> GetBanksExcel();
         void ChangeStatus(ActiveDto input);
+        // Job status
+        ListResultDto<JobStatusDto> GetJobStatuses(GetInput input);
+        void CreateOrUpdateJobStatus(JobStatusToDto input);
+        JobStatusDto GetJobStatus(GetClaimsInput input);
+        Task<FileDto> GetJobStatusToExcel();
+
     }
 }

@@ -224,6 +224,10 @@ appModule.config([
             url: '/towoperators',
             templateUrl: '~/App/host/views/towoperators/index.cshtml'
         });
+        $stateProvider.state('host.JobStatuses', {
+            url: '/JobStatuses',
+            templateUrl: '~/App/host/views/JobStatuses/index.cshtml'
+        });
        }
 
         //TENANT routes

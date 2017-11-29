@@ -212,6 +212,10 @@
     <Compile Include="Migrations\201711250654111_addactivefield.Designer.cs">
       <DependentUpon>201711250654111_addactivefield.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711290837108_tId_fk_del_towoperation.cs" />
+    <Compile Include="Migrations\201711290837108_tId_fk_del_towoperation.Designer.cs">
+      <DependentUpon>201711290837108_tId_fk_del_towoperation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -367,6 +371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711250654111_addactivefield.resx">
       <DependentUpon>201711250654111_addactivefield.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711290837108_tId_fk_del_towoperation.resx">
+      <DependentUpon>201711290837108_tId_fk_del_towoperation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

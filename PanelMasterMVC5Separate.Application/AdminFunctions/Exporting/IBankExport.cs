@@ -10,6 +10,7 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Exporting
 {
    public  interface IBankExport
     {
-        FileDto ExportToFile(List<BankDto> listDtos); 
+        FileDto ExportToFile(List<BankDto> listDtos);
+        FileDto ExportToFile(List<JobStatusDto> listDtos);
     }
 }

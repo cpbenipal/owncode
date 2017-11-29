@@ -9,10 +9,10 @@ namespace PanelMasterMVC5Separate.Claim
     [Table("tblTowOperator")]
     public class TowOperator : FullAuditedEntity
     {
-        [Required]
+        //[Required]
         public virtual int TenantId { get; set; }
-        [ForeignKey("TenantId")]
-        public virtual Tenant Tenant { get; set; }         
+        //[ForeignKey("TenantId")]
+        //public virtual Tenant Tenant { get; set; }         
         public virtual string Description { get; set; }        
         [Phone]
         public virtual string ContactNumber { get; set; }                 

@@ -1,6 +1,8 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using Abp.Domain.Entities.Auditing;
 using Abp.Runtime.Validation;
+using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.Vendors;
 using System;
@@ -28,8 +30,11 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
     {
         public int Id { get; set; }
     }
-   
-    
+    public class GetInput
+    {
+        public string Filter { get; set; }
+    }
+
     public class BankDto
     {
         public int Id { get; set; }
@@ -104,5 +109,15 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
     {
         public int Id { get; set; } 
         public bool Status { get; set; }
+    }
+    [AutoMapFrom(typeof(Jobstatus))]
+    public class JobStatusDto : FullAuditedEntity
+    {
+        public virtual string Description { get; set; }
+    }
+    [AutoMapTo(typeof(Jobstatus))]
+    public class JobStatusToDto : FullAuditedEntity
+    {
+        public virtual string Description { get; set; }
     }
 }

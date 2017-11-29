@@ -261,10 +261,17 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                         PageNames.App.Host.TowOperators,
                         L("TowOperators"),
                         url: "host.towoperators",
-                        icon: "icon-settings"
+                       icon: "glyphicon glyphicon-search"
                         )
                     )
 
+                    .AddItem(new MenuItemDefinition(
+                        PageNames.App.Host.JobStatuses,
+                        L("JobStatuses"),
+                        url: "host.JobStatuses",
+                        icon: "glyphicon glyphicon-search"
+                        )
+                    )
                     )
 
                     .AddItem(new MenuItemDefinition(
@@ -295,7 +302,8 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                         PageNames.App.Tenant.JobStatuses,
                         L("JobStatuses"),
                         url: "tenant.jobstatuses",
-                        icon: "icon-settings"
+                        icon: "icon-settings",
+                        requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                         )
                     )
                     .AddItem(new MenuItemDefinition(
