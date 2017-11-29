@@ -353,7 +353,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         {
             var status = _jobstatusmaskRepository
                 .GetAll()
-                .Where(p => p.IsDeleted == false)
+                .Where(p => p.IsDeleted == false && p.Enabled == true)
                 .ToList();
 
             return new ListResultDto<JobStatusMasksDto>(ObjectMapper.Map<List<JobStatusMasksDto>>(status));
@@ -416,11 +416,21 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
             return new ListResultDto<int>(ObjectMapper.Map<List<int>>(numberList));
         }
-
+        public Int32 IfNullThenZero(object value)
+        {
+            if (value == DBNull.Value)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(value);
+            }
+        }
         public ListResultDto<TowOperatorDto> GetTowOperators(GetClaimsInput input)
         {
             int countryId = GetCountryIdByCode();
-            var towops = _towoperatorrepository.GetAll().Where(p => (p.TenantId == _abpSession.TenantId || p.TenantId == 1) && p.CountryID == countryId)
+            var towops = _towoperatorrepository.GetAll().Where(p => (p.TenantId == _abpSession.TenantId || (object)p.TenantId == null) && p.CountryID == countryId)
                .WhereIf(
                 !input.Filter.IsNullOrWhiteSpace(),
                 u =>
@@ -520,6 +530,10 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         }
         public void CreateOrUpdateTowOperator(TowTenantDto input)
         {
+            if(input.CountryID == 0)
+            {
+                input.CountryID = GetCountryIdByCode();
+            }
             input.isActive = input.isActive; // Default Status : Quote Preparation             
             var query = input.MapTo<TowOperator>();
             _towoperatorrepository.InsertOrUpdate(query);

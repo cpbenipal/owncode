@@ -45,7 +45,7 @@ namespace PanelMasterMVC5Separate.Web.Navigation
 
                 public const string TowOperators = "SystemDefaults.TowOperators.Host";
                 public const string JobStatuses = "SystemDefaults.JobStatuses.Host";
-
+                public const string JobMaskStatuses = "SystemDefaults.JobMaskStatuses.Host";
             }
 
             public static class Tenant
@@ -75,7 +75,7 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string BrokerList = "Brokers.Brokers";
 
                 public const string JobStatuses = "Administration.JobStatuses.Tenant";
-
+                public const string JobMaskStatuses = "Administration.JobMaskStatuses.Tenant";
                 public const string TowOperators = "Administration.TowOperators.Tenant";
                 // public const string VehicleManufacturer = "Dashboard.VehicleManufacturer";                 
             }

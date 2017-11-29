@@ -286,13 +286,21 @@
     <text name="RepairType" value="Repair Type" />
     <text name="SelectOne" value="--Select One--" />
     <text name="QuoteProperties" value="Quote Properties" />
+    <text name="Description1" value="Description 1" />
+    <text name="Description2" value="Description 2" />
+    <text name="Description3" value="Description 3" />
+    <text name="JobStatusProperties" value="Job Status Properties" />
     <text name="EditQuotationFor" value="Edit Quotation For" />
     <text name="EditQuotation" value="Edit Quote Details" />
     <text name="EditQuoteType" value="Edit Quote Type" />
     <text name="JobStatuses" value="Job Statuses" />
-    <text name="JobStatusProperties" value="JobStatus Properties" />
+    <text name="JobStatus" value="Job Status" />
+    <text name="JobMaskStatuses" value="Job Mask Statuses" />
+    <text name="ActivateJobStatusMask" value="Activate Job Status Mask" />
     <text name="EditStatus" value="Edit Job Status" />
-    <text name="CreateStatus" value="Create Job Status" />
+    <text name="EditStatusMask" value="Edit Job Status Mask" />
+    <text name="CreateStatus" value="Activate Job Status" />
+    <text name="CreateStatusMask" value="Activate Job Status Mask" />
     <text name="ShowSpeedbump" value="Show Speedbump" />
     <text name="ShowAwaiting" value="Show Awaiting" />
     <text name="ShortOrder" value="Short Order" />

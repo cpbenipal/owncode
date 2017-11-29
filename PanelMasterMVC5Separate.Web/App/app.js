@@ -228,6 +228,10 @@ appModule.config([
             url: '/JobStatuses',
             templateUrl: '~/App/host/views/JobStatuses/index.cshtml'
         });
+        $stateProvider.state('host.JobMaskStatuses', {
+            url: '/JobMaskStatuses',
+            templateUrl: '~/App/host/views/JobMaskStatuses/index.cshtml'
+        });
        }
 
         //TENANT routes
@@ -441,7 +445,10 @@ appModule.config([
             url: '/jobstatuses',
             templateUrl: '~/App/tenant/views/jobstatuses/index.cshtml'
         });
-
+        //$stateProvider.state('tenant.JobMaskStatuses', {
+        //    url: '/JobMaskStatuses',
+        //    templateUrl: '~/App/tenant/views/JobMaskStatuses/index.cshtml'
+        //});
         $stateProvider.state('tenant.towoperators', {
             url: '/towoperators',
             templateUrl: '~/App/tenant/views/towoperators/index.cshtml'

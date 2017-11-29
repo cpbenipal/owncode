@@ -272,6 +272,13 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                         icon: "glyphicon glyphicon-search"
                         )
                     )
+                    .AddItem(new MenuItemDefinition(
+                        PageNames.App.Host.JobMaskStatuses,
+                        L("JobMaskStatuses"),
+                        url: "host.JobMaskStatuses",
+                        icon: "glyphicon glyphicon-search"
+                        )
+                    )
                     )
 
                     .AddItem(new MenuItemDefinition(
@@ -305,7 +312,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                         icon: "icon-settings",
                         requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                         )
-                    )
+                    ) 
                     .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Vendors,
                     L("Vendors"),

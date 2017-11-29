@@ -91,5 +91,41 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Exporting
                     }
                 });
         }
+
+        public FileDto ExportToFile(List<JobStatusMaskDto> claimListDtos)
+        {
+            return CreateExcelPackage(
+                "JobStatusMask.xlsx",
+                excelPackage =>
+                {
+                    var sheet = excelPackage.Workbook.Worksheets.Add(L("JobStatusMask"));
+                    sheet.OutLineApplyStyle = true;
+
+                    AddHeader(
+                     sheet,
+                    L("JobStatus"),
+                    L("CreationTime")
+                 );
+
+                    AddObjects(
+                        sheet, 2, claimListDtos,
+                        _ => _.Description1,
+                        _ => _.CreationTime
+                    );
+
+                    //Formatting cells
+
+                    var lastLoginTimeColumn = sheet.Column(8);
+                    lastLoginTimeColumn.Style.Numberformat.Format = "yyyy-mm-dd";
+
+                    var creationTimeColumn = sheet.Column(10);
+                    creationTimeColumn.Style.Numberformat.Format = "yyyy-mm-dd";
+
+                    for (var i = 1; i <= 10; i++)
+                    {
+                        sheet.Column(i).AutoFit();
+                    }
+                });
+        }
     }
 }

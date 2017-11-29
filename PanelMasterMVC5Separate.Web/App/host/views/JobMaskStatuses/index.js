@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    appModule.controller('host.views.JobStatuses.index', [
+    appModule.controller('host.views.JobMaskStatuses.index', [
         '$scope', '$uibModal', '$stateParams', 'uiGridConstants', 'abp.services.app.systemDefaults',
         function ($scope, $uibModal, $stateParams, uiGridConstants, userService) {
             var vm = this;
@@ -57,13 +57,28 @@
                     },
                     {
                         name: app.localize('JobStatus'),
-                        field: 'description',
+                        field: 'description1',
                         minWidth: 120
                     },                  
                      {
                         name: app.localize('CreationTime'),
                         field: 'creationTime',
                         cellFilter: 'momentFormat: \'L\'',
+                        minWidth: 50
+                    },                    ,
+                    {
+                        name: app.localize('Status'),
+                        field: 'enabled',
+                        cellTemplate:
+                        '<div class=\"ui-grid-cell-contents\">' +
+                        '<div ng-show="row.entity.enabled" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.makeID}} bootstrap-switch-animate bootstrap-switch-on" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: 0px;">' +
+                        '<span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;"> ON</span>' +
+                        '<span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span>' +
+                        '<span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
+                        '<input ng-checked="row.entity.enabled" ng-model="row.entity.enabled"  class="make-switch" data-size="mini" type="checkbox"></div></div>' +
+                        '<div ng-show="!row.entity.enabled" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.makeID}} bootstrap-switch-animate bootstrap-switch-off" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: -32px;"><span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;">ON</span><span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
+                        '</div></div>' +
+                        '</div>',
                         minWidth: 50
                     }
                 ],
@@ -90,7 +105,7 @@
 
             vm.getJobStatus = function () {
                 vm.loading = true;
-                userService.getJobStatuses($.extend({ filter: vm.filterText }, vm.requestParams))
+                userService.getJobMaskStatuses($.extend({ filter: vm.filterText }, vm.requestParams))
                     .then(function (result) {
                         vm.userGridOptions.totalItems = result.data.totalCount;
                         vm.userGridOptions.data = addRoleNamesField(result.data.items);
@@ -134,8 +149,8 @@
             function openCreateOrEditUserModal(jobStatusId) {
 
                 var modalInstance = $uibModal.open({
-                    templateUrl: '~/App/host/views/JobStatuses/createOrEditModal.cshtml',
-                    controller: 'host.views.JobStatuses.createOrEditModal as vm',
+                    templateUrl: '~/App/host/views/JobMaskStatuses/createOrEditModal.cshtml',
+                    controller: 'host.views.JobMaskStatuses.createOrEditModal as vm',
                     backdrop: 'static',
                     resolve: {
                         jobStatusId: function () {
@@ -149,6 +164,29 @@
                 });
             }
              
+            
+            vm.Status = function (mask) {
+                abp.message.confirm(
+                    app.localize('AreYouSure', mask.description1),
+                    function (isConfirmed) {
+                        if (isConfirmed) {
+                            if (mask.id != 0) {
+                                userService.changeJobMaskStatus({
+                                    id: mask.id,
+                                    status: !mask.enabled
+                                }).then(function () {
+                                    vm.getJobStatus();
+                                    if (!mask.enabled)
+                                        abp.notify.success(app.localize('SuccessfullyEnabled'));
+                                    else
+                                        abp.notify.warn(app.localize('SuccessfullyDisabled'));
+                                });
+                            }                            
+                        }
+                    }
+                );
+            };
+
             vm.getJobStatus();
         }]);
 })();

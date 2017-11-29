@@ -120,4 +120,19 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
     {
         public virtual string Description { get; set; }
     }
+    [AutoMapFrom(typeof(JobstatusMask))]
+    public class JobStatusMaskDto : FullAuditedEntity
+    {
+        public virtual string Description1 { get; set; }
+
+        public virtual bool Enabled { get; set; }
+    }
+    [AutoMapTo(typeof(JobstatusMask))]
+    public class JobStatusMaskToDto : FullAuditedEntity
+    { 
+        public virtual string Description1 { get; set; }
+        public virtual string Description2 { get; set; }
+        public virtual string Description3 { get; set; }
+        public virtual bool Enabled { get; set; }
+    }
 }

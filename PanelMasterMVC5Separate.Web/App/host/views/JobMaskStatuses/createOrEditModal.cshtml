@@ -1,0 +1,34 @@
+<div>
+    <form name="userCreateOrEditForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span ng-if="vm.job.id">@L("EditStatusMask"): {{vm.job.jobStatus}}</span>
+                <span ng-if="!vm.job.id">@L("CreateStatusMask") : {{vm.job.jobStatus}}</span>
+            </h4>
+        </div>
+        <div class="modal-body">
+            <uib-tabset class="tab-container tabbable-line">
+                <uib-tab heading="@L("JobStatusProperties")">
+                      
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <label>@L("Description1")</label>
+                        <input ng-model="vm.job.description1" required name="description1" class="form-control" type="text" />
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <label>@L("Description2")</label>
+                        <input ng-model="vm.job.description2" name="description2" class="form-control" type="text" />
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <label>@L("Description3")</label>
+                        <input ng-model="vm.job.description3" name="description3" class="form-control" type="text" />
+                    </div>
+                </uib-tab>
+                 
+            </uib-tabset>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            <button type="submit" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="userCreateOrEditForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+        </div>
+    </form>
+</div>

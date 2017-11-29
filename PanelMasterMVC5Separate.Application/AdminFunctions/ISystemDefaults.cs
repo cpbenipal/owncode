@@ -23,6 +23,11 @@ namespace PanelMasterMVC5Separate.AdminFunctions
         void CreateOrUpdateJobStatus(JobStatusToDto input);
         JobStatusDto GetJobStatus(GetClaimsInput input);
         Task<FileDto> GetJobStatusToExcel();
-
+        //Job Status Mask
+        ListResultDto<JobStatusMaskDto> GetJobMaskStatuses(GetInput input);
+        void CreateOrUpdateJobMaskStatus(JobStatusMaskToDto input);
+        JobStatusMaskDto GetJobStatusMask(GetClaimsInput input);
+        void ChangeJobMaskStatus(ActiveDto input);
+        Task<FileDto> GetJobStatusMaskToExcel();
     }
 }
