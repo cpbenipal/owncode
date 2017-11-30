@@ -550,7 +550,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
         }
         public virtual List<SignonPlans> GetTenantPlans()
         {
-            List<SignonPlans> data = _SignonPlansRepository.GetAll().ToList();
+            List<SignonPlans> data = _SignonPlansRepository.GetAll().Where(x=>x.isActive == true && x.IsDeleted == false).ToList();
 
             return data;
         }

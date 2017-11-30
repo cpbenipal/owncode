@@ -21,36 +21,28 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string Maintenance = "Administration.Maintenance";
                 public const string Settings = "Administration.Settings.Host";
                 public const string SystemDefaults = "Administration.SystemDefaults";
-
                 public static string Banks = "Administration.SystemDefaults.Banks";
                 public static string AddBank = "Banks.AddBank";
-
                 public const string VehicleMakes = "Administration.SystemDefaults.VehicleMakes";
                 public const string AddMake = "VehicleMakes.AddVehicleMake";
-
                 public const string VehicleMades = "Administration.SystemDefaults.VehicleMades";
                 public const string AddModel = "VehicleMades.AddVehicleMade";
-
                 public const string Insurers = "Administration.SystemDefaults.Insurers";
                 public const string InsurerList = "Insurers.Insurers";
                 public const string AddInsurer = "Insurers.AddInsurer";
-
                 public const string Brokers = "Administration.SystemDefaults.Brokers";
                 public const string BrokerList = "Brokers.Brokers";
                 public const string AddBroker = "Brokers.AddBroker";
-
                 public const string MainVendors = "Administration.SystemDefaults.Vendors";
                 public const string Vendors = "MainVendors.Vendors";
                 public const string AddVendor = "MainVendors.AddVendor";
-
                 public const string TowOperators = "SystemDefaults.TowOperators.Host";
                 public const string JobStatuses = "SystemDefaults.JobStatuses.Host";
                 public const string JobMaskStatuses = "SystemDefaults.JobMaskStatuses.Host";
-
                 public static string QuoteStatus = "SystemDefaults.QuoteStatus.Host";
                 public static string RepairTypes = "SystemDefaults.RepairTypes.Host";
-
                 public static string RoleCategories = "SystemDefaults.RoleCategories.Host";
+                public static string SignonPlans = "SystemDefaults.SignonPlans.Host";
             }
 
             public static class Tenant

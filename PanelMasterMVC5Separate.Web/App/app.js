@@ -244,6 +244,10 @@ appModule.config([
             url: '/RoleCategories',
             templateUrl: '~/App/host/views/RoleCategories/index.cshtml'
         });
+        $stateProvider.state('host.SignonPlans', {
+            url: '/SignonPlans',
+            templateUrl: '~/App/host/views/SignonPlans/index.cshtml'
+        });
        }
 
         //TENANT routes

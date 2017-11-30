@@ -50,5 +50,11 @@ namespace PanelMasterMVC5Separate.AdminFunctions
         void ChangeRoleCategoryStatus(ActiveDto input);
         Task<FileDto> GetRoleCategoryToExcel();
 
+        //SignOnPlan
+        ListResultDto<SignOnDto> GetSignOnPlans(GetInputs input);
+        void CreateOrUpdateSignOnPlan(SignOnToDto input);
+        void ChangePlanStatus(ActiveDto input);
+        SignOnDto GetPlanDetail(GetClaimsInput input);
+        Task<FileDto> GetSignOnToExcel();
     }
 }

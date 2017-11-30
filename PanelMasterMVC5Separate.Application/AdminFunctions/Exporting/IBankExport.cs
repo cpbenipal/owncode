@@ -1,5 +1,6 @@
 ﻿using PanelMasterMVC5Separate.AdminFunctions.Dto;
 using PanelMasterMVC5Separate.Dto;
+using PanelMasterMVC5Separate.MultiTenancy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,6 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Exporting
         FileDto ExportToFile(List<QuoteStatusDto> listDtos);
         FileDto ExportToFile(List<RepairTypeDto> listDtos);
         FileDto ExportToFile(List<RoleCategoryDto> listDtos);
+        FileDto ExportToFile(List<SignOnDto> listDtos);
     }
 }

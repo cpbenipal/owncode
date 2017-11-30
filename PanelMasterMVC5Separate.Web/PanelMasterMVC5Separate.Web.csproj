@@ -526,6 +526,8 @@
     <Content Include="App\host\views\editions\index.js" />
     <Content Include="App\host\views\AddEditVendor\index.js" />
     <Content Include="App\host\views\Insurers\index.js" />
+    <Content Include="App\host\views\SignonPlans\createOrEditModal.js" />
+    <Content Include="App\host\views\SignonPlans\index.js" />
     <Content Include="App\host\views\RoleCategories\createOrEditModal.js" />
     <Content Include="App\host\views\RoleCategories\index.js" />
     <Content Include="App\host\views\RepairTypes\createOrEditModal.js" />
@@ -7692,6 +7694,8 @@
     <Content Include="App\host\views\RepairTypes\index.cshtml" />
     <Content Include="App\host\views\RoleCategories\createOrEditModal.cshtml" />
     <Content Include="App\host\views\RoleCategories\index.cshtml" />
+    <Content Include="App\host\views\SignonPlans\createOrEditModal.cshtml" />
+    <Content Include="App\host\views\SignonPlans\index.cshtml" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />

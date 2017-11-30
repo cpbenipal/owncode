@@ -4,10 +4,12 @@ using Abp.Domain.Entities.Auditing;
 using Abp.Runtime.Validation;
 using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.Dto;
+using PanelMasterMVC5Separate.MultiTenancy;
 using PanelMasterMVC5Separate.Quotings;
 using PanelMasterMVC5Separate.RolesCategories;
 using PanelMasterMVC5Separate.Vendors;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace PanelMasterMVC5Separate.AdminFunctions.Dto
 {
@@ -163,6 +165,7 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
         public virtual string Description { get; set; }
         public virtual bool Enabled { get; set; }
     }
+    //RolesCategory
     [AutoMapFrom(typeof(RolesCategory))]
     public class RoleCategoryDto : FullAuditedEntity
     {
@@ -174,5 +177,25 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
     {
         public virtual string Description { get; set; }
         public virtual bool Enabled { get; set; }
+    }
+    //SignOns
+    [AutoMapFrom(typeof(SignonPlans))]
+    public class SignOnDto : FullAuditedEntity
+    {
+        public virtual string PlanName { get; set; } 
+        public virtual double Price { get; set; }
+        public virtual string HeaderColor { get; set; }
+        public virtual int Members { get; set; }
+        public virtual bool isActive { get; set; }
+    }
+    [AutoMapTo(typeof(SignonPlans))]
+    public class SignOnToDto : FullAuditedEntity
+    {
+        public virtual string PlanName { get; set; }
+        [DataType(DataType.Currency)]
+        public virtual double Price { get; set; }
+        public virtual string HeaderColor { get; set; }
+        public virtual int Members { get; set; }
+        public virtual bool isActive { get; set; }
     }
 }

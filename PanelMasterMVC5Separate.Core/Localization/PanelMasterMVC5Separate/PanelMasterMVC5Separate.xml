@@ -643,6 +643,10 @@
     <text name="CardHoldersName">Card Holder's Name</text>
     <text name="CurrentPlan">Current Plan</text>
     <text name="Plans">Plans</text>
+    <text name="Planname">Plan name</text>
+    <text name="HeaderColor">Header color</text>
+    <text name="Price">Price</text>
+    <text name="AddNewPlan">Add new plan</text>
     <text name="InvoicingInstruction">Invoicing Instruction</text>
     <text name="CompanyVatNo">Company Vat No</text>
     <text name="CompanyRegistrationNo">Company Registration No</text>
@@ -656,5 +660,6 @@
     <text name="AdminContactNumber" value="Admin Contact Number" />
     <text name="Logo" value="Logo" />
     <text name="SystemDefaults" value="System Defaults" />
+    <text name="SignOnPlans" value="Signon Plans" />
   </texts>
 </localizationDictionary>

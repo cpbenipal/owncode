@@ -235,5 +235,47 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Exporting
                     }
                 });
         }
+
+        public FileDto ExportToFile(List<SignOnDto> claimListDtos)
+        {
+            return CreateExcelPackage(
+                "SignOnPlans.xlsx",
+                excelPackage =>
+                {
+                    var sheet = excelPackage.Workbook.Worksheets.Add(L("SignOnPlans"));
+                    sheet.OutLineApplyStyle = true;
+
+                    AddHeader(
+                     sheet,
+                    L("Planname"),
+                    L("Price"),
+                    L("Members"),
+                    L("HeaderColor"),
+                    L("CreationTime")
+                 );
+
+                    AddObjects(
+                        sheet, 2, claimListDtos,
+                        _ => _.PlanName,
+                        _ => _.Price,
+                        _ => _.Members,
+                        _ => _.HeaderColor,                         
+                        _ => _.CreationTime
+                    );
+
+                    //Formatting cells
+
+                    var lastLoginTimeColumn = sheet.Column(8);
+                    lastLoginTimeColumn.Style.Numberformat.Format = "yyyy-mm-dd";
+
+                    var creationTimeColumn = sheet.Column(10);
+                    creationTimeColumn.Style.Numberformat.Format = "yyyy-mm-dd";
+
+                    for (var i = 1; i <= 10; i++)
+                    {
+                        sheet.Column(i).AutoFit();
+                    }
+                });
+        }
     }
 }

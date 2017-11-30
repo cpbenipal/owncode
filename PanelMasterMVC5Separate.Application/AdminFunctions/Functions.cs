@@ -411,7 +411,6 @@ namespace PanelMasterMVC5Separate.AdminFunctions
                          CreationTime = f.CreationTime
                      }).ToList();
 
-
             return new ListResultDto<PlanDto>(ObjectMapper.Map<List<PlanDto>>(a));
         }
 

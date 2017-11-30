@@ -293,6 +293,13 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                         )
                     )
                     .AddItem(new MenuItemDefinition(
+                        PageNames.App.Host.SignonPlans,
+                        L("SignOnPlans"),
+                        url: "host.SignonPlans",
+                        icon: "glyphicon glyphicon-search"
+                        )
+                    )
+                    .AddItem(new MenuItemDefinition(
                         PageNames.App.Host.RoleCategories,
                         L("RoleCategories"),
                         url: "host.RoleCategories",

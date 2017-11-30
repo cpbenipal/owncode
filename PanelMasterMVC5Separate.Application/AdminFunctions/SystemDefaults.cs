@@ -25,7 +25,6 @@ namespace PanelMasterMVC5Separate.AdminFunctions
     [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
     public class SystemDefaults : PanelMasterMVC5SeparateAppServiceBase, ISystemDefaults
     {
-        private readonly IRepository<RolesCategory> _rolescategoryrepositry;
         private readonly IRepository<RepairTypes> _repairtypesrepositry;
         private readonly IRepository<QuoteStatus> _quotestatusrepositry;
         private readonly IRepository<RolesCategory> _rolescategory;
@@ -39,7 +38,7 @@ namespace PanelMasterMVC5Separate.AdminFunctions
         public SystemDefaults(IRepository<RepairTypes> repairtypesrepositry, IRepository<RolesCategory> rolescategory, IRepository<CountryandCurrency> countryandcurrency
                     , IRepository<Countries> countries, IRepository<Banks> banks, IRepository<SignonPlans> signonplans,
             IRepository<Jobstatus> jobstatusRepository, IBankExport imlistexcelexporter, IRepository<JobstatusMask> jobstatusmaskRepository,
-            IRepository<QuoteStatus> quotestatusrepositry, IRepository<RolesCategory> rolescategoryrepositry)
+            IRepository<QuoteStatus> quotestatusrepositry)
         {
             _rolescategory = rolescategory;
             _countryandcurrency = countryandcurrency;
@@ -51,7 +50,6 @@ namespace PanelMasterMVC5Separate.AdminFunctions
             _jobstatusmaskRepository = jobstatusmaskRepository;
             _quotestatusrepositry = quotestatusrepositry;
             _repairtypesrepositry = repairtypesrepositry;
-            _rolescategoryrepositry = rolescategoryrepositry;
         }
         public ListResultDto<CountriesDto> GetCountry()
         {
@@ -316,7 +314,7 @@ namespace PanelMasterMVC5Separate.AdminFunctions
         // Role Category
         public ListResultDto<RoleCategoryDto> GetRoleCategories(GetInput input)
         {
-            var queryjobstatus = _rolescategoryrepositry.GetAll()
+            var queryjobstatus = _rolescategory.GetAll()
                 .WhereIf(
                 !input.Filter.IsNullOrWhiteSpace(),
                 u =>
@@ -329,24 +327,63 @@ namespace PanelMasterMVC5Separate.AdminFunctions
         {
             input.Enabled = true;
             var jobstatus = input.MapTo<RolesCategory>();
-            _rolescategoryrepositry.InsertOrUpdate(jobstatus);
+            _rolescategory.InsertOrUpdate(jobstatus);
         }
         public RoleCategoryDto GetRoleCategory(GetClaimsInput input)
         {
-            var query = _rolescategoryrepositry
+            var query = _rolescategory
               .GetAll().FirstOrDefault(c => c.Id == input.Id).MapTo<RoleCategoryDto>();
             return query;
         }
         public void ChangeRoleCategoryStatus(ActiveDto input)
         {
-            var client = _rolescategoryrepositry.FirstOrDefault(input.Id);
+            var client = _rolescategory.FirstOrDefault(input.Id);
             client.Enabled = input.Status;
-            _rolescategoryrepositry.Update(client);
+            _rolescategory.Update(client);
         }
         public async Task<FileDto> GetRoleCategoryToExcel()
         {
-            var query = await _rolescategoryrepositry.GetAll().ToListAsync();
+            var query = await _rolescategory.GetAll().ToListAsync();
             var claimListDtos = query.MapTo<List<RoleCategoryDto>>();
+            return _IMListExcelExporter.ExportToFile(claimListDtos);
+        }
+
+        public ListResultDto<SignOnDto> GetSignOnPlans(GetInputs input)
+        {
+            var data = _signonplans.GetAll()
+         .WhereIf(!input.Filter.IsNullOrWhiteSpace(),
+         u => u.PlanName.ToLower().Contains(input.Filter.ToLower())
+         )
+         .OrderByDescending(p => p.LastModificationTime)
+         .ToList();
+
+            return new ListResultDto<SignOnDto>(ObjectMapper.Map<List<SignOnDto>>(data));
+        }
+
+        public void CreateOrUpdateSignOnPlan(SignOnToDto input)
+        {
+            input.isActive = true;
+            var client = input.MapTo<SignonPlans>();
+            _signonplans.InsertOrUpdate(client);
+        }
+
+        public void ChangePlanStatus(ActiveDto input)
+        {
+            var client = _signonplans.FirstOrDefault(input.Id);
+            client.isActive = input.Status;
+            _signonplans.Update(client);
+        }
+
+        public SignOnDto GetPlanDetail(GetClaimsInput input)
+        {
+            var query = _signonplans
+              .GetAll().FirstOrDefault(c => c.Id == input.Id).MapTo<SignOnDto>();
+            return query;
+        }
+        public async Task<FileDto> GetSignOnToExcel()
+        {
+            var query = await _signonplans.GetAll().ToListAsync();
+            var claimListDtos = query.MapTo<List<SignOnDto>>();
             return _IMListExcelExporter.ExportToFile(claimListDtos);
         }
     }
