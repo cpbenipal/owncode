@@ -279,6 +279,26 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                         icon: "glyphicon glyphicon-search"
                         )
                     )
+                    .AddItem(new MenuItemDefinition(
+                        PageNames.App.Host.QuoteStatus,
+                        L("QuoteStatuses"),
+                        url: "host.QuoteStatus",
+                        icon: "glyphicon glyphicon-search"
+                        )
+                    ).AddItem(new MenuItemDefinition(
+                        PageNames.App.Host.RepairTypes,
+                        L("RepairTypes"),
+                        url: "host.RepairTypes",
+                        icon: "glyphicon glyphicon-search"
+                        )
+                    )
+                    .AddItem(new MenuItemDefinition(
+                        PageNames.App.Host.RoleCategories,
+                        L("RoleCategories"),
+                        url: "host.RoleCategories",
+                        icon: "glyphicon glyphicon-search"
+                        )
+                    )
                     )
 
                     .AddItem(new MenuItemDefinition(

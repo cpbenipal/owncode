@@ -4,6 +4,8 @@ using Abp.Domain.Entities.Auditing;
 using Abp.Runtime.Validation;
 using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.Dto;
+using PanelMasterMVC5Separate.Quotings;
+using PanelMasterMVC5Separate.RolesCategories;
 using PanelMasterMVC5Separate.Vendors;
 using System;
 
@@ -14,13 +16,13 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
         public int Id { get; set; }
         public string Description { get; set; }
         public DateTime CreationTime { get; set; }
-        public bool Enabled { get; set; } 
+        public bool Enabled { get; set; }
         public bool ShowSwitch { get; set; }
     }
     public class PlanDto
     {
         public int Id { get; set; }
-        public virtual string PlanName { get; set; }   
+        public virtual string PlanName { get; set; }
         public virtual double Price { get; set; }
         public virtual string HeaderColor { get; set; }
         public virtual int Members { get; set; }
@@ -48,7 +50,7 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
         public int Id { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
-        public DateTime CreationTime { get; set; }        
+        public DateTime CreationTime { get; set; }
     }
     public class GetInputs : PagedAndSortedInputDto, IShouldNormalize
     {
@@ -67,7 +69,7 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
     public class CountriesDto : FullAuditedEntityDto
     {
         public virtual string Code { get; set; }
-          
+
         public virtual string Country { get; set; }
     }
 
@@ -88,7 +90,7 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
     public class TableDescriptionDto
     {
         public int Id { get; set; }
-        public string Description { get; set; } 
+        public string Description { get; set; }
         public int tableIndex { get; set; }
     }
     public class CodeDto
@@ -107,7 +109,7 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
     }
     public class ActiveDto
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
         public bool Status { get; set; }
     }
     [AutoMapFrom(typeof(Jobstatus))]
@@ -124,15 +126,53 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
     public class JobStatusMaskDto : FullAuditedEntity
     {
         public virtual string Description1 { get; set; }
-
+        public virtual string Description2 { get; set; }
+        public virtual string Description3 { get; set; }
         public virtual bool Enabled { get; set; }
     }
     [AutoMapTo(typeof(JobstatusMask))]
     public class JobStatusMaskToDto : FullAuditedEntity
-    { 
+    {
         public virtual string Description1 { get; set; }
         public virtual string Description2 { get; set; }
         public virtual string Description3 { get; set; }
+        public virtual bool Enabled { get; set; }
+    }
+    //Quote Status prob
+    [AutoMapFrom(typeof(QuoteStatus))]
+    public class QuoteStatusDto : FullAuditedEntity
+    {
+        public virtual string Description { get; set; }
+        public virtual bool Enabled { get; set; }
+    }
+    [AutoMapTo(typeof(QuoteStatus))]
+    public class QuoteStatusToDto : FullAuditedEntity
+    {
+        public virtual string Description { get; set; }
+        public virtual bool Enabled { get; set; }
+    }
+    [AutoMapTo(typeof(RepairTypes))]
+    public class RepairTypeToDto : FullAuditedEntity
+    {
+        public virtual string Description { get; set; }
+        public virtual bool Enabled { get; set; }
+    }
+    [AutoMapFrom(typeof(RepairTypes))]
+    public class RepairTypeDto : FullAuditedEntity
+    {
+        public virtual string Description { get; set; }
+        public virtual bool Enabled { get; set; }
+    }
+    [AutoMapFrom(typeof(RolesCategory))]
+    public class RoleCategoryDto : FullAuditedEntity
+    {
+        public virtual string Description { get; set; }
+        public virtual bool Enabled { get; set; }
+    }
+    [AutoMapTo(typeof(RolesCategory))]
+    public class RoleCategoryToDto : FullAuditedEntity
+    {
+        public virtual string Description { get; set; }
         public virtual bool Enabled { get; set; }
     }
 }

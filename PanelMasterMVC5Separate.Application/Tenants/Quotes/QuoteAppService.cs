@@ -47,11 +47,11 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
         {
             var JobMaster = _jobsrrepository.GetAll().ToList();
 
-            var quotestatus = _qstatusrepository.GetAll().ToList();
+            var quotestatus = _qstatusrepository.GetAll().Where(x => x.Enabled == true).ToList();
 
             var quotecategories = _quotecatrepository.GetAll().ToList();
 
-            var repairtypes = _repairtyperepository.GetAll().ToList();
+            var repairtypes = _repairtyperepository.GetAll().Where(x=>x.Enabled == true).ToList();
 
             var qmaster = _quotemasterrepository.GetAll().Where(c => c.TenantId == _abpSession.TenantId).ToList();
 

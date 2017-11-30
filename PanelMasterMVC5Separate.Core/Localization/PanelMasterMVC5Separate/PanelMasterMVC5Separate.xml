@@ -24,7 +24,12 @@
     <text name="CreateAnAccount" value="Create account" />
     <text name="Pages" value="Pages" />
     <text name="RoleName" value="Role name" />
+    <text name="ActivateRoleCategory" value="Activate Role category" />
     <text name="RoleCategory" value="Role category" />
+    <text name="AddNewRoleCategory" value="Add Role Category" />
+    <text name="AddNewRepairtype" value="Add Repair type" />
+    <text name="RoleCategories" value="Role categories" />
+    <text name="EditRoleCategory" value="Edit Role category" />
     <text name="EditRole" value="Edit role" />
     <text name="CreateNewRole" value="Create new role" />
     <text name="RoleProperties" value="Role properties" />
@@ -284,7 +289,11 @@
     <text name="PreAuthorised" value="Already Authorised (Pre Authorised)" />
     <text name="Comments" value="Comments" />
     <text name="RepairType" value="Repair Type" />
+    <text name="RepairTypes" value="Repair Types" />
+    <text name="EditRepairType" value="Edit Repair Type" />
+    <text name="ActivateRepairType" value="Activate Repair Type" />
     <text name="SelectOne" value="--Select One--" />
+    <text name="RepairTypeProperties" value="Repair Type Properties" />
     <text name="QuoteProperties" value="Quote Properties" />
     <text name="Description1" value="Description 1" />
     <text name="Description2" value="Description 2" />
@@ -296,6 +305,7 @@
     <text name="JobStatuses" value="Job Statuses" />
     <text name="JobStatus" value="Job Status" />
     <text name="JobMaskStatuses" value="Job Mask Statuses" />
+    <text name="QuoteStatuses" value="Quote Statuses" />
     <text name="ActivateJobStatusMask" value="Activate Job Status Mask" />
     <text name="EditStatus" value="Edit Job Status" />
     <text name="EditStatusMask" value="Edit Job Status Mask" />
@@ -309,6 +319,7 @@
     <text name="EditOperator" value="Edit Operator" />
     <text name="AddnewOperator" value="Add new Operator" />
     <text name="AddNewJobStatus" value="Add job status" />
+    <text name="AddNewQuoteStatus" value="Add Quote Status" />
     <text name="ContactNumber" value="Contact Number" />
     <text name="ContactPerson" value="Contact Person" />
     <text name="TowoperatorInformation" value="Tow Operator Information" />
@@ -343,6 +354,8 @@
       Notice: There is also a <strong>Single-Page Application</strong> version built using ASP.NET MVC and <strong>AngularJs</strong>.
       ]]>
     </text>
+    <text name="ActivateQuoteStatus" value="Activate Quote Status" />
+    <text name="EditQuoteStatus" value="Edit Quote Status" />
     <text name="SeeDemo" value="See demo" />
     <text name="Edition" value="Edition" />
     <text name="Editions" value="Editions" />

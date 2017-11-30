@@ -11,6 +11,7 @@ using PanelMasterMVC5Separate.Authorization;
 using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.MultiTenancy;
+using PanelMasterMVC5Separate.Quotings;
 using PanelMasterMVC5Separate.RolesCategories;
 using PanelMasterMVC5Separate.Vendors;
 using System;
@@ -24,6 +25,9 @@ namespace PanelMasterMVC5Separate.AdminFunctions
     [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
     public class SystemDefaults : PanelMasterMVC5SeparateAppServiceBase, ISystemDefaults
     {
+        private readonly IRepository<RolesCategory> _rolescategoryrepositry;
+        private readonly IRepository<RepairTypes> _repairtypesrepositry;
+        private readonly IRepository<QuoteStatus> _quotestatusrepositry;
         private readonly IRepository<RolesCategory> _rolescategory;
         private readonly IRepository<CountryandCurrency> _countryandcurrency;
         private readonly IRepository<Countries> _countries;
@@ -32,9 +36,10 @@ namespace PanelMasterMVC5Separate.AdminFunctions
         private readonly IBankExport _IMListExcelExporter;
         private readonly IRepository<Jobstatus> _jobstatusRepository;
         private readonly IRepository<JobstatusMask> _jobstatusmaskRepository;
-        public SystemDefaults(IRepository<RolesCategory> rolescategory, IRepository<CountryandCurrency> countryandcurrency
+        public SystemDefaults(IRepository<RepairTypes> repairtypesrepositry, IRepository<RolesCategory> rolescategory, IRepository<CountryandCurrency> countryandcurrency
                     , IRepository<Countries> countries, IRepository<Banks> banks, IRepository<SignonPlans> signonplans,
-            IRepository<Jobstatus> jobstatusRepository, IBankExport imlistexcelexporter, IRepository<JobstatusMask> jobstatusmaskRepository)
+            IRepository<Jobstatus> jobstatusRepository, IBankExport imlistexcelexporter, IRepository<JobstatusMask> jobstatusmaskRepository,
+            IRepository<QuoteStatus> quotestatusrepositry, IRepository<RolesCategory> rolescategoryrepositry)
         {
             _rolescategory = rolescategory;
             _countryandcurrency = countryandcurrency;
@@ -44,6 +49,9 @@ namespace PanelMasterMVC5Separate.AdminFunctions
             _IMListExcelExporter = imlistexcelexporter;
             _jobstatusRepository = jobstatusRepository;
             _jobstatusmaskRepository = jobstatusmaskRepository;
+            _quotestatusrepositry = quotestatusrepositry;
+            _repairtypesrepositry = repairtypesrepositry;
+            _rolescategoryrepositry = rolescategoryrepositry;
         }
         public ListResultDto<CountriesDto> GetCountry()
         {
@@ -184,12 +192,12 @@ namespace PanelMasterMVC5Separate.AdminFunctions
         public JobStatusDto GetJobStatus(GetClaimsInput input)
         {
             var query = _jobstatusRepository
-              .GetAll().FirstOrDefault(c => c.Id == input.Id).MapTo<JobStatusDto>();                            
+              .GetAll().FirstOrDefault(c => c.Id == input.Id).MapTo<JobStatusDto>();
             return query;
         }
 
         public async Task<FileDto> GetJobStatusToExcel()
-        { 
+        {
             var queryjobstatus = await _jobstatusRepository.GetAll().ToListAsync();
             var claimListDtos = queryjobstatus.MapTo<List<JobStatusDto>>();
             return _IMListExcelExporter.ExportToFile(claimListDtos);
@@ -228,6 +236,117 @@ namespace PanelMasterMVC5Separate.AdminFunctions
         {
             var queryjobstatus = await _jobstatusmaskRepository.GetAll().ToListAsync();
             var claimListDtos = queryjobstatus.MapTo<List<JobStatusMaskDto>>();
+            return _IMListExcelExporter.ExportToFile(claimListDtos);
+        }
+
+        // Quote Status 
+        public ListResultDto<QuoteStatusDto> GetQuoteStatuses(GetInput input)
+        {
+            var queryjobstatus = _quotestatusrepositry.GetAll()
+                .WhereIf(
+                !input.Filter.IsNullOrWhiteSpace(),
+                u =>
+                    u.Description.Contains(input.Filter))
+                    .OrderBy(p => p.Id)
+            .ToList();
+            return new ListResultDto<QuoteStatusDto>(ObjectMapper.Map<List<QuoteStatusDto>>(queryjobstatus));
+        }
+        public void CreateOrUpdateQuoteStatus(QuoteStatusToDto input)
+        {
+            input.Enabled = true;
+            var jobstatus = input.MapTo<QuoteStatus>();
+            _quotestatusrepositry.InsertOrUpdate(jobstatus);
+        }
+        public QuoteStatusDto GetQuoteStatus(GetClaimsInput input)
+        {
+            var query = _quotestatusrepositry
+              .GetAll().FirstOrDefault(c => c.Id == input.Id).MapTo<QuoteStatusDto>();
+            return query;
+        }
+        public void ChangeQuoteStatusStatus(ActiveDto input)
+        {
+            var client = _quotestatusrepositry.FirstOrDefault(input.Id);
+            client.Enabled = input.Status;
+            _quotestatusrepositry.Update(client);
+        }
+        public async Task<FileDto> GetQuoteStatusToExcel()
+        {
+            var queryjobstatus = await _quotestatusrepositry.GetAll().ToListAsync();
+            var claimListDtos = queryjobstatus.MapTo<List<QuoteStatusDto>>();
+            return _IMListExcelExporter.ExportToFile(claimListDtos);
+        }
+
+        // Repair Type
+        public ListResultDto<RepairTypeDto> GetRepairTypes(GetInput input)
+        {
+            var queryjobstatus = _repairtypesrepositry.GetAll()
+                .WhereIf(
+                !input.Filter.IsNullOrWhiteSpace(),
+                u =>
+                    u.Description.Contains(input.Filter))
+                    .OrderBy(p => p.Id)
+            .ToList();
+            return new ListResultDto<RepairTypeDto>(ObjectMapper.Map<List<RepairTypeDto>>(queryjobstatus));
+        }
+        public void CreateOrUpdateRepairType(RepairTypeToDto input)
+        {
+            input.Enabled = true;
+            var jobstatus = input.MapTo<RepairTypes>();
+            _repairtypesrepositry.InsertOrUpdate(jobstatus);
+        }
+        public RepairTypeDto GetRepairType(GetClaimsInput input)
+        {
+            var query = _repairtypesrepositry
+              .GetAll().FirstOrDefault(c => c.Id == input.Id).MapTo<RepairTypeDto>();
+            return query;
+        }
+        public void ChangeRepairTypeStatus(ActiveDto input)
+        {
+            var client = _repairtypesrepositry.FirstOrDefault(input.Id);
+            client.Enabled = input.Status;
+            _repairtypesrepositry.Update(client);
+        }
+        public async Task<FileDto> GetRepairTypeToExcel()
+        {
+            var queryjobstatus = await _repairtypesrepositry.GetAll().ToListAsync();
+            var claimListDtos = queryjobstatus.MapTo<List<RepairTypeDto>>();
+            return _IMListExcelExporter.ExportToFile(claimListDtos);
+        }
+
+        // Role Category
+        public ListResultDto<RoleCategoryDto> GetRoleCategories(GetInput input)
+        {
+            var queryjobstatus = _rolescategoryrepositry.GetAll()
+                .WhereIf(
+                !input.Filter.IsNullOrWhiteSpace(),
+                u =>
+                    u.Description.Contains(input.Filter))
+                    .OrderBy(p => p.Id)
+            .ToList();
+            return new ListResultDto<RoleCategoryDto>(ObjectMapper.Map<List<RoleCategoryDto>>(queryjobstatus));
+        }
+        public void CreateOrUpdateRoleCategory(RoleCategoryToDto input)
+        {
+            input.Enabled = true;
+            var jobstatus = input.MapTo<RolesCategory>();
+            _rolescategoryrepositry.InsertOrUpdate(jobstatus);
+        }
+        public RoleCategoryDto GetRoleCategory(GetClaimsInput input)
+        {
+            var query = _rolescategoryrepositry
+              .GetAll().FirstOrDefault(c => c.Id == input.Id).MapTo<RoleCategoryDto>();
+            return query;
+        }
+        public void ChangeRoleCategoryStatus(ActiveDto input)
+        {
+            var client = _rolescategoryrepositry.FirstOrDefault(input.Id);
+            client.Enabled = input.Status;
+            _rolescategoryrepositry.Update(client);
+        }
+        public async Task<FileDto> GetRoleCategoryToExcel()
+        {
+            var query = await _rolescategoryrepositry.GetAll().ToListAsync();
+            var claimListDtos = query.MapTo<List<RoleCategoryDto>>();
             return _IMListExcelExporter.ExportToFile(claimListDtos);
         }
     }

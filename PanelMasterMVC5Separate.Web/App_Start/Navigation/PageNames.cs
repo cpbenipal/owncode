@@ -46,6 +46,11 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string TowOperators = "SystemDefaults.TowOperators.Host";
                 public const string JobStatuses = "SystemDefaults.JobStatuses.Host";
                 public const string JobMaskStatuses = "SystemDefaults.JobMaskStatuses.Host";
+
+                public static string QuoteStatus = "SystemDefaults.QuoteStatus.Host";
+                public static string RepairTypes = "SystemDefaults.RepairTypes.Host";
+
+                public static string RoleCategories = "SystemDefaults.RoleCategories.Host";
             }
 
             public static class Tenant

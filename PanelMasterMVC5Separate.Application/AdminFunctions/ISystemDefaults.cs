@@ -29,5 +29,26 @@ namespace PanelMasterMVC5Separate.AdminFunctions
         JobStatusMaskDto GetJobStatusMask(GetClaimsInput input);
         void ChangeJobMaskStatus(ActiveDto input);
         Task<FileDto> GetJobStatusMaskToExcel();
+        //Quote Status
+        ListResultDto<QuoteStatusDto> GetQuoteStatuses(GetInput input);
+        void CreateOrUpdateQuoteStatus(QuoteStatusToDto input);
+        QuoteStatusDto GetQuoteStatus(GetClaimsInput input);
+        void ChangeQuoteStatusStatus(ActiveDto input);
+        Task<FileDto> GetQuoteStatusToExcel();
+
+        //Repair Type
+        ListResultDto<RepairTypeDto> GetRepairTypes(GetInput input);
+        void CreateOrUpdateRepairType(RepairTypeToDto input);
+        RepairTypeDto GetRepairType(GetClaimsInput input);
+        void ChangeRepairTypeStatus(ActiveDto input);
+        Task<FileDto> GetRepairTypeToExcel();
+
+        //Role Category
+        ListResultDto<RoleCategoryDto> GetRoleCategories(GetInput input);
+        void CreateOrUpdateRoleCategory(RoleCategoryToDto input);
+        RoleCategoryDto GetRoleCategory(GetClaimsInput input);
+        void ChangeRoleCategoryStatus(ActiveDto input);
+        Task<FileDto> GetRoleCategoryToExcel();
+
     }
 }

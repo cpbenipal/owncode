@@ -232,6 +232,18 @@ appModule.config([
             url: '/JobMaskStatuses',
             templateUrl: '~/App/host/views/JobMaskStatuses/index.cshtml'
         });
+        $stateProvider.state('host.QuoteStatus', {
+            url: '/QuoteStatus',
+            templateUrl: '~/App/host/views/QuoteStatus/index.cshtml'
+        });
+        $stateProvider.state('host.RepairTypes', {
+            url: '/RepairTypes',
+            templateUrl: '~/App/host/views/RepairTypes/index.cshtml'
+        });
+        $stateProvider.state('host.RoleCategories', {
+            url: '/RoleCategories',
+            templateUrl: '~/App/host/views/RoleCategories/index.cshtml'
+        });
        }
 
         //TENANT routes

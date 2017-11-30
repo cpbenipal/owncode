@@ -526,6 +526,12 @@
     <Content Include="App\host\views\editions\index.js" />
     <Content Include="App\host\views\AddEditVendor\index.js" />
     <Content Include="App\host\views\Insurers\index.js" />
+    <Content Include="App\host\views\RoleCategories\createOrEditModal.js" />
+    <Content Include="App\host\views\RoleCategories\index.js" />
+    <Content Include="App\host\views\RepairTypes\createOrEditModal.js" />
+    <Content Include="App\host\views\RepairTypes\index.js" />
+    <Content Include="App\host\views\QuoteStatus\createOrEditModal.js" />
+    <Content Include="App\host\views\QuoteStatus\index.js" />
     <Content Include="App\host\views\JobMaskStatuses\createOrEditModal.js" />
     <Content Include="App\host\views\JobMaskStatuses\index.js" />
     <Content Include="App\host\views\JobStatuses\createOrEditModal.js" />
@@ -574,8 +580,6 @@
     <Content Include="App\tenant\views\settings\editCompany.js" />
     <Content Include="App\tenant\views\towoperators\createOrEditModal.js" />
     <Content Include="App\tenant\views\towoperators\index.js" />
-    <Content Include="App\tenant\views\jobstatuses\createOrEditModal.js" />
-    <Content Include="App\tenant\views\jobstatuses\index.js" />
     <Content Include="App\tenant\views\job_information\index.js" />
     <Content Include="App\tenant\views\job_landing\index.js" />
     <Content Include="App\tenant\views\photos\index.js" />
@@ -7663,8 +7667,6 @@
     <Content Include="App\tenant\views\reporting\index.cshtml" />
     <Content Include="assets\global\plugins\counterup\LICENSE" />
     <Content Include="assets\global\plugins\counterup\README.md" />
-    <Content Include="App\tenant\views\jobstatuses\index.cshtml" />
-    <Content Include="App\tenant\views\jobstatuses\createOrEditModal.cshtml" />
     <Content Include="App\tenant\views\towing\index.cshtml" />
     <Content Include="App\tenant\views\towoperators\createOrEditModal.cshtml" />
     <Content Include="App\tenant\views\towoperators\index.cshtml" />
@@ -7684,6 +7686,12 @@
     <Content Include="App\host\views\JobStatuses\index.cshtml" />
     <Content Include="App\host\views\JobMaskStatuses\createOrEditModal.cshtml" />
     <Content Include="App\host\views\JobMaskStatuses\index.cshtml" />
+    <Content Include="App\host\views\QuoteStatus\createOrEditModal.cshtml" />
+    <Content Include="App\host\views\QuoteStatus\index.cshtml" />
+    <Content Include="App\host\views\RepairTypes\createOrEditModal.cshtml" />
+    <Content Include="App\host\views\RepairTypes\index.cshtml" />
+    <Content Include="App\host\views\RoleCategories\createOrEditModal.cshtml" />
+    <Content Include="App\host\views\RoleCategories\index.cshtml" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
