@@ -21,8 +21,6 @@ using PanelMasterMVC5Separate.Tenants.Insurer.Dto;
 using PanelMasterMVC5Separate.Brokers;
 using PanelMasterMVC5Separate.Tenants.Brokers.Dto;
 using Abp.Runtime.Session;
-using PanelMasterMVC5Separate.Authorization;
-using Abp.Authorization;
 using PanelMasterMVC5Separate.Vendors;
 using PanelMasterMVC5Separate.MultiTenancy;
 
@@ -45,6 +43,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         private readonly IRepository<JobstatusMask> _jobstatusmaskRepository;
         private readonly IRepository<JobstatusTenant> _jobstatustenantRepository;
         private readonly IRepository<TowOperator> _towoperatorrepository;
+        private readonly IRepository<TowSubOperator> _towsuboperatorrepositry;
         private readonly IRepository<TenantProfile> _TenantProfile;
         private readonly IRepository<Countries> _countryRepository;
         public BranchClaimAppService(IAbpSession abpSession, IClaimsListExcelExporter claimListExcelExporter, IRepository<Jobs> claimRepository,
@@ -52,8 +51,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                                      IRepository<VehicleMake> manufactureRepository, IRepository<BrokerMaster> brokerRepository,
                                      IRepository<VehicleModels> vehicleModelRepository, IRepository<Jobstatus> jobstatusRepository, IRepository<JobstatusMask> jobstatusmaskRepository,
                                      IRepository<JobstatusTenant> jobstatustenantRepository, IRepository<TowOperator> towoperatorrepository,
-                                     IRepository<TenantProfile> tenantprofile,
-            IRepository<Countries> countryRepository)
+                                     IRepository<TenantProfile> tenantprofile, IRepository<Countries> countryRepository, IRepository<TowSubOperator> towsuboperatorrepositry)
         {
             _abpSession = abpSession;
             _claimListExcelExporter = claimListExcelExporter;
@@ -67,6 +65,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             _jobstatusmaskRepository = jobstatusmaskRepository;
             _jobstatustenantRepository = jobstatustenantRepository;
             _towoperatorrepository = towoperatorrepository;
+            _towsuboperatorrepositry = towsuboperatorrepositry;
             _TenantProfile = tenantprofile;
             _countryRepository = countryRepository;
         }
@@ -416,163 +415,109 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
             return new ListResultDto<int>(ObjectMapper.Map<List<int>>(numberList));
         }
-        public Int32 IfNullThenZero(object value)
-        {
-            if (value == DBNull.Value)
-            {
-                return 0;
-            }
-            else
-            {
-                return Convert.ToInt32(value);
-            }
-        }
         public ListResultDto<TowOperatorDto> GetTowOperators(GetClaimsInput input)
         {
             int countryId = GetCountryIdByCode();
-            var towops = _towoperatorrepository.GetAll().Where(p => (p.TenantId == _abpSession.TenantId || (object)p.TenantId == null) && p.CountryID == countryId)
+            var towops = _towoperatorrepository.GetAll().Where(p => p.CountryID == countryId)
                .WhereIf(
                 !input.Filter.IsNullOrWhiteSpace(),
                 u =>
-                    u.Description.Contains(input.Filter) ||
-                    u.ContactNumber.Contains(input.Filter) ||
-                    u.ContactPerson.Contains(input.Filter) ||
-                    u.EmailAddress.Contains(input.Filter)
+                    u.Description.Contains(input.Filter)
             )
             .OrderBy(p => p.Id)
             .ToList();
-            var countries = _countryRepository.GetAll().AsNoTracking().ToList();
-            var final = (
-                from x in towops
-                join v in countries on x.CountryID equals v.Id
-                select new TowOperatorDto
-                {
-                    Id = x.Id,
-                    Description = x.Description,
-                    ContactNumber = x == null ? "--" : x.ContactNumber,
-                    ContactPerson = x == null ? "--" : x.ContactPerson,
-                    CreationTime = x == null ? "--" : x.CreationTime.ToShortDateString(),
-                    EmailAddress = x == null ? "--" : x.EmailAddress,
-                    Country = x == null ? "--" : v.Country,
-                    isActive = x == null ? false : x.isActive
-                });
+
+            var towsub = _towsuboperatorrepositry.GetAll().Where(p => p.TenantId == _abpSession.TenantId)
+             .WhereIf(
+                 !input.Filter.IsNullOrWhiteSpace(),
+                 u =>
+                     u.ContactNumber.Contains(input.Filter) ||
+                     u.ContactPerson.Contains(input.Filter) ||
+                     u.EmailAddress.Contains(input.Filter)
+             )
+             .OrderByDescending(p => p.LastModificationTime)
+             .ToList();
+
+            var final = (from master in towops
+                         join v in towsub on master.Id equals v.TowOperatorId into ps
+                         from x in ps.DefaultIfEmpty()
+                         select new TowOperatorDto
+                         {
+                             Id = master.Id,
+                             SubpkId = x == null ? 0 : x.Id,
+                             Description = master.Description,
+                             ContactNumber = x == null ? "--" : x.ContactNumber,
+                             ContactPerson = x == null ? "--" : x.ContactPerson,
+                             EmailAddress = x == null ? "--" : x.EmailAddress,
+                             isActive = x == null ? false : x.isActive
+                         });
 
 
             return new ListResultDto<TowOperatorDto>(ObjectMapper.Map<List<TowOperatorDto>>(final));
         }
-        [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
-        public ListResultDto<TowOperatorDto> GetHostTowOperators(GetClaimsInput input)
+        public TowOperatorDto GetTow(NullableIdDto<int> input)
         {
-            var towops = _towoperatorrepository.GetAll()
-               .WhereIf(
-                !input.Filter.IsNullOrWhiteSpace(),
-                u =>
-                    u.Description.Contains(input.Filter) ||
-                    u.ContactNumber.Contains(input.Filter) ||
-                    u.ContactPerson.Contains(input.Filter) ||
-                    u.EmailAddress.Contains(input.Filter)
-            )
-            .OrderBy(p => p.Id)
-            .ToList();
-            var countries = _countryRepository.GetAll().AsNoTracking().ToList();
-            var final = (
-                from x in towops
-                join v in countries on x.CountryID equals v.Id
-                select new TowOperatorDto
-                {
-                    Id = x.Id,
-                    Description = x.Description,
-                    CreationTime = x.CreationTime.ToShortDateString(),
-                    Country = v.Country,
-                    isActive = x.isActive
-                });
-
-
-            return new ListResultDto<TowOperatorDto>(ObjectMapper.Map<List<TowOperatorDto>>(final));
-        }
-
-        public async Task<TowTenantDto> GetTow(NullableIdDto<int> input)
-        {
-            var output = new TowTenantDto();
-
-            if (input.Id.HasValue)
+            TowOperatorDto towsub = new TowOperatorDto();
+            var querymain = _towsuboperatorrepositry.FirstOrDefault(c => c.TowOperatorId == input.Id);
+            if (querymain != null)
             {
-                var towinfo = await _towoperatorrepository.FirstOrDefaultAsync(p => p.Id == input.Id.Value && p.TenantId == _abpSession.TenantId);
-                output.Id = towinfo.Id;
-                output.Description = towinfo.Description == null ? "" : towinfo.Description;
-                output.ContactNumber = towinfo.ContactNumber == null ? "" : towinfo.ContactNumber;
-                output.ContactPerson = towinfo.ContactPerson == null ? "" : towinfo.ContactPerson;
-                output.EmailAddress = towinfo.EmailAddress == null ? "" : towinfo.EmailAddress;
+                towsub.ContactNumber = querymain.ContactNumber;
+                towsub.ContactPerson = querymain.ContactPerson;
+                towsub.EmailAddress = querymain.EmailAddress;
+                towsub.TenantId = querymain.TenantId;
+                towsub.Id = querymain.Id; // pk->subtow
             }
-            else
-            {
-                output.Id = 0;
-            }
-            return output;
-        }
-        [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
-        public async Task<TowTenantDto> GetHostTow(NullableIdDto<int> input)
-        {
-            var output = new TowTenantDto();
-
-            if (input.Id.HasValue)
-            {
-                var towinfo = await _towoperatorrepository.FirstOrDefaultAsync(p => p.Id == input.Id.Value);
-                output.Id = towinfo.Id;
-                output.Description = towinfo.Description;
-                output.CountryID = towinfo.CountryID;
-            }
-            else
-            {
-                output.Id = 0;
-            }
-            return output;
+            var towquery = _towoperatorrepository.FirstOrDefault(p => p.Id == input.Id);
+            towsub.Description = towquery.Description;
+            towsub.TowOperatorId = towquery.Id; // pk->fk             
+            return towsub;
         }
         public void CreateOrUpdateTowOperator(TowTenantDto input)
         {
-            if(input.CountryID == 0)
-            {
-                input.CountryID = GetCountryIdByCode();
-            }
-            input.isActive = input.isActive; // Default Status : Quote Preparation             
-            var query = input.MapTo<TowOperator>();
-            _towoperatorrepository.InsertOrUpdate(query);
+            var client = input.MapTo<TowSubOperator>();            
+            _towsuboperatorrepositry.InsertOrUpdate(client);
         }
-
-        public void ChangeTowStatus(JobStatusDto input)
-        {
-            int Id = Convert.ToInt32(input.Id);
-
-            var query = _towoperatorrepository
-             .GetAll().Where(c => c.Id == Id && c.TenantId == _abpSession.TenantId)
-             .FirstOrDefault();
-            query.isActive = !input.IsActive;
-            _towoperatorrepository.Update(query);
-        }
-
         public async Task<FileDto> GetTowOperatorsToExcel()
         {
-            var towops = await _towoperatorrepository.GetAll().Where(p => p.TenantId == _abpSession.TenantId)
+            int countryId = GetCountryIdByCode();
+            var towops = await _towoperatorrepository.GetAll().Where(p => p.CountryID == countryId)
             .OrderBy(p => p.Id)
             .ToListAsync();
 
-            var final = (
-                from x in towops
-                select new TowOperatorDto
-                {
-                    Id = x.Id,
-                    Description = x.Description,
-                    ContactNumber = x == null ? "--" : x.ContactNumber,
-                    ContactPerson = x == null ? "--" : x.ContactPerson,
-                    CreationTime = x == null ? "--" : x.CreationTime.ToShortDateString(),
-                    EmailAddress = x == null ? "--" : x.EmailAddress,
-                    isActive = x == null ? false : x.isActive
-                });
+            var towsub = await _towsuboperatorrepositry.GetAll().Where(p => p.TenantId == _abpSession.TenantId)
+             .OrderByDescending(p => p.LastModificationTime)
+             .ToListAsync();
+
+            var final = (from master in towops
+                         join v in towsub on master.Id equals v.TowOperatorId into ps
+                         from x in ps.DefaultIfEmpty()
+                         select new TowOperatorDto
+                         {
+                             Id = master.Id,
+                             SubpkId = x == null ? 0 : x.Id,
+                             Description = master.Description,
+                             ContactNumber = x == null ? "--" : x.ContactNumber,
+                             ContactPerson = x == null ? "--" : x.ContactPerson,
+                             EmailAddress = x == null ? "--" : x.EmailAddress,
+                             isActive = x == null ? false : x.isActive
+                         });
 
             var claimListDtos = final.MapTo<List<TowOperatorDto>>();
             return _claimListExcelExporter.ExportToFile(claimListDtos);
-
         }
+        public void ChangeTowStatus(TowOperatorDto input)
+        {
+            int Id = Convert.ToInt32(input.Id);
+
+            var query = _towsuboperatorrepositry
+             .GetAll().Where(c => c.Id == Id && c.TenantId == _abpSession.TenantId)
+             .FirstOrDefault();
+
+            query.isActive = input.isActive;
+
+            _towsuboperatorrepositry.Update(query);
+        }
+
         private int GetCountryIdByCode()
         {
             var CountryCode = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);

@@ -119,20 +119,21 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
     { 
         public virtual int Order { get; set; } 
     }
-
-    public class TowOperatorDto
-    {
-        public virtual int Id { get; set; } 
+    [AutoMapFrom(typeof(TowSubOperator))]
+    public class TowOperatorDto : FullAuditedEntityDto
+    { 
         public virtual string Description { get; set; }
         public virtual string ContactNumber { get; set; }
         public virtual string ContactPerson { get; set; }
         public virtual string EmailAddress { get; set; } 
-        public virtual Boolean isActive { get; set; }       
-        public virtual string CreationTime { get; set; }
+        public virtual Boolean isActive { get; set; }        
         public virtual string Country { get; set; }
+        public virtual int SubpkId { get; set; }
+        public virtual int TenantId { get; set; }
+        public virtual int TowOperatorId { get; set; }
     }
 
-    [AutoMapTo(typeof(TowOperator))]
+    [AutoMapTo(typeof(TowSubOperator))]
     public class TowTenantDto : FullAuditedEntityDto
     {
         [Required]
@@ -148,5 +149,6 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
         public virtual bool isActive { get; set; }
         [Required]
         public virtual int CountryID { get; set; }
+        public virtual int TowOperatorId { get; set; }
     }
 }

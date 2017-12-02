@@ -277,5 +277,41 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Exporting
                     }
                 });
         }
+
+        public FileDto ExportToFile(List<TowOperatorDto> claimListDtos)
+        {
+            return CreateExcelPackage(
+                "TowOperators.xlsx",
+                excelPackage =>
+                {
+                    var sheet = excelPackage.Workbook.Worksheets.Add(L("TowOperators"));
+                    sheet.OutLineApplyStyle = true;
+
+                    AddHeader(
+                     sheet,
+                    L("Description"), 
+                    L("CreationTime")
+                 );
+
+                    AddObjects(
+                        sheet, 2, claimListDtos,
+                        _ => _.Description, 
+                        _ => _.CreationTime
+                    );
+
+                    //Formatting cells
+
+                    var lastLoginTimeColumn = sheet.Column(8);
+                    lastLoginTimeColumn.Style.Numberformat.Format = "yyyy-mm-dd";
+
+                    var creationTimeColumn = sheet.Column(10);
+                    creationTimeColumn.Style.Numberformat.Format = "yyyy-mm-dd";
+
+                    for (var i = 1; i <= 10; i++)
+                    {
+                        sheet.Column(i).AutoFit();
+                    }
+                });
+        }
     }
 }

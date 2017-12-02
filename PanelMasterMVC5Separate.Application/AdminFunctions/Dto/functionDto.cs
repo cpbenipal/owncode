@@ -198,4 +198,19 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Dto
         public virtual int Members { get; set; }
         public virtual bool isActive { get; set; }
     }
+    [AutoMapFrom(typeof(TowOperator))]
+    public class TowOperatorDto : FullAuditedEntity
+    {
+        public virtual string Description { get; set; }
+        public virtual string Country { get; set; }
+        public virtual int CountryId { get; set; }
+        public virtual bool isActive { get; set; }
+    }
+    [AutoMapTo(typeof(TowOperator))]
+    public class TowOperatorToDto : FullAuditedEntity
+    {
+        public virtual string Description { get; set; }
+        public int CountryId { get; set; }
+        public virtual bool isActive { get; set; }
+    }
 }

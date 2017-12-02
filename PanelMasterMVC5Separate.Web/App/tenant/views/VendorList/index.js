@@ -76,17 +76,7 @@
                         '  {{COL_FIELD CUSTOM_FILTERS}} ' +
                         '</div>',
                         minWidth: 140
-                    },
-                    {
-                        name: app.localize('RegistrationNumber'),
-                        field: 'registrationNumber',
-                        minWidth: 120
-                    },
-                    {
-                        name: app.localize('TaxRegistrationNumber'),
-                        field: 'taxRegistrationNumber',
-                        minWidth: 200
-                    }
+                    }                    
                     ,{
                         name: app.localize('Status'),
                         field: 'isActive',

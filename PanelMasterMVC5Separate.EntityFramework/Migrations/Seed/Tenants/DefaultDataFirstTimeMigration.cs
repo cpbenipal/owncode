@@ -53,7 +53,7 @@ namespace PanelMasterMVC5Separate.Migrations.Seed.Tenants
             string[] str = allstatus.Split(',');
             for (int i = 0; i < str.Length; i++)
             {
-                if (!_context.TowOperators.Any(x => x.TenantId == tenantId && x.Description == str[i]))
+                if (!_context.TowOperators.Any(x => x.Description == str[i]))
                     yield return GetTowOperator(str[i], tenantId);
             }
         }
@@ -64,7 +64,6 @@ namespace PanelMasterMVC5Separate.Migrations.Seed.Tenants
             return new TowOperator()
             {
                 Description = desc,
-                TenantId = tenantId,
                 isActive = false
             };
         }
@@ -199,8 +198,7 @@ namespace PanelMasterMVC5Separate.Migrations.Seed.Tenants
             {
                 return new TowOperator()
                 {
-                    Description = name,
-                    TenantId = 1,
+                    Description = name,                     
                     isActive = false
                 };
             }

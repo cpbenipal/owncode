@@ -7,10 +7,10 @@
             vm.job = null;           
            
             vm.save = function () {
-                vm.saving = true;                 
-                vm.job.tenantId = abp.session.tenantId; 
-                           
+                vm.saving = true;         
                 vm.job.isActive = true; 
+                vm.job.tenantId = abp.session.tenantId;
+                vm.job.towOperatorId = towId;
                 userService.createOrUpdateTowOperator(vm.job).then(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
                     $uibModalInstance.close()

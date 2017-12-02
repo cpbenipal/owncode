@@ -18,5 +18,6 @@ namespace PanelMasterMVC5Separate.AdminFunctions.Exporting
         FileDto ExportToFile(List<RepairTypeDto> listDtos);
         FileDto ExportToFile(List<RoleCategoryDto> listDtos);
         FileDto ExportToFile(List<SignOnDto> listDtos);
+        FileDto ExportToFile(List<TowOperatorDto> listDtos);
     }
 }

@@ -1,15 +1,16 @@
 ﻿(function () {
     appModule.controller('host.views.towoperators.createOrEditModal', [
-        '$scope', '$uibModalInstance', 'abp.services.app.branchClaim', 'towId',
+        '$scope', '$uibModalInstance', 'abp.services.app.systemDefaults', 'towId',
         function ($scope, $uibModalInstance, userService, towId) {
             var vm = this;
             vm.saving = false;
             vm.job = null;           
            
             vm.save = function () {
-                vm.saving = true;                 
-                vm.job.tenantId = 1;                            
-                vm.job.isActive = true; 
+                vm.saving = true;  
+                if(towId==null){       
+                    vm.job.isActive = true;
+                }
                 userService.createOrUpdateTowOperator(vm.job).then(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
                     $uibModalInstance.close()
@@ -38,13 +39,15 @@
                     });
             };
             function init() {
-                userService.getHostTow({
+                userService.getTowOperator({
                     id: towId
                 }).then(function (result) {                         
                     vm.job = result.data; 
                 });
             }
-            init(); 
+            if(towId!=null){
+                    init(); 
+            }
             vm.getCountries();
         }
     ]);

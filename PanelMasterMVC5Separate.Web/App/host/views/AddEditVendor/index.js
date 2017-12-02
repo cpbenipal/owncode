@@ -50,11 +50,8 @@
              vm.save = function () {
                 vm.saving = true; 
                 vendorService.addUpdateVendor({
-                    Id: $stateParams.id,
-                    SupplierCode: vm.mainVendor.supplierCode,
-                    SupplierName: vm.mainVendor.supplierName,
-                    RegistrationNumber: vm.mainVendor.registrationNumber,
-                    TaxRegistrationNumber: vm.mainVendor.taxRegistrationNumber,
+                    Id: $stateParams.id,                     
+                    SupplierName: vm.mainVendor.supplierName, 
                     CountryID: vm.mainVendor.countryID
                     }).then(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));

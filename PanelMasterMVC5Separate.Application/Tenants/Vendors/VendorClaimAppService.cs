@@ -5,10 +5,8 @@ using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Abp.Runtime.Session;
-using AutoMapper;
 using PanelMasterMVC5Separate.Authorization;
 using PanelMasterMVC5Separate.Dto;
-using PanelMasterMVC5Separate.Job.Dto;
 using PanelMasterMVC5Separate.MultiTenancy;
 using PanelMasterMVC5Separate.Tenants.Vendors.Dto;
 using PanelMasterMVC5Separate.Tenants.Vendors.Exporting;
@@ -114,9 +112,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             var query = _vendorMainRepository.GetAll()
               .WhereIf(
                     !input.Filter.IsNullOrEmpty(),
-                    p => p.SupplierName.Equals(input.Filter) ||
-                         p.RegistrationNumber.Equals(input.Filter) ||
-                         p.TaxRegistrationNumber.Equals(input.Filter)
+                    p => p.SupplierName.Equals(input.Filter)  
               )
              .OrderByDescending(p => p.LastModificationTime)
              .ToList();
@@ -134,8 +130,6 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
                                   id = master.Id,
                                   SupplierCode = master.SupplierCode,
                                   SupplierName = master.SupplierName,
-                                  RegistrationNumber = master.RegistrationNumber,
-                                  TaxRegistrationNumber = master.TaxRegistrationNumber,
                                   Country = c.Country,
                                   IsActive = y1 == null ? false : y1.IsActive,
                                   HasSub = y1 == null ? false : true
@@ -153,9 +147,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             var query = _vendorMainRepository.GetAll()
               .WhereIf(
                     !input.Filter.IsNullOrEmpty(),
-                    p => p.SupplierName.Equals(input.Filter) ||
-                         p.RegistrationNumber.Equals(input.Filter) ||
-                         p.TaxRegistrationNumber.Equals(input.Filter)
+                    p => p.SupplierName.Equals(input.Filter) 
               )
               .Where(p => p.CountryID.Equals(countryId))
              .OrderByDescending(p => p.LastModificationTime)
@@ -174,9 +166,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
                               {
                                   id = master.Id,
                                   SupplierCode = master.SupplierCode,
-                                  SupplierName = master.SupplierName,
-                                  RegistrationNumber = master.RegistrationNumber,
-                                  TaxRegistrationNumber = master.TaxRegistrationNumber,
+                                  SupplierName = master.SupplierName,                                   
                                   IsActive = y1 == null ? false : y1.IsActive
                               }).ToList();
 
@@ -209,7 +199,8 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
                 newSubVendor.Branch = input.Branch;
                 newSubVendor.CurrencyID = input.CurrencyID;
                 newSubVendor.BankID = input.BankID;
-
+                newSubVendor.RegistrationNumber = input.RegistrationNumber;
+                newSubVendor.TaxRegistrationNumber = input.TaxRegistrationNumber;
                 _vendorSubRepository.Insert(newSubVendor);
             }
             else
@@ -224,8 +215,6 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             VendorMain newVendor = new VendorMain();
             newVendor.SupplierCode = System.Guid.NewGuid();
             newVendor.SupplierName = input.SupplierName;
-            newVendor.RegistrationNumber = input.RegistrationNumber;
-            newVendor.TaxRegistrationNumber = input.TaxRegistrationNumber;
             newVendor.CountryID = GetCountryIdByCode();
             return _vendorMainRepository.Insert(newVendor);
 
@@ -238,9 +227,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
                 VendorMain updateMainVendor = _vendorMainRepository.GetAll().Where(s => s.Id == input.id).First();
 
                 updateMainVendor.SupplierName = input.SupplierName;
-                updateMainVendor.RegistrationNumber = input.RegistrationNumber;
                 updateMainVendor.SupplierCode = input.SupplierCode;
-                updateMainVendor.TaxRegistrationNumber = input.TaxRegistrationNumber;
 
                 _vendorMainRepository.Update(updateMainVendor);
             }
@@ -292,6 +279,8 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
                     Branch = vendor_obj.Branch,
                     CurrencyID = vendor_obj.CurrencyID,
                     BankID = vendor_obj.BankID,
+                    TaxRegistrationNumber = vendor_obj.TaxRegistrationNumber,
+                    RegistrationNumber = vendor_obj.RegistrationNumber,
                     IsActive = vendor_obj.IsActive
                 });
             }
@@ -321,7 +310,8 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
                 updateSubVendor.CurrencyID = input.CurrencyID;
                 updateSubVendor.BankID = input.BankID;
                 updateSubVendor.IsActive = input.IsActive;
-
+                updateSubVendor.TaxRegistrationNumber = input.TaxRegistrationNumber;
+                updateSubVendor.RegistrationNumber = input.RegistrationNumber;
                 _vendorSubRepository.Update(updateSubVendor);
             }
             catch (System.Exception ex)

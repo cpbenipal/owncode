@@ -73,17 +73,7 @@
                         enableSorting: true,
                         field: 'country',
                         minWidth: 100
-                    },
-                    {
-                        name: app.localize('RegistrationNumber'),
-                        field: 'registrationNumber',
-                        minWidth: 120
-                    },
-                    {
-                        name: app.localize('TaxRegistrationNumber'),
-                        field: 'taxRegistrationNumber',
-                        minWidth: 200
-                    }
+                    },                    
                     //,{
                     //    name: app.localize('Status'),
                     //    field: 'isActive',

@@ -536,8 +536,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             for (int i = 0; i < str.Length; i++)
             {
                 tow = new TowOperator();
-                tow.Description = str[i];
-                tow.TenantId = tenantId;
+                tow.Description = str[i];                 
                 tow.isActive = false;
                 tow.CountryID = CountryID;
                 _TowOperator.Insert(tow);

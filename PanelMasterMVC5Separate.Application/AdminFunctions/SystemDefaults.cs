@@ -25,6 +25,8 @@ namespace PanelMasterMVC5Separate.AdminFunctions
     [AbpAuthorize(AppPermissions.Pages_Administration_Host_SystemDefaults)]
     public class SystemDefaults : PanelMasterMVC5SeparateAppServiceBase, ISystemDefaults
     {
+        
+        private readonly IRepository<TowOperator> _towoperatorrepositry;
         private readonly IRepository<RepairTypes> _repairtypesrepositry;
         private readonly IRepository<QuoteStatus> _quotestatusrepositry;
         private readonly IRepository<RolesCategory> _rolescategory;
@@ -35,10 +37,11 @@ namespace PanelMasterMVC5Separate.AdminFunctions
         private readonly IBankExport _IMListExcelExporter;
         private readonly IRepository<Jobstatus> _jobstatusRepository;
         private readonly IRepository<JobstatusMask> _jobstatusmaskRepository;
+
         public SystemDefaults(IRepository<RepairTypes> repairtypesrepositry, IRepository<RolesCategory> rolescategory, IRepository<CountryandCurrency> countryandcurrency
                     , IRepository<Countries> countries, IRepository<Banks> banks, IRepository<SignonPlans> signonplans,
             IRepository<Jobstatus> jobstatusRepository, IBankExport imlistexcelexporter, IRepository<JobstatusMask> jobstatusmaskRepository,
-            IRepository<QuoteStatus> quotestatusrepositry)
+            IRepository<QuoteStatus> quotestatusrepositry, IRepository<TowOperator> towoperatorrepositry)
         {
             _rolescategory = rolescategory;
             _countryandcurrency = countryandcurrency;
@@ -50,6 +53,7 @@ namespace PanelMasterMVC5Separate.AdminFunctions
             _jobstatusmaskRepository = jobstatusmaskRepository;
             _quotestatusrepositry = quotestatusrepositry;
             _repairtypesrepositry = repairtypesrepositry;
+            _towoperatorrepositry = towoperatorrepositry;            
         }
         public ListResultDto<CountriesDto> GetCountry()
         {
@@ -385,6 +389,59 @@ namespace PanelMasterMVC5Separate.AdminFunctions
             var query = await _signonplans.GetAll().ToListAsync();
             var claimListDtos = query.MapTo<List<SignOnDto>>();
             return _IMListExcelExporter.ExportToFile(claimListDtos);
+        }
+
+        public ListResultDto<TowOperatorDto> GetTowOperators(GetInputs input)
+        {
+            var towops = _towoperatorrepositry.GetAll()
+                           .WhereIf(
+                           !input.Filter.IsNullOrWhiteSpace(),
+                           u =>
+                               u.Description.Contains(input.Filter))
+                               .OrderBy(p => p.Id)
+                       .ToList();
+            var countries = _countries.GetAll().AsNoTracking().ToList();
+
+            var final = (
+                from x in towops
+                join v in countries on x.CountryID equals v.Id
+                select new TowOperatorDto
+                {
+                    Id = x.Id,
+                    Description = x.Description,
+                    CreationTime = x.CreationTime,
+                    Country = v.Country,
+                    isActive = x.isActive
+                });
+
+            return new ListResultDto<TowOperatorDto>(ObjectMapper.Map<List<TowOperatorDto>>(final));
+        }
+
+        public void CreateOrUpdateTowOperator(TowOperatorToDto input)
+        {
+            var client = input.MapTo<TowOperator>();
+            _towoperatorrepositry.InsertOrUpdate(client);
+        }
+
+        public TowOperatorDto GetTowOperator(GetClaimsInput input)
+        {
+            var query = _towoperatorrepositry
+             .GetAll().FirstOrDefault(c => c.Id == input.Id).MapTo<TowOperatorDto>();
+            return query;
+        }
+
+        public async Task<FileDto> GetTowOperatorsExcel()
+        {
+            var query = await _towoperatorrepositry.GetAll().ToListAsync();
+            var claimListDtos = query.MapTo<List<TowOperatorDto>>();
+            return _IMListExcelExporter.ExportToFile(claimListDtos);
+        }
+
+        public void ChangeTowOperatorStatus(ActiveDto input)
+        {
+            var client = _towoperatorrepositry.FirstOrDefault(input.Id);
+            client.isActive = input.Status;
+            _towoperatorrepositry.Update(client);
         }
     }
 }

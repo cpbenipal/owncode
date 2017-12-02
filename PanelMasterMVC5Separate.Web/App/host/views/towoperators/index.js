@@ -1,7 +1,7 @@
 ﻿(function () {
 
     appModule.controller('host.views.towoperators.index', [
-        '$scope', '$uibModal', '$stateParams', 'uiGridConstants', 'abp.services.app.branchClaim',
+        '$scope', '$uibModal', '$stateParams', 'uiGridConstants', 'abp.services.app.systemDefaults',
         function ($scope, $uibModal, $stateParams, uiGridConstants, userService) {
             var vm = this;
 
@@ -48,7 +48,7 @@
                         cellTemplate:
                         '<div class=\"ui-grid-cell-contents\">' +
                         '  <div class="btn-group dropdown" uib-dropdown="" dropdown-append-to-body>' +
-                        '    <button ng-show="row.entity.isActive" class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
+                        '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
                         '    <ul uib-dropdown-menu>' +
                         '      <li><a ng-if="grid.appScope.permissions.edit" ng-click="grid.appScope.editTow(row.entity.id)">' + app.localize('Edit') + '</a></li>' +
                         '    </ul>' +
@@ -68,23 +68,24 @@
                     {
                         name: app.localize('CreationTime'),
                         field: 'creationTime',
+                        cellFilter: 'momentFormat: \'L\'',
                         minWidth: 100
                     }
-                    //, {
-                    //    name: app.localize('Status'),
-                    //    field: 'isActive',
-                    //    cellTemplate:
-                    //    '<div class=\"ui-grid-cell-contents\">' +
-                    //    '<div ng-show="row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.id}} bootstrap-switch-animate bootstrap-switch-on" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: 0px;">' +
-                    //    '<span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;"> ON</span>' +
-                    //    '<span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span>' +
-                    //    '<span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
-                    //    '<input ng-checked="row.entity.isActive" ng-model="row.entity.isActive"  class="make-switch" data-size="mini" type="checkbox"></div></div>' +
-                    //    '<div ng-show="!row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.id}} bootstrap-switch-animate bootstrap-switch-off" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: -32px;"><span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;">ON</span><span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
-                    //    '</div></div>' +
-                    //    '</div>',
-                    //    minWidth: 50
-                    //}
+                    , {
+                        name: app.localize('Status'),
+                        field: 'isActive',
+                        cellTemplate:
+                        '<div class=\"ui-grid-cell-contents\">' +
+                        '<div ng-show="row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.id}} bootstrap-switch-animate bootstrap-switch-on" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: 0px;">' +
+                        '<span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;"> ON</span>' +
+                        '<span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span>' +
+                        '<span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
+                        '<input ng-checked="row.entity.isActive" ng-model="row.entity.isActive"  class="make-switch" data-size="mini" type="checkbox"></div></div>' +
+                        '<div ng-show="!row.entity.isActive" ng-click="grid.appScope.Status(row.entity)" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.id}} bootstrap-switch-animate bootstrap-switch-off" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: -32px;"><span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;">ON</span><span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
+                        '</div></div>' +
+                        '</div>',
+                        minWidth: 50
+                    },
                 ],
                 onRegisterApi: function (gridApi) {
                     $scope.gridApi = gridApi;
@@ -109,7 +110,7 @@
 
             vm.getTowOperator = function () {
                 vm.loading = true;
-                userService.getHostTowOperators($.extend({ filter: vm.filterText }, vm.requestParams))
+                userService.getTowOperators($.extend({ filter: vm.filterText }, vm.requestParams))
                     .then(function (result) {
                         vm.userGridOptions.totalItems = result.data.totalCount;
                         vm.userGridOptions.data = addRoleNamesField(result.data.items);
@@ -137,9 +138,30 @@
                 return users;
             }
              
+            vm.Status = function (mask) {
+                abp.message.confirm(
+                    app.localize('AreYouSure', mask.description),
+                    function (isConfirmed) {
+                        if (isConfirmed) {
+                            if (mask.id != 0) {
+                                userService.changeTowOperatorStatus({
+                                    id: mask.id,
+                                    status: !mask.isActive
+                                }).then(function () {
+                                    vm.getTowOperator();
+                                    if (!mask.isActive)
+                                        abp.notify.success(app.localize('SuccessfullyEnabled'));
+                                    else
+                                        abp.notify.warn(app.localize('SuccessfullyDisabled'));
+                                });
+                            }                            
+                        }
+                    }
+                );
+            };
 
             vm.exportToExcel = function () {
-                userService.getTowOperatorsToExcel({})
+                userService.getTowOperatorsExcel({})
                     .then(function (result) {
                         app.downloadTempFile(result.data);
                     });

@@ -23,6 +23,8 @@
     <text name="DontYouHaveAnAccount" value="Don't you have an account?" />
     <text name="CreateAnAccount" value="Create account" />
     <text name="Pages" value="Pages" />
+    <text name="EditOperatorDetail" value="Edit Operator Detail" />
+    <text name="AddOperatorDetail" value="Add Operator Detail" />
     <text name="RoleName" value="Role name" />
     <text name="ActivateRoleCategory" value="Activate Role category" />
     <text name="RoleCategory" value="Role category" />
@@ -323,7 +325,7 @@
     <text name="ContactNumber" value="Contact Number" />
     <text name="ContactPerson" value="Contact Person" />
     <text name="TowoperatorInformation" value="Tow Operator Information" />
-    <text name="TowOperators" value="Tow Operators" />
+    <text name="TowOperators" value="Tow Operators" />    
     <text name="AddNewOperator" value="Add New Operator" />
     <text name="Registration" value="Registration" />
     <text name="CompanyName" value="Company Name" />

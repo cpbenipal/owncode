@@ -240,8 +240,7 @@ namespace MasterData
         {
             return new TowOperator()
             {
-                Description = name,
-                TenantId = 1,
+                Description = name,            
                 isActive = false,
                 CountryID = 250,
                 CreationTime = DateTime.Now
@@ -475,8 +474,7 @@ namespace MasterData
         {
             return new TowOperator()
             {
-                Description = desc,
-                TenantId = tenantId,
+                Description = desc,                 
                 isActive = false,
                 IsDeleted = false,                
                 CreationTime = DateTime.Now,

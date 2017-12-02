@@ -56,5 +56,12 @@ namespace PanelMasterMVC5Separate.AdminFunctions
         void ChangePlanStatus(ActiveDto input);
         SignOnDto GetPlanDetail(GetClaimsInput input);
         Task<FileDto> GetSignOnToExcel();
+
+        //TowOperators
+        ListResultDto<TowOperatorDto> GetTowOperators(GetInputs input);
+        void CreateOrUpdateTowOperator(TowOperatorToDto input);
+        TowOperatorDto GetTowOperator(GetClaimsInput input);
+        Task<FileDto> GetTowOperatorsExcel();
+        void ChangeTowOperatorStatus(ActiveDto input);
     }
 }

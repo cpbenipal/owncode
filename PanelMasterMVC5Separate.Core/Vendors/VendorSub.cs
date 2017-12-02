@@ -18,7 +18,9 @@ namespace PanelMasterMVC5Separate.Vendors
 
         [Required]
         public virtual int VendorID { get; set; }
-        public virtual VendorMain VendorMains { get; set; }        
+        public virtual VendorMain VendorMains { get; set; }
+        public virtual string RegistrationNumber { get; set; }
+        public virtual string TaxRegistrationNumber { get; set; }
         public virtual string ContactName { get; set; }
         public virtual string ContactPhone { get; set; }
         public virtual string ContactFax { get; set; }
@@ -26,7 +28,7 @@ namespace PanelMasterMVC5Separate.Vendors
         public virtual string Address1 { get; set; }
         public virtual string Address2 { get; set; }
         public virtual string Address3 { get; set; }
-        public virtual string Location { get; set; }        
+        public virtual string Location { get; set; }
         public virtual string SupplierAccount { get; set; }
         public virtual string PaymentTerms { get; set; }
         public virtual string AccountNumber { get; set; }

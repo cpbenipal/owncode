@@ -3,22 +3,17 @@
     <form name="userCreateOrEditForm" role="form" novalidate class="form-validation">
         <div class="modal-header">
             <h4 class="modal-title">
-                <span ng-if="vm.job.id">@L("EditOperator"): {{vm.job.description}}</span>
-                <span ng-if="!vm.job.id">@L("AddnewOperator") </span>
+                <span ng-if="vm.job.id">@L("EditOperatorDetail"): {{vm.job.description}}</span>
+                <span ng-if="!vm.job.id">@L("AddOperatorDetail"): {{vm.job.description}} </span>
             </h4>
         </div>
         <div class="modal-body">
             <uib-tabset class="tab-container tabbable-line">
-                <uib-tab heading="@L("TowoperatorInformation")">
-                     
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <label>@L("Description")</label>
-                        <input ng-model="vm.job.description" name="description" class="form-control" type="text"/>
-                    </div>
+                <uib-tab heading="@L("TowoperatorInformation")">                    
 
                     <div class="form-group form-md-line-input form-md-floating-label no-hint">
                         <label>@L("ContactNumber")</label>
-                        <input ng-model="vm.job.contactNumber" name="contactNumber" class="form-control" type="text" />
+                        <input ng-model="vm.job.contactNumber" name="contactNumber" maxlength="10" id="mask_phone" class="form-control" type="text" />
                     </div>
 
                     <div class="form-group form-md-line-input form-md-floating-label no-hint">

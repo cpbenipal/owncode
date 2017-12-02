@@ -62,6 +62,7 @@ namespace PanelMasterMVC5Separate.EntityFramework
         public virtual IDbSet<JobstatusMask> JobstatusMask { get; set; }
         public virtual IDbSet<JobstatusTenant> JobstatusTenant { get; set; }
         public virtual IDbSet<TowOperator> TowOperators { get; set; }
+        public virtual IDbSet<TowSubOperator> TowSubOperators { get; set; }
         public virtual IDbSet<TenantProfile> TenantProfiles { get; set; }
         public virtual IDbSet<TenantPlanBillingDetails> TenantPlanBillingDetail { get; set; }
         public virtual IDbSet<TenantCompanyLogo> TenantCompanyLogo { get; set; }

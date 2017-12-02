@@ -48,9 +48,9 @@
                         cellTemplate:
                         '<div class=\"ui-grid-cell-contents\">' +
                         '  <div class="btn-group dropdown" uib-dropdown="" dropdown-append-to-body>' +
-                        '    <button ng-show="row.entity.isActive" class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
+                        '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
                         '    <ul uib-dropdown-menu>' +
-                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-click="grid.appScope.editTow(row.entity.id)">' + app.localize('Edit') + '</a></li>' +
+                        '      <li><a ng-show="row.entity.isActive" ng-if="grid.appScope.permissions.edit" ng-click="grid.appScope.editTow(row.entity.id)">' + app.localize('Edit') + '</a></li>' +
                         '    </ul>' +
                         '  </div>' +
                         '</div>'
@@ -58,16 +58,6 @@
                     {
                         name: app.localize('Description'),
                         field: 'description',
-                        minWidth: 120
-                    },
-                    {
-                        name: app.localize('Country'),
-                        field: 'country',
-                        minWidth: 120
-                    },
-                    {
-                        name: app.localize('ContactNumber'),
-                        field: 'contactNumber',
                         minWidth: 120
                     },
                     {
@@ -83,9 +73,10 @@
                     {
                         name: app.localize('CreationTime'),
                         field: 'creationTime',
-                        minWidth: 100
-                    }
-                    , {
+                        cellFilter: 'momentFormat: \'L\'',
+                        minWidth: 50
+                    },
+                    {
                         name: app.localize('Status'),
                         field: 'isActive',
                         cellTemplate:
@@ -163,11 +154,7 @@
             vm.editTow = function (towId) {          
                 openCreateOrEditUserModal(towId);
             };
-
-
-            vm.newOperator = function (){
-                openCreateOrEditUserModal(null);
-            };
+ 
 
             function openCreateOrEditUserModal(towId) {
                 
@@ -191,11 +178,11 @@
                 abp.message.confirm(
                     app.localize('AreYouSure', tow.description),
                     function (isConfirmed) {
-                        if (isConfirmed) {
-                            if (tow.id != 0) {
+                        if (isConfirmed) { 
+                            if (tow.subpkId != "0") {
                                 userService.changeTowStatus({
-                                    id: tow.id,
-                                    isActive: tow.isActive
+                                    id: tow.subpkId,
+                                    isActive: !tow.isActive
                                 }).then(function () {
                                     vm.getTowOperator();
                                     if (!tow.isActive)
@@ -211,6 +198,7 @@
                     }
                 );
             };
+
             vm.getTowOperator();
         }]);
 })();
