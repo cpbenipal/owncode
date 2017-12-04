@@ -49,8 +49,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors.Exporting
                     L("Bank"),
                     L("CurrencyCode"),
                     L("Type"),
-                    L("Branch"),
-                    L("CreationTime")
+                    L("Branch") 
                  );
 
                     AddObjects(
@@ -73,8 +72,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors.Exporting
                           _ => _.Bank,
                         _ => _.Currency,
                         _ => _.Type,
-                        _ => _.Branch
-                        
+                        _ => _.Branch                        
                     );
 
                     //Formatting cells

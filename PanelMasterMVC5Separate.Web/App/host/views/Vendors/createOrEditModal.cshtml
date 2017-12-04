@@ -1,0 +1,33 @@
+@using PanelMasterMVC5Separate.AdminFunctions
+<div>
+    <form name="userCreateOrEditForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span ng-if="vm.vendorId">@L("EditVendor"): {{vm.mainVendor.supplierName}}</span>
+                <span ng-if="!vm.vendorId">@L("AddVendor")</span>
+            </h4>
+        </div>
+        <div class="modal-body">
+            <uib-tabset class="tab-container tabbable-line">
+                <uib-tab heading="@L("VendorProperties")">
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <label>@L("Country")</label>
+                        <select ng-model="vm.mainVendor.countryID" class="form-control" ng-options="opt.id as opt.name for opt in countryList" required>
+                            <option value="">@L("SelectOne")</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <label>@L("SupplierName")</label>
+                        <input type="text" ng-model="vm.mainVendor.supplierName" class="form-control" ng-class="{'edited':vm.mainVendor.supplierName}" maxlength="128" required />                         
+                    </div>
+                </uib-tab>
+
+            </uib-tabset>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            <button type="submit" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="userCreateOrEditForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+        </div>
+    </form>
+</div>

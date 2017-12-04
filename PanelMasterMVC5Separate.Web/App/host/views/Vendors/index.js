@@ -52,7 +52,7 @@
                         '  <div class="btn-group dropdown" uib-dropdown="" dropdown-append-to-body>' +
                         '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
                         '    <ul uib-dropdown-menu>' +
-                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/host/AddEditVendor/{{row.entity.id}}">' + app.localize('Open') + '</a></li>' +
+                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-click="grid.appScope.editVendor(row.entity)">' + app.localize('Open') + '</a></li>' +
                         '    </ul>' +
                         '  </div>' +
                         '</div>'
@@ -60,12 +60,6 @@
                     {
                         name: app.localize('SupplierName'),
                         field: 'supplierName',
-                        cellTemplate:
-                        '<div class=\"ui-grid-cell-contents\">' +
-                        '  <img ng-if="row.entity.profilePictureId" ng-src="' + abp.appPath + 'Profile/GetProfilePictureById?id={{row.entity.profilePictureId}}" width="22" height="22" class="img-rounded img-profile-picture-in-grid" />' +
-                        '  <img ng-if="!row.entity.profilePictureId" src="' + abp.appPath + 'Common/Images/default-profile-picture.png" width="22" height="22" class="img-rounded" />' +
-                        '  {{COL_FIELD CUSTOM_FILTERS}} ' +
-                        '</div>',
                         minWidth: 140
                     },
                     {
@@ -172,6 +166,29 @@
                     });
             };
 
+            vm.editVendor = function (vendor) {
+                openCreateOrEditVendorModal(vendor.id);
+            };
+
+            vm.addVendor = function () {
+                openCreateOrEditVendorModal(null);
+            };
+            function openCreateOrEditVendorModal(vendorId) {
+
+                var modalInstance = $uibModal.open({
+                    templateUrl: '~/App/host/views/Vendors/createOrEditModal.cshtml',
+                    controller: 'host.views.Vendors.createOrEditModal as vm',
+                    backdrop: 'static',
+                    resolve: {
+                        vendorId: function () {
+                            return vendorId;
+                        }
+                    }
+                });
+                modalInstance.result.then(function (result) {
+                    vm.getUsers();
+                });
+            }
             vm.getUsers();
         }]);
 })();

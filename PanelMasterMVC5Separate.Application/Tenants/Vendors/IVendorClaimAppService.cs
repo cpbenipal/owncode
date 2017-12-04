@@ -14,12 +14,12 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
         ListResultDto<CurrencyDto> GetCurrencies();
         VendorMain AddMainVendor(VendorMainListDto input);
         void AddSubVendor(VendorSubListDto input);
-        ListResultDto<VendorMainListDto> GetVendors(GetClaimsInput input, string tenantID);
+        ListResultDto<GVendorsListDto> GetVendors(GetClaimsInput input);
         Task<FileDto> GetClaimsToExcel();
         void AddEditVendor(VendorSaveDto input);
         VendorDto GetMainVendor(GetClaimsInput input);
 
-        ListResultDto<VendorSubListDto> GetSubVendor(GetClaimsInput input, string tenantID);
+        ListResultDto<VendorSubListDto> GetSubVendor(GetClaimsInput input);
         void UpdateVendor(VendorSubListDto input);
         void ChangeStatus(VendorSubListDto input);
         void UpdateMainVendor(VendorMainListDto input);

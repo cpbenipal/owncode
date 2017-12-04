@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
-
-    <!-- BEGIN PAGE TITLE-->
-    <h1 class="page-title">
-        Update Vendor
-        <small>Infomation</small>
-    </h1>
-    <!-- END PAGE TITLE-->
-    <!-- END PAGE HEADER-->
+ <div class="row margin-bottom-5">
+    <div class="col-xs-6">
+        <div class="page-head">
+            <div class="page-title">
+                <h1>
+                    <span> @L("AddSubMasterInsurer")</span> <small>more info about insurer</small>
+                </h1>
+            </div>
+        </div>
+    </div>
     <form ng-controller="tenant.views.AddSubVendor.index as vm" class="form-horizontal" action="#" id="submit_form" method="POST">
 
         <div class="row">
@@ -43,10 +41,10 @@
                                                     <span class="input-group-addon input-circle-left">
                                                         <i class="fa fa-pencil"></i>
                                                     </span>
-                                                    <input type="text" readonly  ng-model="vm.mainVendor.supplierName" ng-class="{'edited':vm.mainVendor.supplierName}" class="form-control input-circle-right" placeholder="Supplier Name">
+                                                    <input type="text" readonly ng-model="vm.mainVendor.supplierName" ng-class="{'edited':vm.mainVendor.supplierName}" class="form-control input-circle-right" placeholder="Supplier Name">
                                                 </div>
                                             </div>
-                                        </div>                                        
+                                        </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Contact Name</label>
                                             <div class="col-md-4">
@@ -59,24 +57,13 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Contact Name</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon input-circle-left">
-                                                        <i class="fa fa-pencil"></i>
-                                                    </span>
-                                                    <input type="text" ng-model="vm.subVendor.contactName" ng-class="{'edited':vm.subVendor.contactName}"  class="form-control input-circle-right" placeholder="Contact Name">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
                                             <label class="col-md-3 control-label">Contact Phone</label>
                                             <div class="col-md-4">
                                                 <div class="input-group">
                                                     <span class="input-group-addon input-circle-left">
                                                         <i class="fa fa-phone"></i>
                                                     </span>
-                                                    <input type="text" ng-model="vm.subVendor.contactPhone" ng-class="{'edited':vm.subVendor.contactPhone}"  placeholder="Contact Phone" class="form-control input-circle-right">
+                                                    <input type="text" ng-model="vm.subVendor.contactPhone" maxlength="10" ng-class="{'edited':vm.subVendor.contactPhone}" placeholder="Contact Phone" class="form-control input-circle-right">
 
                                                 </div>
                                             </div>
@@ -88,7 +75,7 @@
                                                     <span class="input-group-addon input-circle-left">
                                                         <i class="fa fa-fax"></i>
                                                     </span>
-                                                    <input type="text" ng-model="vm.subVendor.contactFax"  ng-class="{'edited':vm.subVendor.contactFax}" class="form-control input-circle-right" placeholder="Contact Fax">
+                                                    <input type="text" ng-model="vm.subVendor.contactFax" maxlength="10"  ng-class="{'edited':vm.subVendor.contactFax}" class="form-control input-circle-right" placeholder="Contact Fax">
                                                 </div>
                                             </div>
                                         </div>
@@ -99,51 +86,7 @@
                                                     <span class="input-group-addon input-circle-left">
                                                         <i class="fa fa-envelope"></i>
                                                     </span>
-                                                    <input type="email" ng-model="vm.subVendor.contactEmail"  ng-class="{'edited':vm.subVendor.contactEmail}" class="form-control input-circle-right" placeholder="Contact Email">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Address 1</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon input-circle-left">
-                                                        <i class="fa fa-address"></i>
-                                                    </span>
-                                                    <textarea ng-model="vm.subVendor.address1" ng-class="{'edited':vm.subVendor.address1}"  class="form-control input-circle-right" rows="3"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Address 2</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon input-circle-left">
-                                                        <i class="fa fa-address"></i>
-                                                    </span>
-                                                    <textarea ng-model="vm.subVendor.address2"  ng-class="{'edited':vm.subVendor.address2}" class="form-control input-circle-right" rows="3"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Address 3</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon input-circle-left">
-                                                        <i class="fa fa-address"></i>
-                                                    </span>
-                                                    <textarea ng-model="vm.subVendor.address3" ng-class="{'edited':vm.subVendor.address3}"  class="form-control input-circle-right" rows="3"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Location</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon input-circle-left">
-                                                        <i class="fa fa-location-arrow"></i>
-                                                    </span>
-                                                    <input type="text" ng-model="vm.subVendor.location" ng-class="{'edited':vm.subVendor.location}"  class="form-control input-circle-right" placeholder="Location">
+                                                    <input type="email" ng-model="vm.subVendor.contactEmail" ng-class="{'edited':vm.subVendor.contactEmail}" class="form-control input-circle-right" placeholder="Contact Email">
                                                 </div>
                                             </div>
                                         </div>
@@ -154,7 +97,7 @@
                                                     <span class="input-group-addon input-circle-left">
                                                         <i class="fa fa-registered"></i>
                                                     </span>
-                                                    <input type="text" ng-model="vm.mainVendor.registrationNumber" ng-class="{'edited':vm.mainVendor.registrationNumber}"  class="form-control input-circle-right" placeholder="Registration">
+                                                    <input type="text" ng-model="vm.subVendor.registrationNumber" ng-class="{'edited':vm.mainVendor.registrationNumber}" class="form-control input-circle-right" placeholder="Registration">
                                                 </div>
                                             </div>
                                         </div>
@@ -165,10 +108,55 @@
                                                     <span class="input-group-addon input-circle-left">
                                                         <i class="fa fa-registered"></i>
                                                     </span>
-                                                    <input type="text" readonly ng-model="vm.mainVendor.taxRegistrationNumber" ng-class="{'edited':vm.mainVendor.taxRegistrationNumber}"  class="form-control input-circle-right" placeholder="Tax Registration">
+                                                    <input type="text" ng-model="vm.subVendor.taxRegistrationNumber" ng-class="{'edited':vm.mainVendor.taxRegistrationNumber}" class="form-control input-circle-right" placeholder="Tax Registration">
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Address 1</label>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon input-circle-left">
+                                                        <i class="fa fa-address"></i>
+                                                    </span>
+                                                    <textarea ng-model="vm.subVendor.address1" ng-class="{'edited':vm.subVendor.address1}" class="form-control input-circle-right" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Address 2</label>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon input-circle-left">
+                                                        <i class="fa fa-address"></i>
+                                                    </span>
+                                                    <textarea ng-model="vm.subVendor.address2" ng-class="{'edited':vm.subVendor.address2}" class="form-control input-circle-right" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Address 3</label>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon input-circle-left">
+                                                        <i class="fa fa-address"></i>
+                                                    </span>
+                                                    <textarea ng-model="vm.subVendor.address3" ng-class="{'edited':vm.subVendor.address3}" class="form-control input-circle-right" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Location</label>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon input-circle-left">
+                                                        <i class="fa fa-location-arrow"></i>
+                                                    </span>
+                                                    <input type="text" ng-model="vm.subVendor.location" ng-class="{'edited':vm.subVendor.location}" class="form-control input-circle-right" placeholder="Location">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Supplier Account</label>
                                             <div class="col-md-4">
@@ -176,7 +164,7 @@
                                                     <span class="input-group-addon input-circle-left">
                                                         <i class="fa fa-bank"></i>
                                                     </span>
-                                                    <input type="text" ng-model="vm.subVendor.supplierAccount" ng-class="{'edited':vm.subVendor.supplierAccount}"  class="form-control input-circle-right" placeholder="Supplier Account">
+                                                    <input type="text" ng-model="vm.subVendor.supplierAccount" ng-class="{'edited':vm.subVendor.supplierAccount}" class="form-control input-circle-right" placeholder="Supplier Account">
                                                 </div>
                                             </div>
                                         </div>
@@ -241,7 +229,7 @@
                                                     <span class="input-group-addon input-circle-left">
                                                         <i class="fa fa-building"></i>
                                                     </span>
-                                                    <input type="text" ng-model="vm.subVendor.branch"  ng-class="{'edited':vm.subVendor.branch}" class="form-control input-circle-right" placeholder="Branch">
+                                                    <input type="text" ng-model="vm.subVendor.branch" ng-class="{'edited':vm.subVendor.branch}" class="form-control input-circle-right" placeholder="Branch">
                                                 </div>
                                             </div>
                                         </div>
@@ -259,7 +247,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="form-actions">
                                         <div class="row">
@@ -282,13 +270,5 @@
             </div>
         </div>
 
-    </form>   
-    <script>
-        $(document).ready(function () {
-            $('#clickmewow').click(function () {
-                $('#radio1003').attr('checked', 'checked');
-            });
-        })
-    </script>
-</body>
-</html>
+    </form>
+</div>

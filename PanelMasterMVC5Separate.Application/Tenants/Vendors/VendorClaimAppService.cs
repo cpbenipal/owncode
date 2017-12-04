@@ -60,38 +60,43 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
 
         public async Task<FileDto> GetClaimsToExcel()
         {
-            var Mainvendors = await _vendorMainRepository.GetAll().ToListAsync();
-            var Subvendors = _vendorSubRepository.GetAll().ToList();
-            var bank = await _bankRepository.GetAll().ToListAsync();
-            var currency = await _currRepository.GetAll().ToListAsync();
+            int countryId = GetCountryIdByCode();
+            var query = await _vendorMainRepository.GetAll().Where(p => p.CountryID.Equals(countryId))
+             .OrderByDescending(p => p.LastModificationTime)
+             .ToListAsync();
 
-            var finalQuery = (from sv in Subvendors
+            var sub_query = await _vendorSubRepository.GetAll()
+                            .Where(sv => sv.TenantId == _abpSession.TenantId)
+                            .ToListAsync();
+
+
+            var finalQuery = (from master in query
+                              join v in sub_query on master.Id equals v.VendorID into ps
+                              from y1 in ps.DefaultIfEmpty()
+
                               select new GVendorsListDto
-                              {
-                                  SupplierCode = sv.VendorMains.SupplierCode
-                                  /*SupplierName = mv.SupplierName,
-                                  ContactName = sv.ContactName,
-                                  ContactPhone = sv.ContactPhone,
-                                  ContactFax = sv.ContactFax,
-                                  ContactEmail = sv.ContactEmail,
-                                  Address1 = sv.Address1,
-                                  Address2 = sv.Address2,
-                                  Address3 = sv.Address3,
-                                  Location = sv.Location,
-                                  RegistrationNumber = mv.RegistrationNumber,
-                                  TaxRegistrationNumber = mv.TaxRegistrationNumber,
-                                  SupplierAccount = sv.SupplierAccount,
-                                  PaymentTerms = sv.PaymentTerms,
-                                  AccountNumber = sv.AccountNumber,
-                                  Type = sv.Type,
-                                  Branch = sv.Branch,
-                                  Bank = b.BankName,
-                                  Currency = c.CurrencyCode*/
-
+                              { 
+                                  SupplierCode = master.SupplierCode,
+                                  SupplierName = master.SupplierName,
+                                  ContactEmail = y1 == null ? "" : y1.ContactEmail,
+                                  ContactPhone = y1 == null ? "" : y1.ContactPhone,
+                                  ContactFax = y1 == null ? "" : y1.ContactFax,
+                                  Address1 = y1 == null ? "" : y1.Address1,
+                                  Address2 = y1 == null ? "" : y1.Address2,
+                                  Address3 = y1 == null ? "" : y1.Address3,
+                                  Location = y1 == null ? "" : y1.Location,
+                                  RegistrationNumber = y1 == null ? "" : y1.RegistrationNumber,
+                                  TaxRegistrationNumber = y1 == null ? "" : y1.TaxRegistrationNumber,
+                                  SupplierAccount = y1 == null ? "" : y1.SupplierAccount,
+                                  PaymentTerms = y1 == null ? "" : y1.PaymentTerms,
+                                  AccountNumber = y1 == null ? "" : y1.AccountNumber,
+                                  Type = y1 == null ? "" : y1.Type,
+                                  Branch = y1 == null ? "" : y1.Branch,
+                                  Bank = y1 == null ? "" : _bankRepository.FirstOrDefault(x => x.Id == y1.BankID).BankName,
+                                  Currency = y1 == null ? "" : _currRepository.FirstOrDefault(x => x.Id == y1.CurrencyID).CountryAndCurrency
                               }).ToList();
 
             var ListDtos = finalQuery.MapTo<List<GVendorsListDto>>();
-
             return _vendorListExcelExporter.ExportToFile(ListDtos);
         }
 
@@ -112,7 +117,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             var query = _vendorMainRepository.GetAll()
               .WhereIf(
                     !input.Filter.IsNullOrEmpty(),
-                    p => p.SupplierName.Equals(input.Filter)  
+                    p => p.SupplierName.Equals(input.Filter)
               )
              .OrderByDescending(p => p.LastModificationTime)
              .ToList();
@@ -140,21 +145,20 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
 
         }
 
-        public ListResultDto<VendorMainListDto> GetVendors(GetClaimsInput input, string tenantID)
-        {
-            int tenant_id = Convert.ToInt16(tenantID);
+        public ListResultDto<GVendorsListDto> GetVendors(GetClaimsInput input)
+        { 
             int countryId = GetCountryIdByCode();
             var query = _vendorMainRepository.GetAll()
               .WhereIf(
                     !input.Filter.IsNullOrEmpty(),
-                    p => p.SupplierName.Equals(input.Filter) 
+                    p => p.SupplierName.Equals(input.Filter)
               )
               .Where(p => p.CountryID.Equals(countryId))
              .OrderByDescending(p => p.LastModificationTime)
              .ToList();
 
             var sub_query = _vendorSubRepository.GetAll()
-                            .Where(sv => sv.TenantId == tenant_id)
+                            .Where(sv => sv.TenantId == _abpSession.TenantId)
                             .ToList();
 
 
@@ -162,16 +166,18 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
                               join v in sub_query on master.Id equals v.VendorID into ps
                               from y1 in ps.DefaultIfEmpty()
 
-                              select new VendorMainListDto
+                              select new GVendorsListDto
                               {
-                                  id = master.Id,
+                                  VendorID = master.Id,
                                   SupplierCode = master.SupplierCode,
-                                  SupplierName = master.SupplierName,                                   
+                                  SupplierName = master.SupplierName,
+                                  ContactEmail = y1 == null ? "" : y1.ContactEmail,
+                                  ContactPhone = y1 == null ? "" : y1.ContactPhone,
                                   IsActive = y1 == null ? false : y1.IsActive
                               }).ToList();
 
 
-            return new ListResultDto<VendorMainListDto>(finalQuery);
+            return new ListResultDto<GVendorsListDto>(finalQuery);
 
         }
 
@@ -248,12 +254,11 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors
             return main_query.MapTo<VendorDto>();
         }
 
-        public ListResultDto<VendorSubListDto> GetSubVendor(GetClaimsInput input, string tenantID)
+        public ListResultDto<VendorSubListDto> GetSubVendor(GetClaimsInput input)
         {
-            int Id = Convert.ToInt32(input.Filter);
-            int tenant_id = Convert.ToInt16(tenantID);
+            int Id = Convert.ToInt32(input.Filter);            
             var sub_query = _vendorSubRepository
-                .GetAll().Where(s => s.VendorID == Id && s.TenantId == tenant_id)
+                .GetAll().Where(s => s.VendorID == Id && s.TenantId == _abpSession.TenantId)
                 .ToList();
 
             var newList = new List<VendorSubListDto>();

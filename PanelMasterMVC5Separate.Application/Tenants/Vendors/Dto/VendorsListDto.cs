@@ -32,6 +32,7 @@ namespace PanelMasterMVC5Separate.Tenants.Vendors.Dto
         public int BankID { get; set; }
         public string Bank { get; set; }
         public bool IsActive { get; set; }
+        public string CreationDate { get; set; }
     }
 
     [AutoMapFrom(typeof(Banks))]

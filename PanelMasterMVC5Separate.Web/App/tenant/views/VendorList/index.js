@@ -52,7 +52,7 @@
                         '  <div class="btn-group dropdown" uib-dropdown="" dropdown-append-to-body>' +
                         '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
                         '    <ul uib-dropdown-menu>' +
-                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/tenant/AddEditVendor/{{row.entity.id}}">' + app.localize('Open') + '</a></li>' +                                       
+                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/tenant/AddEditVendor/{{row.entity.vendorID}}">' + app.localize('Open') + '</a></li>' +                                       
                         '    </ul>' +
                         '  </div>' +
                         '</div>'
@@ -62,7 +62,7 @@
                         field: 'isActive',
                         cellTemplate:
                         '<div class=\"ui-grid-cell-contents\">' +
-                        '<a ng-show="row.entity.isActive" ng-href="#!/tenant/EditVendor/{{row.entity.id}}" class="btn btn-xs btn-primary blue">' + app.localize('EDIT') + '</a>' +
+                        '<a ng-show="row.entity.isActive" ng-href="#!/tenant/EditVendor/{{row.entity.vendorID}}" class="btn btn-xs btn-primary blue">' + app.localize('EDIT') + '</a>' +
                         '</div>',
                         minWidth: 50
                     },
@@ -76,7 +76,19 @@
                         '  {{COL_FIELD CUSTOM_FILTERS}} ' +
                         '</div>',
                         minWidth: 140
-                    }                    
+                    }  
+                    ,
+                    {
+                        name: app.localize('ContactEmail'),
+                        field: 'contactEmail', 
+                        minWidth: 140
+                    }  
+                    ,
+                    {
+                        name: app.localize('ContactPhone'),
+                        field: 'contactPhone', 
+                        minWidth: 140
+                    }  
                     ,{
                         name: app.localize('Status'),
                         field: 'isActive',
@@ -116,7 +128,7 @@
 
             vm.getUsers = function () {
                 vm.loading = true; 
-                userService.getVendors($.extend({ filter: vm.filterText }, vm.requestParams), vm.tenantID)
+                userService.getVendors($.extend({ filter: vm.filterText }, vm.requestParams))
                     .then(function (result) {
                         vm.userGridOptions.totalItems = result.data.totalCount;
                         vm.userGridOptions.data = addRoleNamesField(result.data.items);
@@ -133,11 +145,11 @@
                         
                         if (isConfirmed) {                           
                             if (i.isActive === false) {
-                                window.location.href = "#!/tenant/AddSubVendor/" + i.id;
+                                window.location.href = "#!/tenant/AddSubVendor/" + i.vendorID;
                             }
                             else {
                                 userService.changeStatus({
-                                    vendorID: i.id,
+                                    vendorID: i.vendorID,
                                     tenantID: abp.session.tenantId,
                                     status: !i.isActive
                                 }).then(function () {                                    

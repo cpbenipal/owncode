@@ -1,0 +1,41 @@
+@using PanelMasterMVC5Separate.AdminFunctions
+<div>
+    <form name="userCreateOrEditForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span ng-if="vm.madeId">@L("EditVehicleMade"): {{vm.job.model}}</span>
+                <span ng-if="!vm.madeId">@L("AddVehicleMade")</span>
+            </h4>
+        </div>
+        <div class="modal-body">
+            <uib-tabset class="tab-container tabbable-line">
+                <uib-tab heading="@L("ModelProperties")">
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <label>@L("VehicleMake")</label>
+                        <select required class="form-control" ng-model="vm.job.vehicleMakeID"
+                                ng-options="opt.id as opt.name for opt in makeList">
+                            <option value="">--Select One--</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <label>@L("Model")</label>
+                        <input class="form-control" type="text" ng-class="{'edited':vm.job.model}" ng-model="vm.job.model" maxlength="128" required>
+
+                    </div>
+
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <label>@L("MMCode")</label>
+                        <input class="form-control" type="text" ng-class="{'edited':vm.job.mmCode}" ng-model="vm.job.mmCode" maxlength="128" required>
+
+                    </div>
+                </uib-tab>
+
+            </uib-tabset>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            <button type="submit" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="userCreateOrEditForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+        </div>
+    </form>
+</div>

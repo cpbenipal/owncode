@@ -52,7 +52,7 @@
                         '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
                         '    <ul uib-dropdown-menu>' +
                         // '      <li><a ng-if="grid.appScope.permissions.impersonation && row.entity.id != grid.appScope.currentUserId" ng-click="grid.appScope.impersonate(row.entity)">' + app.localize('LoginAsThisUser') + '</a></li>' +
-                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/host/AddEditBroker/{{row.entity.id}}">' + app.localize('Open') + '</a></li>' +                         
+                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-click="grid.appScope.edit(row.entity.id)">' + app.localize('Open') + '</a></li>' +                         
                         //'      <li><a ng-click="grid.appScope.unlockUser(row.entity)">' + app.localize('Unlock') + '</a></li>' +
                         //'      <li><a ng-if="grid.appScope.permissions.delete" ng-click="grid.appScope.deleteUser(row.entity)">' + app.localize('Delete') + '</a></li>' +
                         '    </ul>' +
@@ -176,7 +176,32 @@
 
                 return users;
             };
+            
+            
+            vm.edit = function (brokerId) {          
+                openCreateOrEditUserModal(brokerId);
+            };
 
+            vm.newBroker = function (){
+                openCreateOrEditUserModal(null);
+            };
+            function openCreateOrEditUserModal(brokerId) {
+               
+                var modalInstance = $uibModal.open({
+                    templateUrl: '~/App/host/views/Brokers/createOrEditModal.cshtml',
+                    controller: 'host.views.Brokers.createOrEditModal as vm',
+                    backdrop: 'static',
+                    resolve: {
+                        brokerId: function () {
+                            return brokerId;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (result) {
+                    vm.getBrokerdata();
+                });
+            }
             vm.exportToExcel = function () {
                 userService.getClaimsToExcel({})
                     .then(function (result) {

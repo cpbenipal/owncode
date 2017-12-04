@@ -27,7 +27,7 @@ namespace PanelMasterMVC5Separate.Vehicle
         {
             Description = description;          
             LogoPicture = logoPicture;
-            IsActive = false;
+            IsActive = true;
             Id = id;
         }         
     }

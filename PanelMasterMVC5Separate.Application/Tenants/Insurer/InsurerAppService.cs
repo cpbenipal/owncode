@@ -240,8 +240,7 @@ namespace PanelMasterMVC5Separate.Tenants.Insurer
             master.CountryID = input.CountryID;
             await _insurersRepository.UpdateAsync(master);
         }
-
-
+         
         public InsurersDto GetInsurerMasterDetail(GetClaimsInput input)
         {
             int countryId = GetCountryIdByCode();

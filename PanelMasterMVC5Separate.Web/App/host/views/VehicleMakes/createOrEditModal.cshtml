@@ -1,0 +1,36 @@
+@using PanelMasterMVC5Separate.Localization
+<div>
+    <form name="userCreateOrEditForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span ng-if="!vm.makeId">@L("AddVehicleMake")</span>
+                <span ng-if="vm.makeId">@L("EditVehicleMake") : {{vm.job.Description}} </span>
+            </h4>
+        </div>
+        <div class="modal-body">
+            <uib-tabset class="tab-container tabbable-line">
+                <uib-tab heading="@L("VehicleMakeProperties")">
+                   
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <label>@L("Description")</label>
+                        <input ng-model="vm.job.description" name="Description" class="form-control" type="text"/>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint"  ng-if="vm.makeId">
+                        <label>@L("LogoPicture")</label>
+                        <img ng-if="vm.makeId" ng-src="@Url.Action("GetProfilePictureById","Manufacture")?id={{vm.makeId}}" class="img-thumbnail" />
+                        <img ng-if="!vm.makeId" src="@Url.Content("~/Common/Images/default-profile-picture.png")" class="img-thumbnail img-rounded user-edit-dialog-profile-image" />
+                        <input type="hidden" ng-model="vm.job.logoPicture" />
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <label>@L("ChangeLogoPicture")</label>
+                        <input type="file" nv-file-select uploader="vm.uploader" />                  
+                    </div>                     
+                </uib-tab>                 
+            </uib-tabset>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            <button type="submit" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="userCreateOrEditForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+        </div>
+    </form>
+</div>

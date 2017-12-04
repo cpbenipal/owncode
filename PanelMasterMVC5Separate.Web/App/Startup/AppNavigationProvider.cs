@@ -153,109 +153,54 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     ).AddItem(new MenuItemDefinition(
                     PageNames.App.Host.SystemDefaults,
                     L("SystemDefaults"),
-                    icon: "glyphicon glyphicon-tasks",
+                   icon: "icon-wrench",
                     requiredPermissionName: AppPermissions.Pages_Administration_Host_SystemDefaults
                     )
                      .AddItem(new MenuItemDefinition(
                     PageNames.App.Host.Banks,
                     L("Banks"),
-                    icon: "glyphicon glyphicon-tasks"
-                    )
-                    .AddItem(new MenuItemDefinition(
-                    PageNames.App.Host.Banks,
-                    L("Search"),
                     url: "host.Banks",
-                    icon: "glyphicon glyphicon-collapse-down"
+                    icon: "glyphicon glyphicon-search"
                     ))
-                    )
 
                     .AddItem(new MenuItemDefinition(
                     PageNames.App.Host.VehicleMakes,
                     L("VehicleMakes"),
-                    icon: "glyphicon glyphicon-tasks"
+                     url: "host.VehicleMakes",
+                   icon: "glyphicon glyphicon-search"
                     )
-                    .AddItem(new MenuItemDefinition(
-                    PageNames.App.Host.VehicleMakes,
-                    L("Search"),
-                    url: "host.VehicleMakes",
-                    icon: "glyphicon glyphicon-search"
-                    ))
-                    .AddItem(new MenuItemDefinition(
-                    PageNames.App.Host.AddMake,
-                    L("AddVehicleMake"),
-                    url: "host.AddVehicleMake",
-                    icon: "glyphicon glyphicon-collapse-down"
-                    ))
                     )
 
                      .AddItem(new MenuItemDefinition(
                     PageNames.App.Host.VehicleMades,
                     L("VehicleMades"),
-                    icon: "glyphicon glyphicon-tasks"
-                    )
-                    .AddItem(new MenuItemDefinition(
-                    PageNames.App.Host.VehicleMades,
-                    L("Search"),
                     url: "host.VehicleMades",
                     icon: "glyphicon glyphicon-search"
-                    ))
-                    .AddItem(new MenuItemDefinition(
-                    PageNames.App.Host.AddModel,
-                    L("AddVehicleMade"),
-                    url: "host.AddVehicleMade",
-                    icon: "glyphicon glyphicon-collapse-down"
-                    ))
                     )
-                    .AddItem(new MenuItemDefinition(
-                    PageNames.App.Host.Insurers,
-                    L("Insurers"),
-                    icon: "glyphicon glyphicon-tasks"
-                    ).AddItem(new MenuItemDefinition(
-                    PageNames.App.Host.AddInsurer,
-                    L("AddInsurer"),
-                    url: "host.AddInsurer",
-                    icon: "glyphicon glyphicon-collapse-down"
-                    )).AddItem(new MenuItemDefinition(
-                    PageNames.App.Host.Insurers,
-                    L("Search"),
-                    url: "host.Insurers",
-                    icon: "glyphicon glyphicon-search"
-                    ))
+                    )
+
+                     .AddItem(new MenuItemDefinition(
+                        PageNames.App.Host.Insurers,
+                        L("Insurers"),
+                        url: "host.Insurers",
+                       icon: "glyphicon glyphicon-search"
+                        )
                     )
 
                     .AddItem(new MenuItemDefinition(
-                    PageNames.App.Host.Brokers,
-                    L("Brokers"),
-                    icon: "glyphicon glyphicon-tasks"
-                    ).AddItem(new MenuItemDefinition(
-                    PageNames.App.Host.AddBroker,
-                    L("AddBroker"),
-                    url: "host.AddBroker",
-                    icon: "glyphicon glyphicon-collapse-down"
-                    )).AddItem(new MenuItemDefinition(
-                    PageNames.App.Host.Brokers,
-                    L("Search"),
-                    url: "host.Brokers",
-                    icon: "glyphicon glyphicon-search"
-                    ))
+                        PageNames.App.Host.Brokers,
+                        L("Brokers"),
+                        url: "host.Brokers",
+                       icon: "glyphicon glyphicon-search"
+                        )
                     )
 
                     .AddItem(new MenuItemDefinition(
                     PageNames.App.Host.MainVendors,
                     L("Vendors"),
-                    icon: "glyphicon glyphicon-tasks"
-                    ).AddItem(new MenuItemDefinition(
-                    PageNames.App.Host.AddVendor,
-                    L("AddVendor"),
-                    url: "host.AddVendor",
-                    icon: "glyphicon glyphicon-collapse-down"
-                    )).AddItem(new MenuItemDefinition(
-                    PageNames.App.Host.Vendors,
-                    L("Search"),
                     url: "host.Vendors",
-                    icon: "glyphicon glyphicon-search"
+                     icon: "glyphicon glyphicon-search"
                     ))
-                    )
 
                     .AddItem(new MenuItemDefinition(
                         PageNames.App.Host.TowOperators,
@@ -332,14 +277,14 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                         requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                         )
                     )
-                     .AddItem(new MenuItemDefinition(
-                        PageNames.App.Tenant.JobStatuses,
-                        L("JobStatuses"),
-                        url: "tenant.jobstatuses",
-                        icon: "icon-settings",
-                        requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
-                        )
-                    ) 
+                    // .AddItem(new MenuItemDefinition(
+                    //    PageNames.App.Tenant.JobStatuses,
+                    //    L("JobStatuses"),
+                    //    url: "tenant.jobstatuses",
+                    //    icon: "icon-settings",
+                    //    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
+                    //    )
+                    //) 
                     .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Vendors,
                     L("Vendors"),

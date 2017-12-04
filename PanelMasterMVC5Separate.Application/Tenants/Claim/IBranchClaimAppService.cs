@@ -43,5 +43,8 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         Task<FileDto> GetTowOperatorsToExcel();
         void CreateOrUpdateTowOperator(TowTenantDto input);
         void ChangeTowStatus(TowOperatorDto input);
+
+        void AddUpdateTowOperator(TowOperatorMainToDto input);
+        TowOperatorMainDto GetMainTowOperator(GetClaimsInput input);
     }
 }

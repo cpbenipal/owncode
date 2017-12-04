@@ -457,10 +457,10 @@ appModule.config([
             templateUrl: '~/App/tenant/views/EditBrokerSub/index.cshtml'
         });       
 
-        $stateProvider.state('tenant.jobstatuses', {
-            url: '/jobstatuses',
-            templateUrl: '~/App/tenant/views/jobstatuses/index.cshtml'
-        });
+        //$stateProvider.state('tenant.jobstatuses', {
+        //    url: '/jobstatuses',
+        //    templateUrl: '~/App/tenant/views/jobstatuses/index.cshtml'
+        //});
         //$stateProvider.state('tenant.JobMaskStatuses', {
         //    url: '/JobMaskStatuses',
         //    templateUrl: '~/App/tenant/views/JobMaskStatuses/index.cshtml'

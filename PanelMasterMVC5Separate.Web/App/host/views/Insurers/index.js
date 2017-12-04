@@ -52,7 +52,7 @@
                         '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
                         '    <ul uib-dropdown-menu>' +
                         // '      <li><a ng-if="grid.appScope.permissions.impersonation && row.entity.id != grid.appScope.currentUserId" ng-click="grid.appScope.impersonate(row.entity)">' + app.localize('LoginAsThisUser') + '</a></li>' +
-                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/host/AddEditInsurer/{{row.entity.id}}">' + app.localize('Open') + '</a></li>' +
+                        '      <li><a ng-if="grid.appScope.permissions.edit"  ng-click="grid.appScope.edit(row.entity.id)">' + app.localize('Open') + '</a></li>' +
                         //'      <li><a ng-click="grid.appScope.unlockUser(row.entity)">' + app.localize('Unlock') + '</a></li>' +
                         //'      <li><a ng-if="grid.appScope.permissions.delete" ng-click="grid.appScope.deleteUser(row.entity)">' + app.localize('Delete') + '</a></li>' +
                         '    </ul>' +
@@ -182,6 +182,31 @@
                         app.downloadTempFile(result.data);
                     });
             };
+
+            vm.edit = function (insurerId) {
+                openCreateOrEditUserModal(insurerId);
+            };
+
+            vm.newInsurer = function () {
+                openCreateOrEditUserModal(null);
+            };
+            function openCreateOrEditUserModal(insurerId) {
+
+                var modalInstance = $uibModal.open({
+                    templateUrl: '~/App/host/views/Insurers/createOrEditModal.cshtml',
+                    controller: 'host.views.Insurers.createOrEditModal as vm',
+                    backdrop: 'static',
+                    resolve: {
+                        insurerId: function () {
+                            return insurerId;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (result) {
+                    vm.getInsurerdata();
+                });
+            }
 
             vm.getInsurerdata();
 

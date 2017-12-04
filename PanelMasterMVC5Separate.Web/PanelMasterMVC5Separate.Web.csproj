@@ -520,11 +520,14 @@
     <Content Include="App\host\directives\featureTree.min.css">
       <DependentUpon>featureTree.css</DependentUpon>
     </Content>
+    <Content Include="App\host\views\VehicleMades\createOrEditModal.js" />
+    <Content Include="App\host\views\VehicleMakes\createOrEditModal.js" />
     <Content Include="App\host\views\Banks\createOrEditModal.js" />
+    <Content Include="App\host\views\Brokers\createOrEditModal.js" />
     <Content Include="App\host\views\Brokers\index.js" />
     <Content Include="App\host\views\editions\createOrEditModal.js" />
     <Content Include="App\host\views\editions\index.js" />
-    <Content Include="App\host\views\AddEditVendor\index.js" />
+    <Content Include="App\host\views\Insurers\createOrEditModal.js" />
     <Content Include="App\host\views\Insurers\index.js" />
     <Content Include="App\host\views\SignonPlans\createOrEditModal.js" />
     <Content Include="App\host\views\SignonPlans\index.js" />
@@ -549,6 +552,7 @@
     <Content Include="App\host\views\Banks\index.js" />
     <Content Include="App\host\views\towoperators\createOrEditModal.js" />
     <Content Include="App\host\views\towoperators\index.js" />
+    <Content Include="App\host\views\Vendors\createOrEditModal.js" />
     <Content Include="App\host\views\Vendors\index.js" />
     <Content Include="App\tenant\views\AddEditVendor\index.js" />
     <Content Include="App\tenant\views\adminforms\index.js" />
@@ -556,16 +560,10 @@
     <Content Include="App\tenant\views\audit_trail\index.js" />
     <Content Include="App\tenant\views\authorised_values\index.js" />
     <Content Include="App\tenant\views\communications\index.js" />
-    <Content Include="App\host\views\EditVehicleMade\index.js" />
-    <Content Include="App\host\views\AddVehicleMade\index.js" />
-    <Content Include="App\host\views\AddVehicleMake\index.js" />
     <Content Include="App\tenant\views\AddBrokerSub\index.js" />
-    <Content Include="App\host\views\EditVehicleMake\index.js" />
-    <Content Include="App\host\views\AddEditBroker\index.js" />
     <Content Include="App\tenant\views\EditBrokerSub\index.js" />
     <Content Include="App\tenant\views\EditInsurerSub\index.js" />
     <Content Include="App\tenant\views\AddInsurerSub\index.js" />
-    <Content Include="App\host\views\AddEditInsurer\index.js" />
     <Content Include="App\tenant\views\client_information\index.js" />
     <Content Include="App\tenant\views\comments_information\index.js" />
     <Content Include="App\tenant\views\costing\index.js" />
@@ -576,10 +574,13 @@
     <Content Include="App\tenant\views\insurance_information\index.js" />
     <Content Include="App\tenant\views\Brokers\index.js" />
     <Content Include="App\tenant\views\invoiced_values\index.js" />
+    <Content Include="App\tenant\views\JobStatuses\createOrEditModal.js" />
+    <Content Include="App\tenant\views\JobStatuses\index.js" />
     <Content Include="App\tenant\views\settings\changeLogo.cshtml" />
     <Content Include="App\tenant\views\settings\changeLogo.js" />
     <Content Include="App\tenant\views\settings\editRegister.js" />
     <Content Include="App\tenant\views\settings\editCompany.js" />
+    <Content Include="App\tenant\views\towoperators\addedittow.js" />
     <Content Include="App\tenant\views\towoperators\createOrEditModal.js" />
     <Content Include="App\tenant\views\towoperators\index.js" />
     <Content Include="App\tenant\views\job_information\index.js" />
@@ -7282,18 +7283,12 @@
     <Content Include="App\tenant\views\EditVendor\index.cshtml" />
     <Content Include="App\tenant\views\VendorList\index.cshtml" />
     <Content Include="App\tenant\views\Insurers\index.cshtml" />
-    <Content Include="App\host\views\AddEditInsurer\index.cshtml" />
     <Content Include="App\tenant\views\AddInsurerSub\index.cshtml" />
     <Content Include="App\tenant\views\EditInsurerSub\index.cshtml" />
     <Content Include="App\tenant\views\Brokers\index.cshtml" />
     <Content Include="App\tenant\views\AddBrokerSub\index.cshtml" />
-    <Content Include="App\host\views\AddEditBroker\index.cshtml" />
     <Content Include="App\tenant\views\EditBrokerSub\index.cshtml" />
     <Content Include="App\host\views\VehicleMakes\index.cshtml" />
-    <Content Include="App\host\views\AddVehicleMake\index.cshtml" />
-    <Content Include="App\host\views\EditVehicleMake\index.cshtml" />
-    <Content Include="App\host\views\AddVehicleMade\index.cshtml" />
-    <Content Include="App\host\views\EditVehicleMade\index.cshtml" />
     <Content Include="App\host\views\VehicleMades\index.cshtml" />
     <None Include=".bin\git.cmd" />
     <None Include=".bin\node.cmd" />
@@ -7680,7 +7675,6 @@
     <Content Include="App\host\views\Insurers\index.cshtml" />
     <Content Include="App\host\views\Brokers\index.cshtml" />
     <Content Include="App\host\views\Vendors\index.cshtml" />
-    <Content Include="App\host\views\AddEditVendor\index.cshtml" />
     <Content Include="App\tenant\views\AddEditVendor\index.cshtml" />
     <Content Include="App\host\views\towoperators\index.cshtml" />
     <Content Include="App\host\views\towoperators\createOrEditModal.cshtml" />
@@ -7696,6 +7690,14 @@
     <Content Include="App\host\views\RoleCategories\index.cshtml" />
     <Content Include="App\host\views\SignonPlans\createOrEditModal.cshtml" />
     <Content Include="App\host\views\SignonPlans\index.cshtml" />
+    <Content Include="App\tenant\views\JobStatuses\createOrEditModal.cshtml" />
+    <Content Include="App\tenant\views\JobStatuses\index.cshtml" />
+    <Content Include="App\host\views\Brokers\createOrEditModal.cshtml" />
+    <Content Include="App\host\views\Insurers\createOrEditModal.cshtml" />
+    <Content Include="App\host\views\Vendors\createOrEditModal.cshtml" />
+    <Content Include="App\host\views\VehicleMakes\createOrEditModal.cshtml" />
+    <Content Include="App\host\views\VehicleMades\createOrEditModal.cshtml" />
+    <Content Include="App\tenant\views\towoperators\addedittow.cshtml" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />

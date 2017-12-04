@@ -81,7 +81,7 @@ namespace PanelMasterMVC5Separate.Tenants.Manufacturing
                      u.MMCode.Contains(input.Filter) ||
                      u.Model.Contains(input.Filter)
              )
-             .OrderByDescending(p => p.LastModificationTime)
+             .OrderByDescending(p => p.Id)
              .ToList();
 
 
@@ -96,6 +96,7 @@ namespace PanelMasterMVC5Separate.Tenants.Manufacturing
                                   Model = mk.Model
                               })
                               .OrderByDescending(p => p.Make)
+                              .ThenByDescending(p=>p.MadeID)
                               .ToList();
 
             return new ListResultDto<ModelMadeListDto>(ObjectMapper.Map<List<ModelMadeListDto>>(finalQuery));
@@ -164,7 +165,7 @@ namespace PanelMasterMVC5Separate.Tenants.Manufacturing
             int Id = Convert.ToInt32(input.Filter);
 
             var query = _VehicleMakeRepository
-              .GetAll().Where(c => c.Id == Id && c.IsActive == true)
+              .GetAll().Where(c => c.Id == Id)
               .FirstOrDefault();
 
             return query.MapTo<VehicleMakeDto>();

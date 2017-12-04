@@ -474,7 +474,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         }
         public void CreateOrUpdateTowOperator(TowTenantDto input)
         {
-            var client = input.MapTo<TowSubOperator>();            
+            var client = input.MapTo<TowSubOperator>();
             _towsuboperatorrepositry.InsertOrUpdate(client);
         }
         public async Task<FileDto> GetTowOperatorsToExcel()
@@ -522,6 +522,22 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         {
             var CountryCode = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
             return (CountryCode == null ? 0 : _countryRepository.FirstOrDefault(x => x.Code == CountryCode.CountryCode).Id);
+        }
+
+        public void AddUpdateTowOperator(TowOperatorMainToDto input)
+        {
+            var client = input.MapTo<TowOperator>();
+            client.CountryID = GetCountryIdByCode();
+            if (input.Id == 0) // Active by default new tenant
+                client.isActive = true;
+            _towoperatorrepository.InsertOrUpdate(client);
+        }
+
+        public TowOperatorMainDto GetMainTowOperator(GetClaimsInput input)
+        {
+            int id = Convert.ToInt32(input.Filter);
+            var query = _towoperatorrepository.FirstOrDefault(c => c.Id == id).MapTo<TowOperatorMainDto>();
+            return query;
         }
     }
 }

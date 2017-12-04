@@ -151,4 +151,16 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
         public virtual int CountryID { get; set; }
         public virtual int TowOperatorId { get; set; }
     }
+    [AutoMapFrom(typeof(TowOperator))]
+    public class TowOperatorMainDto : FullAuditedEntity
+    {
+        public virtual string Description { get; set; } 
+        public virtual bool isActive { get; set; }
+    }
+    [AutoMapTo(typeof(TowOperator))]
+    public class TowOperatorMainToDto : FullAuditedEntity
+    {
+        public virtual string Description { get; set; }       
+        public virtual bool isActive { get; set; }
+    }
 }
