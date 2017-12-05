@@ -192,7 +192,9 @@
                         app.downloadTempFile(result.data);
                     });
             };
-
+            vm.addVendor = function () {
+                window.location.href = "#!/tenant/AddEditVendor";
+            };
             vm.getUsers();
         }]);
 })();

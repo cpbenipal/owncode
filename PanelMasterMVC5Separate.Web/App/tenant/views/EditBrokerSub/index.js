@@ -22,6 +22,7 @@
             vm.currentUserId = abp.session.userId;
             vm.TenantId = abp.session.tenantId;
 
+
             $scope.bankList = []; //list of Banks
             vm.getBank = function () {
 
@@ -105,6 +106,10 @@
                 }).finally(function () {
                     vm.saving = false;
                 });
+            };
+             
+            vm.cancel = function () {
+                window.location.href = "#!/tenant/Brokers";
             };
 
             vm.getpaymenttype();

@@ -328,7 +328,7 @@
                                         <div class="row">
                                             <div class="col-md-offset-3 col-md-9">
                                                 <input type="hidden" ng-model="vm.client.countryId" ng-class="{'edited':vm.client.countryId}" />
-                                                <button ng-disabled="vm.saving" type="reset" class="btn btn-default">@L("Cancel")</button>
+                                                <button ng-disabled="vm.saving" type="reset" ng-click="vm.cancel()" class="btn btn-default">@L("Cancel")</button>
                                                 <button type="button" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="addinsurersubform.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
                                             </div>
                                         </div>

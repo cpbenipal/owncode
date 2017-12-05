@@ -17,7 +17,7 @@ namespace PanelMasterMVC5Separate.Tenants.Brokers
         //Task UpdateBrokerMaster(BrokersUDto input);
         //void CreateOrUpdateSubBroker(BrokersToListDto input);
         //BrokersDto GetBrokerMasterDetail(GetClaimsInput input);
-        //BrokersForListDto GetBrokerSubMasterDetail(GetClaimsInput input);
+        BrokersForListDto GetBrokerSubMasterDetail(GetClaimsInput input);
         //Task<BrokerMasterPics> GetOrNullAsync(int id);
         //Task<FileDto> GetClaimsToExcel();
         //void ChangeStatus(StatusDto input);

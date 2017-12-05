@@ -1,5 +1,5 @@
 ﻿(function () {
- 
+
     appModule.controller('tenant.views.AddBrokerSub.index', [
         '$scope', '$uibModal', '$stateParams', 'abp.services.app.broker',
 
@@ -15,25 +15,25 @@
             vm.job = {};
             vm.client = {};
 
-             
+
             vm.advancedFiltersAreShown = false;
             vm.filterText = $stateParams.filterText || '';
             vm.currentUserId = abp.session.userId;
             vm.TenantId = abp.session.tenantId;
-                       
+
             $scope.bankList = []; //list of Banks
             vm.getBank = function () {
 
                 jobService.getBanks()
-                    .then(function (ins_obj) {                       
+                    .then(function (ins_obj) {
 
-                        angular.forEach(ins_obj.data.items, function (insvalue, key1) {                             
+                        angular.forEach(ins_obj.data.items, function (insvalue, key1) {
                             $scope.bankList.push({
                                 name: insvalue.bankName,
                                 id: insvalue.id
                             });
                         });
-                        
+
                     }).finally(function () {
                         vm.loading = false;
                     });
@@ -61,14 +61,14 @@
 
             $scope.SimpleData = []; //list of Currencies
             vm.getpaymenttype = function () {
-               
+
                 for (var i = 1; i <= 100; i++) {
                     $scope.SimpleData.push({
-                        name: i+' DAYS',
-                        id: i+' DAYS'
+                        name: i + ' DAYS',
+                        id: i + ' DAYS'
                     });
-                }                
-            }; 
+                }
+            };
 
             vm.getBrokerMaster = function () {
 
@@ -82,7 +82,9 @@
                         vm.loading = false;
                     });
             };
-
+            vm.cancel = function () {
+                window.location.href = "#!/tenant/Brokers";
+            };
             vm.save = function () {
                 vm.job.TenantId = abp.session.tenantId;
                 vm.job.BrokerId = $stateParams.id;
@@ -100,6 +102,6 @@
             vm.getBank();
             vm.getcurrency();
             vm.getBrokerMaster();
-            
+
         }]);
 })();

@@ -52,7 +52,7 @@
                         '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
                         '    <ul uib-dropdown-menu>' +
                         // '      <li><a ng-if="grid.appScope.permissions.impersonation && row.entity.id != grid.appScope.currentUserId" ng-click="grid.appScope.impersonate(row.entity)">' + app.localize('LoginAsThisUser') + '</a></li>' +
-                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/tenant/EditBrokerSub/{{row.entity.id}}">' + app.localize('Edit') + '</a></li>' +                         
+                        '      <li><a ng-show="row.entity.isActive" ng-href="#!/tenant/EditBrokerSub/{{row.entity.id}}">' + app.localize('Edit') + '</a></li>' +                         
                         //'      <li><a ng-click="grid.appScope.unlockUser(row.entity)">' + app.localize('Unlock') + '</a></li>' +
                         //'      <li><a ng-if="grid.appScope.permissions.delete" ng-click="grid.appScope.deleteUser(row.entity)">' + app.localize('Delete') + '</a></li>' +
                         '    </ul>' +
@@ -189,7 +189,7 @@
                         app.downloadTempFile(result.data);
                     });
             };
-
+             
             vm.getBrokerdata();
 
         }]);

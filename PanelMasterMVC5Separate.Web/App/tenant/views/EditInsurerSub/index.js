@@ -80,7 +80,9 @@
                         vm.loading = false;
                     });
             };
-
+            vm.cancel = function () {
+                window.location.href = "#!/tenant/Insurers";
+            };
             vm.getInsurersub = function () {
                 vm.loading = true;
                 jobService.getInsurerSubDetail($.extend({ filter: $stateParams.id }, $stateParams.id))

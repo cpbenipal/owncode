@@ -2,7 +2,7 @@
 
     appModule.controller('tenant.views.AddEditVendor.index', [
         '$scope', 'appSession', '$uibModal', '$stateParams', 'abp.services.app.vendorClaim',
-        
+
         function ($scope, appSession, $uibModal, $stateParams, vendorService) {
             var vm = this;
             $scope.$on('$viewContentLoaded', function () {
@@ -16,7 +16,7 @@
             vm.advancedFiltersAreShown = false;
             vm.filterText = $stateParams.filterText || '';
             vm.currentUserId = abp.session.userId;
-         
+
             $scope.countryList = []; //list of Countries
             vm.getCountries = function () {
 
@@ -34,21 +34,24 @@
                         vm.loading = false;
                     });
             };
- 
-            
-              vm.getVendorDetails = function () {               
+
+
+            vm.getVendorDetails = function () {
                 vm.loading = true;
                 vendorService.getMainVendor($.extend({ filter: $stateParams.id }, $stateParams.id))
                     .then(function (result) {
-                        vm.mainVendor = result.data;                       
-                       
+                        vm.mainVendor = result.data;
+
                     }).finally(function () {
                         vm.loading = false;
-                    });               
+                    });
             };
-             
-             vm.save = function () {
-                vm.saving = true; 
+            vm.cancel = function () {
+                window.location.href = "#!/tenant/VendorList";
+            };
+           
+            vm.save = function () {
+                vm.saving = true;
                 vendorService.addEditVendor({
                     Id: $stateParams.id,
                     SupplierCode: vm.mainVendor.supplierCode,
@@ -56,7 +59,7 @@
                     RegistrationNumber: vm.mainVendor.registrationNumber,
                     TaxRegistrationNumber: vm.mainVendor.taxRegistrationNumber,
                     CountryID: 0
-                    }).then(function () {
+                }).then(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
                     window.location.href = "#!/tenant/VendorList";
                 }).finally(function () {

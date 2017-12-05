@@ -20,7 +20,12 @@
             vm.filterText = $stateParams.filterText || '';
             vm.currentUserId = abp.session.userId;
             vm.TenantId = abp.session.tenantId;
-                       
+                 
+
+            vm.cancel = function () {
+                window.location.href = "#!/tenant/Insurers";
+            };
+      
             $scope.bankList = []; //list of Banks
             vm.getBank = function () {
 

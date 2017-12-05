@@ -128,7 +128,7 @@
                                                     <span class="input-group-addon input-circle-left">
                                                         <i class="fa fa-phone"></i>
                                                     </span>
-                                                    <input type="text" ng-model="vm.job.ContactPhone" placeholder="Contact Phone" class="form-control input-circle-right">
+                                                    <input type="text" ng-model="vm.job.ContactPhone" maxlength="10" placeholder="Contact Phone" class="form-control input-circle-right">
 
                                                 </div>
                                             </div>
@@ -140,7 +140,7 @@
                                                     <span class="input-group-addon input-circle-left">
                                                         <i class="fa fa-fax"></i>
                                                     </span>
-                                                    <input type="text" ng-model="vm.job.ContactFax" class="form-control input-circle-right" placeholder="Contact Fax">
+                                                    <input type="text" ng-model="vm.job.ContactFax"  maxlength="10" class="form-control input-circle-right" placeholder="Contact Fax">
                                                 </div>
                                             </div>
                                         </div>
@@ -327,7 +327,7 @@
                                     <div class="form-actions">
                                         <div class="row">
                                             <div class="col-md-offset-3 col-md-9">
-                                                <button ng-disabled="vm.saving" type="reset" class="btn btn-default">@L("Cancel")</button>
+                                                <button ng-disabled="vm.saving" type="reset" ng-click="vm.cancel()" class="btn btn-default">@L("Cancel")</button>
                                                 <button type="button" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="addBrokersubform.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
                                             </div>
                                         </div>
