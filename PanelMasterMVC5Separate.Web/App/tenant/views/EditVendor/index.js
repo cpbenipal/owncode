@@ -47,7 +47,7 @@
                 jobService.getMainVendor($.extend({ filter: $stateParams.id }, $stateParams.id))
                     .then(function (result) {
 
-                        vm.mainVendor = result.data.items[0];
+                        vm.mainVendor = result.data;
 
                     }).finally(function () {
                         vm.loading = false;

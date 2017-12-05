@@ -55,15 +55,15 @@
                         '  </div>' +
                         '</div>'
                     },
-                    {
-                        name: app.localize('Edit'),
-                        enableSorting: false,
-                        width: 120,
-                        cellTemplate:
-                        '<div class=\"ui-grid-cell-contents\">' +
-                        '<a ng-if="grid.appScope.permissions.edit" ng-click="grid.appScope.editTowMain(row.entity.id)" class="btn btn-xs btn-primary blue">' + app.localize('Edit') + '</a></li>' +
-                        '</div>'
-                    },
+                    //{
+                    //    name: app.localize('Edit'),
+                    //    enableSorting: false,
+                    //    width: 120,
+                    //    cellTemplate:
+                    //    '<div class=\"ui-grid-cell-contents\">' +
+                    //    '<a ng-if="grid.appScope.permissions.edit" ng-click="grid.appScope.editTowMain(row.entity.id)" class="btn btn-xs btn-primary blue">' + app.localize('Edit') + '</a></li>' +
+                    //    '</div>'
+                    //},
                     {
                         name: app.localize('Description'),
                         field: 'description',

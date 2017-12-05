@@ -52,20 +52,11 @@
                         '  <div class="btn-group dropdown" uib-dropdown="" dropdown-append-to-body>' +
                         '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
                         '    <ul uib-dropdown-menu>' +
-                        '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/tenant/AddEditVendor/{{row.entity.vendorID}}">' + app.localize('Open') + '</a></li>' +                                       
+                        '      <li><a ng-show="row.entity.isActive" ng-href="#!/tenant/EditVendor/{{row.entity.vendorID}}">' + app.localize('Open') + '</a></li>' +                                       
                         '    </ul>' +
                         '  </div>' +
                         '</div>'
-                    },
-                    {
-                        name: '',
-                        field: 'isActive',
-                        cellTemplate:
-                        '<div class=\"ui-grid-cell-contents\">' +
-                        '<a ng-show="row.entity.isActive" ng-href="#!/tenant/EditVendor/{{row.entity.vendorID}}" class="btn btn-xs btn-primary blue">' + app.localize('EDIT') + '</a>' +
-                        '</div>',
-                        minWidth: 50
-                    },
+                    },                     
                     {
                         name: app.localize('SupplierName'),
                         field: 'supplierName',

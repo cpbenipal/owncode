@@ -5907,3 +5907,532 @@ DEBUG 2017-12-05 14:58:48,646 [42   ] Abp.Web.SignalR.Hubs.AbpCommonHub        -
 DEBUG 2017-12-05 14:59:19,064 [99   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: 629b5224-bd6e-4c64-8115-d4df4ba810d1
 DEBUG 2017-12-05 14:59:29,437 [83   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"7a363f2e-3dde-4a46-adac-d2e59ec03aa7","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T09:29:29.4370285Z","Properties":{}}
 DEBUG 2017-12-05 14:59:29,684 [80   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: 7a363f2e-3dde-4a46-adac-d2e59ec03aa7
+DEBUG 2017-12-05 15:00:00,654 [42   ] Abp.Modules.AbpModuleManager             - Shutting down has been started
+DEBUG 2017-12-05 15:00:00,656 [42   ] Abp.BackgroundJobs.BackgroundJobManager  - Stop background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2017-12-05 15:00:00,658 [42   ] Abp.BackgroundJobs.BackgroundJobManager  - WaitToStop background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2017-12-05 15:00:00,659 [42   ] Abp.Modules.AbpModuleManager             - Shutting down completed.
+DEBUG 2017-12-05 15:00:08,105 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2017-12-05 15:00:08,422 [1    ] Abp.Modules.AbpModuleManager             - Found 21 ABP modules in total.
+DEBUG 2017-12-05 15:00:08,477 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: PanelMasterMVC5Separate.Web.PanelMasterMVC5SeparateWebModule, PanelMasterMVC5Separate.Web, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,486 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,487 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,488 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,488 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=2.2.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,490 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpZeroOwinModule, Abp.Zero.Owin, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,490 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.Zero, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,491 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,492 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: PanelMasterMVC5Separate.PanelMasterMVC5SeparateDataModule, PanelMasterMVC5Separate.EntityFramework, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,494 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFramework.AbpZeroEntityFrameworkModule, Abp.Zero.EntityFramework, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,497 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkModule, Abp.EntityFramework, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,498 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,498 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: PanelMasterMVC5Separate.PanelMasterMVC5SeparateCoreModule, PanelMasterMVC5Separate.Core, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,500 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.Ldap.AbpZeroLdapModule, Abp.Zero.Ldap, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,501 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,501 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: PanelMasterMVC5Separate.PanelMasterMVC5SeparateApplicationModule, PanelMasterMVC5Separate.Application, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,502 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: PanelMasterMVC5Separate.WebApi.PanelMasterMVC5SeparateWebApiModule, PanelMasterMVC5Separate.WebApi, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,503 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.WebApi.AbpWebApiModule, Abp.Web.Api, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,504 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.SignalR.AbpWebSignalRModule, Abp.Web.SignalR, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,504 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Runtime.Caching.Redis.AbpRedisCacheModule, Abp.RedisCache, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,505 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Hangfire.AbpHangfireModule, Abp.HangFire, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:08,527 [1    ] Abp.Modules.AbpModuleManager             - 21 modules loaded.
+DEBUG 2017-12-05 15:00:09,969 [1    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2017-12-05 15:00:09,970 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2017-12-05 15:00:09,970 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2017-12-05 15:00:09,970 [1    ] o.Configuration.LanguageManagementConfig - Converted PanelMasterMVC5Separate (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2017-12-05 15:00:11,752 [1    ] EntityFramework.AbpEntityFrameworkModule - Registering DbContext: PanelMasterMVC5Separate.EntityFramework.PanelMasterMVC5SeparateDbContext, PanelMasterMVC5Separate.EntityFramework, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:00:14,961 [1    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2017-12-05 15:00:14,984 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2017-12-05 15:00:14,989 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2017-12-05 15:00:15,028 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2017-12-05 15:00:15,107 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: PanelMasterMVC5Separate
+DEBUG 2017-12-05 15:00:15,375 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2017-12-05 15:00:19,063 [1    ] Abp.Owin.OwinUserTokenProviderAccessor   - DataProtectionProvider has not been set yet.
+DEBUG 2017-12-05 15:00:19,615 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 82 classes define auto mapping attributes
+DEBUG 2017-12-05 15:00:19,615 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Friendships.Cache.FriendCacheItem
+DEBUG 2017-12-05 15:00:19,628 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Vendors.Dto.BankDto
+DEBUG 2017-12-05 15:00:19,628 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Vendors.Dto.CurrencyDto
+DEBUG 2017-12-05 15:00:19,628 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Vendors.Dto.VendorSaveDto
+DEBUG 2017-12-05 15:00:19,630 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Vendors.Dto.CountryDto
+DEBUG 2017-12-05 15:00:19,630 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Vendors.Dto.VendorDto
+DEBUG 2017-12-05 15:00:19,630 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.QuoteMastersDto
+DEBUG 2017-12-05 15:00:19,630 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.QuoteMasterDto
+DEBUG 2017-12-05 15:00:19,630 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.QuoteMasterToDto
+DEBUG 2017-12-05 15:00:19,630 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.QuoteStatusDto
+DEBUG 2017-12-05 15:00:19,631 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.QuoteCategoriesDto
+DEBUG 2017-12-05 15:00:19,631 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.RepairTypeDto
+DEBUG 2017-12-05 15:00:19,631 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Manufacturing.Dto.VehicleMakeDto
+DEBUG 2017-12-05 15:00:19,631 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Manufacturing.Dto.VehicleFromModelsDto
+DEBUG 2017-12-05 15:00:19,631 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Manufacturing.Dto.VehicleModelsDto
+DEBUG 2017-12-05 15:00:19,631 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Manufacturing.Dto.VehicleModelsFDto
+DEBUG 2017-12-05 15:00:19,631 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.InsurersDto
+DEBUG 2017-12-05 15:00:19,632 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.InsurersListDto
+DEBUG 2017-12-05 15:00:19,632 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.InsurersToListDto
+DEBUG 2017-12-05 15:00:19,632 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.InsurersForListDto
+DEBUG 2017-12-05 15:00:19,632 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.InsurersMasterDto
+DEBUG 2017-12-05 15:00:19,632 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.CountriesDto
+DEBUG 2017-12-05 15:00:19,633 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.BranchClaimListDto
+DEBUG 2017-12-05 15:00:19,633 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.JobstatusTenantDto
+DEBUG 2017-12-05 15:00:19,633 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.JobStatusMasksDto
+DEBUG 2017-12-05 15:00:19,633 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.JobstatusTenantToDto
+DEBUG 2017-12-05 15:00:19,633 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.TowOperatorDto
+DEBUG 2017-12-05 15:00:19,633 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.TowTenantDto
+DEBUG 2017-12-05 15:00:19,634 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.TowOperatorMainDto
+DEBUG 2017-12-05 15:00:19,634 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.TowOperatorMainToDto
+DEBUG 2017-12-05 15:00:19,634 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.BrokersDto
+DEBUG 2017-12-05 15:00:19,634 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.BrokerMasterDto
+DEBUG 2017-12-05 15:00:19,634 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.CountriesDto
+DEBUG 2017-12-05 15:00:19,634 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.BrokersListDto
+DEBUG 2017-12-05 15:00:19,635 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.BrokersToListDto
+DEBUG 2017-12-05 15:00:19,635 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.BrokersForListDto
+DEBUG 2017-12-05 15:00:19,635 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2017-12-05 15:00:19,635 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Sessions.Dto.UserLoginInfoDto
+DEBUG 2017-12-05 15:00:19,635 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Organizations.Dto.OrganizationUnitDto
+DEBUG 2017-12-05 15:00:19,635 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Organizations.Dto.OrganizationUnitUserListDto
+DEBUG 2017-12-05 15:00:19,636 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Notifications.Dto.NotificationSubscriptionWithDisplayNameDto
+DEBUG 2017-12-05 15:00:19,636 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.MultiTenancy.Dto.TenantListDto
+DEBUG 2017-12-05 15:00:19,636 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.MultiTenancy.Dto.SignonPlansDto
+DEBUG 2017-12-05 15:00:19,637 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.MultiTenancy.Dto.TenantEditDto
+DEBUG 2017-12-05 15:00:19,638 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Localization.Dto.ApplicationLanguageEditDto
+DEBUG 2017-12-05 15:00:19,638 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Localization.Dto.ApplicationLanguageListDto
+DEBUG 2017-12-05 15:00:19,638 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Friendships.Dto.FriendDto
+DEBUG 2017-12-05 15:00:19,638 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Editions.Dto.EditionEditDto
+DEBUG 2017-12-05 15:00:19,639 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Editions.Dto.FlatFeatureDto
+DEBUG 2017-12-05 15:00:19,639 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Editions.Dto.EditionListDto
+DEBUG 2017-12-05 15:00:19,639 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Chat.Dto.ChatMessageDto
+DEBUG 2017-12-05 15:00:19,639 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Chat.Dto.ChatUserDto
+DEBUG 2017-12-05 15:00:19,640 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Chat.Dto.ChatUserWithMessagesDto
+DEBUG 2017-12-05 15:00:19,640 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Claim.Profile.Dto.CurrentUserProfileEditDto
+DEBUG 2017-12-05 15:00:19,640 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Claim.Dto.UserLoginAttemptDto
+DEBUG 2017-12-05 15:00:19,640 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Claim.Dto.UserListDto
+DEBUG 2017-12-05 15:00:19,640 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Roles.Dto.RoleListDto
+DEBUG 2017-12-05 15:00:19,641 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Roles.Dto.RoleEditDto
+DEBUG 2017-12-05 15:00:19,641 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Permissions.Dto.FlatPermissionDto
+DEBUG 2017-12-05 15:00:19,641 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Permissions.Dto.FlatPermissionWithLevelDto
+DEBUG 2017-12-05 15:00:19,641 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Auditing.Dto.AuditLogListDto
+DEBUG 2017-12-05 15:00:19,641 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Job.Dto.CreateClientInput
+DEBUG 2017-12-05 15:00:19,642 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Job.Dto.CreateJobInput
+DEBUG 2017-12-05 15:00:19,642 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.CountriesDto
+DEBUG 2017-12-05 15:00:19,642 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.BankDetailDto
+DEBUG 2017-12-05 15:00:19,642 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.BankToDto
+DEBUG 2017-12-05 15:00:19,642 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.JobStatusDto
+DEBUG 2017-12-05 15:00:19,642 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.JobStatusToDto
+DEBUG 2017-12-05 15:00:19,643 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.JobStatusMaskDto
+DEBUG 2017-12-05 15:00:19,643 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.JobStatusMaskToDto
+DEBUG 2017-12-05 15:00:19,643 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.QuoteStatusDto
+DEBUG 2017-12-05 15:00:19,644 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.QuoteStatusToDto
+DEBUG 2017-12-05 15:00:19,644 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.RepairTypeToDto
+DEBUG 2017-12-05 15:00:19,644 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.RepairTypeDto
+DEBUG 2017-12-05 15:00:19,644 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.RoleCategoryDto
+DEBUG 2017-12-05 15:00:19,644 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.RoleCategoryToDto
+DEBUG 2017-12-05 15:00:19,644 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.SignOnDto
+DEBUG 2017-12-05 15:00:19,644 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.SignOnToDto
+DEBUG 2017-12-05 15:00:19,645 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.TowOperatorDto
+DEBUG 2017-12-05 15:00:19,645 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.TowOperatorToDto
+DEBUG 2017-12-05 15:00:19,645 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Claim.Dto.UserListDto+UserListRoleDto
+DEBUG 2017-12-05 15:00:19,645 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Web.Models.Account.TenantSelectionViewModel+TenantInfo
+DEBUG 2017-12-05 15:00:22,665 [1    ] Abp.Owin.OwinUserTokenProviderAccessor   - DataProtectionProvider has not been set yet.
+DEBUG 2017-12-05 15:00:22,870 [1    ] Abp.Owin.OwinUserTokenProviderAccessor   - DataProtectionProvider has not been set yet.
+DEBUG 2017-12-05 15:00:22,940 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Vehicle.IJobAppService' with service name 'app/job'.
+DEBUG 2017-12-05 15:00:22,951 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Timing.ITimingAppService' with service name 'app/timing'.
+DEBUG 2017-12-05 15:00:22,958 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Vendors.IVendorClaimAppService' with service name 'app/vendorClaim'.
+DEBUG 2017-12-05 15:00:22,967 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Quotes.IQuoteAppService' with service name 'app/quote'.
+DEBUG 2017-12-05 15:00:22,976 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Manufacturing.IManufactureAppService' with service name 'app/manufacture'.
+DEBUG 2017-12-05 15:00:22,983 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Insurer.IInsurerAppService' with service name 'app/insurer'.
+DEBUG 2017-12-05 15:00:22,992 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Dashboard.ITenantDashboardAppService' with service name 'app/tenantDashboard'.
+DEBUG 2017-12-05 15:00:22,999 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Claim.IBranchClaimAppService' with service name 'app/branchClaim'.
+DEBUG 2017-12-05 15:00:23,018 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Brokers.IBrokerAppService' with service name 'app/broker'.
+DEBUG 2017-12-05 15:00:23,027 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Sessions.ISessionAppService' with service name 'app/session'.
+DEBUG 2017-12-05 15:00:23,035 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Organizations.IOrganizationUnitAppService' with service name 'app/organizationUnit'.
+DEBUG 2017-12-05 15:00:23,043 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Notifications.INotificationAppService' with service name 'app/notification'.
+DEBUG 2017-12-05 15:00:23,051 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.MultiTenancy.ITenantAppService' with service name 'app/tenant'.
+DEBUG 2017-12-05 15:00:23,064 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Logging.IWebLogAppService' with service name 'app/webLog'.
+DEBUG 2017-12-05 15:00:23,072 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Localization.ILanguageAppService' with service name 'app/language'.
+DEBUG 2017-12-05 15:00:23,080 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Friendships.IFriendshipAppService' with service name 'app/friendship'.
+DEBUG 2017-12-05 15:00:23,091 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Editions.IEditionAppService' with service name 'app/edition'.
+DEBUG 2017-12-05 15:00:23,101 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Common.ICommonLookupAppService' with service name 'app/commonLookup'.
+DEBUG 2017-12-05 15:00:23,110 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Chat.IChatAppService' with service name 'app/chat'.
+DEBUG 2017-12-05 15:00:23,118 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Caching.ICachingAppService' with service name 'app/caching'.
+DEBUG 2017-12-05 15:00:23,126 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Claim.IUserLinkAppService' with service name 'app/userLink'.
+DEBUG 2017-12-05 15:00:23,140 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Claim.IUserLoginAppService' with service name 'app/userLogin'.
+DEBUG 2017-12-05 15:00:23,148 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Claim.IUserAppService' with service name 'app/user'.
+DEBUG 2017-12-05 15:00:23,157 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Claim.Profile.IProfileAppService' with service name 'app/profile'.
+DEBUG 2017-12-05 15:00:23,167 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Roles.IRoleAppService' with service name 'app/role'.
+DEBUG 2017-12-05 15:00:23,182 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Permissions.IPermissionAppService' with service name 'app/permission'.
+DEBUG 2017-12-05 15:00:23,190 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Auditing.IAuditLogAppService' with service name 'app/auditLog'.
+DEBUG 2017-12-05 15:00:23,198 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Configuration.Host.IHostSettingsAppService' with service name 'app/hostSettings'.
+DEBUG 2017-12-05 15:00:23,206 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Configuration.Tenants.ITenantSettingsAppService' with service name 'app/tenantSettings'.
+DEBUG 2017-12-05 15:00:23,236 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.AdminFunctions.ISystemDefaults' with service name 'app/systemDefaults'.
+DEBUG 2017-12-05 15:00:23,245 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.AdminFunctions.IFunctions' with service name 'app/functions'.
+DEBUG 2017-12-05 15:00:40,473 [38   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected (on reconnected event): {"ConnectionId":"7a363f2e-3dde-4a46-adac-d2e59ec03aa7","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T09:30:39.605012Z","Properties":{}}
+DEBUG 2017-12-05 15:00:40,473 [92   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected (on reconnected event): {"ConnectionId":"7a363f2e-3dde-4a46-adac-d2e59ec03aa7","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T09:30:39.6030108Z","Properties":{}}
+DEBUG 2017-12-05 15:00:40,482 [17   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected (on reconnected event): {"ConnectionId":"7a363f2e-3dde-4a46-adac-d2e59ec03aa7","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T09:30:39.6020124Z","Properties":{}}
+DEBUG 2017-12-05 15:00:40,516 [83   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected (on reconnected event): {"ConnectionId":"3dd450fc-bf01-47f9-ad3c-a6ab40984b8f","IpAddress":"::1","TenantId":null,"UserId":1,"ConnectTime":"2017-12-05T09:30:39.6040126Z","Properties":{}}
+DEBUG 2017-12-05 15:00:40,518 [90   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected (on reconnected event): {"ConnectionId":"7a363f2e-3dde-4a46-adac-d2e59ec03aa7","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T09:30:39.6010096Z","Properties":{}}
+DEBUG 2017-12-05 15:00:40,519 [42   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected (on reconnected event): {"ConnectionId":"7a363f2e-3dde-4a46-adac-d2e59ec03aa7","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T09:30:39.6030108Z","Properties":{}}
+DEBUG 2017-12-05 15:00:40,520 [103  ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected (on reconnected event): {"ConnectionId":"7a363f2e-3dde-4a46-adac-d2e59ec03aa7","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T09:30:39.6040126Z","Properties":{}}
+DEBUG 2017-12-05 15:00:40,669 [17   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"f789314c-1e64-4733-ae9d-d21d52d9e891","IpAddress":"::1","TenantId":null,"UserId":1,"ConnectTime":"2017-12-05T09:30:40.6690732Z","Properties":{}}
+DEBUG 2017-12-05 15:00:40,672 [83   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"1c6909f5-5bc9-4836-8864-7c91c316611e","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T09:30:40.672071Z","Properties":{}}
+DEBUG 2017-12-05 15:01:19,119 [17   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: 3dd450fc-bf01-47f9-ad3c-a6ab40984b8f
+DEBUG 2017-12-05 15:01:19,149 [17   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: 7a363f2e-3dde-4a46-adac-d2e59ec03aa7
+DEBUG 2017-12-05 15:38:03,228 [30   ] Abp.Modules.AbpModuleManager             - Shutting down has been started
+DEBUG 2017-12-05 15:38:03,232 [30   ] Abp.BackgroundJobs.BackgroundJobManager  - Stop background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2017-12-05 15:38:03,235 [30   ] Abp.BackgroundJobs.BackgroundJobManager  - WaitToStop background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2017-12-05 15:38:03,235 [30   ] Abp.Modules.AbpModuleManager             - Shutting down completed.
+DEBUG 2017-12-05 15:38:50,723 [76   ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2017-12-05 15:38:50,789 [76   ] Abp.Modules.AbpModuleManager             - Found 21 ABP modules in total.
+DEBUG 2017-12-05 15:38:50,829 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: PanelMasterMVC5Separate.Web.PanelMasterMVC5SeparateWebModule, PanelMasterMVC5Separate.Web, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,836 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,836 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,837 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,837 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=2.2.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,838 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpZeroOwinModule, Abp.Zero.Owin, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,838 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.Zero, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,839 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,840 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: PanelMasterMVC5Separate.PanelMasterMVC5SeparateDataModule, PanelMasterMVC5Separate.EntityFramework, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,840 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFramework.AbpZeroEntityFrameworkModule, Abp.Zero.EntityFramework, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,842 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkModule, Abp.EntityFramework, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,842 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,843 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: PanelMasterMVC5Separate.PanelMasterMVC5SeparateCoreModule, PanelMasterMVC5Separate.Core, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,844 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.Ldap.AbpZeroLdapModule, Abp.Zero.Ldap, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,844 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,845 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: PanelMasterMVC5Separate.PanelMasterMVC5SeparateApplicationModule, PanelMasterMVC5Separate.Application, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,845 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: PanelMasterMVC5Separate.WebApi.PanelMasterMVC5SeparateWebApiModule, PanelMasterMVC5Separate.WebApi, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,846 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.WebApi.AbpWebApiModule, Abp.Web.Api, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,847 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.SignalR.AbpWebSignalRModule, Abp.Web.SignalR, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,847 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Runtime.Caching.Redis.AbpRedisCacheModule, Abp.RedisCache, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,848 [76   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Hangfire.AbpHangfireModule, Abp.HangFire, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:38:50,865 [76   ] Abp.Modules.AbpModuleManager             - 21 modules loaded.
+DEBUG 2017-12-05 15:38:51,536 [76   ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2017-12-05 15:38:51,536 [76   ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2017-12-05 15:38:51,536 [76   ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2017-12-05 15:38:51,536 [76   ] o.Configuration.LanguageManagementConfig - Converted PanelMasterMVC5Separate (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2017-12-05 15:38:53,883 [76   ] EntityFramework.AbpEntityFrameworkModule - Registering DbContext: PanelMasterMVC5Separate.EntityFramework.PanelMasterMVC5SeparateDbContext, PanelMasterMVC5Separate.EntityFramework, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 15:39:01,203 [76   ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2017-12-05 15:39:01,232 [76   ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2017-12-05 15:39:01,237 [76   ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2017-12-05 15:39:01,264 [76   ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2017-12-05 15:39:01,346 [76   ] Abp.Localization.LocalizationManager     - Initialized localization source: PanelMasterMVC5Separate
+DEBUG 2017-12-05 15:39:01,669 [76   ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2017-12-05 15:39:07,180 [76   ] Abp.Owin.OwinUserTokenProviderAccessor   - DataProtectionProvider has not been set yet.
+DEBUG 2017-12-05 15:39:08,362 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - Found 82 classes define auto mapping attributes
+DEBUG 2017-12-05 15:39:08,362 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Friendships.Cache.FriendCacheItem
+DEBUG 2017-12-05 15:39:08,384 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Vendors.Dto.BankDto
+DEBUG 2017-12-05 15:39:08,384 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Vendors.Dto.CurrencyDto
+DEBUG 2017-12-05 15:39:08,385 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Vendors.Dto.VendorSaveDto
+DEBUG 2017-12-05 15:39:08,386 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Vendors.Dto.CountryDto
+DEBUG 2017-12-05 15:39:08,387 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Vendors.Dto.VendorDto
+DEBUG 2017-12-05 15:39:08,387 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.QuoteMastersDto
+DEBUG 2017-12-05 15:39:08,387 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.QuoteMasterDto
+DEBUG 2017-12-05 15:39:08,388 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.QuoteMasterToDto
+DEBUG 2017-12-05 15:39:08,388 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.QuoteStatusDto
+DEBUG 2017-12-05 15:39:08,389 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.QuoteCategoriesDto
+DEBUG 2017-12-05 15:39:08,389 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.RepairTypeDto
+DEBUG 2017-12-05 15:39:08,389 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Manufacturing.Dto.VehicleMakeDto
+DEBUG 2017-12-05 15:39:08,389 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Manufacturing.Dto.VehicleFromModelsDto
+DEBUG 2017-12-05 15:39:08,390 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Manufacturing.Dto.VehicleModelsDto
+DEBUG 2017-12-05 15:39:08,390 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Manufacturing.Dto.VehicleModelsFDto
+DEBUG 2017-12-05 15:39:08,390 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.InsurersDto
+DEBUG 2017-12-05 15:39:08,391 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.InsurersListDto
+DEBUG 2017-12-05 15:39:08,391 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.InsurersToListDto
+DEBUG 2017-12-05 15:39:08,391 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.InsurersForListDto
+DEBUG 2017-12-05 15:39:08,392 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.InsurersMasterDto
+DEBUG 2017-12-05 15:39:08,392 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.CountriesDto
+DEBUG 2017-12-05 15:39:08,392 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.BranchClaimListDto
+DEBUG 2017-12-05 15:39:08,392 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.JobstatusTenantDto
+DEBUG 2017-12-05 15:39:08,393 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.JobStatusMasksDto
+DEBUG 2017-12-05 15:39:08,393 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.JobstatusTenantToDto
+DEBUG 2017-12-05 15:39:08,393 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.TowOperatorDto
+DEBUG 2017-12-05 15:39:08,393 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.TowTenantDto
+DEBUG 2017-12-05 15:39:08,394 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.TowOperatorMainDto
+DEBUG 2017-12-05 15:39:08,394 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.TowOperatorMainToDto
+DEBUG 2017-12-05 15:39:08,394 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.BrokersDto
+DEBUG 2017-12-05 15:39:08,395 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.BrokerMasterDto
+DEBUG 2017-12-05 15:39:08,395 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.CountriesDto
+DEBUG 2017-12-05 15:39:08,395 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.BrokersListDto
+DEBUG 2017-12-05 15:39:08,395 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.BrokersToListDto
+DEBUG 2017-12-05 15:39:08,396 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.BrokersForListDto
+DEBUG 2017-12-05 15:39:08,396 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2017-12-05 15:39:08,396 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Sessions.Dto.UserLoginInfoDto
+DEBUG 2017-12-05 15:39:08,396 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Organizations.Dto.OrganizationUnitDto
+DEBUG 2017-12-05 15:39:08,397 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Organizations.Dto.OrganizationUnitUserListDto
+DEBUG 2017-12-05 15:39:08,397 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Notifications.Dto.NotificationSubscriptionWithDisplayNameDto
+DEBUG 2017-12-05 15:39:08,398 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.MultiTenancy.Dto.TenantListDto
+DEBUG 2017-12-05 15:39:08,398 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.MultiTenancy.Dto.SignonPlansDto
+DEBUG 2017-12-05 15:39:08,398 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.MultiTenancy.Dto.TenantEditDto
+DEBUG 2017-12-05 15:39:08,401 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Localization.Dto.ApplicationLanguageEditDto
+DEBUG 2017-12-05 15:39:08,401 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Localization.Dto.ApplicationLanguageListDto
+DEBUG 2017-12-05 15:39:08,402 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Friendships.Dto.FriendDto
+DEBUG 2017-12-05 15:39:08,402 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Editions.Dto.EditionEditDto
+DEBUG 2017-12-05 15:39:08,402 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Editions.Dto.FlatFeatureDto
+DEBUG 2017-12-05 15:39:08,403 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Editions.Dto.EditionListDto
+DEBUG 2017-12-05 15:39:08,403 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Chat.Dto.ChatMessageDto
+DEBUG 2017-12-05 15:39:08,404 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Chat.Dto.ChatUserDto
+DEBUG 2017-12-05 15:39:08,404 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Chat.Dto.ChatUserWithMessagesDto
+DEBUG 2017-12-05 15:39:08,404 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Claim.Profile.Dto.CurrentUserProfileEditDto
+DEBUG 2017-12-05 15:39:08,404 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Claim.Dto.UserLoginAttemptDto
+DEBUG 2017-12-05 15:39:08,405 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Claim.Dto.UserListDto
+DEBUG 2017-12-05 15:39:08,405 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Roles.Dto.RoleListDto
+DEBUG 2017-12-05 15:39:08,405 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Roles.Dto.RoleEditDto
+DEBUG 2017-12-05 15:39:08,406 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Permissions.Dto.FlatPermissionDto
+DEBUG 2017-12-05 15:39:08,406 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Permissions.Dto.FlatPermissionWithLevelDto
+DEBUG 2017-12-05 15:39:08,406 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Auditing.Dto.AuditLogListDto
+DEBUG 2017-12-05 15:39:08,406 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Job.Dto.CreateClientInput
+DEBUG 2017-12-05 15:39:08,407 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Job.Dto.CreateJobInput
+DEBUG 2017-12-05 15:39:08,407 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.CountriesDto
+DEBUG 2017-12-05 15:39:08,407 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.BankDetailDto
+DEBUG 2017-12-05 15:39:08,408 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.BankToDto
+DEBUG 2017-12-05 15:39:08,408 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.JobStatusDto
+DEBUG 2017-12-05 15:39:08,408 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.JobStatusToDto
+DEBUG 2017-12-05 15:39:08,408 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.JobStatusMaskDto
+DEBUG 2017-12-05 15:39:08,409 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.JobStatusMaskToDto
+DEBUG 2017-12-05 15:39:08,409 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.QuoteStatusDto
+DEBUG 2017-12-05 15:39:08,409 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.QuoteStatusToDto
+DEBUG 2017-12-05 15:39:08,409 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.RepairTypeToDto
+DEBUG 2017-12-05 15:39:08,410 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.RepairTypeDto
+DEBUG 2017-12-05 15:39:08,410 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.RoleCategoryDto
+DEBUG 2017-12-05 15:39:08,410 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.RoleCategoryToDto
+DEBUG 2017-12-05 15:39:08,410 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.SignOnDto
+DEBUG 2017-12-05 15:39:08,410 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.SignOnToDto
+DEBUG 2017-12-05 15:39:08,411 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.TowOperatorDto
+DEBUG 2017-12-05 15:39:08,411 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.TowOperatorToDto
+DEBUG 2017-12-05 15:39:08,412 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Claim.Dto.UserListDto+UserListRoleDto
+DEBUG 2017-12-05 15:39:08,412 [76   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Web.Models.Account.TenantSelectionViewModel+TenantInfo
+DEBUG 2017-12-05 15:39:11,885 [76   ] Abp.Owin.OwinUserTokenProviderAccessor   - DataProtectionProvider has not been set yet.
+DEBUG 2017-12-05 15:39:12,029 [76   ] Abp.Owin.OwinUserTokenProviderAccessor   - DataProtectionProvider has not been set yet.
+DEBUG 2017-12-05 15:39:12,102 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Vehicle.IJobAppService' with service name 'app/job'.
+DEBUG 2017-12-05 15:39:12,110 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Timing.ITimingAppService' with service name 'app/timing'.
+DEBUG 2017-12-05 15:39:12,119 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Vendors.IVendorClaimAppService' with service name 'app/vendorClaim'.
+DEBUG 2017-12-05 15:39:12,128 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Quotes.IQuoteAppService' with service name 'app/quote'.
+DEBUG 2017-12-05 15:39:12,138 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Manufacturing.IManufactureAppService' with service name 'app/manufacture'.
+DEBUG 2017-12-05 15:39:12,144 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Insurer.IInsurerAppService' with service name 'app/insurer'.
+DEBUG 2017-12-05 15:39:12,157 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Dashboard.ITenantDashboardAppService' with service name 'app/tenantDashboard'.
+DEBUG 2017-12-05 15:39:12,166 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Claim.IBranchClaimAppService' with service name 'app/branchClaim'.
+DEBUG 2017-12-05 15:39:12,176 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Brokers.IBrokerAppService' with service name 'app/broker'.
+DEBUG 2017-12-05 15:39:12,184 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Sessions.ISessionAppService' with service name 'app/session'.
+DEBUG 2017-12-05 15:39:12,193 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Organizations.IOrganizationUnitAppService' with service name 'app/organizationUnit'.
+DEBUG 2017-12-05 15:39:12,204 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Notifications.INotificationAppService' with service name 'app/notification'.
+DEBUG 2017-12-05 15:39:12,213 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.MultiTenancy.ITenantAppService' with service name 'app/tenant'.
+DEBUG 2017-12-05 15:39:12,221 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Logging.IWebLogAppService' with service name 'app/webLog'.
+DEBUG 2017-12-05 15:39:12,232 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Localization.ILanguageAppService' with service name 'app/language'.
+DEBUG 2017-12-05 15:39:12,239 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Friendships.IFriendshipAppService' with service name 'app/friendship'.
+DEBUG 2017-12-05 15:39:12,247 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Editions.IEditionAppService' with service name 'app/edition'.
+DEBUG 2017-12-05 15:39:12,256 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Common.ICommonLookupAppService' with service name 'app/commonLookup'.
+DEBUG 2017-12-05 15:39:12,264 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Chat.IChatAppService' with service name 'app/chat'.
+DEBUG 2017-12-05 15:39:12,272 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Caching.ICachingAppService' with service name 'app/caching'.
+DEBUG 2017-12-05 15:39:12,280 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Claim.IUserLinkAppService' with service name 'app/userLink'.
+DEBUG 2017-12-05 15:39:12,288 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Claim.IUserLoginAppService' with service name 'app/userLogin'.
+DEBUG 2017-12-05 15:39:12,296 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Claim.IUserAppService' with service name 'app/user'.
+DEBUG 2017-12-05 15:39:12,310 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Claim.Profile.IProfileAppService' with service name 'app/profile'.
+DEBUG 2017-12-05 15:39:12,317 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Roles.IRoleAppService' with service name 'app/role'.
+DEBUG 2017-12-05 15:39:12,325 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Permissions.IPermissionAppService' with service name 'app/permission'.
+DEBUG 2017-12-05 15:39:12,334 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Auditing.IAuditLogAppService' with service name 'app/auditLog'.
+DEBUG 2017-12-05 15:39:12,341 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Configuration.Host.IHostSettingsAppService' with service name 'app/hostSettings'.
+DEBUG 2017-12-05 15:39:12,346 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Configuration.Tenants.ITenantSettingsAppService' with service name 'app/tenantSettings'.
+DEBUG 2017-12-05 15:39:12,356 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.AdminFunctions.ISystemDefaults' with service name 'app/systemDefaults'.
+DEBUG 2017-12-05 15:39:12,365 [76   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.AdminFunctions.IFunctions' with service name 'app/functions'.
+DEBUG 2017-12-05 15:39:18,757 [98   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"829c9214-6f10-4c62-8c6a-73d70cbbfff2","IpAddress":"::1","TenantId":null,"UserId":1,"ConnectTime":"2017-12-05T10:09:18.6772921Z","Properties":{}}
+DEBUG 2017-12-05 15:39:19,197 [65   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected (on reconnected event): {"ConnectionId":"f789314c-1e64-4733-ae9d-d21d52d9e891","IpAddress":"::1","TenantId":null,"UserId":1,"ConnectTime":"2017-12-05T10:09:18.4482797Z","Properties":{}}
+DEBUG 2017-12-05 15:39:19,252 [106  ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected (on reconnected event): {"ConnectionId":"1c6909f5-5bc9-4836-8864-7c91c316611e","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:09:18.4532772Z","Properties":{}}
+DEBUG 2017-12-05 15:39:19,276 [24   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected (on reconnected event): {"ConnectionId":"1c6909f5-5bc9-4836-8864-7c91c316611e","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:09:18.4522783Z","Properties":{}}
+DEBUG 2017-12-05 15:39:23,701 [17   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"c9b299b9-42a4-4e57-8812-2b4588f4222c","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:09:23.701577Z","Properties":{}}
+DEBUG 2017-12-05 15:39:44,890 [98   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: c9b299b9-42a4-4e57-8812-2b4588f4222c
+DEBUG 2017-12-05 15:39:52,979 [96   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: 1c6909f5-5bc9-4836-8864-7c91c316611e
+DEBUG 2017-12-05 15:39:53,041 [96   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: f789314c-1e64-4733-ae9d-d21d52d9e891
+DEBUG 2017-12-05 15:39:56,858 [88   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"4f41863a-e008-43c6-aaa4-eba79603d30f","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:09:56.8581773Z","Properties":{}}
+DEBUG 2017-12-05 15:39:57,170 [88   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: 4f41863a-e008-43c6-aaa4-eba79603d30f
+WARN  2017-12-05 15:41:15,154 [65   ] naries.DictionaryBasedLocalizationSource - Can not find ' FilterByRole' in localization source 'PanelMasterMVC5Separate'!
+DEBUG 2017-12-05 15:41:40,010 [65   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: 4f41863a-e008-43c6-aaa4-eba79603d30f
+WARN  2017-12-05 15:41:50,842 [106  ] naries.DictionaryBasedLocalizationSource - Can not find ' FilterByRole' in localization source 'PanelMasterMVC5Separate'!
+DEBUG 2017-12-05 15:41:56,532 [65   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"f14ec56e-6e6a-4224-ae72-d58edb590c3a","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:11:56.5321606Z","Properties":{}}
+DEBUG 2017-12-05 15:41:56,842 [24   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: f14ec56e-6e6a-4224-ae72-d58edb590c3a
+DEBUG 2017-12-05 15:44:21,052 [90   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: f14ec56e-6e6a-4224-ae72-d58edb590c3a
+WARN  2017-12-05 15:44:28,958 [24   ] naries.DictionaryBasedLocalizationSource - Can not find ' FilterByRole' in localization source 'PanelMasterMVC5Separate'!
+DEBUG 2017-12-05 15:44:33,693 [104  ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"dd99566c-4f72-41fa-a316-fcb2caab4d18","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:14:33.6931049Z","Properties":{}}
+DEBUG 2017-12-05 15:44:34,149 [82   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: dd99566c-4f72-41fa-a316-fcb2caab4d18
+DEBUG 2017-12-05 15:45:07,727 [65   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: dd99566c-4f72-41fa-a316-fcb2caab4d18
+WARN  2017-12-05 15:45:17,924 [71   ] naries.DictionaryBasedLocalizationSource - Can not find ' FilterByRole' in localization source 'PanelMasterMVC5Separate'!
+DEBUG 2017-12-05 15:45:20,931 [90   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"a0b040ec-0fee-4c33-8f6e-01d71cfade4a","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:15:20.9317918Z","Properties":{}}
+DEBUG 2017-12-05 15:45:21,561 [89   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: a0b040ec-0fee-4c33-8f6e-01d71cfade4a
+DEBUG 2017-12-05 15:48:11,365 [88   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: a0b040ec-0fee-4c33-8f6e-01d71cfade4a
+WARN  2017-12-05 15:48:21,409 [65   ] naries.DictionaryBasedLocalizationSource - Can not find ' FilterByRole' in localization source 'PanelMasterMVC5Separate'!
+DEBUG 2017-12-05 15:48:21,541 [80   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"fd8eef0a-54d2-4aa9-a418-d1c2e339f474","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:18:21.541785Z","Properties":{}}
+DEBUG 2017-12-05 15:48:23,955 [80   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: fd8eef0a-54d2-4aa9-a418-d1c2e339f474
+DEBUG 2017-12-05 15:54:54,330 [42   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: fd8eef0a-54d2-4aa9-a418-d1c2e339f474
+DEBUG 2017-12-05 15:55:20,322 [94   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"8c4c1a7b-a1bc-4e52-899f-3e7240e4f4f5","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:25:20.3217393Z","Properties":{}}
+DEBUG 2017-12-05 15:55:20,478 [94   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: 8c4c1a7b-a1bc-4e52-899f-3e7240e4f4f5
+DEBUG 2017-12-05 15:57:27,358 [72   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: 8c4c1a7b-a1bc-4e52-899f-3e7240e4f4f5
+DEBUG 2017-12-05 15:57:44,792 [86   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"ea71d850-9e27-49e2-a4ac-9690c4c09818","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:27:44.7928284Z","Properties":{}}
+DEBUG 2017-12-05 15:57:44,966 [93   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: ea71d850-9e27-49e2-a4ac-9690c4c09818
+DEBUG 2017-12-05 15:59:46,270 [89   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: ea71d850-9e27-49e2-a4ac-9690c4c09818
+DEBUG 2017-12-05 16:00:00,228 [88   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"e9855e9c-7678-49db-9beb-4a6106a596fe","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:30:00.2282595Z","Properties":{}}
+DEBUG 2017-12-05 16:00:00,430 [84   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: e9855e9c-7678-49db-9beb-4a6106a596fe
+WARN  2017-12-05 16:01:06,873 [80   ] naries.DictionaryBasedLocalizationSource - Can not find ' FilterByRole' in localization source 'PanelMasterMVC5Separate'!
+DEBUG 2017-12-05 16:04:05,328 [29   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: e9855e9c-7678-49db-9beb-4a6106a596fe
+DEBUG 2017-12-05 16:04:19,274 [103  ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"eb21ac08-93a9-4c35-972c-2ec83737982a","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:34:19.2746111Z","Properties":{}}
+DEBUG 2017-12-05 16:04:19,736 [103  ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: eb21ac08-93a9-4c35-972c-2ec83737982a
+DEBUG 2017-12-05 16:06:20,240 [71   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: eb21ac08-93a9-4c35-972c-2ec83737982a
+DEBUG 2017-12-05 16:06:30,061 [17   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"3c0b3e7c-0ba4-4562-b5ad-b9ae628666de","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:36:30.0610507Z","Properties":{}}
+DEBUG 2017-12-05 16:06:30,251 [65   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: 3c0b3e7c-0ba4-4562-b5ad-b9ae628666de
+DEBUG 2017-12-05 16:07:21,057 [17   ] Abp.Modules.AbpModuleManager             - Shutting down has been started
+DEBUG 2017-12-05 16:07:21,060 [17   ] Abp.BackgroundJobs.BackgroundJobManager  - Stop background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2017-12-05 16:07:21,062 [17   ] Abp.BackgroundJobs.BackgroundJobManager  - WaitToStop background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2017-12-05 16:07:21,062 [17   ] Abp.Modules.AbpModuleManager             - Shutting down completed.
+DEBUG 2017-12-05 16:08:11,441 [99   ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2017-12-05 16:08:11,515 [99   ] Abp.Modules.AbpModuleManager             - Found 21 ABP modules in total.
+DEBUG 2017-12-05 16:08:11,556 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: PanelMasterMVC5Separate.Web.PanelMasterMVC5SeparateWebModule, PanelMasterMVC5Separate.Web, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,565 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,567 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,568 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,569 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=2.2.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,570 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpZeroOwinModule, Abp.Zero.Owin, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,570 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.Zero, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,571 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,572 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: PanelMasterMVC5Separate.PanelMasterMVC5SeparateDataModule, PanelMasterMVC5Separate.EntityFramework, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,573 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFramework.AbpZeroEntityFrameworkModule, Abp.Zero.EntityFramework, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,575 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkModule, Abp.EntityFramework, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,575 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,576 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: PanelMasterMVC5Separate.PanelMasterMVC5SeparateCoreModule, PanelMasterMVC5Separate.Core, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,577 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.Ldap.AbpZeroLdapModule, Abp.Zero.Ldap, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,577 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,578 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: PanelMasterMVC5Separate.PanelMasterMVC5SeparateApplicationModule, PanelMasterMVC5Separate.Application, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,579 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: PanelMasterMVC5Separate.WebApi.PanelMasterMVC5SeparateWebApiModule, PanelMasterMVC5Separate.WebApi, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,579 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.WebApi.AbpWebApiModule, Abp.Web.Api, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,580 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.SignalR.AbpWebSignalRModule, Abp.Web.SignalR, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,581 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Runtime.Caching.Redis.AbpRedisCacheModule, Abp.RedisCache, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,581 [99   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Hangfire.AbpHangfireModule, Abp.HangFire, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:11,602 [99   ] Abp.Modules.AbpModuleManager             - 21 modules loaded.
+DEBUG 2017-12-05 16:08:12,508 [99   ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2017-12-05 16:08:12,509 [99   ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2017-12-05 16:08:12,509 [99   ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2017-12-05 16:08:12,509 [99   ] o.Configuration.LanguageManagementConfig - Converted PanelMasterMVC5Separate (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2017-12-05 16:08:15,562 [99   ] EntityFramework.AbpEntityFrameworkModule - Registering DbContext: PanelMasterMVC5Separate.EntityFramework.PanelMasterMVC5SeparateDbContext, PanelMasterMVC5Separate.EntityFramework, Version=4.2.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2017-12-05 16:08:24,694 [99   ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2017-12-05 16:08:24,729 [99   ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2017-12-05 16:08:24,737 [99   ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2017-12-05 16:08:24,887 [99   ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2017-12-05 16:08:24,961 [99   ] Abp.Localization.LocalizationManager     - Initialized localization source: PanelMasterMVC5Separate
+DEBUG 2017-12-05 16:08:25,273 [99   ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2017-12-05 16:08:29,524 [99   ] Abp.Owin.OwinUserTokenProviderAccessor   - DataProtectionProvider has not been set yet.
+DEBUG 2017-12-05 16:08:30,580 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - Found 82 classes define auto mapping attributes
+DEBUG 2017-12-05 16:08:30,580 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Friendships.Cache.FriendCacheItem
+DEBUG 2017-12-05 16:08:30,612 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Vendors.Dto.BankDto
+DEBUG 2017-12-05 16:08:30,612 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Vendors.Dto.CurrencyDto
+DEBUG 2017-12-05 16:08:30,612 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Vendors.Dto.VendorSaveDto
+DEBUG 2017-12-05 16:08:30,615 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Vendors.Dto.CountryDto
+DEBUG 2017-12-05 16:08:30,615 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Vendors.Dto.VendorDto
+DEBUG 2017-12-05 16:08:30,615 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.QuoteMastersDto
+DEBUG 2017-12-05 16:08:30,616 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.QuoteMasterDto
+DEBUG 2017-12-05 16:08:30,616 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.QuoteMasterToDto
+DEBUG 2017-12-05 16:08:30,616 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.QuoteStatusDto
+DEBUG 2017-12-05 16:08:30,616 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.QuoteCategoriesDto
+DEBUG 2017-12-05 16:08:30,617 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Quotes.Dto.RepairTypeDto
+DEBUG 2017-12-05 16:08:30,617 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Manufacturing.Dto.VehicleMakeDto
+DEBUG 2017-12-05 16:08:30,617 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Manufacturing.Dto.VehicleFromModelsDto
+DEBUG 2017-12-05 16:08:30,617 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Manufacturing.Dto.VehicleModelsDto
+DEBUG 2017-12-05 16:08:30,618 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Manufacturing.Dto.VehicleModelsFDto
+DEBUG 2017-12-05 16:08:30,618 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.InsurersDto
+DEBUG 2017-12-05 16:08:30,618 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.InsurersListDto
+DEBUG 2017-12-05 16:08:30,618 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.InsurersToListDto
+DEBUG 2017-12-05 16:08:30,618 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.InsurersForListDto
+DEBUG 2017-12-05 16:08:30,618 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.InsurersMasterDto
+DEBUG 2017-12-05 16:08:30,619 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Insurer.Dto.CountriesDto
+DEBUG 2017-12-05 16:08:30,619 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.BranchClaimListDto
+DEBUG 2017-12-05 16:08:30,619 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.JobstatusTenantDto
+DEBUG 2017-12-05 16:08:30,619 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.JobStatusMasksDto
+DEBUG 2017-12-05 16:08:30,619 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.JobstatusTenantToDto
+DEBUG 2017-12-05 16:08:30,619 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.TowOperatorDto
+DEBUG 2017-12-05 16:08:30,620 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.TowTenantDto
+DEBUG 2017-12-05 16:08:30,620 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.TowOperatorMainDto
+DEBUG 2017-12-05 16:08:30,620 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Claim.Dto.TowOperatorMainToDto
+DEBUG 2017-12-05 16:08:30,623 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.BrokersDto
+DEBUG 2017-12-05 16:08:30,624 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.BrokerMasterDto
+DEBUG 2017-12-05 16:08:30,624 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.CountriesDto
+DEBUG 2017-12-05 16:08:30,625 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.BrokersListDto
+DEBUG 2017-12-05 16:08:30,625 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.BrokersToListDto
+DEBUG 2017-12-05 16:08:30,625 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Tenants.Brokers.Dto.BrokersForListDto
+DEBUG 2017-12-05 16:08:30,626 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2017-12-05 16:08:30,626 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Sessions.Dto.UserLoginInfoDto
+DEBUG 2017-12-05 16:08:30,626 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Organizations.Dto.OrganizationUnitDto
+DEBUG 2017-12-05 16:08:30,626 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Organizations.Dto.OrganizationUnitUserListDto
+DEBUG 2017-12-05 16:08:30,627 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Notifications.Dto.NotificationSubscriptionWithDisplayNameDto
+DEBUG 2017-12-05 16:08:30,627 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.MultiTenancy.Dto.TenantListDto
+DEBUG 2017-12-05 16:08:30,628 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.MultiTenancy.Dto.SignonPlansDto
+DEBUG 2017-12-05 16:08:30,628 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.MultiTenancy.Dto.TenantEditDto
+DEBUG 2017-12-05 16:08:30,629 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Localization.Dto.ApplicationLanguageEditDto
+DEBUG 2017-12-05 16:08:30,630 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Localization.Dto.ApplicationLanguageListDto
+DEBUG 2017-12-05 16:08:30,630 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Friendships.Dto.FriendDto
+DEBUG 2017-12-05 16:08:30,630 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Editions.Dto.EditionEditDto
+DEBUG 2017-12-05 16:08:30,631 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Editions.Dto.FlatFeatureDto
+DEBUG 2017-12-05 16:08:30,631 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Editions.Dto.EditionListDto
+DEBUG 2017-12-05 16:08:30,631 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Chat.Dto.ChatMessageDto
+DEBUG 2017-12-05 16:08:30,632 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Chat.Dto.ChatUserDto
+DEBUG 2017-12-05 16:08:30,632 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Chat.Dto.ChatUserWithMessagesDto
+DEBUG 2017-12-05 16:08:30,632 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Claim.Profile.Dto.CurrentUserProfileEditDto
+DEBUG 2017-12-05 16:08:30,633 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Claim.Dto.UserLoginAttemptDto
+DEBUG 2017-12-05 16:08:30,633 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Claim.Dto.UserListDto
+DEBUG 2017-12-05 16:08:30,633 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Roles.Dto.RoleListDto
+DEBUG 2017-12-05 16:08:30,634 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Roles.Dto.RoleEditDto
+DEBUG 2017-12-05 16:08:30,634 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Permissions.Dto.FlatPermissionDto
+DEBUG 2017-12-05 16:08:30,634 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Permissions.Dto.FlatPermissionWithLevelDto
+DEBUG 2017-12-05 16:08:30,635 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Auditing.Dto.AuditLogListDto
+DEBUG 2017-12-05 16:08:30,635 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Job.Dto.CreateClientInput
+DEBUG 2017-12-05 16:08:30,635 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Job.Dto.CreateJobInput
+DEBUG 2017-12-05 16:08:30,636 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.CountriesDto
+DEBUG 2017-12-05 16:08:30,636 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.BankDetailDto
+DEBUG 2017-12-05 16:08:30,636 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.BankToDto
+DEBUG 2017-12-05 16:08:30,636 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.JobStatusDto
+DEBUG 2017-12-05 16:08:30,637 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.JobStatusToDto
+DEBUG 2017-12-05 16:08:30,637 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.JobStatusMaskDto
+DEBUG 2017-12-05 16:08:30,637 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.JobStatusMaskToDto
+DEBUG 2017-12-05 16:08:30,637 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.QuoteStatusDto
+DEBUG 2017-12-05 16:08:30,637 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.QuoteStatusToDto
+DEBUG 2017-12-05 16:08:30,637 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.RepairTypeToDto
+DEBUG 2017-12-05 16:08:30,638 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.RepairTypeDto
+DEBUG 2017-12-05 16:08:30,638 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.RoleCategoryDto
+DEBUG 2017-12-05 16:08:30,638 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.RoleCategoryToDto
+DEBUG 2017-12-05 16:08:30,638 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.SignOnDto
+DEBUG 2017-12-05 16:08:30,638 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.SignOnToDto
+DEBUG 2017-12-05 16:08:30,638 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.TowOperatorDto
+DEBUG 2017-12-05 16:08:30,639 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.AdminFunctions.Dto.TowOperatorToDto
+DEBUG 2017-12-05 16:08:30,639 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Authorization.Claim.Dto.UserListDto+UserListRoleDto
+DEBUG 2017-12-05 16:08:30,639 [99   ] Abp.AutoMapper.AbpAutoMapperModule       - PanelMasterMVC5Separate.Web.Models.Account.TenantSelectionViewModel+TenantInfo
+DEBUG 2017-12-05 16:08:34,260 [99   ] Abp.Owin.OwinUserTokenProviderAccessor   - DataProtectionProvider has not been set yet.
+DEBUG 2017-12-05 16:08:34,437 [99   ] Abp.Owin.OwinUserTokenProviderAccessor   - DataProtectionProvider has not been set yet.
+DEBUG 2017-12-05 16:08:34,501 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Vehicle.IJobAppService' with service name 'app/job'.
+DEBUG 2017-12-05 16:08:34,510 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Timing.ITimingAppService' with service name 'app/timing'.
+DEBUG 2017-12-05 16:08:34,517 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Vendors.IVendorClaimAppService' with service name 'app/vendorClaim'.
+DEBUG 2017-12-05 16:08:34,533 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Quotes.IQuoteAppService' with service name 'app/quote'.
+DEBUG 2017-12-05 16:08:34,546 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Manufacturing.IManufactureAppService' with service name 'app/manufacture'.
+DEBUG 2017-12-05 16:08:34,559 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Insurer.IInsurerAppService' with service name 'app/insurer'.
+DEBUG 2017-12-05 16:08:34,567 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Dashboard.ITenantDashboardAppService' with service name 'app/tenantDashboard'.
+DEBUG 2017-12-05 16:08:34,577 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Claim.IBranchClaimAppService' with service name 'app/branchClaim'.
+DEBUG 2017-12-05 16:08:34,585 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Tenants.Brokers.IBrokerAppService' with service name 'app/broker'.
+DEBUG 2017-12-05 16:08:34,593 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Sessions.ISessionAppService' with service name 'app/session'.
+DEBUG 2017-12-05 16:08:34,603 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Organizations.IOrganizationUnitAppService' with service name 'app/organizationUnit'.
+DEBUG 2017-12-05 16:08:34,614 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Notifications.INotificationAppService' with service name 'app/notification'.
+DEBUG 2017-12-05 16:08:34,636 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.MultiTenancy.ITenantAppService' with service name 'app/tenant'.
+DEBUG 2017-12-05 16:08:34,644 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Logging.IWebLogAppService' with service name 'app/webLog'.
+DEBUG 2017-12-05 16:08:34,658 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Localization.ILanguageAppService' with service name 'app/language'.
+DEBUG 2017-12-05 16:08:34,667 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Friendships.IFriendshipAppService' with service name 'app/friendship'.
+DEBUG 2017-12-05 16:08:34,677 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Editions.IEditionAppService' with service name 'app/edition'.
+DEBUG 2017-12-05 16:08:34,685 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Common.ICommonLookupAppService' with service name 'app/commonLookup'.
+DEBUG 2017-12-05 16:08:34,694 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Chat.IChatAppService' with service name 'app/chat'.
+DEBUG 2017-12-05 16:08:34,704 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Caching.ICachingAppService' with service name 'app/caching'.
+DEBUG 2017-12-05 16:08:34,713 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Claim.IUserLinkAppService' with service name 'app/userLink'.
+DEBUG 2017-12-05 16:08:34,720 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Claim.IUserLoginAppService' with service name 'app/userLogin'.
+DEBUG 2017-12-05 16:08:34,729 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Claim.IUserAppService' with service name 'app/user'.
+DEBUG 2017-12-05 16:08:34,737 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Claim.Profile.IProfileAppService' with service name 'app/profile'.
+DEBUG 2017-12-05 16:08:34,745 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Roles.IRoleAppService' with service name 'app/role'.
+DEBUG 2017-12-05 16:08:34,756 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Authorization.Permissions.IPermissionAppService' with service name 'app/permission'.
+DEBUG 2017-12-05 16:08:34,764 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Auditing.IAuditLogAppService' with service name 'app/auditLog'.
+DEBUG 2017-12-05 16:08:34,776 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Configuration.Host.IHostSettingsAppService' with service name 'app/hostSettings'.
+DEBUG 2017-12-05 16:08:34,787 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.Configuration.Tenants.ITenantSettingsAppService' with service name 'app/tenantSettings'.
+DEBUG 2017-12-05 16:08:34,795 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.AdminFunctions.ISystemDefaults' with service name 'app/systemDefaults'.
+DEBUG 2017-12-05 16:08:34,804 [99   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'PanelMasterMVC5Separate.AdminFunctions.IFunctions' with service name 'app/functions'.
+DEBUG 2017-12-05 16:08:53,659 [77   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"4df42f9e-e9d1-48f1-bc6d-853c751f6506","IpAddress":"::1","TenantId":null,"UserId":1,"ConnectTime":"2017-12-05T10:38:53.5545318Z","Properties":{}}
+DEBUG 2017-12-05 16:08:53,930 [29   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected (on reconnected event): {"ConnectionId":"3c0b3e7c-0ba4-4562-b5ad-b9ae628666de","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:38:50.5893616Z","Properties":{}}
+DEBUG 2017-12-05 16:08:53,937 [97   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected (on reconnected event): {"ConnectionId":"3c0b3e7c-0ba4-4562-b5ad-b9ae628666de","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:38:50.5973626Z","Properties":{}}
+DEBUG 2017-12-05 16:08:53,937 [88   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected (on reconnected event): {"ConnectionId":"3c0b3e7c-0ba4-4562-b5ad-b9ae628666de","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:38:50.5933626Z","Properties":{}}
+DEBUG 2017-12-05 16:08:53,997 [94   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected (on reconnected event): {"ConnectionId":"829c9214-6f10-4c62-8c6a-73d70cbbfff2","IpAddress":"::1","TenantId":null,"UserId":1,"ConnectTime":"2017-12-05T10:38:50.5933626Z","Properties":{}}
+DEBUG 2017-12-05 16:08:53,997 [80   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected (on reconnected event): {"ConnectionId":"3c0b3e7c-0ba4-4562-b5ad-b9ae628666de","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:38:50.594361Z","Properties":{}}
+DEBUG 2017-12-05 16:08:55,730 [17   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"52d98e55-b69e-4124-81c3-22630ffb8ca0","IpAddress":"::1","TenantId":19,"UserId":13,"ConnectTime":"2017-12-05T10:38:55.7306125Z","Properties":{}}

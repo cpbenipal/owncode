@@ -72,6 +72,7 @@
     <text name="ResetPermissionsTooltip" value="This button immediately resets user specific permission settings and saves changes. The user will only have permissions from assigned roles." />
     <text name="ResetSuccessfully" value="Reset successfully" />
     <text name="Tenants" value="Tenants" />
+    <text name="Tenant" value="Tenant" />
     <text name="Mask" value="Mask" />
     <text name="Insurers" value="Insurers" />
     <text name="AddInsurer" value="Add Insurer" />

@@ -268,23 +268,22 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                         icon: "icon-settings",
                         requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                         )
-                    )
+                    ))
+                     .AddItem(new MenuItemDefinition(
+                        PageNames.App.Tenant.Tenants,
+                        L("Tenant"),
+                        icon: "icon-settings",
+                        requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
+                        )
+
                     .AddItem(new MenuItemDefinition(
                         PageNames.App.Tenant.TowOperators,
                         L("TowOperators"),
                         url: "tenant.towoperators",
-                        icon: "icon-settings",
+                        icon: "glyphicon glyphicon-search",
                         requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                         )
                     )
-                    // .AddItem(new MenuItemDefinition(
-                    //    PageNames.App.Tenant.JobStatuses,
-                    //    L("JobStatuses"),
-                    //    url: "tenant.jobstatuses",
-                    //    icon: "icon-settings",
-                    //    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
-                    //    )
-                    //) 
                     .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Vendors,
                     L("Vendors"),
@@ -308,7 +307,7 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                      url: "tenant.Brokers",
                      requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     ))
-                );
+                    );
         }
 
         private static ILocalizableString L(string name)

@@ -87,7 +87,7 @@
                                                     <span class="input-group-addon input-circle-left">
                                                         <i class="fa fa-phone"></i>
                                                     </span>
-                                                    <input type="text" ng-model="vm.subVendor.contactPhone" ng-class="{'edited':vm.subVendor.contactPhone}"  placeholder="Contact Phone" class="form-control input-circle-right">
+                                                    <input type="text" maxlength="10" ng-model="vm.subVendor.contactPhone" ng-class="{'edited':vm.subVendor.contactPhone}"  placeholder="Contact Phone" class="form-control input-circle-right">
 
                                                 </div>
                                             </div>
@@ -99,7 +99,7 @@
                                                     <span class="input-group-addon input-circle-left">
                                                         <i class="fa fa-fax"></i>
                                                     </span>
-                                                    <input type="text" ng-model="vm.subVendor.contactFax"  ng-class="{'edited':vm.subVendor.contactFax}" class="form-control input-circle-right" placeholder="Contact Fax">
+                                                    <input type="text" maxlength="10" ng-model="vm.subVendor.contactFax"  ng-class="{'edited':vm.subVendor.contactFax}" class="form-control input-circle-right" placeholder="Contact Fax">
                                                 </div>
                                             </div>
                                         </div>
@@ -157,29 +157,7 @@
                                                     <input type="text" ng-model="vm.subVendor.location" ng-class="{'edited':vm.subVendor.location}"  class="form-control input-circle-right" placeholder="Location">
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Registration Number</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon input-circle-left">
-                                                        <i class="fa fa-registered"></i>
-                                                    </span>
-                                                    <input type="text" readonly ng-model="vm.mainVendor.registrationNumber" ng-class="{'edited':vm.mainVendor.registrationNumber}"  class="form-control input-circle-right" placeholder="Registration">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Tax Registration Number</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon input-circle-left">
-                                                        <i class="fa fa-registered"></i>
-                                                    </span>
-                                                    <input type="text" readonly ng-model="vm.mainVendor.taxRegistrationNumber" ng-class="{'edited':vm.mainVendor.taxRegistrationNumber}"  class="form-control input-circle-right" placeholder="Tax Registration">
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </div>                                        
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Supplier Account</label>
                                             <div class="col-md-4">
