@@ -461,10 +461,10 @@ appModule.config([
         //    url: '/jobstatuses',
         //    templateUrl: '~/App/tenant/views/jobstatuses/index.cshtml'
         //});
-        //$stateProvider.state('tenant.JobMaskStatuses', {
-        //    url: '/JobMaskStatuses',
-        //    templateUrl: '~/App/tenant/views/JobMaskStatuses/index.cshtml'
-        //});
+        $stateProvider.state('tenant.createjob', {
+            url: '/createjob',
+            templateUrl: '~/App/tenant/views/createjob/index.cshtml'
+        });
         $stateProvider.state('tenant.towoperators', {
             url: '/towoperators',
             templateUrl: '~/App/tenant/views/towoperators/index.cshtml'

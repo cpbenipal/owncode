@@ -576,6 +576,7 @@
     <Content Include="App\tenant\views\invoiced_values\index.js" />
     <Content Include="App\tenant\views\JobStatuses\createOrEditModal.js" />
     <Content Include="App\tenant\views\JobStatuses\index.js" />
+    <Content Include="App\tenant\views\createjob\index.js" />
     <Content Include="App\tenant\views\settings\changeLogo.cshtml" />
     <Content Include="App\tenant\views\settings\changeLogo.js" />
     <Content Include="App\tenant\views\settings\editRegister.js" />
@@ -1349,7 +1350,9 @@
     <Content Include="assets\pages\scripts\form-validation-md.min.js" />
     <Content Include="assets\pages\scripts\form-validation.js" />
     <Content Include="assets\pages\scripts\form-validation.min.js" />
+    <Content Include="assets\pages\scripts\createjob-form-wizard.js" />
     <Content Include="assets\pages\scripts\form-wizard.js" />
+    <Content Include="assets\pages\scripts\createjob-form-wizard.min.js" />
     <Content Include="assets\pages\scripts\form-wizard.min.js" />
     <Content Include="assets\pages\scripts\inbox.js" />
     <Content Include="assets\pages\scripts\inbox.min.js" />
@@ -6885,6 +6888,8 @@
     <Content Include="metronic\assets\pages\scripts\form-validation-md.min.js" />
     <Content Include="metronic\assets\pages\scripts\form-validation.js" />
     <Content Include="metronic\assets\pages\scripts\form-validation.min.js" />
+    <Content Include="metronic\assets\pages\scripts\createjob-form-wizard.js" />
+    <Content Include="metronic\assets\pages\scripts\createjob-form-wizard.min.js" />
     <Content Include="Views\TenantRegistration\form-wizard.js" />
     <Content Include="metronic\assets\pages\scripts\form-wizard.js" />
     <Content Include="Views\TenantRegistration\form-wizard.min.js" />
@@ -7698,6 +7703,7 @@
     <Content Include="App\host\views\VehicleMakes\createOrEditModal.cshtml" />
     <Content Include="App\host\views\VehicleMades\createOrEditModal.cshtml" />
     <Content Include="App\tenant\views\towoperators\addedittow.cshtml" />
+    <Content Include="App\tenant\views\createjob\index.cshtml" />
     <None Include="Properties\PublishProfiles\aspnetzero - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />

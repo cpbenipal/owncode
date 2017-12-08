@@ -1,6 +1,9 @@
 ﻿using System.Linq;
 using PanelMasterMVC5Separate.Editions;
 using PanelMasterMVC5Separate.EntityFramework;
+using System.Collections.Generic;
+using PanelMasterMVC5Separate.Vehicle;
+using System.Data.Entity.Migrations;
 
 namespace PanelMasterMVC5Separate.Migrations.Seed.Tenants
 {
@@ -16,6 +19,7 @@ namespace PanelMasterMVC5Separate.Migrations.Seed.Tenants
         public void Create()
         {
             CreateDefaultTenant();
+            CreateDefaultPaintTypes();
         }
 
         private void CreateDefaultTenant()
@@ -36,6 +40,35 @@ namespace PanelMasterMVC5Separate.Migrations.Seed.Tenants
                 _context.Tenants.Add(defaultTenant);
                 _context.SaveChanges();
             }
+        }
+        
+
+        private void CreateDefaultPaintTypes()
+        {
+            var data = new List<PaintTypes>();
+            data.AddRange(GetDefaultPaintTypes());
+            _context.PaintTypes.AddOrUpdate(data.ToArray());
+            _context.SaveChanges();
+        }
+        private IEnumerable<PaintTypes> GetDefaultPaintTypes()
+        {
+            yield return PaintTypes("Solid");
+            yield return PaintTypes("Metallic");
+            yield return PaintTypes("Pearlescent");
+            yield return PaintTypes("Matte");
+        }
+
+        private PaintTypes PaintTypes(string name)
+        {
+            if (!_context.PaintTypes.Any(x => x.PaintType == name))
+            {
+                return new PaintTypes()
+                {
+                    PaintType = name
+                };
+            }
+            else
+                return new PaintTypes() { };
         }
     }
 }

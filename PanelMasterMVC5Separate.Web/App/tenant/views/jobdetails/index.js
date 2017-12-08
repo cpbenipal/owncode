@@ -147,6 +147,10 @@
                 openCreateOrEditUserModal(null);
             };
 
+            vm.createnewjob = function () {
+                window.location.href = "#!/tenant/createjob";
+            };
+
             vm.editPermissions = function (user) {
                 $uibModal.open({
                     templateUrl: '~/App/common/views/users/permissionsModal.cshtml',

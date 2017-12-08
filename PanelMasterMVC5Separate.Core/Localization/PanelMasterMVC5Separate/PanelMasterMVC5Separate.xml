@@ -332,7 +332,7 @@
     <text name="ContactNumber" value="Contact Number" />
     <text name="ContactPerson" value="Contact Person" />
     <text name="TowoperatorInformation" value="Tow Operator Information" />
-    <text name="TowOperators" value="Tow Operators" />    
+    <text name="TowOperators" value="Tow Operators" />
     <text name="AddNewBroker" value="Add New Broker" />
     <text name="AddNewInsurer" value="Add New Insurer" />
     <text name="AddNewVendor" value="Add New Vendor" />
@@ -343,9 +343,9 @@
     <text name="AdminLoginName" value="Admin Login Name" />
     <text name="ChooseAdminLoginName" value="Choose Admin Login Name" />
     <text name="FullName" value="Full Name" />
-    <text name="CellNumber" value="Cell Number" />    
+    <text name="CellNumber" value="Cell Number" />
     <text name="OTP" value="OTP"/>
-    <text name="EnterOTP" value="Please enter OTP send to ( cell number and email)."/>   
+    <text name="EnterOTP" value="Please enter OTP send to ( cell number and email)."/>
     <text name="Billing" value="Billing" />
     <text name="FaximileeNumber" value="Faximilee Number" />
     <text name="YourFullName" value="Your FullName" />
@@ -665,8 +665,8 @@
     <text name="CompanyRegistrationNo">Company Registration No</text>
     <text name="Country">Country</text>
     <text name="CityTown">City/Town</text>
-    <text name="Address">Address</text> 
-    <text name="Company">Company</text>     
+    <text name="Address">Address</text>
+    <text name="Company">Company</text>
     <text name="AdminFunctions" value="Admin Functions" />
     <text name="ChangeLogo" value="Change Logo" />
     <text name="CompanyContactNumber" value="Company Contact Number" />
@@ -674,5 +674,6 @@
     <text name="Logo" value="Logo" />
     <text name="SystemDefaults" value="System Defaults" />
     <text name="SignOnPlans" value="Signon Plans" />
+    <text name="CreateJob" value="Create Job" />
   </texts>
 </localizationDictionary>

@@ -66,6 +66,9 @@ namespace PanelMasterMVC5Separate.EntityFramework
         public virtual IDbSet<TenantProfile> TenantProfiles { get; set; }
         public virtual IDbSet<TenantPlanBillingDetails> TenantPlanBillingDetail { get; set; }
         public virtual IDbSet<TenantCompanyLogo> TenantCompanyLogo { get; set; }
+        public virtual IDbSet<PaintTypes> PaintTypes { get; set; }
+        public virtual IDbSet<BrVehicle> BrVehicle { get; set; }
+        public virtual IDbSet<VehicleInsurance> VehicleInsurance { get; set; } 
 
         public PanelMasterMVC5SeparateDbContext()
         : base("Default")

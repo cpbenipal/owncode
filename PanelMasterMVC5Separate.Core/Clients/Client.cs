@@ -21,5 +21,7 @@ namespace PanelMasterMVC5Separate.Clients
         public virtual string CommunicationType { get; set; }        
         public virtual bool ContactAfterService { get; set; }
 
+        public virtual string IdNumber { get; set; }
+        public virtual string OtherInformation { get; set; }
     }
 }

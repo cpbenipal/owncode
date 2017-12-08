@@ -232,6 +232,18 @@
     <Compile Include="Migrations\201712020046169_ChangeInTow_Vendor_tbls_24.Designer.cs">
       <DependentUpon>201712020046169_ChangeInTow_Vendor_tbls_24.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712061120208_createnewjob.cs" />
+    <Compile Include="Migrations\201712061120208_createnewjob.Designer.cs">
+      <DependentUpon>201712061120208_createnewjob.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712061744137_createnewjobagainjjj.cs" />
+    <Compile Include="Migrations\201712061744137_createnewjobagainjjj.Designer.cs">
+      <DependentUpon>201712061744137_createnewjobagainjjj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712061855355_newjob.cs" />
+    <Compile Include="Migrations\201712061855355_newjob.Designer.cs">
+      <DependentUpon>201712061855355_newjob.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -402,6 +414,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712020046169_ChangeInTow_Vendor_tbls_24.resx">
       <DependentUpon>201712020046169_ChangeInTow_Vendor_tbls_24.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712061120208_createnewjob.resx">
+      <DependentUpon>201712061120208_createnewjob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712061744137_createnewjobagainjjj.resx">
+      <DependentUpon>201712061744137_createnewjobagainjjj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712061855355_newjob.resx">
+      <DependentUpon>201712061855355_newjob.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

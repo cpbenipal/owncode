@@ -52,6 +52,11 @@ namespace PanelMasterMVC5Separate.Claim
         public virtual string UnderWaranty { get; set; }
         public virtual bool New_Comeback { get; set; }
 
+        public virtual string DamangeReason { get; set; }
+        public virtual string BranchEntryMethod { get; set; }
+        public virtual bool IsUnrelatedDamangeReason { get; set; }
+        public virtual string CurrentKMs { get; set; }
+        public virtual string OtherInformation { get; set; }
     }
 
     [Table("tblJobstatus")]

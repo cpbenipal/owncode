@@ -1,0 +1,432 @@
+<div class="portlet light bordered" id="form_wizard_1">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class=" icon-layers font-red"></i>
+            <span class="caption-subject font-red bold uppercase">
+                Client,Vehicle,Repair & Insurer Details -
+                <span class="step-title"> Step 1 of 4 </span>
+            </span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form ng-controller="tenant.views.createjob.index as vm" class="form-horizontal" action="#" id="submit_form" method="POST">
+            <div class="form-wizard">
+                <div class="form-body">
+                    <ul class="nav nav-pills nav-justified steps">
+                        <li>
+                            <a href="#tab1" data-toggle="tab" class="step">
+                                <span class="number"> 1 </span>
+                                <span class="desc">
+                                    <i class="fa fa-check"></i> Client Details
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab2" data-toggle="tab" class="step">
+                                <span class="number"> 2 </span>
+                                <span class="desc">
+                                    <i class="fa fa-check"></i> Vehicle Details
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab3" data-toggle="tab" class="step active">
+                                <span class="number"> 3 </span>
+                                <span class="desc">
+                                    <i class="fa fa-check"></i> Repair Details
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab4" data-toggle="tab" class="step">
+                                <span class="number"> 4 </span>
+                                <span class="desc">
+                                    <i class="fa fa-check"></i> Insurer Quote Details
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div id="bar" class="progress progress-striped" role="progressbar">
+                        <div class="progress-bar progress-bar-success"> </div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="alert alert-danger display-none">
+                            <button class="close" data-dismiss="alert"></button> You have some form errors. Please check below.
+                        </div>
+                        <div class="alert alert-success display-none">
+                            <button class="close" data-dismiss="alert"></button> Your form validation is successful!
+                        </div>
+                        <div class="tab-pane active" id="tab1">
+                            <h3 class="block">Provide Client Details</h3>
+                            
+                            <div class="form-group">
+
+                                <label class="control-label col-md-3">
+                                    First Name
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input ng-model="vm.client.Name" type="text" class="form-control" name="firstname" />
+                                    <span class="help-block"> Provide your firstname </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Surname
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input ng-model="vm.client.Surname" type="text" class="form-control" name="surname" />
+                                    <span class="help-block"> Provide your surname </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Title
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <select ng-model="vm.job.Title" name="title" id="title" class="form-control">
+                                        <option value="">Select One</option>
+                                        <option value="mr">MR</option>
+                                        <option value="mrs">MRS</option>
+                                        <option value="miss">MISS</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Tel/Cell
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input ng-model="vm.client.Tel" type="text" class="form-control" name="phone" />
+                                    <span class="help-block"> Provide your phone number </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Email
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input ng-model="vm.client.Email" type="text" class="form-control" name="email" />
+                                    <span class="help-block"> Provide your email address </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Id Number
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input ng-model="vm.client.IdNumber" type="text" class="form-control" name="idnumber" />
+                                    <span class="help-block"> Provide your Id Number </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    How would you like to be communicated
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <select ng-model="vm.job.CommunicationType" name="CommunicationType" id="CommunicationType" class="form-control">
+                                        <option value="">Select One</option>
+                                        <option value="all">All</option>
+                                        <option value="sms">SMS</option>
+                                        <option value="email">Email</option>
+                                        <option value="telephone">Telephone</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Once your repair is completed, do you give us permission to send you electronic communication on additional services we offer?
+
+                                </label>
+                                <div class="col-md-4">
+                                    <select ng-model="vm.job.ContactAfterService" name="ContactAfterService" id="ContactAfterService" class="form-control">
+                                        <option value="">Select One</option>
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Other Information
+                                </label>
+                                <div class="col-md-4">
+                                    <textarea class="form-control" rows="3" ng-model="vm.job.ClientOtherInformation" name="ClientOtherInformation"></textarea>
+                                    <span class="help-block"> </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                            <h3 class="block">Provide vehicle details</h3>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Make
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <select ng-model="vm.job.MakeID" ng-options="source.name for source in manufactureList" data-ng-change="getModels(vm.job.MakeID)" name="MakeID" class="form-control">
+                                        <option value="">Select One</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Model
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <select ng-model="vm.job.ModelID" ng-options="item.name for item in modelList" name="ModelID" id="ModelID" class="form-control">
+                                        <option value="">Select One</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Colour
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input ng-model="vm.job.Colour" type="color" class="form-control" name="colour" />
+                                    <span class="help-block"> Provide colour of the car </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Paint Type
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <select ng-model="vm.job.PaintTypeID" ng-options="item.name for item in paintList" name="PaintTypeID" id="PaintTypeID" class="form-control">
+                                        <option value="">Select One</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Year
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input ng-model="vm.job.Year" type="text" class="form-control" name="year" />
+                                    <span class="help-block"> Provide year of the car </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Registration No
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input ng-model="vm.job.RegNo" type="text" class="form-control" name="regno" />
+                                    <span class="help-block"> Provide reg.no of the car </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Vin Number
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input ng-model="vm.job.VinNumber" type="text" class="form-control" name="VinNumber" />
+                                    <span class="help-block"> Provide Vin no. of the car </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Is your vehicle still under warranty?
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <div class="radio-list">
+                                        <label>
+                                            <input ng-model="vm.job.UnderWaranty" type="radio" name="warranty" value="y" data-title="Yes" /> Yes
+                                        </label>
+                                        <label>
+                                            <input ng-model="vm.job.UnderWaranty" type="radio" name="warranty" value="n" data-title="No" /> No
+                                        </label>
+                                    </div>
+                                    <div id="form_warranty_error"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab3">
+                            <h3 class="block">Provide vehicle repair/accident details</h3>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Comeback/Waranty
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <select ng-model="vm.job.New_Comeback" name="New_Comeback" id="New_Comeback" class="form-control">
+                                        <option value="">Select One</option>
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Describe briefly how the vehicle was damaged
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <textarea ng-model="vm.job.DamangeReason" class="form-control" rows="3" name="DamangeReason"></textarea>
+                                    <span class="help-block"> </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Whilst your vehicle is with us for this particular repair, is there other damage (unrelated to this claim) that you would like us to repair?
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <select ng-model="vm.job.IsUnrelatedDamangeReason" name="IsUnrelatedDamangeReason" id="IsUnrelatedDamangeReason" class="form-control">
+                                        <option value="">Select One</option>
+                                        <option value="Y">Yes</option>
+                                        <option value="N">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Branch entry method
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <select ng-model="vm.job.BranchEntryMethod" name="BranchEntryMethod" id="BranchEntryMethod" class="form-control">
+                                        <option value="">Select One</option>
+                                        <option value="D">Drivable</option>
+                                        <option value="T">Non Drivable</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Current Km's/Miles on Vehicle
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input ng-model="vm.job.CurrentKMs" type="text" class="form-control" name="CurrentKMs" />
+                                    <span class="help-block"> Provide Current KMs of the car </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Other Information
+                                </label>
+                                <div class="col-md-4">
+                                    <textarea ng-model="vm.job.RepairOtherInformation" class="form-control" rows="3" name="RepairOtherInformation"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab4">
+                            <h3 class="block">Quotation Details</h3>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Insurance Company
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <select ng-model="vm.job.InsuranceID" ng-options="insurance.name for insurance in InsuranceList" name="InsuranceID" id="InsuranceID" class="form-control">
+                                        <option value="">Select One</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Broker
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <select ng-model="vm.job.BrokerID" name="BrokerID" id="BrokerID" ng-options="broker.name for broker in BrokerList" class="form-control">
+                                        <option value="">Select One</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Claim Administrator
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" ng-model="vm.job.ClaimAdministrator" class="form-control" name="ClaimAdministrator" />
+                                    <span class="help-block"> Provide Claim Administrator</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Policy Number
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" ng-model="vm.job.PolicyNumber" class="form-control" name="insurance_policy_number" />
+                                    <span class="help-block"> Provide Policy Number</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Claim Number
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" ng-model="vm.job.ClaimNumber" class="form-control" name="insurance_claim_number" />
+                                    <span class="help-block"> Provide Claim Number</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Other Information
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <textarea ng-model="vm.job.InsurerOtherInformation" class="form-control" rows="3" name="InsurerOtherInformation"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            <a href="javascript:;" class="btn default button-previous">
+                                <i class="fa fa-angle-left"></i> Back
+                            </a>
+                            <a href="javascript:;" class="btn btn-outline green button-next">
+                                Continue
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                            <a href="javascript:;" class="btn green button-submit">
+                                Submit
+                                <i class="fa fa-check"></i>
+                            </a>
+                        </div>
+                    </div>+
+                </div>
+            </div>
+        </form>
+    </div>
+     
+    <script src="~/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+    <script src="~/assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
+
+    <script src="~/assets/pages/scripts/createjob-form-wizard.js" type="text/javascript"></script>
+
+    <script src="~/assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
+    <script src="~/assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
+    <script src="~/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+    <script src="~/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script> 
+</div> 

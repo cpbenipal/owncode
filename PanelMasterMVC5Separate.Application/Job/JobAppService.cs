@@ -29,10 +29,13 @@ namespace PanelMasterMVC5Separate.Vehicle
         private readonly IRepository<BrokerMaster> _brokerRepository;
         private readonly IRepository<Jobs> _jobsRepository;
         private readonly IRepository<Client> _clientRepository;
+         
+        private readonly IRepository<PaintTypes> _painttypesrepository; 
 
         public JobAppService(IRepository<VehicleMake> manufactureRepository, IRepository<VehicleModels> vehiclemodelRepository
                              , IRepository<InsurerMaster> insurersRepository,IRepository<BrokerMaster> brokerRepository
-                             ,IRepository<Jobs> jobsRepository, IRepository<Client> clientRepository)
+                             ,IRepository<Jobs> jobsRepository, IRepository<Client> clientRepository, 
+            IRepository<PaintTypes> painttypesrepository)
         {
             _manufactureRepository = manufactureRepository;
             _vehiclemodelRepository = vehiclemodelRepository;
@@ -41,6 +44,8 @@ namespace PanelMasterMVC5Separate.Vehicle
             _brokerRepository = brokerRepository;
             _jobsRepository = jobsRepository;
             _clientRepository = clientRepository;
+             
+            _painttypesrepository = painttypesrepository;
         }
         public ListResultDto<VehicleMakeDto> GetManufacture()
         {
@@ -50,6 +55,16 @@ namespace PanelMasterMVC5Separate.Vehicle
                 .ToList();
 
             return new ListResultDto<VehicleMakeDto>(ObjectMapper.Map<List<VehicleMakeDto>>(manufacture));
+        }
+
+        public ListResultDto<PaintTypesDto> GetPaintType()
+        {
+            var paints = _painttypesrepository
+                .GetAll()
+                .OrderBy(p => p.PaintType)
+                .ToList();
+
+            return new ListResultDto<PaintTypesDto>(ObjectMapper.Map<List<PaintTypesDto>>(paints));
         }
 
         public ListResultDto<ModelMadeListDto> GetVehicleModel(GetVehicleModelInput input)

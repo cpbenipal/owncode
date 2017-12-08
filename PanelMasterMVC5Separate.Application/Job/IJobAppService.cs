@@ -18,5 +18,7 @@ namespace PanelMasterMVC5Separate.Vehicle
         ListResultDto<GetBrokersDto> GetBrokers();
         Task CreateJob(CreateJobInput input);
         Task<Client> AddClient(CreateClientInput input);
+
+        ListResultDto<PaintTypesDto> GetPaintType();
     }
 }
