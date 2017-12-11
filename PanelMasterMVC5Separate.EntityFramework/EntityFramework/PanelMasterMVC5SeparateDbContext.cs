@@ -32,14 +32,14 @@ namespace PanelMasterMVC5Separate.EntityFramework
         /* Define an IDbSet for each entity of the application */
 
 
-        public virtual IDbSet<Client> Clients { get; set; }       
+        public virtual IDbSet<Client> Clients { get; set; }
         public virtual DbSet<Jobs> BranchClaims { get; set; }
         public virtual IDbSet<BinaryObject> BinaryObjects { get; set; }
         public virtual IDbSet<Friendship> Friendships { get; set; }
         public virtual IDbSet<ChatMessage> ChatMessages { get; set; }
         public virtual DbSet<VendorSub> VendorSub { get; set; }
         public virtual IDbSet<VendorMain> VendorMain { get; set; }
-        public virtual IDbSet<Countries> Countries { get; set; }       
+        public virtual IDbSet<Countries> Countries { get; set; }
         public virtual IDbSet<CountryandCurrency> Currencies { get; set; }
         public virtual IDbSet<Banks> Banks { get; set; }
         public virtual IDbSet<InsurerMaster> InsurerMasters { get; set; }
@@ -51,7 +51,7 @@ namespace PanelMasterMVC5Separate.EntityFramework
         public virtual IDbSet<VehicleMake> VehicleMake { get; set; }
         public virtual IDbSet<VehicleModels> VehicleModel { get; set; }
         public virtual IDbSet<VehicleModelLogos> VehicleModelLogo { get; set; }
-        public virtual IDbSet<SignonPlans> SignonPlan { get; set; }       
+        public virtual IDbSet<SignonPlans> SignonPlan { get; set; }
         public virtual IDbSet<QuoteMaster> QuoteMasters { get; set; }
         public virtual IDbSet<RepairTypes> RepairTypes { get; set; }
         public virtual IDbSet<QuoteCategories> QuoteCategories { get; set; }
@@ -68,12 +68,17 @@ namespace PanelMasterMVC5Separate.EntityFramework
         public virtual IDbSet<TenantCompanyLogo> TenantCompanyLogo { get; set; }
         public virtual IDbSet<PaintTypes> PaintTypes { get; set; }
         public virtual IDbSet<BrVehicle> BrVehicle { get; set; }
-        public virtual IDbSet<VehicleInsurance> VehicleInsurance { get; set; } 
+        public virtual IDbSet<VehicleInsurance> VehicleInsurance { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);            
+        }
 
         public PanelMasterMVC5SeparateDbContext()
-        : base("Default")
+            : base("Default")
         {
-           
+
         }
 
         public PanelMasterMVC5SeparateDbContext(string nameOrConnectionString)

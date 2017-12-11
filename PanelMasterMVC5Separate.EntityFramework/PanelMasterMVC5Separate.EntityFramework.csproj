@@ -244,6 +244,22 @@
     <Compile Include="Migrations\201712061855355_newjob.Designer.cs">
       <DependentUpon>201712061855355_newjob.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712081018308_certainly.cs" />
+    <Compile Include="Migrations\201712081018308_certainly.Designer.cs">
+      <DependentUpon>201712081018308_certainly.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712100429174_certainlyd.cs" />
+    <Compile Include="Migrations\201712100429174_certainlyd.Designer.cs">
+      <DependentUpon>201712100429174_certainlyd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712100747331_certainlydw.cs" />
+    <Compile Include="Migrations\201712100747331_certainlydw.Designer.cs">
+      <DependentUpon>201712100747331_certainlydw.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712111331336_agaom.cs" />
+    <Compile Include="Migrations\201712111331336_agaom.Designer.cs">
+      <DependentUpon>201712111331336_agaom.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -423,6 +439,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712061855355_newjob.resx">
       <DependentUpon>201712061855355_newjob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712081018308_certainly.resx">
+      <DependentUpon>201712081018308_certainly.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712100429174_certainlyd.resx">
+      <DependentUpon>201712100429174_certainlyd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712100747331_certainlydw.resx">
+      <DependentUpon>201712100747331_certainlydw.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712111331336_agaom.resx">
+      <DependentUpon>201712111331336_agaom.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

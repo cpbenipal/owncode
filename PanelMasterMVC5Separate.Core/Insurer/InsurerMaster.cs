@@ -1,6 +1,8 @@
 ﻿ 
 using Abp.Domain.Entities.Auditing;
+using PanelMasterMVC5Separate.Vehicle;
 using PanelMasterMVC5Separate.Vendors;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -35,7 +37,7 @@ namespace PanelMasterMVC5Separate.Insurer
         [ForeignKey("CountryID")]
         public virtual Countries Country { get; set; }
 
-        public virtual bool IsActive { get; set; }
+        public virtual bool IsActive { get; set; }         
     }
     [Table("tblInsurerMasterPics")]
     public class InsurerPics : FullAuditedEntity

@@ -10,29 +10,26 @@
 
             vm.loading = false;
             vm.saving = false;
-            vm.job = {};
+             
             vm.client = {};
-
+            vm.filter = {};
             vm.advancedFiltersAreShown = false;
             vm.filterText = $stateParams.filterText || '';
+            vm.filterText1 = $stateParams.filterText1 || '';
             vm.currentUserId = abp.session.userId;
             vm.BranchID = abp.session.tenantId;
-           
+
+            $scope.manufactureList = [];
             vm.getVehicleMake = function () {
-
                 vm.loading = true;
+                $scope.manufactureList.pop();
                 jobService.getManufacture()
-                    .then(function (result) {
-                        $scope.manufactureList = [];
-
-                        angular.forEach(result.data.items, function (value, key) {
-
+                    .then(function (ins_obj) {
+                        angular.forEach(ins_obj.data.items, function (insvalue, key) {
                             $scope.manufactureList.push({
-                                name: value.description,
-                                id: value.id
+                                name: insvalue.description,
+                                id: insvalue.id
                             });
-
-                            vm.filterText = value.manufacture_Desc;                            
                         });
 
                     }).finally(function () {
@@ -40,19 +37,17 @@
                     });
             };
 
+            $scope.paintList = [];
             vm.getPaints = function () {
-
                 vm.loading = true;
+                $scope.paintList.pop();
                 jobService.getPaintType()
-                    .then(function (result) {
-                        $scope.paintList = [];
-
-                        angular.forEach(result.data.items, function (value, key) {
-
+                    .then(function (ins_obj) {
+                        angular.forEach(ins_obj.data.items, function (value, key) {
                             $scope.paintList.push({
                                 name: value.paintType,
                                 id: value.id
-                            });                             
+                            });
                         });
 
                     }).finally(function () {
@@ -60,12 +55,11 @@
                     });
             };
 
-            $scope.getModels = function (control) {       
-                 
+            $scope.modelList = []; //list of car models
+            $scope.getModels = function (control) {
+                $scope.modelList.pop();
                 jobService.getVehicleModel($.extend({ filter: control.id }, control.id))
                     .then(function (result1) {
-                        $scope.modelList = []; //list of car models
-
                         angular.forEach(result1.data.items, function (value1, key1) {
                             $scope.modelList.push({
                                 name: value1.model,
@@ -76,32 +70,58 @@
                     }).finally(function () {
                         vm.loading = false;
                     });
-            }
+            };
 
+            $scope.InsuranceList = []; //list of Insurances
             vm.getInsurance = function () {
-                //alert($scope.selectedSource.id);               
+                $scope.InsuranceList.pop();
                 jobService.getInsurances()
                     .then(function (ins_obj) {
-                        $scope.InsuranceList = []; //list of Insurances
-
-                        angular.forEach(ins_obj.data.items, function (insvalue, key1) {                           
+                        angular.forEach(ins_obj.data.items, function (insvalue, key1) {
                             $scope.InsuranceList.push({
                                 name: insvalue.insurerName,
                                 id: insvalue.id
-                            });                            
+                            });
                         });
 
                     }).finally(function () {
                         vm.loading = false;
                     });
-            }
+            };
 
+            $scope.contactAfterServiceList = []; //list of preAuthList
+            vm.contactAfterService = function () {
+                $scope.contactAfterServiceList.pop();
+                $scope.contactAfterServiceList.push({
+                    name: "Yes",
+                    id: true
+                });
+                $scope.contactAfterServiceList.push({
+                    name: "No",
+                    id: false
+                });
+            };
+
+            vm.importClient = function () {
+                vm.loading = true;                 
+                jobService.importExistingData(vm.filter)
+                    .then(function (result) {
+                        vm.client = result.data;
+                        vm.client.clientOtherInformation = result.data.otherInformation;                            
+                        $scope.MakeId = result.data.makeId;
+                        vm.getVehicleModel(result.data.makeId);
+                        $scope.ModelID = result.data.modelId;
+                    }).finally(function () {
+                        vm.loading = false;
+                    });
+            };
+             
+
+            $scope.BrokerList = []; //list of Brokers
             vm.getBroker = function () {
-                             
+                $scope.BrokerList.pop();
                 jobService.getBrokers()
                     .then(function (ins_obj) {
-                        $scope.BrokerList = []; //list of Brokers
-
                         angular.forEach(ins_obj.data.items, function (insvalue, key1) {
                             $scope.BrokerList.push({
                                 name: insvalue.brokerName,
@@ -112,57 +132,71 @@
                     }).finally(function () {
                         vm.loading = false;
                     });
-                
-            }
-             
-            $scope.getModelID = function () {
-                //alert($scope.selectedItem.id);
-            }
+            };
 
-            $scope.drptitle_listChange = function () {
-                //alert($scope.drptitle_list);
-            }         
-            
-            
-            $('#form_wizard_1 .button-submit').click(function () { 
-                
-                vm.saving = true;
-                //alert(" Title: " + $scope.drptitle_list + " Comm Type: " + $scope.communicationTypeModel + " Contact After Service: " + $scope.ContactAfterServiceModel);
-                vm.client.Title = $scope.drptitle_list;
-                vm.client.CommunicationType = $scope.communicationTypeModel;
-                vm.client.ContactAfterService = $scope.ContactAfterServiceModel;
-                
-                vm.job.ManufactureID = $scope.selectedSource.id;
-                vm.job.ModelID = $scope.selectedItem.id;
-                vm.job.InsuranceID = $scope.InsuranceModel.id;
-                vm.job.BrokerID = $scope.BrokerModel.id;
-                vm.job.BranchID = vm.BranchID;
-                vm.job.New_Comeback = $scope.NewComebackModel;       
-                
-                jobService.addClient(vm.client).then(function (client_results) {
+            $('#form_wizard_1 .button-submit').click(function () {
+                vm.loading = true;
+                vm.saving = true;  
+ 
+                vm.client.MakeId = $scope.MakeId.id;
+                vm.client.ModelId = $scope.ModelID.id;
+                vm.client.InsurerId = $scope.InsurerId.id;
+                vm.client.BrokerID = $scope.BrokerId.id;
+                vm.client.PaintTypeId = $scope.PaintTypeId.id;
 
-                    vm.job.ClientID = client_results.data.id;
-                    
-                    jobService.createJob(vm.job).then(function () {
-                        
-                        abp.notify.info(app.localize('SavedSuccessfully'));
-                        window.location.href = "#!/tenant/jobdetails";
-                        
-                    }).finally(function () {
-                        vm.saving = false;
-                    });
-
-
+                jobService.createNewJob($.extend({ filter: vm.client }, vm.client)).then(function () {
+                    abp.notify.info(app.localize('SavedSuccessfully')); 
+                    window.location.href = "#!/tenant/jobdetails";
                 }).finally(function () {
                     vm.saving = false;
+                    vm.loading = false;
                 });
+            }).hide();
+            
+            $scope.communicationTypeList = []; //list of communicationTypeList
+            vm.communicationType = function () {
+                $scope.communicationTypeList.pop();
+                $scope.communicationTypeList.push({
+                    name: "All",
+                    id: 'all'
+                });
+                $scope.communicationTypeList.push({
+                    name: "SMS",
+                    id: 'sms'
+                });
+                $scope.communicationTypeList.push({
+                    name: "Email",
+                    id: 'email'
+                });
+                $scope.communicationTypeList.push({
+                    name: "Telephone",
+                    id: 'telephone'
+                });
+            };
 
-            }).hide();            
+            $scope.titleList = []; //list of communicationTypeList
+            vm.getTitles = function () {
+                $scope.titleList.pop();
+                $scope.titleList.push({
+                    name: "Mr",
+                    id: 'mr'
+                });
+                $scope.titleList.push({
+                    name: "Mrs",
+                    id: 'mrs'
+                });
+                $scope.titleList.push({
+                    name: "Miss",
+                    id: 'miss'
+                });
+            };
 
-            vm.getVehicleMake(); 
+            vm.getVehicleMake();
             vm.getInsurance();
             vm.getBroker();
-            vm.getPaints();   
-            
+            vm.getPaints();
+            vm.contactAfterService();
+            vm.communicationType();
+            vm.getTitles();
         }]);
 })();

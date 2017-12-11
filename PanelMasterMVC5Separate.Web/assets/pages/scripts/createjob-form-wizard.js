@@ -21,12 +21,11 @@ var FormWizard = function () {
                     //account
                     title: { 
                         required: true
-                    },
-                     
-                    MakeID: {
+                    },                     
+                    makeid: {
                         required: true
                     },
-                    ModelID: {
+                    modelid: {
                         required: true
                     },
                     colour: {
@@ -38,13 +37,13 @@ var FormWizard = function () {
                     idnumber: {
                         required: true
                     },
-                    CommunicationType: {
+                    communicationtype: {
                         required: true
                     },
-                    ContactAfterService: {
+                    contactafterservice: {
                         required: true
                     },
-                    ContactAfterService: {
+                    contactafterservice: {
                         required: true
                     },
                     firstname: {
@@ -66,40 +65,46 @@ var FormWizard = function () {
                     regno: {
                         required: true
                     },
-                    VinNumber: {
+                    vinnumber: {
                         required: true
                     },
-                    New_Comeback: {
+                    new_comeback: {
                         required: true
                     },
-                    IsUnrelatedDamangeReason: {
+                    damangereason: {
+                        required: true
+                    },
+                    isunrelateddamangereason: {
                         required: true
                     },      
-                    BranchEntryMethod: {
+                    branchentrymethod: {
                         required: true
                     }, 
-                    CurrentKMs: {
+                    currentkms: {
                         required: true
                     }, 
-                    InsuranceID: {
+                    painttypeid: {
                         required: true
                     }, 
-                    BrokerID: {
+                    insurerid: {
                         required: true
                     }, 
-                    ClaimAdministrator: {
+                    brokerid: {
+                        required: true
+                    }, 
+                    claimadministrator: {
                         required: true
                     },
-                    PolicyNumber: {
+                    policynumber: {
                         required: true
                     },
-                    ClaimNumber: {
+                    claimnumber: {
                         required: true
                     },                    
-                    'warranty[]': {
+                    underwaranty: {
                         required: true,
                         minlength: 1
-                    }
+                    }, 
                 },
 
                 messages: { // custom messages for radio buttons and checkboxes

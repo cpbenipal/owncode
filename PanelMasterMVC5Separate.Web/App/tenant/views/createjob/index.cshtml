@@ -44,7 +44,7 @@
                                     <i class="fa fa-check"></i> Insurer Quote Details
                                 </span>
                             </a>
-                        </li>
+                        </li>                        
                     </ul>
                     <div id="bar" class="progress progress-striped" role="progressbar">
                         <div class="progress-bar progress-bar-success"> </div>
@@ -57,16 +57,44 @@
                             <button class="close" data-dismiss="alert"></button> Your form validation is successful!
                         </div>
                         <div class="tab-pane active" id="tab1">
-                            <h3 class="block">Provide Client Details</h3>
-                            
-                            <div class="form-group">
+                            <h3 class="block">
+                                Provide Client Details
+                                <button type="button" ng-click="vm.importClient()" class="btn btn-success btn-sm mt-ladda-btn ladda-button btn-circle" data-style="expand-right" data-size="s">
+                                    <span class="ladda-label">Import</span>
+                                </button>
 
+                            </h3>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Search
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input ng-model="vm.filter.filterText" type="text" class="form-control" placeholder="@L("SearchWithThreeDot")" name="filterText" />
+
+                                </div>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Title
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <select required class="form-control" name="title" ng-model="vm.client.title"
+                                            ng-options="opt.id as opt.name for opt in titleList">
+                                        <option value="">@L("SelectOne")</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="control-label col-md-3">
                                     First Name
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input ng-model="vm.client.Name" type="text" class="form-control" name="firstname" />
+                                    <input ng-model="vm.client.name" type="text" class="form-control" name="firstname" />
                                     <span class="help-block"> Provide your firstname </span>
                                 </div>
                             </div>
@@ -76,31 +104,18 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input ng-model="vm.client.Surname" type="text" class="form-control" name="surname" />
+                                    <input ng-model="vm.client.surname" type="text" class="form-control" name="surname" />
                                     <span class="help-block"> Provide your surname </span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3">
-                                    Title
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    <select ng-model="vm.job.Title" name="title" id="title" class="form-control">
-                                        <option value="">Select One</option>
-                                        <option value="mr">MR</option>
-                                        <option value="mrs">MRS</option>
-                                        <option value="miss">MISS</option>
-                                    </select>
-                                </div>
-                            </div>
+
                             <div class="form-group">
                                 <label class="control-label col-md-3">
                                     Tel/Cell
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input ng-model="vm.client.Tel" type="text" class="form-control" name="phone" />
+                                    <input ng-model="vm.client.tel" type="text" class="form-control" name="phone" />
                                     <span class="help-block"> Provide your phone number </span>
                                 </div>
                             </div>
@@ -110,7 +125,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input ng-model="vm.client.Email" type="text" class="form-control" name="email" />
+                                    <input ng-model="vm.client.email" type="text" class="form-control" name="email" />
                                     <span class="help-block"> Provide your email address </span>
                                 </div>
                             </div>
@@ -120,7 +135,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input ng-model="vm.client.IdNumber" type="text" class="form-control" name="idnumber" />
+                                    <input ng-model="vm.client.idNumber" type="text" class="form-control" name="idnumber" />
                                     <span class="help-block"> Provide your Id Number </span>
                                 </div>
                             </div>
@@ -130,25 +145,20 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <select ng-model="vm.job.CommunicationType" name="CommunicationType" id="CommunicationType" class="form-control">
-                                        <option value="">Select One</option>
-                                        <option value="all">All</option>
-                                        <option value="sms">SMS</option>
-                                        <option value="email">Email</option>
-                                        <option value="telephone">Telephone</option>
+                                    <select required class="form-control" name="communicationType" ng-model="vm.client.communicationType"
+                                            ng-options="opt.id as opt.name for opt in communicationTypeList">
+                                        <option value="">@L("SelectOne")</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">
                                     Once your repair is completed, do you give us permission to send you electronic communication on additional services we offer?
-
                                 </label>
                                 <div class="col-md-4">
-                                    <select ng-model="vm.job.ContactAfterService" name="ContactAfterService" id="ContactAfterService" class="form-control">
-                                        <option value="">Select One</option>
-                                        <option value="true">Yes</option>
-                                        <option value="false">No</option>
+                                    <select required class="form-control" name="contactAfterService" ng-model="vm.client.contactAfterService"
+                                            ng-options="opt.id as opt.name for opt in contactAfterServiceList">
+                                        <option value="">@L("SelectOne")</option>
                                     </select>
                                 </div>
                             </div>
@@ -157,22 +167,35 @@
                                     Other Information
                                 </label>
                                 <div class="col-md-4">
-                                    <textarea class="form-control" rows="3" ng-model="vm.job.ClientOtherInformation" name="ClientOtherInformation"></textarea>
+                                    <textarea class="form-control" rows="3" ng-model="vm.client.clientOtherInformation" name="clientOtherInformation"></textarea>
                                     <span class="help-block"> </span>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane" id="tab2">
-                            <h3 class="block">Provide vehicle details</h3>
-
+                            <h3 class="block">
+                                Provide vehicle details
+                                <button type="button" ng-click="vm.importClient()" class="btn btn-success btn-sm mt-ladda-btn ladda-button btn-circle" data-style="expand-right" data-size="s">
+                                    <span class="ladda-label">Import</span>
+                                </button>
+                            </h3>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Search
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <input ng-model="vm.filter.filterText1" type="text" class="form-control" placeholder="@L("SearchWithThreeDot")" name="filterText1" />
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">
                                     Make
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <select ng-model="vm.job.MakeID" ng-options="source.name for source in manufactureList" data-ng-change="getModels(vm.job.MakeID)" name="MakeID" class="form-control">
-                                        <option value="">Select One</option>
+                                    <select ng-model="$parent.MakeId" ng-options="source.name for source in manufactureList" data-ng-change="getModels($parent.MakeId)" id="MakeID" name="MakeID" class="form-control" required>
+                                        <option value="">@L("SelectOne")</option>
                                     </select>
                                 </div>
                             </div>
@@ -182,8 +205,21 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <select ng-model="vm.job.ModelID" ng-options="item.name for item in modelList" name="ModelID" id="ModelID" class="form-control">
-                                        <option value="">Select One</option>
+                                    <select ng-model="$parent.ModelID" ng-options="item.name for item in modelList" name="ModelID" id="ModelID" class="form-control" required>
+                                        <option value="">@L("SelectOne")</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Paint Type
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <select ng-model="$parent.PaintTypeId" ng-options="item.name for item in paintList" name="PaintTypeId" id="PaintTypeId" class="form-control">
+                                        <option value="">@L("SelectOne")</option>
                                     </select>
                                 </div>
                             </div>
@@ -194,21 +230,11 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input ng-model="vm.job.Colour" type="color" class="form-control" name="colour" />
+                                    <input ng-model="vm.client.colour" type="color" class="form-control" id="Colour" />
                                     <span class="help-block"> Provide colour of the car </span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3">
-                                    Paint Type
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    <select ng-model="vm.job.PaintTypeID" ng-options="item.name for item in paintList" name="PaintTypeID" id="PaintTypeID" class="form-control">
-                                        <option value="">Select One</option>
-                                    </select>
-                                </div>
-                            </div>
+
 
                             <div class="form-group">
                                 <label class="control-label col-md-3">
@@ -216,7 +242,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input ng-model="vm.job.Year" type="text" class="form-control" name="year" />
+                                    <input ng-model="vm.client.year" type="text" class="form-control" name="year" />
                                     <span class="help-block"> Provide year of the car </span>
                                 </div>
                             </div>
@@ -226,7 +252,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input ng-model="vm.job.RegNo" type="text" class="form-control" name="regno" />
+                                    <input ng-model="vm.client.registrationNumber" type="text" class="form-control" name="regno" />
                                     <span class="help-block"> Provide reg.no of the car </span>
                                 </div>
                             </div>
@@ -236,7 +262,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input ng-model="vm.job.VinNumber" type="text" class="form-control" name="VinNumber" />
+                                    <input ng-model="vm.client.vinNumber" type="text" class="form-control" name="VinNumber" />
                                     <span class="help-block"> Provide Vin no. of the car </span>
                                 </div>
                             </div>
@@ -245,42 +271,30 @@
                                     Is your vehicle still under warranty?
                                     <span class="required"> * </span>
                                 </label>
+                                <div class="col-md-4">                                    
+                                    <select required class="form-control" id="underWaranty" name="UnderWaranty" ng-model="vm.client.UnderWaranty"
+                                            ng-options="opt.id as opt.name for opt in contactAfterServiceList">
+                                        <option value="">@L("SelectOne")</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Other Information
+                                </label>
                                 <div class="col-md-4">
-                                    <div class="radio-list">
-                                        <label>
-                                            <input ng-model="vm.job.UnderWaranty" type="radio" name="warranty" value="y" data-title="Yes" /> Yes
-                                        </label>
-                                        <label>
-                                            <input ng-model="vm.job.UnderWaranty" type="radio" name="warranty" value="n" data-title="No" /> No
-                                        </label>
-                                    </div>
-                                    <div id="form_warranty_error"></div>
+                                    <textarea ng-model="vm.client.VehicleOtherInformation" class="form-control" rows="3"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane" id="tab3">
-                            <h3 class="block">Provide vehicle repair/accident details</h3>
-                            <div class="form-group">
-                                <label class="control-label col-md-3">
-                                    Comeback/Waranty
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    <select ng-model="vm.job.New_Comeback" name="New_Comeback" id="New_Comeback" class="form-control">
-                                        <option value="">Select One</option>
-                                        <option value="true">Yes</option>
-                                        <option value="false">No</option>
-                                    </select>
-                                </div>
-                            </div>
-
+                            <h3 class="block">Provide vehicle repair/accident details</h3>                            
                             <div class="form-group">
                                 <label class="control-label col-md-3">
                                     Describe briefly how the vehicle was damaged
-                                    <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <textarea ng-model="vm.job.DamangeReason" class="form-control" rows="3" name="DamangeReason"></textarea>
+                                    <textarea ng-model="vm.client.damangeReason" class="form-control" rows="3" name="DamangeReason" id="DamangeReason"></textarea>
                                     <span class="help-block"> </span>
                                 </div>
                             </div>
@@ -289,11 +303,10 @@
                                     Whilst your vehicle is with us for this particular repair, is there other damage (unrelated to this claim) that you would like us to repair?
                                     <span class="required"> * </span>
                                 </label>
-                                <div class="col-md-4">
-                                    <select ng-model="vm.job.IsUnrelatedDamangeReason" name="IsUnrelatedDamangeReason" id="IsUnrelatedDamangeReason" class="form-control">
-                                        <option value="">Select One</option>
-                                        <option value="Y">Yes</option>
-                                        <option value="N">No</option>
+                                <div class="col-md-4"> 
+                                    <select required class="form-control"  id="IsUnrelatedDamangeReason" name="isUnrelatedDamangeReason" ng-model="vm.client.isUnrelatedDamangeReason"
+                                            ng-options="opt.id as opt.name for opt in contactAfterServiceList">
+                                        <option value="">@L("SelectOne")</option>
                                     </select>
                                 </div>
                             </div>
@@ -303,8 +316,8 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <select ng-model="vm.job.BranchEntryMethod" name="BranchEntryMethod" id="BranchEntryMethod" class="form-control">
-                                        <option value="">Select One</option>
+                                    <select ng-model="vm.client.branchEntryMethod" name="BranchEntryMethod" id="BranchEntryMethod" class="form-control">
+                                        <option value="">@L("SelectOne")</option>
                                         <option value="D">Drivable</option>
                                         <option value="T">Non Drivable</option>
                                     </select>
@@ -316,7 +329,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input ng-model="vm.job.CurrentKMs" type="text" class="form-control" name="CurrentKMs" />
+                                    <input ng-model="vm.client.currentKMs" type="text" class="form-control"  name="CurrentKMs" id="CurrentKMs" />
                                     <span class="help-block"> Provide Current KMs of the car </span>
                                 </div>
                             </div>
@@ -325,7 +338,7 @@
                                     Other Information
                                 </label>
                                 <div class="col-md-4">
-                                    <textarea ng-model="vm.job.RepairOtherInformation" class="form-control" rows="3" name="RepairOtherInformation"></textarea>
+                                    <textarea ng-model="vm.client.RepairOtherInformation" class="form-control" rows="3"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -338,8 +351,8 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <select ng-model="vm.job.InsuranceID" ng-options="insurance.name for insurance in InsuranceList" name="InsuranceID" id="InsuranceID" class="form-control">
-                                        <option value="">Select One</option>
+                                    <select ng-model="$parent.InsurerId" ng-options="insurance.name for insurance in InsuranceList" name="InsurerId" id="InsurerId" class="form-control">
+                                        <option value="">@L("SelectOne")</option>
                                     </select>
                                 </div>
                             </div>
@@ -349,8 +362,8 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <select ng-model="vm.job.BrokerID" name="BrokerID" id="BrokerID" ng-options="broker.name for broker in BrokerList" class="form-control">
-                                        <option value="">Select One</option>
+                                    <select ng-model="$parent.BrokerId" name="BrokerID" id="BrokerID" ng-options="broker.name for broker in BrokerList" class="form-control">
+                                        <option value="">@L("SelectOne")</option>
                                     </select>
                                 </div>
                             </div>
@@ -360,7 +373,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input type="text" ng-model="vm.job.ClaimAdministrator" class="form-control" name="ClaimAdministrator" />
+                                    <input type="text" ng-model="vm.client.claimAdministrator" class="form-control" name="ClaimAdministrator" />
                                     <span class="help-block"> Provide Claim Administrator</span>
                                 </div>
                             </div>
@@ -370,7 +383,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input type="text" ng-model="vm.job.PolicyNumber" class="form-control" name="insurance_policy_number" />
+                                    <input type="text" ng-model="vm.client.policyNumber" class="form-control" name="insurance_policy_number" />
                                     <span class="help-block"> Provide Policy Number</span>
                                 </div>
                             </div>
@@ -380,7 +393,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input type="text" ng-model="vm.job.ClaimNumber" class="form-control" name="insurance_claim_number" />
+                                    <input type="text" ng-model="vm.client.claimNumber" class="form-control" name="insurance_claim_number" />
                                     <span class="help-block"> Provide Claim Number</span>
                                 </div>
                             </div>
@@ -390,7 +403,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <textarea ng-model="vm.job.InsurerOtherInformation" class="form-control" rows="3" name="InsurerOtherInformation"></textarea>
+                                    <textarea ng-model="vm.client.insurerOtherInformation" class="form-control" rows="3" name="otherInformation"></textarea>
                                 </div>
                             </div>
 
@@ -417,7 +430,7 @@
             </div>
         </form>
     </div>
-     
+
     <script src="~/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
     <script src="~/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="~/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
@@ -428,5 +441,5 @@
     <script src="~/assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
     <script src="~/assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
     <script src="~/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
-    <script src="~/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script> 
+    <script src="~/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
 </div> 

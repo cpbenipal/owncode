@@ -20,5 +20,8 @@ namespace PanelMasterMVC5Separate.Vehicle
         Task<Client> AddClient(CreateClientInput input);
 
         ListResultDto<PaintTypesDto> GetPaintType();
+        ImportDto ImportExistingData(GetClaimsInput input);
+        //VehicleImport ImportVehicle(GetClaimsInput input);
+        void CreateNewJob(Accident clientDto);
     }
 }

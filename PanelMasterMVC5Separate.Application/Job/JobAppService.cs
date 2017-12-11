@@ -3,14 +3,17 @@ using Abp.AutoMapper;
 using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
+using Abp.Runtime.Session;
 using PanelMasterMVC5Separate.Brokers;
 using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.Clients;
 using PanelMasterMVC5Separate.Insurer;
 using PanelMasterMVC5Separate.Job.Dto;
+using PanelMasterMVC5Separate.MultiTenancy;
 using PanelMasterMVC5Separate.Tenants.Brokers.Dto;
 using PanelMasterMVC5Separate.Tenants.Insurer.Dto;
 using PanelMasterMVC5Separate.Tenants.Manufacturing.Dto;
+using PanelMasterMVC5Separate.Vendors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,36 +25,106 @@ namespace PanelMasterMVC5Separate.Vehicle
     public class JobAppService : PanelMasterMVC5SeparateAppServiceBase, IJobAppService
     {
         private readonly IRepository<VehicleMake> _manufactureRepository;
-
         private readonly IRepository<VehicleModels> _vehiclemodelRepository;
-
-        private readonly IRepository<InsurerMaster> _insurersRepository;       
+        private readonly IRepository<InsurerMaster> _insurersRepository;
         private readonly IRepository<BrokerMaster> _brokerRepository;
         private readonly IRepository<Jobs> _jobsRepository;
         private readonly IRepository<Client> _clientRepository;
-         
-        private readonly IRepository<PaintTypes> _painttypesrepository; 
-
-        public JobAppService(IRepository<VehicleMake> manufactureRepository, IRepository<VehicleModels> vehiclemodelRepository
-                             , IRepository<InsurerMaster> insurersRepository,IRepository<BrokerMaster> brokerRepository
-                             ,IRepository<Jobs> jobsRepository, IRepository<Client> clientRepository, 
-            IRepository<PaintTypes> painttypesrepository)
+        private readonly IRepository<PaintTypes> _painttypesrepository;
+        private readonly IRepository<BrVehicle> _brvehiclerepository;
+        private readonly IRepository<VehicleInsurance> _vehicleinsurancerepository;
+        private readonly IRepository<TenantProfile> _TenantProfile;
+        private readonly IRepository<Countries> _countryRepository;
+        private readonly IAbpSession _abpSession;
+        public JobAppService(IAbpSession abpSession, IRepository<VehicleMake> manufactureRepository, IRepository<VehicleModels> vehiclemodelRepository
+                             , IRepository<InsurerMaster> insurersRepository, IRepository<BrokerMaster> brokerRepository
+                             , IRepository<Jobs> jobsRepository, IRepository<Client> clientRepository,
+            IRepository<PaintTypes> painttypesrepository, IRepository<BrVehicle> brvehiclerepository,
+            IRepository<VehicleInsurance> vehicleinsurancerepository, IRepository<TenantProfile> tenantprofile,
+            IRepository<Countries> countryRepository)
         {
+            _abpSession = abpSession;
             _manufactureRepository = manufactureRepository;
             _vehiclemodelRepository = vehiclemodelRepository;
             _insurersRepository = insurersRepository;
-          
             _brokerRepository = brokerRepository;
             _jobsRepository = jobsRepository;
             _clientRepository = clientRepository;
-             
             _painttypesrepository = painttypesrepository;
+            _brvehiclerepository = brvehiclerepository;
+            _vehicleinsurancerepository = vehicleinsurancerepository;
+            _TenantProfile = tenantprofile;
+            _countryRepository = countryRepository;
         }
+
+        public ImportDto ImportExistingData(GetClaimsInput input)
+        {
+            ImportDto importDto = new ImportDto();
+            var query = _clientRepository.GetAll()
+              .Where(p =>
+                   p.IdNumber.Equals(input.FilterText) ||
+                   p.Tel.Equals(input.FilterText) ||
+                   p.Email.Equals(input.FilterText))
+             .FirstOrDefault();
+
+            if (query != null)
+            {
+                importDto.Id = query.Id;
+                importDto.Name = query.Name;
+                importDto.Surname = query.Surname;
+                importDto.Title = query.Title;
+                importDto.Email = query.Email;
+                importDto.Tel = query.Tel;
+                importDto.IdNumber = query.IdNumber;
+                importDto.CommunicationType = query.CommunicationType;
+                importDto.ContactAfterService = query.ContactAfterService;
+                importDto.ClientOtherInformation = query.OtherInformation;
+                importDto.VId = query.Id;
+            }
+            var query1 = _brvehiclerepository.GetAll()
+              .Where(p => p.RegistrationNumber.Equals(input.FilterText1) || p.VinNumber.Equals(input.FilterText1))
+             .FirstOrDefault();
+
+            if (query1 != null)
+            {                
+                importDto.MakeId = query1.MakeId;
+                importDto.ModelId = query1.ModelId;
+                importDto.Colour = query1.Color;
+                importDto.PaintTypeId = query1.PaintTypeId;
+                importDto.Year = query1.Year;
+                importDto.RegistrationNumber = query1.RegistrationNumber;
+                importDto.VinNumber = query1.VinNumber;
+                importDto.UnderWaranty = query1.UnderWaranty;
+                importDto.IsSpecialisedType = query1.IsSpecialisedType;
+                importDto.IsLuxury = query1.IsLuxury;
+                importDto.VehicleOtherInformation = query1.OtherInformation;
+            }
+            return importDto;
+        }
+        //public VehicleImport ImportVehicle(GetClaimsInput input)
+        //{
+        //    var query = _brvehiclerepository.GetAll()
+        //      .WhereIf(
+        //            !input.Filter1.IsNullOrEmpty(),
+        //            p => p.RegistrationNumber.Equals(input.Filter) ||
+        //            p.VinNumber.Equals(input.Filter) 
+        //      )
+        //     .FirstOrDefault();
+
+        //    var data = query.MapTo<VehicleImport>();
+        //    if (data != null)
+        //    {
+        //        data.makeID = query.VehicleMake.Id;
+        //        data.modelID = query.VehicleModels.Id;
+        //        data.paintTypeID = query.PaintTypes.Id;
+        //    }
+        //    return data;
+        //}
         public ListResultDto<VehicleMakeDto> GetManufacture()
         {
             var manufacture = _manufactureRepository
-                .GetAll()                
-                .OrderBy(p => p.Description)                
+                 .GetAll().Where(c => c.IsActive == true)
+                .OrderBy(p => p.Description)
                 .ToList();
 
             return new ListResultDto<VehicleMakeDto>(ObjectMapper.Map<List<VehicleMakeDto>>(manufacture));
@@ -75,12 +148,12 @@ namespace PanelMasterMVC5Separate.Vehicle
                 .GetAll()
                 .WhereIf(
                     !input.Filter.IsNullOrEmpty(),
-                    p => p.VehicleMakeID.Equals(make_id)                       
+                    p => p.VehicleMakeID.Equals(make_id)
                 )
-                .OrderBy(p => p.Model)               
+                .OrderBy(p => p.Model)
                 .ToList();
 
-           
+
             var newList = new List<ModelMadeListDto>();
             foreach (VehicleModels model_obj in vehicleModel)
             {
@@ -89,7 +162,7 @@ namespace PanelMasterMVC5Separate.Vehicle
                     MadeID = model_obj.Id,
                     Make = model_obj.VehicleMake.Description,
                     Model = model_obj.Model,
-                    MMCode = model_obj.MMCode                 
+                    MMCode = model_obj.MMCode
                 });
             }
 
@@ -99,7 +172,9 @@ namespace PanelMasterMVC5Separate.Vehicle
 
         public ListResultDto<GetInsurersDto> GetInsurances()
         {
-            var insurerMaster = _insurersRepository.GetAll()            
+            int countryid = GetCountryIdByCode();
+            var insurerMaster = _insurersRepository.GetAll()
+                .Where(p => p.CountryID == countryid)
              .OrderByDescending(p => p.InsurerName)
              .ToList();
             var newList = new List<GetInsurersDto>();
@@ -115,11 +190,13 @@ namespace PanelMasterMVC5Separate.Vehicle
 
             return new ListResultDto<GetInsurersDto>(newList);
         }
-        
+
         public ListResultDto<GetBrokersDto> GetBrokers()
         {
+            int countryid = GetCountryIdByCode();
             var broker = _brokerRepository
                 .GetAll()
+                .Where(p => p.CountryID == countryid)
                 .OrderBy(p => p.BrokerName)
                 .ToList();
 
@@ -150,7 +227,78 @@ namespace PanelMasterMVC5Separate.Vehicle
             await _jobsRepository.InsertAsync(job);
         }
 
-        
-    }
+        public void CreateNewJob(Accident clientDto)
+        {
+            //var a = await _brokerRepository.FirstOrDefaultAsync(1);
+            var clients = new Client()
+            {
+                Id = clientDto.Id,
+                Name = clientDto.Name,
+                Surname = clientDto.Surname,
+                Title = clientDto.Title,
+                Email = clientDto.Email,
+                Tel = clientDto.Tel,
+                IdNumber = clientDto.IdNumber,
+                CommunicationType = clientDto.CommunicationType,
+                ContactAfterService = clientDto.ContactAfterService,
+                OtherInformation = clientDto.ClientOtherInformation
+            };
 
+            int id = _clientRepository.InsertOrUpdateAndGetId(clients);
+
+            var jobs = new Jobs()
+            {
+                ClientID = id,
+                ManufactureID = clientDto.MakeId,
+                ModelID = clientDto.ModelId,
+                Year = clientDto.Year,
+                RegNo = clientDto.RegistrationNumber,
+                VinNumber = clientDto.VinNumber,
+                CurrentKMs = clientDto.CurrentKMs,
+                DamangeReason = clientDto.DamangeReason,
+                BranchEntryMethod = clientDto.BranchEntryMethod,
+                IsUnrelatedDamangeReason = clientDto.IsUnrelatedDamangeReason,
+                InsuranceID = clientDto.InsurerId,
+                BrokerID = clientDto.BrokerId,
+                Colour = clientDto.Colour,
+                OtherInformation = clientDto.RepairOtherInformation
+            };
+
+            _jobsRepository.InsertOrUpdate(jobs);
+
+            var vehicle = new BrVehicle()
+            {
+                Id = clientDto.Id,
+                MakeId = clientDto.MakeId,
+                ModelId = clientDto.ModelId,
+                Color = clientDto.Colour,
+                PaintTypeId = clientDto.PaintTypeId,
+                Year = clientDto.Year,
+                RegistrationNumber = clientDto.RegistrationNumber,
+                VinNumber = clientDto.VinNumber,
+                UnderWaranty = clientDto.UnderWaranty,
+                IsSpecialisedType = clientDto.IsSpecialisedType,
+                IsLuxury = clientDto.IsLuxury,
+                OtherInformation = clientDto.VehicleOtherInformation
+            };
+            _brvehiclerepository.InsertOrUpdate(vehicle);
+
+            var quote = new VehicleInsurance()
+            {
+                BrokerId = clientDto.BrokerId,
+                ClaimAdministrator = clientDto.ClaimAdministrator,
+                InsurerId = clientDto.InsurerId,
+                PolicyNumber = clientDto.PolicyNumber,
+                OtherInformation = clientDto.InsurerOtherInformation
+            };
+
+            _vehicleinsurancerepository.InsertOrUpdate(quote);
+        }
+
+        private int GetCountryIdByCode()
+        {
+            var CountryCode = _TenantProfile.FirstOrDefault(x => x.TenantId == _abpSession.TenantId);
+            return (CountryCode == null ? 0 : _countryRepository.FirstOrDefault(x => x.Code == CountryCode.CountryCode).Id);
+        }
+    }
 }

@@ -46,6 +46,7 @@ namespace PanelMasterMVC5Separate.Vehicle
 
         [Required]
         public virtual string MMCode { get; set; }
+
     }
 
     [Table("tblVehiclemodelLogos")]
@@ -75,22 +76,25 @@ namespace PanelMasterMVC5Separate.Vehicle
 
     [Table("brVehicle")]
     public class BrVehicle : FullAuditedEntity
-    { 
+    {
+        public virtual int MakeId { get; set; }
+        [ForeignKey("MakeId")]
         public virtual VehicleMake VehicleMake { get; set; }
          
+        public virtual int ModelId { get; set; }
+        [ForeignKey("ModelId")]
         public virtual VehicleModels VehicleModels { get; set; }
-
+        [Required]
         public virtual string Color { get; set; }
          
+        public virtual int PaintTypeId { get; set; }
+        [ForeignKey("PaintTypeId")]
         public virtual PaintTypes PaintTypes { get; set; }
-
         [StringLength(4)]
         public virtual string Year { get; set; }
-
         public virtual string RegistrationNumber { get; set; }
         public virtual string VinNumber { get; set; }
         public virtual bool UnderWaranty { get; set; }
-
         public virtual bool IsSpecialisedType { get; set; }
         public virtual bool IsLuxury { get; set; }
         public virtual string OtherInformation { get; set; }
@@ -98,12 +102,18 @@ namespace PanelMasterMVC5Separate.Vehicle
 
     [Table("brINS")]
     public class VehicleInsurance : FullAuditedEntity
-    {
-        public virtual InsurerMaster InsurerMasters { get; set; }        
-        public virtual BrokerMaster BrokerMasters { get; set; }
+    { 
+        public virtual int InsurerId { get; set; }
+        [ForeignKey("InsurerId")]
+        public virtual InsurerMaster InsurerMaster { get; set; }
+      
+        public virtual int BrokerId { get; set; }
+        [ForeignKey("BrokerId")]
+        public virtual BrokerMaster BrokerMaster { get; set; }
+
         public virtual string ClaimAdministrator { get; set; }
         public virtual string PolicyNumber { get; set; }
-        //public virtual string ClaimNumber { get; set; }
+        public virtual string ClaimNumber { get; set; }
         public virtual string OtherInformation { get; set; }
     }
 }
