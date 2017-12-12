@@ -30,13 +30,14 @@ namespace PanelMasterMVC5Separate.Job.Dto
         public virtual string ClientOtherInformation { get; set; }
 
         //Provide Vehicle Details        
-        //[Required]
+        public virtual int VId { get; set; }
+        [Required]
         public virtual int MakeId { get; set; }
-       // [Required]
+        [Required]
         public virtual int ModelId { get; set; }
         [Required]
         public virtual string Colour { get; set; }
-      //  [Required]
+         [Required]
         public virtual int PaintTypeId { get; set; }
         [Required]
         public virtual string Year { get; set; }
@@ -65,9 +66,9 @@ namespace PanelMasterMVC5Separate.Job.Dto
         public virtual string RepairOtherInformation { get; set; }
 
         // Vehicle Insurer Details
-      //  [Required]
+        [Required]
         public virtual int InsurerId { get; set; }
-      //  [Required]
+        [Required]
         public virtual int BrokerId { get; set; }
         [Required]
         public virtual string ClaimAdministrator { get; set; }
@@ -143,7 +144,7 @@ namespace PanelMasterMVC5Separate.Job.Dto
         [Required]
         public virtual string PolicyNumber { get; set; }
         [Required]
-        public virtual string ClaimNumber { get; set; } 
+        public virtual string ClaimNumber { get; set; }
     }
     [AutoMapTo(typeof(Jobs))]
     public class RepairDto : FullAuditedEntityDto

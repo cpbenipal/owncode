@@ -21,7 +21,13 @@ var FormWizard = function () {
                     //account
                     title: { 
                         required: true
-                    },                     
+                    },      
+                    insurancepolicynumber: { 
+                        required: true
+                    },   
+                    insuranceclaimnumber: { 
+                        required: true
+                    },              
                     makeid: {
                         required: true
                     },
@@ -86,10 +92,10 @@ var FormWizard = function () {
                     painttypeid: {
                         required: true
                     }, 
-                    insurerid: {
+                    InsurerId: {
                         required: true
                     }, 
-                    brokerid: {
+                    BrokerID: {
                         required: true
                     }, 
                     claimadministrator: {
@@ -102,8 +108,7 @@ var FormWizard = function () {
                         required: true
                     },                    
                     underwaranty: {
-                        required: true,
-                        minlength: 1
+                        required: true
                     }, 
                 },
 
@@ -204,7 +209,7 @@ var FormWizard = function () {
                 if (current >= total) {
                     $('#form_wizard_1').find('.button-next').hide();
                     $('#form_wizard_1').find('.button-submit').show();
-                    displayConfirm();
+                  //  displayConfirm();
                 } else {
                     $('#form_wizard_1').find('.button-next').show();
                     $('#form_wizard_1').find('.button-submit').hide();
@@ -267,11 +272,7 @@ var FormWizard = function () {
 
                 alert('Finished! Hope you like it :)');
             }).hide();*/
-
-            //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
-            $('#Country_list', form).change(function () {
-                form.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
-            });
+ 
         }
 
     };

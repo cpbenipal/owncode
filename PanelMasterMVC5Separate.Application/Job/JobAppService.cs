@@ -79,7 +79,7 @@ namespace PanelMasterMVC5Separate.Vehicle
                 importDto.CommunicationType = query.CommunicationType;
                 importDto.ContactAfterService = query.ContactAfterService;
                 importDto.ClientOtherInformation = query.OtherInformation;
-                importDto.VId = query.Id;
+               
             }
             var query1 = _brvehiclerepository.GetAll()
               .Where(p => p.RegistrationNumber.Equals(input.FilterText1) || p.VinNumber.Equals(input.FilterText1))
@@ -98,28 +98,11 @@ namespace PanelMasterMVC5Separate.Vehicle
                 importDto.IsSpecialisedType = query1.IsSpecialisedType;
                 importDto.IsLuxury = query1.IsLuxury;
                 importDto.VehicleOtherInformation = query1.OtherInformation;
+                importDto.VId = query1.Id;
             }
             return importDto;
         }
-        //public VehicleImport ImportVehicle(GetClaimsInput input)
-        //{
-        //    var query = _brvehiclerepository.GetAll()
-        //      .WhereIf(
-        //            !input.Filter1.IsNullOrEmpty(),
-        //            p => p.RegistrationNumber.Equals(input.Filter) ||
-        //            p.VinNumber.Equals(input.Filter) 
-        //      )
-        //     .FirstOrDefault();
-
-        //    var data = query.MapTo<VehicleImport>();
-        //    if (data != null)
-        //    {
-        //        data.makeID = query.VehicleMake.Id;
-        //        data.modelID = query.VehicleModels.Id;
-        //        data.paintTypeID = query.PaintTypes.Id;
-        //    }
-        //    return data;
-        //}
+     
         public ListResultDto<VehicleMakeDto> GetManufacture()
         {
             var manufacture = _manufactureRepository
@@ -261,14 +244,16 @@ namespace PanelMasterMVC5Separate.Vehicle
                 InsuranceID = clientDto.InsurerId,
                 BrokerID = clientDto.BrokerId,
                 Colour = clientDto.Colour,
-                OtherInformation = clientDto.RepairOtherInformation
+                UnderWaranty = clientDto.UnderWaranty ? "Yes": "No",
+                OtherInformation = clientDto.RepairOtherInformation,
+                TenantID = _abpSession.TenantId
             };
 
-            _jobsRepository.InsertOrUpdate(jobs);
+           id = _jobsRepository.InsertOrUpdateAndGetId(jobs);
 
             var vehicle = new BrVehicle()
             {
-                Id = clientDto.Id,
+                Id = clientDto.VId,
                 MakeId = clientDto.MakeId,
                 ModelId = clientDto.ModelId,
                 Color = clientDto.Colour,
@@ -289,10 +274,11 @@ namespace PanelMasterMVC5Separate.Vehicle
                 ClaimAdministrator = clientDto.ClaimAdministrator,
                 InsurerId = clientDto.InsurerId,
                 PolicyNumber = clientDto.PolicyNumber,
+                ClaimNumber = clientDto.ClaimNumber,
                 OtherInformation = clientDto.InsurerOtherInformation
             };
 
-            _vehicleinsurancerepository.InsertOrUpdate(quote);
+          _vehicleinsurancerepository.InsertOrUpdate(quote);
         }
 
         private int GetCountryIdByCode()

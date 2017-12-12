@@ -14,6 +14,8 @@ namespace PanelMasterMVC5Separate.Claim
     public class Jobs : FullAuditedEntity
     {
         public const int MaxLength = 500;
+        
+        public virtual int? TenantID { get; set; }
 
         [Required]
         public virtual int ClientID { get; set; }

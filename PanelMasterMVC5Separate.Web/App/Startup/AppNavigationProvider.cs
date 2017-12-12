@@ -307,6 +307,15 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                      url: "tenant.Brokers",
                      requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     ))
+                    .AddItem(new MenuItemDefinition(
+                        PageNames.App.Tenant.CreateJob,
+                        L("CreateJob"),
+                        url: "tenant.createjob",
+                        icon: "glyphicon glyphicon-search",
+                        requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
+                        )
+                    )
+
                     );
         }
 

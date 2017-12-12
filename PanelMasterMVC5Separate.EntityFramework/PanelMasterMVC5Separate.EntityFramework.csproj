@@ -260,6 +260,10 @@
     <Compile Include="Migrations\201712111331336_agaom.Designer.cs">
       <DependentUpon>201712111331336_agaom.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712120838409_newjobtasdsadasd.cs" />
+    <Compile Include="Migrations\201712120838409_newjobtasdsadasd.Designer.cs">
+      <DependentUpon>201712120838409_newjobtasdsadasd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -451,6 +455,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712111331336_agaom.resx">
       <DependentUpon>201712111331336_agaom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712120838409_newjobtasdsadasd.resx">
+      <DependentUpon>201712120838409_newjobtasdsadasd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -245,7 +245,7 @@
       <Name>PanelMasterMVC5Separate.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\PanelMasterMVC5Separate.EntityFramework\PanelMasterMVC5Separate.EntityFramework.csproj">
-      <Project>{3979F157-DEB0-4878-AB1D-4CEF6B5A1300}</Project>
+      <Project>{3979f157-deb0-4878-ab1d-4cef6b5a1300}</Project>
       <Name>PanelMasterMVC5Separate.EntityFramework</Name>
     </ProjectReference>
   </ItemGroup>

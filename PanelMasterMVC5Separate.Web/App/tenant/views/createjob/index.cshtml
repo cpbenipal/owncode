@@ -145,7 +145,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <select required class="form-control" name="communicationType" ng-model="vm.client.communicationType"
+                                    <select required class="form-control" name="communicationtype" ng-model="vm.client.communicationType"
                                             ng-options="opt.id as opt.name for opt in communicationTypeList">
                                         <option value="">@L("SelectOne")</option>
                                     </select>
@@ -156,7 +156,7 @@
                                     Once your repair is completed, do you give us permission to send you electronic communication on additional services we offer?
                                 </label>
                                 <div class="col-md-4">
-                                    <select required class="form-control" name="contactAfterService" ng-model="vm.client.contactAfterService"
+                                    <select required class="form-control" name="contactafterservice" ng-model="vm.client.contactAfterService"
                                             ng-options="opt.id as opt.name for opt in contactAfterServiceList">
                                         <option value="">@L("SelectOne")</option>
                                     </select>
@@ -167,7 +167,7 @@
                                     Other Information
                                 </label>
                                 <div class="col-md-4">
-                                    <textarea class="form-control" rows="3" ng-model="vm.client.clientOtherInformation" name="clientOtherInformation"></textarea>
+                                    <textarea class="form-control" rows="3" ng-model="vm.client.clientOtherInformation" name="clientotherinformation"></textarea>
                                     <span class="help-block"> </span>
                                 </div>
                             </div>
@@ -194,7 +194,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <select ng-model="$parent.MakeId" ng-options="source.name for source in manufactureList" data-ng-change="getModels($parent.MakeId)" id="MakeID" name="MakeID" class="form-control" required>
+                                    <select ng-model="vm.client.makeId" ng-options="source.id as source.name for source in manufactureList" data-ng-change="vm.getModels(vm.client.makeId)" id="MakeID" name="makeid" class="form-control" required>
                                         <option value="">@L("SelectOne")</option>
                                     </select>
                                 </div>
@@ -205,7 +205,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <select ng-model="$parent.ModelID" ng-options="item.name for item in modelList" name="ModelID" id="ModelID" class="form-control" required>
+                                    <select ng-model="vm.client.modelId" ng-options="item.id as item.name for item in modelList" name="modelid" id="ModelID" class="form-control" required>
                                         <option value="">@L("SelectOne")</option>
                                     </select>
                                 </div>
@@ -218,7 +218,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <select ng-model="$parent.PaintTypeId" ng-options="item.name for item in paintList" name="PaintTypeId" id="PaintTypeId" class="form-control">
+                                    <select ng-model="vm.client.paintTypeId" ng-options="item.id as item.name for item in paintList" name="painttypeid" id="PaintTypeId" class="form-control">
                                         <option value="">@L("SelectOne")</option>
                                     </select>
                                 </div>
@@ -262,7 +262,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input ng-model="vm.client.vinNumber" type="text" class="form-control" name="VinNumber" />
+                                    <input ng-model="vm.client.vinNumber" type="text" class="form-control" name="vinnumber" />
                                     <span class="help-block"> Provide Vin no. of the car </span>
                                 </div>
                             </div>
@@ -272,7 +272,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">                                    
-                                    <select required class="form-control" id="underWaranty" name="UnderWaranty" ng-model="vm.client.UnderWaranty"
+                                    <select required class="form-control" id="underWaranty" name="underwaranty" ng-model="vm.client.underWaranty"
                                             ng-options="opt.id as opt.name for opt in contactAfterServiceList">
                                         <option value="">@L("SelectOne")</option>
                                     </select>
@@ -283,7 +283,7 @@
                                     Other Information
                                 </label>
                                 <div class="col-md-4">
-                                    <textarea ng-model="vm.client.VehicleOtherInformation" class="form-control" rows="3"></textarea>
+                                    <textarea ng-model="vm.client.vehicleOtherInformation" class="form-control" rows="3"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -294,7 +294,7 @@
                                     Describe briefly how the vehicle was damaged
                                 </label>
                                 <div class="col-md-4">
-                                    <textarea ng-model="vm.client.damangeReason" class="form-control" rows="3" name="DamangeReason" id="DamangeReason"></textarea>
+                                    <textarea ng-model="vm.client.damangeReason" class="form-control" rows="3" name="damangereason" id="DamangeReason"></textarea>
                                     <span class="help-block"> </span>
                                 </div>
                             </div>
@@ -304,7 +304,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4"> 
-                                    <select required class="form-control"  id="IsUnrelatedDamangeReason" name="isUnrelatedDamangeReason" ng-model="vm.client.isUnrelatedDamangeReason"
+                                    <select required class="form-control"  id="IsUnrelatedDamangeReason" name="isunrelateddamangereason" ng-model="vm.client.isUnrelatedDamangeReason"
                                             ng-options="opt.id as opt.name for opt in contactAfterServiceList">
                                         <option value="">@L("SelectOne")</option>
                                     </select>
@@ -316,7 +316,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <select ng-model="vm.client.branchEntryMethod" name="BranchEntryMethod" id="BranchEntryMethod" class="form-control">
+                                    <select ng-model="vm.client.branchEntryMethod" name="branchentrymethod" id="BranchEntryMethod" class="form-control">
                                         <option value="">@L("SelectOne")</option>
                                         <option value="D">Drivable</option>
                                         <option value="T">Non Drivable</option>
@@ -329,7 +329,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input ng-model="vm.client.currentKMs" type="text" class="form-control"  name="CurrentKMs" id="CurrentKMs" />
+                                    <input ng-model="vm.client.currentKMs" type="text" class="form-control"  name="currentkms" id="CurrentKMs" />
                                     <span class="help-block"> Provide Current KMs of the car </span>
                                 </div>
                             </div>
@@ -338,7 +338,7 @@
                                     Other Information
                                 </label>
                                 <div class="col-md-4">
-                                    <textarea ng-model="vm.client.RepairOtherInformation" class="form-control" rows="3"></textarea>
+                                    <textarea ng-model="vm.client.repairOtherInformation" class="form-control" rows="3"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -351,7 +351,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <select ng-model="$parent.InsurerId" ng-options="insurance.name for insurance in InsuranceList" name="InsurerId" id="InsurerId" class="form-control">
+                                    <select ng-model="vm.client.insurerId" ng-options="insurance.id as insurance.name for insurance in InsuranceList" name="insurerid" id="insurerid" class="form-control">
                                         <option value="">@L("SelectOne")</option>
                                     </select>
                                 </div>
@@ -362,7 +362,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <select ng-model="$parent.BrokerId" name="BrokerID" id="BrokerID" ng-options="broker.name for broker in BrokerList" class="form-control">
+                                    <select ng-model="vm.client.brokerId" name="brokerid" id="brokerid" ng-options="broker.id as broker.name for broker in BrokerList" class="form-control">
                                         <option value="">@L("SelectOne")</option>
                                     </select>
                                 </div>
@@ -373,7 +373,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input type="text" ng-model="vm.client.claimAdministrator" class="form-control" name="ClaimAdministrator" />
+                                    <input type="text" ng-model="vm.client.claimAdministrator" class="form-control" name="claimadministrator" />
                                     <span class="help-block"> Provide Claim Administrator</span>
                                 </div>
                             </div>
@@ -383,7 +383,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input type="text" ng-model="vm.client.policyNumber" class="form-control" name="insurance_policy_number" />
+                                    <input type="text" ng-model="vm.client.policyNumber" class="form-control" name="insurancepolicynumber" />
                                     <span class="help-block"> Provide Policy Number</span>
                                 </div>
                             </div>
@@ -393,7 +393,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input type="text" ng-model="vm.client.claimNumber" class="form-control" name="insurance_claim_number" />
+                                    <input type="text" ng-model="vm.client.claimNumber" class="form-control" name="insuranceclaimnumber" />
                                     <span class="help-block"> Provide Claim Number</span>
                                 </div>
                             </div>

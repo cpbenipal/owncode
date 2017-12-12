@@ -19,6 +19,19 @@
             vm.currentUserId = abp.session.userId;
             vm.BranchID = abp.session.tenantId;
 
+             vm.importClient = function () {
+                vm.loading = true;                 
+                jobService.importExistingData(vm.filter)
+                    .then(function (result) {
+                        vm.client = result.data;
+                        vm.client.clientOtherInformation = result.data.otherInformation;   
+                        vm.getModels(vm.client.makeId);
+                        vm.client.modelId = result.data.modelId;
+                    }).finally(function () {
+                        vm.loading = false;
+                    });
+            };
+
             $scope.manufactureList = [];
             vm.getVehicleMake = function () {
                 vm.loading = true;
@@ -56,9 +69,10 @@
             };
 
             $scope.modelList = []; //list of car models
-            $scope.getModels = function (control) {
+            vm.getModels = function (makeId) {
+               
                 $scope.modelList.pop();
-                jobService.getVehicleModel($.extend({ filter: control.id }, control.id))
+                jobService.getVehicleModel($.extend({ filter: makeId }, makeId))
                     .then(function (result1) {
                         angular.forEach(result1.data.items, function (value1, key1) {
                             $scope.modelList.push({
@@ -102,21 +116,6 @@
                 });
             };
 
-            vm.importClient = function () {
-                vm.loading = true;                 
-                jobService.importExistingData(vm.filter)
-                    .then(function (result) {
-                        vm.client = result.data;
-                        vm.client.clientOtherInformation = result.data.otherInformation;                            
-                        $scope.MakeId = result.data.makeId;
-                        vm.getVehicleModel(result.data.makeId);
-                        $scope.ModelID = result.data.modelId;
-                    }).finally(function () {
-                        vm.loading = false;
-                    });
-            };
-             
-
             $scope.BrokerList = []; //list of Brokers
             vm.getBroker = function () {
                 $scope.BrokerList.pop();
@@ -136,21 +135,20 @@
 
             $('#form_wizard_1 .button-submit').click(function () {
                 vm.loading = true;
-                vm.saving = true;  
- 
-                vm.client.MakeId = $scope.MakeId.id;
-                vm.client.ModelId = $scope.ModelID.id;
-                vm.client.InsurerId = $scope.InsurerId.id;
-                vm.client.BrokerID = $scope.BrokerId.id;
-                vm.client.PaintTypeId = $scope.PaintTypeId.id;
-
-                jobService.createNewJob($.extend({ filter: vm.client }, vm.client)).then(function () {
-                    abp.notify.info(app.localize('SavedSuccessfully')); 
-                    window.location.href = "#!/tenant/jobdetails";
-                }).finally(function () {
-                    vm.saving = false;
-                    vm.loading = false;
-                });
+                vm.saving = true;
+                abp.message.confirm(
+                    app.localize('AreYouSure', "Submit"),
+                    function (isConfirmed) {
+                        if (isConfirmed) {
+                            jobService.createNewJob($.extend({ filter: vm.client }, vm.client)).then(function () {
+                                abp.notify.info(app.localize('SavedSuccessfully'));
+                                window.location.href = "#!/tenant/jobdetails";
+                            }).finally(function () {
+                                vm.saving = false;
+                                vm.loading = false;
+                            });
+                        }
+                    })                     
             }).hide();
             
             $scope.communicationTypeList = []; //list of communicationTypeList

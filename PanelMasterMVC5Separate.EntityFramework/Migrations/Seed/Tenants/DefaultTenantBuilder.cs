@@ -19,7 +19,7 @@ namespace PanelMasterMVC5Separate.Migrations.Seed.Tenants
         public void Create()
         {
             CreateDefaultTenant();
-            CreateDefaultPaintTypes();
+            //CreateDefaultPaintTypes();
         }
 
         private void CreateDefaultTenant()
@@ -68,7 +68,9 @@ namespace PanelMasterMVC5Separate.Migrations.Seed.Tenants
                 };
             }
             else
-                return new PaintTypes() { };
+            {
+                return null;
+            }
         }
     }
 }

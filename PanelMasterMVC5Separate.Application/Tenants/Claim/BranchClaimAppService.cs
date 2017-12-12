@@ -80,7 +80,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         }
         public ListResultDto<BranchClaimListDto> GetClaims(GetClaimsInput input)
         {
-            var queryjobs = _claimRepository.GetAll().ToList();
+            var queryjobs = _claimRepository.GetAll().Where(p=>p.TenantID == _abpSession.TenantId).ToList();
 
             var queryClient = _clientRepository.GetAll().ToList();
 
@@ -116,7 +116,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         }
         public async Task<FileDto> GetClaimsToExcel()
         {
-            var claims = await _claimRepository.GetAll().ToListAsync();
+            var claims = await _claimRepository.GetAll().Where(p => p.TenantID == _abpSession.TenantId).ToListAsync();
             var claimListDtos = claims.MapTo<List<BranchClaimListDto>>();
 
             return _claimListExcelExporter.ExportToFile(claimListDtos);
