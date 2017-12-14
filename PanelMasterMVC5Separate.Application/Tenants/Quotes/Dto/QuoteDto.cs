@@ -55,13 +55,29 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
         public virtual int RepairTypeId { get; set; }
 
         [Required]
+        public virtual int PaintTypeId { get; set; }
+
+        [Required]
+        public virtual bool IsStructuralRepairWork { get; set; }
+
+        [Required]
         public virtual bool Pre_Auth { get; set; }
-         
+
+        [Required]
+        public virtual bool IsLuxury { get; set; }
+
+        [Required]
+        public virtual bool IsSpecialisedType { get; set; }
+
+        [Required]
+        public virtual bool UnderWaranty { get; set; }
+
         public virtual string Value { get; set; }
 
         public virtual string Comments { get; set; }
 
         public string RegNo { get; set; }
+        public int vehicleId { get; set; }
     }
 
     [AutoMapTo(typeof(QuoteMaster))]
@@ -83,6 +99,21 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
         public virtual int RepairTypeId { get; set; }
 
         [Required]
+        public virtual int PaintTypeId { get; set; }
+
+        [Required]
+        public virtual bool IsStructuralRepairWork { get; set; }
+
+        [Required]
+        public virtual bool IsLuxury { get; set; }
+
+        [Required]
+        public virtual bool IsSpecialisedType { get; set; }
+
+        [Required]
+        public virtual bool UnderWaranty { get; set; }
+
+        [Required]
         public virtual bool Pre_Auth { get; set; }
 
         public virtual string Value { get; set; }
@@ -90,6 +121,8 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
         public virtual string Comments { get; set; }
 
         public string RegNo { get; set; }
+
+        public int vehicleId { get; set; }
     }
     [AutoMapFrom(typeof(QuoteStatus))]
     public class QuoteStatusDto

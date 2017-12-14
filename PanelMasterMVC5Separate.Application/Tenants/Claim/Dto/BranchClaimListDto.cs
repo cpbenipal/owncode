@@ -45,7 +45,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
         public string Broker { get; set; }
         public string Manufacture { get; set; }
         public string Model { get; set; }
-       
+        public int VehicleId { get; set; }
     }
 
     public class JobStatusDto

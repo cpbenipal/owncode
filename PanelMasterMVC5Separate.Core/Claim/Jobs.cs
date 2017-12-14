@@ -21,11 +21,14 @@ namespace PanelMasterMVC5Separate.Claim
         public virtual int ClientID { get; set; }
         public virtual Clients.Client Client { get; set; }
 
-        [Required]
-        public virtual int ManufactureID { get; set; }
-        public virtual VehicleMake Manufacture { get; set; }
+        //[Required]
+        //public virtual int ManufactureID { get; set; }
+        //public virtual VehicleMake Manufacture { get; set; }
 
-        public virtual int ModelID { get; set; }
+        //public virtual int ModelID { get; set; }     
+        public virtual int VehicleID { get; set; }
+        [ForeignKey("VehicleID")]
+        public virtual BrVehicle BrVehicle { get; set; }
 
         [Required]
         public virtual int InsuranceID { get; set; }
@@ -47,11 +50,11 @@ namespace PanelMasterMVC5Separate.Claim
          
         public virtual TowOperator TowOperator { get; set; }
 
-        public virtual string RegNo { get; set; }
-        public virtual string VinNumber { get; set; }
-        public virtual string Colour { get; set; }
-        public virtual string Year { get; set; }
-        public virtual string UnderWaranty { get; set; }
+        //public virtual string RegNo { get; set; }
+        //public virtual string VinNumber { get; set; }
+        //public virtual string Colour { get; set; }
+        //public virtual string Year { get; set; }
+        //public virtual string UnderWaranty { get; set; }
         public virtual bool New_Comeback { get; set; }
 
         public virtual string DamangeReason { get; set; }

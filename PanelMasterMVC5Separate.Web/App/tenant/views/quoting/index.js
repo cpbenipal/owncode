@@ -138,8 +138,8 @@
                 return users;
             };
  
-            vm.newQuotation = function (quote) {
-                openCreateQuoteModal(quote.jobId);
+            vm.addQuote = function (quote) {
+                window.location.href = "#!/tenant/viewQuotations";
             };
             vm.editQuotation = function (quote) {
                 openEditQuoteModal(quote.id);

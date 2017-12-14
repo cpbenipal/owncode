@@ -32,6 +32,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         private readonly IAbpSession _abpSession;
         private readonly IClaimsListExcelExporter _claimListExcelExporter;
         private readonly IRepository<Jobs> _claimRepository;
+        private readonly IRepository<BrVehicle> _brVehicleRepository;
         private readonly IRepository<Client> _clientRepository;
         private readonly IRepository<InsurerMaster> _InsuranceRepository;
 
@@ -47,7 +48,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         private readonly IRepository<TenantProfile> _TenantProfile;
         private readonly IRepository<Countries> _countryRepository;
         public BranchClaimAppService(IAbpSession abpSession, IClaimsListExcelExporter claimListExcelExporter, IRepository<Jobs> claimRepository,
-                                     IRepository<Client> clientRepository, IRepository<InsurerMaster> InsuranceRepository,
+                                     IRepository<BrVehicle> brVehicleRepository, IRepository<Client> clientRepository, IRepository<InsurerMaster> InsuranceRepository,
                                      IRepository<VehicleMake> manufactureRepository, IRepository<BrokerMaster> brokerRepository,
                                      IRepository<VehicleModels> vehicleModelRepository, IRepository<Jobstatus> jobstatusRepository, IRepository<JobstatusMask> jobstatusmaskRepository,
                                      IRepository<JobstatusTenant> jobstatustenantRepository, IRepository<TowOperator> towoperatorrepository,
@@ -55,6 +56,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         {
             _abpSession = abpSession;
             _claimListExcelExporter = claimListExcelExporter;
+            _brVehicleRepository = brVehicleRepository;
             _claimRepository = claimRepository;
             _clientRepository = clientRepository;
             _InsuranceRepository = InsuranceRepository;
@@ -82,6 +84,8 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         {
             var queryjobs = _claimRepository.GetAll().Where(p=>p.TenantID == _abpSession.TenantId).ToList();
 
+            var queryveh = _brVehicleRepository.GetAll().Where(p => p.TenantId == _abpSession.TenantId).ToList();
+
             var queryClient = _clientRepository.GetAll().ToList();
 
             var queryInsurance = _InsuranceRepository.GetAll().ToList();
@@ -89,18 +93,18 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             var query = (from j in queryjobs
                          join c in queryClient on j.ClientID equals c.Id
                          join n in queryInsurance on j.InsuranceID equals n.Id
-
+                         join v in queryveh on j.VehicleID equals v.Id
                          select new BranchClaimListDto
                          {
                              Id = j.Id,
                              Name = c.Name,
                              Surname = c.Surname,
                              Insurance = n.InsurerName,
-                             RegNo = j.RegNo,
+                             RegNo = v.RegistrationNumber,
                              CreationTime = j.CreationTime
                          }).WhereIf(
-                !input.Filter.IsNullOrWhiteSpace(),
-                u =>
+                    !input.Filter.IsNullOrWhiteSpace(),
+                    u =>
                     u.Name.Contains(input.Filter) ||
                     u.Surname.Contains(input.Filter) ||
                     u.Insurance.Contains(input.Filter) ||
@@ -156,6 +160,11 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                .GetAll().Where(c => c.Id == Id)
                .FirstOrDefault();
 
+            //Get Vehicle by Id
+            var thisVeh = _brVehicleRepository
+               .GetAll().Where(c => c.Id == thisJob.VehicleID)
+               .FirstOrDefault();
+
             //Get Client by Id
             var thisclient = _clientRepository
                .GetAll().Where(c => c.Id == thisJob.ClientID)
@@ -173,12 +182,12 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
             //Get Model by Id
             var thisModel = _vehicleModelRepository
-                .GetAll().Where(m => m.Id == thisJob.ModelID)
+                .GetAll().Where(m => m.Id == thisVeh.ModelId)
                 .FirstOrDefault();
 
             //Get Make/Manufacture by Id
             var thisMake = _manufactureRepository
-                .GetAll().Where(m => m.Id == thisJob.ManufactureID)
+                .GetAll().Where(m => m.Id == thisVeh.ModelId)
                 .FirstOrDefault();
 
             var finalQuery = (new BranchClaimListDto
@@ -189,11 +198,11 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                 Email = thisclient.Email,
                 Tel = thisclient.Tel,
 
-                Id = thisJob.Id,
-                Colour = thisJob.Colour,
-                Year = thisJob.Year,
-                RegNo = thisJob.RegNo,
-                VinNumber = thisJob.VinNumber,
+                Id = thisVeh.Id,
+                Colour = thisVeh.Color,
+                Year = thisVeh.Year,
+                RegNo = thisVeh.RegistrationNumber,
+                VinNumber = thisVeh.VinNumber,
 
                 BrokerID = thisBroker.Id,
                 Broker = thisBroker.BrokerName,
@@ -219,13 +228,13 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             try
             {
 
-                var jobs = _claimRepository.Get(input.Id);
-                jobs.Colour = input.Colour;
-                jobs.RegNo = input.RegNo;
+                var jobs = _brVehicleRepository.Get(input.Id);
+                jobs.Color = input.Colour;
+                jobs.RegistrationNumber = input.RegNo;
                 jobs.VinNumber = input.VinNumber;
                 jobs.Year = input.Year;
 
-                _claimRepository.Update(jobs);
+                _brVehicleRepository.Update(jobs);
 
             }
             catch (Exception x)

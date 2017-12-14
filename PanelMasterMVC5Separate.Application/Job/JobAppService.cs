@@ -232,19 +232,19 @@ namespace PanelMasterMVC5Separate.Vehicle
             var jobs = new Jobs()
             {
                 ClientID = id,
-                ManufactureID = clientDto.MakeId,
-                ModelID = clientDto.ModelId,
-                Year = clientDto.Year,
-                RegNo = clientDto.RegistrationNumber,
-                VinNumber = clientDto.VinNumber,
+                //ManufactureID = clientDto.MakeId,
+                //ModelID = clientDto.ModelId,
+                //Year = clientDto.Year,
+                //RegNo = clientDto.RegistrationNumber,
+                //VinNumber = clientDto.VinNumber,
                 CurrentKMs = clientDto.CurrentKMs,
                 DamangeReason = clientDto.DamangeReason,
                 BranchEntryMethod = clientDto.BranchEntryMethod,
                 IsUnrelatedDamangeReason = clientDto.IsUnrelatedDamangeReason,
                 InsuranceID = clientDto.InsurerId,
                 BrokerID = clientDto.BrokerId,
-                Colour = clientDto.Colour,
-                UnderWaranty = clientDto.UnderWaranty ? "Yes": "No",
+               // Colour = clientDto.Colour,
+               // UnderWaranty = clientDto.UnderWaranty ? "Yes": "No",
                 OtherInformation = clientDto.RepairOtherInformation,
                 TenantID = _abpSession.TenantId
             };

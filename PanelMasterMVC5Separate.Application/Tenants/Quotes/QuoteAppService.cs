@@ -4,9 +4,11 @@ using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Abp.Runtime.Session;
+using Abp.UI;
 using PanelMasterMVC5Separate.Brokers;
 using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.Insurer;
+using PanelMasterMVC5Separate.Job.Dto;
 using PanelMasterMVC5Separate.Quotings;
 using PanelMasterMVC5Separate.Tenants.Quotes.Dto;
 using PanelMasterMVC5Separate.Vehicle;
@@ -28,30 +30,42 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
         private readonly IRepository<InsurerMaster> _insurerrrepository;
         private readonly IRepository<VehicleMake> _makerepository;
         private readonly IRepository<VehicleModels> _modelepository;
+        private readonly IRepository<BrVehicle> _vehiclerrepository;
+        private readonly IRepository<PaintTypes> _painttypesrepository;
         private readonly IAbpSession _abpSession;
         private readonly IAppFolders _appFolders;
 
         public QuoteAppService(IAbpSession abpSession, IAppFolders appFolders, IRepository<QuoteStatus> qstatusrepository, IRepository<QuoteCategories> quotecatrepository,
-          IRepository<RepairTypes> repairtyperepository, IRepository<QuoteMaster> quotemasterrepository, IRepository<Jobs> jobsrrepository
+         IRepository<BrVehicle> vehiclerrepository, IRepository<RepairTypes> repairtyperepository, IRepository<QuoteMaster> quotemasterrepository, IRepository<Jobs> jobsrrepository
             , IRepository<InsurerMaster> insurerrrepository, IRepository<BrokerMaster> brokerrrepository, IRepository<VehicleMake> makerepository,
-            IRepository<VehicleModels> modelepository)
+            IRepository<VehicleModels> modelepository, IRepository<PaintTypes> painttypesrepository)
         {
             _abpSession = abpSession; _appFolders = appFolders; _qstatusrepository = qstatusrepository; _quotecatrepository = quotecatrepository;
             _repairtyperepository = repairtyperepository; _quotemasterrepository = quotemasterrepository; _jobsrrepository = jobsrrepository;
             _insurerrrepository = insurerrrepository; _brokerrrepository = brokerrrepository; _makerepository = makerepository;
-            _modelepository = modelepository;
+            _modelepository = modelepository; _vehiclerrepository = vehiclerrepository; _painttypesrepository = painttypesrepository;
         }
+        public ListResultDto<PaintTypesDto> GetPaintType()
+        {
+            var paints = _painttypesrepository
+                .GetAll()
+                .OrderBy(p => p.PaintType)
+                .ToList();
 
+            return new ListResultDto<PaintTypesDto>(ObjectMapper.Map<List<PaintTypesDto>>(paints));
+        }
 
         public ListResultDto<QuoteMastersDto> ViewQuotations(GetQuoteInput input)
         {
-            var JobMaster = _jobsrrepository.GetAll().ToList();
+            var JobMaster = _jobsrrepository.GetAll().Where(c => c.TenantID == _abpSession.TenantId).ToList();
+
+            var VehicleMaster = _vehiclerrepository.GetAll().Where(c => c.TenantId == _abpSession.TenantId).ToList();
 
             var quotestatus = _qstatusrepository.GetAll().Where(x => x.Enabled == true).ToList();
 
             var quotecategories = _quotecatrepository.GetAll().ToList();
 
-            var repairtypes = _repairtyperepository.GetAll().Where(x=>x.Enabled == true).ToList();
+            var repairtypes = _repairtyperepository.GetAll().Where(x => x.Enabled == true).ToList();
 
             var qmaster = _quotemasterrepository.GetAll().Where(c => c.TenantId == _abpSession.TenantId).ToList();
 
@@ -72,19 +86,19 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
                                }).ToList();
 
             var finalQuery = (from v in JobMaster
-                              join master in quoteMaster on v.Id equals master.JobId into pp
-                              from y1 in pp.DefaultIfEmpty()
+                              join master in quoteMaster on v.Id equals master.JobId
+                              //into pp from y1 in pp.DefaultIfEmpty()
 
                               select new QuoteMastersDto
                               {
                                   JobId = v.Id,
-                                  Id = y1 == null ? 0 : y1.Id,
-                                  Job = v.RegNo,
-                                  Value = y1 == null ? "" : y1.Value,
-                                  CreationTime = y1 == null ? DateTime.MinValue : y1.CreationTime,
-                                  QuoteCat = y1 == null ? "" : y1.QuoteCat,
-                                  RepairType = y1 == null ? "" : y1.RepairType,
-                                  QuoteStatus = y1 == null ? "" : y1.QuoteStatus
+                                  Id = master == null ? 0 : master.Id,
+                                  Job = _vehiclerrepository.FirstOrDefault(p => p.Id == v.VehicleID).RegistrationNumber,
+                                  Value = master == null ? "" : master.Value,
+                                  CreationTime = master == null ? DateTime.MinValue : master.CreationTime,
+                                  QuoteCat = master == null ? "" : master.QuoteCat,
+                                  RepairType = master == null ? "" : master.RepairType,
+                                  QuoteStatus = master == null ? "" : master.QuoteStatus
                               }).WhereIf(!input.Filter.IsNullOrWhiteSpace(),
                               u =>
                               u.Job.Contains(input.Filter) ||
@@ -97,24 +111,24 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
         }
         // Get Quote type for Create or Edit 
         public async Task<QuoteMasterDto> GetQuoteForNewQuotation(GetJobInput input)
-        {             
-            var output = new QuoteMasterDto();            
-            
-            if (input.id != 0)//Edit
-            { 
-                var quote = _quotemasterrepository.FirstOrDefault(p => p.Id == input.id);
-                input.jobId = quote.JobId;
-                try
-                {
-                    output = quote.MapTo<QuoteMasterDto>();
-                }
-                catch (Exception c){
-                    throw c;
-                }                
-
+        {
+            var output = new QuoteMasterDto();
+            var quote = _quotemasterrepository.FirstOrDefault(p => p.JobId == input.jobId);
+            if (quote != null)
+                output = quote.MapTo<QuoteMasterDto>();
+            output.Id = 0;
+            var VehicleID = _jobsrrepository.FirstOrDefault(p => p.Id == input.jobId).VehicleID;
+            var vehicle = await _vehiclerrepository.GetAsync(VehicleID);
+            if (vehicle != null)
+            {
+                output.RegNo = vehicle.RegistrationNumber;
+                output.IsSpecialisedType = vehicle.IsSpecialisedType;
+                output.IsLuxury = vehicle.IsLuxury;
+                output.UnderWaranty = vehicle.UnderWaranty;
+                output.PaintTypeId = vehicle.PaintTypeId;
+                output.vehicleId = VehicleID;
+                //output = vehicle.MapTo<QuoteMasterDto>();
             }
-            var job = await _jobsrrepository.GetAsync(input.jobId);
-            output.RegNo = job.RegNo;
             return output;
         }
 
@@ -148,12 +162,25 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
             return new ListResultDto<RepairTypeDto>(ObjectMapper.Map<List<RepairTypeDto>>(status));
         }
 
-        public int CreateOrUpdateQuotation(QuoteMasterToDto input)
+        public int CreateOrUpdateQuotation(QuoteMasterToDto vehicle)
         {
-            input.QuoteStatusID = 1; // Default Status : Quote Preparation                          
-            var query = input.MapTo<QuoteMaster>();
-            
-            return _quotemasterrepository.InsertOrUpdateAndGetId(query);
+            try
+            {
+                var output = _vehiclerrepository.Get(vehicle.vehicleId);
+                output.IsSpecialisedType = vehicle.IsSpecialisedType;
+                output.IsLuxury = vehicle.IsLuxury;
+                output.UnderWaranty = vehicle.UnderWaranty;
+                output.PaintTypeId = vehicle.PaintTypeId;
+                _vehiclerrepository.InsertOrUpdate(output);
+
+                vehicle.QuoteStatusID = 1; // Default Status : Quote Preparation                          
+                var query = vehicle.MapTo<QuoteMaster>();
+                return _quotemasterrepository.InsertOrUpdateAndGetId(query);
+            }
+            catch
+            {
+                return 0;
+            }
         }
 
         public QuoteSummaryDto GetQuoteJobSummary(GetQuoteInput input)
@@ -163,6 +190,8 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
             var qmaster = _quotemasterrepository.GetAll().Where(c => c.Id == Id).FirstOrDefault();
 
             var JobMaster = _jobsrrepository.GetAll().Where(c => c.Id == qmaster.JobId).FirstOrDefault();
+
+            var VehicleMaster = _vehiclerrepository.GetAll().Where(c => c.Id == JobMaster.VehicleID).FirstOrDefault();
 
             var InsurerName = _insurerrrepository.GetAll().Where(c => c.Id == JobMaster.InsuranceID).FirstOrDefault().InsurerName;
 
@@ -174,7 +203,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
 
             var repairtypes = _repairtyperepository.GetAll().Where(c => c.Id == qmaster.RepairTypeId).FirstOrDefault().Description;
 
-            var model = _modelepository.GetAll().Where(c => c.Id == JobMaster.ModelID).FirstOrDefault();
+            var model = _modelepository.GetAll().Where(c => c.Id == VehicleMaster.ModelId).FirstOrDefault();
 
             var make = _makerepository.GetAll().Where(c => c.Id == model.VehicleMakeID).FirstOrDefault().Description;
 
@@ -186,10 +215,10 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
             sdtos.QuoteStatus = quotestatus;
             sdtos.QuoteCreated = qmaster.CreationTime.ToShortDateString();
             sdtos.Value = qmaster.Value;
-            sdtos.VehicleYear = JobMaster.Year;
-            sdtos.VehicleColor = JobMaster.Colour;
-            sdtos.VehicleReg = JobMaster.RegNo;
-            sdtos.VehicleVin = JobMaster.VinNumber;
+            sdtos.VehicleYear = VehicleMaster.Year;
+            sdtos.VehicleColor = VehicleMaster.Color;
+            sdtos.VehicleReg = VehicleMaster.RegistrationNumber;
+            sdtos.VehicleVin = VehicleMaster.VinNumber;
             sdtos.VehicleCreatedBy = JobMaster.CreationTime.ToShortDateString();
             sdtos.RepairType = repairtypes;
             sdtos.Pre_Auth = qmaster.Pre_Auth ? "Yes" : "No";

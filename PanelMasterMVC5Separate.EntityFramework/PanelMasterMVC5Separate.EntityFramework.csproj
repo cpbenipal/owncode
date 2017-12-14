@@ -264,6 +264,18 @@
     <Compile Include="Migrations\201712120838409_newjobtasdsadasd.Designer.cs">
       <DependentUpon>201712120838409_newjobtasdsadasd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712140258584_dbchange.cs" />
+    <Compile Include="Migrations\201712140258584_dbchange.Designer.cs">
+      <DependentUpon>201712140258584_dbchange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712140301478_dbchange1.cs" />
+    <Compile Include="Migrations\201712140301478_dbchange1.Designer.cs">
+      <DependentUpon>201712140301478_dbchange1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712140856106_NewQuote.cs" />
+    <Compile Include="Migrations\201712140856106_NewQuote.Designer.cs">
+      <DependentUpon>201712140856106_NewQuote.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -458,6 +470,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712120838409_newjobtasdsadasd.resx">
       <DependentUpon>201712120838409_newjobtasdsadasd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712140258584_dbchange.resx">
+      <DependentUpon>201712140258584_dbchange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712140301478_dbchange1.resx">
+      <DependentUpon>201712140301478_dbchange1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712140856106_NewQuote.resx">
+      <DependentUpon>201712140856106_NewQuote.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -40,6 +40,9 @@ namespace PanelMasterMVC5Separate.Quotings
         public virtual RepairTypes RepairTypes { get; set; }
 
         [Required]
+        public virtual bool IsStructuralRepairWork { get; set; }
+
+        [Required]
         public virtual bool Pre_Auth { get; set; }
 
         public virtual string Value { get; set; }

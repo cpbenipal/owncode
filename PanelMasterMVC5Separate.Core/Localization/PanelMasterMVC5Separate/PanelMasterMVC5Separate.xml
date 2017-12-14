@@ -675,5 +675,11 @@
     <text name="SystemDefaults" value="System Defaults" />
     <text name="SignOnPlans" value="Signon Plans" />
     <text name="CreateJob" value="Create Job" />
+    <text name="UnderManufacturerWarantee" value="Is Vehicle Under Manufacturer Warantee?" />
+    <text name="SpecialisedRepair" value="Is this a Specialised Repair?" />
+    <text name="IsLuxuryRepair" value="Is this a Luxury/Niche repair?" />
+    <text name="StructuralRepairWorkRequired" value="Will there be structural repair work required?" />
+    <text name="PaintType" value="Please select Paint Type" />
+    <text name="AddnewQuote" value="Add a quote" />
   </texts>
 </localizationDictionary>
