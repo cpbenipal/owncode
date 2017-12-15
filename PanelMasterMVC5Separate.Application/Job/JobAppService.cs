@@ -228,28 +228,7 @@ namespace PanelMasterMVC5Separate.Vehicle
             };
 
             int id = _clientRepository.InsertOrUpdateAndGetId(clients);
-
-            var jobs = new Jobs()
-            {
-                ClientID = id,
-                //ManufactureID = clientDto.MakeId,
-                //ModelID = clientDto.ModelId,
-                //Year = clientDto.Year,
-                //RegNo = clientDto.RegistrationNumber,
-                //VinNumber = clientDto.VinNumber,
-                CurrentKMs = clientDto.CurrentKMs,
-                DamangeReason = clientDto.DamangeReason,
-                BranchEntryMethod = clientDto.BranchEntryMethod,
-                IsUnrelatedDamangeReason = clientDto.IsUnrelatedDamangeReason,
-                InsuranceID = clientDto.InsurerId,
-                BrokerID = clientDto.BrokerId,
-               // Colour = clientDto.Colour,
-               // UnderWaranty = clientDto.UnderWaranty ? "Yes": "No",
-                OtherInformation = clientDto.RepairOtherInformation,
-                TenantID = _abpSession.TenantId
-            };
-
-           id = _jobsRepository.InsertOrUpdateAndGetId(jobs);
+                      
 
             var vehicle = new BrVehicle()
             {
@@ -266,7 +245,30 @@ namespace PanelMasterMVC5Separate.Vehicle
                 IsLuxury = clientDto.IsLuxury,
                 OtherInformation = clientDto.VehicleOtherInformation
             };
-            _brvehiclerepository.InsertOrUpdate(vehicle);
+           int vehicleId =  _brvehiclerepository.InsertOrUpdateAndGetId(vehicle);
+
+            var jobs = new Jobs()
+            {
+                ClientID = id,
+                //ManufactureID = clientDto.MakeId,
+                //ModelID = clientDto.ModelId,
+                //Year = clientDto.Year,
+                //RegNo = clientDto.RegistrationNumber,
+                //VinNumber = clientDto.VinNumber,
+                CurrentKMs = clientDto.CurrentKMs,
+                DamangeReason = clientDto.DamangeReason,
+                BranchEntryMethod = clientDto.BranchEntryMethod,
+                IsUnrelatedDamangeReason = clientDto.IsUnrelatedDamangeReason,
+                InsuranceID = clientDto.InsurerId,
+                BrokerID = clientDto.BrokerId,
+                // Colour = clientDto.Colour,
+                // UnderWaranty = clientDto.UnderWaranty ? "Yes": "No",
+                OtherInformation = clientDto.RepairOtherInformation,
+                VehicleID = vehicleId,
+               TenantID = _abpSession.TenantId
+            };
+
+            id = _jobsRepository.InsertOrUpdateAndGetId(jobs);
 
             var quote = new VehicleInsurance()
             {
