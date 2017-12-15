@@ -77,8 +77,7 @@ namespace PanelMasterMVC5Separate.Vehicle
     [Table("brVehicle")]
     public class BrVehicle : FullAuditedEntity
     {
-        [Required]
-        public virtual int TenantId { get; set; }
+        public virtual int? TenantId { get; set; }
 
         public virtual int MakeId { get; set; }
         [ForeignKey("MakeId")]

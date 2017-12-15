@@ -79,14 +79,14 @@ namespace PanelMasterMVC5Separate.Vehicle
                 importDto.CommunicationType = query.CommunicationType;
                 importDto.ContactAfterService = query.ContactAfterService;
                 importDto.ClientOtherInformation = query.OtherInformation;
-               
+
             }
             var query1 = _brvehiclerepository.GetAll()
               .Where(p => p.RegistrationNumber.Equals(input.FilterText1) || p.VinNumber.Equals(input.FilterText1))
              .FirstOrDefault();
 
             if (query1 != null)
-            {                
+            {
                 importDto.MakeId = query1.MakeId;
                 importDto.ModelId = query1.ModelId;
                 importDto.Colour = query1.Color;
@@ -102,7 +102,7 @@ namespace PanelMasterMVC5Separate.Vehicle
             }
             return importDto;
         }
-     
+
         public ListResultDto<VehicleMakeDto> GetManufacture()
         {
             var manufacture = _manufactureRepository
@@ -228,7 +228,7 @@ namespace PanelMasterMVC5Separate.Vehicle
             };
 
             int id = _clientRepository.InsertOrUpdateAndGetId(clients);
-                      
+
 
             var vehicle = new BrVehicle()
             {
@@ -243,9 +243,10 @@ namespace PanelMasterMVC5Separate.Vehicle
                 UnderWaranty = clientDto.UnderWaranty,
                 IsSpecialisedType = clientDto.IsSpecialisedType,
                 IsLuxury = clientDto.IsLuxury,
-                OtherInformation = clientDto.VehicleOtherInformation
+                OtherInformation = clientDto.VehicleOtherInformation,
+                TenantId = _abpSession.TenantId
             };
-           int vehicleId =  _brvehiclerepository.InsertOrUpdateAndGetId(vehicle);
+            int vehicleId = _brvehiclerepository.InsertOrUpdateAndGetId(vehicle);
 
             var jobs = new Jobs()
             {
@@ -265,7 +266,7 @@ namespace PanelMasterMVC5Separate.Vehicle
                 // UnderWaranty = clientDto.UnderWaranty ? "Yes": "No",
                 OtherInformation = clientDto.RepairOtherInformation,
                 VehicleID = vehicleId,
-               TenantID = _abpSession.TenantId
+                TenantID = _abpSession.TenantId
             };
 
             id = _jobsRepository.InsertOrUpdateAndGetId(jobs);
@@ -280,7 +281,7 @@ namespace PanelMasterMVC5Separate.Vehicle
                 OtherInformation = clientDto.InsurerOtherInformation
             };
 
-          _vehicleinsurancerepository.InsertOrUpdate(quote);
+            _vehicleinsurancerepository.InsertOrUpdate(quote);
         }
 
         private int GetCountryIdByCode()

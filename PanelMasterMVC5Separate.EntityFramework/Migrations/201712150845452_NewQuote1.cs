@@ -1,21 +1,18 @@
 namespace PanelMasterMVC5Separate.Migrations
 {
     using System;
-    using System.Collections.Generic;
-    using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.Migrations;
     
-    public partial class _1 : DbMigration
+    public partial class NewQuote1 : DbMigration
     {
         public override void Up()
         {
-           
-            
+            AlterColumn("dbo.brVehicle", "TenantId", c => c.Int());
         }
         
         public override void Down()
         {
-             
+            AlterColumn("dbo.brVehicle", "TenantId", c => c.Int(nullable: false));
         }
     }
 }
