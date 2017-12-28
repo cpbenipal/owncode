@@ -156,6 +156,14 @@
     <Compile Include="Migrations\201712150845452_NewQuote1.Designer.cs">
       <DependentUpon>201712150845452_NewQuote1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712180915520_quote.cs" />
+    <Compile Include="Migrations\201712180915520_quote.Designer.cs">
+      <DependentUpon>201712180915520_quote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712280345497_addnotaxvalparameter.cs" />
+    <Compile Include="Migrations\201712280345497_addnotaxvalparameter.Designer.cs">
+      <DependentUpon>201712280345497_addnotaxvalparameter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -269,6 +277,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712150845452_NewQuote1.resx">
       <DependentUpon>201712150845452_NewQuote1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712180915520_quote.resx">
+      <DependentUpon>201712180915520_quote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712280345497_addnotaxvalparameter.resx">
+      <DependentUpon>201712280345497_addnotaxvalparameter.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

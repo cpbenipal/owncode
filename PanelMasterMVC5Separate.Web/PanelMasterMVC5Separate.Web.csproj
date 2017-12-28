@@ -1223,6 +1223,7 @@
     <Content Include="assets\pages\css\coming-soon.min.css" />
     <Content Include="assets\pages\css\contact.css" />
     <Content Include="assets\pages\css\contact.min.css" />
+    <Content Include="assets\pages\css\editablegrid.css" />
     <Content Include="assets\pages\css\error.css" />
     <Content Include="assets\pages\css\error.min.css" />
     <Content Include="assets\pages\css\faq.css" />
@@ -1343,6 +1344,13 @@
     <Content Include="assets\pages\scripts\ecommerce-products-edit.min.js" />
     <Content Include="assets\pages\scripts\ecommerce-products.js" />
     <Content Include="assets\pages\scripts\ecommerce-products.min.js" />
+    <Content Include="assets\pages\scripts\editablegrid.js" />
+    <Content Include="assets\pages\scripts\editablegrid_charts.js" />
+    <Content Include="assets\pages\scripts\editablegrid_charts_ofc.js" />
+    <Content Include="assets\pages\scripts\editablegrid_editors.js" />
+    <Content Include="assets\pages\scripts\editablegrid_renderers.js" />
+    <Content Include="assets\pages\scripts\editablegrid_utils.js" />
+    <Content Include="assets\pages\scripts\editablegrid_validators.js" />
     <Content Include="assets\pages\scripts\form-dropzone.js" />
     <Content Include="assets\pages\scripts\form-dropzone.min.js" />
     <Content Include="assets\pages\scripts\form-editable.js" />
@@ -6903,6 +6911,7 @@
     <Content Include="metronic\assets\pages\scripts\form-validation.min.js" />
     <Content Include="metronic\assets\pages\scripts\createjob-form-wizard.js" />
     <Content Include="metronic\assets\pages\scripts\createjob-form-wizard.min.js" />
+    <Content Include="Temp\grid.html" />
     <Content Include="Views\TenantRegistration\form-wizard.js" />
     <Content Include="metronic\assets\pages\scripts\form-wizard.js" />
     <Content Include="Views\TenantRegistration\form-wizard.min.js" />

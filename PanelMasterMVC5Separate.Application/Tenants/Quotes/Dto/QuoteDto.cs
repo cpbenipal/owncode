@@ -1,6 +1,8 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using Abp.Domain.Entities.Auditing;
 using PanelMasterMVC5Separate.Quotings;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
@@ -38,7 +40,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
 
     [AutoMapFrom(typeof(QuoteMaster))]
     public class QuoteMasterDto : FullAuditedEntityDto
-    { 
+    {
         [Required]
         public virtual int TenantId { get; set; }
 
@@ -145,16 +147,16 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
         public virtual string Description { get; set; }
     }
 
-    public class QuoteSummaryDto 
-    { 
+    public class QuoteSummaryDto
+    {
         public virtual int JobId { get; set; }
-         
+
         public virtual string QuoteStatus { get; set; }
-         
+
         public virtual string QuoteCat { get; set; }
-         
+
         public virtual string RepairType { get; set; }
-         
+
         public virtual string Value { get; set; }
 
         public virtual string Pre_Auth { get; set; } // true:Yes false:No
@@ -182,5 +184,65 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
         public virtual string CreatedBy { get; set; }
 
         public virtual int Id { get; set; }
+    }
+
+    [AutoMapFrom(typeof(QuoteDetails))]
+    public class QuoteDetailDto : FullAuditedEntity
+    {
+        public virtual int? tenantid { get; set; }
+        [Required]
+        public virtual int QuoteId { get; set; }
+        [Required]
+        public virtual string quoteStatus { get; set; }
+        [Required]
+        public virtual int Actionid { get; set; }
+        [Required]
+        public virtual int Locationid { get; set; }
+        [Required]
+        public virtual string Description { get; set; }
+        [Required]
+        public virtual bool ToOrder { get; set; }
+        [Required]
+        public virtual bool Outwork { get; set; }
+        [Required]
+        public virtual int PartQty { get; set; }
+        [Required]
+        public virtual decimal PartPrice { get; set; }
+        [Required]
+        public virtual string Part { get; set; }
+        [Required]
+        public virtual decimal PanelHrs { get; set; }
+        [Required]
+        public virtual decimal PanelRate { get; set; }
+        [Required]
+        public virtual decimal PaintHrs { get; set; }
+        [Required]
+        public virtual decimal PaintRate { get; set; }
+        [Required]
+        public virtual decimal SAHrs { get; set; }
+        [Required]
+        public virtual decimal SARate { get; set; }
+        [Required]
+        public virtual bool NoTaxVat { get; set; }
+        public virtual bool IsCurrent { get; set; }
+        public string Locations { get; set; }
+        public string Actions { get; set; }
+    }
+    [AutoMapFrom(typeof(QLocation))]
+    public class QLocationDto : FullAuditedEntity
+    {
+        public virtual string Location { get; set; }
+    }
+    [AutoMapFrom(typeof(QAction))]
+    public class QActionDto : FullAuditedEntity
+    {
+        public virtual string Action { get; set; }
+        //public virtual int qparttypeId { get; set; }
+    }
+
+    public class QuoteObject
+    {
+        [Required]
+        public List<QuoteDetailDto> quote { get; set; }
     }
 }

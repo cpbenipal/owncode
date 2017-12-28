@@ -4,7 +4,7 @@ using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Abp.Runtime.Session;
-using Abp.UI;
+using Newtonsoft.Json;
 using PanelMasterMVC5Separate.Brokers;
 using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.Insurer;
@@ -12,15 +12,20 @@ using PanelMasterMVC5Separate.Job.Dto;
 using PanelMasterMVC5Separate.Quotings;
 using PanelMasterMVC5Separate.Tenants.Quotes.Dto;
 using PanelMasterMVC5Separate.Vehicle;
+using PanelMasterMVC5Separate.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PanelMasterMVC5Separate.Tenants.Quotes
 {
     public class QuoteAppService : PanelMasterMVC5SeparateAppServiceBase, IQuoteAppService
     {
+        private readonly IRepository<QLocation> _qlocationrepository;
+        private readonly IRepository<QAction> _qactionrepository;
+        private readonly IRepository<QuoteDetails> _quotedetailsrepository;
         private readonly IRepository<QuoteStatus> _qstatusrepository;
         private readonly IRepository<QuoteCategories> _quotecatrepository;
         private readonly IRepository<RepairTypes> _repairtyperepository;
@@ -35,15 +40,19 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
         private readonly IAbpSession _abpSession;
         private readonly IAppFolders _appFolders;
 
-        public QuoteAppService(IAbpSession abpSession, IAppFolders appFolders, IRepository<QuoteStatus> qstatusrepository, IRepository<QuoteCategories> quotecatrepository,
+        public QuoteAppService(IAbpSession abpSession, IAppFolders appFolders, IRepository<QuoteStatus> qstatusrepository,
+            IRepository<QuoteDetails> quotedetailsrepository, IRepository<QuoteCategories> quotecatrepository,
          IRepository<BrVehicle> vehiclerrepository, IRepository<RepairTypes> repairtyperepository, IRepository<QuoteMaster> quotemasterrepository, IRepository<Jobs> jobsrrepository
             , IRepository<InsurerMaster> insurerrrepository, IRepository<BrokerMaster> brokerrrepository, IRepository<VehicleMake> makerepository,
-            IRepository<VehicleModels> modelepository, IRepository<PaintTypes> painttypesrepository)
+            IRepository<VehicleModels> modelepository, IRepository<PaintTypes> painttypesrepository, IRepository<QLocation> qlocationrepository
+            , IRepository<QAction> qactionrepository)
         {
-            _abpSession = abpSession; _appFolders = appFolders; _qstatusrepository = qstatusrepository; _quotecatrepository = quotecatrepository;
+
+            _quotedetailsrepository = quotedetailsrepository; _abpSession = abpSession; _appFolders = appFolders; _qstatusrepository = qstatusrepository; _quotecatrepository = quotecatrepository;
             _repairtyperepository = repairtyperepository; _quotemasterrepository = quotemasterrepository; _jobsrrepository = jobsrrepository;
             _insurerrrepository = insurerrrepository; _brokerrrepository = brokerrrepository; _makerepository = makerepository;
             _modelepository = modelepository; _vehiclerrepository = vehiclerrepository; _painttypesrepository = painttypesrepository;
+            _qactionrepository = qactionrepository; _qlocationrepository = qlocationrepository;
         }
         public ListResultDto<PaintTypesDto> GetPaintType()
         {
@@ -229,6 +238,138 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
             sdtos.Id = Id;
             sdtos.CreatedBy = createdBy;
             return sdtos.MapTo<QuoteSummaryDto>();
+        }
+
+        public ListResultDto<QuoteDetailDto> GetQuotes(GetQuoteInput input)
+        {
+            int Id = Convert.ToInt32(input.Filter);
+
+            var quotes = _quotedetailsrepository.GetAll()
+                .Where(p => p.QuoteId == Id && p.tenantid == _abpSession.TenantId).ToList();
+
+            return new ListResultDto<QuoteDetailDto>(ObjectMapper.Map<List<QuoteDetailDto>>(quotes));
+
+        }
+
+        public string GetHeaders()
+        {
+
+            StringBuilder xmlfile = new StringBuilder();
+            xmlfile.Append("[{ name: \"Ref#\", datatype: \"integer\", editable: false },");//0
+            xmlfile.Append("{ name: \"actions\", datatype: \"string\", editable: true , values : " + GetActions() + "},");//1
+            xmlfile.Append("{ name: \"location\", datatype: \"string\", editable: true , values : " + GetLocations() + "},");//2
+
+            xmlfile.Append("{ name: \"description\", datatype: \"string\", editable: true },");//3
+            xmlfile.Append("{ name: \"towork\", datatype: \"html\", editable: false },");//4
+            xmlfile.Append("{ name: \"outwork\", datatype: \"html\", editable: false },");//5
+
+            xmlfile.Append("{ name: \"quantity\", datatype: \"integer\", editable: true },");//6
+            xmlfile.Append("{ name: \"price\", datatype: \"double(2)\", editable: true },");//7
+            xmlfile.Append("{ name: \"total\", datatype: \"double($,2)\", editable: false },");//8
+            xmlfile.Append("{ name: \"part\", datatype: \"string\", editable: true },");//9
+
+            xmlfile.Append("{ name: \"pbhrs\", datatype: \"double(2)\", editable: true },");//10
+            xmlfile.Append("{ name: \"pbrate\", datatype: \"double(2)\", editable: true },");//11
+            xmlfile.Append("{ name: \"pbvalue\", datatype: \"double(2)\", editable: false },");//12
+
+            xmlfile.Append("{ name: \"phrs\", datatype: \"double(2)\", editable: true },");//13
+            xmlfile.Append("{ name: \"prate\", datatype: \"double(2)\", editable: true },");//14
+            xmlfile.Append("{ name: \"pvalue\", datatype: \"double(2)\", editable: false },");//15
+
+            xmlfile.Append("{ name: \"sahrs\", datatype: \"double(2)\", editable: true },");//16
+            xmlfile.Append("{ name: \"sarate\", datatype: \"double(2)\", editable: true },");//17
+            xmlfile.Append("{ name: \"savalue\", datatype: \"double(2)\", editable: false },");//18
+
+            xmlfile.Append("{ name: \"notaxvat\", datatype: \"html\", editable: false },");//19
+            xmlfile.Append("{ name: \"gtotal\", datatype: \"double($,2)\", editable: false },");//20
+
+            xmlfile.Append("{ name: \"photo\", datatype: \"string\", editable: false },");
+            xmlfile.Append("{ name: \"copydelete\", datatype: \"html\", editable: false }]");
+
+            return xmlfile.ToString();
+        }
+
+        public string GetLocations()
+        {
+            var actions = _qlocationrepository
+                .GetAll()
+                .OrderBy(p => p.Location)
+                .ToList();
+            string strJson = "{ \"0\" : \"-Choose-\" , ";
+
+            foreach (var a in actions)
+            {
+                strJson += " \"" + a.Id + "\" : \"" + a.Location.Replace(":", " -") + "\",";
+            }
+            strJson = strJson.Trim(',');
+            strJson += "}";
+            return strJson;
+        }
+
+        public string GetActions(/*GetQuoteInput input*/)
+        {
+            // int Id = Convert.ToInt32(input.Filter);
+            var actions = _qactionrepository
+                .GetAll()
+                // .Where(p => p.tblqparttypeId == Id)
+                .OrderBy(p => p.Action)
+                .ToList();
+
+            string strJson = "{ \"0\" : \"-Choose-\" , ";
+            foreach (var a in actions)
+            {
+                strJson += " \"" + a.Id + "\" : \"" + a.Action.Replace(":", " -") + "\",";
+            }
+            strJson = strJson.Trim(',');
+            strJson += "}";
+            return strJson;
+        }
+
+        public void SaveQuote(string quote)
+        {
+            try
+            {
+                var result = JsonConvert.DeserializeObject<QuoteObject>(quote).quote.ToList();
+
+                var finalresults = (from f in result
+                                    select new QuoteDetails()
+                                    {
+                                        Id = f.Id,
+                                        tenantid = _abpSession.TenantId,
+                                        quoteStatus = "Captured",
+                                        IsCurrent = f.Id == 0 ? true : false,
+                                        Description = f.Description,
+                                        QuoteId = f.QuoteId,
+                                        Actionid = f.Actionid,
+                                        Locationid = f.Locationid,
+                                        ToOrder = f.ToOrder,
+                                        Outwork = f.Outwork,
+                                        PartQty = f.PartQty,
+                                        PartPrice = f.PartPrice,
+                                        Part = f.Part,
+                                        PanelHrs = f.PanelHrs,
+                                        PanelRate = f.PanelRate,
+                                        PaintHrs = f.PaintHrs,
+                                        PaintRate = f.PaintRate,
+                                        SAHrs = f.SAHrs,
+                                        SARate = f.SARate,
+                                        NoTaxVat = f.NoTaxVat,
+                                    }).ToList();
+
+                foreach (QuoteDetails q in finalresults)
+                {
+                    _quotedetailsrepository.InsertOrUpdate(q);
+                }
+            }
+            catch
+            {
+
+            }
+        }
+        public void DeleteQuote(GetQuoteInput input)
+        {
+            int Id = Convert.ToInt32(input.Filter);
+            _quotedetailsrepository.Delete(Id);
         }
     }
 }

@@ -3,21 +3,22 @@
         '$scope', '$uibModalInstance', 'abp.services.app.quote', 'jobId',
         function ($scope, $uibModalInstance, jobService, jobId) {
             var vm = this;
- 
+
             vm.saving = false;
             vm.currentUserId = abp.session.userId;
             vm.TenantId = abp.session.tenantId;
-             
-            vm.save = function () {                              
-                vm.vehicle.jobId = jobId;                            
-                vm.vehicle.quoteStatusID = 1;                        
-                vm.vehicle.TenantId = vm.TenantId; 
-                jobService.createOrUpdateQuotation(vm.vehicle).then(function (result) {                         
+
+            vm.save = function () {
+                
+                vm.vehicle.jobId = jobId;
+                vm.vehicle.quoteStatusID = 1;
+                vm.vehicle.TenantId = vm.TenantId;
+                jobService.createOrUpdateQuotation(vm.vehicle).then(function (result) {
                     abp.notify.info(app.localize('SavedSuccessfully'));
                     window.location.href = "#!/tenant/quoting";
                     $uibModalInstance.close();
                 }).finally(function () {
-                    vm.saving = false;
+                    
                 });
             };
 
@@ -43,7 +44,7 @@
                     });
 
             };
-            
+
             $scope.rtypeList = []; //list of repair types
             vm.getRepairs = function () {
 
@@ -94,19 +95,23 @@
             };
 
             function init() {
+                vm.loading = true;
                 jobService.getQuoteForNewQuotation({
                     jobid: jobId,
-                    id : 0
-                }).then(function (result) {                                
-                    vm.vehicle = result.data;                          
-               });
-            }           
+                    id: 0
+                }).then(function (result) {
+                    vm.vehicle = result.data;
+                    
+                }).finally(function () {
+                    vm.loading = false;
+                });
+            }
             
             vm.getCategories();
-            vm.getRepairs();     
-            vm.getYesNoList();  
-            vm.getPaints();     
-            init();
+            vm.getRepairs();
+            vm.getYesNoList();
+            vm.getPaints();
+           // init();
         }
     ]);
 })();

@@ -23,5 +23,14 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
         QuoteSummaryDto GetQuoteJobSummary(GetQuoteInput input);
 
         ListResultDto<PaintTypesDto> GetPaintType();
+
+        string GetHeaders();
+
+        ListResultDto<QuoteDetailDto> GetQuotes(GetQuoteInput input);
+
+        void SaveQuote(string quote);
+
+        void DeleteQuote(GetQuoteInput input);
+
     }
 }
