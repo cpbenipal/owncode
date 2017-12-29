@@ -182,21 +182,22 @@
 
                                                     <td>
                                                         <input id="notaxvat{{$index}}" type="checkbox" checked="{{q.noTaxVat}}" />
-                                                        <input type="hidden" id="hdnId{{$index}}" value="{{q.id}}" />
+                                                        <input type="hidden" name="hdnId{{$index}}" id="hdnId{{$index}}" value="{{q.id}}" />
                                                     </td>
                                                     <td>
                                                         {{ ((q.partQty*q.partPrice)+(q.panelHrs*q.panelRate)+(q.paintHrs*q.paintRate)+(q.saHrs*q.saRate)) }}
                                                     </td>
                                                     <td></td>
                                                     <td></td>
+                                                    
                                                 </tr>
-                                                <tr id="R{{rowcount}}">
-                                                    <td>{{rowcount}}</td>
+                                                 <tr ng-show="isShow" id="R1">
+                                                    <td>1</td>
                                                     <td>0</td>
                                                     <td>0</td>
                                                     <td></td>
-                                                    <td><input id="toOrder{{rowcount}}" type="checkbox" /></td>
-                                                    <td><input id="outwork{{rowcount}}" type="checkbox" /></td>
+                                                    <td><input id="toOrder1" type="checkbox" /></td>
+                                                    <td><input id="outwork1" type="checkbox" /></td>
                                                     <td>0</td>
                                                     <td>0</td>
                                                     <td>0</td>
@@ -214,13 +215,13 @@
                                                     <td>0</td>
                                                     <td>0</td>
                                                     <td>
-                                                        <input id="notaxvat{{rowcount}}" type="checkbox" />
-                                                        <input type="hidden" id="hdnId{{rowcount}}" value="0" />
+                                                        <input id="notaxvat1" type="checkbox" />
+                                                        <input type="hidden" id="hdnId1" value="0" />
                                                     </td>
                                                     <td>0</td>
                                                     <td></td>
                                                     <td></td>
-                                                </tr> 
+                                                </tr>  
                                             </tbody>
                                             <tfoot>
                                                 <tr>

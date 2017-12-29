@@ -249,7 +249,7 @@ CellEditor.prototype.applyEditing = function (element, newValue) {
             });
             totalhours = (totalhours/9).toFixed(2);
             $("#tdestimatedRepairDays").html(totalhours);  
-            $("#tdtotal").html(totalMoney);  
+            $("#tdtotal").html(totalMoney.toFixed(2));  
             _clearEditor(element);
             return true;
         }

@@ -190,39 +190,39 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
     public class QuoteDetailDto : FullAuditedEntity
     {
         public virtual int? tenantid { get; set; }
-        [Required]
+       
         public virtual int QuoteId { get; set; }
-        [Required]
+       
         public virtual string quoteStatus { get; set; }
-        [Required]
+       
         public virtual int Actionid { get; set; }
-        [Required]
+       
         public virtual int Locationid { get; set; }
-        [Required]
+       
         public virtual string Description { get; set; }
-        [Required]
+       
         public virtual bool ToOrder { get; set; }
-        [Required]
+       
         public virtual bool Outwork { get; set; }
-        [Required]
+       
         public virtual int PartQty { get; set; }
-        [Required]
+       
         public virtual decimal PartPrice { get; set; }
-        [Required]
+       
         public virtual string Part { get; set; }
-        [Required]
+       
         public virtual decimal PanelHrs { get; set; }
-        [Required]
+       
         public virtual decimal PanelRate { get; set; }
-        [Required]
+       
         public virtual decimal PaintHrs { get; set; }
-        [Required]
+       
         public virtual decimal PaintRate { get; set; }
-        [Required]
+       
         public virtual decimal SAHrs { get; set; }
-        [Required]
+       
         public virtual decimal SARate { get; set; }
-        [Required]
+       
         public virtual bool NoTaxVat { get; set; }
         public virtual bool IsCurrent { get; set; }
         public string Locations { get; set; }

@@ -1,8 +1,8 @@
 ﻿(function () {
     appModule.controller('tenant.views.quoteheaders.index', [
-        '$scope', '$uibModal', '$stateParams', 'uiGridConstants', 'abp.services.app.quote',
-        function ($scope, $uibModal, $stateParams, uiGridConstants, jobService) {
-
+        '$scope', '$uibModal', '$stateParams', '$window' , 'uiGridConstants', 'abp.services.app.quote',
+        function ($scope, $uibModal, $stateParams, $window, uiGridConstants, jobService) {
+            
             var vm = this;
 
             $scope.$on('$viewContentLoaded', function () {
@@ -11,7 +11,7 @@
             vm.job = {};
             vm.quote = {};
             vm.saving = false;
-            vm.loading = false;            
+            vm.loading = false;
             vm.advancedFiltersAreShown = false;
             vm.filterText = $stateParams.filterText || '';
             vm.currentUserId = abp.session.userId;
@@ -50,16 +50,16 @@
                         vm.loading = false;
                     });
             };
-             
+
             vm.getQuotes = function () {
                 vm.loading = true;
                 jobService.getQuotes($.extend({ filter: $stateParams.id }, $stateParams.id))
                     .then(function (result) {
                         vm.quote = result.data.items;
-                        $scope.rowcount = result.data.items.length+1;
-                        if($scope.rowcount==0)
-                            
-                        //   $scope.showNew = true;     
+                        $scope.rowcount = result.data.items.length;
+                        if ($scope.rowcount == 0){
+                            $scope.isShow = true;     
+                        }
                         //else
                         //    $scope.showNew = false;     
                         //$scope.rowcount = $scope.rowcount + 1;
@@ -69,25 +69,28 @@
                     });
             };
 
-            
+
             vm.estimatedRepairDays = function () {
                 var total = 0;
                 var totalvalue = 0;
                 angular.forEach(vm.quote, function (q) {
                     total = total + (q.panelHrs + q.paintHrs + q.saHrs);
-                    totalvalue = totalvalue + (q.partQty * q.partPrice) + (q.panelHrs * q.panelRate) + (q.paintHrs * q.paintRate) + (q.saHrs * q.saRate) ;
+                    totalvalue = totalvalue + (q.partQty * q.partPrice) + (q.panelHrs * q.panelRate) + (q.paintHrs * q.paintRate) + (q.saHrs * q.saRate);
                 })
-                total = (total/9).toFixed(2);                                 
+                total = (total / 9).toFixed(2);
                 $("#tdestimatedRepairDays").html(total);
-                $("#tdtotal").html(totalvalue)
+                $("#tdtotal").html(totalvalue.toFixed(2))
             };
-            
+
 
             vm.save = function () {
-                vm.saving = true;
-                vm.loading = true;
+                vm.saving = true;                 
                 var quote = [];
                 $('#htmlgrid tbody tr').each(function (i, tr) {
+                    var Id = $("#hdnId" + i + "").val();                    
+                    if (Id == undefined) {
+                        Id = 0;                         
+                    } 
                     quote.push({
                         "actionid": "" + editableGrid.getValueAt(i, 1) + "",
                         "locationid": "" + editableGrid.getValueAt(i, 2) + "",
@@ -103,36 +106,36 @@
                         "paintRate": "" + editableGrid.getValueAt(i, 14) + "",
                         "saHrs": "" + editableGrid.getValueAt(i, 16) + "",
                         "saRate": "" + editableGrid.getValueAt(i, 17) + "",
-                        "notaxvat": $("#notaxvat" + i + "").is(":checked") + "",
-                        "quoteId": $stateParams.id + "",
-                        "tenantid": vm.TenantId + "",
-                        "quoteStatus": "Captured" + "",                        
-                        "id": $("#hdnId" + i + "").val()
+                        "notaxvat": $("#notaxvat" + i + "").is(":checked"),
+                        "quoteId": $stateParams.id,
+                        "id": Id
                     });
-                    
+
                 });
                 // $scope.display = quote;
-                jobService.saveQuote(JSON.stringify({ 'quote': quote })).then(function () {
-                    abp.notify.info(app.localize('SavedSuccessfully'));                   
-                    window.location.href = "#!/tenant/quoteheaders/" + $stateParams.id;
-                }).finally(function () {
-                    vm.saving = false;
-                    vm.loading = false;
-                });                
+                jobService.saveQuote(JSON.stringify({ 'quote': quote })).then(function () { 
+                    abp.notify.info(app.localize('SavedSuccessfully'));                     
+                    getQuotes();
+                }).finally(function () {                    
+                    vm.saving = false;                    
+                });
             };
             deleteRow = function (c) {
                 var quoteId = $("#hdnId" + c).val();
-                jobService.deleteQuote($.extend({ filter: quoteId }, quoteId)).then(function () {
-                    abp.notify.info(app.localize('QuoteRemovedSuccessfully'));
-                    vm.getQuotes();
-                   // window.location.href = "#!/tenant/quoteheaders/" + $stateParams.id;
-                }).finally(function () {
-                    vm.saving = false;
-                });
-                //editableGrid.remove(c);
+                if (quoteId == null) {
+                    editableGrid.remove(c);
+                }
+                else {
+                    jobService.deleteQuote($.extend({ filter: quoteId }, quoteId)).then(function () {
+                        abp.notify.info(app.localize('QuoteRemovedSuccessfully'));                         
+                        $window.location.href = "#!/tenant/quoteheaders/" + $stateParams.id;
+                    }).finally(function () {
+                        vm.saving = false;
+                    });
+                }
             };
             vm.getJobSummary();
             vm.getHeaders();
-            vm.getQuotes();           
+            vm.getQuotes();
         }]);
 })();

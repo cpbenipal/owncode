@@ -286,6 +286,8 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
             xmlfile.Append("{ name: \"photo\", datatype: \"string\", editable: false },");
             xmlfile.Append("{ name: \"copydelete\", datatype: \"html\", editable: false }]");
 
+            
+
             return xmlfile.ToString();
         }
 

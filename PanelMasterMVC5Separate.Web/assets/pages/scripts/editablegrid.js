@@ -1371,13 +1371,13 @@ EditableGrid.prototype.insert = function(rowIndex, rowId, cellValues, rowAttribu
 	return this._insert(rowIndex, 0, rowId, cellValues, rowAttributes, dontSort);
 };
 
-
+// added by Charanpreet
 EditableGrid.prototype.duplicate = function (rowIndex) { 
-
-    // get id for new row (max id + 1)
-    var newRowId = 0;
-    for (var r = 0; r < this.getRowCount(); r++) newRowId = Math.max(newRowId, parseInt(this.getRowId(r)) + 1);
-
+    var values = this.getRowValues(rowIndex);
+    rowIndex  = $('#htmlgrid tbody tr').length+1;    
+    values['Ref#'] = rowIndex; // new index for first column for new row            
+    var newRowId = rowIndex;
+    //for (var r = 0; r < this.getRowCount(); r++) newRowId = Math.max(newRowId, parseInt(this.getRowId(r)) + 1);    
     // add new row
     this.insertAfter(rowIndex, newRowId, values);
 };
