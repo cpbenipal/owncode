@@ -50,7 +50,7 @@
                         '  <div class="btn-group dropdown" uib-dropdown="" dropdown-append-to-body>' +
                         '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
                         '    <ul uib-dropdown-menu>' +
-                        '      <li><a ng-click="grid.appScope.newQuotation(row.entity)">' + app.localize('NewQuotation') + '</a></li>' +
+                        '      <li><a ng-click="grid.appScope.newQuotation(row.entity)">' + app.localize('AddnewQuote') + '</a></li>' +
                         '    </ul>' +
                         '  </div>' +
                         '</div>'

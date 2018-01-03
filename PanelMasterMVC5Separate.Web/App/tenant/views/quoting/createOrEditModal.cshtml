@@ -3,8 +3,7 @@
     <form name="quoteCreateOrEditForm" role="form" novalidate class="form-validation">
         <div class="modal-header">
             <h4 class="modal-title">
-                <span ng-if="!vm.vehicle.id">@L("NewQuotationFor"): # {{vm.vehicle.regNo}}</span>
-                <span ng-if="vm.vehicle.id">@L("EditQuotationFor"): # {{vm.vehicle.regNo}}</span>
+                <span>@L("EditQuotationFor"): # {{vm.vehicle.regNo}}</span>
             </h4>
         </div>
         <div class="modal-body">
@@ -23,20 +22,55 @@
                         <select required class="form-control" ng-model="vm.vehicle.repairTypeId" name="RepairTypeId"
                                 ng-options="opt.id as opt.name for opt in rtypeList">
                             <option value="">@L("SelectOne")</option>
-                        </select>                       
+                        </select>
                     </div>
 
-                    <div class="form-group form-md-line-input no-hint"><label>@L("PreAuthorised")</label>
-                        <select required class="form-control" name="Pre_Auth" ng-model="vm.vehicle.pre_Auth"
-                               ng-options="opt.id as opt.name for opt in preAuthList">    
+                    <div class="form-group form-md-line-input no-hint">
+                        <label>@L("UnderManufacturerWarantee")</label>
+                        <select required class="form-control" ng-model="vm.vehicle.underWaranty"
+                                ng-options="opt.id as opt.name for opt in yesNoList">
                             <option value="">@L("SelectOne")</option>
                         </select>
-                      
+                    </div>
+                    <div class="form-group form-md-line-input no-hint">
+                        <label>@L("SpecialisedRepair")</label>
+                        <select required class="form-control" ng-model="vm.vehicle.isSpecialisedType"
+                                ng-options="opt.id as opt.name for opt in yesNoList">
+                            <option value="">@L("SelectOne")</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-md-line-input no-hint">
+                        <label>@L("IsLuxuryRepair")</label>
+                        <select required class="form-control" ng-model="vm.vehicle.isLuxury"
+                                ng-options="opt.id as opt.name for opt in yesNoList">
+                            <option value="">@L("SelectOne")</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-md-line-input no-hint">
+                        <label>@L("StructuralRepairWorkRequired")</label>
+                        <select required class="form-control" ng-model="vm.vehicle.isStructuralRepairWork"
+                                ng-options="opt.id as opt.name for opt in yesNoList">
+                            <option value="">@L("SelectOne")</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-md-line-input no-hint">
+                        <label>@L("PaintType")</label>
+                        <select ng-model="vm.vehicle.paintTypeId" name="PaintTypeId" ng-options="item.id as item.name for item in paintList" required class="form-control">
+                            <option value="">@L("SelectOne")</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-md-line-input no-hint">
+                        <label>@L("PreAuthorised")</label>
+                        <select required class="form-control" name="Pre_Auth" ng-model="vm.vehicle.pre_Auth"
+                                ng-options="opt.id as opt.name for opt in yesNoList">
+                            <option value="">@L("SelectOne")</option>
+                        </select>
+
                     </div>
 
                     <div class="form-group form-md-line-input no-hint">
                         <label>@L("Comments")</label> <textarea ng-model="vm.vehicle.comments" name="Comments" class="form-control" rows="3"></textarea>
-                        
+
                     </div>
 
                 </uib-tab>

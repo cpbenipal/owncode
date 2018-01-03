@@ -66,17 +66,17 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
 
         public ListResultDto<QuoteMastersDto> ViewQuotations(GetQuoteInput input)
         {
-            var JobMaster = _jobsrrepository.GetAll().Where(c => c.TenantID == _abpSession.TenantId).ToList();
+            var JobMaster = _jobsrrepository.GetAll().Where(c => c.TenantID == _abpSession.TenantId && c.IsDeleted == false).ToList();
 
-            var VehicleMaster = _vehiclerrepository.GetAll().Where(c => c.TenantId == _abpSession.TenantId).ToList();
+            var VehicleMaster = _vehiclerrepository.GetAll().Where(c => c.TenantId == _abpSession.TenantId && c.IsDeleted == false).ToList();
 
-            var quotestatus = _qstatusrepository.GetAll().Where(x => x.Enabled == true).ToList();
+            var quotestatus = _qstatusrepository.GetAll().Where(x => x.Enabled == true && x.IsDeleted == false).ToList();
 
-            var quotecategories = _quotecatrepository.GetAll().ToList();
+            var quotecategories = _quotecatrepository.GetAll().Where(x => x.Enabled == true && x.IsDeleted == false).ToList();
 
-            var repairtypes = _repairtyperepository.GetAll().Where(x => x.Enabled == true).ToList();
+            var repairtypes = _repairtyperepository.GetAll().Where(x => x.Enabled == true && x.IsDeleted == false).ToList();
 
-            var qmaster = _quotemasterrepository.GetAll().Where(c => c.TenantId == _abpSession.TenantId).ToList();
+            var qmaster = _quotemasterrepository.GetAll().Where(c => c.TenantId == _abpSession.TenantId && c.IsDeleted == false).ToList();
 
             var quoteMaster = (from y1 in qmaster
                                join s in quotestatus on y1.QuoteStatusID equals s.Id
@@ -119,28 +119,50 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
             return new ListResultDto<QuoteMastersDto>(ObjectMapper.Map<List<QuoteMastersDto>>(finalQuery));
         }
         // Get Quote type for Create or Edit 
-        public async Task<QuoteMasterDto> GetQuoteForNewQuotation(GetJobInput input)
+        public async Task<QuoteMasterDto> QuoteDetailToEdit(GetJobInput input)
         {
             var output = new QuoteMasterDto();
-            var quote = _quotemasterrepository.FirstOrDefault(p => p.JobId == input.jobId);
+            var quote = _quotemasterrepository.FirstOrDefault(p => p.Id == input.id);
             if (quote != null)
-                output = quote.MapTo<QuoteMasterDto>();
-            output.Id = 0;
-            var VehicleID = _jobsrrepository.FirstOrDefault(p => p.Id == input.jobId).VehicleID;
-            var vehicle = await _vehiclerrepository.GetAsync(VehicleID);
-            if (vehicle != null)
             {
-                output.RegNo = vehicle.RegistrationNumber;
-                output.IsSpecialisedType = vehicle.IsSpecialisedType;
-                output.IsLuxury = vehicle.IsLuxury;
-                output.UnderWaranty = vehicle.UnderWaranty;
-                output.PaintTypeId = vehicle.PaintTypeId;
-                output.vehicleId = VehicleID;
-                //output = vehicle.MapTo<QuoteMasterDto>();
+                output = quote.MapTo<QuoteMasterDto>();
+                output.JobId = quote.JobId;
+            }
+            else
+                output.JobId = input.id; // jobId
+
+            var VehicleID = _jobsrrepository.FirstOrDefault(p => p.Id == quote.JobId);
+            if (VehicleID != null)
+            {
+                var vehicle = await _vehiclerrepository.GetAsync(VehicleID.VehicleID);
+                if (vehicle != null)
+                {
+                    output.RegNo = vehicle.RegistrationNumber;
+                    output.IsSpecialisedType = vehicle.IsSpecialisedType;
+                    output.IsLuxury = vehicle.IsLuxury;
+                    output.UnderWaranty = vehicle.UnderWaranty;
+                    output.PaintTypeId = vehicle.PaintTypeId;
+                    output.vehicleId = VehicleID.VehicleID;
+                    //output = vehicle.MapTo<QuoteMasterDto>();
+                }
             }
             return output;
         }
-
+        // Get Quote type for Create or Edit 
+        public async Task<QuoteMasterDto> GetQuoteForNewQuotation(GetJobInput input)
+        { 
+            var VehicleID = _jobsrrepository.FirstOrDefault(p => p.Id == input.id);
+            var vehicle = await _vehiclerrepository.GetAsync(VehicleID.VehicleID);          
+            var output = new QuoteMasterDto();
+            output.JobId = input.id;
+            output.vehicleId = VehicleID.VehicleID;
+            output.RegNo = vehicle.RegistrationNumber;
+            output.IsSpecialisedType = vehicle.IsSpecialisedType;
+            output.IsLuxury = vehicle.IsLuxury;
+            output.UnderWaranty = vehicle.UnderWaranty;
+            output.PaintTypeId = vehicle.PaintTypeId;           
+            return output;
+        }
         public ListResultDto<QuoteStatusDto> GetQuoteStatus()
         {
             var status = _qstatusrepository
@@ -265,7 +287,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
 
             xmlfile.Append("{ name: \"quantity\", datatype: \"integer\", editable: true },");//6
             xmlfile.Append("{ name: \"price\", datatype: \"double(2)\", editable: true },");//7
-            xmlfile.Append("{ name: \"total\", datatype: \"double($,2)\", editable: false },");//8
+            xmlfile.Append("{ name: \"total\", datatype: \"double(2)\", editable: false },");//8
             xmlfile.Append("{ name: \"part\", datatype: \"string\", editable: true },");//9
 
             xmlfile.Append("{ name: \"pbhrs\", datatype: \"double(2)\", editable: true },");//10
@@ -281,12 +303,12 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
             xmlfile.Append("{ name: \"savalue\", datatype: \"double(2)\", editable: false },");//18
 
             xmlfile.Append("{ name: \"notaxvat\", datatype: \"html\", editable: false },");//19
-            xmlfile.Append("{ name: \"gtotal\", datatype: \"double($,2)\", editable: false },");//20
+            xmlfile.Append("{ name: \"gtotal\", datatype: \"double(2)\", editable: false },");//20
 
             xmlfile.Append("{ name: \"photo\", datatype: \"string\", editable: false },");
             xmlfile.Append("{ name: \"copydelete\", datatype: \"html\", editable: false }]");
 
-            
+
 
             return xmlfile.ToString();
         }

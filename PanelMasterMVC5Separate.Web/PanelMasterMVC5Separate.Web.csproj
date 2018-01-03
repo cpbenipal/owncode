@@ -1737,6 +1737,14 @@
     <Content Include="libs\carousel-owl-carousel\owl-carousel\owl.carousel.min.js" />
     <Content Include="libs\carousel-owl-carousel\owl-carousel\owl.theme.css" />
     <Content Include="libs\carousel-owl-carousel\owl-carousel\owl.transitions.css" />
+    <Content Include="libs\edittablegrid\css\editablegrid.css" />
+    <Content Include="libs\edittablegrid\js\editablegrid.js" />
+    <Content Include="libs\edittablegrid\js\editablegrid_charts.js" />
+    <Content Include="libs\edittablegrid\js\editablegrid_charts_ofc.js" />
+    <Content Include="libs\edittablegrid\js\editablegrid_editors.js" />
+    <Content Include="libs\edittablegrid\js\editablegrid_renderers.js" />
+    <Content Include="libs\edittablegrid\js\editablegrid_utils.js" />
+    <Content Include="libs\edittablegrid\js\editablegrid_validators.js" />
     <Content Include="libs\excanvas\excanvas.min.js" />
     <Content Include="libs\fancybox\.gitattributes" />
     <Content Include="libs\fancybox\CHANGELOG.txt" />

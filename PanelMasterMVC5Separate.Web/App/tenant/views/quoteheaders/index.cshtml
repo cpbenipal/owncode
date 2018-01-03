@@ -1,6 +1,6 @@
 @using PanelMasterMVC5Separate.Localization
 <div ng-controller="tenant.views.quoteheaders.index as vm" name="quotesForm" role="form" novalidate action="#" id="submit_form" method="POST">
-
+    <link href="~/libs/edittablegrid/css/editablegrid.css" rel="stylesheet" type="text/css" />
     <h1 class="page-title">
         Quote
         <small>Summary</small>
@@ -131,7 +131,7 @@
                                                     <th>OutWork</th>
 
                                                     <th>Qty</th>
-                                                    <th>Price(Ex)</th>
+                                                    <th>Value</th>
                                                     <th>Total</th>
                                                     <th>Parts#</th>
 
@@ -189,9 +189,9 @@
                                                     </td>
                                                     <td></td>
                                                     <td></td>
-                                                    
+
                                                 </tr>
-                                                 <tr ng-show="isShow" id="R1">
+                                                <tr ng-show="isShow" id="R1">
                                                     <td>1</td>
                                                     <td>0</td>
                                                     <td>0</td>
@@ -221,16 +221,16 @@
                                                     <td>0</td>
                                                     <td></td>
                                                     <td></td>
-                                                </tr>  
+                                                </tr>
                                             </tbody>
                                             <tfoot>
                                                 <tr>
                                                     <td colspan="9" align="right">Estimated Repair Days : <label id="tdestimatedRepairDays"></label> </td>
-                                                    <td colspan="12" align="right">Total Quote Value : <label id="tdtotal"></label>$</td>
+                                                    <td colspan="12" align="right">Total Quote Value : <label id="tdtotal"></label></td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="9" align="right">Repairer Estimated Days : <input type="number" /> </td>
-                                                    
+
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -529,7 +529,7 @@
                             <button type="button" class="btn btn-primary blue">Print</button>
                             <button type="button" class="btn btn-primary blue">Email</button>
                             <button type="button" class="btn btn-primary blue">Authorize</button>
-                            <div id="display" style="padding:10px 0;">{{display}}</div>
+                             
                         </div>
                     </div>
                 </div>
@@ -541,10 +541,10 @@
 
 </div>
 
-<script type="text/javascript" src="~/assets/pages/scripts/editablegrid.js"></script>
-<script type="text/javascript" src="~/assets/pages/scripts/editablegrid_validators.js"></script>
-<script type="text/javascript" src="~/assets/pages/scripts/editablegrid_renderers.js"></script>
-<script type="text/javascript" src="~/assets/pages/scripts/editablegrid_editors.js"></script>
-<script type="text/javascript" src="~/assets/pages/scripts/editablegrid_utils.js"></script>
-<script type="text/javascript" src="~/assets/pages/scripts/editablegrid_charts.js"></script>
-<link href="~/assets/pages/css/editablegrid.css" rel="stylesheet" />
+<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid.js"></script>
+<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_validators.js"></script>
+<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_renderers.js"></script>
+<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_editors.js"></script>
+<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_utils.js"></script>
+<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_charts.js"></script>
+

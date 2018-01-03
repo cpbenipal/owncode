@@ -14,8 +14,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
 
     public class GetJobInput
     {
-        public int id { get; set; }
-        public int jobId { get; set; }
+        public int id { get; set; }         
     }
     [AutoMapFrom(typeof(QuoteMaster))]
     public class QuoteMastersDto : FullAuditedEntityDto

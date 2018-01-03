@@ -18,6 +18,8 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
 
         Task<QuoteMasterDto> GetQuoteForNewQuotation(GetJobInput input);
 
+        Task<QuoteMasterDto> QuoteDetailToEdit(GetJobInput input);
+
         int CreateOrUpdateQuotation(QuoteMasterToDto input);
 
         QuoteSummaryDto GetQuoteJobSummary(GetQuoteInput input);

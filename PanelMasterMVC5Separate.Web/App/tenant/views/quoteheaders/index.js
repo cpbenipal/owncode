@@ -39,8 +39,8 @@
 
                         editableGrid.setCellRenderer("copydelete", new CellRenderer({
                             render: function (cell, value) {
-                                cell.innerHTML = "<a onclick=\"if (confirm('Are you sure you want to delete this quote ? ')) deleteRow(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
-                                    "<i class=\"fa fa-remove\" title=\"del\"></i></a>|<a onclick=\"if (confirm('Are you sure you want to clone this quote ? ')) editableGrid.duplicate(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
+                                cell.innerHTML = "<a onclick=\"if (confirm('Are you sure you want to delete this line ? ')) deleteRow(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
+                                    "<i class=\"fa fa-remove\" title=\"del\"></i></a>|<a onclick=\"if (confirm('Are you sure you want to clone this line in a quote ? ')) editableGrid.duplicate(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
                                     "<i class=\"fa fa-plus\" title=\"add\"></i></a>";
                             }
                         }));

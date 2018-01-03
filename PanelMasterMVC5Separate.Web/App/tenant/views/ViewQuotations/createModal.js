@@ -94,11 +94,10 @@
                     });
             };
 
-            function init() {
+            function init() {                
                 vm.loading = true;
-                jobService.getQuoteForNewQuotation({
-                    jobid: jobId,
-                    id: 0
+                jobService.getQuoteForNewQuotation({                    
+                    id: jobId
                 }).then(function (result) {
                     vm.vehicle = result.data;
                     
@@ -111,7 +110,7 @@
             vm.getRepairs();
             vm.getYesNoList();
             vm.getPaints();
-           // init();
+            init();
         }
     ]);
 })();
