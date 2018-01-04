@@ -278,7 +278,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
 
             StringBuilder xmlfile = new StringBuilder();
             xmlfile.Append("[{ name: \"Ref#\", datatype: \"integer\", editable: false },");//0
-            xmlfile.Append("{ name: \"actions\", datatype: \"string\", editable: true , values : " + GetActions() + "},");//1
+            xmlfile.Append("{ name: \"actions\", datatype: \"html\", editable: true , values : " + GetActions() + "},");//1
             xmlfile.Append("{ name: \"location\", datatype: \"string\", editable: true , values : " + GetLocations() + "},");//2
 
             xmlfile.Append("{ name: \"description\", datatype: \"string\", editable: true },");//3
