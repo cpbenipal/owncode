@@ -100,13 +100,17 @@ namespace PanelMasterMVC5Separate.Quotings
 
         public virtual string quoteStatus { get; set; }
 
-        public virtual int Actionid { get; set; }
-        [ForeignKey("Actionid")]
-        public virtual QAction QActions { get; set; }
+        //public virtual int Actionid { get; set; }
+        //[ForeignKey("Actionid")]
+        //public virtual QAction QActions { get; set; }
 
-        public virtual int Locationid { get; set; }
-        [ForeignKey("Locationid")]
-        public virtual QLocation QLocations { get; set; }
+        public virtual string QAction { get; set; }
+
+        //public virtual int Locationid { get; set; }
+        //[ForeignKey("Locationid")]
+        //public virtual QLocation QLocations { get; set; }
+
+        public virtual string QLocation { get; set; }
 
         public virtual string Description { get; set; }
         public virtual bool ToOrder { get; set; }

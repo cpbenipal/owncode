@@ -164,6 +164,10 @@
     <Compile Include="Migrations\201712280345497_addnotaxvalparameter.Designer.cs">
       <DependentUpon>201712280345497_addnotaxvalparameter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801060655456_ChangeQdetail.cs" />
+    <Compile Include="Migrations\201801060655456_ChangeQdetail.Designer.cs">
+      <DependentUpon>201801060655456_ChangeQdetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -283,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712280345497_addnotaxvalparameter.resx">
       <DependentUpon>201712280345497_addnotaxvalparameter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801060655456_ChangeQdetail.resx">
+      <DependentUpon>201801060655456_ChangeQdetail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

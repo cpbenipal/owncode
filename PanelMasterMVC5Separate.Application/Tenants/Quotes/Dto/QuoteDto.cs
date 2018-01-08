@@ -11,7 +11,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
     {
         public string Filter { get; set; }
     }
-
+    
     public class GetJobInput
     {
         public int id { get; set; }         
@@ -194,9 +194,9 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
        
         public virtual string quoteStatus { get; set; }
        
-        public virtual int Actionid { get; set; }
+        public virtual string QAction { get; set; }
        
-        public virtual int Locationid { get; set; }
+        public virtual string QLocation { get; set; }
        
         public virtual string Description { get; set; }
        
@@ -223,17 +223,15 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
         public virtual decimal SARate { get; set; }
        
         public virtual bool NoTaxVat { get; set; }
-        public virtual bool IsCurrent { get; set; }
-        public string Locations { get; set; }
-        public string Actions { get; set; }
+        public virtual bool IsCurrent { get; set; }        
     }
     [AutoMapFrom(typeof(QLocation))]
     public class QLocationDto : FullAuditedEntity
     {
         public virtual string Location { get; set; }
     }
-    [AutoMapFrom(typeof(QAction))]
-    public class QActionDto : FullAuditedEntity
+    //[AutoMapFrom(typeof(QAction))]
+    public class QActionDto //: FullAuditedEntity
     {
         public virtual string Action { get; set; }
         //public virtual int qparttypeId { get; set; }

@@ -5,6 +5,7 @@ using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Abp.Runtime.Session;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using PanelMasterMVC5Separate.Brokers;
 using PanelMasterMVC5Separate.Claim;
 using PanelMasterMVC5Separate.Insurer;
@@ -150,9 +151,9 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
         }
         // Get Quote type for Create or Edit 
         public async Task<QuoteMasterDto> GetQuoteForNewQuotation(GetJobInput input)
-        { 
+        {
             var VehicleID = _jobsrrepository.FirstOrDefault(p => p.Id == input.id);
-            var vehicle = await _vehiclerrepository.GetAsync(VehicleID.VehicleID);          
+            var vehicle = await _vehiclerrepository.GetAsync(VehicleID.VehicleID);
             var output = new QuoteMasterDto();
             output.JobId = input.id;
             output.vehicleId = VehicleID.VehicleID;
@@ -160,7 +161,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
             output.IsSpecialisedType = vehicle.IsSpecialisedType;
             output.IsLuxury = vehicle.IsLuxury;
             output.UnderWaranty = vehicle.UnderWaranty;
-            output.PaintTypeId = vehicle.PaintTypeId;           
+            output.PaintTypeId = vehicle.PaintTypeId;
             return output;
         }
         public ListResultDto<QuoteStatusDto> GetQuoteStatus()
@@ -267,8 +268,15 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
             int Id = Convert.ToInt32(input.Filter);
 
             var quotes = _quotedetailsrepository.GetAll()
-                .Where(p => p.QuoteId == Id && p.tenantid == _abpSession.TenantId).ToList();
+                .Where(p => p.QuoteId == Id && p.IsCurrent.Equals(true) && p.tenantid == _abpSession.TenantId).ToList();
 
+            if (quotes.Count == 0)
+            {
+                var aa = new QuoteDetails();
+                aa.QuoteId = Id;
+                quotes = new List<QuoteDetails>();
+                quotes.Add(aa);
+            }
             return new ListResultDto<QuoteDetailDto>(ObjectMapper.Map<List<QuoteDetailDto>>(quotes));
 
         }
@@ -278,12 +286,12 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
 
             StringBuilder xmlfile = new StringBuilder();
             xmlfile.Append("[{ name: \"Ref#\", datatype: \"integer\", editable: false },");//0
-            xmlfile.Append("{ name: \"actions\", datatype: \"html\", editable: true , values : " + GetActions() + "},");//1
-            xmlfile.Append("{ name: \"location\", datatype: \"string\", editable: true , values : " + GetLocations() + "},");//2
+            xmlfile.Append("{ name: \"action\", datatype: \"string\", editable: true },");//1
+            xmlfile.Append("{ name: \"location\", datatype: \"string\", editable: true },");//2
 
             xmlfile.Append("{ name: \"description\", datatype: \"string\", editable: true },");//3
-            xmlfile.Append("{ name: \"towork\", datatype: \"html\", editable: false },");//4
-            xmlfile.Append("{ name: \"outwork\", datatype: \"html\", editable: false },");//5
+            xmlfile.Append("{ name: \"towork\", datatype: \"boolean\", editable: true },");//4
+            xmlfile.Append("{ name: \"outwork\", datatype: \"boolean\", editable: true },");//5
 
             xmlfile.Append("{ name: \"quantity\", datatype: \"integer\", editable: true },");//6
             xmlfile.Append("{ name: \"price\", datatype: \"double(2)\", editable: true },");//7
@@ -302,10 +310,10 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
             xmlfile.Append("{ name: \"sarate\", datatype: \"double(2)\", editable: true },");//17
             xmlfile.Append("{ name: \"savalue\", datatype: \"double(2)\", editable: false },");//18
 
-            xmlfile.Append("{ name: \"notaxvat\", datatype: \"html\", editable: false },");//19
+            xmlfile.Append("{ name: \"notaxvat\", datatype: \"boolean\", editable: true },");//19
             xmlfile.Append("{ name: \"gtotal\", datatype: \"double(2)\", editable: false },");//20
 
-            xmlfile.Append("{ name: \"photo\", datatype: \"string\", editable: false },");
+            xmlfile.Append("{ name: \"photo\", datatype: \"html\", editable: false },");
             xmlfile.Append("{ name: \"copydelete\", datatype: \"html\", editable: false }]");
 
 
@@ -319,33 +327,37 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
                 .GetAll()
                 .OrderBy(p => p.Location)
                 .ToList();
-            string strJson = "{ \"0\" : \"-Choose-\" , ";
-
+            int i = 1;
+            string strJson = "[";
             foreach (var a in actions)
             {
-                strJson += " \"" + a.Id + "\" : \"" + a.Location.Replace(":", " -") + "\",";
+                strJson += "{id:" + i + " , name:'" + a.Location + "'},";
+                i++;
             }
             strJson = strJson.Trim(',');
-            strJson += "}";
+            strJson += "]";
+
             return strJson;
         }
 
-        public string GetActions(/*GetQuoteInput input*/)
+        public string GetActions()
         {
-            // int Id = Convert.ToInt32(input.Filter);
             var actions = _qactionrepository
                 .GetAll()
                 // .Where(p => p.tblqparttypeId == Id)
                 .OrderBy(p => p.Action)
                 .ToList();
 
-            string strJson = "{ \"0\" : \"-Choose-\" , ";
+            int i = 1;
+            string strJson = "[";
             foreach (var a in actions)
             {
-                strJson += " \"" + a.Id + "\" : \"" + a.Action.Replace(":", " -") + "\",";
+                strJson += "{id:" + i + " , name:'" + a.Action + "'},";
+                i++;
             }
             strJson = strJson.Trim(',');
-            strJson += "}";
+            strJson += "]";
+
             return strJson;
         }
 
@@ -354,18 +366,32 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
             try
             {
                 var result = JsonConvert.DeserializeObject<QuoteObject>(quote).quote.ToList();
+                //var result = (List<QuoteDetailDto>)JsonConvert.DeserializeObject(quote, typeof(List<QuoteDetailDto>));
+
+                int QuoteId = result[0].QuoteId;
+
+                var ifany = _quotedetailsrepository.GetAll().Where(p => p.QuoteId == QuoteId).ToList();
+                if (ifany.Count > 0)
+                {
+                    foreach (QuoteDetails q in ifany)
+                    {
+                        q.IsCurrent = false;
+                        q.QuoteId = QuoteId;
+                        _quotedetailsrepository.Update(q);
+                    }
+                }
 
                 var finalresults = (from f in result
                                     select new QuoteDetails()
                                     {
-                                        Id = f.Id,
+                                        Id = 0,
                                         tenantid = _abpSession.TenantId,
                                         quoteStatus = "Captured",
-                                        IsCurrent = f.Id == 0 ? true : false,
+                                        IsCurrent = true,
                                         Description = f.Description,
                                         QuoteId = f.QuoteId,
-                                        Actionid = f.Actionid,
-                                        Locationid = f.Locationid,
+                                        QAction = f.QAction,
+                                        QLocation = f.QLocation,
                                         ToOrder = f.ToOrder,
                                         Outwork = f.Outwork,
                                         PartQty = f.PartQty,
@@ -382,7 +408,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
 
                 foreach (QuoteDetails q in finalresults)
                 {
-                    _quotedetailsrepository.InsertOrUpdate(q);
+                    _quotedetailsrepository.Insert(q);
                 }
             }
             catch

@@ -18,7 +18,8 @@ CellEditor.prototype.edit = function (rowIndex, columnIndex, element, value) {
     element.columnIndex = columnIndex;
 
     // call the specialized getEditor method
-    var editorInput = this.getEditor(element, value);
+    var editorInput = null;    
+    editorInput = this.getEditor(element, value, columnIndex);
     if (!editorInput) return false;
 
     // give access to the cell editor and element from the editor widget
@@ -102,7 +103,7 @@ CellEditor.prototype.autoFocus = function (editorInput) {
     editorInput.focus();
 };
 
-CellEditor.prototype.getEditor = function (element, value) {
+CellEditor.prototype.getEditor = function (element, value, columnIndex) {
     return null;
 };
 
@@ -219,9 +220,9 @@ CellEditor.prototype.applyEditing = function (element, newValue) {
 
             var pbhrs = editablegrid.getValueAt(element.rowIndex, 10);
             var pbrate = editablegrid.getValueAt(element.rowIndex, 11);
-           // var pbvalue = editablegrid.getValueAt(element.rowIndex, 12);
-           // var setpbhrs = editablegrid.setValueAt(element.rowIndex, 10, pbvalue / pbrate);
-           // var setpbrate = editablegrid.setValueAt(element.rowIndex, 11, pbvalue / pbhrs);
+            // var pbvalue = editablegrid.getValueAt(element.rowIndex, 12);
+            // var setpbhrs = editablegrid.setValueAt(element.rowIndex, 10, pbvalue / pbrate);
+            // var setpbrate = editablegrid.setValueAt(element.rowIndex, 11, pbvalue / pbhrs);
             var setpbvalue = editablegrid.setValueAt(element.rowIndex, 12, pbhrs * pbrate);
 
             var phrs = editablegrid.getValueAt(element.rowIndex, 13);
@@ -236,20 +237,20 @@ CellEditor.prototype.applyEditing = function (element, newValue) {
             var finalpvalue = editablegrid.getValueAt(element.rowIndex, 15);
             var finalsavalue = editablegrid.getValueAt(element.rowIndex, 18);
 
-            var gtotal = editablegrid.setValueAt(element.rowIndex, 20, vqvalue + finalpbvalue + finalpbvalue + finalsavalue);                            
+            var gtotal = editablegrid.setValueAt(element.rowIndex, 20, vqvalue + finalpbvalue + finalpbvalue + finalsavalue);
             var totalhours = 0;
             var totalMoney = 0;
             //var tdhours = $("#tdestimatedRepairDays").html();
             //totalhours = totalhours.toFixed(2);
             //$("#tdestimatedRepairDays").html(totalhours);            
-                
-            $('#htmlgrid tbody tr').each(function (i, tr) {                 
-               totalhours = totalhours + ( editableGrid.getValueAt(i, 10) + editableGrid.getValueAt(i, 13) + editableGrid.getValueAt(i, 16) );
-               totalMoney  = totalMoney  + editableGrid.getValueAt(i, 20);
+
+            $('#htmlgrid tbody tr').each(function (i, tr) {
+                totalhours = totalhours + (editableGrid.getValueAt(i, 10) + editableGrid.getValueAt(i, 13) + editableGrid.getValueAt(i, 16));
+                totalMoney = totalMoney + editableGrid.getValueAt(i, 20);
             });
-            totalhours = (totalhours/9).toFixed(2);
-            $("#tdestimatedRepairDays").html(totalhours);  
-            $("#tdtotal").html(totalMoney.toFixed(2));  
+            totalhours = (totalhours / 9).toFixed(2);
+            $("#tdestimatedRepairDays").html(totalhours);
+            $("#tdtotal").html(totalMoney.toFixed(2));
             _clearEditor(element);
             return true;
         }
@@ -285,10 +286,15 @@ TextCellEditor.prototype.updateStyle = function (htmlInput) {
     else this.editablegrid.addClassName(htmlInput, this.editablegrid.invalidClassName);
 };
 
-TextCellEditor.prototype.getEditor = function (element, value) {
+TextCellEditor.prototype.getEditor = function (element, value, columnIndex) {
     // create and initialize text field
     var htmlInput = document.createElement("input");
     htmlInput.setAttribute("type", "text");
+    if (columnIndex == 1)
+        htmlInput.setAttribute("list", "actions");
+    if (columnIndex == 2)
+        htmlInput.setAttribute("list", "locations");
+
     htmlInput.setAttribute("required", "required");
     if (this.maxLength > 0) htmlInput.setAttribute("maxlength", this.maxLength);
 
@@ -304,6 +310,7 @@ TextCellEditor.prototype.getEditor = function (element, value) {
 
     return htmlInput;
 };
+ 
 
 TextCellEditor.prototype.displayEditor = function (element, htmlInput) {
     // call base method

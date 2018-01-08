@@ -1,6 +1,5 @@
-@using PanelMasterMVC5Separate.Localization
+ 
 <div ng-controller="tenant.views.quoteheaders.index as vm" name="quotesForm" role="form" novalidate action="#" id="submit_form" method="POST">
-    <link href="~/libs/edittablegrid/css/editablegrid.css" rel="stylesheet" type="text/css" />
     <h1 class="page-title">
         Quote
         <small>Summary</small>
@@ -158,11 +157,11 @@
                                                     <td>
                                                         {{$index+1}}
                                                     </td>
-                                                    <td>{{q.actionid}}</td>
-                                                    <td>{{q.locationid}}</td>
+                                                    <td>{{q.qAction}}</td>
+                                                    <td>{{q.qLocation}}</td>
                                                     <td>{{q.description}}</td>
-                                                    <td><input id="toOrder{{$index}}" type="checkbox" checked="{{q.toOrder}}" /></td>
-                                                    <td><input id="outwork{{$index}}" type="checkbox" checked="{{q.outwork}}" /></td>
+                                                    <td>{{q.toOrder}}</td>
+                                                    <td>{{q.outwork}}</td>
                                                     <td>{{q.partQty}}</td>
                                                     <td>{{q.partPrice}}</td>
                                                     <td>{{q.partQty*q.partPrice}}</td>
@@ -180,54 +179,11 @@
                                                     <td>{{q.saRate}}</td>
                                                     <td>{{q.saHrs*q.saRate}}</td>
 
-                                                    <td>
-                                                        <input id="notaxvat{{$index}}" type="checkbox" checked="{{q.noTaxVat}}" />
-                                                        <input type="hidden" name="hdnId{{$index}}" id="hdnId{{$index}}" value="{{q.id}}" />
-                                                    </td>
+                                                    <td>{{q.noTaxVat}}</td>
                                                     <td>
                                                         {{ ((q.partQty*q.partPrice)+(q.panelHrs*q.panelRate)+(q.paintHrs*q.paintRate)+(q.saHrs*q.saRate)) }}
                                                     </td>
-                                                    <td></td>
-                                                    <td></td>
-
-                                                </tr>
-                                                <tr ng-show="isShow" id="R1">
-                                                    <td>1</td>
-                                                    <td>
-                                                        <input type="text" list="cars" />
-                                                        <datalist id="cars">
-                                                            <option>Volvo</option>
-                                                            <option>Saab</option>
-                                                            <option>Mercedes</option>
-                                                            <option>Audi</option>
-                                                        </datalist>
-                                                    </td>
-                                                    <td>0</td>
-                                                    <td></td>
-                                                    <td><input id="toOrder1" type="checkbox" /></td>
-                                                    <td><input id="outwork1" type="checkbox" /></td>
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td></td>
-
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
-
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
-
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td>
-                                                        <input id="notaxvat1" type="checkbox" />
-                                                        <input type="hidden" id="hdnId1" value="0" />
-                                                    </td>
-                                                    <td>0</td>
-                                                    <td></td>
+                                                    <td><input type="hidden" name="hdnId{{$index}}" id="hdnId{{$index}}" value="{{q.id}}" /></td>
                                                     <td></td>
                                                 </tr>
                                             </tbody>
@@ -537,7 +493,18 @@
                             <button type="button" class="btn btn-primary blue">Print</button>
                             <button type="button" class="btn btn-primary blue">Email</button>
                             <button type="button" class="btn btn-primary blue">Authorize</button>
-                             
+                            <datalist id="actions">
+                                <option ng-repeat="a in lstactions track by $index"
+                                        value="{{a.name}}">
+                                    {{a.name}}
+                                </option>
+                            </datalist>
+                            <datalist id="locations">
+                                <option ng-repeat="l in lstlocations track by $index"
+                                        value="{{l.name}}">
+                                    {{l.name}}
+                                </option>
+                            </datalist>
                         </div>
                     </div>
                 </div>
@@ -549,6 +516,7 @@
 
 </div>
 
+<link href="~/libs/edittablegrid/css/editablegrid.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid.js"></script>
 <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_validators.js"></script>
 <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_renderers.js"></script>

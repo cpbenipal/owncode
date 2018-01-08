@@ -2,6 +2,7 @@
 using Abp.Application.Services.Dto;
 using PanelMasterMVC5Separate.Job.Dto;
 using PanelMasterMVC5Separate.Tenants.Quotes.Dto;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PanelMasterMVC5Separate.Tenants.Quotes
@@ -25,6 +26,10 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
         QuoteSummaryDto GetQuoteJobSummary(GetQuoteInput input);
 
         ListResultDto<PaintTypesDto> GetPaintType();
+
+        string GetActions();
+
+        string GetLocations();
 
         string GetHeaders();
 
