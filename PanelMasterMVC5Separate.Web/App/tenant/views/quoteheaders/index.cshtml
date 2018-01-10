@@ -1,5 +1,6 @@
- 
+
 <div ng-controller="tenant.views.quoteheaders.index as vm" name="quotesForm" role="form" novalidate action="#" id="submit_form" method="POST">
+    <link href="~/libs/edittablegrid/css/editablegrid.css" rel="stylesheet" type="text/css" />
     <h1 class="page-title">
         Quote
         <small>Summary</small>
@@ -101,12 +102,12 @@
                                 <li class="active">
                                     <a ng-href="#!/tenant/quoteheaders/{{Id=vm.job.id}}#overview_1" data-toggle="tab"> Original Quote </a>
                                 </li>
-                                <li>
-                                    <a ng-href="#!/tenant/quoteheaders/{{Id=vm.job.id}}#overview_2" data-toggle="tab"> Approved Quote </a>
-                                </li>
-                                <li>
-                                    <a ng-href="#!/tenant/quoteheaders/{{Id=vm.job.id}}#overview_3" data-toggle="tab"> Additionals </a>
-                                </li>
+                                @*<li>
+                                        <a ng-href="#!/tenant/quoteheaders/{{Id=vm.job.id}}#overview_2" data-toggle="tab"> Approved Quote </a>
+                                    </li>
+                                    <li>
+                                        <a ng-href="#!/tenant/quoteheaders/{{Id=vm.job.id}}#overview_3" data-toggle="tab"> Additionals </a>
+                                    </li>*@
 
                             </ul>
                             <div class="tab-content">
@@ -126,7 +127,7 @@
                                                     <th>Action</th>
                                                     <th>Location</th>
                                                     <th>Description</th>
-                                                    <th>To Order.</th>
+                                                    <th>ToOrder.</th>
                                                     <th>OutWork</th>
 
                                                     <th>Qty</th>
@@ -146,10 +147,9 @@
                                                     <th>Rate</th>
                                                     <th>Value</th>
 
-                                                    <th>No Tax/Vat</th>
+                                                    <th>No-Tax/Vat</th>
                                                     <th>Total</th>
-                                                    <th>Photo</th>
-                                                    <th>Delete/Copy Line</th>
+                                                    <th>Action-Lines</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -179,11 +179,14 @@
                                                     <td>{{q.saRate}}</td>
                                                     <td>{{q.saHrs*q.saRate}}</td>
 
-                                                    <td>{{q.noTaxVat}}</td>
+                                                    <td>
+                                                        <input ng-show="{{q.noTaxVat}}" id="notaxvat{{$index}}" type="checkbox" checked="checked" />
+                                                        <input ng-show="!{{q.noTaxVat}}" id="notaxvat{{$index}}" type="checkbox"/>
+                                                        <input type="hidden" name="hdnId{{$index}}" id="hdnId{{$index}}" value="{{q.id}}" />
+                                                    </td>
                                                     <td>
                                                         {{ ((q.partQty*q.partPrice)+(q.panelHrs*q.panelRate)+(q.paintHrs*q.paintRate)+(q.saHrs*q.saRate)) }}
                                                     </td>
-                                                    <td><input type="hidden" name="hdnId{{$index}}" id="hdnId{{$index}}" value="{{q.id}}" /></td>
                                                     <td></td>
                                                 </tr>
                                             </tbody>
@@ -389,6 +392,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+
                                                 <tr>
                                                     <td>
                                                         <a href="javascript:;"> David Wilson </a>
@@ -488,11 +492,12 @@
                             </div>
                         </div>
                         <div class="tabbable-line">
-                            <button type="button" class="btn btn-primary blue">Import</button>
                             <button type="submit" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="quotesForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+                            <button type="button" class="btn btn-primary blue">Import</button>
+                            <button type="button" class="btn btn-primary blue">Completed</button>
                             <button type="button" class="btn btn-primary blue">Print</button>
                             <button type="button" class="btn btn-primary blue">Email</button>
-                            <button type="button" class="btn btn-primary blue">Authorize</button>
+                            @*<button type="button" class="btn btn-primary blue">Authorize</button>*@
                             <datalist id="actions">
                                 <option ng-repeat="a in lstactions track by $index"
                                         value="{{a.name}}">
@@ -507,6 +512,7 @@
                             </datalist>
                         </div>
                     </div>
+
                 </div>
                 <!-- End: life time stats -->
             </div>
@@ -514,13 +520,13 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid.js" defer="defer"></script>
+    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_validators.js" defer="defer"></script>
+    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_renderers.js" defer="defer"></script>
+    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_editors.js" defer="defer"></script>
+    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_utils.js" defer="defer"></script>
+    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_charts.js" defer="defer"></script>
 </div>
 
-<link href="~/libs/edittablegrid/css/editablegrid.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid.js"></script>
-<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_validators.js"></script>
-<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_renderers.js"></script>
-<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_editors.js"></script>
-<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_utils.js"></script>
-<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_charts.js"></script>
+
 

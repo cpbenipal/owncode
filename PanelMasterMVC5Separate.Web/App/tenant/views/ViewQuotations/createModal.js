@@ -15,7 +15,7 @@
                 vm.vehicle.TenantId = vm.TenantId;
                 jobService.createOrUpdateQuotation(vm.vehicle).then(function (result) {
                     abp.notify.info(app.localize('SavedSuccessfully'));
-                    window.location.href = "#!/tenant/quoting";
+                    window.location.href = "#!/tenant/quoteheaders/" + result.data;
                     $uibModalInstance.close();
                 }).finally(function () {
                     

@@ -192,7 +192,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
        
         public virtual int QuoteId { get; set; }
        
-        public virtual string quoteStatus { get; set; }
+        public virtual int quoteStatusId { get; set; }
        
         public virtual string QAction { get; set; }
        

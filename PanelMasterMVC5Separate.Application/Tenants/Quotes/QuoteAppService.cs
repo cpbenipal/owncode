@@ -310,10 +310,10 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
             xmlfile.Append("{ name: \"sarate\", datatype: \"double(2)\", editable: true },");//17
             xmlfile.Append("{ name: \"savalue\", datatype: \"double(2)\", editable: false },");//18
 
-            xmlfile.Append("{ name: \"notaxvat\", datatype: \"boolean\", editable: true },");//19
+            xmlfile.Append("{ name: \"notaxvat\", datatype: \"html\", editable: false },");//19
             xmlfile.Append("{ name: \"gtotal\", datatype: \"double(2)\", editable: false },");//20
 
-            xmlfile.Append("{ name: \"photo\", datatype: \"html\", editable: false },");
+          //  xmlfile.Append("{ name: \"photo\", datatype: \"html\", hidden: false },");
             xmlfile.Append("{ name: \"copydelete\", datatype: \"html\", editable: false }]");
 
 
@@ -368,25 +368,25 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
                 var result = JsonConvert.DeserializeObject<QuoteObject>(quote).quote.ToList();
                 //var result = (List<QuoteDetailDto>)JsonConvert.DeserializeObject(quote, typeof(List<QuoteDetailDto>));
 
-                int QuoteId = result[0].QuoteId;
+                //int QuoteId = result[0].QuoteId;
 
-                var ifany = _quotedetailsrepository.GetAll().Where(p => p.QuoteId == QuoteId).ToList();
-                if (ifany.Count > 0)
-                {
-                    foreach (QuoteDetails q in ifany)
-                    {
-                        q.IsCurrent = false;
-                        q.QuoteId = QuoteId;
-                        _quotedetailsrepository.Update(q);
-                    }
-                }
+                //var ifany = _quotedetailsrepository.GetAll().Where(p => p.QuoteId == QuoteId).ToList();
+                //if (ifany.Count > 0)
+                //{
+                //    foreach (QuoteDetails q in ifany)
+                //    {
+                //        q.IsCurrent = false;
+                //        q.QuoteId = QuoteId;
+                //        _quotedetailsrepository.Update(q);
+                //    }
+                //}
 
                 var finalresults = (from f in result
                                     select new QuoteDetails()
                                     {
-                                        Id = 0,
+                                        Id = f.Id,
                                         tenantid = _abpSession.TenantId,
-                                        quoteStatus = "Captured",
+                                        QuoteStatusId = 1,
                                         IsCurrent = true,
                                         Description = f.Description,
                                         QuoteId = f.QuoteId,
@@ -408,7 +408,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
 
                 foreach (QuoteDetails q in finalresults)
                 {
-                    _quotedetailsrepository.Insert(q);
+                    _quotedetailsrepository.InsertOrUpdate(q);
                 }
             }
             catch

@@ -98,7 +98,9 @@ namespace PanelMasterMVC5Separate.Quotings
         [ForeignKey("QuoteId")]
         public virtual QuoteMaster QuoteMaster { get; set; }
 
-        public virtual string quoteStatus { get; set; }
+        public virtual int QuoteStatusId { get; set; }
+        [ForeignKey("QuoteStatusId")]
+        public virtual QuoteStatus QuoteStatus { get; set; }
 
         //public virtual int Actionid { get; set; }
         //[ForeignKey("Actionid")]
