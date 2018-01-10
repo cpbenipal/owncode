@@ -13,6 +13,7 @@
             vm.saving = false;
             vm.loading = false;
             vm.advancedFiltersAreShown = false;
+
             vm.filterText = $stateParams.filterText || '';
             vm.currentUserId = abp.session.userId;
             vm.TenantId = abp.session.tenantId;
@@ -46,8 +47,8 @@
                             render: function (cell, value) {
                                 
                                 cell.innerHTML = "<span><a onclick=\"if (confirm('Are you sure you want to delete this line ? ')) deleteRow(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
-                                    "<i class=\"fa fa-remove\" title=\"del\"></i></a><a onclick=\"if (confirm('Are you sure you want to clone this line in a quote ? ')) editableGrid.duplicate(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
-                                    "<i class=\"fa fa-save\" title=\"save\"></i></a><a onclick=\"if (confirm('Are you sure you want to add new line in a quote ? ')) editableGrid.addnewline(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
+                                    "<i class=\"fa fa-remove\" title=\"del\"></i></a><a onclick=\"if (confirm('Are you sure you want to clone this line in a quote ? ')) duplicate(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
+                                    "<i class=\"fa fa-save\" title=\"save\"></i></a><a onclick=\"if (confirm('Are you sure you want to add new line in a quote ? ')) addnewline(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
                                     "<i class=\"fa fa-plus\" title=\"addnew\"></i></a></span>";
                             }
                         }));
@@ -86,6 +87,27 @@
                 total = (total / 9).toFixed(2);
                 $("#tdestimatedRepairDays").html(total);
                 $("#tdtotal").html(totalvalue.toFixed(2))
+                    
+            };
+            duplicate = function (c) {
+                editableGrid.duplicate(c);
+                vm.RepairDays();
+            };
+            addnewline = function (c) {
+                editableGrid.addnewline(c);
+                vm.RepairDays();
+            };
+
+            vm.RepairDays = function () {
+                var totalhours = 0;
+                var totalMoney = 0;                    
+                $('#htmlgrid tbody tr').each(function (i, tr) {
+                totalhours = totalhours + (editableGrid.getValueAt(i, 10) + editableGrid.getValueAt(i, 13) + editableGrid.getValueAt(i, 16));
+                totalMoney = totalMoney + editableGrid.getValueAt(i, 20);
+                });
+                totalhours = (totalhours / 9).toFixed(2);
+                $("#tdestimatedRepairDays").html(totalhours);
+                $("#tdtotal").html(totalMoney.toFixed(2));
             };
 
             vm.save = function () {
@@ -130,9 +152,8 @@
                 var quoteId = $("#hdnId" + c).val();
                 if (quoteId == null) {
                     editableGrid.remove(c);
-                    abp.notify.info(app.localize('QuoteRemovedSuccessfully'));     
-                     vm.getHeaders();
-                        vm.getQuotes();
+                    abp.notify.info(app.localize('QuoteRemovedSuccessfully')); 
+                    vm.estimatedRepairDays();                         
                 }
                 else {
                     jobService.deleteQuote($.extend({ filter: quoteId }, quoteId)).then(function () {
@@ -141,8 +162,10 @@
                     }).finally(function () {
                         vm.saving = false;
                     });
-                }                
+                }
+                                
             };
+            
             vm.getJobSummary();
             vm.getHeaders();
             vm.getQuotes();
