@@ -1,6 +1,35 @@
 
 <div ng-controller="tenant.views.quoteheaders.index as vm" name="quotesForm" role="form" novalidate action="#" id="submit_form" method="POST">
+    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid.js"></script>
+    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_validators.js"></script>
+    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_renderers.js"></script>
+    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_editors.js"></script>
+    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_utils.js"></script>
+    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_charts.js"></script>
     <link href="~/libs/edittablegrid/css/editablegrid.css" rel="stylesheet" type="text/css" />
+    <style>         
+
+        table.htmlgrid {
+            border-collapse: collapse;
+            border: 1px solid #CCB;
+            width: 800px;
+        }
+
+            table.htmlgrid td, table.htmlgrid th {
+                padding: 5px;
+                border: 1px solid #E0E0E0;
+            }
+
+            table.htmlgrid th {
+                background: #E5E5E5;
+                text-align: left;
+            }
+
+        input.invalid {
+            background: red;
+            color: #FDFDFD;
+        }
+    </style>
     <h1 class="page-title">
         Quote
         <small>Summary</small>
@@ -181,7 +210,7 @@
 
                                                     <td>
                                                         <input ng-show="{{q.noTaxVat}}" id="notaxvat{{$index}}" type="checkbox" checked="checked" />
-                                                        <input ng-show="!{{q.noTaxVat}}" id="notaxvat{{$index}}" type="checkbox"/>
+                                                        <input ng-show="!{{q.noTaxVat}}" id="notaxvat{{$index}}" type="checkbox" />
                                                         <input type="hidden" name="hdnId{{$index}}" id="hdnId{{$index}}" value="{{q.id}}" />
                                                     </td>
                                                     <td>
@@ -196,7 +225,7 @@
                                                     <td colspan="12" align="right">Total Quote Value : <label id="tdtotal"></label></td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="9" align="right">Repairer Estimated Days : <input type="number" /> </td>
+                                                    <td colspan="9" align="right">Repairer Estimated Days : <input type="number" ng-model="vm.repairerEstimatedDays" /> </td>
 
                                                 </tr>
                                             </tfoot>
@@ -205,7 +234,7 @@
                                 </div>
                                 <div class="tab-pane" id="overview_2">
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-hover table-bordered" id="testtable">
+                                        <table class="table table-striped table-hover table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th>Product Name</th>
@@ -227,7 +256,66 @@
                                                         </a>
                                                     </td>
                                                 </tr>
-                                              
+                                                <tr>
+                                                    <td>
+                                                        <a href="javascript:;"> Regatta Luca 3 in 1 Jacket </a>
+                                                    </td>
+                                                    <td>$25.50</td>
+                                                    <td>1245</td>
+                                                    <td>
+                                                        <a href="javascript:;" class="btn btn-sm btn-default">
+                                                            <i class="fa fa-search"></i> View
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href="javascript:;"> Motorola Droid 4 XT894 - 16GB - Black </a>
+                                                    </td>
+                                                    <td>$878.50</td>
+                                                    <td>784</td>
+                                                    <td>
+                                                        <a href="javascript:;" class="btn btn-sm btn-default">
+                                                            <i class="fa fa-search"></i> View
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href="javascript:;"> Apple iPhone 4s - 16GB - Black </a>
+                                                    </td>
+                                                    <td>$625.50</td>
+                                                    <td>809</td>
+                                                    <td>
+                                                        <a href="javascript:;" class="btn btn-sm btn-default">
+                                                            <i class="fa fa-search"></i> View
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href="javascript:;"> Samsung Galaxy S III SGH-I747 - 16GB </a>
+                                                    </td>
+                                                    <td>$915.50</td>
+                                                    <td>6709</td>
+                                                    <td>
+                                                        <a href="javascript:;" class="btn btn-sm btn-default">
+                                                            <i class="fa fa-search"></i> View
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href="javascript:;"> Motorola Droid 4 XT894 - 16GB - Black </a>
+                                                    </td>
+                                                    <td>$878.50</td>
+                                                    <td>784</td>
+                                                    <td>
+                                                        <a href="javascript:;" class="btn btn-sm btn-default">
+                                                            <i class="fa fa-search"></i> View
+                                                        </a>
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -461,12 +549,7 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid.js" defer="defer"></script>
-    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_validators.js" defer="defer"></script>
-    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_renderers.js" defer="defer"></script>
-    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_editors.js" defer="defer"></script>
-    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_utils.js" defer="defer"></script>
-    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_charts.js" defer="defer"></script>
+
 </div>
 
 

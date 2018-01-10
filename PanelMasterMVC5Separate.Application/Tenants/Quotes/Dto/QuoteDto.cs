@@ -223,7 +223,13 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
         public virtual decimal SARate { get; set; }
        
         public virtual bool NoTaxVat { get; set; }
-        public virtual bool IsCurrent { get; set; }        
+        public virtual bool IsCurrent { get; set; }
+
+        public virtual decimal TotalQuotedValue { get; set; }
+
+        public virtual decimal EstimatedRepairDays { get; set; }
+
+        public virtual int RepairerEstimatedDays { get; set; }
     }
     [AutoMapFrom(typeof(QLocation))]
     public class QLocationDto : FullAuditedEntity

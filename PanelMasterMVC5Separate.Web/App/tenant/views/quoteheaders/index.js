@@ -32,7 +32,7 @@
                     });
             };
 
-            editableGrid = new EditableGrid("DemoGridAttach");
+            editableGrid = new EditableGrid("DemoGridAttach"); 
             vm.getHeaders = function () {
                 vm.loading = true;
                 jobService.getHeaders()
@@ -42,18 +42,18 @@
                          
                         editableGrid.load({ "metadata": metadata });
                         editableGrid.attachToHTMLTable('htmlgrid'); 
-
+                        
                         editableGrid.setCellRenderer("copydelete", new CellRenderer({
                             render: function (cell, value) {
                                 
-                                cell.innerHTML = "<span><a onclick=\"if (confirm('Are you sure you want to delete this line ? ')) deleteRow(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
-                                    "<i class=\"fa fa-remove\" title=\"del\"></i></a><a onclick=\"if (confirm('Are you sure you want to clone this line in a quote ? ')) duplicate(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
-                                    "<i class=\"fa fa-save\" title=\"save\"></i></a><a onclick=\"if (confirm('Are you sure you want to add new line in a quote ? ')) addnewline(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
-                                    "<i class=\"fa fa-plus\" title=\"addnew\"></i></a></span>";
+                                cell.innerHTML = "<span><a onclick=\"deleteRow(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
+                                    "<i class=\"fa fa-remove\" title=\"Delete Line\"></i></a>  <a onclick=\"duplicate(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
+                                    "<i class=\"fa fa-copy\" title=\"Clone Line\"></i></a>  <a onclick=\"addnewline(" + cell.rowIndex + ");\" style=\"cursor:pointer\">" +
+                                    "<i class=\"fa fa-plus\" title=\"Add Blank Line\"></i></a></span>";
                             }
                         }));
 
-                        editableGrid.renderGrid();
+                        editableGrid.renderGrid(); 
 
                     }).finally(function () {
                         vm.loading = false;
@@ -70,7 +70,8 @@
                             $scope.isShow = false;
                         else
                             $scope.isShow = true;
-
+                        
+                        vm.repairerEstimatedDays = vm.quote[0].repairerEstimatedDays;
                         vm.estimatedRepairDays();
                     }).finally(function () {
                         vm.loading = false;
@@ -89,14 +90,7 @@
                 $("#tdtotal").html(totalvalue.toFixed(2))
                     
             };
-            duplicate = function (c) {
-                editableGrid.duplicate(c);
-                vm.RepairDays();
-            };
-            addnewline = function (c) {
-                editableGrid.addnewline(c);
-                vm.RepairDays();
-            };
+           
 
             vm.RepairDays = function () {
                 var totalhours = 0;
@@ -133,12 +127,19 @@
                         "paintRate": "" + editableGrid.getValueAt(i, 14) + "",
                         "saHrs": "" + editableGrid.getValueAt(i, 16) + "",
                         "saRate": "" + editableGrid.getValueAt(i, 17) + "",
-                         "notaxvat": $("#notaxvat" + i + "").is(":checked"),
+                        "notaxvat": $("#notaxvat" + i + "").is(":checked"),
                         "quoteId": $stateParams.id,
+                        "repairerEstimatedDays" : vm.repairerEstimatedDays,
+                        "estimatedRepairDays" : $("#tdestimatedRepairDays").html(),
+                        "totalQuotedValue" : $("#tdtotal").html(),
                         "id": Id    
                     });
                     // }
                 });
+                //quote.push({"repairerEstimatedDays" : vm.repairerEstimatedDays}); 
+                //quote.push({"tdestimatedRepairDays" : $("#tdestimatedRepairDays").html()}); 
+                //quote.push({"tdtotal" : $("#tdtotal").html()});  
+  
                 jobService.saveQuote(JSON.stringify({ 'quote': quote })).then(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
                     window.location.reload();
@@ -149,23 +150,41 @@
             };
 
             deleteRow = function (c) {
-                var quoteId = $("#hdnId" + c).val();
-                if (quoteId == null) {
-                    editableGrid.remove(c);
-                    abp.notify.info(app.localize('QuoteRemovedSuccessfully')); 
-                    vm.estimatedRepairDays();                         
-                }
-                else {
-                    jobService.deleteQuote($.extend({ filter: quoteId }, quoteId)).then(function () {
-                        abp.notify.info(app.localize('QuoteRemovedSuccessfully'));
-                        window.location.reload();
-                    }).finally(function () {
-                        vm.saving = false;
-                    });
-                }
-                                
+               abp.message.confirm(app.localize('Are you sure to delete this line?', "DeleteQuoteLine"),function (isConfirmed) {
+                    if (isConfirmed) {    
+                            var quoteId = $("#hdnId" + c).val();
+                                if (quoteId == null) {
+                                    editableGrid.remove(c);
+                                    abp.notify.info(app.localize('QuoteRemovedSuccessfully')); 
+                                    vm.estimatedRepairDays();                         
+                                }
+                                else {
+                                    jobService.deleteQuote($.extend({ filter: quoteId }, quoteId)).then(function () {
+                                    abp.notify.info(app.localize('QuoteRemovedSuccessfully'));
+                                    window.location.reload();
+                                    }).finally(function () {
+                                    vm.saving = false;
+                                    });
+                               }
+                        }
+                });           
             };
-            
+             duplicate = function (c) {
+                abp.message.confirm(app.localize('Are you sure to clone this line?', "duplicateQuoteLine"),function (isConfirmed) {
+                    if (isConfirmed) { 
+                        editableGrid.duplicate(c);
+                        vm.RepairDays();
+                        }
+                });       
+            };
+            addnewline = function (c) {
+                abp.message.confirm(app.localize('Are you sure to add blank line?', "Addnewline"),function (isConfirmed) {
+                if (isConfirmed) { 
+                editableGrid.addnewline(c);
+                vm.RepairDays();
+                }
+                }); 
+            };
             vm.getJobSummary();
             vm.getHeaders();
             vm.getQuotes();

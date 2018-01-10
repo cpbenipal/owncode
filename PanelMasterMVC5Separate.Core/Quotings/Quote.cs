@@ -48,6 +48,12 @@ namespace PanelMasterMVC5Separate.Quotings
         public virtual string Value { get; set; }
 
         public virtual string Comments { get; set; }
+
+        public virtual decimal TotalQuotedValue { get; set; }
+
+        public virtual decimal EstimatedRepairDays { get; set; }
+
+        public virtual int RepairerEstimatedDays { get; set; }
     }
 
     [Table("tblRepairType")]

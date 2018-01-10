@@ -1223,7 +1223,6 @@
     <Content Include="assets\pages\css\coming-soon.min.css" />
     <Content Include="assets\pages\css\contact.css" />
     <Content Include="assets\pages\css\contact.min.css" />
-    <Content Include="assets\pages\css\editablegrid.css" />
     <Content Include="assets\pages\css\error.css" />
     <Content Include="assets\pages\css\error.min.css" />
     <Content Include="assets\pages\css\faq.css" />
@@ -1344,13 +1343,6 @@
     <Content Include="assets\pages\scripts\ecommerce-products-edit.min.js" />
     <Content Include="assets\pages\scripts\ecommerce-products.js" />
     <Content Include="assets\pages\scripts\ecommerce-products.min.js" />
-    <Content Include="assets\pages\scripts\editablegrid.js" />
-    <Content Include="assets\pages\scripts\editablegrid_charts.js" />
-    <Content Include="assets\pages\scripts\editablegrid_charts_ofc.js" />
-    <Content Include="assets\pages\scripts\editablegrid_editors.js" />
-    <Content Include="assets\pages\scripts\editablegrid_renderers.js" />
-    <Content Include="assets\pages\scripts\editablegrid_utils.js" />
-    <Content Include="assets\pages\scripts\editablegrid_validators.js" />
     <Content Include="assets\pages\scripts\form-dropzone.js" />
     <Content Include="assets\pages\scripts\form-dropzone.min.js" />
     <Content Include="assets\pages\scripts\form-editable.js" />
