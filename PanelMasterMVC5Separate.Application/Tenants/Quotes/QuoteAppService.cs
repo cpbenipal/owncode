@@ -274,6 +274,10 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
             {
                 var aa = new QuoteDetails();
                 aa.QuoteId = Id;
+                aa.QLocation = "";
+                aa.QAction= "";
+                aa.Description = "";
+                aa.Part = "";
                 quotes = new List<QuoteDetails>();
                 quotes.Add(aa);
             }

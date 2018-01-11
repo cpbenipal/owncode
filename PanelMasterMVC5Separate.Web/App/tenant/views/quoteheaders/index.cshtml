@@ -1,13 +1,14 @@
-
+<link href="~/libs/edittablegrid/css/editablegrid.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid.js"></script>
+<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_validators.js"></script>
+<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_renderers.js"></script>
+<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_editors.js"></script>
+<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_utils.js"></script>
+<script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_charts.js"></script>
 <div ng-controller="tenant.views.quoteheaders.index as vm" name="quotesForm" role="form" novalidate action="#" id="submit_form" method="POST">
-    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid.js"></script>
-    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_validators.js"></script>
-    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_renderers.js"></script>
-    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_editors.js"></script>
-    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_utils.js"></script>
-    <script type="text/javascript" src="~/libs/edittablegrid/js/editablegrid_charts.js"></script>
-    <link href="~/libs/edittablegrid/css/editablegrid.css" rel="stylesheet" type="text/css" />
-    <style>         
+
+
+    <style>
 
         table.htmlgrid {
             border-collapse: collapse;
@@ -181,44 +182,7 @@
                                                     <th>Action-Lines</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr ng-repeat="q in vm.quote" id="R{{$index+1}}">
-                                                    <td>
-                                                        {{$index+1}}
-                                                    </td>
-                                                    <td>{{q.qAction}}</td>
-                                                    <td>{{q.qLocation}}</td>
-                                                    <td>{{q.description}}</td>
-                                                    <td>{{q.toOrder}}</td>
-                                                    <td>{{q.outwork}}</td>
-                                                    <td>{{q.partQty}}</td>
-                                                    <td>{{q.partPrice}}</td>
-                                                    <td>{{q.partQty*q.partPrice}}</td>
-                                                    <td>{{q.part}}</td>
-
-                                                    <td>{{q.panelHrs}}</td>
-                                                    <td>{{q.panelRate}}</td>
-                                                    <td>{{q.panelHrs*q.panelRate}}</td>
-
-                                                    <td>{{q.paintHrs}}</td>
-                                                    <td>{{q.paintRate}}</td>
-                                                    <td>{{q.paintHrs*q.paintRate}}</td>
-
-                                                    <td>{{q.saHrs}}</td>
-                                                    <td>{{q.saRate}}</td>
-                                                    <td>{{q.saHrs*q.saRate}}</td>
-
-                                                    <td>
-                                                        <input ng-show="{{q.noTaxVat}}" id="notaxvat{{$index}}" type="checkbox" checked="checked" />
-                                                        <input ng-show="!{{q.noTaxVat}}" id="notaxvat{{$index}}" type="checkbox" />
-                                                        <input type="hidden" name="hdnId{{$index}}" id="hdnId{{$index}}" value="{{q.id}}" />
-                                                    </td>
-                                                    <td>
-                                                        {{ ((q.partQty*q.partPrice)+(q.panelHrs*q.panelRate)+(q.paintHrs*q.paintRate)+(q.saHrs*q.saRate)) }}
-                                                    </td>
-                                                    <td></td>
-                                                </tr>
-                                            </tbody>
+                                            <tbody></tbody>
                                             <tfoot>
                                                 <tr>
                                                     <td colspan="9" align="right">Estimated Repair Days : <label id="tdestimatedRepairDays"></label> </td>

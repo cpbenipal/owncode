@@ -35,13 +35,35 @@
             editableGrid = new EditableGrid("DemoGridAttach"); 
             vm.getHeaders = function () {
                 vm.loading = true;
-                jobService.getHeaders()
-                    .then(function (result) {
+                //jobService.getHeaders()
+                //    .then(function (result) {
                         var metadata = [];
-                        var metadata = eval(result.data);
-                         
+                     //   var metadata = eval(result.data);
+                                              
+                        metadata.push({ name: "Ref#", datatype: "integer", editable: false});
+                        metadata.push({ name: "action", datatype: "string", editable: true});
+                        metadata.push({ name: "location", datatype: "string", editable: true});
+                        metadata.push({ name: "description", datatype: "string", editable: true});
+                        metadata.push({ name: "towork", datatype: "boolean", editable: true});
+                        metadata.push({ name: "outwork", datatype: "boolean", editable: true});
+                        metadata.push({ name: "quantity", datatype: "integer", editable: true});
+                        metadata.push({ name: "price", datatype: "double(2)", editable: true});
+                        metadata.push({ name: "total", datatype: "double(2)", editable: false});
+                        metadata.push({ name: "part", datatype: "string", editable: true});
+                        metadata.push({ name: "pbhrs", datatype: "double(2)", editable: true});
+                        metadata.push({ name: "pbrate", datatype: "double(2)", editable: true});
+                        metadata.push({ name: "pbvalue", datatype: "double(2)", editable: false});
+                        metadata.push({ name: "phrs", datatype: "double(2)", editable: true});
+                        metadata.push({ name: "prate", datatype: "double(2)", editable: true});
+                        metadata.push({ name: "pvalue", datatype: "double(2)", editable: false});
+                        metadata.push({ name: "sahrs", datatype: "double(2)", editable: true});
+                        metadata.push({ name: "sarate", datatype: "double(2)", editable: true});
+                        metadata.push({ name: "savalue", datatype: "double(2)", editable: false});
+                        metadata.push({ name: "notaxvat", datatype: "html", editable: false});
+                        metadata.push({ name: "gtotal", datatype: "double(2)", editable: false}); 
+                        metadata.push({ name: "copydelete", datatype: "html", editable: false});  
                         editableGrid.load({ "metadata": metadata });
-                        editableGrid.attachToHTMLTable('htmlgrid'); 
+                        
                         
                         editableGrid.setCellRenderer("copydelete", new CellRenderer({
                             render: function (cell, value) {
@@ -53,31 +75,30 @@
                             }
                         }));
 
-                        editableGrid.renderGrid(); 
-
-                    }).finally(function () {
-                        vm.loading = false;
-                    });
-            };
-
-            vm.getQuotes = function () {
-                vm.loading = true;
-                jobService.getQuotes($.extend({ filter: $stateParams.id }, $stateParams.id))
+                        jobService.getQuotes($.extend({ filter: $stateParams.id }, $stateParams.id))
                     .then(function (result) {
                         vm.quote = result.data.items;                        
-                        $scope.rowcount = result.data.items.length;
-                        if ($scope.rowcount == 0)
-                            $scope.isShow = false;
-                        else
-                            $scope.isShow = true;
                         
+                         
+                        angular.forEach(vm.quote, function (q,c) {                        
+                                var r = c+1;
+                                var chk = q.noTaxVat?"checked":"";
+                              
+                                $('#htmlgrid tbody').append("<tr id='R"+r+"'><td>"+r+"</td><td>"+q.qAction+"</td><td>"+q.qLocation+"</td><td>"+q.description+"</td><td>"+q.toOrder+"</td><td>"+q.outwork+"</td><td>"+q.partQty+"</td><td>"+q.partPrice+"</td><td>"+q.partQty*q.partPrice+"</td><td>"+q.part+"</td><td>"+q.panelHrs+"</td><td>"+q.panelRate+"</td><td>"+q.panelHrs*q.panelRate+"</td><td>"+q.paintHrs+"</td><td>"+q.paintRate+"</td><td>"+q.paintHrs*q.paintRate+"</td><td>"+q.saHrs+"</td><td>"+q.saRate+"</td><td>"+q.saHrs*q.saRate+"</td><td><input type=\"checkbox\" name=\"notaxvat"+r+"\" id=\"notaxvat"+r+"\" "+chk+" /><input type=\"hidden\" name=\"hdnId"+r+"\" id=\"hdnId"+r+"\" value=\""+q.id+"\" /></td><td>"+((q.partQty*q.partPrice)+(q.panelHrs*q.panelRate)+(q.paintHrs*q.paintRate)+(q.saHrs*q.saRate))+"</td><td></td>");  
+                        })
+                        editableGrid.attachToHTMLTable('htmlgrid'); 
+                        editableGrid.renderGrid(); 
                         vm.repairerEstimatedDays = vm.quote[0].repairerEstimatedDays;
                         vm.estimatedRepairDays();
                     }).finally(function () {
                         vm.loading = false;
                     });
-            };
 
+                    //}).finally(function () {
+                    //    vm.loading = false;
+                    //});
+            };
+ 
             vm.estimatedRepairDays = function () {
                 var total = 0;
                 var totalvalue = 0;
@@ -185,8 +206,9 @@
                 }
                 }); 
             };
+             
             vm.getJobSummary();
             vm.getHeaders();
-            vm.getQuotes();
+           // vm.getQuotes();           
         }]);
 })();
