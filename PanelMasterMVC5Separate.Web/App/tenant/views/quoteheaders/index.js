@@ -11,7 +11,7 @@
             vm.job = {};
             vm.quote = {};
             vm.saving = false;
-            vm.loading = false;
+            vm.loading = false; 
             vm.advancedFiltersAreShown = false;
 
             vm.filterText = $stateParams.filterText || '';
@@ -35,10 +35,9 @@
             editableGrid = new EditableGrid("DemoGridAttach"); 
             vm.getHeaders = function () {
                 vm.loading = true;
-                //jobService.getHeaders()
-                //    .then(function (result) {
+               
                         var metadata = [];
-                     //   var metadata = eval(result.data);
+                    
                                               
                         metadata.push({ name: "Ref#", datatype: "integer", editable: false});
                         metadata.push({ name: "action", datatype: "string", editable: true});
@@ -74,30 +73,11 @@
                                     "<i class=\"fa fa-plus\" title=\"Add Blank Line\"></i></a></span>";
                             }
                         }));
+                    };
+                       
 
-                        jobService.getQuotes($.extend({ filter: $stateParams.id }, $stateParams.id))
-                    .then(function (result) {
-                        vm.quote = result.data.items;                        
-                        
-                         
-                        angular.forEach(vm.quote, function (q,c) {                        
-                                var r = c+1;
-                                var chk = q.noTaxVat?"checked":"";
-                              
-                                $('#htmlgrid tbody').append("<tr id='R"+r+"'><td>"+r+"</td><td>"+q.qAction+"</td><td>"+q.qLocation+"</td><td>"+q.description+"</td><td>"+q.toOrder+"</td><td>"+q.outwork+"</td><td>"+q.partQty+"</td><td>"+q.partPrice+"</td><td>"+q.partQty*q.partPrice+"</td><td>"+q.part+"</td><td>"+q.panelHrs+"</td><td>"+q.panelRate+"</td><td>"+q.panelHrs*q.panelRate+"</td><td>"+q.paintHrs+"</td><td>"+q.paintRate+"</td><td>"+q.paintHrs*q.paintRate+"</td><td>"+q.saHrs+"</td><td>"+q.saRate+"</td><td>"+q.saHrs*q.saRate+"</td><td><input type=\"checkbox\" name=\"notaxvat"+r+"\" id=\"notaxvat"+r+"\" "+chk+" /><input type=\"hidden\" name=\"hdnId"+r+"\" id=\"hdnId"+r+"\" value=\""+q.id+"\" /></td><td>"+((q.partQty*q.partPrice)+(q.panelHrs*q.panelRate)+(q.paintHrs*q.paintRate)+(q.saHrs*q.saRate))+"</td><td></td>");  
-                        })
-                        editableGrid.attachToHTMLTable('htmlgrid'); 
-                        editableGrid.renderGrid(); 
-                        vm.repairerEstimatedDays = vm.quote[0].repairerEstimatedDays;
-                        vm.estimatedRepairDays();
-                    }).finally(function () {
-                        vm.loading = false;
-                    });
-
-                    //}).finally(function () {
-                    //    vm.loading = false;
-                    //});
-            };
+                   
+           
  
             vm.estimatedRepairDays = function () {
                 var total = 0;
@@ -157,13 +137,11 @@
                     });
                     // }
                 });
-                //quote.push({"repairerEstimatedDays" : vm.repairerEstimatedDays}); 
-                //quote.push({"tdestimatedRepairDays" : $("#tdestimatedRepairDays").html()}); 
-                //quote.push({"tdtotal" : $("#tdtotal").html()});  
+                
   
                 jobService.saveQuote(JSON.stringify({ 'quote': quote })).then(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
-                    window.location.reload();
+                    vm.getQuotes();
                 }).finally(function () {
                     vm.saving = false;                  
                 });
@@ -182,7 +160,7 @@
                                 else {
                                     jobService.deleteQuote($.extend({ filter: quoteId }, quoteId)).then(function () {
                                     abp.notify.info(app.localize('QuoteRemovedSuccessfully'));
-                                    window.location.reload();
+                                     vm.getQuotes();
                                     }).finally(function () {
                                     vm.saving = false;
                                     });
@@ -206,9 +184,31 @@
                 }
                 }); 
             };
-             
+                
+             vm.getQuotes = function () {
+                    vm.loading = true;
+                    jobService.getQuotes($.extend({ filter: $stateParams.id }, $stateParams.id)).then(function (result) {
+                                    vm.quote = result.data.items;                        
+                        
+                            $('#htmlgrid tbody').html("");
+                            angular.forEach(vm.quote, function (q,c) {                        
+                                    var r = c+1;
+                                    var chk = q.noTaxVat?"checked":"";
+                              
+                                    $('#htmlgrid tbody').append("<tr id='R"+r+"'><td>"+r+"</td><td>"+q.qAction+"</td><td>"+q.qLocation+"</td><td>"+q.description+"</td><td>"+q.toOrder+"</td><td>"+q.outwork+"</td><td>"+q.partQty+"</td><td>"+q.partPrice+"</td><td>"+q.partQty*q.partPrice+"</td><td>"+q.part+"</td><td>"+q.panelHrs+"</td><td>"+q.panelRate+"</td><td>"+q.panelHrs*q.panelRate+"</td><td>"+q.paintHrs+"</td><td>"+q.paintRate+"</td><td>"+q.paintHrs*q.paintRate+"</td><td>"+q.saHrs+"</td><td>"+q.saRate+"</td><td>"+q.saHrs*q.saRate+"</td><td><input type=\"checkbox\" name=\"notaxvat"+c+"\" id=\"notaxvat"+c+"\" "+chk+" /><input type=\"hidden\" name=\"hdnId"+c+"\" id=\"hdnId"+c+"\" value=\""+q.id+"\" /></td><td>"+((q.partQty*q.partPrice)+(q.panelHrs*q.panelRate)+(q.paintHrs*q.paintRate)+(q.saHrs*q.saRate))+"</td><td></td>");  
+                            })
+                            editableGrid.attachToHTMLTable('htmlgrid'); 
+                            editableGrid.renderGrid(); 
+                            vm.repairerEstimatedDays = vm.quote[0].repairerEstimatedDays;
+                            vm.estimatedRepairDays();
+                        }).finally(function () {
+                            vm.loading = false;
+                        });  
+                };                  
+
+ 
             vm.getJobSummary();
             vm.getHeaders();
-           // vm.getQuotes();           
+            vm.getQuotes();                        
         }]);
 })();
