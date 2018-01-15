@@ -18,7 +18,7 @@ namespace PanelMasterMVC5Separate.Web
         {
             //Use UTC clock. Remove this to use local time for your application.
             Clock.Provider = ClockProviders.Utc;
-
+               
             //Log4Net configuration
             AbpBootstrapper.IocManager.IocContainer
                 .AddFacility<LoggingFacility>(f => f.UseAbpLog4Net()

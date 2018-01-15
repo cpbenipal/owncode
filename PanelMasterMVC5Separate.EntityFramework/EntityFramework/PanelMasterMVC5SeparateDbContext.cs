@@ -69,6 +69,10 @@ namespace PanelMasterMVC5Separate.EntityFramework
         public virtual IDbSet<PaintTypes> PaintTypes { get; set; }
         public virtual IDbSet<BrVehicle> BrVehicle { get; set; }
         public virtual IDbSet<VehicleInsurance> VehicleInsurance { get; set; }
+        public virtual IDbSet<QPartType> QPartTypes { get; set; }
+        public virtual IDbSet<QLocation> QLocations { get; set; }
+        public virtual IDbSet<QAction> QActions { get; set; }
+        public virtual IDbSet<QuoteDetails> QuoteDetails { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

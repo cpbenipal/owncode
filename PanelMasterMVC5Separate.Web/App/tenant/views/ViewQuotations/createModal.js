@@ -3,23 +3,22 @@
         '$scope', '$uibModalInstance', 'abp.services.app.quote', 'jobId',
         function ($scope, $uibModalInstance, jobService, jobId) {
             var vm = this;
- 
+
             vm.saving = false;
             vm.currentUserId = abp.session.userId;
             vm.TenantId = abp.session.tenantId;
-             
-            vm.save = function () {                
-                vm.saving = true;                            
-                vm.vehicle.jobId = jobId;                            
-                vm.vehicle.quoteStatusID = 1;                        
-                vm.vehicle.TenantId = vm.TenantId; 
+
+            vm.save = function () {
+                
+                vm.vehicle.jobId = jobId;
+                vm.vehicle.quoteStatusID = 1;
+                vm.vehicle.TenantId = vm.TenantId;
                 jobService.createOrUpdateQuotation(vm.vehicle).then(function (result) {
-                         
                     abp.notify.info(app.localize('SavedSuccessfully'));
-                    window.location.href = "#!/tenant/quoteheaders/"+result.data;
+                    window.location.href = "#!/tenant/quoteheaders/" + result.data;
                     $uibModalInstance.close();
                 }).finally(function () {
-                    vm.saving = false;
+                    
                 });
             };
 
@@ -45,7 +44,7 @@
                     });
 
             };
-            
+
             $scope.rtypeList = []; //list of repair types
             vm.getRepairs = function () {
 
@@ -65,31 +64,52 @@
 
             };
 
-            $scope.preAuthList = []; //list of preAuthList
-            vm.getPreAuth = function () {
-                $scope.preAuthList.push({
+            $scope.yesNoList = []; //list of yesNo
+            vm.getYesNoList = function () {
+                $scope.yesNoList.push({
                     name: "Yes",
                     id: true
                 });
-                $scope.preAuthList.push({
+                $scope.yesNoList.push({
                     name: "No",
                     id: false
                 });
             };
 
-            function init() {
-                jobService.getQuoteForNewQuotation({
-                    jobid: jobId,
-                    id : 0
-                }).then(function (result) {                                
-                    vm.vehicle = result.data; 
-                    vm.vehicle.pre_Auth = '0';                          
-                    });
-            }           
+            $scope.paintList = [];
+            vm.getPaints = function () {
+                vm.loading = true;
+                $scope.paintList.pop();
+                jobService.getPaintType()
+                    .then(function (ins_obj) {
+                        angular.forEach(ins_obj.data.items, function (value, key) {
+                            $scope.paintList.push({
+                                name: value.paintType,
+                                id: value.id
+                            });
+                        });
 
+                    }).finally(function () {
+                        vm.loading = false;
+                    });
+            };
+
+            function init() {                
+                vm.loading = true;
+                jobService.getQuoteForNewQuotation({                    
+                    id: jobId
+                }).then(function (result) {
+                    vm.vehicle = result.data;
+                    
+                }).finally(function () {
+                    vm.loading = false;
+                });
+            }
+            
             vm.getCategories();
-            vm.getRepairs();     
-            vm.getPreAuth();       
+            vm.getRepairs();
+            vm.getYesNoList();
+            vm.getPaints();
             init();
         }
     ]);

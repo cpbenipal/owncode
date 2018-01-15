@@ -1,6 +1,8 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using Abp.Domain.Entities.Auditing;
 using PanelMasterMVC5Separate.Quotings;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
@@ -9,11 +11,10 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
     {
         public string Filter { get; set; }
     }
-
+    
     public class GetJobInput
     {
-        public int id { get; set; }
-        public int jobId { get; set; }
+        public int id { get; set; }         
     }
     [AutoMapFrom(typeof(QuoteMaster))]
     public class QuoteMastersDto : FullAuditedEntityDto
@@ -38,7 +39,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
 
     [AutoMapFrom(typeof(QuoteMaster))]
     public class QuoteMasterDto : FullAuditedEntityDto
-    { 
+    {
         [Required]
         public virtual int TenantId { get; set; }
 
@@ -55,13 +56,29 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
         public virtual int RepairTypeId { get; set; }
 
         [Required]
+        public virtual int PaintTypeId { get; set; }
+
+        [Required]
+        public virtual bool IsStructuralRepairWork { get; set; }
+
+        [Required]
         public virtual bool Pre_Auth { get; set; }
-         
+
+        [Required]
+        public virtual bool IsLuxury { get; set; }
+
+        [Required]
+        public virtual bool IsSpecialisedType { get; set; }
+
+        [Required]
+        public virtual bool UnderWaranty { get; set; }
+
         public virtual string Value { get; set; }
 
         public virtual string Comments { get; set; }
 
         public string RegNo { get; set; }
+        public int vehicleId { get; set; }
     }
 
     [AutoMapTo(typeof(QuoteMaster))]
@@ -83,6 +100,21 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
         public virtual int RepairTypeId { get; set; }
 
         [Required]
+        public virtual int PaintTypeId { get; set; }
+
+        [Required]
+        public virtual bool IsStructuralRepairWork { get; set; }
+
+        [Required]
+        public virtual bool IsLuxury { get; set; }
+
+        [Required]
+        public virtual bool IsSpecialisedType { get; set; }
+
+        [Required]
+        public virtual bool UnderWaranty { get; set; }
+
+        [Required]
         public virtual bool Pre_Auth { get; set; }
 
         public virtual string Value { get; set; }
@@ -90,6 +122,8 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
         public virtual string Comments { get; set; }
 
         public string RegNo { get; set; }
+
+        public int vehicleId { get; set; }
     }
     [AutoMapFrom(typeof(QuoteStatus))]
     public class QuoteStatusDto
@@ -112,16 +146,16 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
         public virtual string Description { get; set; }
     }
 
-    public class QuoteSummaryDto 
-    { 
+    public class QuoteSummaryDto
+    {
         public virtual int JobId { get; set; }
-         
+
         public virtual string QuoteStatus { get; set; }
-         
+
         public virtual string QuoteCat { get; set; }
-         
+
         public virtual string RepairType { get; set; }
-         
+
         public virtual string Value { get; set; }
 
         public virtual string Pre_Auth { get; set; } // true:Yes false:No
@@ -149,5 +183,69 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
         public virtual string CreatedBy { get; set; }
 
         public virtual int Id { get; set; }
+    }
+
+    [AutoMapFrom(typeof(QuoteDetails))]
+    public class QuoteDetailDto : FullAuditedEntity
+    {
+        public virtual int? tenantid { get; set; }
+       
+        public virtual int QuoteId { get; set; }
+       
+        public virtual int quoteStatusId { get; set; }
+       
+        public virtual string QAction { get; set; }
+       
+        public virtual string QLocation { get; set; }
+       
+        public virtual string Description { get; set; }
+       
+        public virtual bool ToOrder { get; set; }
+       
+        public virtual bool Outwork { get; set; }
+       
+        public virtual int PartQty { get; set; }
+       
+        public virtual decimal PartPrice { get; set; }
+       
+        public virtual string Part { get; set; }
+       
+        public virtual decimal PanelHrs { get; set; }
+       
+        public virtual decimal PanelRate { get; set; }
+       
+        public virtual decimal PaintHrs { get; set; }
+       
+        public virtual decimal PaintRate { get; set; }
+       
+        public virtual decimal SAHrs { get; set; }
+       
+        public virtual decimal SARate { get; set; }
+       
+        public virtual bool NoTaxVat { get; set; }
+        public virtual bool IsCurrent { get; set; }
+
+        public virtual decimal TotalQuotedValue { get; set; }
+
+        public virtual decimal EstimatedRepairDays { get; set; }
+
+        public virtual int RepairerEstimatedDays { get; set; }
+    }
+    [AutoMapFrom(typeof(QLocation))]
+    public class QLocationDto : FullAuditedEntity
+    {
+        public virtual string Location { get; set; }
+    }
+    //[AutoMapFrom(typeof(QAction))]
+    public class QActionDto //: FullAuditedEntity
+    {
+        public virtual string Action { get; set; }
+        //public virtual int qparttypeId { get; set; }
+    }
+
+    public class QuoteObject
+    {
+        [Required]
+        public List<QuoteDetailDto> quote { get; set; }
     }
 }

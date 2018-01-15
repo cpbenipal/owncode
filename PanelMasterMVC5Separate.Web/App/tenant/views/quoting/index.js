@@ -53,11 +53,11 @@
                         '    <ul uib-dropdown-menu>' +                        
                        // '      <li><a ng-click="grid.appScope.newQuotation(row.entity)">' + app.localize('NewQuotation') + '</a></li>' +
                         '      <li><a ng-show="row.entity.id!=0" ng-href="#!/tenant/quoteheaders/{{row.entity.id}}">' + app.localize('EditQuotation') + '</a></li>' + 
-                        '      <li><a ng-show="row.entity.id!=0" ng-click="grid.appScope.editQuotation(row.entity)">' + app.localize('EditQuoteType') + '</a></li>' + 
+                        '      <li><a ng-show="row.entity.id!=0" ng-click="grid.appScope.editQuotation(row.entity.id)">' + app.localize('EditQuoteType') + '</a></li>' + 
                         '    </ul>' +
                         '  </div>' +
                         '</div>'
-                    },                     
+                    },                  
                     {
                         name: app.localize('VehicleRegistration'),
                         field: 'job', 
@@ -138,31 +138,14 @@
                 return users;
             };
  
-            vm.newQuotation = function (quote) {
-                openCreateQuoteModal(quote.jobId);
+            vm.addQuote = function (quote) {
+                window.location.href = "#!/tenant/viewQuotations";
             };
             vm.editQuotation = function (quote) {
-                openEditQuoteModal(quote.id);
-            };             
-              
-            function openEditQuoteModal(Id) { 
-                var modalInstance = $uibModal.open({
-                    templateUrl: '~/App/tenant/views/quoting/createOrEditModal.cshtml',
-                    controller: 'tenant.views.quoting.editModal as vm',
-                    backdrop: 'static',
-                    resolve: {
-                        Id: function () {                         
-                            return Id;
-                        }
-                    }
-                });
+                openCreateQuoteModal(quote);
+            };    
 
-                modalInstance.result.then(function (result) {
-                    vm.getQuotes();
-                });
-            }
-
-            function openCreateQuoteModal(jobId) {
+            function openCreateQuoteModal(jobId) {                
                 var modalInstance = $uibModal.open({
                     templateUrl: '~/App/tenant/views/quoting/createOrEditModal.cshtml',
                     controller: 'tenant.views.quoting.createModal as vm',

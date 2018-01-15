@@ -79,14 +79,14 @@ namespace PanelMasterMVC5Separate.Vehicle
                 importDto.CommunicationType = query.CommunicationType;
                 importDto.ContactAfterService = query.ContactAfterService;
                 importDto.ClientOtherInformation = query.OtherInformation;
-               
+
             }
             var query1 = _brvehiclerepository.GetAll()
               .Where(p => p.RegistrationNumber.Equals(input.FilterText1) || p.VinNumber.Equals(input.FilterText1))
              .FirstOrDefault();
 
             if (query1 != null)
-            {                
+            {
                 importDto.MakeId = query1.MakeId;
                 importDto.ModelId = query1.ModelId;
                 importDto.Colour = query1.Color;
@@ -102,7 +102,7 @@ namespace PanelMasterMVC5Separate.Vehicle
             }
             return importDto;
         }
-     
+
         public ListResultDto<VehicleMakeDto> GetManufacture()
         {
             var manufacture = _manufactureRepository
@@ -229,29 +229,6 @@ namespace PanelMasterMVC5Separate.Vehicle
 
             int id = _clientRepository.InsertOrUpdateAndGetId(clients);
 
-            var jobs = new Jobs()
-            {
-                ClientID = id,
-                ManufactureID = clientDto.MakeId,
-                ModelID = clientDto.ModelId,
-                Year = clientDto.Year,
-                RegNo = clientDto.RegistrationNumber,
-                VinNumber = clientDto.VinNumber,
-                CurrentKMs = clientDto.CurrentKMs,
-                DamangeReason = clientDto.DamangeReason,
-                BranchEntryMethod = clientDto.BranchEntryMethod,
-                IsUnrelatedDamangeReason = clientDto.IsUnrelatedDamangeReason,
-                InsuranceID = clientDto.InsurerId,
-                BrokerID = clientDto.BrokerId,
-                Colour = clientDto.Colour,
-                UnderWaranty = clientDto.UnderWaranty ? "Yes" : "No",
-                OtherInformation = clientDto.RepairOtherInformation,
-                TenantID = _abpSession.TenantId,
-                JobStatusID = 1,
-                New_Comeback = clientDto.New_Comeback
-            };
-
-           id = _jobsRepository.InsertOrUpdateAndGetId(jobs);
 
             var vehicle = new BrVehicle()
             {
@@ -266,9 +243,33 @@ namespace PanelMasterMVC5Separate.Vehicle
                 UnderWaranty = clientDto.UnderWaranty,
                 IsSpecialisedType = clientDto.IsSpecialisedType,
                 IsLuxury = clientDto.IsLuxury,
-                OtherInformation = clientDto.VehicleOtherInformation
+                OtherInformation = clientDto.VehicleOtherInformation,
+                TenantId = _abpSession.TenantId
             };
-            _brvehiclerepository.InsertOrUpdate(vehicle);
+            int vehicleId = _brvehiclerepository.InsertOrUpdateAndGetId(vehicle);
+
+            var jobs = new Jobs()
+            {
+                ClientID = id,
+                //ManufactureID = clientDto.MakeId,
+                //ModelID = clientDto.ModelId,
+                //Year = clientDto.Year,
+                //RegNo = clientDto.RegistrationNumber,
+                //VinNumber = clientDto.VinNumber,
+                CurrentKMs = clientDto.CurrentKMs,
+                DamangeReason = clientDto.DamangeReason,
+                BranchEntryMethod = clientDto.BranchEntryMethod,
+                IsUnrelatedDamangeReason = clientDto.IsUnrelatedDamangeReason,
+                InsuranceID = clientDto.InsurerId,
+                BrokerID = clientDto.BrokerId,
+                // Colour = clientDto.Colour,
+                // UnderWaranty = clientDto.UnderWaranty ? "Yes": "No",
+                OtherInformation = clientDto.RepairOtherInformation,
+                VehicleID = vehicleId,
+                TenantID = _abpSession.TenantId
+            };
+
+            id = _jobsRepository.InsertOrUpdateAndGetId(jobs);
 
             var quote = new VehicleInsurance()
             {
@@ -280,7 +281,7 @@ namespace PanelMasterMVC5Separate.Vehicle
                 OtherInformation = clientDto.InsurerOtherInformation
             };
 
-          _vehicleinsurancerepository.InsertOrUpdate(quote);
+            _vehicleinsurancerepository.InsertOrUpdate(quote);
         }
 
         private int GetCountryIdByCode()
