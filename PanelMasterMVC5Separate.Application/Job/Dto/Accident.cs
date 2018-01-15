@@ -37,7 +37,7 @@ namespace PanelMasterMVC5Separate.Job.Dto
         public virtual int ModelId { get; set; }
         [Required]
         public virtual string Colour { get; set; }
-         [Required]
+        [Required]
         public virtual int PaintTypeId { get; set; }
         [Required]
         public virtual string Year { get; set; }
@@ -52,8 +52,12 @@ namespace PanelMasterMVC5Separate.Job.Dto
         [Required]
         public virtual bool IsLuxury { get; set; }
         public virtual string VehicleOtherInformation { get; set; }
+        public virtual string New_Comeback { get; set; }
 
         //Repair Details
+
+        [Required]
+        public virtual int JobStatudID { get; set; }
         [Required]
         public virtual string DamangeReason { get; set; }
         [Required]

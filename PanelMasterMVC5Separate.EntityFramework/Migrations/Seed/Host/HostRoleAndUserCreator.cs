@@ -26,7 +26,7 @@ namespace PanelMasterMVC5Separate.Migrations.Seed.Host
         }
 
         private void CreateRolesCategory()
-        {
+        {          
             var AdminRoleDesc = _context.RolesCategory.FirstOrDefault(r => r.Description.ToLower() == StaticRoleNames.Tenants.Admin.ToLower());
             if(AdminRoleDesc == null)
             {
@@ -190,6 +190,19 @@ namespace PanelMasterMVC5Separate.Migrations.Seed.Host
                       new RolesCategories.RolesCategory
                       {
                           Description = StaticRoleNames.Tenants.Broker,
+                          Enabled = true
+                      });
+
+                _context.SaveChanges();
+            }
+
+            var NoneRoleDesc = _context.RolesCategory.FirstOrDefault(r => r.Description.ToLower() == StaticRoleNames.Tenants.None.ToLower());
+            if (NoneRoleDesc == null)
+            {
+                NoneRoleDesc = _context.RolesCategory.Add(
+                      new RolesCategories.RolesCategory
+                      {
+                          Description = StaticRoleNames.Tenants.None,
                           Enabled = true
                       });
 

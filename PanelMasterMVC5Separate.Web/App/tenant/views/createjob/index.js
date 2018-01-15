@@ -136,6 +136,7 @@
             $('#form_wizard_1 .button-submit').click(function () {
                 vm.loading = true;
                 vm.saving = true;
+                vm.client.new_Comeback = "N";
                 abp.message.confirm(
                     app.localize('AreYouSure', "Submit"),
                     function (isConfirmed) {

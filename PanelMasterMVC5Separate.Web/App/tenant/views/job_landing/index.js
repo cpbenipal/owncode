@@ -37,8 +37,8 @@
                         vm.job.ClaimStatusDesc = result.data.claimStatusDescription;
                         vm.job.Surname = result.data.surname;
                         vm.job.Name = result.data.name;
-                        
-                       
+                        vm.job.JobStatusDesc = result.data.jobStatusDesc;
+
                     }).finally(function () {
                         vm.loading = false;
                     });

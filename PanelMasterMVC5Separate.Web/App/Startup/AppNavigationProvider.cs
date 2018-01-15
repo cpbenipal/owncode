@@ -63,19 +63,9 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                 ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Claim,
                     L("JobDetails"),
-                    icon: "glyphicon glyphicon-tasks"
-                    ).AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.NewJob,
-                    L("NewJob"),
-                    url: "tenant.NewJob",
-                    icon: "glyphicon glyphicon-collapse-down"
-                    )).AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.JobDetails,
-                    L("Search"),
                     url: "tenant.jobdetails",
-                    icon: "glyphicon glyphicon-search"
-                    ))
-
+                    icon: "glyphicon glyphicon-tasks"
+                    )
                 ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Productivity,
                     L("Productivity"),

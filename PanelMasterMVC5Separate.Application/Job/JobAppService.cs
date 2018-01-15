@@ -244,9 +244,11 @@ namespace PanelMasterMVC5Separate.Vehicle
                 InsuranceID = clientDto.InsurerId,
                 BrokerID = clientDto.BrokerId,
                 Colour = clientDto.Colour,
-                UnderWaranty = clientDto.UnderWaranty ? "Yes": "No",
+                UnderWaranty = clientDto.UnderWaranty ? "Yes" : "No",
                 OtherInformation = clientDto.RepairOtherInformation,
-                TenantID = _abpSession.TenantId
+                TenantID = _abpSession.TenantId,
+                JobStatusID = 1,
+                New_Comeback = clientDto.New_Comeback
             };
 
            id = _jobsRepository.InsertOrUpdateAndGetId(jobs);

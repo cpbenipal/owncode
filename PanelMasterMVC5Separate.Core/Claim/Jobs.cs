@@ -35,7 +35,10 @@ namespace PanelMasterMVC5Separate.Claim
         public virtual int BrokerID { get; set; }
         public virtual Brokers.BrokerMaster Broker { get; set; }
 
-        public virtual int BranchID { get; set; }
+        [Required]
+        public virtual int JobStatusID { get; set; }
+        public virtual Jobstatus JobStatus { get; set; }
+
         public virtual int FinancialID { get; set; }
         public virtual int CSAID { get; set; }
 
@@ -52,7 +55,7 @@ namespace PanelMasterMVC5Separate.Claim
         public virtual string Colour { get; set; }
         public virtual string Year { get; set; }
         public virtual string UnderWaranty { get; set; }
-        public virtual bool New_Comeback { get; set; }
+        public virtual string New_Comeback { get; set; }
 
         public virtual string DamangeReason { get; set; }
         public virtual string BranchEntryMethod { get; set; }
