@@ -41,34 +41,40 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                 .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Quote,
                     L("Quoting"),
-                    icon: "glyphicon glyphicon-tasks"
+                    icon: "glyphicon glyphicon-tasks",
+                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Quotations,
                     L("ViewQuotations"),
                     url: "tenant.quoting",
-                    icon: "glyphicon glyphicon-collapse-down"
+                    icon: "glyphicon glyphicon-collapse-down",
+                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     )).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Quotations,
                     L("NewQuotation"),
                     url: "tenant.viewQuotations",
-                    icon: "glyphicon glyphicon-search"
+                    icon: "glyphicon glyphicon-search",
+                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     ))
                 )
                 .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.PartsOrdering,
                     L("PartsOrdering"),
                     url: "tenant.partsordering",
-                    icon: "glyphicon glyphicon-link"
+                    icon: "glyphicon glyphicon-link",
+                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     )
                 ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Claim,
                     L("JobDetails"),
-                    icon: "glyphicon glyphicon-tasks"
+                    icon: "glyphicon glyphicon-tasks",
+                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.NewJob,
                     L("NewJob"),
                     url: "tenant.NewJob",
-                    icon: "glyphicon glyphicon-collapse-down"
+                    icon: "glyphicon glyphicon-collapse-down",
+                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     )).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.JobDetails,
                     L("Search"),
@@ -80,19 +86,22 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     PageNames.App.Tenant.Productivity,
                     L("Productivity"),
                     url: "tenant.productivity",
-                    icon: "glyphicon glyphicon-wrench"
+                    icon: "glyphicon glyphicon-wrench",
+                     requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     )
                 ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Towing,
                     L("Towing"),
                     url: "tenant.towing",
-                    icon: "glyphicon glyphicon-book"
+                    icon: "glyphicon glyphicon-book",
+                     requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     )
                 ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Costing,
                     L("Costing"),
                     url: "tenant.costing",
-                    icon: "glyphicon glyphicon-usd"
+                    icon: "glyphicon glyphicon-usd",
+                     requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     )
 
 
@@ -100,7 +109,8 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     PageNames.App.Tenant.Productivity,
                     @L("Report"),
                     url: "tenant.reporting",
-                    icon: "glyphicon glyphicon-info-sign"
+                    icon: "glyphicon glyphicon-info-sign",
+                     requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     )
 
 
