@@ -35,33 +35,31 @@ namespace PanelMasterMVC5Separate.Claim
         public virtual Insurer.InsurerMaster Insurance { get; set; }
 
         [Required]
-        public virtual int BrokerID { get; set; }
-        public virtual Brokers.BrokerMaster Broker { get; set; }
+        public int BrokerID { get; set; }
+        public Brokers.BrokerMaster Broker { get; set; }
 
-        public virtual int BranchID { get; set; }
-        public virtual int FinancialID { get; set; }
-        public virtual int CSAID { get; set; }
-
-        public virtual int ProductiveStaffID { get; set; }
-
-        public virtual int ClaimEventID { get; set; }
-
-        public virtual NotProceedReason NotProceedReason { get; set; }
-         
-        public virtual TowOperator TowOperator { get; set; }
+        [Required]
+        public virtual int JobStatusID { get; set; }
+        public virtual Jobstatus JobStatus { get; set; }
+        
+        public int CSAID { get; set; }
+        public int ClaimHandlerID { get; set; }
+        public int PartsBuyerID { get; set; }
+        public int KeyAccountManagerID { get; set; }
+        public int EstimatorID { get; set; }
 
         //public virtual string RegNo { get; set; }
         //public virtual string VinNumber { get; set; }
         //public virtual string Colour { get; set; }
         //public virtual string Year { get; set; }
         //public virtual string UnderWaranty { get; set; }
-        public virtual bool New_Comeback { get; set; }
+        public string New_Comeback { get; set; }
 
-        public virtual string DamangeReason { get; set; }
-        public virtual string BranchEntryMethod { get; set; }
-        public virtual bool IsUnrelatedDamangeReason { get; set; }
-        public virtual string CurrentKMs { get; set; }
-        public virtual string OtherInformation { get; set; }
+        public string DamangeReason { get; set; }
+        public string BranchEntryMethod { get; set; }
+        public bool IsUnrelatedDamangeReason { get; set; }
+        public string CurrentKMs { get; set; }
+        public string OtherInformation { get; set; }
     }
 
     [Table("tblJobstatus")]

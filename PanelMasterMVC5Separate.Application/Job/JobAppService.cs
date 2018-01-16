@@ -266,7 +266,14 @@ namespace PanelMasterMVC5Separate.Vehicle
                 // UnderWaranty = clientDto.UnderWaranty ? "Yes": "No",
                 OtherInformation = clientDto.RepairOtherInformation,
                 VehicleID = vehicleId,
-                TenantID = _abpSession.TenantId
+                TenantID = _abpSession.TenantId,
+                CSAID = clientDto.CSAID,
+                JobStatusID = clientDto.JobStatusID,
+                ClaimHandlerID = clientDto.ClaimHandlerID,
+                PartsBuyerID = clientDto.PartsBuyerID,
+                KeyAccountManagerID = clientDto.KeyAccountManagerID,
+                EstimatorID = clientDto.EstimatorID,
+                New_Comeback = clientDto.New_Comeback
             };
 
             id = _jobsRepository.InsertOrUpdateAndGetId(jobs);

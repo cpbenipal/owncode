@@ -57,7 +57,21 @@ namespace PanelMasterMVC5Separate.Job.Dto
         //Repair Details
 
         [Required]
-        public virtual int JobStatudID { get; set; }
+        public virtual int CSAID { get; set; }
+
+        [Required]
+        public virtual int JobStatusID { get; set; }
+        [Required]
+        public virtual int ClaimHandlerID { get; set; }
+        [Required]
+        public virtual int PartsBuyerID { get; set; }
+        [Required]
+        public virtual int KeyAccountManagerID { get; set; }
+        [Required]
+        public virtual int EstimatorID { get; set; }
+
+        public virtual string NewComeback { get; set; }
+
         [Required]
         public virtual string DamangeReason { get; set; }
         [Required]

@@ -138,13 +138,20 @@
                 vm.job.ModelID = $scope.selectedItem.id;
                 vm.job.InsuranceID = $scope.InsuranceModel.id;
                 vm.job.BrokerID = $scope.BrokerModel.id;
-                vm.job.BranchID = vm.BranchID;
+                vm.job.CSAID = 0;
+                vm.job.JobStatusID = 1;
+                vm.job.ClaimHandlerID = 0;
+                vm.job.PartsBuyerID = 0;
+                vm.job.KeyAccountManagerID = 0;
+                vm.job.EstimatorID = 0;
+               
                 vm.job.New_Comeback = $scope.NewComebackModel;       
                 
                 jobService.addClient(vm.client).then(function (client_results) {
-
-                    vm.job.ClientID = client_results.data.id;
                     
+                    vm.job.ClientID = client_results.data.id;
+
+                    alert(vm.job.ClientID);
                     jobService.createJob(vm.job).then(function () {
                         
                         abp.notify.info(app.localize('SavedSuccessfully'));

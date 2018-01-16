@@ -48,6 +48,6 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         void AddUpdateTowOperator(TowOperatorMainToDto input);
         TowOperatorMainDto GetMainTowOperator(GetClaimsInput input);
 
-        ListResultDto<RoleCategoriesDto> GetRoles(int RolesCategoryID);
+        ListResultDto<RoleCategoriesDto> GetRoles();
     }
 }

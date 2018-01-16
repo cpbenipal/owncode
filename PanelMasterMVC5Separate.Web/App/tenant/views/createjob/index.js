@@ -136,7 +136,14 @@
             $('#form_wizard_1 .button-submit').click(function () {
                 vm.loading = true;
                 vm.saving = true;
-                vm.client.new_Comeback = "N";
+
+                vm.client.New_Comeback = "N";
+                vm.client.JobStatusID = 1;
+                vm.client.ClaimHandlerID = 0;
+                vm.client.PartsBuyerID = 0;
+                vm.client.KeyAccountManagerID = 0;
+                vm.client.EstimatorID = 0;
+
                 abp.message.confirm(
                     app.localize('AreYouSure', "Submit"),
                     function (isConfirmed) {

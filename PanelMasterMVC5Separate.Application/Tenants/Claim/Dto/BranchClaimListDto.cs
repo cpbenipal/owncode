@@ -18,23 +18,27 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
     [AutoMapFrom(typeof(Jobs))]
     public class BranchClaimListDto : FullAuditedEntityDto
     {
-        public virtual int ClientID { get; set; }
-        public virtual int ManufactureID { get; set; }
-        public virtual int ModelID { get; set; }
-        public virtual int InsuranceID { get; set; }
-        public virtual int BrokerID { get; set; }
-        public virtual int BranchID { get; set; }
-        public virtual int FinancialID { get; set; }
-        public virtual int CSAID { get; set; }
-        public virtual int ProductiveStaffID { get; set; }       
-        public virtual int ClaimEventID { get; set; }
+        public int ClientID { get; set; }
+        public int ManufactureID { get; set; }
+        public int ModelID { get; set; }
+        public int InsuranceID { get; set; }
+        public int BrokerID { get; set; }
+        public int BranchID { get; set; }
+        public int FinancialID { get; set; }
+        public int CSAID { get; set; }
+        public int ProductiveStaffID { get; set; }       
+        public int ClaimEventID { get; set; }
 
-        public virtual string RegNo { get; set; }
-        public virtual string VinNumber { get; set; }
-        public virtual string Colour { get; set; }
-        public virtual string Year { get; set; }
-        public virtual string UnderWaranty { get; set; }
-        public virtual bool New_Comeback { get; set; }
+        public string RegNo { get; set; }
+        public string VinNumber { get; set; }
+        public string Colour { get; set; }
+        public string Year { get; set; }
+        public string UnderWaranty { get; set; }
+        public string New_Comeback { get; set; }
+        public string BranchEntryMethod { get; set; }
+
+        public int JobStatusID { get; set; }
+        public string JobStatusDesc { get; set; }
 
         public string Name { get; set; }
         public string Surname { get; set; }

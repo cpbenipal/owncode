@@ -22,8 +22,7 @@
             vm.BranchID = abp.session.tenantId;
             vm.job.id = $stateParams.id;
 
-            $scope.jobStatusList = []; 
-            $scope.claimHandlerList = [];
+            $scope.jobStatusList = [];           
             
             vm.getJobs = function () {
 
@@ -43,8 +42,8 @@
                         });
                         
                         $scope.selectedJobStatus = $scope.jobStatusList[0];
-
-                        if (result.data.branchEntryMethod == "D") {                           
+                       
+                        if (result.data.branchEntryMethod === "D") {                           
                             $scope.branchEntryMethodList = [{ name: "Drive", id: "D" }, { name: "Tow", id: "T" }];
                         } else {
                             $scope.branchEntryMethodList = [{ name: "Tow", id: "T" }, { name: "Drive", id: "D" }];
@@ -52,7 +51,7 @@
                         
                         $scope.selectedBranchEntry = $scope.branchEntryMethodList[0];
 
-                        if (result.data.new_Comeback == "N") {                          
+                        if (result.data.new_Comeback === "N") {                          
                             $scope.new_ComebackList = [{ name: "New", id: "N" }, { name: "Waranty/Comeback", id: "C" }];
                         } else {
                             $scope.new_ComebackList = [{ name: "Warranty/Comeback", id: "C" }, { name: "New", id: "N" }];
@@ -62,18 +61,51 @@
                     }).finally(function () {
                         //vm.loading = false;
                     });
-               
-                jobService.getRoles(3)
+                $scope.claimHandlerList = [];
+                $scope.CSAList = [];
+                $scope.EstimatorList = [];
+                $scope.PartsBuyerList = [];
+
+                jobService.getRoles()
                     .then(function (result) {                        
 
-                        angular.forEach(result.data.items, function (roles_value, key) {                            
-                            $scope.claimHandlerList.push({
-                                name: roles_value.description,
-                                id: roles_value.iD
-                            });
+                        angular.forEach(result.data.items, function (roles_value, key) {                        
+                            
+                            if (roles_value.rolesCategoryID === 3) {
+                                $scope.claimHandlerList.push({
+                                    name: roles_value.description,
+                                    id: roles_value.id
+                                });
+                            }
+                            
+                            if (roles_value.rolesCategoryID === 4) {                               
+                                $scope.CSAList.push({
+                                    name: roles_value.description,
+                                    id: roles_value.id
+                                });
+                            }
+
+                            if (roles_value.rolesCategoryID === 5) {
+                                $scope.PartsBuyerList.push({
+                                    name: roles_value.description,
+                                    id: roles_value.id
+                                });
+                            }
+
+                            if (roles_value.rolesCategoryID === 6) {                               
+                                $scope.EstimatorList.push({
+                                    name: roles_value.description,
+                                    id: roles_value.id
+                                });
+                            }
+
                         });
 
-                        $scope.selectedClaimHandler = $scope.claimHandlerList[0];
+                        //$scope.selectedClaimHandler = $scope.claimHandlerList[0];
+                        //$scope.selectedCSA = $scope.CSAList[0];
+                        //$scope.selectedPartsBuyer = $scope.PartsBuyerList[0];
+                        //$scope.selectedEstimator = $scope.EstimatorList[0];
+                        
                        
                     }).finally(function () {
                         vm.loading = false;
