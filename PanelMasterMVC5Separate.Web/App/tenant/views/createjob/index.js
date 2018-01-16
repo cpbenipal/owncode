@@ -116,6 +116,21 @@
                 });
             };
 
+            $scope.NewComebackList = []; 
+            vm.NewComeback = function () {
+                $scope.NewComebackList.pop();
+                $scope.NewComebackList.push({
+                    name: "Yes",
+                    id: true
+                });
+                $scope.NewComebackList.push({
+                    name: "No",
+                    id: false
+                });
+            };
+
+            
+
             $scope.BrokerList = []; //list of Brokers
             vm.getBroker = function () {
                 $scope.BrokerList.pop();
@@ -136,8 +151,7 @@
             $('#form_wizard_1 .button-submit').click(function () {
                 vm.loading = true;
                 vm.saving = true;
-
-                vm.client.New_Comeback = "N";
+                
                 vm.client.JobStatusID = 1;
                 vm.client.ClaimHandlerID = 0;
                 vm.client.PartsBuyerID = 0;
@@ -202,6 +216,7 @@
             vm.getBroker();
             vm.getPaints();
             vm.contactAfterService();
+            vm.NewComeback();
             vm.communicationType();
             vm.getTitles();
         }]);

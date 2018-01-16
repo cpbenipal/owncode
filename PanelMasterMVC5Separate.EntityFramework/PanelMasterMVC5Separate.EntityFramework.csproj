@@ -164,6 +164,10 @@
     <Compile Include="Migrations\201801151205191_4.Designer.cs">
       <DependentUpon>201801151205191_4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801161357285_5.cs" />
+    <Compile Include="Migrations\201801161357285_5.Designer.cs">
+      <DependentUpon>201801161357285_5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -283,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801151205191_4.resx">
       <DependentUpon>201801151205191_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801161357285_5.resx">
+      <DependentUpon>201801161357285_5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

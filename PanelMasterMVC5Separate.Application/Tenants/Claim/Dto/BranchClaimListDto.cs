@@ -34,7 +34,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
         public string Colour { get; set; }
         public string Year { get; set; }
         public string UnderWaranty { get; set; }
-        public string New_Comeback { get; set; }
+        public bool New_Comeback { get; set; }
         public string BranchEntryMethod { get; set; }
 
         public int JobStatusID { get; set; }

@@ -53,7 +53,7 @@ namespace PanelMasterMVC5Separate.Claim
         //public virtual string Colour { get; set; }
         //public virtual string Year { get; set; }
         //public virtual string UnderWaranty { get; set; }
-        public string New_Comeback { get; set; }
+        public bool New_Comeback { get; set; }
 
         public string DamangeReason { get; set; }
         public string BranchEntryMethod { get; set; }

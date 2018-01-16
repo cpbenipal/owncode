@@ -67,21 +67,10 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                 ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Claim,
                     L("JobDetails"),
+                    url: "tenant.jobdetails",
                     icon: "glyphicon glyphicon-tasks",
                     requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
-                    ).AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.NewJob,
-                    L("NewJob"),
-                    url: "tenant.NewJob",
-                    icon: "glyphicon glyphicon-collapse-down",
-                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
-                    )).AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.JobDetails,
-                    L("Search"),
-                    url: "tenant.jobdetails",
-                    icon: "glyphicon glyphicon-search"
-                    ))
-
+                    )
                 ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Productivity,
                     L("Productivity"),

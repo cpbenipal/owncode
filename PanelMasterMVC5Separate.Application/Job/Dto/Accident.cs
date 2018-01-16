@@ -52,7 +52,7 @@ namespace PanelMasterMVC5Separate.Job.Dto
         [Required]
         public virtual bool IsLuxury { get; set; }
         public virtual string VehicleOtherInformation { get; set; }
-        public virtual string New_Comeback { get; set; }
+        public virtual bool New_Comeback { get; set; }
 
         //Repair Details
 
