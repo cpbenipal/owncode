@@ -22,6 +22,6 @@ namespace PanelMasterMVC5Separate.Vehicle
         ListResultDto<PaintTypesDto> GetPaintType();
         ImportDto ImportExistingData(GetClaimsInput input);
         //VehicleImport ImportVehicle(GetClaimsInput input);
-        void CreateNewJob(Accident clientDto);
+        int CreateNewJob(Accident clientDto);
     }
 }

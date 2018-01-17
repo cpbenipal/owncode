@@ -210,7 +210,7 @@ namespace PanelMasterMVC5Separate.Vehicle
             await _jobsRepository.InsertAsync(job);
         }
 
-        public void CreateNewJob(Accident clientDto)
+        public int CreateNewJob(Accident clientDto)
         {
             //var a = await _brokerRepository.FirstOrDefaultAsync(1);
             var clients = new Client()
@@ -278,7 +278,7 @@ namespace PanelMasterMVC5Separate.Vehicle
             };
 
             id = _jobsRepository.InsertOrUpdateAndGetId(jobs);
-
+           
             var quote = new VehicleInsurance()
             {
                 BrokerId = clientDto.BrokerId,
@@ -290,6 +290,8 @@ namespace PanelMasterMVC5Separate.Vehicle
             };
 
             _vehicleinsurancerepository.InsertOrUpdate(quote);
+
+            return id;
         }
 
         private int GetCountryIdByCode()

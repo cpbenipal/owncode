@@ -162,9 +162,12 @@
                     app.localize('AreYouSure', "Submit"),
                     function (isConfirmed) {
                         if (isConfirmed) {
-                            jobService.createNewJob($.extend({ filter: vm.client }, vm.client)).then(function () {
+                            jobService.createNewJob($.extend({ filter: vm.client }, vm.client)).then(function (job_obj) {
+                              
                                 abp.notify.info(app.localize('SavedSuccessfully'));
-                                window.location.href = "#!/tenant/createjob";
+                                window.location.href = "#!/tenant/job_landing/job_information/" + job_obj.data;
+                                //window.location.href = "#!/tenant/jobdetails";
+                              
                             }).finally(function () {
                                 vm.saving = false;
                                 vm.loading = false;
