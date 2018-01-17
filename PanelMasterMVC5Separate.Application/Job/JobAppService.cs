@@ -94,7 +94,7 @@ namespace PanelMasterMVC5Separate.Vehicle
                 importDto.Year = query1.Year;
                 importDto.RegistrationNumber = query1.RegistrationNumber;
                 importDto.VinNumber = query1.VinNumber;
-                importDto.UnderWaranty = query1.UnderWaranty;
+                //importDto.UnderWaranty = query1.UnderWaranty;
                 importDto.IsSpecialisedType = query1.IsSpecialisedType;
                 importDto.IsLuxury = query1.IsLuxury;
                 importDto.VehicleOtherInformation = query1.OtherInformation;
@@ -240,7 +240,7 @@ namespace PanelMasterMVC5Separate.Vehicle
                 Year = clientDto.Year,
                 RegistrationNumber = clientDto.RegistrationNumber,
                 VinNumber = clientDto.VinNumber,
-                UnderWaranty = clientDto.UnderWaranty,
+                //UnderWaranty = clientDto.UnderWaranty,
                 IsSpecialisedType = clientDto.IsSpecialisedType,
                 IsLuxury = clientDto.IsLuxury,
                 OtherInformation = clientDto.VehicleOtherInformation,
@@ -273,7 +273,8 @@ namespace PanelMasterMVC5Separate.Vehicle
                 PartsBuyerID = clientDto.PartsBuyerID,
                 KeyAccountManagerID = clientDto.KeyAccountManagerID,
                 EstimatorID = clientDto.EstimatorID,
-                New_Comeback = clientDto.New_Comeback
+                New_Comeback = clientDto.New_Comeback,
+                UnderWaranty = clientDto.UnderWaranty
             };
 
             id = _jobsRepository.InsertOrUpdateAndGetId(jobs);

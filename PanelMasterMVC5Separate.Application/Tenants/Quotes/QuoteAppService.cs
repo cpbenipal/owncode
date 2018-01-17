@@ -141,7 +141,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
                     output.RegNo = vehicle.RegistrationNumber;
                     output.IsSpecialisedType = vehicle.IsSpecialisedType;
                     output.IsLuxury = vehicle.IsLuxury;
-                    output.UnderWaranty = vehicle.UnderWaranty;
+                    output.UnderWaranty = VehicleID.UnderWaranty;
                     output.PaintTypeId = vehicle.PaintTypeId;
                     output.vehicleId = VehicleID.VehicleID;
                     //output = vehicle.MapTo<QuoteMasterDto>();
@@ -160,7 +160,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
             output.RegNo = vehicle.RegistrationNumber;
             output.IsSpecialisedType = vehicle.IsSpecialisedType;
             output.IsLuxury = vehicle.IsLuxury;
-            output.UnderWaranty = vehicle.UnderWaranty;
+            output.UnderWaranty = VehicleID.UnderWaranty;
             output.PaintTypeId = vehicle.PaintTypeId;
             return output;
         }
@@ -197,13 +197,17 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
         public int CreateOrUpdateQuotation(QuoteMasterToDto vehicle)
         {
             try
-            {
+            {               
                 var output = _vehiclerrepository.Get(vehicle.vehicleId);
                 output.IsSpecialisedType = vehicle.IsSpecialisedType;
                 output.IsLuxury = vehicle.IsLuxury;
-                output.UnderWaranty = vehicle.UnderWaranty;
+                //output.UnderWaranty = vehicle.UnderWaranty;
                 output.PaintTypeId = vehicle.PaintTypeId;
                 _vehiclerrepository.InsertOrUpdate(output);
+
+                var update_job = _jobsrrepository.Get(vehicle.JobId);
+                update_job.UnderWaranty = vehicle.UnderWaranty;
+                _jobsrrepository.InsertOrUpdate(update_job);
 
                 vehicle.QuoteStatusID = 1; // Default Status : Quote Preparation                          
                 var query = vehicle.MapTo<QuoteMaster>();

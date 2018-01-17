@@ -271,6 +271,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                 JobStatusID = thisJobStatus.Id,
                 JobStatusDesc = thisJobStatus.Description,
                 New_Comeback = thisJob.New_Comeback,
+                UnderWaranty = thisJob.UnderWaranty,
                 BranchEntryMethod = thisJob.BranchEntryMethod
                
             }).MapTo<BranchClaimListDto>();

@@ -33,7 +33,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
         public string VinNumber { get; set; }
         public string Colour { get; set; }
         public string Year { get; set; }
-        public string UnderWaranty { get; set; }
+        public bool UnderWaranty { get; set; }
         public bool New_Comeback { get; set; }
         public string BranchEntryMethod { get; set; }
 
