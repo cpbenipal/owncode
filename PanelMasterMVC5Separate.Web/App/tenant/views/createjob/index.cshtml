@@ -313,18 +313,7 @@
                                     <span class="help-block"> </span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3">
-                                    Whilst your vehicle is with us for this particular repair, is there other damage (unrelated to this claim) that you would like us to repair?
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4"> 
-                                    <select required class="form-control"  id="IsUnrelatedDamangeReason" name="isunrelateddamangereason" ng-model="vm.client.isUnrelatedDamangeReason"
-                                            ng-options="opt.id as opt.name for opt in contactAfterServiceList">
-                                        <option value="">@L("SelectOne")</option>
-                                    </select>
-                                </div>
-                            </div>
+                            
                             <div class="form-group">
                                 <label class="control-label col-md-3">
                                     Branch entry method
@@ -350,7 +339,19 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">
-                                    Other Information
+                                    Whilst your vehicle is with us for this particular repair, is there other damage (unrelated to this claim) that you would like us to repair?
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    <select required class="form-control" id="IsUnrelatedDamangeReason" name="isunrelateddamangereason" ng-model="vm.client.isUnrelatedDamangeReason"
+                                            ng-options="opt.id as opt.name for opt in contactAfterServiceList">
+                                        <option value="">@L("SelectOne")</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Unrelated Damage Information
                                 </label>
                                 <div class="col-md-4">
                                     <textarea ng-model="vm.client.repairOtherInformation" class="form-control" rows="3"></textarea>

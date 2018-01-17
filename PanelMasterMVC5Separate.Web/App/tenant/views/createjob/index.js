@@ -164,7 +164,7 @@
                         if (isConfirmed) {
                             jobService.createNewJob($.extend({ filter: vm.client }, vm.client)).then(function () {
                                 abp.notify.info(app.localize('SavedSuccessfully'));
-                                window.location.href = "#!/tenant/jobdetails";
+                                window.location.href = "#!/tenant/createjob";
                             }).finally(function () {
                                 vm.saving = false;
                                 vm.loading = false;
