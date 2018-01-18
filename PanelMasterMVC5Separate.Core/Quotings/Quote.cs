@@ -134,5 +134,7 @@ namespace PanelMasterMVC5Separate.Quotings
         public virtual decimal SARate { get; set; }
         public virtual bool NoTaxVat { get; set; }
         public virtual bool IsCurrent { get; set; }
+
+        public virtual bool IsCompleted { get; set; }
     }
 }
