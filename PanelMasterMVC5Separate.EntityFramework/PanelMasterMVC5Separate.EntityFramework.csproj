@@ -148,33 +148,33 @@
     <Compile Include="EntityFramework\IndexInitializer.cs" />
     <Compile Include="EntityFramework\PanelMasterMVC5SeparateDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\PanelMasterMVC5SeparateRepositoryBase.cs" />
-    <Compile Include="Migrations\201712150622586_1.cs" />
-    <Compile Include="Migrations\201712150622586_1.Designer.cs">
-      <DependentUpon>201712150622586_1.cs</DependentUpon>
+    <Compile Include="Migrations\201801150934407_1.cs" />
+    <Compile Include="Migrations\201801150934407_1.Designer.cs">
+      <DependentUpon>201801150934407_1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712150845452_NewQuote1.cs" />
-    <Compile Include="Migrations\201712150845452_NewQuote1.Designer.cs">
-      <DependentUpon>201712150845452_NewQuote1.cs</DependentUpon>
+    <Compile Include="Migrations\201801151104324_2.cs" />
+    <Compile Include="Migrations\201801151104324_2.Designer.cs">
+      <DependentUpon>201801151104324_2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712180915520_quote.cs" />
-    <Compile Include="Migrations\201712180915520_quote.Designer.cs">
-      <DependentUpon>201712180915520_quote.cs</DependentUpon>
+    <Compile Include="Migrations\201801151125441_3.cs" />
+    <Compile Include="Migrations\201801151125441_3.Designer.cs">
+      <DependentUpon>201801151125441_3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712280345497_addnotaxvalparameter.cs" />
-    <Compile Include="Migrations\201712280345497_addnotaxvalparameter.Designer.cs">
-      <DependentUpon>201712280345497_addnotaxvalparameter.cs</DependentUpon>
+    <Compile Include="Migrations\201801151205191_4.cs" />
+    <Compile Include="Migrations\201801151205191_4.Designer.cs">
+      <DependentUpon>201801151205191_4.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801060655456_ChangeQdetail.cs" />
-    <Compile Include="Migrations\201801060655456_ChangeQdetail.Designer.cs">
-      <DependentUpon>201801060655456_ChangeQdetail.cs</DependentUpon>
+    <Compile Include="Migrations\201801161357285_5.cs" />
+    <Compile Include="Migrations\201801161357285_5.Designer.cs">
+      <DependentUpon>201801161357285_5.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801100526474_ChangeStatusColumn.cs" />
-    <Compile Include="Migrations\201801100526474_ChangeStatusColumn.Designer.cs">
-      <DependentUpon>201801100526474_ChangeStatusColumn.cs</DependentUpon>
+    <Compile Include="Migrations\201801170740193_6.cs" />
+    <Compile Include="Migrations\201801170740193_6.Designer.cs">
+      <DependentUpon>201801170740193_6.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801101750361_CalculatedVals.cs" />
-    <Compile Include="Migrations\201801101750361_CalculatedVals.Designer.cs">
-      <DependentUpon>201801101750361_CalculatedVals.cs</DependentUpon>
+    <Compile Include="Migrations\201801170838085_7.cs" />
+    <Compile Include="Migrations\201801170838085_7.Designer.cs">
+      <DependentUpon>201801170838085_7.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201801160829226_AddedIsCompletedFieldtoQuoteDetails.cs" />
     <Compile Include="Migrations\201801160829226_AddedIsCompletedFieldtoQuoteDetails.Designer.cs">
@@ -288,26 +288,26 @@
     <Folder Include="bin\Release\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712150622586_1.resx">
-      <DependentUpon>201712150622586_1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801150934407_1.resx">
+      <DependentUpon>201801150934407_1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712150845452_NewQuote1.resx">
-      <DependentUpon>201712150845452_NewQuote1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801151104324_2.resx">
+      <DependentUpon>201801151104324_2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712180915520_quote.resx">
-      <DependentUpon>201712180915520_quote.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801151125441_3.resx">
+      <DependentUpon>201801151125441_3.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712280345497_addnotaxvalparameter.resx">
-      <DependentUpon>201712280345497_addnotaxvalparameter.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801151205191_4.resx">
+      <DependentUpon>201801151205191_4.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801060655456_ChangeQdetail.resx">
-      <DependentUpon>201801060655456_ChangeQdetail.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801161357285_5.resx">
+      <DependentUpon>201801161357285_5.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801100526474_ChangeStatusColumn.resx">
-      <DependentUpon>201801100526474_ChangeStatusColumn.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801170740193_6.resx">
+      <DependentUpon>201801170740193_6.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801101750361_CalculatedVals.resx">
-      <DependentUpon>201801101750361_CalculatedVals.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801170838085_7.resx">
+      <DependentUpon>201801170838085_7.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801160829226_AddedIsCompletedFieldtoQuoteDetails.resx">
       <DependentUpon>201801160829226_AddedIsCompletedFieldtoQuoteDetails.cs</DependentUpon>

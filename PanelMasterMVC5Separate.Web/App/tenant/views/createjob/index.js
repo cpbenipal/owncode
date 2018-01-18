@@ -116,6 +116,21 @@
                 });
             };
 
+            $scope.NewComebackList = []; 
+            vm.NewComeback = function () {
+                $scope.NewComebackList.pop();
+                $scope.NewComebackList.push({
+                    name: "Yes",
+                    id: true
+                });
+                $scope.NewComebackList.push({
+                    name: "No",
+                    id: false
+                });
+            };
+
+            
+
             $scope.BrokerList = []; //list of Brokers
             vm.getBroker = function () {
                 $scope.BrokerList.pop();
@@ -136,13 +151,23 @@
             $('#form_wizard_1 .button-submit').click(function () {
                 vm.loading = true;
                 vm.saving = true;
+                
+                vm.client.JobStatusID = 1;
+                vm.client.ClaimHandlerID = 0;
+                vm.client.PartsBuyerID = 0;
+                vm.client.KeyAccountManagerID = 0;
+                vm.client.EstimatorID = 0;
+
                 abp.message.confirm(
                     app.localize('AreYouSure', "Submit"),
                     function (isConfirmed) {
                         if (isConfirmed) {
-                            jobService.createNewJob($.extend({ filter: vm.client }, vm.client)).then(function () {
+                            jobService.createNewJob($.extend({ filter: vm.client }, vm.client)).then(function (job_obj) {
+                              
                                 abp.notify.info(app.localize('SavedSuccessfully'));
-                                window.location.href = "#!/tenant/jobdetails";
+                                window.location.href = "#!/tenant/job_landing/job_information/" + job_obj.data;
+                                //window.location.href = "#!/tenant/jobdetails";
+                              
                             }).finally(function () {
                                 vm.saving = false;
                                 vm.loading = false;
@@ -194,6 +219,7 @@
             vm.getBroker();
             vm.getPaints();
             vm.contactAfterService();
+            vm.NewComeback();
             vm.communicationType();
             vm.getTitles();
         }]);

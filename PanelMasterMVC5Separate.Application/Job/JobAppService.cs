@@ -94,7 +94,7 @@ namespace PanelMasterMVC5Separate.Vehicle
                 importDto.Year = query1.Year;
                 importDto.RegistrationNumber = query1.RegistrationNumber;
                 importDto.VinNumber = query1.VinNumber;
-                importDto.UnderWaranty = query1.UnderWaranty;
+                //importDto.UnderWaranty = query1.UnderWaranty;
                 importDto.IsSpecialisedType = query1.IsSpecialisedType;
                 importDto.IsLuxury = query1.IsLuxury;
                 importDto.VehicleOtherInformation = query1.OtherInformation;
@@ -210,7 +210,7 @@ namespace PanelMasterMVC5Separate.Vehicle
             await _jobsRepository.InsertAsync(job);
         }
 
-        public void CreateNewJob(Accident clientDto)
+        public int CreateNewJob(Accident clientDto)
         {
             //var a = await _brokerRepository.FirstOrDefaultAsync(1);
             var clients = new Client()
@@ -240,7 +240,7 @@ namespace PanelMasterMVC5Separate.Vehicle
                 Year = clientDto.Year,
                 RegistrationNumber = clientDto.RegistrationNumber,
                 VinNumber = clientDto.VinNumber,
-                UnderWaranty = clientDto.UnderWaranty,
+                //UnderWaranty = clientDto.UnderWaranty,
                 IsSpecialisedType = clientDto.IsSpecialisedType,
                 IsLuxury = clientDto.IsLuxury,
                 OtherInformation = clientDto.VehicleOtherInformation,
@@ -266,11 +266,19 @@ namespace PanelMasterMVC5Separate.Vehicle
                 // UnderWaranty = clientDto.UnderWaranty ? "Yes": "No",
                 OtherInformation = clientDto.RepairOtherInformation,
                 VehicleID = vehicleId,
-                TenantID = _abpSession.TenantId
+                TenantID = _abpSession.TenantId,
+                CSAID = clientDto.CSAID,
+                JobStatusID = clientDto.JobStatusID,
+                ClaimHandlerID = clientDto.ClaimHandlerID,
+                PartsBuyerID = clientDto.PartsBuyerID,
+                KeyAccountManagerID = clientDto.KeyAccountManagerID,
+                EstimatorID = clientDto.EstimatorID,
+                New_Comeback = clientDto.New_Comeback,
+                UnderWaranty = clientDto.UnderWaranty
             };
 
             id = _jobsRepository.InsertOrUpdateAndGetId(jobs);
-
+           
             var quote = new VehicleInsurance()
             {
                 BrokerId = clientDto.BrokerId,
@@ -282,6 +290,8 @@ namespace PanelMasterMVC5Separate.Vehicle
             };
 
             _vehicleinsurancerepository.InsertOrUpdate(quote);
+
+            return id;
         }
 
         private int GetCountryIdByCode()

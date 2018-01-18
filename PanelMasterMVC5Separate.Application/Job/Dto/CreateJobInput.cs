@@ -11,22 +11,25 @@ namespace PanelMasterMVC5Separate.Job.Dto
     [AutoMapTo(typeof(Jobs))]
     public class CreateJobInput
     {
+        public int TenantID { get; set; }
         public int ClientID { get; set; }
-        public int ManufactureID { get; set; }
-        public int ModelID { get; set; }
+        public int VehicleID { get; set; }
         public int InsuranceID { get; set; }
         public int BrokerID { get; set; }
-        public int BranchID { get; set; }
-        public int FinancialID { get; set; }
         public int CSAID { get; set; }
-        public int ProductiveStaffID { get; set; }       
-        public int ClaimEventID { get; set; }
+        public string New_Comeback { get; set; }
+       
+        public int JobStatusID { get; set; }       
+        public int ClaimHandlerID { get; set; }       
+        public int PartsBuyerID { get; set; }
+        public int KeyAccountManagerID { get; set; }
+        public int EstimatorID { get; set; }
 
         public string RegNo { get; set; }
         public string VinNumber { get; set; }
         public string Colour { get; set; }
         public string Year { get; set; }
         public string UnderWaranty { get; set; }
-        public bool New_Comeback { get; set; }
+        
     }
 }

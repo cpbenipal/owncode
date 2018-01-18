@@ -95,10 +95,9 @@ namespace PanelMasterMVC5Separate.Vehicle
         [StringLength(4)]
         public virtual string Year { get; set; }
         public virtual string RegistrationNumber { get; set; }
-        public virtual string VinNumber { get; set; }
-        public virtual bool UnderWaranty { get; set; }
+        public virtual string VinNumber { get; set; }        
         public virtual bool IsSpecialisedType { get; set; }
-        public virtual bool IsLuxury { get; set; }
+        public virtual bool IsLuxury { get; set; }       
         public virtual string OtherInformation { get; set; }
     }
 

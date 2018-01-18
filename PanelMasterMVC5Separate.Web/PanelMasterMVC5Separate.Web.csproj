@@ -584,7 +584,6 @@
     <Content Include="App\tenant\views\EditJob\index.js" />
     <Content Include="App\tenant\views\EditVendor\index.js" />
     <Content Include="App\tenant\views\financial_information\index.js" />
-    <Content Include="App\tenant\views\insurance_information\index.js" />
     <Content Include="App\tenant\views\Brokers\index.js" />
     <Content Include="App\tenant\views\invoiced_values\index.js" />
     <Content Include="App\tenant\views\JobStatuses\createOrEditModal.js" />
@@ -969,9 +968,6 @@
     <Content Include="assets\global\plugins\bootstrap\css\bootstrap.min.css" />
     <Content Include="assets\global\plugins\bootstrap\js\bootstrap.js" />
     <Content Include="assets\global\plugins\bootstrap\js\bootstrap.min.js" />
-    <Content Include="assets\global\plugins\counterup\jquery.counterup.js" />
-    <Content Include="assets\global\plugins\counterup\jquery.counterup.min.js" />
-    <Content Include="assets\global\plugins\counterup\jquery.waypoints.min.js" />
     <Content Include="assets\global\plugins\excanvas.min.js" />
     <Content Include="assets\global\plugins\font-awesome\css\font-awesome.css" />
     <Content Include="assets\global\plugins\font-awesome\css\font-awesome.min.css" />
@@ -5822,7 +5818,6 @@
     <Content Include="metronic\assets\global\plugins\icheck\demo\css\montserrat-regular.svg" />
     <Content Include="metronic\assets\global\plugins\icheck\demo\css\normalize.css" />
     <Content Include="metronic\assets\global\plugins\icheck\demo\index.html" />
-    <Content Include="metronic\assets\global\plugins\icheck\demo\js\custom.js" />
     <Content Include="metronic\assets\global\plugins\icheck\demo\js\custom.min.js" />
     <Content Include="metronic\assets\global\plugins\icheck\demo\js\jquery.js" />
     <Content Include="metronic\assets\global\plugins\icheck\demo\js\zepto.js" />
@@ -7689,8 +7684,6 @@
     <Content Include="App\tenant\views\ViewQuotations\index.cshtml" />
     <Content Include="App\tenant\views\ViewQuotations\createOrEditModal.cshtml" />
     <Content Include="App\tenant\views\reporting\index.cshtml" />
-    <Content Include="assets\global\plugins\counterup\LICENSE" />
-    <Content Include="assets\global\plugins\counterup\README.md" />
     <Content Include="App\tenant\views\towing\index.cshtml" />
     <Content Include="App\tenant\views\towoperators\createOrEditModal.cshtml" />
     <Content Include="App\tenant\views\towoperators\index.cshtml" />
@@ -8714,6 +8707,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\common\views\functions\" />
+    <Folder Include="assets\global\plugins\counterup\" />
     <Folder Include="assets\pages\img\" />
     <Folder Include="libs\jquery-jtable\dev\" />
     <Folder Include="libs\jquery-jtable\lib\" />

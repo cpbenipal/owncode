@@ -23,6 +23,11 @@ using PanelMasterMVC5Separate.Tenants.Brokers.Dto;
 using Abp.Runtime.Session;
 using PanelMasterMVC5Separate.Vendors;
 using PanelMasterMVC5Separate.MultiTenancy;
+using PanelMasterMVC5Separate.Authorization.Claim;
+using Abp.Authorization.Users;
+using PanelMasterMVC5Separate.RolesCategories;
+using PanelMasterMVC5Separate.Authorization.Roles;
+using PanelMasterMVC5Separate.Authorization.Roles.Dto;
 
 namespace PanelMasterMVC5Separate.Tenants.Claim
 {
@@ -47,12 +52,21 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         private readonly IRepository<TowSubOperator> _towsuboperatorrepositry;
         private readonly IRepository<TenantProfile> _TenantProfile;
         private readonly IRepository<Countries> _countryRepository;
+
+        private readonly IRepository<User, long> _userRepository;
+        private readonly IRepository<UserRole, long> _userRoleRepository;
+        private readonly IRepository<RolesCategory> _rolesCategoryRepository;
+        private readonly RoleManager _roleManager;
+
+
         public BranchClaimAppService(IAbpSession abpSession, IClaimsListExcelExporter claimListExcelExporter, IRepository<Jobs> claimRepository,
                                      IRepository<BrVehicle> brVehicleRepository, IRepository<Client> clientRepository, IRepository<InsurerMaster> InsuranceRepository,
                                      IRepository<VehicleMake> manufactureRepository, IRepository<BrokerMaster> brokerRepository,
                                      IRepository<VehicleModels> vehicleModelRepository, IRepository<Jobstatus> jobstatusRepository, IRepository<JobstatusMask> jobstatusmaskRepository,
                                      IRepository<JobstatusTenant> jobstatustenantRepository, IRepository<TowOperator> towoperatorrepository,
-                                     IRepository<TenantProfile> tenantprofile, IRepository<Countries> countryRepository, IRepository<TowSubOperator> towsuboperatorrepositry)
+                                     IRepository<TenantProfile> tenantprofile, IRepository<Countries> countryRepository, IRepository<TowSubOperator> towsuboperatorrepositry,
+                                     IRepository<User, long> userRepository, IRepository<UserRole, long> userRoleRepository, IRepository<RolesCategory> rolesCategoryRepository,
+                                     RoleManager roleManager)
         {
             _abpSession = abpSession;
             _claimListExcelExporter = claimListExcelExporter;
@@ -70,6 +84,11 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             _towsuboperatorrepositry = towsuboperatorrepositry;
             _TenantProfile = tenantprofile;
             _countryRepository = countryRepository;
+
+            _userRepository = userRepository;
+            _userRoleRepository = userRoleRepository;
+            _rolesCategoryRepository = rolesCategoryRepository;
+            _roleManager = roleManager;
         }
         public ListResultDto<Brokers.Dto.CountriesDto> GetCountry()
         {
@@ -118,6 +137,32 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             return new ListResultDto<BranchClaimListDto>(ObjectMapper.Map<List<BranchClaimListDto>>(query));
 
         }
+
+        public ListResultDto<RoleCategoriesDto> GetRoles()
+        {
+            var user = _userRepository.GetAll().ToList();
+            var userRoles = _userRoleRepository.GetAll().ToList();
+            var rolesCategory = _rolesCategoryRepository.GetAll().ToList();
+            var roles = _roleManager.Roles.ToList();
+
+            var query = (from u in user
+                         join ur in userRoles on u.Id equals ur.UserId
+                         join r in roles on ur.RoleId equals r.Id
+                         join rc in rolesCategory on r.RoleCategoryID equals rc.Id
+                         where u.TenantId == _abpSession.TenantId
+
+                         select new RoleCategoriesDto
+                         {
+                             ID = Convert.ToInt16(u.Id),
+                             Description = u.Name,
+                             RolesCategoryID = rc.Id
+                         }).ToList();
+
+            return new ListResultDto<RoleCategoriesDto>(ObjectMapper.Map<List<RoleCategoriesDto>>(query));
+        }
+
+
+
         public async Task<FileDto> GetClaimsToExcel()
         {
             var claims = await _claimRepository.GetAll().Where(p => p.TenantID == _abpSession.TenantId).ToListAsync();
@@ -187,8 +232,15 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
             //Get Make/Manufacture by Id
             var thisMake = _manufactureRepository
-                .GetAll().Where(m => m.Id == thisVeh.ModelId)
+                .GetAll().Where(m => m.Id == thisVeh.MakeId)
                 .FirstOrDefault();
+
+            //Get Job Status
+
+            var thisJobStatus = _jobstatusRepository
+                .GetAll().Where(js => js.Id == thisJob.JobStatusID)
+                .FirstOrDefault();
+
 
             var finalQuery = (new BranchClaimListDto
             {
@@ -214,8 +266,14 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                 Manufacture = thisMake.Description,
 
                 ModelID = thisModel.Id,
-                Model = thisModel.Model
+                Model = thisModel.Model,
 
+                JobStatusID = thisJobStatus.Id,
+                JobStatusDesc = thisJobStatus.Description,
+                New_Comeback = thisJob.New_Comeback,
+                UnderWaranty = thisJob.UnderWaranty,
+                BranchEntryMethod = thisJob.BranchEntryMethod
+               
             }).MapTo<BranchClaimListDto>();
 
             return finalQuery;

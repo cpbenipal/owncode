@@ -30,56 +30,56 @@
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Job Status</label>
                                             <div class="col-md-4">
-                                                <select required class="form-control" ng-options="" ng-model="">
+                                                <select data-ng-options="source.name for source in jobStatusList" data-ng-model="selectedJobStatus"  class="form-control">
                                                     <option value="">--Select Status--</option>
-                                                </select>
+                                                </select>                                              
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Tow/DriveIN</label>
                                             <div class="col-md-4">
-                                                <select required class="form-control" ng-options="" ng-model="">
-                                                    <option value="">--Select--</option>
+                                                <select data-ng-options="source.name for source in branchEntryMethodList" data-ng-model="selectedBranchEntry" class="form-control">
+                                                    <option value="">--Select Entry Method--</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">New/Warantee</label>
                                             <div class="col-md-4">
-                                                <select required class="form-control" ng-options="" ng-model="">
-                                                    <option value="">--Select--</option>
+                                                <select data-ng-options="source.name for source in new_ComebackList" data-ng-model="selectedNew_Comeback" class="form-control">
+                                                    <option value="">--Select Entry Method--</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Claims Handler</label>
                                             <div class="col-md-4">
-                                                <select required class="form-control" ng-options="" ng-model="">
-                                                    <option value="">--Select--</option>
-                                                </select>
+                                                <select data-ng-options="source.name for source in claimHandlerList" data-ng-model="selectedClaimHandler" class="form-control">
+                                                    <option value="">@L("SelectOne")</option>
+                                                </select> 
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Service Advisor</label>
                                             <div class="col-md-4">
-                                                <select required class="form-control" ng-options="" ng-model="">
-                                                    <option value="">--Select--</option>
+                                                <select data-ng-options="source.name for source in CSAList" data-ng-model="selectedCSA" class="form-control">
+                                                    <option value="">@L("SelectOne")</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Estimator</label>
                                             <div class="col-md-4">
-                                                <select required class="form-control" ng-options="" ng-model="">
-                                                    <option value="">--Select--</option>
+                                                <select data-ng-options="source.name for source in EstimatorList" data-ng-model="selectedEstimator" class="form-control">
+                                                    <option value="">@L("SelectOne")</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Parts Buyer</label>
                                             <div class="col-md-4">
-                                                <select required class="form-control" ng-options="" ng-model="">
-                                                    <option value="">--Select--</option>
+                                                <select data-ng-options="source.name for source in PartsBuyerList" data-ng-model="selectedPartsBuyer" class="form-control">
+                                                    <option value="">@L("SelectOne")</option>
                                                 </select>
                                             </div>
                                         </div>

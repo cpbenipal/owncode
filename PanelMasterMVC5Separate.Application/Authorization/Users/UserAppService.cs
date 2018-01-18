@@ -64,10 +64,10 @@ namespace PanelMasterMVC5Separate.Authorization.Claim
             _userRoleRepository = userRoleRepository;
             _userPolicy = userPolicy;
         }
-
+        
         public async Task<PagedResultDto<UserListDto>> GetUsers(GetUsersInput input)
         {
-            var query = UserManager.Users
+            var query = UserManager.Users                
                 .Include(u => u.Roles)
                 .WhereIf(input.Role.HasValue, u => u.Roles.Any(r => r.RoleId == input.Role.Value))
                 .WhereIf(
@@ -76,7 +76,7 @@ namespace PanelMasterMVC5Separate.Authorization.Claim
                         u.Name.Contains(input.Filter) ||
                         u.Surname.Contains(input.Filter) ||
                         u.UserName.Contains(input.Filter) ||
-                        u.EmailAddress.Contains(input.Filter)
+                        u.EmailAddress.Contains(input.Filter)                        
                 );
 
             if (!input.Permission.IsNullOrWhiteSpace())

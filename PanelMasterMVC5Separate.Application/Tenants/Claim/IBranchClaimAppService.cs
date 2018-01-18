@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using PanelMasterMVC5Separate.Authorization.Roles.Dto;
 using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.Tenants.Brokers.Dto;
 using PanelMasterMVC5Separate.Tenants.Claim.Dto;
@@ -46,5 +47,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
         void AddUpdateTowOperator(TowOperatorMainToDto input);
         TowOperatorMainDto GetMainTowOperator(GetClaimsInput input);
+
+        ListResultDto<RoleCategoriesDto> GetRoles();
     }
 }
