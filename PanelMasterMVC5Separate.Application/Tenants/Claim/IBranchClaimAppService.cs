@@ -49,5 +49,6 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         TowOperatorMainDto GetMainTowOperator(GetClaimsInput input);
 
         ListResultDto<RoleCategoriesDto> GetRoles();
+        ListResultDto<JobStatusDto> GetJobStatuses_1(int jobStatusID);
     }
 }

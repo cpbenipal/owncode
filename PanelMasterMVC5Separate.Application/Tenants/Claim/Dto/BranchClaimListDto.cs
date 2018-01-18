@@ -25,8 +25,13 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
         public int BrokerID { get; set; }
         public int BranchID { get; set; }
         public int FinancialID { get; set; }
-        public int CSAID { get; set; }
-        public int ProductiveStaffID { get; set; }       
+        public int CsaID { get; set; }
+        public int ClaimHandlerID { get; set; }
+        public int EstimatorID { get; set; }
+        public int ProductiveStaffID { get; set; }
+        public int PartsBuyerID { get; set; }
+        public int ShopAllocationID { get; set; }
+
         public int ClaimEventID { get; set; }
 
         public string RegNo { get; set; }
@@ -35,7 +40,15 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
         public string Year { get; set; }
         public bool UnderWaranty { get; set; }
         public bool New_Comeback { get; set; }
+        public bool IsUnrelatedDamageReason { get; set; }
         public string BranchEntryMethod { get; set; }
+        public int ShopAllocation { get; set; }
+        public bool HighPriority { get; set; }
+        public bool Contents { get; set; }
+        public bool JobNotProceeding { get; set; }   
+        public int CurrentKMs { get; set; }
+        public string OtherInformation { get; set; }
+        public string DamageReason { get; set; }
 
         public int JobStatusID { get; set; }
         public string JobStatusDesc { get; set; }

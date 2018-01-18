@@ -58,8 +58,12 @@ namespace PanelMasterMVC5Separate.Claim
         public string DamangeReason { get; set; }
         public string BranchEntryMethod { get; set; }
         public bool IsUnrelatedDamangeReason { get; set; }
-        public string CurrentKMs { get; set; }
+        public int CurrentKMs { get; set; }
         public string OtherInformation { get; set; }
+        public int ShopAllocation { get; set; }
+        public bool HighPriority { get; set; }
+        public bool Contents { get; set; }
+        public bool JobNotProceeding { get; set; }
     }
 
     [Table("tblJobstatus")]

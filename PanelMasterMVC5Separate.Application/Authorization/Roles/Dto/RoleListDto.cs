@@ -27,5 +27,5 @@ namespace PanelMasterMVC5Separate.Authorization.Roles.Dto
         public string Description { get; set; }
         public int? RolesCategoryID { get; set; }
     }
-   
+
 }

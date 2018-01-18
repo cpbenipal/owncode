@@ -42,7 +42,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Exporting
                     AddObjects(
                         sheet, 2, claimListDtos,
                         _ => _.BranchID,
-                        _ => _.CSAID,
+                        _ => _.CsaID,
                         _ => _.Colour
                     );
 

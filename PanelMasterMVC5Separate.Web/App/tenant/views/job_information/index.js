@@ -35,37 +35,67 @@
                         vm.job.VinNumber = result.data.vinNumber;
                         vm.job.Year = result.data.year;
                         vm.job.Colour = result.data.colour;
-                       
+                        vm.job.new_Comeback = result.data.new_Comeback;
+                        vm.job.underWaranty = result.data.underWaranty; 
+                        vm.job.isUnrelatedDamangeReason = result.data.isUnrelatedDamageReason;
+                        vm.job.shopAllocation = result.data.shopAllocation;
+                        vm.job.highPriority = result.data.highPriority;
+                        vm.job.contents = result.data.contents;
+                        vm.job.jobNotProceeding = result.data.jobNotProceeding;
+                        vm.job.currentKMs = result.data.currentKMs;
+                        vm.job.otherInformation = result.data.otherInformation;
+                        vm.job.damageReason = result.data.damageReason;
+                        vm.job.csaID = result.data.csaID;
+                        vm.job.claimHandlerID = result.data.claimHandlerID;
+                        vm.job.estimatorID = result.data.estimatorID;
+                        vm.job.partsBuyerID = result.data.partsBuyerID;
+                        vm.job.shopAllocationID = result.data.shopAllocationID;                        
+                        
+
                         $scope.jobStatusList.push({
                             name: result.data.jobStatusDesc,
                             id: result.data.jobStatusID
                         });
+
+                        jobService.getJobStatuses_1(result.data.jobStatusID).then(function (result) {
+
+                            angular.forEach(result.data.items, function (status_obj, key) {
+                              
+                                $scope.jobStatusList.push({
+                                    name: status_obj.jobstatus,
+                                    id: status_obj.id
+                                });
+
+                            });
+
+                        }).finally(function () {
+                            //vm.loading = false;
+                        });
                         
                         $scope.selectedJobStatus = $scope.jobStatusList[0];
-                       
+                        
                         if (result.data.branchEntryMethod === "D") {                           
                             $scope.branchEntryMethodList = [{ name: "Drive", id: "D" }, { name: "Tow", id: "T" }];
                         } else {
                             $scope.branchEntryMethodList = [{ name: "Tow", id: "T" }, { name: "Drive", id: "D" }];
-                        }
-                        
+                        }                        
                         $scope.selectedBranchEntry = $scope.branchEntryMethodList[0];
 
-                        if (result.data.new_Comeback === "N") {                          
-                            $scope.new_ComebackList = [{ name: "New", id: "N" }, { name: "Waranty/Comeback", id: "C" }];
-                        } else {
-                            $scope.new_ComebackList = [{ name: "Warranty/Comeback", id: "C" }, { name: "New", id: "N" }];
+                   
+                        if (result.data.shopAllocation === 0) {
+                            $scope.shopAllocationMethodList = [{ name: "1", id: "1" }, { name: "2", id: "2" },
+                                { name: "3", id: "3" }, { name: "4", id: "4" }, { name: "5", id: "5" }];
                         }
-                        $scope.selectedNew_Comeback = $scope.new_ComebackList[0];     
                        
                     }).finally(function () {
                         //vm.loading = false;
                     });
+
                 $scope.claimHandlerList = [];
                 $scope.CSAList = [];
                 $scope.EstimatorList = [];
                 $scope.PartsBuyerList = [];
-
+                
                 jobService.getRoles()
                     .then(function (result) {                        
 

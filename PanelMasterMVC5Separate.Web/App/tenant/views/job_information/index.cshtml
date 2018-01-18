@@ -28,110 +28,141 @@
 
                                     <div class="form-body">
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Job Status</label>
+                                            <label class="col-md-2 control-label">Job Status</label>
                                             <div class="col-md-4">
                                                 <select data-ng-options="source.name for source in jobStatusList" data-ng-model="selectedJobStatus"  class="form-control">
                                                     <option value="">--Select Status--</option>
                                                 </select>                                              
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Tow/DriveIN</label>
+
+                                            <label class="col-md-2 control-label">Branch entry method</label>
                                             <div class="col-md-4">
                                                 <select data-ng-options="source.name for source in branchEntryMethodList" data-ng-model="selectedBranchEntry" class="form-control">
                                                     <option value="">--Select Entry Method--</option>
                                                 </select>
                                             </div>
-                                        </div>
+
+                                        </div>                                        
+                                        
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">New/Warantee</label>
+                                            
+                                            <label class="col-md-2 control-label">Customer Service Advisor</label>
                                             <div class="col-md-4">
-                                                <select data-ng-options="source.name for source in new_ComebackList" data-ng-model="selectedNew_Comeback" class="form-control">
-                                                    <option value="">--Select Entry Method--</option>
+                                                <select data-ng-options="source.name for source in CSAList" data-ng-model="selectedCSA" class="form-control">
+                                                    <option value="">@L("SelectOne")</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Claims Handler</label>
+
+                                            <label class="col-md-2 control-label">Claims Handler</label>
                                             <div class="col-md-4">
                                                 <select data-ng-options="source.name for source in claimHandlerList" data-ng-model="selectedClaimHandler" class="form-control">
                                                     <option value="">@L("SelectOne")</option>
                                                 </select> 
                                             </div>
                                         </div>
+                                       
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Service Advisor</label>
-                                            <div class="col-md-4">
-                                                <select data-ng-options="source.name for source in CSAList" data-ng-model="selectedCSA" class="form-control">
-                                                    <option value="">@L("SelectOne")</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Estimator</label>
+                                            
+                                            <label class="col-md-2 control-label">Estimator</label>
                                             <div class="col-md-4">
                                                 <select data-ng-options="source.name for source in EstimatorList" data-ng-model="selectedEstimator" class="form-control">
                                                     <option value="">@L("SelectOne")</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Parts Buyer</label>
+                                            <label class="col-md-2 control-label">Parts Buyer</label>
                                             <div class="col-md-4">
                                                 <select data-ng-options="source.name for source in PartsBuyerList" data-ng-model="selectedPartsBuyer" class="form-control">
                                                     <option value="">@L("SelectOne")</option>
                                                 </select>
                                             </div>
+
                                         </div>
+                                        
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Shop Allocation</label>
+
+                                            <label class="col-md-2 control-label">Shop Allocation</label>
                                             <div class="col-md-4">
-                                                <select required class="form-control" ng-options="" ng-model="">
-                                                    <option value="">--Select--</option>
+                                                <select data-ng-options="source.name for source in shopAllocationMethodList" data-ng-model="Select_ShopAllocation" class="form-control">
+                                                    <option value="">--Select Entry Method--</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Accident Details</label>
+                                            <label class="col-md-2 control-label">Accident Details</label>
                                             <div class="col-md-4">
-                                                <textarea cols="2" rows="3" class="form-control input-circle"></textarea>
+                                                <input type="text" ng-model="vm.job.damageReason" class="form-control input-circle" />
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Accident Area</label>
-                                            <div class="col-md-4">
-                                                <textarea cols="2" rows="3" class="form-control input-circle"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Other Repairs</label>
-                                            <div class="col-md-4">
-                                                <textarea cols="2" rows="3" class="form-control input-circle"></textarea>
-                                            </div>
+
                                         </div>
                                        
+                                      
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">High Prority</label>
+                                            <label class="col-md-2 control-label">Current KM's</label>
                                             <div class="col-md-4">
-                                                <div class="input-group" style="width: 10% !important;">
-                                                    <input type="checkbox" class="form-control" />
-                                                </div>
+                                                <input type="text" ng-model="vm.job.currentKMs" class="form-control input-circle" />
                                             </div>
+
+                                            <label class="col-md-2 control-label">Other Information</label>
+                                            <div class="col-md-4">
+                                                <input type="text" ng-model="vm.job.otherInformation" class="form-control input-circle" />
+                                            </div>
+                                            
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Contents bag onsite</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group" style="width: 10% !important;">
-                                                    <input type="checkbox" class="form-control" />
+                                            <label class="col-md-2 control-label">Rectifivation | Comeback | Warantee</label>
+                                            <div class="col-md-2">
+                                                <div class="input-group" style="width: 20% !important;">
+                                                    <input type="checkbox" ng-model="vm.job.new_Comeback" value="new_Comeback" ng-checked="vm.job.new_Comeback=='true'" class="form-control" />
                                                 </div>
                                             </div>
+                                            <label class="col-md-2 control-label">Under Manufacture warantee?</label>
+                                            <div class="col-md-2">
+                                                <div class="input-group" style="width: 20% !important;">
+                                                    <input type="checkbox" ng-model="vm.job.underWaranty" value="underWaranty" ng-checked="vm.job.underWaranty=='true''" class="form-control" />
+                                                </div>
+                                            </div>
+
+                                            <label class="col-md-2 control-label">Other Repairs Required|Upsell?</label>
+                                            <div class="col-md-2">
+                                                <div class="input-group" style="width: 20% !important;">
+                                                    <input type="checkbox" ng-model="vm.job.isUnrelatedDamangeReason" value="isUnrelatedDamangeReason" ng-checked="vm.job.isUnrelatedDamangeReason=='true'" class="form-control" />
+                                                </div>
+                                            </div>
+
+                                            <!--<div class="col-md-4">
+                                                <select data-ng-options="source.name for source in new_ComebackList" data-ng-model="selectedNew_Comeback" class="form-control">
+                                                    <option value="">--Select Entry Method--</option>
+                                                </select>
+                                            </div>-->
                                         </div>
 
+                                        <div class="form-group">                                            
+                                            <label class="col-md-2 control-label">Job not proceeding</label>
+                                            <div class="col-md-2">
+                                                <div class="input-group" style="width: 20% !important;">
+                                                    <input type="checkbox" ng-model="vm.job.jobNotProceeding" value="jobNotProceeding" ng-checked="vm.job.jobNotProceeding=='true'" class="form-control" />
+                                                </div>
+                                            </div>
+
+                                            <label class="col-md-2 control-label">High Prority</label>
+                                            <div class="col-md-2">
+                                                <div class="input-group" style="width: 20% !important;">
+                                                    <input type="checkbox" ng-model="vm.job.highPriority" value="highPriority" ng-checked="vm.job.highPriority=='true'" class="form-control" />
+                                                </div>
+                                            </div>
+
+                                            <label class="col-md-2 control-label">Contents bag onsite</label>
+                                            <div class="col-md-2">
+                                                <div class="input-group" style="width: 20% !important;">
+                                                    <input type="checkbox" ng-model="vm.job.contents" value="contents" ng-checked="vm.job.contents=='true'" class="form-control" />
+                                                </div>
+                                            </div>                                            
+
+                                        </div>
+                                       
                                     </div>
                                     <div class="form-actions">
                                         <div class="row">
-                                            <div class="col-md-offset-3 col-md-9">
+                                            <div class="col-md-offset-10 col-md-8">
                                                 <button type="button" class="btn btn-circle green button-submit">Submit</button>
                                             </div>
                                         </div>

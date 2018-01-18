@@ -79,7 +79,7 @@ namespace PanelMasterMVC5Separate.Job.Dto
         //   [Required]
         public virtual bool IsUnrelatedDamangeReason { get; set; }
         [Required]
-        public virtual string CurrentKMs { get; set; }
+        public virtual int CurrentKMs { get; set; }
 
         public virtual string RepairOtherInformation { get; set; }
 
