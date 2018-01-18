@@ -211,7 +211,7 @@
     <text name="ProfilePicture_Warn_SizeLimit" value="Picture size must be smalled than 1MB. Please select another file." />
     <text name="ProfilePicture_Warn_FileType" value="You can only select JPG/JPEG/GIF/PNG file. Please select another file." />
     <text name="Dashboard" value="Dashboard" />
-    <text name="Quoting" value="Quoting" />
+    <text name="Quotations" value="Quotations" />
     <text name="PartsOrdering" value="Parts Ordering" />
     <text name="JobDetails" value="Job Details" />
     <text name="NewJob" value="new" />
@@ -675,11 +675,19 @@
     <text name="SystemDefaults" value="System Defaults" />
     <text name="SignOnPlans" value="Signon Plans" />
     <text name="CreateJob" value="Create Job" />
+    <text name="Create" value="Create" />
+    <text name="ManageRepairs" value="Manage Repairs" />
     <text name="UnderManufacturerWarantee" value="Is Vehicle Under Manufacturer Warantee?" />
     <text name="SpecialisedRepair" value="Is this a Specialised Repair?" />
     <text name="IsLuxuryRepair" value="Is this a Luxury/Niche repair?" />
     <text name="StructuralRepairWorkRequired" value="Will there be structural repair work required?" />
     <text name="PaintType" value="Please select Paint Type" />
     <text name="AddnewQuote" value="Add a quote" />
+    <text name="GoodReceived" value="Good Received" />
+    <text name="GeneratePurchaseOrder" value="Purchase Order" />
+    <text name="CreditNotes" value="Credit Notes" />
+    <text name="Financials" value="Financials" />
+    <text name="Invoicing" value="Invoicing" />
+     
   </texts>
 </localizationDictionary>

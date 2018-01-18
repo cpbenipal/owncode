@@ -51,14 +51,24 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string Quote = "Dashboard.Quote";
                 public const string Quotations = "Quote.Quoting";
 
+                public const string ManageRepairs = "Dashboard.ManageRepairs";
+                public const string Repairs = "ManageRepairs.ManageRepairs";
+                public const string CreateRepair = "ManageRepairs.CreateRepair";
+
                 public const string PartsOrdering = "Dashboard.PartsOrdering";
+                public const string GoodReceived = "PartsOrdering.GoodReceived";
+                public const string CreditNotes = "PartsOrdering.CreditNotes";
 
                 public const string Claim = "Dashboard.Claim";
                 public const string JobDetails = "Claim.JobDetails";
                 public const string NewJob = "Claim.NewJob";
                 public const string Productivity = "Dashboard.Productivity";
                 public const string Towing = "Dashboard.Towing";
-                public const string Costing = "Dashboard.Costing";
+
+                public const string Financials = "Dashboard.Financials";
+                public const string Invoicing = "Financials.Invoicing";
+                public const string Costing = "Financials.Costing";
+
                 public const string Settings = "Administration.Settings.Tenant";
 
                 public const string Vendors = "Dashboard.Vendors";
@@ -78,6 +88,7 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string Tenants = "Dashboard.Tenants";
                  
                 public const string CreateJob = "Administration.CreateJob.Tenant";
+                 
                 // public const string VehicleManufacturer = "Dashboard.VehicleManufacturer";                 
             }
         }

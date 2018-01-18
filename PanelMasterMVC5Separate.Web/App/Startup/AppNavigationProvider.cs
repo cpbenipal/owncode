@@ -38,33 +38,96 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     requiredPermissionName: AppPermissions.Pages_Tenant_Dashboard
                     )
                 )
+
                 .AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.Quote,
-                    L("Quoting"),
+                    PageNames.App.Tenant.ManageRepairs,
+                    L("ManageRepairs"),
                     icon: "glyphicon glyphicon-tasks",
                     requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     ).AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.Quotations,
-                    L("ViewQuotations"),
-                    url: "tenant.quoting",
+                    PageNames.App.Tenant.CreateRepair,
+                    L("Create"),
+                    // url: "tenant.quoting",
                     icon: "glyphicon glyphicon-collapse-down",
                     requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     )).AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.Quotations,
-                    L("NewQuotation"),
-                    url: "tenant.viewQuotations",
+                    PageNames.App.Tenant.Repairs,
+                    L("Search"),
+                    //url: "tenant.viewQuotations",
                     icon: "glyphicon glyphicon-search",
                     requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     ))
                 )
+
+                .AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.Quote,
+                    L("Quotations"),
+                    icon: "glyphicon glyphicon-tasks",
+                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
+                    ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.Quotations,
+                    L("Create"),
+                    url: "tenant.viewQuotations",
+                    icon: "glyphicon glyphicon-collapse-down",
+                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
+                    ))
+                    .AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.Quotations,
+                    L("Search"),
+                    url: "tenant.quoting",
+                    icon: "glyphicon glyphicon-search",
+                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
+                    ))
+                )
+
                 .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.PartsOrdering,
                     L("PartsOrdering"),
-                    url: "tenant.partsordering",
-                    icon: "glyphicon glyphicon-link",
+                    icon: "glyphicon glyphicon-tasks",
                     requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
-                    )
-                ).AddItem(new MenuItemDefinition(
+                    ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.PartsOrdering,
+                    L("GeneratePurchaseOrder"),
+                    //url: "tenant.viewQuotations",
+                    icon: "glyphicon glyphicon-collapse-down",
+                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
+                    ))
+                    .AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.GoodReceived,
+                    L("GoodReceived"),
+                    //url: "tenant.quoting",
+                    icon: "glyphicon glyphicon-collapse-down",
+                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
+                    ))
+                    .AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.CreditNotes,
+                    L("CreditNotes"),
+                    url: "tenant.partsordering",
+                    icon: "glyphicon glyphicon-collapse-down",
+                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
+                    ))
+                )
+                .AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.Financials,
+                    L("Financials"),
+                    icon: "glyphicon glyphicon-tasks",
+                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
+                    ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.Invoicing,
+                    L("Invoicing"),
+                    //url: "tenant.viewQuotations",
+                    icon: "glyphicon glyphicon-search",
+                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
+                    ))
+                    .AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.Costing,
+                    L("Costing"),
+                    url: "tenant.costing",
+                    icon: "glyphicon glyphicon-collapse-down",
+                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
+                    ))
+                )
+                .AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Claim,
                     L("JobDetails"),
                     url: "tenant.jobdetails",
@@ -85,15 +148,6 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     icon: "glyphicon glyphicon-book",
                      requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     )
-                ).AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.Costing,
-                    L("Costing"),
-                    url: "tenant.costing",
-                    icon: "glyphicon glyphicon-usd",
-                     requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
-                    )
-
-
                 ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Productivity,
                     @L("Report"),

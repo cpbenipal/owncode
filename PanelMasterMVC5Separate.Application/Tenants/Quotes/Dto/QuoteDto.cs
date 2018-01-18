@@ -10,11 +10,12 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
     public class GetQuoteInput
     {
         public string Filter { get; set; }
+        public int StatusId { get; set; }
     }
-    
+
     public class GetJobInput
     {
-        public int id { get; set; }         
+        public int id { get; set; }
     }
     [AutoMapFrom(typeof(QuoteMaster))]
     public class QuoteMastersDto : FullAuditedEntityDto
@@ -189,39 +190,39 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
     public class QuoteDetailDto : FullAuditedEntity
     {
         public virtual int? tenantid { get; set; }
-       
+
         public virtual int QuoteId { get; set; }
-       
+
         public virtual int quoteStatusId { get; set; }
-       
+
         public virtual string QAction { get; set; }
-       
+
         public virtual string QLocation { get; set; }
-       
+
         public virtual string Description { get; set; }
-       
+
         public virtual bool ToOrder { get; set; }
-       
+
         public virtual bool Outwork { get; set; }
-       
+
         public virtual int PartQty { get; set; }
-       
+
         public virtual decimal PartPrice { get; set; }
-       
+
         public virtual string Part { get; set; }
-       
+
         public virtual decimal PanelHrs { get; set; }
-       
+
         public virtual decimal PanelRate { get; set; }
-       
+
         public virtual decimal PaintHrs { get; set; }
-       
+
         public virtual decimal PaintRate { get; set; }
-       
+
         public virtual decimal SAHrs { get; set; }
-       
+
         public virtual decimal SARate { get; set; }
-       
+
         public virtual bool NoTaxVat { get; set; }
         public virtual bool IsCurrent { get; set; }
 
@@ -230,6 +231,8 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
         public virtual decimal EstimatedRepairDays { get; set; }
 
         public virtual int RepairerEstimatedDays { get; set; }
+
+        public virtual bool IsCompleted { get; set; }
     }
     [AutoMapFrom(typeof(QLocation))]
     public class QLocationDto : FullAuditedEntity

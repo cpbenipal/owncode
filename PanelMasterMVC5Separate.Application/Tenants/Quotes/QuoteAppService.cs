@@ -272,14 +272,16 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
             int Id = Convert.ToInt32(input.Filter);
 
             var quotes = _quotedetailsrepository.GetAll()
-                .Where(p => p.QuoteId == Id && p.IsCurrent.Equals(true) && p.tenantid == _abpSession.TenantId).ToList();
+                .Where(p => p.QuoteId == Id && p.QuoteStatusId == input.StatusId && p.tenantid == _abpSession.TenantId && p.IsDeleted.Equals(false) && p.QuoteStatusId == input.StatusId).ToList();
 
             if (quotes.Count == 0)
             {
                 var aa = new QuoteDetails();
+                aa.QuoteStatusId = 0;
+                aa.IsCompleted = false;
                 aa.QuoteId = Id;
                 aa.QLocation = "";
-                aa.QAction= "";
+                aa.QAction = "";
                 aa.Description = "";
                 aa.Part = "";
                 quotes = new List<QuoteDetails>();
@@ -402,7 +404,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
                                     {
                                         Id = f.Id,
                                         tenantid = _abpSession.TenantId,
-                                        QuoteStatusId = 1,
+                                        QuoteStatusId = f.quoteStatusId,
                                         IsCurrent = true,
                                         Description = f.Description,
                                         QuoteId = f.QuoteId,
@@ -419,19 +421,30 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
                                         PaintRate = f.PaintRate,
                                         SAHrs = f.SAHrs,
                                         SARate = f.SARate,
-                                        NoTaxVat = f.NoTaxVat                                        
+                                        NoTaxVat = f.NoTaxVat,
+                                        IsCompleted = false,
                                     }).ToList();
-
+                int statusId = 0;
                 foreach (QuoteDetails q in finalresults)
                 {
-                    _quotedetailsrepository.InsertOrUpdate(q);
+                    if (q.QuoteStatusId == 2)// move to revision
+                    {
+                        statusId = 3;
+                        q.QuoteStatusId = 3;
+                        _quotedetailsrepository.Insert(q);
+                    }
+                    else
+                    {
+                        statusId = q.QuoteStatusId;
+                        _quotedetailsrepository.InsertOrUpdate(q);
+                    }
                 }
-
 
                 var qmaster = _quotemasterrepository.FirstOrDefault(p => p.Id == QuoteId);
                 qmaster.TotalQuotedValue = result[0].TotalQuotedValue;
                 qmaster.EstimatedRepairDays = result[0].EstimatedRepairDays;
-                qmaster.RepairerEstimatedDays = result[0].RepairerEstimatedDays;                
+                qmaster.RepairerEstimatedDays = result[0].RepairerEstimatedDays;
+                qmaster.QuoteStatusID = statusId;
                 _quotemasterrepository.Update(qmaster);
             }
             catch
@@ -443,6 +456,42 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
         {
             int Id = Convert.ToInt32(input.Filter);
             _quotedetailsrepository.Delete(Id);
+        }
+        public void CompleteQuote(GetQuoteInput input)
+        {
+            int Id = Convert.ToInt32(input.Filter);
+            var Tonewrow = _quotedetailsrepository.GetAll().Where(p => p.QuoteId == Id && p.IsDeleted == false && p.IsCompleted == false && p.QuoteStatusId == 1).ToList();
+            foreach (var qmaster in Tonewrow)
+            {
+                qmaster.IsCompleted = true;
+                qmaster.QuoteStatusId = 1;
+                qmaster.QuoteId = Id;
+                _quotedetailsrepository.Update(qmaster);
+            }
+        }
+        public void CompleteQuoteCallBack(GetQuoteInput input)
+        {
+            int Id = Convert.ToInt32(input.Filter);
+            var Tonewrow = _quotedetailsrepository.GetAll().Where(p => p.QuoteId == Id && p.IsDeleted == false && p.IsCompleted == true && p.QuoteStatusId == 1).ToList();
+            foreach (var qmaster in Tonewrow)
+            {
+                qmaster.IsCompleted = false;
+                qmaster.QuoteStatusId = input.StatusId;
+                _quotedetailsrepository.Insert(qmaster);
+            }
+            var master = _quotemasterrepository.FirstOrDefault(p => p.Id == Id);
+            master.QuoteStatusID = input.StatusId;
+            _quotemasterrepository.Update(master);
+        }
+        public bool IsQuotePreparationCompleted(GetQuoteInput input)
+        {
+            int Id = Convert.ToInt32(input.Filter);
+            return _quotedetailsrepository.FirstOrDefault(p => p.QuoteId == Id && p.IsDeleted == false && p.QuoteStatusId == input.StatusId).IsCompleted;
+        }
+        public int CurrentQuoteStatusId(GetQuoteInput input)
+        {
+            int Id = Convert.ToInt32(input.Filter);
+            return _quotemasterrepository.FirstOrDefault(p => p.Id == Id).QuoteStatusID;
         }
     }
 }

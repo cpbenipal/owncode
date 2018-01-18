@@ -39,5 +39,13 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
 
         void DeleteQuote(GetQuoteInput input);
 
+        void CompleteQuote(GetQuoteInput input);
+
+        void CompleteQuoteCallBack(GetQuoteInput input);
+
+        bool IsQuotePreparationCompleted(GetQuoteInput input);
+
+        int CurrentQuoteStatusId(GetQuoteInput input);
+
     }
 }

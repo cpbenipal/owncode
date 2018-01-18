@@ -129,19 +129,22 @@
                     <div class="portlet-body">
                         <div class="tabbable-line">
                             <ul class="nav nav-tabs">
-                                <li class="active">
-                                    <a ng-href="#!/tenant/quoteheaders/{{Id=vm.job.id}}#overview_1" data-toggle="tab"> Original Quote </a>
+                                <li ng-class="activeTab1">
+                                    <a ng-click="vm.getQuotes(1)" data-toggle="tab">Quote Preparation</a>
                                 </li>
-                                @*<li>
-                                        <a ng-href="#!/tenant/quoteheaders/{{Id=vm.job.id}}#overview_2" data-toggle="tab"> Approved Quote </a>
-                                    </li>
-                                    <li>
-                                        <a ng-href="#!/tenant/quoteheaders/{{Id=vm.job.id}}#overview_3" data-toggle="tab"> Additionals </a>
-                                    </li>*@
-
+                                <li ng-class="activeTab2">
+                                    <a ng-click="vm.getQuotes(2)" data-toggle="tab">Quote Revision</a>
+                                </li>
+                                <li ng-class="activeTab3">
+                                    <a ng-click="vm.getQuotes(3)" data-toggle="tab">Quote Authorised</a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab">Authorised Additionals</a>
+                                </li>
                             </ul>
+
                             <div class="tab-content">
-                                <div class="tab-pane active" id="overview_1">
+                                <div class="tab-pane active">
                                     <div class="table-responsive">
                                         <table id="htmlgrid" class="table table-striped table-hover table-bordered">
                                             <thead>
@@ -196,301 +199,14 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="overview_2">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-hover table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Product Name</th>
-                                                    <th>Price</th>
-                                                    <th>Views</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Metronic - Responsive Admin + Frontend Theme </a>
-                                                    </td>
-                                                    <td>$20.00</td>
-                                                    <td>11190</td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Regatta Luca 3 in 1 Jacket </a>
-                                                    </td>
-                                                    <td>$25.50</td>
-                                                    <td>1245</td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Motorola Droid 4 XT894 - 16GB - Black </a>
-                                                    </td>
-                                                    <td>$878.50</td>
-                                                    <td>784</td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Apple iPhone 4s - 16GB - Black </a>
-                                                    </td>
-                                                    <td>$625.50</td>
-                                                    <td>809</td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Samsung Galaxy S III SGH-I747 - 16GB </a>
-                                                    </td>
-                                                    <td>$915.50</td>
-                                                    <td>6709</td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Motorola Droid 4 XT894 - 16GB - Black </a>
-                                                    </td>
-                                                    <td>$878.50</td>
-                                                    <td>784</td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="overview_3">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-hover table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Customer Name</th>
-                                                    <th>Total Orders</th>
-                                                    <th>Total Amount</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> David Wilson </a>
-                                                    </td>
-                                                    <td>3</td>
-                                                    <td>$625.50</td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Amanda Nilson </a>
-                                                    </td>
-                                                    <td>4</td>
-                                                    <td>$12625.50</td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Paul Strong </a>
-                                                    </td>
-                                                    <td>1</td>
-                                                    <td>$890.85</td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Jhon Doe </a>
-                                                    </td>
-                                                    <td>2</td>
-                                                    <td>$125.00</td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Bill Chang </a>
-                                                    </td>
-                                                    <td>45</td>
-                                                    <td>$12,125.70</td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Paul Strong </a>
-                                                    </td>
-                                                    <td>1</td>
-                                                    <td>$890.85</td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="overview_4">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-hover table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Customer Name</th>
-                                                    <th>Date</th>
-                                                    <th>Amount</th>
-                                                    <th>Status</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> David Wilson </a>
-                                                    </td>
-                                                    <td>3 Jan, 2013</td>
-                                                    <td>$625.50</td>
-                                                    <td>
-                                                        <span class="label label-sm label-warning"> Pending </span>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Amanda Nilson </a>
-                                                    </td>
-                                                    <td>13 Feb, 2013</td>
-                                                    <td>$12625.50</td>
-                                                    <td>
-                                                        <span class="label label-sm label-warning"> Pending </span>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Paul Strong </a>
-                                                    </td>
-                                                    <td>1 Jun, 2013</td>
-                                                    <td>$890.85</td>
-                                                    <td>
-                                                        <span class="label label-sm label-success"> Success </span>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Jhon Doe </a>
-                                                    </td>
-                                                    <td>20 Mar, 2013</td>
-                                                    <td>$125.00</td>
-                                                    <td>
-                                                        <span class="label label-sm label-success"> Success </span>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Bill Chang </a>
-                                                    </td>
-                                                    <td>29 May, 2013</td>
-                                                    <td>$12,125.70</td>
-                                                    <td>
-                                                        <span class="label label-sm label-info"> In Process </span>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Paul Strong </a>
-                                                    </td>
-                                                    <td>1 Jun, 2013</td>
-                                                    <td>$890.85</td>
-                                                    <td>
-                                                        <span class="label label-sm label-success"> Success </span>
-                                                    </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-
                             </div>
                         </div>
                         <div class="tabbable-line">
-                            <button type="submit" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="quotesForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
-                            <button type="button" class="btn btn-primary blue">Import</button>
-                            <button type="button" class="btn btn-primary blue">Completed</button>
-                            <button type="button" class="btn btn-primary blue">Print</button>
-                            <button type="button" class="btn btn-primary blue">Email</button>
-                            @*<button type="button" class="btn btn-primary blue">Authorize</button>*@
+                            <button type="submit" ng-disabled="vm.disableSave" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+                            <button type="button" ng-disabled="vm.disableImport" class="btn btn-primary blue">Import</button>
+                            <button type="submit" ng-disabled="disableCompleted" button-busy="vm.completing" busy-text="@L("SavingWithThreeDot")" ng-click="vm.completed()" class="btn btn-primary blue">Completed</button>
+                            <button type="button" ng-disabled="vm.disablePrint" class="btn btn-primary blue">Print</button>
+                            <button type="button" ng-disabled="vm.disableEmail" class="btn btn-primary blue">Email</button>
                             <datalist id="actions">
                                 <option ng-repeat="a in lstactions track by $index"
                                         value="{{a.name}}">
