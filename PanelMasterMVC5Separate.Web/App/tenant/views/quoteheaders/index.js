@@ -149,7 +149,7 @@
 
                 jobService.saveQuote(JSON.stringify({ 'quote': quote })).then(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
-                    vm.getQuotes(vm.quoteTabShow);
+                    vm.currentStatusId();
                 }).finally(function () {
                     vm.saving = false;
                 });
