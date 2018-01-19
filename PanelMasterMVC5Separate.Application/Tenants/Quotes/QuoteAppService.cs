@@ -197,7 +197,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
         public int CreateOrUpdateQuotation(QuoteMasterToDto vehicle)
         {
             try
-            {               
+            {
                 var output = _vehiclerrepository.Get(vehicle.vehicleId);
                 output.IsSpecialisedType = vehicle.IsSpecialisedType;
                 output.IsLuxury = vehicle.IsLuxury;
@@ -271,8 +271,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
         {
             int Id = Convert.ToInt32(input.Filter);
 
-            var quotes = _quotedetailsrepository.GetAll()
-                .Where(p => p.QuoteId == Id && p.QuoteStatusId == input.StatusId && p.tenantid == _abpSession.TenantId && p.IsDeleted.Equals(false) && p.QuoteStatusId == input.StatusId).ToList();
+            var quotes = _quotedetailsrepository.GetAll().Where(p => p.QuoteId == Id && p.tenantid == _abpSession.TenantId && p.IsDeleted.Equals(false) && p.QuoteStatusId == input.StatusId).ToList();
 
             if (quotes.Count == 0)
             {
@@ -492,6 +491,71 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
         {
             int Id = Convert.ToInt32(input.Filter);
             return _quotemasterrepository.FirstOrDefault(p => p.Id == Id).QuoteStatusID;
+        }
+
+        public void CompleteItems(string quote)
+        {
+            try
+            {
+                
+
+                var result = JsonConvert.DeserializeObject<QuoteObject>(quote).quote.ToList();
+
+                int QuoteId = result[0].QuoteId;
+                var quotes = _quotedetailsrepository.GetAll()
+                .Where(p => p.QuoteId == QuoteId && p.QuoteStatusId == 1 && p.tenantid == _abpSession.TenantId && p.IsDeleted.Equals(false)).ToList();
+
+                foreach(var a in quotes)
+                {
+                    a.IsCompleted = true;
+                    _quotedetailsrepository.Update(a);
+                }
+
+                var finalresults = (from f in result
+                                    select new QuoteDetails()
+                                    {
+                                        Id = f.Id,
+                                        tenantid = _abpSession.TenantId,
+                                        QuoteStatusId = f.quoteStatusId,
+                                        IsCurrent = true,
+                                        Description = f.Description,
+                                        QuoteId = f.QuoteId,
+                                        QAction = f.QAction,
+                                        QLocation = f.QLocation,
+                                        ToOrder = f.ToOrder,
+                                        Outwork = f.Outwork,
+                                        PartQty = f.PartQty,
+                                        PartPrice = f.PartPrice,
+                                        Part = f.Part,
+                                        PanelHrs = f.PanelHrs,
+                                        PanelRate = f.PanelRate,
+                                        PaintHrs = f.PaintHrs,
+                                        PaintRate = f.PaintRate,
+                                        SAHrs = f.SAHrs,
+                                        SARate = f.SARate,
+                                        NoTaxVat = f.NoTaxVat, 
+                                        IsCompleted = false
+                                    }).ToList();
+                int statusId = 0;
+                foreach (QuoteDetails q in finalresults)
+                {
+                    statusId = 2;
+                    q.QuoteStatusId = 2;
+                    _quotedetailsrepository.Insert(q);
+                }
+
+                var qmaster = _quotemasterrepository.FirstOrDefault(p => p.Id == QuoteId);
+                qmaster.TotalQuotedValue = result[0].TotalQuotedValue;
+                qmaster.EstimatedRepairDays = result[0].EstimatedRepairDays;
+                qmaster.RepairerEstimatedDays = result[0].RepairerEstimatedDays;
+                qmaster.QuoteStatusID = statusId;
+                _quotemasterrepository.Update(qmaster);
+
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
         }
     }
 }

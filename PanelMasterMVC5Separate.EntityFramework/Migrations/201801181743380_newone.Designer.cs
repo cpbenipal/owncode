@@ -7,13 +7,13 @@ namespace PanelMasterMVC5Separate.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class _1 : IMigrationMetadata
+    public sealed partial class newone : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(newone));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801181440250_1"; }
+            get { return "201801181743380_newone"; }
         }
         
         string IMigrationMetadata.Source

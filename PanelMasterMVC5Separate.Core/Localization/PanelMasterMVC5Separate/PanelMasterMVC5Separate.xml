@@ -688,6 +688,8 @@
     <text name="CreditNotes" value="Credit Notes" />
     <text name="Financials" value="Financials" />
     <text name="Invoicing" value="Invoicing" />
-     
+    <text name="Calender" value="Calender" />
+    <text name="LineRemovedSuccessfully" value="Line Removed Successfully" />
+    <text name="QuoteCompletedAndMovedtoRevisionSuccessfully" value="Quote Completed and moved to Revision Successfully" />
   </texts>
 </localizationDictionary>

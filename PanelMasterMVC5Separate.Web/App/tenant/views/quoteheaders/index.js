@@ -4,9 +4,9 @@
         function ($scope, $uibModal, $stateParams, uiGridConstants, jobService) {
 
             var vm = this;
-              
-            vm.quoteTabShow = 1;          
-             
+
+            vm.quoteTabShow = 1;
+
             $scope.$on('$viewContentLoaded', function () {
                 App.initAjax();
             });
@@ -120,7 +120,7 @@
                     if (Id == undefined) {
                         Id = 0;
                     }
-                     
+
                     quote.push({
                         "qaction": "" + editableGrid.getValueAt(i, 1) + "",
                         "qlocation": "" + editableGrid.getValueAt(i, 2) + "",
@@ -146,10 +146,10 @@
                     });
                     // }
                 });
- 
+
                 jobService.saveQuote(JSON.stringify({ 'quote': quote })).then(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
-                    vm.getQuotes(vm.quoteTabShow);
+                    vm.currentStatusId();
                 }).finally(function () {
                     vm.saving = false;
                 });
@@ -162,14 +162,14 @@
                 var quoteId = $("#hdnId" + c).val();
                 if (quoteId == null) {
                     editableGrid.remove(c);
-                    abp.notify.info(app.localize('QuoteRemovedSuccessfully'));
+                    abp.notify.info(app.localize('LineRemovedSuccessfully'));
                     vm.estimatedRepairDays();
                 }
                 else {
                     jobService.deleteQuote($.extend({ filter: quoteId }, quoteId)).then(function () {
                         vm.getQuotes(vm.quoteTabShow);
                     }).finally(function () {
-                        abp.notify.info(app.localize('QuoteRemovedSuccessfully'));
+                        abp.notify.info(app.localize('LineRemovedSuccessfully'));
                         vm.saving = false;
                     });
                 }
@@ -184,17 +184,17 @@
                 vm.RepairDays();
                 //        }
                 //});
-                       
+
             };
             addnewline = function (c) {
-                 $scope.disableCompleted = true;
+                $scope.disableCompleted = true;
                 //abp.message.confirm(app.localize('Are you sure to add blank line?', "Addnewline"),function (isConfirmed) {
                 //if (isConfirmed) { 
                 editableGrid.addnewline(c);
                 vm.RepairDays();
                 //}
                 //});
-                
+
             };
 
             vm.getQuotes = function (statusId) {
@@ -212,10 +212,10 @@
                     editableGrid.attachToHTMLTable('htmlgrid');
                     editableGrid.renderGrid();
                     vm.repairerEstimatedDays = vm.quote[0].repairerEstimatedDays;
-                    vm.quoteStatusId = vm.quote[0].quoteStatusId;                     
+                    vm.quoteStatusId = vm.quote[0].quoteStatusId;
                     vm.estimatedRepairDays();
-                     
-                   // $("#htmlgrid").removeAttr("disabled");
+
+                    // $("#htmlgrid").removeAttr("disabled");
                     $("#htmlgrid").removeAttr("style");
                     if (vm.quoteStatusId == 0) {
                         $scope.disableCompleted = true;
@@ -227,52 +227,50 @@
                         $scope.activeTab2 = "notactive";
                         $scope.activeTab3 = "notactive";
                         if (statusId == 1) {
-                         $("#htmlgrid").removeAttr("style");
-                        }               
-                        else
-                        {
-                         vm.disableSave = true;   
-                         $("#htmlgrid").attr("style", "pointer-events : none");
+                            $("#htmlgrid").removeAttr("style");
+                        }
+                        else {
+                            vm.disableSave = true;
+                            $("#htmlgrid").attr("style", "pointer-events : none");
                         }
                     }
-                    else
-                    {
+                    else {
                         if (vm.quoteStatusId == 1) {
-                            $scope.disableCompleted = false;
+                            //$scope.disableCompleted = false;
                             vm.disableSave = false;
                             vm.disableImport = true;
                             vm.disablePrint = true;
                             vm.disableEmail = true;
-                            
+
                             if (statusId == 3) {
                                 vm.disableSave = true;
                             }
                             if (vm.quote[0].isCompleted == true) {
-                            $scope.disableCompleted = true;
-                            
-                            vm.disableSave = true;
-                            vm.disablePrint = false;
-                            vm.disableEmail = false;
-                            //$("#htmlgrid").find('*').prop('disabled', 'disabled');
-                            $("#htmlgrid").attr("style", "pointer-events : none");
+                                $scope.disableCompleted = true;
+
+                                vm.disableSave = true;
+                                vm.disablePrint = false;
+                                vm.disableEmail = false;
+                                //$("#htmlgrid").find('*').prop('disabled', 'disabled');
+                                $("#htmlgrid").attr("style", "pointer-events : none");
                             }
                             else {
-                            $scope.disableCompleted = false;                                                        
+                                $scope.disableCompleted = false;
                             }
                             $scope.activeTab1 = "active";
                             $scope.activeTab2 = "notactive";
-                            $scope.activeTab3 = "notactive";  
+                            $scope.activeTab3 = "notactive";
                         }
                         else if (vm.quoteStatusId == 2) {
                             vm.disableSave = false;
                             vm.disableImport = true;
                             vm.disablePrint = false;
                             vm.disableEmail = false;
-                            
+
                             $scope.disableCompleted = true;
                             $scope.activeTab1 = "notactive";
                             $scope.activeTab2 = "active";
-                            $scope.activeTab3 = "notactive";             
+                            $scope.activeTab3 = "notactive";                            
                         }
                         else if (vm.quoteStatusId == 3) {
                             //if (statusId == 1) {
@@ -287,14 +285,14 @@
                             vm.disableImport = true;
                             vm.disablePrint = false;
                             vm.disableEmail = false;
-                            
+
                             $scope.disableCompleted = true;
                             $("#htmlgrid").attr("style", "pointer-events : none");
                             $scope.activeTab1 = "notactive";
                             $scope.activeTab2 = "notactive";
-                            $scope.activeTab3 = "active";             
-                        }                    
-                       
+                            $scope.activeTab3 = "active";
+                        }
+
                     }
 
                 }).finally(function () {
@@ -305,23 +303,70 @@
 
             vm.completed = function () {
                 vm.completing = true;
-                jobService.completeQuote($.extend({ filter: $stateParams.id, statusId: 1 }, $stateParams.id)).then(function () {
-                    abp.notify.info(app.localize('QuoteCompletedSuccessfully'));
+                vm.loading = true;
+                //jobService.completeQuote($.extend({ filter: $stateParams.id, statusId: 1 }, $stateParams.id)).then(function () {
+                //    abp.notify.info(app.localize('QuoteCompletedSuccessfully'));
+                //});
+                //jobService.completeQuoteCallBack($.extend({ filter: $stateParams.id, statusId: 2 }, $stateParams.id)).then(function () {
+                //}).finally(function () {
+                //    abp.notify.info(app.localize('QuoteMovedtoRevisionSuccessfully'));                     
+                //    vm.getQuotes(1);
+                //    vm.completing = false;                    
+                //});    
+
+                var quote = [];
+                $('#htmlgrid tbody tr').each(function (i, tr) {
+                    var Id = $("#hdnId" + i + "").val();
+                    if (Id == undefined) {
+                        Id = 0;
+                    }
+
+                    quote.push({
+                        "qaction": "" + editableGrid.getValueAt(i, 1) + "",
+                        "qlocation": "" + editableGrid.getValueAt(i, 2) + "",
+                        "description": "" + editableGrid.getValueAt(i, 3) + "",
+                        "toOrder": "" + editableGrid.getValueAt(i, 4) + "",
+                        "outwork": "" + editableGrid.getValueAt(i, 5) + "",
+                        "partQty": "" + editableGrid.getValueAt(i, 6) + "",
+                        "partPrice": "" + editableGrid.getValueAt(i, 7) + "",
+                        "part": "" + editableGrid.getValueAt(i, 9) + "",
+                        "panelHrs": "" + editableGrid.getValueAt(i, 10) + "",
+                        "panelRate": "" + editableGrid.getValueAt(i, 11) + "",
+                        "paintHrs": "" + editableGrid.getValueAt(i, 13) + "",
+                        "paintRate": "" + editableGrid.getValueAt(i, 14) + "",
+                        "saHrs": "" + editableGrid.getValueAt(i, 16) + "",
+                        "saRate": "" + editableGrid.getValueAt(i, 17) + "",
+                        "notaxvat": $("#notaxvat" + i + "").is(":checked"),
+                        "quoteId": $stateParams.id,
+                        "quoteStatusId": vm.quoteTabShow,
+                        "repairerEstimatedDays": vm.repairerEstimatedDays,
+                        "estimatedRepairDays": $("#tdestimatedRepairDays").html(),
+                        "totalQuotedValue": $("#tdtotal").html(),
+                        "id": Id
+                    });
+                    // }
                 });
-                jobService.completeQuoteCallBack($.extend({ filter: $stateParams.id, statusId: 2 }, $stateParams.id)).then(function () {
-                }).finally(function () {
-                    abp.notify.info(app.localize('QuoteMovedtoRevisionSuccessfully'));                     
-                    vm.getQuotes(1);
-                    vm.completing = false;                    
-                });    
+
+                jobService.completeItems(JSON.stringify({ 'quote': quote })).then(function () {
+                    abp.notify.info(app.localize('QuoteCompletedAndMovedtoRevisionSuccessfully'));
+                    vm.currentStatusId();
+                }).finally(function () {                    
+                    vm.completing = false;
+                    vm.loading = false;
+                    window.location.href = "#!/tenant/quoteheaders/" + $stateParams.id;
+                });
+
             };
 
-            vm.getJobSummary();            
-            vm.getHeaders(); 
-            jobService.currentQuoteStatusId($.extend({ filter: $stateParams.id, statusId: 1 }, $stateParams.id)).then(function (result) {
-                   vm.quoteStatusId = result.data; 
-                   vm.getQuotes(vm.quoteStatusId);
+            vm.getJobSummary();
+            vm.getHeaders();
+
+            vm.currentStatusId = function () {
+                jobService.currentQuoteStatusId($.extend({ filter: $stateParams.id, statusId: 1 }, $stateParams.id)).then(function (result) {
+                    vm.quoteStatusId = result.data;
+                    vm.getQuotes(vm.quoteStatusId);
                 });
-            
+            };
+            vm.currentStatusId();
         }]);
 })();
