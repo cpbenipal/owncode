@@ -1,3 +1,5 @@
+
+
 namespace PanelMasterMVC5Separate.Web.Navigation
 {
     public static class PageNames
@@ -54,6 +56,7 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string ManageRepairs = "Dashboard.ManageRepairs";
                 public const string Repairs = "ManageRepairs.ManageRepairs";
                 public const string CreateRepair = "ManageRepairs.CreateRepair";
+                public const string Calender = "ManageRepairs.Calender";
 
                 public const string PartsOrdering = "Dashboard.PartsOrdering";
                 public const string GoodReceived = "PartsOrdering.GoodReceived";
@@ -86,9 +89,9 @@ namespace PanelMasterMVC5Separate.Web.Navigation
                 public const string TowOperators = "Administration.TowOperators.Tenant";
 
                 public const string Tenants = "Dashboard.Tenants";
-                 
+
                 public const string CreateJob = "Administration.CreateJob.Tenant";
-                 
+
                 // public const string VehicleManufacturer = "Dashboard.VehicleManufacturer";                 
             }
         }

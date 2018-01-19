@@ -47,5 +47,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
 
         int CurrentQuoteStatusId(GetQuoteInput input);
 
+        void CompleteItems(string quote);
+
     }
 }

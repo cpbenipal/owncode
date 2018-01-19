@@ -148,37 +148,9 @@
     <Compile Include="EntityFramework\IndexInitializer.cs" />
     <Compile Include="EntityFramework\PanelMasterMVC5SeparateDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\PanelMasterMVC5SeparateRepositoryBase.cs" />
-    <Compile Include="Migrations\201801150934407_1.cs" />
-    <Compile Include="Migrations\201801150934407_1.Designer.cs">
-      <DependentUpon>201801150934407_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801151104324_2.cs" />
-    <Compile Include="Migrations\201801151104324_2.Designer.cs">
-      <DependentUpon>201801151104324_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801151125441_3.cs" />
-    <Compile Include="Migrations\201801151125441_3.Designer.cs">
-      <DependentUpon>201801151125441_3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801151205191_4.cs" />
-    <Compile Include="Migrations\201801151205191_4.Designer.cs">
-      <DependentUpon>201801151205191_4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801161357285_5.cs" />
-    <Compile Include="Migrations\201801161357285_5.Designer.cs">
-      <DependentUpon>201801161357285_5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801170740193_6.cs" />
-    <Compile Include="Migrations\201801170740193_6.Designer.cs">
-      <DependentUpon>201801170740193_6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801170838085_7.cs" />
-    <Compile Include="Migrations\201801170838085_7.Designer.cs">
-      <DependentUpon>201801170838085_7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801160829226_AddedIsCompletedFieldtoQuoteDetails.cs" />
-    <Compile Include="Migrations\201801160829226_AddedIsCompletedFieldtoQuoteDetails.Designer.cs">
-      <DependentUpon>201801160829226_AddedIsCompletedFieldtoQuoteDetails.cs</DependentUpon>
+    <Compile Include="Migrations\201801181743380_newone.cs" />
+    <Compile Include="Migrations\201801181743380_newone.Designer.cs">
+      <DependentUpon>201801181743380_newone.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
@@ -288,29 +260,8 @@
     <Folder Include="bin\Release\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801150934407_1.resx">
-      <DependentUpon>201801150934407_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801151104324_2.resx">
-      <DependentUpon>201801151104324_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801151125441_3.resx">
-      <DependentUpon>201801151125441_3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801151205191_4.resx">
-      <DependentUpon>201801151205191_4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801161357285_5.resx">
-      <DependentUpon>201801161357285_5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801170740193_6.resx">
-      <DependentUpon>201801170740193_6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801170838085_7.resx">
-      <DependentUpon>201801170838085_7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801160829226_AddedIsCompletedFieldtoQuoteDetails.resx">
-      <DependentUpon>201801160829226_AddedIsCompletedFieldtoQuoteDetails.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801181743380_newone.resx">
+      <DependentUpon>201801181743380_newone.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

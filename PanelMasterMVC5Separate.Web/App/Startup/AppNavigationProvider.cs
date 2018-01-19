@@ -47,12 +47,18 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.CreateRepair,
                     L("Create"),
-                    // url: "tenant.quoting",
+                    url: "tenant.createjob",
                     icon: "glyphicon glyphicon-collapse-down",
                     requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     )).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Repairs,
                     L("Search"),
+                    url: "tenant.jobdetails",
+                    icon: "glyphicon glyphicon-search",
+                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
+                    )).AddItem(new MenuItemDefinition(
+                    PageNames.App.Tenant.Calender,
+                    L("Calender"),
                     //url: "tenant.viewQuotations",
                     icon: "glyphicon glyphicon-search",
                     requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
@@ -127,14 +133,15 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                     requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     ))
                 )
+                //.AddItem(new MenuItemDefinition(
+                //    PageNames.App.Tenant.Claim,
+                //    L("JobDetails"),
+                //    url: "tenant.jobdetails",
+                //    icon: "glyphicon glyphicon-tasks",
+                //    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
+                //    )
+                //)
                 .AddItem(new MenuItemDefinition(
-                    PageNames.App.Tenant.Claim,
-                    L("JobDetails"),
-                    url: "tenant.jobdetails",
-                    icon: "glyphicon glyphicon-tasks",
-                    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
-                    )
-                ).AddItem(new MenuItemDefinition(
                     PageNames.App.Tenant.Productivity,
                     L("Productivity"),
                     url: "tenant.productivity",
@@ -360,14 +367,14 @@ namespace PanelMasterMVC5Separate.Web.App.Startup
                      url: "tenant.Brokers",
                      requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                     ))
-                    .AddItem(new MenuItemDefinition(
-                        PageNames.App.Tenant.CreateJob,
-                        L("CreateJob"),
-                        url: "tenant.createjob",
-                        icon: "glyphicon glyphicon-search",
-                        requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
-                        )
-                    )
+                    //.AddItem(new MenuItemDefinition(
+                    //    PageNames.App.Tenant.CreateJob,
+                    //    L("CreateJob"),
+                    //    url: "tenant.createjob",
+                    //    icon: "glyphicon glyphicon-search",
+                    //    requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
+                    //    )
+                    //)
 
                     );
         }
