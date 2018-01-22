@@ -236,8 +236,8 @@ CellEditor.prototype.applyEditing = function (element, newValue) {
             var finalpbvalue = editablegrid.getValueAt(element.rowIndex, 12);
             var finalpvalue = editablegrid.getValueAt(element.rowIndex, 15);
             var finalsavalue = editablegrid.getValueAt(element.rowIndex, 18);
-
-            var gtotal = editablegrid.setValueAt(element.rowIndex, 20, vqvalue + finalpbvalue + finalpbvalue + finalsavalue);
+             
+            var gtotal = editablegrid.setValueAt(element.rowIndex, 20, vqvalue + finalpbvalue + finalpvalue + finalsavalue);
             var totalhours = 0;
             var totalMoney = 0;
             //var tdhours = $("#tdestimatedRepairDays").html();
