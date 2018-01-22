@@ -17,7 +17,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
         BranchClaimListDto GetJobDetails(GetClaimsInput input);
 
-        void UpdateVehicleInfo(BranchClaimListDto input);
+        void UpdateJobInfo(BranchClaimListDto input);
 
         void UpdateInsuranceInfo(BranchClaimListDto input);
 

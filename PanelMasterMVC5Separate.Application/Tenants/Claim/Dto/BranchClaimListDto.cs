@@ -18,6 +18,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
     [AutoMapFrom(typeof(Jobs))]
     public class BranchClaimListDto : FullAuditedEntityDto
     {
+        
         public int ClientID { get; set; }
         public int ManufactureID { get; set; }
         public int ModelID { get; set; }
@@ -25,11 +26,21 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
         public int BrokerID { get; set; }
         public int BranchID { get; set; }
         public int FinancialID { get; set; }
+
         public int CsaID { get; set; }
+        public string CsaDesc { get; set; }
+
         public int ClaimHandlerID { get; set; }
+        public string ClaimHandlerDesc { get; set; }
+
         public int EstimatorID { get; set; }
+        public string EstimatorDesc { get; set; }
+
         public int ProductiveStaffID { get; set; }
+        
         public int PartsBuyerID { get; set; }
+        public string PartsBuyerDesc { get; set; }
+
         public int ShopAllocationID { get; set; }
 
         public int ClaimEventID { get; set; }

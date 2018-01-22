@@ -22,22 +22,28 @@
             vm.BranchID = abp.session.tenantId;
             vm.job.id = $stateParams.id;
 
-            $scope.jobStatusList = [];           
+            $scope.jobStatusList = []; 
+            $scope.claimHandlerList = [];
+            $scope.CSAList = [];
+            $scope.EstimatorList = [];
+            $scope.PartsBuyerList = [];
             
             vm.getJobs = function () {
+
+               
 
                 vm.loading = true;
                 jobService.getJobDetails($.extend({ filter: $stateParams.id }, $stateParams.id))
                     .then(function (result) {
 
                         vm.job.id = $stateParams.id;
-                        vm.job.RegNo = result.data.regNo;
-                        vm.job.VinNumber = result.data.vinNumber;
-                        vm.job.Year = result.data.year;
-                        vm.job.Colour = result.data.colour;
+                        //vm.job.RegNo = result.data.regNo;
+                        //vm.job.VinNumber = result.data.vinNumber;
+                        //vm.job.Year = result.data.year;
+                        //vm.job.Colour = result.data.colour;
                         vm.job.new_Comeback = result.data.new_Comeback;
-                        vm.job.underWaranty = result.data.underWaranty; 
-                        vm.job.isUnrelatedDamangeReason = result.data.isUnrelatedDamageReason;
+                        vm.job.underWaranty = result.data.underWaranty;                        
+                        vm.job.isUnrelatedDamageReason = result.data.isUnrelatedDamageReason;
                         vm.job.shopAllocation = result.data.shopAllocation;
                         vm.job.highPriority = result.data.highPriority;
                         vm.job.contents = result.data.contents;
@@ -45,13 +51,54 @@
                         vm.job.currentKMs = result.data.currentKMs;
                         vm.job.otherInformation = result.data.otherInformation;
                         vm.job.damageReason = result.data.damageReason;
-                        vm.job.csaID = result.data.csaID;
-                        vm.job.claimHandlerID = result.data.claimHandlerID;
-                        vm.job.estimatorID = result.data.estimatorID;
-                        vm.job.partsBuyerID = result.data.partsBuyerID;
-                        vm.job.shopAllocationID = result.data.shopAllocationID;                        
-                        
 
+                        vm.job.csaID = result.data.csaID;
+                        vm.job.csaDesc = result.data.csaDesc; 
+                        
+                        vm.job.claimHandlerID = result.data.claimHandlerID;
+                        vm.job.claimHandlerDesc = result.data.claimHandlerDesc;
+                        
+                        vm.job.estimatorID = result.data.estimatorID;
+                        vm.job.estimatorDesc = result.data.estimatorDesc;
+
+                        vm.job.partsBuyerID = result.data.partsBuyerID;
+                        vm.job.partsBuyerDesc = result.data.partsBuyerDesc;
+
+                        vm.job.shopAllocationID = result.data.shopAllocationID;                       
+                        
+                        
+                        if (vm.job.csaID !== 0) {
+                            $scope.CSAList.push({
+                                name: vm.job.csaDesc,
+                                id: vm.job.csaID
+                            });
+                            vm.job.selectedCSA = $scope.CSAList[0];
+                        }
+
+                        if (vm.job.claimHandlerID !== 0) {
+                            $scope.claimHandlerList.push({
+                                name: vm.job.claimHandlerDesc,
+                                id: vm.job.claimHandlerID
+                            });
+                            vm.job.selectedClaimHandler = $scope.claimHandlerList[0];
+                        }
+
+                        if (vm.job.partsBuyerID !== 0) {
+                            $scope.PartsBuyerList.push({
+                                name: vm.job.partsBuyerDesc,
+                                id: vm.job.partsBuyerID
+                            });
+                            vm.job.selectedPartsBuyer = $scope.PartsBuyerList[0];
+                        }
+
+                        if (vm.job.estimatorID !== 0) {
+                            $scope.EstimatorList.push({
+                                name: vm.job.estimatorDesc,
+                                id: vm.job.estimatorID
+                            });
+                            vm.job.selectedEstimator = $scope.EstimatorList[0];
+                        }                      
+                      
                         $scope.jobStatusList.push({
                             name: result.data.jobStatusDesc,
                             id: result.data.jobStatusID
@@ -72,31 +119,28 @@
                             //vm.loading = false;
                         });
                         
-                        $scope.selectedJobStatus = $scope.jobStatusList[0];
+                        vm.job.selectedJobStatus = $scope.jobStatusList[0];
                         
                         if (result.data.branchEntryMethod === "D") {                           
                             $scope.branchEntryMethodList = [{ name: "Drive", id: "D" }, { name: "Tow", id: "T" }];
                         } else {
                             $scope.branchEntryMethodList = [{ name: "Tow", id: "T" }, { name: "Drive", id: "D" }];
                         }                        
-                        $scope.selectedBranchEntry = $scope.branchEntryMethodList[0];
+                        vm.job.selectedBranchEntry = $scope.branchEntryMethodList[0];
 
-                   
-                        if (result.data.shopAllocation === 0) {
-                            $scope.shopAllocationMethodList = [{ name: "1", id: "1" }, { name: "2", id: "2" },
-                                { name: "3", id: "3" }, { name: "4", id: "4" }, { name: "5", id: "5" }];
-                        }
+                        $scope.shopAllocationMethodList = [{ name: "1", id: "1" }, { name: "2", id: "2" },
+                        { name: "3", id: "3" }, { name: "4", id: "4" }, { name: "5", id: "5" }];
+                        
+                        if (result.data.shopAllocation !== 0) {
+                            vm.job.shopAllocationSelectedValue = $scope.shopAllocationMethodList[vm.job.shopAllocationID - 1];
+                        } 
                        
                     }).finally(function () {
                         //vm.loading = false;
-                    });
-
-                $scope.claimHandlerList = [];
-                $scope.CSAList = [];
-                $scope.EstimatorList = [];
-                $scope.PartsBuyerList = [];
+                    });               
+               
                 
-                jobService.getRoles()
+                    jobService.getRoles()
                     .then(function (result) {                        
 
                         angular.forEach(result.data.items, function (roles_value, key) {                        
@@ -108,7 +152,8 @@
                                 });
                             }
                             
-                            if (roles_value.rolesCategoryID === 4) {                               
+                            if (roles_value.rolesCategoryID === 4) {
+                                
                                 $scope.CSAList.push({
                                     name: roles_value.description,
                                     id: roles_value.id
@@ -129,13 +174,9 @@
                                 });
                             }
 
-                        });
-
-                        //$scope.selectedClaimHandler = $scope.claimHandlerList[0];
-                        //$scope.selectedCSA = $scope.CSAList[0];
-                        //$scope.selectedPartsBuyer = $scope.PartsBuyerList[0];
-                        //$scope.selectedEstimator = $scope.EstimatorList[0];
-                        
+                        });                  
+                       
+                       
                        
                     }).finally(function () {
                         vm.loading = false;
@@ -161,8 +202,16 @@
 
                 vm.saving = true;
                 vm.job.id = $stateParams.id;
+                vm.job.jobStatusID = vm.job.selectedJobStatus.id;
+                vm.job.branchEntryMethod = vm.job.selectedBranchEntry.id;
+                vm.job.csaID = vm.job.selectedCSA.id;
+                vm.job.claimHandlerID = vm.job.selectedClaimHandler.id;
+                vm.job.estimatorID = vm.job.selectedEstimator.id;
+                vm.job.partsBuyerID = vm.job.selectedPartsBuyer.id;
+                vm.job.shopAllocationID = vm.job.shopAllocationSelectedValue.id;
+                //alert(vm.job.selectedJobStatus.id);
 
-                jobService.updateVehicleInfo(
+                jobService.updateJobInfo(
                     $.extend({ filter: vm.job }, vm.job)
                 ).then(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
