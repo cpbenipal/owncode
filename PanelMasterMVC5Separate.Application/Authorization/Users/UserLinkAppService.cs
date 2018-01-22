@@ -132,7 +132,8 @@ namespace PanelMasterMVC5Separate.Authorization.Claim
                         TenantId = userAccount.TenantId,
                         TenancyName = tenant == null ? "." : tenant.TenancyName,
                         Username = userAccount.UserName,
-                        LastLoginTime = userAccount.LastLoginTime
+                        LastLoginTime = userAccount.LastLoginTime,
+                        Name = tenant.Name,
                     }).OrderBy(sorting);
         }
     }

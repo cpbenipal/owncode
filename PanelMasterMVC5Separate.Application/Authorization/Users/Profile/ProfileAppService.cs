@@ -15,6 +15,8 @@ using PanelMasterMVC5Separate.Security;
 using PanelMasterMVC5Separate.Storage;
 using PanelMasterMVC5Separate.Timing;
 using Newtonsoft.Json;
+using PanelMasterMVC5Separate.MultiTenancy;
+using Abp.Domain.Repositories;
 
 namespace PanelMasterMVC5Separate.Authorization.Claim.Profile
 {
@@ -24,15 +26,17 @@ namespace PanelMasterMVC5Separate.Authorization.Claim.Profile
         private readonly IAppFolders _appFolders;
         private readonly IBinaryObjectManager _binaryObjectManager;
         private readonly ITimeZoneService _timeZoneService;
+        private readonly IRepository<TenantProfile> _TenantProfile;
 
         public ProfileAppService(
             IAppFolders appFolders,
             IBinaryObjectManager binaryObjectManager,
-            ITimeZoneService timezoneService)
+            ITimeZoneService timezoneService, IRepository<TenantProfile> tenantprofiles)
         {
             _appFolders = appFolders;
             _binaryObjectManager = binaryObjectManager;
             _timeZoneService = timezoneService;
+            _TenantProfile = tenantprofiles;
         }
 
         public async Task<CurrentUserProfileEditDto> GetCurrentUserProfileForEdit()
@@ -111,7 +115,7 @@ namespace PanelMasterMVC5Separate.Authorization.Claim.Profile
             }
 
             var user = await UserManager.GetUserByIdAsync(AbpSession.GetUserId());
-
+           
             if (user.ProfilePictureId.HasValue)
             {
                 await _binaryObjectManager.DeleteAsync(user.ProfilePictureId.Value);
@@ -146,6 +150,23 @@ namespace PanelMasterMVC5Separate.Authorization.Claim.Profile
             {
                 throw new UserFriendlyException(L("PasswordComplexityNotSatisfied"));
             }
+        }
+
+        public async Task<MyInfo> MyPersonalInfo()
+        {
+            var user = await UserManager.GetUserByIdAsync(AbpSession.GetUserId());
+            var myinfo = await _TenantProfile.FirstOrDefaultAsync(p=>p.TenantId == user.TenantId);
+            var a = myinfo.MapTo<MyInfo>();
+            return a; 
+        }
+
+        public async Task saveprofileInfo(MyInfo info)
+        {
+            var user = await UserManager.GetUserByIdAsync(AbpSession.GetUserId());
+            var myinfo = await _TenantProfile.FirstOrDefaultAsync(p => p.TenantId == user.TenantId);
+            myinfo.FullName = info.FullName;
+            myinfo.CellNumber = info.CellNumber;
+            await _TenantProfile.UpdateAsync(myinfo);
         }
     }
 }
