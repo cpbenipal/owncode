@@ -30,14 +30,14 @@
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">Job Status</label>
                                             <div class="col-md-4">
-                                                <select data-ng-options="source.name for source in jobStatusList" data-ng-model="selectedJobStatus"  class="form-control">
+                                                <select data-ng-options="source.name for source in jobStatusList" ng-model="vm.job.selectedJobStatus"  class="form-control">
                                                     <option value="">--Select Status--</option>
                                                 </select>                                              
                                             </div>
 
                                             <label class="col-md-2 control-label">Branch entry method</label>
                                             <div class="col-md-4">
-                                                <select data-ng-options="source.name for source in branchEntryMethodList" data-ng-model="selectedBranchEntry" class="form-control">
+                                                <select data-ng-options="source.name for source in branchEntryMethodList" ng-model="vm.job.selectedBranchEntry" class="form-control">
                                                     <option value="">--Select Entry Method--</option>
                                                 </select>
                                             </div>
@@ -48,14 +48,14 @@
                                             
                                             <label class="col-md-2 control-label">Customer Service Advisor</label>
                                             <div class="col-md-4">
-                                                <select data-ng-options="source.name for source in CSAList" data-ng-model="selectedCSA" class="form-control">
+                                                <select data-ng-options="source.name for source in CSAList" ng-model="vm.job.selectedCSA" class="form-control">
                                                     <option value="">@L("SelectOne")</option>
                                                 </select>
                                             </div>
 
                                             <label class="col-md-2 control-label">Claims Handler</label>
                                             <div class="col-md-4">
-                                                <select data-ng-options="source.name for source in claimHandlerList" data-ng-model="selectedClaimHandler" class="form-control">
+                                                <select data-ng-options="source.name for source in claimHandlerList" ng-model="vm.job.selectedClaimHandler" class="form-control">
                                                     <option value="">@L("SelectOne")</option>
                                                 </select> 
                                             </div>
@@ -65,13 +65,13 @@
                                             
                                             <label class="col-md-2 control-label">Estimator</label>
                                             <div class="col-md-4">
-                                                <select data-ng-options="source.name for source in EstimatorList" data-ng-model="selectedEstimator" class="form-control">
+                                                <select data-ng-options="source.name for source in EstimatorList" ng-model="vm.job.selectedEstimator" class="form-control">
                                                     <option value="">@L("SelectOne")</option>
                                                 </select>
                                             </div>
                                             <label class="col-md-2 control-label">Parts Buyer</label>
                                             <div class="col-md-4">
-                                                <select data-ng-options="source.name for source in PartsBuyerList" data-ng-model="selectedPartsBuyer" class="form-control">
+                                                <select data-ng-options="source.name for source in PartsBuyerList" ng-model="vm.job.selectedPartsBuyer" class="form-control">
                                                     <option value="">@L("SelectOne")</option>
                                                 </select>
                                             </div>
@@ -82,7 +82,7 @@
 
                                             <label class="col-md-2 control-label">Shop Allocation</label>
                                             <div class="col-md-4">
-                                                <select data-ng-options="source.name for source in shopAllocationMethodList" data-ng-model="Select_ShopAllocation" class="form-control">
+                                                <select data-ng-options="source.name for source in shopAllocationMethodList" ng-model="vm.job.shopAllocationSelectedValue" class="form-control">
                                                     <option value="">--Select Entry Method--</option>
                                                 </select>
                                             </div>
@@ -124,7 +124,7 @@
                                             <label class="col-md-2 control-label">Other Repairs Required|Upsell?</label>
                                             <div class="col-md-2">
                                                 <div class="input-group" style="width: 20% !important;">
-                                                    <input type="checkbox" ng-model="vm.job.isUnrelatedDamangeReason" value="isUnrelatedDamangeReason" ng-checked="vm.job.isUnrelatedDamangeReason=='true'" class="form-control" />
+                                                    <input type="checkbox" ng-model="vm.job.isUnrelatedDamageReason" value="isUnrelatedDamangeReason" ng-checked="vm.job.isUnrelatedDamageReason=='true'" class="form-control" />
                                                 </div>
                                             </div>
 

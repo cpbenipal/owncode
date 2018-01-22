@@ -217,6 +217,12 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                 .GetAll().Where(js => js.Id == thisJob.JobStatusID)
                 .FirstOrDefault();
 
+            //get users
+
+            var ExistingCsa = _userRepository.GetAll().Where(u => u.Id == thisJob.CSAID).FirstOrDefault();
+            var ExistingClaimHandler = _userRepository.GetAll().Where(u => u.Id == thisJob.ClaimHandlerID).FirstOrDefault();
+            var ExistingEstimator = _userRepository.GetAll().Where(u => u.Id == thisJob.EstimatorID).FirstOrDefault();
+            var ExistingPartsBuyer = _userRepository.GetAll().Where(u => u.Id == thisJob.PartsBuyerID).FirstOrDefault();
 
             var finalQuery = (new BranchClaimListDto
             {
@@ -258,9 +264,13 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                 OtherInformation = thisJob.OtherInformation,
                 DamageReason = thisJob.DamangeReason,
                 CsaID = thisJob.CSAID,
+                CsaDesc = ExistingCsa == null ? " " : ExistingCsa.Name,               
                 ClaimHandlerID = thisJob.ClaimHandlerID,
+                ClaimHandlerDesc = ExistingClaimHandler == null ? " " : ExistingClaimHandler.Name,
                 EstimatorID = thisJob.EstimatorID,
+                EstimatorDesc = ExistingEstimator == null ? " " : ExistingEstimator.Name,
                 PartsBuyerID = thisJob.PartsBuyerID,
+                PartsBuyerDesc = ExistingPartsBuyer == null ? " " : ExistingPartsBuyer.Name,
                 ShopAllocationID = thisJob.ShopAllocation
                 
 
@@ -271,18 +281,29 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         }
 
 
-        public void UpdateVehicleInfo(BranchClaimListDto input)
+        public void UpdateJobInfo(BranchClaimListDto input)
         {
             try
             {
 
-                var jobs = _brVehicleRepository.Get(input.Id);
-                jobs.Color = input.Colour;
-                jobs.RegistrationNumber = input.RegNo;
-                jobs.VinNumber = input.VinNumber;
-                jobs.Year = input.Year;
-
-                _brVehicleRepository.Update(jobs);
+                var jobs = _claimRepository.Get(input.Id);
+                jobs.JobStatusID = input.JobStatusID;
+                jobs.BranchEntryMethod = input.BranchEntryMethod;
+                jobs.CSAID = input.CsaID;
+                jobs.ClaimHandlerID = input.ClaimHandlerID;
+                jobs.EstimatorID = input.EstimatorID;
+                jobs.PartsBuyerID = input.PartsBuyerID;
+                jobs.ShopAllocation = input.ShopAllocationID;
+                jobs.DamangeReason = input.DamageReason;
+                jobs.CurrentKMs = input.CurrentKMs;
+                jobs.OtherInformation = input.OtherInformation;
+                jobs.New_Comeback = input.New_Comeback;
+                jobs.UnderWaranty = input.UnderWaranty;
+                jobs.IsUnrelatedDamangeReason = input.IsUnrelatedDamageReason;
+                jobs.JobNotProceeding = input.JobNotProceeding;
+                jobs.HighPriority = input.HighPriority;
+                jobs.Contents = input.Contents;
+                _claimRepository.Update(jobs);
 
             }
             catch (Exception x)
