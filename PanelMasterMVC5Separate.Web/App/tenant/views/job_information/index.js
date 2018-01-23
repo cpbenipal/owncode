@@ -138,33 +138,55 @@
                             $scope.CSAList.push({
                                 name: vm.job.csaDesc,
                                 id: vm.job.csaID
-                            });
-                            vm.job.selectedCSA = $scope.CSAList[0];
+                            });                            
+                        } else {
+                            $scope.CSAList.push({
+                                name: "---Select CSA---",
+                                id: "0"
+                            }); 
                         }
+                        vm.job.selectedCSA = $scope.CSAList[0];
 
                         if (vm.job.claimHandlerID !== 0) {
                             $scope.claimHandlerList.push({
                                 name: vm.job.claimHandlerDesc,
                                 id: vm.job.claimHandlerID
-                            });
-                            vm.job.selectedClaimHandler = $scope.claimHandlerList[0];
+                            });                            
+                        } else {
+                            $scope.claimHandlerList.push({
+                                name: "---Select Claim Handler---",
+                                id: "0"
+                            }); 
                         }
+                        vm.job.selectedClaimHandler = $scope.claimHandlerList[0];
 
                         if (vm.job.partsBuyerID !== 0) {
                             $scope.PartsBuyerList.push({
                                 name: vm.job.partsBuyerDesc,
                                 id: vm.job.partsBuyerID
                             });
-                            vm.job.selectedPartsBuyer = $scope.PartsBuyerList[0];
+                            
+                        } else {
+                            $scope.PartsBuyerList.push({
+                                name: "---Select Parts Buyer---",
+                                id: "0"
+                            });
                         }
+                        vm.job.selectedPartsBuyer = $scope.PartsBuyerList[0];
 
                         if (vm.job.estimatorID !== 0) {
                             $scope.EstimatorList.push({
                                 name: vm.job.estimatorDesc,
                                 id: vm.job.estimatorID
                             });
-                            vm.job.selectedEstimator = $scope.EstimatorList[0];
-                        }  
+                            
+                        } else {
+                            $scope.EstimatorList.push({
+                                name: "---Select Estimator---",
+                                id: "0"
+                            });
+                        }
+                        vm.job.selectedEstimator = $scope.EstimatorList[0];
 
                         jobService.getRoles()
                             .then(function (result) {
@@ -267,17 +289,23 @@
 
             $('#submit_form .button-submit').click(function () {
                 //$('#myModal_autocomplete').modal('hide');
+              
                 UpdateVehicleINformation();
             });
 
             function UpdateVehicleINformation() {
 
                 vm.saving = true;
-                vm.job.id = $stateParams.id;
+                vm.job.id = $stateParams.id;                
+
                 vm.job.jobStatusID = vm.job.selectedJobStatus.id;
 
                 vm.job.branchEntryMethod = vm.job.selectedBranchEntry.id;
+               
                 vm.job.csaID = vm.job.selectedCSA.id;
+
+                
+
                 vm.job.claimHandlerID = vm.job.selectedClaimHandler.id;
                 vm.job.estimatorID = vm.job.selectedEstimator.id;
                 vm.job.partsBuyerID = vm.job.selectedPartsBuyer.id;
