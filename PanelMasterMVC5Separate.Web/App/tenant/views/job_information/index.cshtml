@@ -30,15 +30,13 @@
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">Job Status</label>
                                             <div class="col-md-4">
-                                                <select data-ng-options="source.name for source in jobStatusList" ng-model="vm.job.selectedJobStatus"  class="form-control">
-                                                    <option value="">--Select Status--</option>
+                                                <select data-ng-options="source.name for source in jobStatusList" ng-model="vm.job.selectedJobStatus"  class="form-control">                                                    
                                                 </select>                                              
                                             </div>
 
                                             <label class="col-md-2 control-label">Branch entry method</label>
                                             <div class="col-md-4">
-                                                <select data-ng-options="source.name for source in branchEntryMethodList" ng-model="vm.job.selectedBranchEntry" class="form-control">
-                                                    <option value="">--Select Entry Method--</option>
+                                                <select data-ng-options="source.name for source in branchEntryMethodList" ng-model="vm.job.selectedBranchEntry" class="form-control">                                                    
                                                 </select>
                                             </div>
 
@@ -48,15 +46,13 @@
                                             
                                             <label class="col-md-2 control-label">Customer Service Advisor</label>
                                             <div class="col-md-4">
-                                                <select data-ng-options="source.name for source in CSAList" ng-model="vm.job.selectedCSA" class="form-control">
-                                                    <option value="">@L("SelectOne")</option>
+                                                <select data-ng-options="source.name for source in CSAList" ng-model="vm.job.selectedCSA" class="form-control">                                                   
                                                 </select>
                                             </div>
 
                                             <label class="col-md-2 control-label">Claims Handler</label>
                                             <div class="col-md-4">
-                                                <select data-ng-options="source.name for source in claimHandlerList" ng-model="vm.job.selectedClaimHandler" class="form-control">
-                                                    <option value="">@L("SelectOne")</option>
+                                                <select data-ng-options="source.name for source in claimHandlerList" ng-model="vm.job.selectedClaimHandler" class="form-control">                                                    
                                                 </select> 
                                             </div>
                                         </div>
@@ -66,13 +62,11 @@
                                             <label class="col-md-2 control-label">Estimator</label>
                                             <div class="col-md-4">
                                                 <select data-ng-options="source.name for source in EstimatorList" ng-model="vm.job.selectedEstimator" class="form-control">
-                                                    <option value="">@L("SelectOne")</option>
                                                 </select>
                                             </div>
                                             <label class="col-md-2 control-label">Parts Buyer</label>
                                             <div class="col-md-4">
                                                 <select data-ng-options="source.name for source in PartsBuyerList" ng-model="vm.job.selectedPartsBuyer" class="form-control">
-                                                    <option value="">@L("SelectOne")</option>
                                                 </select>
                                             </div>
 
@@ -88,7 +82,7 @@
                                             </div>
                                             <label class="col-md-2 control-label">Accident Details</label>
                                             <div class="col-md-4">
-                                                <input type="text" ng-model="vm.job.damageReason" class="form-control input-circle" />
+                                                <input type="text" ng-model="vm.job.damageReason" class="form-control input-block-level" />
                                             </div>
 
                                         </div>
@@ -97,14 +91,55 @@
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">Current KM's</label>
                                             <div class="col-md-4">
-                                                <input type="text" ng-model="vm.job.currentKMs" class="form-control input-circle" />
+                                                <input type="text" ng-model="vm.job.currentKMs" class="form-control input-block-level" />
                                             </div>
 
                                             <label class="col-md-2 control-label">Other Information</label>
                                             <div class="col-md-4">
-                                                <input type="text" ng-model="vm.job.otherInformation" class="form-control input-circle" />
+                                                <input type="text" ng-model="vm.job.otherInformation" class="form-control input-block-level" />
                                             </div>
                                             
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Insurance</label>
+                                            <div class="col-md-4">
+                                                <select data-ng-options="source.name for source in InsuranceList" ng-model="vm.job.selectedInsurance" class="form-control">                                                    
+                                                </select>
+                                            </div>
+
+                                            <label class="col-md-2 control-label">Broker</label>
+                                            <div class="col-md-4">
+                                                <select data-ng-options="source.name for source in BrokerList" ng-model="vm.job.selectedBroker" class="form-control">                                                    
+                                                </select>
+                                            </div>
+
+                                        </div> 
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Claim Administrator</label>
+                                            <div class="col-md-4">
+                                                <input type="text" ng-model="vm.job.claimAdministrator" class="form-control input-block-level" />
+                                            </div>
+
+                                            <label class="col-md-2 control-label">Claim Number</label>
+                                            <div class="col-md-4">
+                                                <input type="text" ng-model="vm.job.claimNumber" class="form-control input-block-level" />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Insurance Other Info</label>
+                                            <div class="col-md-4">
+                                                <input type="text" ng-model="vm.job.insuranceOtherInfo" class="form-control input-block-level" />
+                                            </div>
+
+                                            <label class="col-md-2 control-label">Policy Number</label>
+                                            <div class="col-md-4">
+                                                <input type="text" ng-model="vm.job.policyNumber" class="form-control input-block-level" />
+                                            </div>
+
                                         </div>
 
                                         <div class="form-group">
@@ -127,12 +162,7 @@
                                                     <input type="checkbox" ng-model="vm.job.isUnrelatedDamageReason" value="isUnrelatedDamangeReason" ng-checked="vm.job.isUnrelatedDamageReason=='true'" class="form-control" />
                                                 </div>
                                             </div>
-
-                                            <!--<div class="col-md-4">
-                                                <select data-ng-options="source.name for source in new_ComebackList" data-ng-model="selectedNew_Comeback" class="form-control">
-                                                    <option value="">--Select Entry Method--</option>
-                                                </select>
-                                            </div>-->
+                                          
                                         </div>
 
                                         <div class="form-group">                                            

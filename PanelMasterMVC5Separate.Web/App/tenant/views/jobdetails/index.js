@@ -109,6 +109,7 @@
                 data: []
             };
 
+            
             vm.getUsers = function () {
                 vm.loading = true;
                 userService.getClaims($.extend({ filter: vm.filterText }, vm.requestParams))
@@ -200,5 +201,6 @@
             }
 
             vm.getUsers();
+            
         }]);
 })();

@@ -271,7 +271,12 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                 EstimatorDesc = ExistingEstimator == null ? " " : ExistingEstimator.Name,
                 PartsBuyerID = thisJob.PartsBuyerID,
                 PartsBuyerDesc = ExistingPartsBuyer == null ? " " : ExistingPartsBuyer.Name,
-                ShopAllocationID = thisJob.ShopAllocation
+                ShopAllocationID = thisJob.ShopAllocation,
+                ClaimAdministrator = thisJob.ClaimAdministrator,
+                ClaimNumber = thisJob.ClaimNumber,
+                InsuranceOtherInfo = thisJob.InsuranceOtherInfo,
+                PolicyNumber = thisJob.PolicyNumber
+                
                 
 
     }).MapTo<BranchClaimListDto>();
@@ -303,6 +308,14 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                 jobs.JobNotProceeding = input.JobNotProceeding;
                 jobs.HighPriority = input.HighPriority;
                 jobs.Contents = input.Contents;
+
+                jobs.InsuranceID = input.InsuranceID;
+                jobs.BrokerID = input.BrokerID;
+                jobs.ClaimAdministrator = input.ClaimAdministrator;
+                jobs.ClaimNumber = input.ClaimNumber;
+                jobs.InsuranceOtherInfo = input.InsuranceOtherInfo;
+                jobs.PolicyNumber = input.PolicyNumber;
+
                 _claimRepository.Update(jobs);
 
             }
@@ -347,8 +360,11 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
         public ListResultDto<InsurersDto> GetInsurances()
         {
+            int country_id = GetCountryIdByCode();
+
             var insurance = _InsuranceRepository
                 .GetAll()
+                .Where(c => c.CountryID == country_id)
                 .OrderBy(p => p.InsurerName)
                 .ToList();
 
@@ -357,8 +373,11 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
         public ListResultDto<BrokersDto> GetBrokers()
         {
+            int country_id = GetCountryIdByCode();
+
             var broker = _brokerRepository
                 .GetAll()
+                .Where(b => b.CountryID == country_id)
                 .OrderBy(p => p.BrokerName)
                 .ToList();
 
@@ -617,6 +636,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
             _towsuboperatorrepositry.Update(query);
         }
+
 
         private int GetCountryIdByCode()
         {
