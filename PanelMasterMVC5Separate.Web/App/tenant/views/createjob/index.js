@@ -91,7 +91,8 @@
                 $scope.InsuranceList.pop();
                 jobService.getInsurances()
                     .then(function (ins_obj) {
-                        angular.forEach(ins_obj.data.items, function (insvalue, key1) {
+                        angular.forEach(ins_obj.data.items, function (insvalue, key1) { 
+                           
                             $scope.InsuranceList.push({
                                 name: insvalue.insurerName,
                                 id: insvalue.id

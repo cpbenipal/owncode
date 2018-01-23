@@ -14,7 +14,7 @@ namespace PanelMasterMVC5Separate.Claim
     public class Jobs : FullAuditedEntity
     {
         public const int MaxLength = 500;
-        
+
         public virtual int? TenantID { get; set; }
 
         [Required]
@@ -37,6 +37,11 @@ namespace PanelMasterMVC5Separate.Claim
         [Required]
         public int BrokerID { get; set; }
         public Brokers.BrokerMaster Broker { get; set; }
+
+        public string ClaimAdministrator { get; set; }
+        public string ClaimNumber { get; set; }
+        public string InsuranceOtherInfo { get; set; }
+        public string PolicyNumber { get; set; }
 
         [Required]
         public virtual int JobStatusID { get; set; }

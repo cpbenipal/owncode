@@ -88,7 +88,7 @@
                                             </div>
                                             <label class="col-md-2 control-label">Accident Details</label>
                                             <div class="col-md-4">
-                                                <input type="text" ng-model="vm.job.damageReason" class="form-control input-circle" />
+                                                <input type="text" ng-model="vm.job.damageReason" class="form-control input-block-level" />
                                             </div>
 
                                         </div>
@@ -97,14 +97,57 @@
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">Current KM's</label>
                                             <div class="col-md-4">
-                                                <input type="text" ng-model="vm.job.currentKMs" class="form-control input-circle" />
+                                                <input type="text" ng-model="vm.job.currentKMs" class="form-control input-block-level" />
                                             </div>
 
                                             <label class="col-md-2 control-label">Other Information</label>
                                             <div class="col-md-4">
-                                                <input type="text" ng-model="vm.job.otherInformation" class="form-control input-circle" />
+                                                <input type="text" ng-model="vm.job.otherInformation" class="form-control input-block-level" />
                                             </div>
                                             
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Insurance</label>
+                                            <div class="col-md-4">
+                                                <select data-ng-options="source.name for source in InsuranceList" ng-model="vm.job.selectedInsurance" class="form-control">
+                                                    <option value="">--Select Status--</option>
+                                                </select>
+                                            </div>
+
+                                            <label class="col-md-2 control-label">Broker</label>
+                                            <div class="col-md-4">
+                                                <select data-ng-options="source.name for source in BrokerList" ng-model="vm.job.selectedBroker" class="form-control">
+                                                    <option value="">--Select Entry Method--</option>
+                                                </select>
+                                            </div>
+
+                                        </div> 
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Claim Administrator</label>
+                                            <div class="col-md-4">
+                                                <input type="text" ng-model="vm.job.claimAdministrator" class="form-control input-block-level" />
+                                            </div>
+
+                                            <label class="col-md-2 control-label">Claim Number</label>
+                                            <div class="col-md-4">
+                                                <input type="text" ng-model="vm.job.claimNumber" class="form-control input-block-level" />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Insurance Other Info</label>
+                                            <div class="col-md-4">
+                                                <input type="text" ng-model="vm.job.insuranceOtherInfo" class="form-control input-block-level" />
+                                            </div>
+
+                                            <label class="col-md-2 control-label">Policy Number</label>
+                                            <div class="col-md-4">
+                                                <input type="text" ng-model="vm.job.policyNumber" class="form-control input-block-level" />
+                                            </div>
+
                                         </div>
 
                                         <div class="form-group">

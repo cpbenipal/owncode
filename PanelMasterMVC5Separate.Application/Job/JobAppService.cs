@@ -274,12 +274,16 @@ namespace PanelMasterMVC5Separate.Vehicle
                 KeyAccountManagerID = clientDto.KeyAccountManagerID,
                 EstimatorID = clientDto.EstimatorID,
                 New_Comeback = clientDto.New_Comeback,
-                UnderWaranty = clientDto.UnderWaranty
+                UnderWaranty = clientDto.UnderWaranty,
+                ClaimAdministrator = clientDto.ClaimAdministrator,
+                PolicyNumber = clientDto.PolicyNumber,
+                ClaimNumber = clientDto.ClaimNumber,
+                InsuranceOtherInfo = clientDto.InsurerOtherInformation
             };
 
             id = _jobsRepository.InsertOrUpdateAndGetId(jobs);
            
-            var quote = new VehicleInsurance()
+            /*var quote = new VehicleInsurance()
             {
                 BrokerId = clientDto.BrokerId,
                 ClaimAdministrator = clientDto.ClaimAdministrator,
@@ -289,7 +293,7 @@ namespace PanelMasterMVC5Separate.Vehicle
                 OtherInformation = clientDto.InsurerOtherInformation
             };
 
-            _vehicleinsurancerepository.InsertOrUpdate(quote);
+            _vehicleinsurancerepository.InsertOrUpdate(quote);*/
 
             return id;
         }

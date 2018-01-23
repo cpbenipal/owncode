@@ -27,7 +27,9 @@
             $scope.CSAList = [];
             $scope.EstimatorList = [];
             $scope.PartsBuyerList = [];
-            
+            $scope.InsuranceList = [];
+            $scope.BrokerList = [];
+
             vm.getJobs = function () {
 
                
@@ -64,7 +66,72 @@
                         vm.job.partsBuyerID = result.data.partsBuyerID;
                         vm.job.partsBuyerDesc = result.data.partsBuyerDesc;
 
-                        vm.job.shopAllocationID = result.data.shopAllocationID;                       
+                        vm.job.shopAllocationID = result.data.shopAllocationID; 
+
+                        vm.job.claimAdministrator = result.data.claimAdministrator;
+                        vm.job.claimNumber = result.data.claimNumber;
+                        vm.job.insuranceOtherInfo = result.data.insuranceOtherInfo;
+                        vm.job.policyNumber = result.data.policyNumber;
+
+                        vm.job.insuranceID = result.data.insuranceID;
+                        vm.job.insurance = result.data.insurance;
+                        vm.job.brokerID = result.data.brokerID;
+                        vm.job.broker = result.data.broker;
+
+                        if (result.data.jobStatusID !== 0) {
+                            $scope.jobStatusList.push({
+                                name: result.data.jobStatusDesc,
+                                id: result.data.jobStatusID
+                            });
+                        }
+
+                        if (vm.job.insuranceID !== 0) {
+                            $scope.InsuranceList.push({
+                                name: vm.job.insurance,
+                                id: vm.job.insuranceID
+                            });
+                        }
+
+                        jobService.getInsurances()
+                            .then(function (result) {
+                                angular.forEach(result.data.items, function (ins, key) {
+
+                                    if (vm.job.insuranceID !== ins.id) {
+                                        $scope.InsuranceList.push({
+                                            name: ins.insurerName,
+                                            id: ins.id
+                                        });
+                                    }
+
+                                });
+
+                            });
+
+                        vm.job.selectedInsurance = $scope.InsuranceList[0];
+                            
+                       
+
+                        if (vm.job.brokerID !== 0) {
+                            $scope.BrokerList.push({
+                                name: vm.job.broker,
+                                id: vm.job.brokerID
+                            });                            
+                        }
+                       
+                        jobService.getBrokers()
+                            .then(function (result) {
+                                angular.forEach(result.data.items, function (br, key) {
+                                    if (vm.job.brokerID !== br.id) {
+                                        $scope.BrokerList.push({
+                                            name: br.brokerName,
+                                            id: br.id
+                                        });
+                                    }
+                                });
+
+                            });
+
+                        vm.job.selectedBroker = $scope.BrokerList[0];
                         
                         
                         if (vm.job.csaID !== 0) {
@@ -97,12 +164,57 @@
                                 id: vm.job.estimatorID
                             });
                             vm.job.selectedEstimator = $scope.EstimatorList[0];
-                        }                      
+                        }  
+
+                        jobService.getRoles()
+                            .then(function (result) {
+
+                                angular.forEach(result.data.items, function (roles_value, key) {
+
+                                    if (roles_value.rolesCategoryID === 3) {
+                                        if (vm.job.claimHandlerID !== roles_value.id) {
+                                            $scope.claimHandlerList.push({
+                                                name: roles_value.description,
+                                                id: roles_value.id
+                                            });
+                                        }
+                                    }
+
+                                    if (roles_value.rolesCategoryID === 4) {
+                                        if (vm.job.csaID !== roles_value.id) {
+                                            $scope.CSAList.push({
+                                                name: roles_value.description,
+                                                id: roles_value.id
+                                            });
+                                        }
+                                    }
+
+                                    if (roles_value.rolesCategoryID === 5) {
+                                        if (vm.job.partsBuyerID !== roles_value.id) {
+                                            $scope.PartsBuyerList.push({
+                                                name: roles_value.description,
+                                                id: roles_value.id
+                                            });
+                                        }
+                                    }
+
+                                    if (roles_value.rolesCategoryID === 6) {
+                                        if (vm.job.estimatorID !== roles_value.id) {
+                                            $scope.EstimatorList.push({
+                                                name: roles_value.description,
+                                                id: roles_value.id
+                                            });
+                                        }
+                                    }
+
+                                });
+                                
+
+                            }).finally(function () {
+                                vm.loading = false;
+                            });     
                       
-                        $scope.jobStatusList.push({
-                            name: result.data.jobStatusDesc,
-                            id: result.data.jobStatusID
-                        });
+                        
 
                         jobService.getJobStatuses_1(result.data.jobStatusID).then(function (result) {
 
@@ -137,50 +249,10 @@
                        
                     }).finally(function () {
                         //vm.loading = false;
-                    });               
-               
-                
-                    jobService.getRoles()
-                    .then(function (result) {                        
+                    });    
+                    
 
-                        angular.forEach(result.data.items, function (roles_value, key) {                        
-                            
-                            if (roles_value.rolesCategoryID === 3) {
-                                $scope.claimHandlerList.push({
-                                    name: roles_value.description,
-                                    id: roles_value.id
-                                });
-                            }
-                            
-                            if (roles_value.rolesCategoryID === 4) {
-                                
-                                $scope.CSAList.push({
-                                    name: roles_value.description,
-                                    id: roles_value.id
-                                });
-                            }
-
-                            if (roles_value.rolesCategoryID === 5) {
-                                $scope.PartsBuyerList.push({
-                                    name: roles_value.description,
-                                    id: roles_value.id
-                                });
-                            }
-
-                            if (roles_value.rolesCategoryID === 6) {                               
-                                $scope.EstimatorList.push({
-                                    name: roles_value.description,
-                                    id: roles_value.id
-                                });
-                            }
-
-                        });                  
-                       
-                       
-                       
-                    }).finally(function () {
-                        vm.loading = false;
-                });
+                    
 
 
                 $scope.tab_or_modal = 'tab';
@@ -203,14 +275,16 @@
                 vm.saving = true;
                 vm.job.id = $stateParams.id;
                 vm.job.jobStatusID = vm.job.selectedJobStatus.id;
+
                 vm.job.branchEntryMethod = vm.job.selectedBranchEntry.id;
                 vm.job.csaID = vm.job.selectedCSA.id;
                 vm.job.claimHandlerID = vm.job.selectedClaimHandler.id;
                 vm.job.estimatorID = vm.job.selectedEstimator.id;
                 vm.job.partsBuyerID = vm.job.selectedPartsBuyer.id;
                 vm.job.shopAllocationID = vm.job.shopAllocationSelectedValue.id;
-                //alert(vm.job.selectedJobStatus.id);
-
+                vm.job.insuranceID = vm.job.selectedInsurance.id;
+                vm.job.brokerID = vm.job.selectedBroker.id;
+               
                 jobService.updateJobInfo(
                     $.extend({ filter: vm.job }, vm.job)
                 ).then(function () {
