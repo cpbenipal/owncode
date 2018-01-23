@@ -27,6 +27,7 @@ using PanelMasterMVC5Separate.Authorization.Claim.Exporting;
 using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.Features;
 using PanelMasterMVC5Separate.Notifications;
+using System;
 
 namespace PanelMasterMVC5Separate.Authorization.Claim
 {
@@ -172,6 +173,7 @@ namespace PanelMasterMVC5Separate.Authorization.Claim
 
             return output;
         }
+         
 
         [AbpAuthorize(AppPermissions.Pages_Administration_Users_ChangePermissions)]
         public async Task<GetUserPermissionsForEditOutput> GetUserPermissionsForEdit(EntityDto<long> input)
@@ -236,6 +238,7 @@ namespace PanelMasterMVC5Separate.Authorization.Claim
         {
             var currentUserIdentifier = AbpSession.ToUserIdentifier().UserId;
             var user = await UserManager.FindByIdAsync(currentUserIdentifier);
+            
             CheckErrors(await UserManager.SetRoles(user, input.AssignedRoleNames));
         }
         [AbpAuthorize(AppPermissions.Pages_Administration_Users_Edit)]

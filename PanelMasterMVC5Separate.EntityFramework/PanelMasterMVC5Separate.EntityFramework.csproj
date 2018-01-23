@@ -148,9 +148,13 @@
     <Compile Include="EntityFramework\IndexInitializer.cs" />
     <Compile Include="EntityFramework\PanelMasterMVC5SeparateDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\PanelMasterMVC5SeparateRepositoryBase.cs" />
-    <Compile Include="Migrations\201801191125464_1.cs" />
-    <Compile Include="Migrations\201801191125464_1.Designer.cs">
-      <DependentUpon>201801191125464_1.cs</DependentUpon>
+    <Compile Include="Migrations\201801181743380_newone.cs" />
+    <Compile Include="Migrations\201801181743380_newone.Designer.cs">
+      <DependentUpon>201801181743380_newone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801232004035_addoccupationfield.cs" />
+    <Compile Include="Migrations\201801232004035_addoccupationfield.Designer.cs">
+      <DependentUpon>201801232004035_addoccupationfield.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
@@ -260,8 +264,11 @@
     <Folder Include="bin\Release\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801191125464_1.resx">
-      <DependentUpon>201801191125464_1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801181743380_newone.resx">
+      <DependentUpon>201801181743380_newone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801232004035_addoccupationfield.resx">
+      <DependentUpon>201801232004035_addoccupationfield.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

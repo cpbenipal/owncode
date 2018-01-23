@@ -13,6 +13,12 @@ namespace PanelMasterMVC5Separate.Authorization.Claim
 
         public string Name { get; set; }
 
+        public string Surname { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        public string Occupation { get; set; }
+
         public DateTime? LastLoginTime { get; set; }
 
         public object GetShownLoginName(bool multiTenancyEnabled)

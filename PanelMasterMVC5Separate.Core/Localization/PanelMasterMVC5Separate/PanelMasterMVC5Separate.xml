@@ -691,5 +691,8 @@
     <text name="Calender" value="Calender" />
     <text name="LineRemovedSuccessfully" value="Line Removed Successfully" />
     <text name="QuoteCompletedAndMovedtoRevisionSuccessfully" value="Quote Completed and moved to Revision Successfully" />
+    <text name="Occupation" value="Occupation" />
+    <text name="MyRoles" value="My Roles" />
+    <text name="Employees" value="Employees" />
   </texts>
 </localizationDictionary>
