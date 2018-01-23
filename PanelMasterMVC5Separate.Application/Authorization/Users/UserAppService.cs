@@ -231,7 +231,13 @@ namespace PanelMasterMVC5Separate.Authorization.Claim
             var user = await UserManager.GetUserByIdAsync(input.Id);
             user.Unlock();
         }
-
+         
+        public virtual async Task UpdateUserRoles(UpdateUserRoles input)
+        {
+            var currentUserIdentifier = AbpSession.ToUserIdentifier().UserId;
+            var user = await UserManager.FindByIdAsync(currentUserIdentifier);
+            CheckErrors(await UserManager.SetRoles(user, input.AssignedRoleNames));
+        }
         [AbpAuthorize(AppPermissions.Pages_Administration_Users_Edit)]
         protected virtual async Task UpdateUserAsync(CreateOrUpdateUserInput input)
         {

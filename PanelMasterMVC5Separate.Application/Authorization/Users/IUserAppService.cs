@@ -25,5 +25,7 @@ namespace PanelMasterMVC5Separate.Authorization.Claim
         Task DeleteUser(EntityDto<long> input);
 
         Task UnlockUser(EntityDto<long> input);
+
+        Task UpdateUserRoles(UpdateUserRoles input);
     }
 }

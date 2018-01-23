@@ -14,4 +14,9 @@ namespace PanelMasterMVC5Separate.Authorization.Claim.Dto
 
         public bool SetRandomPassword { get; set; }
     }
+    public class UpdateUserRoles
+    { 
+        [Required]
+        public string[] AssignedRoleNames { get; set; }         
+    }
 }

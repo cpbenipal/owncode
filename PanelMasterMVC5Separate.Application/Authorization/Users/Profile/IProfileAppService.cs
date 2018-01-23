@@ -15,5 +15,9 @@ namespace PanelMasterMVC5Separate.Authorization.Claim.Profile
         Task UpdateProfilePicture(UpdateProfilePictureInput input);
 
         Task<GetPasswordComplexitySettingOutput> GetPasswordComplexitySetting();
+
+        Task<MyInfo> MyPersonalInfo();
+
+        Task saveprofileInfo(MyInfo info);
     }
 }

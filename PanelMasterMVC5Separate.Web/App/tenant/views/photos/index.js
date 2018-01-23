@@ -16,10 +16,6 @@
             vm.filterText = $stateParams.filterText || '';
             vm.currentUserId = abp.session.userId;
             vm.BranchID = abp.session.tenantId;
-            vm.job.id = $stateParams.id;
-           
-            
-
-
+            vm.job.id = $stateParams.id; 
         }]);
 })();

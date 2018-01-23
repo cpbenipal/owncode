@@ -589,6 +589,7 @@
     <Content Include="App\tenant\views\JobStatuses\createOrEditModal.js" />
     <Content Include="App\tenant\views\JobStatuses\index.js" />
     <Content Include="App\tenant\views\createjob\index.js" />
+    <Content Include="App\tenant\views\profile_account\index.js" />
     <Content Include="App\tenant\views\settings\changeLogo.cshtml" />
     <Content Include="App\tenant\views\settings\changeLogo.js" />
     <Content Include="App\tenant\views\settings\editRegister.js" />
