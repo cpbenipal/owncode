@@ -694,5 +694,6 @@
     <text name="Occupation" value="Occupation" />
     <text name="MyRoles" value="My Roles" />
     <text name="Employees" value="Employees" />
+    <text name="RequestAccess" value="Request Access" />
   </texts>
 </localizationDictionary>
