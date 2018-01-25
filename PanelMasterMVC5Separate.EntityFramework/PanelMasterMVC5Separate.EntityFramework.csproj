@@ -164,6 +164,14 @@
     <Compile Include="Migrations\201801241251379_12.Designer.cs">
       <DependentUpon>201801241251379_12.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801241808496_addmessagingstru.cs" />
+    <Compile Include="Migrations\201801241808496_addmessagingstru.Designer.cs">
+      <DependentUpon>201801241808496_addmessagingstru.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801241816343_addmessagingstrui.cs" />
+    <Compile Include="Migrations\201801241816343_addmessagingstrui.Designer.cs">
+      <DependentUpon>201801241816343_addmessagingstrui.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
@@ -283,6 +291,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801241251379_12.resx">
       <DependentUpon>201801241251379_12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801241808496_addmessagingstru.resx">
+      <DependentUpon>201801241808496_addmessagingstru.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801241816343_addmessagingstrui.resx">
+      <DependentUpon>201801241816343_addmessagingstrui.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
