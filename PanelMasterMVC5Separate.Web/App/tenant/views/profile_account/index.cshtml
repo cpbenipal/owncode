@@ -17,24 +17,23 @@
 <!-- END THEME GLOBAL STYLES -->
 <!-- BEGIN PAGE LEVEL STYLES -->
 <link href="~/assets/pages/css/profile.min.css" rel="stylesheet" type="text/css" />
-
+    
 <style type="text/css">
     .page-content-wrapper .page-content {
         margin-left: 90px;
     }
 </style>
-
-<div class="row service-box margin-bottom-40">
+ 
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
-        <div class="page-content" ng-controller="tenant.views.profile_account.index as vm">
+        <div class="page-content">
             <!-- BEGIN PAGE TITLE-->
             <h1 class="page-title">
                 User Profile
             </h1>
             <!-- END PAGE TITLE-->
             <!-- END PAGE HEADER-->
-            <div class="row">
+            <div class="row" ng-controller="tenant.views.profile_account.index as vm">
                 <div class="col-md-12">
                     <!-- BEGIN PROFILE SIDEBAR -->
                     <div class="profile-sidebar">
@@ -42,14 +41,13 @@
                         <div class="portlet light profile-sidebar-portlet ">
                             <!-- SIDEBAR USERPIC -->
                             <div class="profile-userpic">
-
                                 <img id="HeaderProfilePicture" alt="" class="img-responsive" src="@Url.Action("GetProfilePicture", "Profile")?t=@Clock.Now.Ticks.ToString()" />
                             </div>
                             <!-- END SIDEBAR USERPIC -->
                             <!-- SIDEBAR USER TITLE -->
                             <div class="profile-usertitle">
-                                <div class="profile-usertitle-name"> {{vm.userinfo.fullNametitle}} </div>
-                                <div class="profile-usertitle-job"> {{vm.userinfo.companyName}} </div>
+                                <div class="profile-usertitle-name"> {{vm.userinfo.surname}} {{vm.userinfo.name}} </div>
+                                <div class="profile-usertitle-job"> {{vm.userinfo.occupation}} </div>
                             </div>
                             <!-- END SIDEBAR USER TITLE -->
 
@@ -65,16 +63,19 @@
                             <div class="col-md-12">
                                 <div class="portlet light ">
                                     <div class="portlet-title tabbable-line">
-                                       
+                                        <div class="caption caption-md">
+                                            <i class="icon-globe theme-font hide"></i>
+                                            <span class="caption-subject font-blue-madison bold uppercase">Profile Account</span>
+                                        </div>
                                         <ul class="nav nav-tabs">
                                             <li class="active">
-                                                <a ng-href="#!/tenant/profile_account#tab_1_1" data-toggle="tab">Personal Info</a>
+                                                <a href="#!/tenant/profile_account#tab_1_1" data-toggle="tab">@L("PersonalInformations")</a>
                                             </li>
                                             <li>
-                                                <a ng-href="#!/tenant/profile_account#tab_1_2" data-toggle="tab">My Roles</a>
+                                                <a href="#!/tenant/profile_account#tab_1_2" data-toggle="tab">@L("MyRoles")</a>
                                             </li>
                                             <li>
-                                                <a ng-href="#!/tenant/profile_account#tab_1_3" data-toggle="tab">Employees</a>
+                                                <a href="#!/tenant/profile_account#tab_1_3" data-toggle="tab">@L("Employees")</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -82,20 +83,27 @@
                                         <div class="tab-content">
                                             <!-- PERSONAL INFO TAB -->
                                             <div class="tab-pane active" id="tab_1_1">
-                                                    
                                                 <form name="myprofile" role="form" novalidate action="#" id="submit_form" method="POST">
                                                     <div class="form-group">
-                                                        <label class="control-label">@L("FullName")</label>
-                                                        <input type="text" placeholder="Full Name" ng-model="vm.userinfo.fullName" class="form-control" />
+                                                        <label class="control-label">@L("Surname")</label>
+                                                        <input type="text" placeholder="@L("Surname")" ng-model="vm.userinfo.surname" required class="form-control" />
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="control-label">@L("CellNumber")</label>
-                                                        <input type="text" placeholder="111-111-1111" maxlength="10" ng-model="vm.userinfo.cellNumber" class="form-control" />
+                                                        <label class="control-label">@L("Name")</label>
+                                                        <input type="text" placeholder="@L("Name")" ng-model="vm.userinfo.name" required class="form-control" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">@L("Occupation")</label>
+                                                        <input type="text" placeholder="@L("Occupation")" maxlength="10" ng-model="vm.userinfo.occupation" required class="form-control" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">@L("PhoneNumber")</label>
+                                                        <input type="text" placeholder="111-111-1111" maxlength="10" ng-model="vm.userinfo.phoneNumber" required class="form-control" />
                                                     </div>
 
                                                     <div class="margiv-top-10">
                                                         <button ng-disabled="vm.saving" type="reset" ng-click="vm.cancel()" class="btn default">@L("Cancel")</button>
-                                                        <button type="button" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn green" ng-click="vm.saveprofile()" ng-disabled="myprofile.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+                                                        <button type="button" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn green" ng-click="vm.updateroles()" ng-disabled="myprofile.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -104,14 +112,14 @@
                                             <div class="tab-pane" id="tab_1_2">
 
                                                 <form name="asdasd" role="form" novalidate action="#" id="submit_form_1" method="POST">
-                                                    @*<div class="modal-header">
+                                                    <div class="modal-header">
                                                         <h4 class="modal-title">
                                                             @L("Roles") <b class="badge badge-primary">{{vm.getAssignedRoleCount()}}</b>
                                                         </h4>
-                                                    </div>*@
+                                                    </div>
                                                     <div class="md-checkbox-list">
                                                         <div class="md-checkbox" ng-repeat="role in vm.roles">
-                                                            <input id="EditUser_{{role.roleName}}" class="md-check" type="checkbox" name="{{role.roleName}}" ng-model="role.isAssigned">
+                                                            <input id="EditUser_{{role.roleName}}" class="md-check" disabled type="checkbox" name="{{role.roleName}}" ng-model="role.isAssigned">
                                                             <label for="EditUser_{{role.roleName}}">
                                                                 <span class="inc"></span>
                                                                 <span class="check"></span>
@@ -121,8 +129,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="margiv-top-10">
-                                                        <button ng-disabled="vm.saving" type="reset" ng-click="vm.cancel()" class="btn default">@L("Cancel")</button>
-                                                        <button type="button" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn green" ng-click="vm.updateroles()" ng-disabled="asdasd.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+                                                        @*<button ng-disabled="vm.saving" type="reset" ng-click="vm.cancel()" class="btn default">@L("Cancel")</button>*@
+                                                        <button type="button" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn green" ng-disabled="asdasd.$invalid"><i class="fa fa-save"></i> <span>@L("RequestAccess")</span></button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -130,17 +138,26 @@
                                             <!-- CHANGE PASSWORD TAB -->
                                             <div class="tab-pane" id="tab_1_3">
                                                 <form role="form" novalidate>
-                                                    @*<div class="modal-header">
-                                                        <h4 class="modal-title">
-                                                            <span>@L("LinkedAccounts")</span>                                                           
-                                                        </h4>
-                                                    </div>*@
-                                                    <div class="modal-body">
-                                                        <div busy-if="vm.loading">
-                                                            <div ui-grid="vm.linkedUsersGridOptions" ui-grid-pagination ui-grid-resize-columns dir=@(CultureHelper.IsRtl ? "rtl" : "")></div>
-                                                        </div>
-                                                    </div>
-                                                   
+                                                    <table class="table table-striped table-hover table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th align="center">@L("Name")</th>
+                                                                <th align="center">@L("Surname")</th>
+                                                                <th align="center">@L("PhoneNumber")</th>
+                                                                <th align="center">@L("Occupation")</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="q in vm.linkedUsers">
+                                                                <td>{{q.name}}</td>
+                                                                <td>{{q.surname}}</td>
+                                                                <td>{{q.phoneNumber}}</td>
+                                                                <td>{{q.occupation}}</td>
+                                                                <td><input type="button" class="btn btn-xs blue" value="Send Message" /></td>
+                                                            </tr>                                                           
+                                                        </tbody>
+                                                    </table>
                                                 </form>
                                             </div>
                                             <!-- END CHANGE PASSWORD TAB -->
@@ -157,5 +174,5 @@
         </div>
         <!-- END CONTENT BODY -->
     </div><![endif]-->
-</div>
+ 
 

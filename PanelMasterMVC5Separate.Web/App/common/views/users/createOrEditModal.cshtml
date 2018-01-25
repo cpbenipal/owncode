@@ -44,7 +44,10 @@
                         <label>@L("UserName")</label>
                         <span class="help-block" ng-show="!vm.canChangeUserName">@L("CanNotChangeAdminUserName")</span>
                     </div>
-
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        <input type="text" ng-class="{'edited':vm.user.occupation}" name="Occupation" class="form-control input-ltr" ng-model="vm.user.occupation" required maxlength="@AbpUserBase.MaxUserNameLength">
+                        <label>@L("Occupation")</label>                        
+                    </div>
                     <div class="md-checkbox-list">
                         <div class="md-checkbox">
                             <input id="EditUser_SetRandomPassword" class="md-check" type="checkbox" name="SetRandomPassword" ng-model="vm.setRandomPassword">

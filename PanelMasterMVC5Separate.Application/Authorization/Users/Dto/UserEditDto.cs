@@ -26,6 +26,10 @@ namespace PanelMasterMVC5Separate.Authorization.Claim.Dto
         public string UserName { get; set; }
 
         [Required]
+        [StringLength(AbpUserBase.MaxUserNameLength)]
+        public string Occupation { get; set; }
+
+        [Required]
         [EmailAddress]
         [StringLength(AbpUserBase.MaxEmailAddressLength)]
         public string EmailAddress { get; set; }

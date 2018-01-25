@@ -20,6 +20,8 @@ namespace PanelMasterMVC5Separate.Authorization.Claim
 
         //Can add application specific user properties here
 
+        public virtual string Occupation { get; set; }
+
         public User()
         {
             IsLockoutEnabled = true;

@@ -21,6 +21,8 @@ namespace PanelMasterMVC5Separate.Authorization.Claim.Dto
 
         public string PhoneNumber { get; set; }
 
+        public string Occupation { get; set; }
+
         public Guid? ProfilePictureId { get; set; }
 
         public bool IsEmailConfirmed { get; set; }

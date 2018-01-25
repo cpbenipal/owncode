@@ -8,6 +8,7 @@ using Abp.Application.Services.Dto;
 using Abp.Auditing;
 using Abp.Authorization;
 using Abp.Authorization.Users;
+using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Session;
 using Abp.UI;
@@ -23,20 +24,22 @@ namespace PanelMasterMVC5Separate.Authorization.Claim
         private readonly IUserLinkManager _userLinkManager;
         private readonly IRepository<Tenant> _tenantRepository;
         private readonly IRepository<UserAccount, long> _userAccountRepository;
+        private readonly UserManager _userManager;
         private readonly LogInManager _logInManager;
 
         public UserLinkAppService(
             AbpLoginResultTypeHelper abpLoginResultTypeHelper,
             IUserLinkManager userLinkManager,
             IRepository<Tenant> tenantRepository,
-            IRepository<UserAccount, long> userAccountRepository, 
-            LogInManager logInManager)
+            IRepository<UserAccount, long> userAccountRepository,
+            LogInManager logInManager, UserManager userManager)
         {
             _abpLoginResultTypeHelper = abpLoginResultTypeHelper;
             _userLinkManager = userLinkManager;
             _tenantRepository = tenantRepository;
             _userAccountRepository = userAccountRepository;
             _logInManager = logInManager;
+            _userManager = userManager;
         }
 
         public async Task LinkToUser(LinkToUserInput input)
@@ -136,5 +139,32 @@ namespace PanelMasterMVC5Separate.Authorization.Claim
                         Name = tenant.Name,
                     }).OrderBy(sorting);
         }
+
+        public ListResultDto<LinkedUserDto> LinkedUsersQueryForProfile()
+        {
+            var currentUserIdentifier = AbpSession.ToUserIdentifier();
+
+            var users = _userManager.Users;
+
+            // var currentUserAccount = await _userLinkManager.GetUserAccountAsync(AbpSession.ToUserIdentifier());
+
+            var q = (from userAccount in _userAccountRepository.GetAll()
+                     join user in users on userAccount.UserId equals user.Id
+                     where
+                        (userAccount.TenantId == currentUserIdentifier.TenantId && userAccount.UserId != currentUserIdentifier.UserId)
+                     select new LinkedUserDto
+                     {
+                         Id = userAccount.UserId,
+                         Username = userAccount.UserName,
+                         LastLoginTime = userAccount.LastLoginTime,
+                         Name = user.Name,
+                         PhoneNumber = user.PhoneNumber,
+                         Surname = user.Surname,
+                         Occupation = "NA"
+                     }).ToList();
+
+            return new ListResultDto<LinkedUserDto>(q);
+        }
+
     }
 }
