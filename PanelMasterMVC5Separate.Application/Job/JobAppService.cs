@@ -278,7 +278,8 @@ namespace PanelMasterMVC5Separate.Vehicle
                 ClaimAdministrator = clientDto.ClaimAdministrator,
                 PolicyNumber = clientDto.PolicyNumber,
                 ClaimNumber = clientDto.ClaimNumber,
-                InsuranceOtherInfo = clientDto.InsurerOtherInformation
+                InsuranceOtherInfo = clientDto.InsurerOtherInformation,
+                ShopAllocation = 1
             };
 
             id = _jobsRepository.InsertOrUpdateAndGetId(jobs);
