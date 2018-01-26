@@ -33,6 +33,8 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants.Dto
         public string currencyName { get; set; }
         [Required]
         public string cellNumber { get; set; }
+         
+        public string VatorTax { get; set; }
     }
     public class TenantRegisterDto
     {

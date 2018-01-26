@@ -17,6 +17,7 @@ using PanelMasterMVC5Separate.Quotings;
 using PanelMasterMVC5Separate.RolesCategories;
 using PanelMasterMVC5Separate.Migrations;
 using PanelMasterMVC5Separate.Messaging;
+using PanelMasterMVC5Separate.UserTest;
 
 namespace PanelMasterMVC5Separate.EntityFramework
 {
@@ -77,7 +78,8 @@ namespace PanelMasterMVC5Separate.EntityFramework
         public virtual IDbSet<Messages> Messages { get; set; }
         public virtual IDbSet<Attachments> Attachments { get; set; }
         public virtual IDbSet<MessagesUserLinking> MessagesUserLinking { get; set; }
-
+        public virtual IDbSet<uClass> uClass { get; set; }
+      
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);            

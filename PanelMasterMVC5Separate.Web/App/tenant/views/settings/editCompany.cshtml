@@ -29,7 +29,7 @@
                             </div>
                         </div>
                     </div>
-                  
+
                     <div class="form-group form-md-line-input form-md-floating-label no-hint">
                         <input type="text" name="phoneNumber" id="mask_phone" class="form-control" ng-class="{'edited':vm.company.phoneNumber}" ng-model="vm.company.phoneNumber" maxlength="10">
                         <label>@L("AdminContactNumber")</label>
@@ -39,7 +39,7 @@
                         <input type="text" name="FaximileeNumber" id="mask_phone" class="form-control" ng-class="{'edited':vm.company.faximileeNumber}" ng-model="vm.company.faximileeNumber" maxlength="10">
                         <label>@L("FaximileeNumber")</label>
                     </div>
-                     
+
                     <div class="form-group form-md-line-input form-md-floating-label no-hint">
                         <input type="text" name="Address" class="form-control" ng-model="vm.company.address" ng-class="{'edited':vm.company.address}" maxlength="128">
                         <label>@L("Address")</label>
@@ -75,10 +75,14 @@
                         <label>@L("CompanyVatNo")</label>
                     </div>
                     <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="text" name="VatorTax" pattern="\d*" class="form-control" ng-model="vm.company.vatorTax" ng-class="{'edited':vm.company.vatorTax}" maxlength="100">
+                        <label>@L("VatorTax")</label>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
                         <textarea class="form-control" rows="3" name="InvoicingInstruction" ng-model="vm.company.invoicingInstruction" ng-class="{'edited':vm.company.invoicingInstruction}"></textarea>
                         <label>@L("InvoicingInstruction")</label>
                     </div>
-                     
+
                 </uib-tab>                 
             </uib-tabset>
         </div>

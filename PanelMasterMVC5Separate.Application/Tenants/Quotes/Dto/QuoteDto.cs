@@ -34,8 +34,11 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes.Dto
         [Required]
         public virtual string RepairType { get; set; }
 
+        public virtual bool Pre_Auth { get; set; }
+
         [Required]
         public virtual string Value { get; set; }
+        public string LastModifierUser { get; set; }
     }
 
     [AutoMapFrom(typeof(QuoteMaster))]

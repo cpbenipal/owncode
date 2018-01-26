@@ -148,10 +148,6 @@
     <Compile Include="EntityFramework\IndexInitializer.cs" />
     <Compile Include="EntityFramework\PanelMasterMVC5SeparateDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\PanelMasterMVC5SeparateRepositoryBase.cs" />
-    <Compile Include="Migrations\201801191125464_1.cs" />
-    <Compile Include="Migrations\201801191125464_1.Designer.cs">
-      <DependentUpon>201801191125464_1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201801221044034_2.cs" />
     <Compile Include="Migrations\201801221044034_2.Designer.cs">
       <DependentUpon>201801221044034_2.cs</DependentUpon>
@@ -159,6 +155,14 @@
     <Compile Include="Migrations\201801241348286_3.cs" />
     <Compile Include="Migrations\201801241348286_3.Designer.cs">
       <DependentUpon>201801241348286_3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801260906597_testmigration.cs" />
+    <Compile Include="Migrations\201801260906597_testmigration.Designer.cs">
+      <DependentUpon>201801260906597_testmigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801261726536_addvatortaxfieldtotenantprofile.cs" />
+    <Compile Include="Migrations\201801261726536_addvatortaxfieldtotenantprofile.Designer.cs">
+      <DependentUpon>201801261726536_addvatortaxfieldtotenantprofile.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
@@ -268,14 +272,17 @@
     <Folder Include="bin\Release\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801191125464_1.resx">
-      <DependentUpon>201801191125464_1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801221044034_2.resx">
       <DependentUpon>201801221044034_2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801241348286_3.resx">
       <DependentUpon>201801241348286_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801260906597_testmigration.resx">
+      <DependentUpon>201801260906597_testmigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801261726536_addvatortaxfieldtotenantprofile.resx">
+      <DependentUpon>201801261726536_addvatortaxfieldtotenantprofile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

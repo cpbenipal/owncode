@@ -521,7 +521,8 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
                         currencyName = reginfo.CurrencyCode != null ? _currRepository.FirstOrDefault(x => x.CurrencyCode == reginfo.CurrencyCode).CountryAndCurrency : "",
                         faximileeNumber = reginfo.FaximileeNumber,
                         invoicingInstruction = reginfo.InvoicingInstruction,
-                        timezone = reginfo.Timezone
+                        timezone = reginfo.Timezone,
+                        VatorTax  = reginfo.VatorTax
                     };
                 }
                 return retinfo;
@@ -583,7 +584,7 @@ namespace PanelMasterMVC5Separate.Configuration.Tenants
                 current.InvoicingInstruction = reginfo.invoicingInstruction;
                 current.Timezone = reginfo.timezone;
                 current.CurrencyCode = reginfo.currency;
-
+                current.VatorTax = reginfo.VatorTax;
                 await _TenantProfile.UpdateAsync(current);
             }
         }

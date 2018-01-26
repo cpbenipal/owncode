@@ -14,7 +14,7 @@
             vm.advancedFiltersAreShown = false;
             vm.filterText = $stateParams.filterText || '';
             vm.currentUserId = abp.session.userId;
-
+            vm.TenantId = abp.session.tenantId;
             vm.permissions = {
                 create: abp.auth.hasPermission('Pages.Administration.Users.Create'),
                 edit: abp.auth.hasPermission('Pages.Administration.Users.Edit'),
@@ -44,7 +44,7 @@
                 columnDefs: [
                     {
                         name: app.localize('Actions'),
-                        enableSorting: false,
+                        enableSorting: false ,
                         width: 120,
                         cellTemplate:
                         '<div class=\"ui-grid-cell-contents\">' +
@@ -57,32 +57,56 @@
                         '    </ul>' +
                         '  </div>' +
                         '</div>'
-                    },                  
+                    }, 
                     {
-                        name: app.localize('VehicleRegistration'),
-                        field: 'job', 
-                        minWidth: 140
+                        name: app.localize('QuoteNumber'),
+                        enableSorting: true,
+                        cellTemplate:
+                        '<div class=\"ui-grid-cell-contents\">Q0' + vm.TenantId +'-0000{{row.entity.id}}</div>'
                     },
                     {
-                        name: app.localize('QuoteCategory'),
-                        field: 'quoteCat',
-                        minWidth: 120
+                        name: app.localize('JobNumber'),
+                        enableSorting: true,
+                        cellTemplate:
+                        '<div class=\"ui-grid-cell-contents\">R0' + vm.TenantId +'-0000{{row.entity.jobId}}</div>'
+                    },
+                    {
+                        name: app.localize('RegNo'),
+                        field: 'job' 
                     },
                     {
                         name: app.localize('QuoteStatus'),
-                        field: 'quoteStatus',
-                        minWidth: 120
+                        field: 'quoteStatus'   
                     },
                     {
+                        name: app.localize('QuoteCategory'),
+                        field: 'quoteCat' 
+                    },                    
+                    {
                         name: app.localize('RepairType'),
-                        field: 'repairType',
-                        minWidth: 120
+                        field: 'repairType' 
+                    },
+                    {
+                        name: app.localize('PreparedBy'),
+                        field: 'lastModifierUser'
+                    },
+                    {
+                        name: app.localize('PreAuth'),
+                        cellTemplate:
+                        '<div class=\"ui-grid-cell-contents\">' +
+                        '<div ng-show="row.entity.pre_Auth" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.id}} bootstrap-switch-animate bootstrap-switch-on" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: 0px;">' +
+                        '<span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;"> ON</span>' +
+                        '<span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span>' +
+                        '<span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
+                        '<input ng-checked="row.entity.pre_Auth" ng-model="row.entity.pre_Auth"  class="make-switch" data-size="mini" type="checkbox"></div></div>' +
+                        '<div ng-show="!row.entity.pre_Auth" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-id-test{{row.entity.id}} bootstrap-switch-animate bootstrap-switch-off" style="width: 66px;"><div class="bootstrap-switch-container" style="width: 96px; margin-left: -32px;"><span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 32px;">ON</span><span class="bootstrap-switch-label" style="width: 32px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 32px;">OFF</span>' +
+                        '</div></div>' +
+                        '</div>',
                     },
                     {
                         name: app.localize('CreationTime'),
                         field: 'creationTime',
-                        cellFilter: 'momentFormat: \'L\'',
-                        minWidth: 50
+                        cellFilter: 'momentFormat: \'L\'' 
                     }
                 ],
                 onRegisterApi: function (gridApi) {

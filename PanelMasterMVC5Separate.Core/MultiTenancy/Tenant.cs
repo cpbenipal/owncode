@@ -102,6 +102,8 @@ namespace PanelMasterMVC5Separate.MultiTenancy
 
         public string Timezone { get; set; }
 
+        public string VatorTax { get; set; }
+
         [StringLength(User.MaxSurnameLength)]
         public string CompanyRegistrationNo { get; set; }
 

@@ -451,38 +451,47 @@
                                     </div>
                                 </div>
                             </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3">@L("Logo"):</label>
-                                            <div class="col-md-9">
-                                                <img ng-if="vm.settings.company.tenantId" ng-src="@Url.Action("GetTenantLogo", "Company" )?tenantId={{vm.settings.company.tenantId}}" width="128" height="128" class="img-thumbnail img-rounded user-edit-dialog-profile-image" />
-                                                <img ng-if="!vm.settings.company.tenantId" src="@Url.Content("~/Common/Images/default-profile-picture.png")" width="128" height="128" class="img-thumbnail img-rounded user-edit-dialog-profile-image" />                                                 
-                                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("VatorTax"):</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> {{vm.settings.company.vatorTax}} </p>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">                                             
-                                            <div class="col-md-9">                                                
-                                                <button class="btn btn-primary" type="button" ng-click="vm.changeLogo()">@L("ChangeLogo")</button>
-                                            </div>
+                                </div>                               
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@L("Logo"):</label>
+                                        <div class="col-md-9">
+                                            <img ng-if="vm.settings.company.tenantId" ng-src="@Url.Action("GetTenantLogo", "Company" )?tenantId={{vm.settings.company.tenantId}}" width="128" height="128" class="img-thumbnail img-rounded user-edit-dialog-profile-image" />
+                                            <img ng-if="!vm.settings.company.tenantId" src="@Url.Content("~/Common/Images/default-profile-picture.png")" width="128" height="128" class="img-thumbnail img-rounded user-edit-dialog-profile-image" />
                                         </div>
                                     </div>
                                 </div>
 
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-9">
-                                                <button class="btn btn-primary" type="button" ng-click="vm.confirmcompany()">@L("Edit")</button>
-                                            </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-9">
+                                            <button class="btn btn-primary" type="button" ng-click="vm.changeLogo()">@L("ChangeLogo")</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-9">
+                                            <button class="btn btn-primary" type="button" ng-click="vm.confirmcompany()">@L("Edit")</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </uib-tab>
 

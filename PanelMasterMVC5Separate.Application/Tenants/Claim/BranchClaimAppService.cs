@@ -110,20 +110,30 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
             var queryClient = _clientRepository.GetAll().ToList();
 
-            var queryInsurance = _InsuranceRepository.GetAll().ToList();
+            var queryStatus = _jobstatusRepository.GetAll().Where(p=>p.IsDeleted == false).ToList();
+
+            var queryInsurance = _InsuranceRepository.GetAll().Where(p => p.IsDeleted == false && p.IsActive == true).ToList();
+
+            var queryBroker = _brokerRepository.GetAll().Where(p => p.IsDeleted == false && p.IsActive == true).ToList();
 
             var query = (from j in queryjobs
                          join c in queryClient on j.ClientID equals c.Id
                          join n in queryInsurance on j.InsuranceID equals n.Id
                          join v in queryveh on j.VehicleID equals v.Id
+                         join js in queryStatus on j.JobStatusID equals js.Id
+                         join br in queryBroker on j.BrokerID equals br.Id
                          select new BranchClaimListDto
                          {
                              Id = j.Id,
                              Name = c.Name,
                              Surname = c.Surname,
                              Insurance = n.InsurerName,
+                             Broker = br.BrokerName,
                              RegNo = v.RegistrationNumber,
-                             CreationTime = j.CreationTime
+                             BranchEntryMethod = j.BranchEntryMethod,
+                             JobStatusDesc = js.Description,
+                             CreationTime = j.CreationTime,
+                             ShopAllocation  = j.ShopAllocation
                          }).WhereIf(
                     !input.Filter.IsNullOrWhiteSpace(),
                     u =>

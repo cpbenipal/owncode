@@ -695,5 +695,6 @@
     <text name="MyRoles" value="My Roles" />
     <text name="Employees" value="Employees" />
     <text name="RequestAccess" value="Request Access" />
+    <text name="VatorTax" value="Vat/Tax%" />
   </texts>
 </localizationDictionary>

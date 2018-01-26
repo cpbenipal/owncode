@@ -256,7 +256,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
 
             return newTenantId;
         }
-         
+
 
         public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress,
             string fullName, string cellnumber,
@@ -305,7 +305,8 @@ namespace PanelMasterMVC5Separate.MultiTenancy
                     CurrencyCode = currencycode,
                     // Timezone = timezone,
                     InvoicingInstruction = invoicinginstruction,
-                    TenantId = tenant.Id
+                    TenantId = tenant.Id,
+                    VatorTax = "14" // default 14%
                 };
 
                 await _TenantProfile.InsertAsync(tenantprofile);
@@ -597,7 +598,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
             for (int i = 0; i < str.Length; i++)
             {
                 tow = new TowOperator();
-                tow.Description = str[i];                 
+                tow.Description = str[i];
                 tow.isActive = false;
                 tow.CountryID = CountryID;
                 _TowOperator.Insert(tow);
@@ -610,7 +611,7 @@ namespace PanelMasterMVC5Separate.MultiTenancy
         }
         public virtual List<SignonPlans> GetTenantPlans()
         {
-            List<SignonPlans> data = _SignonPlansRepository.GetAll().Where(x=>x.isActive == true && x.IsDeleted == false).ToList();
+            List<SignonPlans> data = _SignonPlansRepository.GetAll().Where(x => x.isActive == true && x.IsDeleted == false).ToList();
 
             return data;
         }

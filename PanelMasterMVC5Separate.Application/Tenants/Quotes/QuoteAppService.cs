@@ -79,20 +79,25 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
 
             var qmaster = _quotemasterrepository.GetAll().Where(c => c.TenantId == _abpSession.TenantId && c.IsDeleted == false).ToList();
 
+            var user = UserManager.Users.ToList();
+
             var quoteMaster = (from y1 in qmaster
                                join s in quotestatus on y1.QuoteStatusID equals s.Id
                                join c in quotecategories on y1.QuoteCatID equals c.Id
                                join r in repairtypes on y1.RepairTypeId equals r.Id
+                               join u in user on (y1.LastModifierUserId != null ? y1.LastModifierUserId : y1.CreatorUserId) equals u.Id
                                select new
                                {
-                                   Id = y1.Id,
-                                   JobId = y1.JobId,
-                                   Value = y1.Value,
-                                   CreationTime = y1.CreationTime,
+                                   y1.Id,
+                                   y1.JobId,
+                                   y1.Value,
+                                   y1.CreationTime,
                                    QuoteCat = c.Description,
                                    RepairType = r.Description,
-                                   QuoteStatus = s.Description
-
+                                   QuoteStatus = s.Description,
+                                   y1.Pre_Auth,
+                                   u.Surname,
+                                   u.Name
                                }).ToList();
 
             var finalQuery = (from v in JobMaster
@@ -108,14 +113,16 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
                                   CreationTime = master == null ? DateTime.MinValue : master.CreationTime,
                                   QuoteCat = master == null ? "" : master.QuoteCat,
                                   RepairType = master == null ? "" : master.RepairType,
-                                  QuoteStatus = master == null ? "" : master.QuoteStatus
+                                  QuoteStatus = master == null ? "" : master.QuoteStatus,
+                                  Pre_Auth = master == null ? false : master.Pre_Auth,
+                                  LastModifierUser = master == null ? "" : master.Surname + " " + master.Name,
                               }).WhereIf(!input.Filter.IsNullOrWhiteSpace(),
                               u =>
                               u.Job.Contains(input.Filter) ||
                               u.QuoteCat.Contains(input.Filter) ||
                               u.RepairType.Contains(input.Filter) ||
                               u.QuoteStatus.Contains(input.Filter)
-                              ).ToList();
+                              ).OrderByDescending(p=>p.CreationTime).ToList();
 
             return new ListResultDto<QuoteMastersDto>(ObjectMapper.Map<List<QuoteMastersDto>>(finalQuery));
         }
@@ -497,7 +504,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
         {
             try
             {
-                
+
 
                 var result = JsonConvert.DeserializeObject<QuoteObject>(quote).quote.ToList();
 
@@ -505,7 +512,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
                 var quotes = _quotedetailsrepository.GetAll()
                 .Where(p => p.QuoteId == QuoteId && p.QuoteStatusId == 1 && p.tenantid == _abpSession.TenantId && p.IsDeleted.Equals(false)).ToList();
 
-                foreach(var a in quotes)
+                foreach (var a in quotes)
                 {
                     a.IsCompleted = true;
                     _quotedetailsrepository.Update(a);
@@ -533,7 +540,7 @@ namespace PanelMasterMVC5Separate.Tenants.Quotes
                                         PaintRate = f.PaintRate,
                                         SAHrs = f.SAHrs,
                                         SARate = f.SARate,
-                                        NoTaxVat = f.NoTaxVat, 
+                                        NoTaxVat = f.NoTaxVat,
                                         IsCompleted = false
                                     }).ToList();
                 int statusId = 0;

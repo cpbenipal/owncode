@@ -469,7 +469,10 @@ appModule.config([
             url: '/towoperators',
             templateUrl: '~/App/tenant/views/towoperators/index.cshtml'
         });
-
+        $stateProvider.state('tenant.phonebook', {
+            url: '/phonebook',
+            templateUrl: '~/App/tenant/views/phonebook/index.cshtml'
+        });
         //$qProvider settings
         $qProvider.errorOnUnhandledRejections(false);
     }

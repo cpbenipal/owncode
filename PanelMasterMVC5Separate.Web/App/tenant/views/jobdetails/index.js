@@ -13,7 +13,7 @@
             vm.advancedFiltersAreShown = false;
             vm.filterText = $stateParams.filterText || '';
             vm.currentUserId = abp.session.userId;
-           
+            vm.TenantId = abp.session.tenantId;
 
             vm.permissions = {
                 create: abp.auth.hasPermission('Pages.Administration.Users.Create'),
@@ -59,36 +59,38 @@
                     },
                     {
                         name: app.localize('JobNumber'),
-                        field: 'id',
+                         enableSorting: true,
                         cellTemplate:
-                        '<div class=\"ui-grid-cell-contents\">' +
-                        '  <img ng-if="row.entity.profilePictureId" ng-src="' + abp.appPath + 'Profile/GetProfilePictureById?id={{row.entity.profilePictureId}}" width="22" height="22" class="img-rounded img-profile-picture-in-grid" />' +
-                        '  <img ng-if="!row.entity.profilePictureId" src="' + abp.appPath + 'Common/Images/default-profile-picture.png" width="22" height="22" class="img-rounded" />' +
-                        '  {{COL_FIELD CUSTOM_FILTERS}} &nbsp;' +
-                        '</div>',
-                        cellFilter: 'momentFormat: \'L\'',
-                        minWidth: 140
-                    },
-                    {
-                        name: app.localize('Surname'),
-                        field: 'surname',
-                        minWidth: 120
+                        '<div class=\"ui-grid-cell-contents\">R0'+vm.TenantId+'-000{{row.entity.id}}</div>' 
                     },
                     {
                         name: app.localize('RegNo'),
-                        field: 'regNo',
-                        minWidth: 200
+                        field: 'regNo' 
                     },
                     {
+                        name: app.localize('JobStatus'),
+                        field: 'jobStatusDesc' 
+                    }, 
+                    {
+                        name: app.localize('BranchEntryMethod '),
+                        field: 'branchEntryMethod' 
+                    },                                     
+                    {
                         name: app.localize('insurance'),
-                        field: 'insurance',
-                        minWidth: 200
+                        field: 'insurance' 
+                    },
+                    {
+                        name: app.localize('Broker'),
+                        field: 'broker' 
+                    },
+                    {
+                        name: app.localize('ShopAllocation'),
+                        field: 'shopAllocation' 
                     },
                     {
                         name: app.localize('CreationTime'),
                         field: 'creationTime',
-                        cellFilter: 'momentFormat: \'L\'',
-                        minWidth: 100
+                        cellFilter: 'momentFormat: \'L\'' 
                     }
                 ],
                 onRegisterApi: function (gridApi) {

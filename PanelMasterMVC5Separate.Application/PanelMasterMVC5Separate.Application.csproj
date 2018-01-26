@@ -337,6 +337,9 @@
     <Compile Include="Tenants\Quotes\Dto\QuoteDto.cs" />
     <Compile Include="Tenants\Quotes\IQuoteAppService.cs" />
     <Compile Include="Tenants\Quotes\QuoteAppService.cs" />
+    <Compile Include="Tenants\UserTest\Dto\uDto.cs" />
+    <Compile Include="Tenants\UserTest\ITestAppService.cs" />
+    <Compile Include="Tenants\UserTest\TestAppService.cs" />
     <Compile Include="Tenants\Vendors\Dto\VendorsListDto.cs" />
     <Compile Include="Tenants\Vendors\Exporting\IVendorExporter.cs" />
     <Compile Include="Tenants\Vendors\Exporting\VendorExporter.cs" />
@@ -367,6 +370,7 @@
   <ItemGroup>
     <Content Include="Tenants\Quotes\grid.html" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
