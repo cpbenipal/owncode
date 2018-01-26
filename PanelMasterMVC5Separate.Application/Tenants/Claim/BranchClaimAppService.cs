@@ -56,6 +56,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
         private readonly IRepository<User, long> _userRepository;
         private readonly IRepository<UserRole, long> _userRoleRepository;
         private readonly IRepository<RolesCategory> _rolesCategoryRepository;
+        private readonly IRepository<PaintTypes> _paintTypesRepository;
         private readonly RoleManager _roleManager;
 
 
@@ -66,7 +67,7 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                                      IRepository<JobstatusTenant> jobstatustenantRepository, IRepository<TowOperator> towoperatorrepository,
                                      IRepository<TenantProfile> tenantprofile, IRepository<Countries> countryRepository, IRepository<TowSubOperator> towsuboperatorrepositry,
                                      IRepository<User, long> userRepository, IRepository<UserRole, long> userRoleRepository, IRepository<RolesCategory> rolesCategoryRepository,
-                                     RoleManager roleManager)
+                                     RoleManager roleManager, IRepository<PaintTypes> paintTypesRepository)
         {
             _abpSession = abpSession;
             _claimListExcelExporter = claimListExcelExporter;
@@ -89,6 +90,8 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             _userRoleRepository = userRoleRepository;
             _rolesCategoryRepository = rolesCategoryRepository;
             _roleManager = roleManager;
+            _paintTypesRepository = paintTypesRepository;
+
         }
         public ListResultDto<Brokers.Dto.CountriesDto> GetCountry()
         {
@@ -171,6 +174,51 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
             return _claimListExcelExporter.ExportToFile(claimListDtos);
         }
 
+        public ListResultDto<VehicleMake> GetVehicleMakes(int makeID)
+        {
+            var vMake = _manufactureRepository.GetAll().Where(m => m.Id != makeID).ToList();
+
+            var res = (from m in vMake       
+                       
+               select new VehicleMake
+               {
+                   Id = m.Id,
+                   Description = m.Description                   
+               }).ToList();
+
+            return new ListResultDto<VehicleMake>(ObjectMapper.Map<List<VehicleMake>>(res));
+        }
+
+        public ListResultDto<VehicleModels> GetVehicleModels(int modelID)
+        {
+            var vModel = _vehicleModelRepository.GetAll().Where(m => m.Id != modelID).ToList();
+
+            var res = (from m in vModel
+
+                       select new VehicleModels
+                       {
+                           Id = m.Id,
+                           Model = m.Model
+                       }).ToList();
+
+            return new ListResultDto<VehicleModels>(ObjectMapper.Map<List<VehicleModels>>(res));
+        }
+
+        public ListResultDto<PaintTypes> GetPaintType(int paintTypeID)
+        {
+            var vPaintType = _paintTypesRepository.GetAll().Where(p => p.Id != paintTypeID).ToList();
+
+            var res = (from p in vPaintType
+
+                       select new PaintTypes
+                       {
+                           Id = p.Id,
+                           PaintType = p.PaintType
+                       }).ToList();
+
+            return new ListResultDto<PaintTypes>(ObjectMapper.Map<List<PaintTypes>>(res));
+        }
+
         public BranchClaimListDto GetJobDetails(GetClaimsInput input)
         {
             //string dd = input.Filter;
@@ -217,6 +265,10 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                 .GetAll().Where(js => js.Id == thisJob.JobStatusID)
                 .FirstOrDefault();
 
+            var thisPaintType = _paintTypesRepository
+                .GetAll().Where(pt => pt.Id == thisVeh.PaintTypeId)
+                .FirstOrDefault();
+
             //get users
 
             var ExistingCsa = _userRepository.GetAll().Where(u => u.Id == thisJob.CSAID).FirstOrDefault();
@@ -237,7 +289,12 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                 Year = thisVeh.Year,
                 RegNo = thisVeh.RegistrationNumber,
                 VinNumber = thisVeh.VinNumber,
-
+                VehicleCode = thisVeh.VehicleCode,
+                mmCode = thisVeh.MM_Code,
+                VehicleOtherInfo = thisVeh.OtherInformation,
+                IsLuxury = thisVeh.IsLuxury,
+                IsSpecialisedType = thisVeh.IsSpecialisedType,
+                
                 BrokerID = thisBroker.Id,
                 Broker = thisBroker.BrokerName,
 
@@ -275,14 +332,43 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
                 ClaimAdministrator = thisJob.ClaimAdministrator,
                 ClaimNumber = thisJob.ClaimNumber,
                 InsuranceOtherInfo = thisJob.InsuranceOtherInfo,
-                PolicyNumber = thisJob.PolicyNumber
-                
+                PolicyNumber = thisJob.PolicyNumber,
+                PaintTypeId = thisPaintType.Id,
+                PaintTypeDesc = thisPaintType.PaintType                
                 
 
-    }).MapTo<BranchClaimListDto>();
+            }).MapTo<BranchClaimListDto>();
 
             return finalQuery;
 
+        }
+
+        public void UpdateVehicleInfo(BranchClaimListDto input)
+        {
+            try
+            {
+                var vehicle = _brVehicleRepository.Get(input.VehicleId);
+
+                vehicle.RegistrationNumber = input.RegNo;
+                vehicle.VinNumber = input.VinNumber;
+                vehicle.MakeId = input.ManufactureID;
+                vehicle.ModelId = input.ModelID;
+                vehicle.Color = input.Colour;
+                vehicle.Year = input.Year;
+                vehicle.PaintTypeId = input.PaintTypeId;
+                vehicle.VehicleCode = input.VehicleCode;
+                vehicle.MM_Code = input.mmCode;
+                vehicle.OtherInformation = input.VehicleOtherInfo;
+                vehicle.IsLuxury = input.IsLuxury;
+                vehicle.IsSpecialisedType = input.IsSpecialisedType;
+
+                _brVehicleRepository.Update(vehicle);
+
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
         }
 
 

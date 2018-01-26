@@ -158,7 +158,7 @@
                 vm.client.PartsBuyerID = 0;
                 vm.client.KeyAccountManagerID = 0;
                 vm.client.EstimatorID = 0;
-
+                
                 abp.message.confirm(
                     app.localize('AreYouSure', "Submit"),
                     function (isConfirmed) {

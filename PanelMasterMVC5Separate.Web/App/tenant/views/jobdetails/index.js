@@ -13,6 +13,7 @@
             vm.advancedFiltersAreShown = false;
             vm.filterText = $stateParams.filterText || '';
             vm.currentUserId = abp.session.userId;
+           
 
             vm.permissions = {
                 create: abp.auth.hasPermission('Pages.Administration.Users.Create'),
@@ -98,13 +99,13 @@
                         } else {
                             vm.requestParams.sorting = sortColumns[0].field + ' ' + sortColumns[0].sort.direction;
                         }
-
+                       
                         vm.getUsers();
                     });
                     gridApi.pagination.on.paginationChanged($scope, function (pageNumber, pageSize) {
                         vm.requestParams.skipCount = (pageNumber - 1) * pageSize;
                         vm.requestParams.maxResultCount = pageSize;
-
+                       
                         vm.getUsers();
                     });
                 },
@@ -133,13 +134,18 @@
             }
             
             vm.getUsers = function () {
+               
                 vm.loading = true;
                 userService.getClaims($.extend({ filter: vm.filterText }, vm.requestParams))
-                    .then(function (result) {
+                    .then(function (result) {                       
                         vm.userGridOptions.totalItems = result.data.totalCount;
                         vm.userGridOptions.data = addRoleNamesField(result.data.items);
-                    }).finally(function () {
+                    }).finally(function () {                       
                         vm.loading = false;
+                    }, function errorCallback(response) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.                      
+                        alert("Error : " + response.data.ExceptionMessage);
                     });
             };
 

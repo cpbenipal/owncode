@@ -77,28 +77,31 @@ namespace PanelMasterMVC5Separate.Vehicle
     [Table("brVehicle")]
     public class BrVehicle : FullAuditedEntity
     {
-        public virtual int? TenantId { get; set; }
+        public int? TenantId { get; set; }
 
-        public virtual int MakeId { get; set; }
+        public int MakeId { get; set; }
         [ForeignKey("MakeId")]
-        public virtual VehicleMake VehicleMake { get; set; }
+        public VehicleMake VehicleMake { get; set; }
          
-        public virtual int ModelId { get; set; }
+        public int ModelId { get; set; }
         [ForeignKey("ModelId")]
-        public virtual VehicleModels VehicleModels { get; set; }
+        public VehicleModels VehicleModels { get; set; }
         [Required]
-        public virtual string Color { get; set; }
+        public string Color { get; set; }
          
-        public virtual int PaintTypeId { get; set; }
+        public int PaintTypeId { get; set; }
         [ForeignKey("PaintTypeId")]
-        public virtual PaintTypes PaintTypes { get; set; }
+        public PaintTypes PaintTypes { get; set; }
         [StringLength(4)]
-        public virtual string Year { get; set; }
-        public virtual string RegistrationNumber { get; set; }
-        public virtual string VinNumber { get; set; }        
-        public virtual bool IsSpecialisedType { get; set; }
-        public virtual bool IsLuxury { get; set; }       
-        public virtual string OtherInformation { get; set; }
+        public string Year { get; set; }
+        public string RegistrationNumber { get; set; }
+        public string VinNumber { get; set; }        
+        public bool IsSpecialisedType { get; set; }
+        public bool IsLuxury { get; set; }       
+        public string OtherInformation { get; set; }
+        public int VehicleCode { get; set; }
+        public string MM_Code { get; set; }
+
     }
 
     [Table("brINS")]

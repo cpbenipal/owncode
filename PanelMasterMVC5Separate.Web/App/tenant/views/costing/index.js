@@ -5,10 +5,7 @@
             var vm = this;
 
             vm.persons = [];
-
-            personService.getPeople({}).then(function(result) {
-                vm.persons = result.data.items;
-            });
+             
         }
     ]);
 })();

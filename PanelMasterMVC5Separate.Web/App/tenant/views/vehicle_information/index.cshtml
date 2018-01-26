@@ -28,100 +28,97 @@
 
                                     <div class="form-body">
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Reg No</label>
+                                            <label class="col-md-2 control-label">Reg No</label>
                                             <div class="col-md-4">
-                                                <input required ng-model="vm.job.RegNo" ng-class="{'edited':vm.job.RegNo}" name="regno" type="text" class="form-control input-circle" placeholder="Enter Reg no.">
+                                                <input required ng-model="vm.vehicle.regNo" ng-class="{'edited':vm.vehicle.regNo}" name="regno" type="text" class="form-control input-block-level" placeholder="Enter Reg no.">
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Vin Number</label>
+
+                                            <label class="col-md-2 control-label">Vin Number</label>
                                             <div class="col-md-4">
-                                                <input required ng-model="vm.job.VinNumber" ng-class="{'edited':vm.job.VinNumber}" name="VinNumber" type="text" class="form-control input-circle" placeholder="Enter Vin Number.">
+                                                <input required ng-model="vm.vehicle.vinNumber" ng-class="{'edited':vm.vehicle.vinNumber}" name="VinNumber" type="text" class="form-control input-block-level" placeholder="Enter Vin Number.">
 
                                             </div>
                                         </div>
+                                       
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Make</label>
+                                            <label class="col-md-2 control-label">Make</label>
                                             <div class="col-md-4">
+                                                <select data-ng-options="source.name for source in MakesList" ng-model="vm.vehicle.selectedMake" class="form-control">
+                                                </select>                                               
+                                            </div>
 
-                                                <select required class="form-control" ng-options="" ng-model="">
-                                                    <option value="">--Select Make--</option>
+                                            <label class="col-md-2 control-label">Model</label>
+                                            <div class="col-md-4">
+                                                <select data-ng-options="source.name for source in ModelList" ng-model="vm.vehicle.selectedModel" class="form-control"></select>   
+                                            </div>
+
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Colour</label>
+                                            <div class="col-md-4">
+                                                <input required ng-model="vm.vehicle.colour" ng-class="{'edited':vm.vehicle.colour}" name="Colour" type="color" class="form-control input-block-level" placeholder="Enter Colour.">
+                                            </div>
+
+                                            <label class="col-md-2 control-label">Year</label>
+                                            <div class="col-md-4">
+                                                <input required ng-model="vm.vehicle.year" ng-class="{'edited':vm.vehicle.year}" name="Year" type="text" class="form-control input-block-level" placeholder="Enter Year.">
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Paint Type</label>
+                                            <div class="col-md-4">
+                                                <select data-ng-options="source.name for source in PaintTypeList" ng-model="vm.vehicle.selectedPaintType" class="form-control"></select>
+                                            </div>
+
+                                            <label class="col-md-2 control-label">Vehicle Code</label>
+                                            <div class="col-md-4">
+                                                <select data-ng-options="source.name for source in VehicleCodeList" ng-model="vm.vehicle.selectedVehicleCode" class="form-control">
+                                                    <option value="">---select vehicle code---</option>
                                                 </select>
-
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Model</label>
-                                            <div class="col-md-4">
 
-                                                <select required class="form-control" ng-options="" ng-model="">
-                                                    <option value="">--Select Model--</option>
-                                                </select>
+                                        </div>
 
-                                            </div>
-                                        </div>
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Colour</label>
+                                            <label class="col-md-2 control-label">TV/MM Code</label>
                                             <div class="col-md-4">
-                                                <input required ng-model="vm.job.Colour" ng-class="{'edited':vm.job.Colour}" name="Colour" type="text" class="form-control input-circle" placeholder="Enter Colour.">
+                                                <input required ng-model="vm.vehicle.mmCode" ng-class="{'edited':vm.vehicle.mmCode}" name="Colour" type="text" class="form-control input-block-level" placeholder="Enter MMCode.">
+                                            </div>
 
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Year</label>
+                                            <label class="col-md-2 control-label">Other Information</label>
                                             <div class="col-md-4">
-                                                <input required ng-model="vm.job.Year" ng-class="{'edited':vm.job.Year}" name="Year" type="text" class="form-control input-circle" placeholder="Enter Year.">
+                                                <input required ng-model="vm.vehicle.vehicleOtherInfo" ng-class="{'edited':vm.vehicle.vehicleOtherInfo}" name="Year" type="text" class="form-control input-block-level" placeholder="Other CarInfo">
                                             </div>
+
                                         </div>
+
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Is Vehicle Insured?</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group" style="width: 10% !important;">
-                                                    <input type="checkbox" class="form-control" />
+                                            <label class="col-md-2 control-label">Luxury</label>
+                                            <div class="col-md-2">
+                                                <div class="input-group" style="width: 20% !important;">
+                                                    <input type="checkbox" ng-model="vm.vehicle.isLuxury" value="IsLuxury" ng-checked="vm.vehicle.isLuxury=='true'" class="form-control" />
+                                                </div>
+                                            </div>                               
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Specialized</label>
+                                            <div class="col-md-2">
+                                                <div class="input-group" style="width: 20% !important;">
+                                                    <input type="checkbox" ng-model="vm.vehicle.isSpecialisedType" value="IsSpecialisedType" ng-checked="vm.vehicle.isSpecialisedType=='true'" class="form-control" />
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <hr style="margin:0px;" />
                                         </div>
-
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Insurer</label>
-                                            <div class="col-md-4">
-                                                <select required class="form-control">
-                                                    <option value="">--Select Insurer--</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Broker</label>
-                                            <div class="col-md-4">
-                                                <select required class="form-control">
-                                                    <option value="">--Select Broker--</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Policy No</label>
-                                            <div class="col-md-4">
-                                                <input required name="policyNo" type="text" class="form-control input-circle" placeholder="Policy Number.">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">Contact</label>
-                                            <div class="col-md-4">
-                                                <input required name="InsuranceContact" type="text" class="form-control input-circle" placeholder="Contact.">
-                                            </div>
-                                        </div>
-
+                                       
                                     </div>
                                     <div class="form-actions">
                                         <div class="row">
-                                            <div class="col-md-offset-3 col-md-9">
+                                            <div class="col-md-offset-10 col-md-9">
                                                 <button type="button" class="btn btn-circle green button-submit">Submit</button>
                                             </div>
                                         </div>

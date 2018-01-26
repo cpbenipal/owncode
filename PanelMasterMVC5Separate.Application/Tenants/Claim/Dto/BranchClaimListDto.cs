@@ -45,10 +45,17 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
 
         public int ClaimEventID { get; set; }
 
+        public int VehicleId { get; set; }
         public string RegNo { get; set; }
         public string VinNumber { get; set; }
         public string Colour { get; set; }
         public string Year { get; set; }
+        public int VehicleCode { get; set; }
+        public string mmCode { get; set; }
+        public string VehicleOtherInfo { get; set; }
+        public bool IsLuxury { get; set; }
+        public bool IsSpecialisedType { get; set; }
+
         public bool UnderWaranty { get; set; }
         public bool New_Comeback { get; set; }
         public bool IsUnrelatedDamageReason { get; set; }
@@ -77,8 +84,9 @@ namespace PanelMasterMVC5Separate.Tenants.Claim.Dto
         public string InsuranceOtherInfo { get; set; }
 
         public string Manufacture { get; set; }
-        public string Model { get; set; }
-        public int VehicleId { get; set; }
+        public string Model { get; set; }        
+        public int PaintTypeId { get; set; }
+        public string PaintTypeDesc { get; set; }
     }
 
     public class JobStatusDto

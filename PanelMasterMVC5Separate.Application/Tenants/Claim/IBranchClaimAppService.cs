@@ -5,6 +5,7 @@ using PanelMasterMVC5Separate.Dto;
 using PanelMasterMVC5Separate.Tenants.Brokers.Dto;
 using PanelMasterMVC5Separate.Tenants.Claim.Dto;
 using PanelMasterMVC5Separate.Tenants.Insurer.Dto;
+using PanelMasterMVC5Separate.Vehicle;
 using System.Threading.Tasks;
 
 namespace PanelMasterMVC5Separate.Tenants.Claim
@@ -50,5 +51,10 @@ namespace PanelMasterMVC5Separate.Tenants.Claim
 
         ListResultDto<RoleCategoriesDto> GetRoles();
         ListResultDto<JobStatusDto> GetJobStatuses_1(int jobStatusID);
+
+        ListResultDto<VehicleMake> GetVehicleMakes(int makeID);
+        ListResultDto<VehicleModels> GetVehicleModels(int modelID);
+        ListResultDto<PaintTypes> GetPaintType(int paintTypeID);
+        void UpdateVehicleInfo(BranchClaimListDto input);
     }
 }

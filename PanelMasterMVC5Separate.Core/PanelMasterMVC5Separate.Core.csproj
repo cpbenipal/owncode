@@ -142,6 +142,7 @@
     <Compile Include="IClaimRepository.cs" />
     <Compile Include="Insurer\InsurerMaster.cs" />
     <Compile Include="Insurer\InsurerSub.cs" />
+    <Compile Include="Messaging\Messages.cs" />
     <Compile Include="MultiTenancy\DbBinaryTenantManager.cs" />
     <Compile Include="MultiTenancy\IBinaryTenantManager.cs" />
     <Compile Include="PanelMasterMVC5SeparateConsts.cs" />
