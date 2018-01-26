@@ -51,19 +51,21 @@
                         '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
                         '    <ul uib-dropdown-menu>' +
                         '      <li><a ng-if="grid.appScope.permissions.edit" ng-href="#!/tenant/job_landing/job_information/{{row.entity.id}}">' + app.localize('Open') + '</a></li>' +
+                        '      <li><a ng-click="grid.appScope.newQuotation(row.entity)">' + app.localize('AddnewQuote') + '</a></li>' +
                         '    </ul>' +
                         '  </div>' +
                         '</div>'
                     },
                     {
-                        name: app.localize('Name'),
-                        field: 'name',
+                        name: app.localize('JobNumber'),
+                        field: 'id',
                         cellTemplate:
                         '<div class=\"ui-grid-cell-contents\">' +
                         '  <img ng-if="row.entity.profilePictureId" ng-src="' + abp.appPath + 'Profile/GetProfilePictureById?id={{row.entity.profilePictureId}}" width="22" height="22" class="img-rounded img-profile-picture-in-grid" />' +
                         '  <img ng-if="!row.entity.profilePictureId" src="' + abp.appPath + 'Common/Images/default-profile-picture.png" width="22" height="22" class="img-rounded" />' +
                         '  {{COL_FIELD CUSTOM_FILTERS}} &nbsp;' +
                         '</div>',
+                        cellFilter: 'momentFormat: \'L\'',
                         minWidth: 140
                     },
                     {
@@ -109,6 +111,26 @@
                 data: []
             };
 
+            vm.newQuotation = function (quote) {
+                openCreateQuoteModal(quote.id);
+            };
+
+            function openCreateQuoteModal(jobId) {
+                var modalInstance = $uibModal.open({
+                    templateUrl: '~/App/tenant/views/viewQuotations/createOrEditModal.cshtml',
+                    controller: 'tenant.views.viewQuotations.createModal as vm',
+                    backdrop: 'static',
+                    resolve: {
+                        jobId: function () {
+                            return jobId;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (result) {
+                    vm.getQuotes();
+                });
+            }
             
             vm.getUsers = function () {
                 vm.loading = true;
