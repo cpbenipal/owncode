@@ -52,10 +52,10 @@ namespace MasterData
             if (anwser?.ToLower() == "Y".ToLower())
                 CreateBrokerMaster(context);
 
-            //System.Console.WriteLine("Would you like to add master data to tblCountries? Y /N");
-            //anwser = System.Console.ReadLine();
-            //if (anwser?.ToLower() == "Y".ToLower())
-            //    AddCountries();
+            System.Console.WriteLine("Would you like to add master data to tblCountries? Y /N");
+            anwser = System.Console.ReadLine();
+            if (anwser?.ToLower() == "Y".ToLower())
+                AddCountries();
 
             System.Console.WriteLine("Would you like to add master data to CreateDefaultBanks ? Y /N");
             anwser = System.Console.ReadLine();
@@ -378,8 +378,8 @@ namespace MasterData
         }
 
         private static void AddCountries()
-        {
-            string File = @"F:\Projects\Hennie\Code\MasterData\MilestoneEstimationlocalization.xlsx";
+        { 
+            string File = @"D:\Projects\PanelMaster\MasterData\MilestoneEstimationlocalization.xlsx";
             // Connection String to Excel Workbook
 
             string excelConnectionString = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=Excel 8.0", File);

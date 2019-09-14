@@ -35,7 +35,7 @@ namespace PanelMasterMVC5Separate.EntityFramework
 
 
         public virtual IDbSet<Client> Clients { get; set; }
-        public virtual DbSet<Jobs> BranchClaims { get; set; }
+        public virtual IDbSet<Jobs> BranchClaims { get; set; }
         public virtual IDbSet<BinaryObject> BinaryObjects { get; set; }
         public virtual IDbSet<Friendship> Friendships { get; set; }
         public virtual IDbSet<ChatMessage> ChatMessages { get; set; }

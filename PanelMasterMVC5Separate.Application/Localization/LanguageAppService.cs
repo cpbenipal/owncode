@@ -74,7 +74,7 @@ namespace PanelMasterMVC5Separate.Localization
                 .OrderBy(f => f)
                 .Select(f => new ComboboxItemDto(f, FamFamFamFlagsHelper.GetCountryCode(f)) { IsSelected = output.Language.Icon == f})
                 .ToList();
-
+              
             return output;
         }
 
